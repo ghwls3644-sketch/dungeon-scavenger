@@ -9,8 +9,8 @@
 | 파일 | 설명 |
 | :--- | :--- |
 | `Dungeon Scavenger - GDD (통합본).md` | ChatGPT + Gemini 기획안을 통합한 최종 게임 기획서 (GDD) |
-| `Dungeon scavenger(chatGPT).md` | 기획안 A — ChatGPT 초안 |
-| `Dungeon scavenger(gemini).md` | 기획안 B — Gemini 초안 |
+| `archive/Dungeon scavenger(chatGPT).md` | 기획안 A — ChatGPT 초안 (아카이브) |
+| `archive/Dungeon scavenger(gemini).md` | 기획안 B — Gemini 초안 (아카이브) |
 
 ---
 
