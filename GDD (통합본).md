@@ -1,5 +1,5 @@
-# Dungeon Scavenger
-## Game Design Document (GDD) v1.0
+﻿# Dungeon Scavenger
+## Game Design Document (GDD) v1.3
 
 > 작성 기준: 기획안 A (ChatGPT) + 기획안 B (Gemini) 통합본
 
@@ -16,6 +16,8 @@
 7. [아트워크 및 연출 방향](#7-아트워크-및-연출-방향)
 8. [기술 스택 및 개발 로드맵](#8-기술-스택-및-개발-로드맵)
 9. [시너지 포인트 요약](#9-시너지-포인트-요약)
+10. [Planning Harness Operating Rules (v3)](#10-planning-harness-operating-rules-v3)
+11. [Appendix: Prompt and Topic Backlog Operations](#11-appendix-prompt-and-topic-backlog-operations)
 
 ---
 
@@ -199,6 +201,42 @@
 - 뒤로 물러서기 / 회피
 - 소모형 투척 도구
 - 단, 전투는 체력·소모품·시간 손실이 크므로 항상 비효율로 설계한다.
+
+### 4-7. 루팅 중량 기반 이동 페널티 및 탈출 리스크
+
+루팅 중량은 인벤토리 압박을 넘어, **이동 성능과 탈출 생존률**에 직접 연결된다.
+핵심 목표는 "더 담을수록 더 위험해지는" 의사결정 루프를 명확히 만드는 것이다.
+
+**중량 티어 규칙**
+
+| 티어 | 중량 비율 (`weightRatio`) | 효과 요약 |
+| :--- | :--- | :--- |
+| Light | 0.00~0.49 | 이동 손실 거의 없음, 소음 낮음 |
+| Normal | 0.50~0.79 | 이동/소음 패널티 시작 |
+| Heavy | 0.80~1.00 | 이동 둔화 체감, 탈출 리스크 급상승 |
+| Over | 1.01+ | 극단적 둔화, 고위험 이벤트 확률 크게 증가 |
+
+**핵심 계산식 (서버 권위형)**
+- `weightRatio = currentWeight / maxCarryWeight`
+- `moveSpeedMultiplier = clamp(1 - 0.55 * max(0, weightRatio - 0.5), 0.45, 1.0)`
+- `noisePenalty = round(40 * max(0, weightRatio - 0.5))`
+- `escapeRiskScore = baseRisk + (weightRatio * 25) + noisePenalty * 0.3`
+
+**연동 포인트**
+- 인벤토리: 획득/버리기 시 중량 비율 즉시 재계산
+- 이동 시스템: `moveSpeedMultiplier` 적용
+- 소음/어그로 시스템: 기존 소음 수치에 `noisePenalty` 가산
+- 탈출 페이즈: `escapeRiskScore` 기반 이벤트 확률 적용
+
+**플레이어 선택 설계**
+- 즉시 귀환
+- 추가 루팅 강행
+- 귀환 전 아이템 일부 투기로 중량 복구
+
+**MVP 구현 범위**
+- 상태값 6개, 신규 UI 3개(중량 게이지/티어/경고), 탈출 리스크 이벤트 2종
+- 예상 개발 공수: 약 9.5 인일
+- 코어 루프 연결: 탐험 -> 루팅 -> 탈출 긴장감 강화
 
 ---
 
@@ -409,4 +447,81 @@ React App Shell
 
 ---
 
-*Document Version: 1.0 | Last Updated: 2026-04-14*
+## 10. Planning Harness Operating Rules (v3)
+
+### 10-1. 목적
+- AI 기획 산출물의 품질 편차를 줄이고, GDD 정합성을 유지한다.
+- 모든 신규 기획 요청은 `기획 하네스 프롬프트.md`를 사용한다.
+- 결과물은 아이디어가 아니라 구현 가능한 명세를 목표로 한다.
+
+### 10-2. 필수 입력 스키마
+- 필수: `Request Topic`, `Target Player Experience`, `Development Priority`
+- 선택: `Difficulty Target`, `Session Length Target`, `Related Existing Systems`
+- 필수 항목 누락 시 설계를 중단하고 누락 목록을 먼저 반환한다.
+
+### 10-3. 실행 순서 고정
+1. Requirement restatement
+2. Consistency checks
+3. System design
+4. Implementation specification
+5. Validation
+
+### 10-4. 충돌 매트릭스 규칙
+- 매 실행에서 `Lore`, `Genre`, `Tech`, `Schedule` 4축을 점검한다.
+- 각 축은 `Conflict`, `Evidence`, `Impact`, `Mitigation`, `Residual Risk`를 포함한다.
+- 충돌 수정안 반영 전에는 최종 확정하지 않는다.
+
+### 10-5. 복잡도 예산 (MVP 상한)
+- New state variables: max `6`
+- New UI components: max `4`
+- New scene/map rules: max `2`
+- New cross-system dependencies: max `3`
+- Initial implementation estimate: max `10 dev-days`
+- 상한 초과 시 반드시 `Scope Cut A`, `Phased Split B`, `Recommended Option`을 제시한다.
+
+### 10-6. 품질 게이트
+- `Consistency`, `Implementability`, `Balance Safety`, `Testability`를 각 0~5점으로 채점한다.
+- 총점은 20점이며, 20점 미만이면 1회 자동 재작성한다.
+- 재작성 후에도 20점 미만이면 추가 입력 요청과 부족 원인을 명시한다.
+
+### 10-7. GDD 자동 반영 모드
+- `AUTO_MERGE`: 20/20, 고영향 충돌 0, 예산 초과 0, MVP 티켓 조건 충족
+- `HOLD`: 16~19점 또는 중영향 충돌 잔존, 수정 후 재검토 필요
+- `REJECT`: 15점 이하 또는 고영향 충돌 존재 또는 제약 위반
+
+### 10-8. AUTO_MERGE 실행 규칙
+- `AUTO_MERGE` 결과는 아래 절차로 GDD 반영 후보로 처리한다.
+1. 하네스 출력의 `GDD 반영 패치 초안`을 생성한다.
+2. 해당 패치를 `## 4~8`의 관련 섹션에 적용한다.
+3. 적용 후 `충돌 매트릭스/품질 점수/티켓 링크`를 변경 로그에 남긴다.
+4. 동일 주제는 `v2` 태그 없이 중복 병합하지 않는다.
+
+## 11. Appendix: Prompt and Topic Backlog Operations
+
+### 11-1. 표준 문서
+- Harness prompt: `기획 하네스 프롬프트.md`
+- Topic backlog: `요청 주제 백로그.md`
+
+### 11-2. 반자동 운영 워크플로우
+1. 백로그에서 `T-ID`를 선택한다.
+2. 하네스 실행 후 `GDD 반영 판정`을 확인한다.
+3. `AUTO_MERGE`면 GDD에 반영하고 실행 이력을 기록한다.
+4. `HOLD`면 수정안 반영 후 재실행한다.
+5. `REJECT`면 주제 범위 축소 또는 입력 스키마 보강 후 재요청한다.
+
+### 11-3. 실행 이력 템플릿
+```text
+YYYY-MM-DD: [Topic ID] [Topic Name] -> [Output Doc Path]
+Merge Decision: [AUTO_MERGE/HOLD/REJECT]
+Quality Score: [Consistency]/5, [Implementability]/5, [Balance]/5, [Testability]/5, Total [xx]/20
+Patch Target: [GDD section]
+Notes: [Conflict summary, Scope-cut decision]
+```
+
+### 11-4. GDD 반영 최소 조건
+- Merge Decision이 `AUTO_MERGE`일 것
+- 품질 점수 20/20일 것
+- 미해결 고영향 충돌이 없을 것
+- MVP 범위 및 코어 루프 연결이 명확할 것
+
+*Document Version: 1.3 | Last Updated: 2026-05-11*
