@@ -1,1 +1,6 @@
 .claude/
+node_modules/
+client/node_modules/
+client/dist/
+server/.venv/
+__pycache__/

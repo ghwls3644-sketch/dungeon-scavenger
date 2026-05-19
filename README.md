@@ -9,6 +9,10 @@
 | 파일 | 설명 |
 | :--- | :--- |
 | `GDD (통합본).md` | ChatGPT + Gemini 기획안을 통합한 최종 게임 기획서 (GDD) |
+| `docs/gdd/README.md` | GDD 분할 운영 인덱스 및 모듈 문서 안내 |
+| `docs/Sprint 1 실행 보드.md` | Sprint 1 실행 상태/리스크/데일리 체크 보드 |
+| `MVP 구현 백로그 (스프린트).md` | 문서 기획을 구현 태스크로 전환한 2주 스프린트 백로그 |
+| `templates/하네스 실행 입력 템플릿.md` | 하네스 실행 시 필수 입력 3개 템플릿 |
 | `archive/Dungeon scavenger(chatGPT).md` | 기획안 A — ChatGPT 초안 (아카이브) |
 | `archive/Dungeon scavenger(gemini).md` | 기획안 B — Gemini 초안 (아카이브) |
 
@@ -17,8 +21,43 @@
 ## 🎮 게임 개요
 
 - **장르**: 2D 탑다운 루팅 / 탈출형 어드벤처
-- **플랫폼**: PC (Node.js/Vite + React + HTML5 Canvas 기반 브라우저 클라이언트)
+- **플랫폼**: PC (Python 서버 + Node.js/Vite + React + HTML5 Canvas 기반 브라우저 클라이언트)
 - **핵심 재미**: 가치 판단 · 귀환 긴장감 · 폐허 탐험 몰입감
+
+---
+
+## 🧱 스캐폴드 구조
+
+- `server/`: Python + websockets 최소 서버 루프
+- `client/`: React + Vite 최소 HUD/Canvas 쉘
+- `shared/`: 클라이언트-서버 메시지 계약
+
+---
+
+## ▶️ 로컬 실행 (스캐폴드)
+
+1. 서버 실행
+```powershell
+cd server
+python -m venv .venv
+.\.venv\Scripts\activate
+pip install -r requirements.txt
+python app.py
+```
+
+2. 클라이언트 실행 (새 터미널)
+```powershell
+cd client
+npm install
+npm run dev
+```
+
+3. 프로토타입 조작
+- 이동: `WASD` 또는 방향키
+- 달리기: `Shift`
+- 루팅: `E` (아이템 근접 시)
+- 드롭: `Q`
+- 출구 정산: `Space` (Exit 방에서 인벤토리 보유 시)
 
 ---
 

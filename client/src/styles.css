@@ -1,0 +1,87 @@
+:root {
+  font-family: "Segoe UI", "Noto Sans KR", sans-serif;
+  background: #0f1217;
+  color: #f2f4f8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.layout {
+  min-height: 100vh;
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  grid-template-columns: 320px 1fr;
+  grid-template-areas:
+    "header header"
+    "hud canvas";
+}
+
+.panel {
+  border: 1px solid #2a2f3a;
+  border-radius: 10px;
+  background: #1a2029;
+  padding: 12px;
+}
+
+.panel h1 {
+  margin: 0 0 6px;
+}
+
+.panel p {
+  margin: 0;
+  opacity: 0.8;
+}
+
+.hud {
+  grid-area: hud;
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+
+.hud-title {
+  font-size: 0.86rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #8ca0bc;
+  margin-top: 4px;
+}
+
+.hud-gap {
+  height: 6px;
+}
+
+.hint {
+  color: #adb8cb;
+  font-size: 0.9rem;
+}
+
+.canvas-shell {
+  grid-area: canvas;
+}
+
+.game-canvas {
+  width: 100%;
+  max-width: 760px;
+  height: auto;
+  border: 1px solid #4d5666;
+  border-radius: 8px;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "hud"
+      "canvas";
+  }
+}
