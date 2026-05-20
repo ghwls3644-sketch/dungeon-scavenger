@@ -12,9 +12,14 @@
 | `docs/gdd/README.md` | GDD 분할 운영 인덱스 및 모듈 문서 안내 |
 | `docs/Sprint 1 실행 보드.md` | Sprint 1 실행 상태/리스크/데일리 체크 보드 |
 | `MVP 구현 백로그 (스프린트).md` | 문서 기획을 구현 태스크로 전환한 2주 스프린트 백로그 |
-| `templates/하네스 실행 입력 템플릿.md` | 하네스 실행 시 필수 입력 3개 템플릿 |
+| `기획 하네스 프롬프트.md` | 보관본(FROZEN): 하네스 템플릿 상태/참조 안내 |
+| `요청 주제 백로그.md` | 보관본(FROZEN): 설계 주제 완료 상태 요약 |
+| `GDD 자동 반영 프로토콜.md` | 보관본(DEPRECATED): 자동 반영 규칙 상태 안내 |
 | `archive/Dungeon scavenger(chatGPT).md` | 기획안 A — ChatGPT 초안 (아카이브) |
 | `archive/Dungeon scavenger(gemini).md` | 기획안 B — Gemini 초안 (아카이브) |
+| `archive/기획 하네스 프롬프트 (FROZEN-2026-05-20).md` | 하네스 프롬프트 원문 보관 |
+| `archive/요청 주제 백로그 (FROZEN-2026-05-20).md` | 요청 주제 백로그 원문 보관 |
+| `archive/GDD 자동 반영 프로토콜 (DEPRECATED-2026-05-20).md` | 자동 반영 프로토콜 원문 보관 |
 
 ---
 
