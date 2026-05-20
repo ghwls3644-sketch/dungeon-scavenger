@@ -1,7 +1,14 @@
-import { useEffect, useRef } from "react";
+﻿import { useEffect, useRef } from "react";
 
 type Vec2 = { x: number; y: number };
-type Rect = { id: string; kind: "room" | "corridor"; x: number; y: number; w: number; h: number };
+type Rect = {
+  id: string;
+  kind: "room" | "corridor";
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+};
 
 type Loot = {
   id: string;
@@ -22,10 +29,16 @@ export type GameSnapshot = {
   lootRemaining: number;
   noiseNow: number;
   noiseTier: "Quiet" | "Caution" | "Loud" | "Critical";
-  runCount: number;
+  completedRuns: number;
   lastExtractValue: number;
   totalExtractedValue: number;
   canExtract: boolean;
+  runElapsedSec: number;
+  sessionElapsedSec: number;
+  lastRunDurationSec: number;
+  inputDebugLastKey: string;
+  inputDebugLastCode: string;
+  inputDebugPressedCount: number;
 };
 
 const WIDTH = 760;
@@ -35,6 +48,7 @@ const BASE_SPEED = 130;
 const RUN_MULTIPLIER = 1.35;
 const INVENTORY_SLOTS = 8;
 const MAX_WEIGHT = 40;
+const RUN_START_POS: Vec2 = { x: 120, y: 100 };
 
 const WALKABLE_ZONES: Rect[] = [
   { id: "Entrance", kind: "room", x: 40, y: 40, w: 180, h: 120 },
@@ -77,7 +91,8 @@ function zoneContainsPoint(zone: Rect, pos: Vec2, radius = 0) {
 }
 
 function isWalkable(pos: Vec2) {
-  return WALKABLE_ZONES.some((zone) => zoneContainsPoint(zone, pos, PLAYER_RADIUS));
+  // Use center-point walkability so adjacent room/corridor borders remain connected.
+  return WALKABLE_ZONES.some((zone) => zoneContainsPoint(zone, pos, 0));
 }
 
 function findZoneId(pos: Vec2) {
@@ -101,14 +116,31 @@ function noiseTier(noise: number): GameSnapshot["noiseTier"] {
   return "Critical";
 }
 
+function lootForRun(runNumber: number): Loot[] {
+  return INITIAL_LOOT.map((loot, idx) => {
+    const offsetX = ((runNumber * 17 + idx * 11) % 15) - 7;
+    const offsetY = ((runNumber * 13 + idx * 19) % 11) - 5;
+    return {
+      ...loot,
+      pos: { x: loot.pos.x + offsetX, y: loot.pos.y + offsetY },
+      picked: false
+    };
+  });
+}
+
 type GameState = {
   player: Vec2;
   inventory: InventoryItem[];
   loot: Loot[];
   noiseNow: number;
-  runCount: number;
+  completedRuns: number;
   lastExtractValue: number;
   totalExtractedValue: number;
+  runElapsedSec: number;
+  sessionElapsedSec: number;
+  lastRunDurationSec: number;
+  inputDebugLastKey: string;
+  inputDebugLastCode: string;
 };
 
 function draw(ctx: CanvasRenderingContext2D, state: GameState) {
@@ -119,10 +151,19 @@ function draw(ctx: CanvasRenderingContext2D, state: GameState) {
 
   for (const zone of WALKABLE_ZONES) {
     ctx.fillStyle = zone.kind === "room" ? "#1f2a38" : "#253244";
+    if (zone.id === "Exit") {
+      ctx.fillStyle = "#233b2f";
+    }
     ctx.fillRect(zone.x, zone.y, zone.w, zone.h);
     ctx.strokeStyle = "#50627b";
     ctx.lineWidth = 1;
     ctx.strokeRect(zone.x, zone.y, zone.w, zone.h);
+
+    if (zone.id === "Exit") {
+      ctx.fillStyle = "#9fe2ae";
+      ctx.font = "12px Segoe UI";
+      ctx.fillText("EXIT", zone.x + 8, zone.y + 16);
+    }
   }
 
   for (const loot of state.loot) {
@@ -140,8 +181,18 @@ function draw(ctx: CanvasRenderingContext2D, state: GameState) {
   ctx.closePath();
 }
 
-export function GameCanvas(props: { onSnapshot: (snapshot: GameSnapshot) => void }) {
+export function GameCanvas(props: {
+  onSnapshot: (snapshot: GameSnapshot) => void;
+  onRunEvent?: (event: string, payload?: Record<string, unknown>) => void;
+}) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const onSnapshotRef = useRef(props.onSnapshot);
+  const onRunEventRef = useRef(props.onRunEvent);
+
+  useEffect(() => {
+    onSnapshotRef.current = props.onSnapshot;
+    onRunEventRef.current = props.onRunEvent;
+  }, [props.onSnapshot, props.onRunEvent]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -149,6 +200,8 @@ export function GameCanvas(props: { onSnapshot: (snapshot: GameSnapshot) => void
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+    canvas.tabIndex = 0;
+    canvas.focus();
 
     let raf = 0;
     let prevTs = performance.now();
@@ -156,19 +209,26 @@ export function GameCanvas(props: { onSnapshot: (snapshot: GameSnapshot) => void
     const onceFlags = { interact: false, drop: false, extract: false };
 
     const state: GameState = {
-      player: { x: 120, y: 100 },
+      player: { ...RUN_START_POS },
       inventory: [],
-      loot: INITIAL_LOOT.map((l) => ({ ...l })),
+      loot: lootForRun(1),
       noiseNow: 0,
-      runCount: 0,
+      completedRuns: 0,
       lastExtractValue: 0,
-      totalExtractedValue: 0
+      totalExtractedValue: 0,
+      runElapsedSec: 0,
+      sessionElapsedSec: 0,
+      lastRunDurationSec: 0,
+      inputDebugLastKey: "-",
+      inputDebugLastCode: "-"
     };
+
+    onRunEventRef.current?.("run_start", { runNumber: 1 });
 
     const emitSnapshot = () => {
       const roomId = findZoneId(state.player);
       const carriedWeight = state.inventory.reduce((sum, item) => sum + item.weight, 0);
-      props.onSnapshot({
+      onSnapshotRef.current({
         roomId,
         position: { ...state.player },
         inventoryCount: state.inventory.length,
@@ -176,34 +236,131 @@ export function GameCanvas(props: { onSnapshot: (snapshot: GameSnapshot) => void
         lootRemaining: state.loot.filter((l) => !l.picked).length,
         noiseNow: state.noiseNow,
         noiseTier: noiseTier(state.noiseNow),
-        runCount: state.runCount,
+        completedRuns: state.completedRuns,
         lastExtractValue: state.lastExtractValue,
         totalExtractedValue: state.totalExtractedValue,
-        canExtract: roomId === "Exit" && state.inventory.length > 0
+        canExtract: roomId === "Exit" && state.inventory.length > 0,
+        runElapsedSec: state.runElapsedSec,
+        sessionElapsedSec: state.sessionElapsedSec,
+        lastRunDurationSec: state.lastRunDurationSec,
+        inputDebugLastKey: state.inputDebugLastKey,
+        inputDebugLastCode: state.inputDebugLastCode,
+        inputDebugPressedCount: pressed.size
       });
     };
 
+    const handledCodes = new Set([
+      "ArrowRight",
+      "ArrowLeft",
+      "ArrowUp",
+      "ArrowDown",
+      "KeyW",
+      "KeyA",
+      "KeyS",
+      "KeyD",
+      "KeyE",
+      "KeyQ",
+      "ShiftLeft",
+      "ShiftRight",
+      "Space"
+    ]);
+    const handledKeys = new Set([
+      "ArrowRight",
+      "ArrowLeft",
+      "ArrowUp",
+      "ArrowDown",
+      "w",
+      "W",
+      "a",
+      "A",
+      "s",
+      "S",
+      "d",
+      "D",
+      "e",
+      "E",
+      "q",
+      "Q",
+      "ㅈ",
+      "ㅁ",
+      "ㄴ",
+      "ㅇ",
+      "ㄷ",
+      "ㅂ",
+      " ",
+      "Shift"
+    ]);
+
     const keyDown = (e: KeyboardEvent) => {
       const code = e.code;
+      const key = e.key;
+      if (handledCodes.has(code) || handledKeys.has(key)) e.preventDefault();
+      state.inputDebugLastCode = code || "-";
+      state.inputDebugLastKey = key || "-";
       pressed.add(code);
-      if (code === "KeyE" && !e.repeat) onceFlags.interact = true;
-      if (code === "KeyQ" && !e.repeat) onceFlags.drop = true;
-      if (code === "Space" && !e.repeat) onceFlags.extract = true;
+      if (code === "KeyW" || key === "w" || key === "W" || key === "ㅈ") pressed.add("KeyW");
+      if (code === "KeyA" || key === "a" || key === "A" || key === "ㅁ") pressed.add("KeyA");
+      if (code === "KeyS" || key === "s" || key === "S" || key === "ㄴ") pressed.add("KeyS");
+      if (code === "KeyD" || key === "d" || key === "D" || key === "ㅇ") pressed.add("KeyD");
+      if (code === "ShiftLeft" || code === "ShiftRight" || key === "Shift") pressed.add("ShiftLeft");
+      if ((code === "KeyE" || key === "e" || key === "E" || key === "ㄷ") && !e.repeat) onceFlags.interact = true;
+      if ((code === "KeyQ" || key === "q" || key === "Q" || key === "ㅂ") && !e.repeat) onceFlags.drop = true;
+      if ((code === "Space" || key === " ") && !e.repeat) onceFlags.extract = true;
     };
 
     const keyUp = (e: KeyboardEvent) => {
-      pressed.delete(e.code);
+      const code = e.code;
+      const key = e.key;
+      if (handledCodes.has(code) || handledKeys.has(key)) e.preventDefault();
+      pressed.delete(code);
+      if (code === "KeyW" || key === "w" || key === "W" || key === "ㅈ") pressed.delete("KeyW");
+      if (code === "KeyA" || key === "a" || key === "A" || key === "ㅁ") pressed.delete("KeyA");
+      if (code === "KeyS" || key === "s" || key === "S" || key === "ㄴ") pressed.delete("KeyS");
+      if (code === "KeyD" || key === "d" || key === "D" || key === "ㅇ") pressed.delete("KeyD");
+      if (code === "ShiftLeft" || code === "ShiftRight" || key === "Shift") {
+        pressed.delete("ShiftLeft");
+        pressed.delete("ShiftRight");
+      }
     };
 
-    window.addEventListener("keydown", keyDown);
-    window.addEventListener("keyup", keyUp);
+    const resetForNextRun = (extractValue: number) => {
+      state.completedRuns += 1;
+      state.lastExtractValue = extractValue;
+      state.totalExtractedValue += extractValue;
+      state.lastRunDurationSec = state.runElapsedSec;
+      state.runElapsedSec = 0;
+      state.player = { ...RUN_START_POS };
+      state.inventory = [];
+      state.loot = lootForRun(state.completedRuns + 1);
+      state.noiseNow = 0;
+
+      onRunEventRef.current?.("run_extract", {
+        runNumber: state.completedRuns,
+        extractValue,
+        totalExtractedValue: state.totalExtractedValue,
+        runDurationSec: Number(state.lastRunDurationSec.toFixed(1))
+      });
+      onRunEventRef.current?.("run_start", { runNumber: state.completedRuns + 1 });
+    };
+
+    window.addEventListener("keydown", keyDown, { capture: true });
+    window.addEventListener("keyup", keyUp, { capture: true });
+    document.addEventListener("keydown", keyDown, { capture: true });
+    document.addEventListener("keyup", keyUp, { capture: true });
 
     const tick = (ts: number) => {
       const dt = clamp((ts - prevTs) / 1000, 0, 0.05);
       prevTs = ts;
 
-      const inputX = (pressed.has("ArrowRight") || pressed.has("KeyD") ? 1 : 0) - (pressed.has("ArrowLeft") || pressed.has("KeyA") ? 1 : 0);
-      const inputY = (pressed.has("ArrowDown") || pressed.has("KeyS") ? 1 : 0) - (pressed.has("ArrowUp") || pressed.has("KeyW") ? 1 : 0);
+      state.sessionElapsedSec += dt;
+      state.runElapsedSec += dt;
+
+      const inputX =
+        (pressed.has("ArrowRight") || pressed.has("KeyD") ? 1 : 0) -
+        (pressed.has("ArrowLeft") || pressed.has("KeyA") ? 1 : 0);
+      const inputY =
+        (pressed.has("ArrowDown") || pressed.has("KeyS") ? 1 : 0) -
+        (pressed.has("ArrowUp") || pressed.has("KeyW") ? 1 : 0);
       const len = Math.hypot(inputX, inputY);
 
       const carriedWeight = state.inventory.reduce((sum, item) => sum + item.weight, 0);
@@ -242,6 +399,11 @@ export function GameCanvas(props: { onSnapshot: (snapshot: GameSnapshot) => void
             weight: target.weight
           });
           state.noiseNow = clamp(state.noiseNow + 6, 0, 100);
+          onRunEventRef.current?.("loot_pick", {
+            lootId: target.id,
+            inventoryCount: state.inventory.length,
+            carriedWeight: Number((carriedWeight + target.weight).toFixed(1))
+          });
         }
         onceFlags.interact = false;
       }
@@ -255,6 +417,10 @@ export function GameCanvas(props: { onSnapshot: (snapshot: GameSnapshot) => void
             picked: false
           });
           state.noiseNow = clamp(state.noiseNow + 3, 0, 100);
+          onRunEventRef.current?.("loot_drop", {
+            lootId: item.id,
+            inventoryCount: state.inventory.length
+          });
         }
         onceFlags.drop = false;
       }
@@ -263,11 +429,7 @@ export function GameCanvas(props: { onSnapshot: (snapshot: GameSnapshot) => void
         const roomId = findZoneId(state.player);
         if (roomId === "Exit" && state.inventory.length > 0) {
           const extractValue = state.inventory.reduce((sum, item) => sum + item.value, 0);
-          state.lastExtractValue = extractValue;
-          state.totalExtractedValue += extractValue;
-          state.runCount += 1;
-          state.inventory = [];
-          state.noiseNow = clamp(state.noiseNow - 12, 0, 100);
+          resetForNextRun(extractValue);
         }
         onceFlags.extract = false;
       }
@@ -289,10 +451,12 @@ export function GameCanvas(props: { onSnapshot: (snapshot: GameSnapshot) => void
 
     return () => {
       cancelAnimationFrame(raf);
-      window.removeEventListener("keydown", keyDown);
-      window.removeEventListener("keyup", keyUp);
+      window.removeEventListener("keydown", keyDown, { capture: true });
+      window.removeEventListener("keyup", keyUp, { capture: true });
+      document.removeEventListener("keydown", keyDown, { capture: true });
+      document.removeEventListener("keyup", keyUp, { capture: true });
     };
-  }, [props.onSnapshot]);
+  }, []);
 
   return (
     <canvas
@@ -300,6 +464,7 @@ export function GameCanvas(props: { onSnapshot: (snapshot: GameSnapshot) => void
       width={WIDTH}
       height={HEIGHT}
       className="game-canvas"
+      onMouseDown={() => canvasRef.current?.focus()}
     />
   );
 }

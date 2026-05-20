@@ -5,17 +5,34 @@ export type SocketSnapshot = {
 };
 
 type ServerEnvelope = {
-  type: "hello" | "tick";
+  type: "hello" | "tick" | "event_ack";
   tick: number;
   note: string;
 };
 
-export function connectGameSocket(onUpdate: (s: SocketSnapshot) => void) {
+export type ClientEventSender = (event: string, payload?: Record<string, unknown>) => void;
+
+export function connectGameSocket(
+  onUpdate: (s: SocketSnapshot) => void,
+  onReady?: (sendEvent: ClientEventSender) => void
+) {
   const ws = new WebSocket("ws://127.0.0.1:8765");
-  onUpdate({ status: "connecting", tick: 0, note: "연결 시도 중" });
+  onUpdate({ status: "connecting", tick: 0, note: "Connecting..." });
+
+  const sendEvent: ClientEventSender = (event, payload = {}) => {
+    if (ws.readyState !== WebSocket.OPEN) return;
+    ws.send(
+      JSON.stringify({
+        type: "run_event",
+        event,
+        payload
+      })
+    );
+  };
 
   ws.onopen = () => {
     ws.send(JSON.stringify({ type: "client_ready" }));
+    onReady?.(sendEvent);
   };
 
   ws.onmessage = (event) => {
@@ -28,11 +45,11 @@ export function connectGameSocket(onUpdate: (s: SocketSnapshot) => void) {
   };
 
   ws.onclose = () => {
-    onUpdate({ status: "disconnected", tick: 0, note: "연결 종료" });
+    onUpdate({ status: "disconnected", tick: 0, note: "Connection closed" });
   };
 
   ws.onerror = () => {
-    onUpdate({ status: "disconnected", tick: 0, note: "연결 오류" });
+    onUpdate({ status: "disconnected", tick: 0, note: "Connection error" });
   };
 
   return () => ws.close();

@@ -6,7 +6,7 @@ export function App() {
   const [snapshot, setSnapshot] = useState<SocketSnapshot>({
     status: "disconnected",
     tick: 0,
-    note: "서버 대기 중"
+    note: "Waiting for server"
   });
   const [game, setGame] = useState<GameSnapshot>({
     roomId: "Entrance",
@@ -16,14 +16,25 @@ export function App() {
     lootRemaining: 0,
     noiseNow: 0,
     noiseTier: "Quiet",
-    runCount: 0,
+    completedRuns: 0,
     lastExtractValue: 0,
     totalExtractedValue: 0,
-    canExtract: false
+    canExtract: false,
+    runElapsedSec: 0,
+    sessionElapsedSec: 0,
+    lastRunDurationSec: 0,
+    inputDebugLastKey: "-",
+    inputDebugLastCode: "-",
+    inputDebugPressedCount: 0
   });
+  const [sendRunEvent, setSendRunEvent] = useState<
+    ((event: string, payload?: Record<string, unknown>) => void) | null
+  >(null);
 
   useEffect(() => {
-    const cleanup = connectGameSocket(setSnapshot);
+    const cleanup = connectGameSocket(setSnapshot, (sendEvent) => {
+      setSendRunEvent(() => sendEvent);
+    });
     return cleanup;
   }, []);
 
@@ -49,10 +60,16 @@ export function App() {
         <div>Weight: {game.carriedWeight.toFixed(1)} / 40</div>
         <div>Loot Left: {game.lootRemaining}</div>
         <div>Noise: {game.noiseNow.toFixed(1)} ({game.noiseTier})</div>
-        <div>Runs: {game.runCount}</div>
+        <div>Completed Runs: {game.completedRuns}</div>
         <div>Last Extract: {game.lastExtractValue}</div>
         <div>Total Extracted: {game.totalExtractedValue}</div>
+        <div>Run Time: {game.runElapsedSec.toFixed(1)}s</div>
+        <div>Last Run Time: {game.lastRunDurationSec.toFixed(1)}s</div>
+        <div>Session Time: {game.sessionElapsedSec.toFixed(1)}s</div>
         <div>Extract Ready: {game.canExtract ? "Yes" : "No"}</div>
+        <div>Input Last Key: {game.inputDebugLastKey}</div>
+        <div>Input Last Code: {game.inputDebugLastCode}</div>
+        <div>Input Pressed: {game.inputDebugPressedCount}</div>
         <div className="hud-gap" />
         <div className="hint">Move: WASD / Arrow</div>
         <div className="hint">Run: Shift</div>
@@ -62,7 +79,10 @@ export function App() {
       </section>
 
       <section className="canvas-shell panel">
-        <GameCanvas onSnapshot={setGame} />
+        <GameCanvas
+          onSnapshot={setGame}
+          onRunEvent={(event, payload) => sendRunEvent?.(event, payload)}
+        />
       </section>
     </main>
   );

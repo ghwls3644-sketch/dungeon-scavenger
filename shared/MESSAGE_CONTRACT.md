@@ -7,6 +7,14 @@
 { "type": "client_ready" }
 ```
 
+```json
+{
+  "type": "run_event",
+  "event": "run_extract",
+  "payload": { "runNumber": 1, "extractValue": 250 }
+}
+```
+
 ## Server -> Client
 ```json
 { "type": "hello", "tick": 0, "note": "서버 연결 완료" }
@@ -16,6 +24,10 @@
 { "type": "tick", "tick": 1, "note": "런타임 heartbeat" }
 ```
 
+```json
+{ "type": "event_ack", "tick": 5, "note": "ack:run_extract" }
+```
+
 ## 주의
 - `tick`은 서버 권위형 카운터다.
-- Sprint 2부터 플레이어 상태/소음/중량 payload를 확장한다.
+- `run_event`는 1차 텔레메트리 훅이며, Sprint 2에서 서버 판정 항목으로 확장한다.

@@ -35,6 +35,19 @@ async def handle_client(websocket) -> None:
                         }
                     )
                 )
+            elif payload.get("type") == "run_event":
+                event_name = str(payload.get("event", "unknown"))
+                event_payload = payload.get("payload", {})
+                print(f"[run_event] {event_name}: {event_payload}")
+                await websocket.send(
+                    json.dumps(
+                        {
+                            "type": "event_ack",
+                            "tick": tick,
+                            "note": f"ack:{event_name}",
+                        }
+                    )
+                )
     finally:
         ticker_task.cancel()
         with contextlib.suppress(asyncio.CancelledError):
