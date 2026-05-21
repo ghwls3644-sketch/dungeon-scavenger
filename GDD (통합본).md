@@ -2028,7 +2028,7 @@ React App Shell
 
 ### 10-1. 목적
 - AI 기획 산출물의 품질 편차를 줄이고, GDD 정합성을 유지한다.
-- 모든 신규 기획 요청은 `기획 하네스 프롬프트.md`를 사용한다.
+- 모든 신규 기획 요청은 `archive/기획 하네스 프롬프트 (FROZEN).md`를 기준 템플릿으로 사용한다.
 - 결과물은 아이디어가 아니라 구현 가능한 명세를 목표로 한다.
 
 ### 10-2. 필수 입력 스키마
@@ -2079,12 +2079,12 @@ React App Shell
 ## 11. Appendix: Prompt and Topic Backlog Operations
 
 ### 11-1. 표준 문서
-- Harness prompt (FROZEN): `기획 하네스 프롬프트.md`
-- Topic backlog (FROZEN): `요청 주제 백로그.md`
-- Auto-merge protocol (DEPRECATED): `GDD 자동 반영 프로토콜.md`
+- Harness prompt (FROZEN): `archive/기획 하네스 프롬프트 (FROZEN).md`
+- Topic backlog (FROZEN): `archive/요청 주제 백로그 (FROZEN).md`
+- Auto-merge protocol (DEPRECATED): `archive/GDD 자동 반영 프로토콜 (DEPRECATED).md`
 - Sprint backlog: `MVP 구현 백로그 (스프린트).md`
 - Modular GDD index: `docs/gdd/README.md`
-- Archived originals: `archive/*(FROZEN-2026-05-20).md`, `archive/*(DEPRECATED-2026-05-20).md`
+- Archived originals: `archive/` 내 용도별 단일 보관본
 
 ### 11-2. 레거시 운영 워크플로우 (보관)
 1. 본 절차는 설계 생성 단계에서 사용한 이력이며 현재 기본 운영 플로우가 아니다.
