@@ -1,8 +1,9 @@
-# Shared Message Contract (v0)
+# Shared Message Contract (v1)
 
-클라이언트-서버 간 Sprint 1 최소 메시지 계약.
+Sprint 2 contract for client/server realtime updates.
 
 ## Client -> Server
+
 ```json
 { "type": "client_ready" }
 ```
@@ -10,24 +11,74 @@
 ```json
 {
   "type": "run_event",
-  "event": "run_extract",
-  "payload": { "runNumber": 1, "extractValue": 250 }
+  "event": "trap_trigger",
+  "payload": { "trapId": "T-01", "health": 88 }
+}
+```
+
+Other expected `event` values:
+- `run_start`
+- `loot_pick`
+- `loot_drop`
+- `chaser_spotted`
+- `chaser_hit`
+- `run_extract`
+- `run_fail`
+
+`run_fail` payload example:
+
+```json
+{
+  "type": "run_event",
+  "event": "run_fail",
+  "payload": {
+    "failedRuns": 1,
+    "carriedValue": 420,
+    "recoveredValue": 147,
+    "lostValue": 273
+  }
 }
 ```
 
 ## Server -> Client
+
 ```json
-{ "type": "hello", "tick": 0, "note": "서버 연결 완료" }
+{
+  "type": "hello",
+  "tick": 0,
+  "note": "Server connected",
+  "threatState": "Idle",
+  "dangerScore": 0
+}
 ```
 
 ```json
-{ "type": "tick", "tick": 1, "note": "런타임 heartbeat" }
+{
+  "type": "tick",
+  "tick": 3,
+  "note": "heartbeat danger=12.0",
+  "threatState": "Investigating",
+  "dangerScore": 12.0
+}
 ```
 
 ```json
-{ "type": "event_ack", "tick": 5, "note": "ack:run_extract" }
+{ "type": "event_ack", "tick": 3, "note": "ack:trap_trigger" }
 ```
 
-## 주의
-- `tick`은 서버 권위형 카운터다.
-- `run_event`는 1차 텔레메트리 훅이며, Sprint 2에서 서버 판정 항목으로 확장한다.
+```json
+{
+  "type": "threat_update",
+  "tick": 3,
+  "note": "threat update from trap_trigger",
+  "threatState": "Chasing",
+  "dangerScore": 28.0
+}
+```
+
+## Notes
+
+- `tick` is server-authoritative time.
+- `dangerScore` is a lightweight sprint metric (0~100) that reacts to threat events.
+- `threat_update` is the server feedback channel for S2-01.
+- `run_fail` in S2-02 applies partial recovery (35%) and loss (65%) on carried value.

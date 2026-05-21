@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 type Vec2 = { x: number; y: number };
 type Rect = {
@@ -19,6 +19,16 @@ type Loot = {
   picked: boolean;
 };
 
+type Trap = {
+  id: string;
+  pos: Vec2;
+  radius: number;
+  damage: number;
+  noiseBoost: number;
+  cooldownSec: number;
+};
+
+type ThreatState = "Idle" | "Investigating" | "Chasing";
 type InventoryItem = Omit<Loot, "pos" | "picked">;
 
 export type GameSnapshot = {
@@ -29,6 +39,15 @@ export type GameSnapshot = {
   lootRemaining: number;
   noiseNow: number;
   noiseTier: "Quiet" | "Caution" | "Loud" | "Critical";
+  playerHealth: number;
+  threatState: ThreatState;
+  trapHits: number;
+  failedRuns: number;
+  chaserDistance: number;
+  stashValue: number;
+  totalRecoveredValue: number;
+  lastRecoveredValue: number;
+  lastFailureLossValue: number;
   completedRuns: number;
   lastExtractValue: number;
   totalExtractedValue: number;
@@ -48,7 +67,9 @@ const BASE_SPEED = 130;
 const RUN_MULTIPLIER = 1.35;
 const INVENTORY_SLOTS = 8;
 const MAX_WEIGHT = 40;
+const MAX_HEALTH = 100;
 const RUN_START_POS: Vec2 = { x: 120, y: 100 };
+const CHASER_SPAWN: Vec2 = { x: 650, y: 120 };
 
 const WALKABLE_ZONES: Rect[] = [
   { id: "Entrance", kind: "room", x: 40, y: 40, w: 180, h: 120 },
@@ -61,6 +82,11 @@ const WALKABLE_ZONES: Rect[] = [
   { id: "C_BD", kind: "corridor", x: 355, y: 160, w: 30, h: 80 },
   { id: "C_DE", kind: "corridor", x: 460, y: 295, w: 60, h: 30 },
   { id: "C_CE", kind: "corridor", x: 595, y: 160, w: 30, h: 80 }
+];
+
+const TRAPS: Trap[] = [
+  { id: "T-01", pos: { x: 510, y: 100 }, radius: 16, damage: 12, noiseBoost: 18, cooldownSec: 3.2 },
+  { id: "T-02", pos: { x: 370, y: 208 }, radius: 16, damage: 10, noiseBoost: 15, cooldownSec: 3.0 }
 ];
 
 const INITIAL_LOOT: Loot[] = [
@@ -91,7 +117,6 @@ function zoneContainsPoint(zone: Rect, pos: Vec2, radius = 0) {
 }
 
 function isWalkable(pos: Vec2) {
-  // Use center-point walkability so adjacent room/corridor borders remain connected.
   return WALKABLE_ZONES.some((zone) => zoneContainsPoint(zone, pos, 0));
 }
 
@@ -133,6 +158,18 @@ type GameState = {
   inventory: InventoryItem[];
   loot: Loot[];
   noiseNow: number;
+  playerHealth: number;
+  threatState: ThreatState;
+  trapHits: number;
+  failedRuns: number;
+  chaserPos: Vec2;
+  chaserAttackReadyAt: number;
+  noisyAnchor: Vec2;
+  trapReadyAt: Record<string, number>;
+  stashValue: number;
+  totalRecoveredValue: number;
+  lastRecoveredValue: number;
+  lastFailureLossValue: number;
   completedRuns: number;
   lastExtractValue: number;
   totalExtractedValue: number;
@@ -166,6 +203,16 @@ function draw(ctx: CanvasRenderingContext2D, state: GameState) {
     }
   }
 
+  for (const trap of TRAPS) {
+    ctx.beginPath();
+    ctx.fillStyle = "rgba(209, 65, 65, 0.35)";
+    ctx.arc(trap.pos.x, trap.pos.y, trap.radius, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.closePath();
+    ctx.strokeStyle = "#d14141";
+    ctx.strokeRect(trap.pos.x - 4, trap.pos.y - 4, 8, 8);
+  }
+
   for (const loot of state.loot) {
     if (loot.picked) continue;
     ctx.fillStyle = "#d8b15b";
@@ -173,6 +220,12 @@ function draw(ctx: CanvasRenderingContext2D, state: GameState) {
     ctx.strokeStyle = "#7d6735";
     ctx.strokeRect(loot.pos.x - 6, loot.pos.y - 6, 12, 12);
   }
+
+  ctx.beginPath();
+  ctx.fillStyle = state.threatState === "Chasing" ? "#ff8a8a" : "#ff6b6b";
+  ctx.arc(state.chaserPos.x, state.chaserPos.y, 9, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.closePath();
 
   ctx.beginPath();
   ctx.fillStyle = "#6fd4ff";
@@ -205,6 +258,7 @@ export function GameCanvas(props: {
 
     let raf = 0;
     let prevTs = performance.now();
+    let telemetryAccum = 0;
     const pressed = new Set<string>();
     const onceFlags = { interact: false, drop: false, extract: false };
 
@@ -213,6 +267,18 @@ export function GameCanvas(props: {
       inventory: [],
       loot: lootForRun(1),
       noiseNow: 0,
+      playerHealth: MAX_HEALTH,
+      threatState: "Idle",
+      trapHits: 0,
+      failedRuns: 0,
+      chaserPos: { ...CHASER_SPAWN },
+      chaserAttackReadyAt: 0,
+      noisyAnchor: { ...RUN_START_POS },
+      trapReadyAt: {},
+      stashValue: 0,
+      totalRecoveredValue: 0,
+      lastRecoveredValue: 0,
+      lastFailureLossValue: 0,
       completedRuns: 0,
       lastExtractValue: 0,
       totalExtractedValue: 0,
@@ -236,6 +302,15 @@ export function GameCanvas(props: {
         lootRemaining: state.loot.filter((l) => !l.picked).length,
         noiseNow: state.noiseNow,
         noiseTier: noiseTier(state.noiseNow),
+        playerHealth: state.playerHealth,
+        threatState: state.threatState,
+        trapHits: state.trapHits,
+        failedRuns: state.failedRuns,
+        chaserDistance: distance(state.player, state.chaserPos),
+        stashValue: state.stashValue,
+        totalRecoveredValue: state.totalRecoveredValue,
+        lastRecoveredValue: state.lastRecoveredValue,
+        lastFailureLossValue: state.lastFailureLossValue,
         completedRuns: state.completedRuns,
         lastExtractValue: state.lastExtractValue,
         totalExtractedValue: state.totalExtractedValue,
@@ -323,24 +398,59 @@ export function GameCanvas(props: {
       }
     };
 
-    const resetForNextRun = (extractValue: number) => {
-      state.completedRuns += 1;
-      state.lastExtractValue = extractValue;
-      state.totalExtractedValue += extractValue;
+    const resetForNextRun = (extractValue: number, reason: "extract" | "fail", carriedValue = 0) => {
+      if (reason === "extract") {
+        state.completedRuns += 1;
+        state.lastExtractValue = extractValue;
+        state.totalExtractedValue += extractValue;
+        state.stashValue += extractValue;
+        state.lastRecoveredValue = 0;
+        state.lastFailureLossValue = 0;
+      } else {
+        const recoveredValue = Math.floor(carriedValue * 0.35);
+        const lostValue = Math.max(0, carriedValue - recoveredValue);
+        state.failedRuns += 1;
+        state.lastExtractValue = 0;
+        state.lastRecoveredValue = recoveredValue;
+        state.lastFailureLossValue = lostValue;
+        state.totalRecoveredValue += recoveredValue;
+        state.stashValue += recoveredValue;
+      }
+
       state.lastRunDurationSec = state.runElapsedSec;
       state.runElapsedSec = 0;
       state.player = { ...RUN_START_POS };
       state.inventory = [];
-      state.loot = lootForRun(state.completedRuns + 1);
+      state.loot = lootForRun(state.completedRuns + state.failedRuns + 1);
       state.noiseNow = 0;
+      state.playerHealth = MAX_HEALTH;
+      state.threatState = "Idle";
+      state.trapHits = 0;
+      state.chaserPos = { ...CHASER_SPAWN };
+      state.chaserAttackReadyAt = 0;
+      state.noisyAnchor = { ...RUN_START_POS };
+      state.trapReadyAt = {};
 
-      onRunEventRef.current?.("run_extract", {
-        runNumber: state.completedRuns,
-        extractValue,
-        totalExtractedValue: state.totalExtractedValue,
-        runDurationSec: Number(state.lastRunDurationSec.toFixed(1))
+      if (reason === "extract") {
+        onRunEventRef.current?.("run_extract", {
+          runNumber: state.completedRuns,
+          extractValue,
+          totalExtractedValue: state.totalExtractedValue,
+          runDurationSec: Number(state.lastRunDurationSec.toFixed(1))
+        });
+      } else {
+        onRunEventRef.current?.("run_fail", {
+          failedRuns: state.failedRuns,
+          carriedValue,
+          recoveredValue: state.lastRecoveredValue,
+          lostValue: state.lastFailureLossValue,
+          runDurationSec: Number(state.lastRunDurationSec.toFixed(1))
+        });
+      }
+
+      onRunEventRef.current?.("run_start", {
+        runNumber: state.completedRuns + state.failedRuns + 1
       });
-      onRunEventRef.current?.("run_start", { runNumber: state.completedRuns + 1 });
     };
 
     window.addEventListener("keydown", keyDown, { capture: true });
@@ -351,6 +461,7 @@ export function GameCanvas(props: {
     const tick = (ts: number) => {
       const dt = clamp((ts - prevTs) / 1000, 0, 0.05);
       prevTs = ts;
+      telemetryAccum += dt;
 
       state.sessionElapsedSec += dt;
       state.runElapsedSec += dt;
@@ -379,6 +490,8 @@ export function GameCanvas(props: {
 
         const proposedY = { x: state.player.x, y: state.player.y + dirY * speed * dt };
         if (isWalkable(proposedY)) state.player.y = proposedY.y;
+
+        state.noisyAnchor = { ...state.player };
       }
 
       if (onceFlags.interact) {
@@ -399,6 +512,7 @@ export function GameCanvas(props: {
             weight: target.weight
           });
           state.noiseNow = clamp(state.noiseNow + 6, 0, 100);
+          state.noisyAnchor = { ...state.player };
           onRunEventRef.current?.("loot_pick", {
             lootId: target.id,
             inventoryCount: state.inventory.length,
@@ -417,6 +531,7 @@ export function GameCanvas(props: {
             picked: false
           });
           state.noiseNow = clamp(state.noiseNow + 3, 0, 100);
+          state.noisyAnchor = { ...state.player };
           onRunEventRef.current?.("loot_drop", {
             lootId: item.id,
             inventoryCount: state.inventory.length
@@ -429,9 +544,87 @@ export function GameCanvas(props: {
         const roomId = findZoneId(state.player);
         if (roomId === "Exit" && state.inventory.length > 0) {
           const extractValue = state.inventory.reduce((sum, item) => sum + item.value, 0);
-          resetForNextRun(extractValue);
+          resetForNextRun(extractValue, "extract", 0);
         }
         onceFlags.extract = false;
+      }
+
+      for (const trap of TRAPS) {
+        const readyAt = state.trapReadyAt[trap.id] ?? 0;
+        const inRange = distance(state.player, trap.pos) <= trap.radius;
+        if (inRange && state.sessionElapsedSec >= readyAt) {
+          state.trapReadyAt[trap.id] = state.sessionElapsedSec + trap.cooldownSec;
+          state.playerHealth = clamp(state.playerHealth - trap.damage, 0, MAX_HEALTH);
+          state.noiseNow = clamp(state.noiseNow + trap.noiseBoost, 0, 100);
+          state.trapHits += 1;
+          state.noisyAnchor = { ...trap.pos };
+          onRunEventRef.current?.("trap_trigger", {
+            trapId: trap.id,
+            health: state.playerHealth,
+            trapHits: state.trapHits
+          });
+        }
+      }
+
+      const distToPlayer = distance(state.chaserPos, state.player);
+      if (distToPlayer <= 95 || state.noiseNow >= 60) {
+        state.threatState = "Chasing";
+      } else if (state.noiseNow >= 32) {
+        state.threatState = "Investigating";
+      } else {
+        state.threatState = "Idle";
+      }
+
+      let chaseTarget = CHASER_SPAWN;
+      let chaseSpeed = 46;
+      if (state.threatState === "Investigating") {
+        chaseTarget = state.noisyAnchor;
+        chaseSpeed = 68;
+      }
+      if (state.threatState === "Chasing") {
+        chaseTarget = state.player;
+        chaseSpeed = 94;
+      }
+
+      const dx = chaseTarget.x - state.chaserPos.x;
+      const dy = chaseTarget.y - state.chaserPos.y;
+      const chaseLen = Math.hypot(dx, dy);
+      if (chaseLen > 1) {
+        const chaserNextX = {
+          x: state.chaserPos.x + (dx / chaseLen) * chaseSpeed * dt,
+          y: state.chaserPos.y
+        };
+        if (isWalkable(chaserNextX)) state.chaserPos.x = chaserNextX.x;
+
+        const chaserNextY = {
+          x: state.chaserPos.x,
+          y: state.chaserPos.y + (dy / chaseLen) * chaseSpeed * dt
+        };
+        if (isWalkable(chaserNextY)) state.chaserPos.y = chaserNextY.y;
+      }
+
+      const chaserDist = distance(state.chaserPos, state.player);
+      if (
+        state.threatState === "Chasing" &&
+        chaserDist <= 20 &&
+        state.sessionElapsedSec >= state.chaserAttackReadyAt
+      ) {
+        state.chaserAttackReadyAt = state.sessionElapsedSec + 0.85;
+        state.playerHealth = clamp(state.playerHealth - 8, 0, MAX_HEALTH);
+        state.noiseNow = clamp(state.noiseNow + 4, 0, 100);
+        onRunEventRef.current?.("chaser_hit", {
+          health: state.playerHealth,
+          distance: Number(chaserDist.toFixed(1))
+        });
+      }
+
+      if (state.threatState === "Chasing" && telemetryAccum >= 0.5) {
+        telemetryAccum = 0;
+        onRunEventRef.current?.("chaser_spotted", {
+          distance: Number(chaserDist.toFixed(1)),
+          noiseNow: Number(state.noiseNow.toFixed(1)),
+          health: state.playerHealth
+        });
       }
 
       if (moving) {
@@ -439,6 +632,11 @@ export function GameCanvas(props: {
         state.noiseNow = clamp(state.noiseNow + movementNoise + tier.noiseBonus * dt, 0, 100);
       } else {
         state.noiseNow = clamp(state.noiseNow - 10 * dt, 0, 100);
+      }
+
+      if (state.playerHealth <= 0) {
+        const carriedValue = state.inventory.reduce((sum, item) => sum + item.value, 0);
+        resetForNextRun(0, "fail", carriedValue);
       }
 
       draw(ctx, state);

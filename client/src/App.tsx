@@ -6,7 +6,9 @@ export function App() {
   const [snapshot, setSnapshot] = useState<SocketSnapshot>({
     status: "disconnected",
     tick: 0,
-    note: "Waiting for server"
+    note: "Waiting for server",
+    threatState: "Idle",
+    dangerScore: 0
   });
   const [game, setGame] = useState<GameSnapshot>({
     roomId: "Entrance",
@@ -16,6 +18,15 @@ export function App() {
     lootRemaining: 0,
     noiseNow: 0,
     noiseTier: "Quiet",
+    playerHealth: 100,
+    threatState: "Idle",
+    trapHits: 0,
+    failedRuns: 0,
+    chaserDistance: 0,
+    stashValue: 0,
+    totalRecoveredValue: 0,
+    lastRecoveredValue: 0,
+    lastFailureLossValue: 0,
     completedRuns: 0,
     lastExtractValue: 0,
     totalExtractedValue: 0,
@@ -42,7 +53,7 @@ export function App() {
     <main className="layout">
       <header className="panel">
         <h1>Dungeon Scavenger</h1>
-        <p>Sprint 1 Vertical Slice Scaffold</p>
+        <p>Sprint 2 ThreatPack Lite</p>
       </header>
 
       <section className="hud panel">
@@ -50,6 +61,8 @@ export function App() {
         <div>Socket: {snapshot.status}</div>
         <div>Server Tick: {snapshot.tick}</div>
         <div>Note: {snapshot.note}</div>
+        <div>Server Threat: {snapshot.threatState}</div>
+        <div>Server Danger: {snapshot.dangerScore.toFixed(1)}</div>
         <div className="hud-gap" />
         <div className="hud-title">Run Snapshot</div>
         <div>Room: {game.roomId}</div>
@@ -60,9 +73,18 @@ export function App() {
         <div>Weight: {game.carriedWeight.toFixed(1)} / 40</div>
         <div>Loot Left: {game.lootRemaining}</div>
         <div>Noise: {game.noiseNow.toFixed(1)} ({game.noiseTier})</div>
+        <div>Health: {game.playerHealth}</div>
+        <div>Threat: {game.threatState}</div>
+        <div>Trap Hits: {game.trapHits}</div>
+        <div>Chaser Dist: {game.chaserDistance.toFixed(1)}</div>
+        <div>Failed Runs: {game.failedRuns}</div>
         <div>Completed Runs: {game.completedRuns}</div>
+        <div>Stash Value: {game.stashValue}</div>
         <div>Last Extract: {game.lastExtractValue}</div>
         <div>Total Extracted: {game.totalExtractedValue}</div>
+        <div>Last Recovered: {game.lastRecoveredValue}</div>
+        <div>Total Recovered: {game.totalRecoveredValue}</div>
+        <div>Last Failure Loss: {game.lastFailureLossValue}</div>
         <div>Run Time: {game.runElapsedSec.toFixed(1)}s</div>
         <div>Last Run Time: {game.lastRunDurationSec.toFixed(1)}s</div>
         <div>Session Time: {game.sessionElapsedSec.toFixed(1)}s</div>

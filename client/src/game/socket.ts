@@ -2,12 +2,16 @@ export type SocketSnapshot = {
   status: "connecting" | "connected" | "disconnected";
   tick: number;
   note: string;
+  threatState: string;
+  dangerScore: number;
 };
 
 type ServerEnvelope = {
-  type: "hello" | "tick" | "event_ack";
+  type: "hello" | "tick" | "event_ack" | "threat_update";
   tick: number;
   note: string;
+  threatState?: string;
+  dangerScore?: number;
 };
 
 export type ClientEventSender = (event: string, payload?: Record<string, unknown>) => void;
@@ -17,7 +21,14 @@ export function connectGameSocket(
   onReady?: (sendEvent: ClientEventSender) => void
 ) {
   const ws = new WebSocket("ws://127.0.0.1:8765");
-  onUpdate({ status: "connecting", tick: 0, note: "Connecting..." });
+  const current: SocketSnapshot = {
+    status: "connecting",
+    tick: 0,
+    note: "Connecting...",
+    threatState: "Idle",
+    dangerScore: 0
+  };
+  onUpdate({ ...current });
 
   const sendEvent: ClientEventSender = (event, payload = {}) => {
     if (ws.readyState !== WebSocket.OPEN) return;
@@ -37,19 +48,30 @@ export function connectGameSocket(
 
   ws.onmessage = (event) => {
     const data = JSON.parse(event.data) as ServerEnvelope;
-    onUpdate({
-      status: "connected",
-      tick: data.tick,
-      note: data.note
-    });
+    current.status = "connected";
+    current.tick = data.tick;
+    current.note = data.note;
+    if (typeof data.threatState === "string") current.threatState = data.threatState;
+    if (typeof data.dangerScore === "number") current.dangerScore = data.dangerScore;
+    onUpdate({ ...current });
   };
 
   ws.onclose = () => {
-    onUpdate({ status: "disconnected", tick: 0, note: "Connection closed" });
+    onUpdate({
+      ...current,
+      status: "disconnected",
+      tick: 0,
+      note: "Connection closed"
+    });
   };
 
   ws.onerror = () => {
-    onUpdate({ status: "disconnected", tick: 0, note: "Connection error" });
+    onUpdate({
+      ...current,
+      status: "disconnected",
+      tick: 0,
+      note: "Connection error"
+    });
   };
 
   return () => ws.close();
