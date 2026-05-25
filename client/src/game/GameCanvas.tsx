@@ -1,4 +1,12 @@
-import { useEffect, useRef } from "react";
+﻿import { useEffect, useRef } from "react";
+import {
+  classifyThreatState,
+  clamp,
+  nextRunNumber,
+  settleExtract,
+  settleFail,
+  type ThreatState
+} from "./gameCore";
 
 type Vec2 = { x: number; y: number };
 type Rect = {
@@ -28,7 +36,6 @@ type Trap = {
   cooldownSec: number;
 };
 
-type ThreatState = "Idle" | "Investigating" | "Chasing";
 type InventoryItem = Omit<Loot, "pos" | "picked">;
 
 export type GameSnapshot = {
@@ -96,10 +103,6 @@ const INITIAL_LOOT: Loot[] = [
   { id: "L-04", name: "Waterlogged Idol", weight: 7, value: 180, pos: { x: 350, y: 290 }, picked: false },
   { id: "L-05", name: "Exit Cache", weight: 6, value: 210, pos: { x: 610, y: 295 }, picked: false }
 ];
-
-function clamp(v: number, min: number, max: number) {
-  return Math.max(min, Math.min(max, v));
-}
 
 function distance(a: Vec2, b: Vec2) {
   const dx = a.x - b.x;
@@ -356,12 +359,6 @@ export function GameCanvas(props: {
       "E",
       "q",
       "Q",
-      "ㅈ",
-      "ㅁ",
-      "ㄴ",
-      "ㅇ",
-      "ㄷ",
-      "ㅂ",
       " ",
       "Shift"
     ]);
@@ -373,13 +370,13 @@ export function GameCanvas(props: {
       state.inputDebugLastCode = code || "-";
       state.inputDebugLastKey = key || "-";
       pressed.add(code);
-      if (code === "KeyW" || key === "w" || key === "W" || key === "ㅈ") pressed.add("KeyW");
-      if (code === "KeyA" || key === "a" || key === "A" || key === "ㅁ") pressed.add("KeyA");
-      if (code === "KeyS" || key === "s" || key === "S" || key === "ㄴ") pressed.add("KeyS");
-      if (code === "KeyD" || key === "d" || key === "D" || key === "ㅇ") pressed.add("KeyD");
+      if (code === "KeyW" || key === "w" || key === "W") pressed.add("KeyW");
+      if (code === "KeyA" || key === "a" || key === "A") pressed.add("KeyA");
+      if (code === "KeyS" || key === "s" || key === "S") pressed.add("KeyS");
+      if (code === "KeyD" || key === "d" || key === "D") pressed.add("KeyD");
       if (code === "ShiftLeft" || code === "ShiftRight" || key === "Shift") pressed.add("ShiftLeft");
-      if ((code === "KeyE" || key === "e" || key === "E" || key === "ㄷ") && !e.repeat) onceFlags.interact = true;
-      if ((code === "KeyQ" || key === "q" || key === "Q" || key === "ㅂ") && !e.repeat) onceFlags.drop = true;
+      if ((code === "KeyE" || key === "e" || key === "E") && !e.repeat) onceFlags.interact = true;
+      if ((code === "KeyQ" || key === "q" || key === "Q") && !e.repeat) onceFlags.drop = true;
       if ((code === "Space" || key === " ") && !e.repeat) onceFlags.extract = true;
     };
 
@@ -388,10 +385,10 @@ export function GameCanvas(props: {
       const key = e.key;
       if (handledCodes.has(code) || handledKeys.has(key)) e.preventDefault();
       pressed.delete(code);
-      if (code === "KeyW" || key === "w" || key === "W" || key === "ㅈ") pressed.delete("KeyW");
-      if (code === "KeyA" || key === "a" || key === "A" || key === "ㅁ") pressed.delete("KeyA");
-      if (code === "KeyS" || key === "s" || key === "S" || key === "ㄴ") pressed.delete("KeyS");
-      if (code === "KeyD" || key === "d" || key === "D" || key === "ㅇ") pressed.delete("KeyD");
+      if (code === "KeyW" || key === "w" || key === "W") pressed.delete("KeyW");
+      if (code === "KeyA" || key === "a" || key === "A") pressed.delete("KeyA");
+      if (code === "KeyS" || key === "s" || key === "S") pressed.delete("KeyS");
+      if (code === "KeyD" || key === "d" || key === "D") pressed.delete("KeyD");
       if (code === "ShiftLeft" || code === "ShiftRight" || key === "Shift") {
         pressed.delete("ShiftLeft");
         pressed.delete("ShiftRight");
@@ -400,28 +397,46 @@ export function GameCanvas(props: {
 
     const resetForNextRun = (extractValue: number, reason: "extract" | "fail", carriedValue = 0) => {
       if (reason === "extract") {
-        state.completedRuns += 1;
-        state.lastExtractValue = extractValue;
-        state.totalExtractedValue += extractValue;
-        state.stashValue += extractValue;
-        state.lastRecoveredValue = 0;
-        state.lastFailureLossValue = 0;
+        const settled = settleExtract(
+          {
+            stashValue: state.stashValue,
+            totalRecoveredValue: state.totalRecoveredValue,
+            totalExtractedValue: state.totalExtractedValue,
+            completedRuns: state.completedRuns,
+            failedRuns: state.failedRuns
+          },
+          extractValue
+        );
+        state.completedRuns = settled.completedRuns;
+        state.stashValue = settled.stashValue;
+        state.totalExtractedValue = settled.totalExtractedValue;
+        state.lastExtractValue = settled.lastExtractValue;
+        state.lastRecoveredValue = settled.lastRecoveredValue;
+        state.lastFailureLossValue = settled.lastFailureLossValue;
       } else {
-        const recoveredValue = Math.floor(carriedValue * 0.35);
-        const lostValue = Math.max(0, carriedValue - recoveredValue);
-        state.failedRuns += 1;
-        state.lastExtractValue = 0;
-        state.lastRecoveredValue = recoveredValue;
-        state.lastFailureLossValue = lostValue;
-        state.totalRecoveredValue += recoveredValue;
-        state.stashValue += recoveredValue;
+        const settled = settleFail(
+          {
+            stashValue: state.stashValue,
+            totalRecoveredValue: state.totalRecoveredValue,
+            totalExtractedValue: state.totalExtractedValue,
+            completedRuns: state.completedRuns,
+            failedRuns: state.failedRuns
+          },
+          carriedValue
+        );
+        state.failedRuns = settled.failedRuns;
+        state.stashValue = settled.stashValue;
+        state.totalRecoveredValue = settled.totalRecoveredValue;
+        state.lastExtractValue = settled.lastExtractValue;
+        state.lastRecoveredValue = settled.lastRecoveredValue;
+        state.lastFailureLossValue = settled.lastFailureLossValue;
       }
 
       state.lastRunDurationSec = state.runElapsedSec;
       state.runElapsedSec = 0;
       state.player = { ...RUN_START_POS };
       state.inventory = [];
-      state.loot = lootForRun(state.completedRuns + state.failedRuns + 1);
+      state.loot = lootForRun(nextRunNumber(state.completedRuns, state.failedRuns));
       state.noiseNow = 0;
       state.playerHealth = MAX_HEALTH;
       state.threatState = "Idle";
@@ -449,7 +464,7 @@ export function GameCanvas(props: {
       }
 
       onRunEventRef.current?.("run_start", {
-        runNumber: state.completedRuns + state.failedRuns + 1
+        runNumber: nextRunNumber(state.completedRuns, state.failedRuns)
       });
     };
 
@@ -567,13 +582,7 @@ export function GameCanvas(props: {
       }
 
       const distToPlayer = distance(state.chaserPos, state.player);
-      if (distToPlayer <= 95 || state.noiseNow >= 60) {
-        state.threatState = "Chasing";
-      } else if (state.noiseNow >= 32) {
-        state.threatState = "Investigating";
-      } else {
-        state.threatState = "Idle";
-      }
+      state.threatState = classifyThreatState(distToPlayer, state.noiseNow);
 
       let chaseTarget = CHASER_SPAWN;
       let chaseSpeed = 46;
@@ -666,3 +675,4 @@ export function GameCanvas(props: {
     />
   );
 }
+

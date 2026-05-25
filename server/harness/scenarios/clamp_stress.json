@@ -1,0 +1,30 @@
+{
+  "name": "clamp_stress",
+  "description": "Repeated high-threat events should clamp dangerScore at 100.",
+  "expect": {
+    "requireTypes": ["hello", "tick", "event_ack", "threat_update"],
+    "ackSequence": [
+      "chaser_hit",
+      "chaser_hit",
+      "chaser_hit",
+      "chaser_hit",
+      "chaser_hit",
+      "chaser_hit",
+      "chaser_hit",
+      "chaser_hit"
+    ],
+    "finalThreatState": "Chasing",
+    "dangerScoreMin": 100,
+    "dangerScoreMax": 100
+  },
+  "events": [
+    { "event": "chaser_hit", "payload": { "health": 90, "distance": 8.9 } },
+    { "event": "chaser_hit", "payload": { "health": 82, "distance": 8.4 } },
+    { "event": "chaser_hit", "payload": { "health": 74, "distance": 8.2 } },
+    { "event": "chaser_hit", "payload": { "health": 66, "distance": 8.0 } },
+    { "event": "chaser_hit", "payload": { "health": 58, "distance": 7.7 } },
+    { "event": "chaser_hit", "payload": { "health": 50, "distance": 7.5 } },
+    { "event": "chaser_hit", "payload": { "health": 42, "distance": 7.2 } },
+    { "event": "chaser_hit", "payload": { "health": 34, "distance": 7.0 } }
+  ]
+}

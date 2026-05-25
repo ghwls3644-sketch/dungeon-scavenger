@@ -1,0 +1,65 @@
+name: Harness Checks
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - master
+      - "codex/**"
+
+jobs:
+  client-harness:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: client
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: client/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      - name: Run deterministic core harness
+        run: npm run harness:core
+
+  server-contract-and-replay:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: server
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run contract tests
+        run: python -m unittest discover -s tests -p "test_*.py"
+
+      - name: Run replay smoke harness
+        run: |
+          python app.py &
+          SERVER_PID=$!
+          trap "kill ${SERVER_PID}" EXIT
+          sleep 1
+          python harness/replay_runner.py harness/scenarios/smoke_run.json
+          python harness/replay_runner.py harness/scenarios/fail_recovery.json
+          python harness/replay_runner.py harness/scenarios/clamp_stress.json

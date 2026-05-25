@@ -1,0 +1,42 @@
+{
+  "name": "fail_recovery",
+  "description": "Failure event should recover part of carried value and reset threat to idle server-side.",
+  "expect": {
+    "requireTypes": ["hello", "tick", "event_ack", "threat_update"],
+    "ackSequence": ["run_start", "trap_trigger", "chaser_hit", "run_fail"],
+    "finalThreatState": "Idle",
+    "dangerScoreMin": 0,
+    "dangerScoreMax": 5
+  },
+  "events": [
+    {
+      "event": "run_start",
+      "payload": {
+        "runNumber": 1
+      }
+    },
+    {
+      "event": "trap_trigger",
+      "payload": {
+        "trapId": "T-02",
+        "health": 90
+      }
+    },
+    {
+      "event": "chaser_hit",
+      "payload": {
+        "health": 82,
+        "distance": 10.1
+      }
+    },
+    {
+      "event": "run_fail",
+      "payload": {
+        "failedRuns": 1,
+        "carriedValue": 420,
+        "recoveredValue": 147,
+        "lostValue": 273
+      }
+    }
+  ]
+}

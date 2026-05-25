@@ -1,0 +1,50 @@
+{
+  "name": "smoke_run",
+  "description": "Minimal replay sequence for contract sanity.",
+  "expect": {
+    "requireTypes": ["hello", "tick", "event_ack", "threat_update"],
+    "ackSequence": ["run_start", "trap_trigger", "loot_pick", "chaser_spotted", "run_extract"],
+    "finalThreatState": "Idle",
+    "dangerScoreMin": 0,
+    "dangerScoreMax": 100
+  },
+  "events": [
+    {
+      "event": "run_start",
+      "payload": {
+        "runNumber": 1
+      }
+    },
+    {
+      "event": "trap_trigger",
+      "payload": {
+        "trapId": "T-01",
+        "health": 88
+      }
+    },
+    {
+      "event": "loot_pick",
+      "payload": {
+        "lootId": "L-01",
+        "inventoryCount": 1,
+        "carriedWeight": 5
+      }
+    },
+    {
+      "event": "chaser_spotted",
+      "payload": {
+        "distance": 24.3,
+        "noiseNow": 64.5,
+        "health": 88
+      }
+    },
+    {
+      "event": "run_extract",
+      "payload": {
+        "runNumber": 1,
+        "extractValue": 120,
+        "totalExtractedValue": 120
+      }
+    }
+  ]
+}
