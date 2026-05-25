@@ -29,6 +29,40 @@
 - HTML5 Canvas
 - WebSocket(JSON)
 
+## 하네스 엔지니어링 (검증 체계)
+
+- 운영 지침: `AGENTS.md`
+- Client 결정론 코어 하네스: `client/harness/game_core_harness.ts`
+- Server 계약 테스트: `server/tests/test_contract.py`
+- Server 전이 매트릭스 테스트: `server/tests/test_transition_matrix.py`
+- Server 리플레이 하네스: `server/harness/replay_runner.py`
+- CI 게이트: `.github/workflows/harness.yml`
+
+### 권장 검증 순서
+
+1. Client 코어 하네스 + 타입체크
+```powershell
+cd client
+npm.cmd run harness:core
+npx.cmd tsc --noEmit
+```
+
+2. Server 계약/전이 테스트
+```powershell
+cd server
+py -3 -m unittest discover -s tests -p "test_*.py"
+```
+
+3. Server 리플레이 시나리오
+```powershell
+cd server
+py -3 app.py
+# 다른 터미널에서
+py -3 harness/replay_runner.py harness/scenarios/smoke_run.json
+py -3 harness/replay_runner.py harness/scenarios/fail_recovery.json
+py -3 harness/replay_runner.py harness/scenarios/clamp_stress.json
+```
+
 ## 실행
 
 1. 서버
