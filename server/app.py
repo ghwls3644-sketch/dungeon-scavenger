@@ -95,6 +95,18 @@ async def handle_client(websocket) -> None:
             elif event_name == "chaser_hit":
                 danger_score = clamp(danger_score + 15, 0, 100)
                 threat_state = "Chasing"
+            elif event_name == "door_interact":
+                event_action = str(event_payload.get("action", ""))
+                event_result = str(event_payload.get("result", ""))
+                noise = float(event_payload.get("noise", 0))
+                danger_score = clamp(danger_score + min(noise * 0.8, 8), 0, 100)
+                if event_action in {"breakDoor", "forceOpen"} or event_result in {"broken", "barred"}:
+                    danger_score = clamp(danger_score + 4, 0, 100)
+                    threat_state = "Investigating" if threat_state == "Idle" else threat_state
+                if event_result == "sealed":
+                    danger_score = clamp(danger_score + 2, 0, 100)
+            elif event_name == "tool_pick":
+                danger_score = clamp(danger_score + 1, 0, 100)
             elif event_name == "run_extract":
                 danger_score = clamp(danger_score - 30, 0, 100)
                 threat_state = "Idle"

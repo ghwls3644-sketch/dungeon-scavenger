@@ -36,7 +36,10 @@ export function App() {
     lastRunDurationSec: 0,
     inputDebugLastKey: "-",
     inputDebugLastCode: "-",
-    inputDebugPressedCount: 0
+    inputDebugPressedCount: 0,
+    lockpickCharges: 2,
+    nearDoorId: "-",
+    nearDoorState: "none"
   });
   const [sendRunEvent, setSendRunEvent] = useState<
     ((event: string, payload?: Record<string, unknown>) => void) | null
@@ -89,15 +92,22 @@ export function App() {
         <div>Last Run Time: {game.lastRunDurationSec.toFixed(1)}s</div>
         <div>Session Time: {game.sessionElapsedSec.toFixed(1)}s</div>
         <div>Extract Ready: {game.canExtract ? "Yes" : "No"}</div>
+        <div>Lockpick Charges: {game.lockpickCharges}</div>
+        <div>Near Door: {game.nearDoorId}</div>
+        <div>Near Door State: {game.nearDoorState}</div>
         <div>Input Last Key: {game.inputDebugLastKey}</div>
         <div>Input Last Code: {game.inputDebugLastCode}</div>
         <div>Input Pressed: {game.inputDebugPressedCount}</div>
         <div className="hud-gap" />
         <div className="hint">Move: WASD / Arrow</div>
         <div className="hint">Run: Shift</div>
-        <div className="hint">Loot: E</div>
+        <div className="hint">Door (Careful) / Loot: E</div>
+        <div className="hint">Door (Quick): F</div>
+        <div className="hint">Door (Pick Lock): T</div>
+        <div className="hint">Door (Force): G</div>
+        <div className="hint">Door (Break): R</div>
         <div className="hint">Drop: Q</div>
-        <div className="hint">Extract at Exit: Space</div>
+        <div className="hint">Extract at Entrance: Space</div>
       </section>
 
       <section className="canvas-shell panel">

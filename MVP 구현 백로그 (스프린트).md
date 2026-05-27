@@ -29,6 +29,7 @@
 | S2-04 | BasePrep v1 | React UI + Server | 2.0 | S2-02 | 거점 준비와 다음 런 선택지 연결 |
 | S2-05 | Telemetry v1 | Node.js Tooling | 1.5 | S1-05 | 생환률/소음피크/과적시간 로그 저장 |
 | S2-06 | Harness Engineering v1 | Full Stack Tooling | 1.5 | S2-01 | `AGENTS.md`, 계약/전이 테스트, 리플레이 시나리오, CI 게이트 구성 |
+| S2-07 | Zone+Door Prototype | Client + Server + Contract | 2.0 | S2-01 | 복도 독립 구역화 + 문 상태/행동 + 해정 도구 루프 + 입구 귀환 정산 |
 
 ## 4) Sprint 3 (2주) - 반복성/밸런스/온보딩
 
@@ -51,4 +52,5 @@
 - S1-03, S1-04 -> `GDD 4-1, 4-3, 4-7`
 - S2-01~S2-05 -> `GDD 4-11, 4-16, 4-21, 4-24~4-27`
 - S2-06 -> `GDD 8-3 (검증/운영 체계 보강)`
+- S2-07 -> `GDD 5-1~5-4, 8-4, 8-6`
 - S3-01~S3-05 -> `GDD 4-29~4-37`

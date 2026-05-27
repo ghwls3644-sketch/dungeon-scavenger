@@ -20,10 +20,45 @@ Other expected `event` values:
 - `run_start`
 - `loot_pick`
 - `loot_drop`
+- `tool_pick`
+- `door_interact`
 - `chaser_spotted`
 - `chaser_hit`
 - `run_extract`
 - `run_fail`
+
+`door_interact` payload example:
+
+```json
+{
+  "type": "run_event",
+  "event": "door_interact",
+  "payload": {
+    "doorId": "D_HALL_STORAGE",
+    "action": "pickLock",
+    "result": "opened",
+    "changed": true,
+    "usedLockpick": true,
+    "lockpickCharges": 1,
+    "noise": 2
+  }
+}
+```
+
+`tool_pick` payload example:
+
+```json
+{
+  "type": "run_event",
+  "event": "tool_pick",
+  "payload": {
+    "tool": "lockpick",
+    "sourceLootId": "L-06",
+    "gainedCharges": 2,
+    "totalCharges": 3
+  }
+}
+```
 
 `run_fail` payload example:
 

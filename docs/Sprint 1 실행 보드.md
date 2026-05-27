@@ -21,11 +21,13 @@
 | S2-01 | IN_PROGRESS | ThreatPack Lite | 함정 1종+추적자 1종+소음 연동+체력 감소/실패 루프 | `server/`, `client/src/game/`, `shared/` |
 | S2-02 | IN_PROGRESS | FailureRule v1 | 런 실패 시 부분 회수(35%) + 손실(65%) 반영, 즉시 재도전 루프 | `client/src/game/`, `shared/` |
 | S2-06 | DONE | Harness Engineering v1 | 계약/전이/리플레이/코어 하네스 + CI 게이트 구성 완료 | `AGENTS.md`, `server/tests/`, `server/harness/`, `client/harness/`, `.github/workflows/` |
+| S2-07 | IN_PROGRESS | Zone+Door Prototype | 복도 독립 구역화 + 문 상태/행동 + 해정 도구 루프 + 입구 귀환 정산 | `client/src/game/`, `server/`, `shared/`, `GDD (통합본).md` |
 
 ## 리스크 / 결정 로그
 - [ ] 추적자 판정(서버 권위/클라이언트 보간) 분리 범위 확정
 - [ ] 함정 배치 랜덤화 적용 여부 (Sprint 2 후반)
 - [ ] 실패 시 손실 규칙(`S2-02`) 정량 수치 확정
+- [ ] 문 상태별 밸런스(소음/시간/도구 소모) 1차 튜닝
 - [x] 하네스 산출물(`*.trace.json`) Git 추적 제외 정책 반영
 
 ## 데일리 체크
@@ -34,4 +36,5 @@
 - [x] Day 5: 루팅 + 중량 + 소음 데모
 - [x] Day 8: 귀환/정산 1사이클
 - [x] Day 9: 하네스 체계(계약/리플레이/전이/CI) 구축
-- [ ] Day 10: 내부 플레이테스트 10회
+- [x] Day 10: 구역+문 프로토타입 1차 구현
+- [ ] Day 11: 내부 플레이테스트 10회
