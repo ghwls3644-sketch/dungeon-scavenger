@@ -19,5 +19,4 @@
 
 ## 현재 단계
 
-문서 분할 단계 `M0 — 준비와 동결`을 진행 중이다. Story, Design, Reference 문서는 파일럿 구조 검토 후 생성한다.
-
+문서 분할 단계 `M0 — 준비와 동결`을 완료했다. 다음 작업은 `DOC-0003` Story, Design, Reference, Project 문서 골격 생성이다.
