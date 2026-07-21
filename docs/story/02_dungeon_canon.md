@@ -1,7 +1,19 @@
 ---
+id: STORY-DUNGEON-CANON
 title: 던전 정설
+document_type: story
 status: draft
-updated: 2026-07-21
+source_version: story-v1.5
+canonical_for:
+  - dungeon_causality
+  - dead_dungeon_detailed_rules
+  - residual_zone_lore
+last_reviewed:
+owner: narrative-design
+related:
+  - ../reference/glossary.md
+  - ../design/repeat_exploration.md
+  - ../project/decisions.md
 ---
 
 # 던전 정설

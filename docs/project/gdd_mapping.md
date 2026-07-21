@@ -1,7 +1,19 @@
 ---
+id: PROJECT-GDD-MAPPING
 title: GDD 연결표
+document_type: project
 status: draft
-updated: 2026-07-21
+source_version: gdd-v2.1
+canonical_for:
+  - gdd_story_design_mapping
+  - implementation_impact_mapping
+last_reviewed:
+owner: project-maintainer
+related:
+  - ../GDD.md
+  - ../story/README.md
+  - ../design/README.md
+  - ../reference/README.md
 ---
 
 # GDD 연결표

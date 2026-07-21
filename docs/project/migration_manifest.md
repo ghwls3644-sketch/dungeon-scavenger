@@ -1,8 +1,18 @@
 ---
+id: PROJECT-MIGRATION-MANIFEST
 title: 문서 이관 대장
+document_type: project
 status: draft
-updated: 2026-07-20
-source_commit: 339ff50
+source_version: story-v1.5
+canonical_for:
+  - migration_status
+  - source_target_mapping
+last_reviewed:
+owner: documentation-maintainer
+related:
+  - story_v1.5_inventory.md
+  - migration_changes.md
+  - ../archive/README.md
 ---
 
 # 문서 이관 대장
@@ -45,7 +55,7 @@ source_commit: 339ff50
 | 대상 | 상태 | 다음 작업 |
 |---|---|---|
 | `docs/GDD.md` | `copied-active`, `verified` | 상호 링크와 책임별 기준 문서 연결 |
-| `docs/archive/story_v1.5_full.md` | `source-frozen`, `copied-archive`, `verified`, `pending-split` | M1 문서 골격 생성 후 계획된 대상에 이관 |
+| `docs/archive/story_v1.5_full.md` | `source-frozen`, `copied-archive`, `verified`, `pending-split` | M2 용어·표현 기준부터 계획된 대상에 순차 이관 |
 | 두 구버전 제안서 | `copied-archive`, `verified` | 추가 작업 없음 |
 | 최신 분할 제안서 v0.2.1 | 활성 작업 지침 | M1~M6 완료 후 아카이브 여부 결정 |
 | 개발 단계별 제안서 v0.1 | 활성 참고 | 개발 프로젝트 문서에 반영 후 아카이브 |
@@ -65,7 +75,20 @@ M0 기준 작업은 2026-07-20에 완료했다.
 ## M1 진행 상태
 
 - [x] `DOC-0003` Story, Design, Reference, Project 파일 골격과 영역별 README를 생성한다.
-- [ ] `DOC-0004` 공통 Front Matter와 상태 규칙을 통일한다.
-- [ ] `DOC-0005` Glossary와 Speaker Lexicon 항목 형식 및 책임 규칙을 확정한다.
+- [x] `DOC-0004` 공통 Front Matter와 상태 규칙을 통일한다.
+- [x] `DOC-0005` Glossary와 Speaker Lexicon 항목 형식 및 책임 규칙을 확정한다.
 
-현재 신규 문서는 모두 `draft`이며 원문 내용을 이관하지 않았다.
+M1에서 만든 신규 문서는 모두 `draft`로 유지한다.
+
+M1 구조 작업은 완료했으며 2026-07-21 사용자의 다음 단계 진행 지시로 검토 관문 G-M1을 통과했다.
+
+## M2 진행 상태
+
+- [x] `DOC-0101` 원본 13-1~13-3에서 공식 용어와 의미 경계를 추출한다.
+- [ ] `DOC-0102` 원본 7-7, 13-2, 13-5, 13-6에서 화자 표현을 추출한다.
+- [ ] `DOC-0103` 원본 12장, 8-4, 13-4에서 문체 규칙을 분리한다.
+- [ ] `DOC-0104` 원본에 존재하는 고유 개체를 식별한다.
+- [ ] `DOC-0105` 원본에서 확정된 사건 순서를 추출한다.
+- [ ] `DOC-0106` 용어·화자·문체 책임 중복을 검토한다.
+
+`DOC-0101`은 공식 용어 12개를 등록했다. 다음 티켓은 `DOC-0102` 화자 표현 추출이다.

@@ -1,7 +1,17 @@
 ---
+id: DESIGN-INDEX
 title: Design 문서 안내
+document_type: design
 status: draft
-updated: 2026-07-21
+source_version: management-proposal-v0.2.1
+canonical_for:
+  - design_document_navigation
+last_reviewed:
+owner: game-design
+related:
+  - ../GDD.md
+  - ../story/README.md
+  - ../reference/README.md
 ---
 
 # Design 문서 안내

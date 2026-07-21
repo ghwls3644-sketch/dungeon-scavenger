@@ -1,7 +1,17 @@
 ---
+id: PROJECT-MIGRATION-CHANGES
 title: 문서 이관 중 변경 대기열
-status: active
-updated: 2026-07-20
+document_type: project
+status: draft
+source_version: management-proposal-v0.2.1
+canonical_for:
+  - migration_change_queue
+last_reviewed:
+owner: project-maintainer
+related:
+  - migration_manifest.md
+  - decisions.md
+  - open_questions.md
 ---
 
 # 문서 이관 중 변경 대기열

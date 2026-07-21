@@ -1,7 +1,18 @@
 ---
+id: STORY-TONE-WRITING
 title: 톤과 문체 가이드
+document_type: story
 status: draft
-updated: 2026-07-21
+source_version: story-v1.5
+canonical_for:
+  - narrative_tone
+  - writing_style
+last_reviewed:
+owner: narrative-design
+related:
+  - 00_core_pillars.md
+  - ../reference/glossary.md
+  - ../reference/speaker_lexicon.md
 ---
 
 # 톤과 문체 가이드

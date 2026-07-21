@@ -1,7 +1,18 @@
 ---
+id: DESIGN-REPEAT-EXPLORATION
 title: 반복 탐험 규칙
+document_type: design
 status: draft
-updated: 2026-07-21
+source_version: story-v1.5
+canonical_for:
+  - repeat_exploration_rules
+  - visit_state_transitions
+last_reviewed:
+owner: game-design
+related:
+  - ../story/02_dungeon_canon.md
+  - item_rules.md
+  - harness_engineering.md
 ---
 
 # 반복 탐험 규칙

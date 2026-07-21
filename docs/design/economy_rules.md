@@ -1,7 +1,18 @@
 ---
+id: DESIGN-ECONOMY-RULES
 title: 경제 규칙
+document_type: design
 status: draft
-updated: 2026-07-21
+source_version: story-v1.5
+canonical_for:
+  - economy_calculations
+  - loss_mitigation_rules
+last_reviewed:
+owner: game-design
+related:
+  - ../story/03_player_and_society.md
+  - item_rules.md
+  - ../project/open_questions.md
 ---
 
 # 경제 규칙

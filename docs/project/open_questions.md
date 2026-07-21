@@ -1,7 +1,18 @@
 ---
+id: PROJECT-OPEN-QUESTIONS
 title: 열린 질문
+document_type: project
 status: draft
-updated: 2026-07-21
+source_version: story-v1.5+gdd-v2.1
+canonical_for:
+  - unresolved_questions
+  - provisional_rules
+last_reviewed:
+owner: project-maintainer
+related:
+  - ../GDD.md
+  - decisions.md
+  - migration_changes.md
 ---
 
 # 열린 질문

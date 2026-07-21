@@ -1,7 +1,18 @@
 ---
+id: REFERENCE-ENTITY-INDEX
 title: 고유 개체 색인
+document_type: reference
 status: draft
-updated: 2026-07-21
+source_version: story-v1.5
+canonical_for:
+  - entity_identifiers
+  - entity_source_locations
+last_reviewed:
+owner: documentation-maintainer
+related:
+  - ../story/03_player_and_society.md
+  - ../story/04_characters_and_factions.md
+  - ../story/05_items_and_discoveries.md
 ---
 
 # 고유 개체 색인

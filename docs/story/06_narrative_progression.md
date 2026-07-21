@@ -1,7 +1,18 @@
 ---
+id: STORY-NARRATIVE-PROGRESSION
 title: 내러티브 진행
+document_type: story
 status: draft
-updated: 2026-07-21
+source_version: story-v1.5
+canonical_for:
+  - narrative_progression
+  - information_reveal_order
+last_reviewed:
+owner: narrative-design
+related:
+  - 01_world_history.md
+  - 04_characters_and_factions.md
+  - ../design/narrative_delivery.md
 ---
 
 # 내러티브 진행

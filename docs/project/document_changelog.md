@@ -1,7 +1,17 @@
 ---
+id: PROJECT-DOCUMENT-CHANGELOG
 title: 문서 구조 변경 이력
+document_type: project
 status: draft
-updated: 2026-07-21
+source_version: management-proposal-v0.2.1
+canonical_for:
+  - document_structure_changes
+last_reviewed:
+owner: documentation-maintainer
+related:
+  - decisions.md
+  - migration_manifest.md
+  - ../README.md
 ---
 
 # 문서 구조 변경 이력

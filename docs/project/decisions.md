@@ -1,7 +1,18 @@
 ---
+id: PROJECT-DECISIONS
 title: 결정 기록
+document_type: project
 status: draft
-updated: 2026-07-21
+source_version: story-v1.5+gdd-v2.1
+canonical_for:
+  - approved_decisions
+  - decision_rationale
+last_reviewed:
+owner: project-maintainer
+related:
+  - ../GDD.md
+  - open_questions.md
+  - document_changelog.md
 ---
 
 # 결정 기록

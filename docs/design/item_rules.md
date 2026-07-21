@@ -1,7 +1,18 @@
 ---
+id: DESIGN-ITEM-RULES
 title: 아이템 규칙
+document_type: design
 status: draft
-updated: 2026-07-21
+source_version: story-v1.5
+canonical_for:
+  - item_system_rules
+  - item_persistence
+last_reviewed:
+owner: game-design
+related:
+  - ../story/05_items_and_discoveries.md
+  - ../reference/glossary.md
+  - economy_rules.md
 ---
 
 # 아이템 규칙

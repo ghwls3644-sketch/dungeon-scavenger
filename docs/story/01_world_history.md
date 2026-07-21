@@ -1,7 +1,18 @@
 ---
+id: STORY-WORLD-HISTORY
 title: 세계의 과거사
+document_type: story
 status: draft
-updated: 2026-07-21
+source_version: story-v1.5
+canonical_for:
+  - world_history
+  - historical_beliefs
+last_reviewed:
+owner: narrative-design
+related:
+  - 02_dungeon_canon.md
+  - 06_narrative_progression.md
+  - ../reference/timeline.md
 ---
 
 # 세계의 과거사

@@ -1,7 +1,18 @@
 ---
+id: STORY-ITEMS-DISCOVERIES
 title: 아이템과 발견물
+document_type: story
 status: draft
-updated: 2026-07-21
+source_version: story-v1.5
+canonical_for:
+  - item_lore
+  - discovery_narrative_roles
+last_reviewed:
+owner: narrative-design
+related:
+  - ../design/item_rules.md
+  - ../design/narrative_delivery.md
+  - ../reference/glossary.md
 ---
 
 # 아이템과 발견물

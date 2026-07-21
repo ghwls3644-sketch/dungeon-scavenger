@@ -1,7 +1,17 @@
 ---
+id: REFERENCE-INDEX
 title: Reference 문서 안내
+document_type: reference
 status: draft
-updated: 2026-07-21
+source_version: management-proposal-v0.2.1
+canonical_for:
+  - reference_document_navigation
+last_reviewed:
+owner: documentation-maintainer
+related:
+  - ../story/README.md
+  - ../design/README.md
+  - ../project/migration_manifest.md
 ---
 
 # Reference 문서 안내
@@ -19,14 +29,46 @@ updated: 2026-07-21
 | [`entity_index.md`](entity_index.md) | 인물·조직·장소·고유 물품의 기준 문서는 어디인가? |
 | [`timeline.md`](timeline.md) | 주요 사건은 어떤 순서로 일어났는가? |
 
+## 적용 우선순위
+
+| 구분 | 문서 | 운영 원칙 |
+|---|---|---|
+| 필수 | `README.md`, `glossary.md`, `speaker_lexicon.md` | 용어·표현 작업에서 항상 확인 |
+| 권장 | `entity_index.md` | 원본에 존재하는 고유 개체만 최소 등록 |
+| 선택적 최소 | `timeline.md` | 사건 순서 충돌이 있을 때 확장 |
+
+현재 다섯 파일을 유지하며, 항목 수 증가나 실제 탐색 문제가 확인되기 전에는 Reference 파일을 더 세분화하지 않는다.
+
 ## 경계 규칙
 
-- Glossary에 상세 세계관을 복사하지 않는다.
-- 화자의 표현은 객관적 사실을 바꾸지 않는다.
-- 표시 명칭과 내부 코드 ID·저장 키를 분리한다.
+- Glossary에는 공식 표기와 짧은 의미 경계만 두고 상세 세계관을 복사하지 않는다.
+- Speaker Lexicon의 표현은 객관적 사실이나 화자의 지식 범위를 바꾸지 않는다.
+- Tone Guide는 공통 문체, Speaker Lexicon은 집단별 어휘와 말투를 담당한다.
+- 표시 명칭과 문서 용어 ID를 코드 ID·저장 키·번역 키와 분리한다.
 - 이름이나 연도가 미정인 개체를 채우기 위해 새 설정을 만들지 않는다.
-- 용어와 표현의 세부 항목 형식은 `DOC-0005`에서 확정한다.
+
+## 정보별 책임
+
+| 정보 | 기준 문서 | 이 문서가 하지 않는 일 |
+|---|---|---|
+| 공식 표기와 짧은 정의 | [`glossary.md`](glossary.md) | 상세 역사·현상·수치 복제 |
+| 화자별 명칭과 은어 | [`speaker_lexicon.md`](speaker_lexicon.md) | 객관적 정의와 지식 진행 결정 |
+| 공통 분위기와 문장 작성법 | [`../story/07_tone_and_writing_guide.md`](../story/07_tone_and_writing_guide.md) | 집단별 어휘 목록 소유 |
+| 화자가 아는 사실 | [`../story/04_characters_and_factions.md`](../story/04_characters_and_factions.md) | 대사 표면 전체 저장 |
+| 인물·조직·장소 식별 | [`entity_index.md`](entity_index.md) | 인물 설정 본문 복제 |
+| 사건 상대 순서 | [`timeline.md`](timeline.md) | 상세 역사 서술 복제 |
+
+## 변경 절차
+
+1. 분할 중 변경이면 [`../project/migration_changes.md`](../project/migration_changes.md)에 먼저 등록한다.
+2. 상세 Story 또는 Design 기준과 충돌하지 않는지 확인한다.
+3. 공식 정의 변경은 Glossary, 화자 표현 변경은 Speaker Lexicon에서 수행한다.
+4. 이전 공식 표기는 삭제하지 않고 `deprecated`로 추적한다.
+5. UI, Design, 대사, 저장·번역 영향은 관련 문서 링크와 검색으로 확인한다.
+6. 승인된 변경은 관련 결정 ID와 문서 변경 이력을 연결한다.
+
+문서 용어 ID와 화자 표현 ID는 한 번 발급하면 재사용하거나 의미를 바꾸지 않는다.
 
 ## 현재 상태
 
-골격 단계다. 원문 추출 전까지 공식 용어와 화자 표현은 [`../archive/story_v1.5_full.md`](../archive/story_v1.5_full.md)를 대조한다.
+`DOC-0101`에서 원본 13-1~13-3의 공식 용어를 [`glossary.md`](glossary.md)에 등록했다. 화자별 명칭과 은어는 아직 원본을 기준으로 대조하며 `DOC-0102`에서 [`speaker_lexicon.md`](speaker_lexicon.md)에 등록한다.

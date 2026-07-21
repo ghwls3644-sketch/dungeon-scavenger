@@ -1,7 +1,20 @@
 ---
+id: DOCS-INDEX
 title: 폐던전 수색꾼 문서 안내
+document_type: project
 status: draft
-updated: 2026-07-21
+source_version: gdd-v2.1+management-proposal-v0.2.1
+canonical_for:
+  - document_navigation
+  - canonical_source_routing
+last_reviewed:
+owner: documentation-maintainer
+related:
+  - GDD.md
+  - story/README.md
+  - design/README.md
+  - reference/README.md
+  - project/README.md
 ---
 
 # 폐던전 수색꾼 문서 안내
@@ -36,4 +49,4 @@ updated: 2026-07-21
 
 ## 현재 단계
 
-문서 분할 단계 `M1 — 문서 골격 생성`을 진행 중이다. `DOC-0003` 파일 책임 골격을 생성했으며, 다음 작업은 `DOC-0004` Front Matter와 문서 상태 규칙 통일이다. 신규 문서는 최종 전환 전까지 `draft`다.
+문서 분할 단계 `M2 — 핵심 용어와 화자 표현 우선 추출`을 진행 중이다. `DOC-0101` 공식 용어 추출을 완료했으며 다음 작업은 `DOC-0102` 화자 표현 추출이다. 신규 문서는 최종 전환 전까지 `draft`다.

@@ -1,9 +1,18 @@
 ---
+id: PROJECT-STORY-V1-5-INVENTORY
 title: 스토리 정리 v1.5 원본 인벤토리
-status: active
-updated: 2026-07-20
-source: 게임 기획 파일/스토리 정리 v1.5.md
-source_sha256: 4191C100D5B3BFBEF291D3FD4D7588A3C5C31113A1827D33886CC8C90931292D
+document_type: project
+status: draft
+source_version: story-v1.5
+canonical_for:
+  - story_source_inventory
+  - structured_source_tracking
+last_reviewed:
+owner: documentation-maintainer
+related:
+  - migration_manifest.md
+  - migration_changes.md
+  - ../archive/story_v1.5_full.md
 ---
 
 # 스토리 정리 v1.5 원본 인벤토리
@@ -11,6 +20,12 @@ source_sha256: 4191C100D5B3BFBEF291D3FD4D7588A3C5C31113A1827D33886CC8C90931292D
 ## 목적
 
 동결된 스토리 원본의 모든 장과 소제목, 누락 위험이 큰 구조화 요소를 안정적인 ID로 추적한다. 이 문서는 위치와 이관 계획만 기록하며 원문을 재작성하거나 새 설정을 확정하지 않는다.
+
+## 원본 기준
+
+- 원본 파일: `게임 기획 파일/스토리 정리 v1.5.md`
+- 보존 사본: [`../archive/story_v1.5_full.md`](../archive/story_v1.5_full.md)
+- SHA-256: `4191C100D5B3BFBEF291D3FD4D7588A3C5C31113A1827D33886CC8C90931292D`
 
 ## 집계
 
@@ -133,9 +148,9 @@ source_sha256: 4191C100D5B3BFBEF291D3FD4D7588A3C5C31113A1827D33886CC8C90931292D
 | STY-0092 | 2 | 12-6. 공포의 방향 | 957-960 | `story/07_tone_and_writing_guide.md` | `move` | planned |
 | STY-0093 | 2 | 이 파트의 추가 검토 메모 | 961-967 | `project/open_questions.md` | `review` | planned |
 | STY-0094 | 1 | 13. 용어와 화자별 표현 | 968-969 | `reference/glossary.md`; `reference/speaker_lexicon.md` | `split` | planned |
-| STY-0095 | 2 | 13-1. 기본 용어 정리 | 970-986 | `reference/glossary.md` | `move` | planned |
-| STY-0096 | 2 | 13-2. 수색꾼 명칭 | 987-1007 | `reference/glossary.md`; `reference/speaker_lexicon.md` | `split` | planned |
-| STY-0097 | 2 | 13-3. 폐던전 명칭 | 1008-1022 | `reference/glossary.md`; `story/02_dungeon_canon.md` | `split` | planned |
+| STY-0095 | 2 | 13-1. 기본 용어 정리 | 970-986 | `reference/glossary.md` | `move` | moved |
+| STY-0096 | 2 | 13-2. 수색꾼 명칭 | 987-1007 | `reference/glossary.md`; `reference/speaker_lexicon.md` | `split` | split |
+| STY-0097 | 2 | 13-3. 폐던전 명칭 | 1008-1022 | `reference/glossary.md`; `story/02_dungeon_canon.md` | `split` | split |
 | STY-0098 | 2 | 13-4. 잔재 설명 장치 | 1023-1036 | `reference/glossary.md`; `story/07_tone_and_writing_guide.md` | `split` | planned |
 | STY-0099 | 2 | 13-5. 마왕 관련 용어 사용 | 1037-1056 | `story/01_world_history.md`; `story/04_characters_and_factions.md`; `story/06_narrative_progression.md`; `reference/speaker_lexicon.md` | `split` | planned |
 | STY-0100 | 2 | 13-6. 화자별 표현 | 1057-1068 | `reference/speaker_lexicon.md`; `story/04_characters_and_factions.md` | `split` | planned |
@@ -170,12 +185,12 @@ source_sha256: 4191C100D5B3BFBEF291D3FD4D7588A3C5C31113A1827D33886CC8C90931292D
 | TBL-021 | table | 815-821 | 11-5. 잔여 구역 활용 방식 | `STY-0081` | planned |
 | TBL-022 | table | 853-860 | 11-7. 잔존 에너지 유실과 보상 노출 규칙 | `STY-0083` | planned |
 | TBL-023 | table | 936-944 | 12-4. 보상 감정 | `STY-0090` | planned |
-| TBL-024 | table | 972-985 | 13-1. 기본 용어 정리 | `STY-0095` | planned |
-| TBL-025 | table | 993-1000 | 13-2. 수색꾼 명칭 | `STY-0096` | planned |
+| TBL-024 | table | 972-985 | 13-1. 기본 용어 정리 | `STY-0095` | moved |
+| TBL-025 | table | 993-1000 | 13-2. 수색꾼 명칭 | `STY-0096` | split |
 | TBL-026 | table | 1043-1051 | 13-5. 마왕 관련 용어 사용 | `STY-0099` | planned |
 | TBL-027 | table | 1059-1067 | 13-6. 화자별 표현 | `STY-0100` | planned |
 | QTE-001 | blockquote | 20-22 | 1-1. 현재 핵심 콘셉트 | `STY-0003` | planned |
-| QTE-002 | blockquote | 1004-1006 | 13-2. 수색꾼 명칭 | `STY-0096` | planned |
+| QTE-002 | blockquote | 1004-1006 | 13-2. 수색꾼 명칭 | `STY-0096` | split |
 | QTE-003 | blockquote | 1029-1031 | 13-4. 잔재 설명 장치 | `STY-0098` | planned |
 | QTE-004 | blockquote | 1035 | 13-4. 잔재 설명 장치 | `STY-0098` | planned |
 | FNC-001 | fenced-text | 1080-1096 | 14. GDD 반영용 추천 목차 | `STY-0102` | planned |

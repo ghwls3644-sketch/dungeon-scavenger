@@ -1,7 +1,19 @@
 ---
+id: STORY-CHARACTERS-FACTIONS
 title: 인물과 세력
+document_type: story
 status: draft
-updated: 2026-07-21
+source_version: story-v1.5
+canonical_for:
+  - character_knowledge
+  - faction_roles
+  - character_attitudes
+last_reviewed:
+owner: narrative-design
+related:
+  - 06_narrative_progression.md
+  - ../reference/speaker_lexicon.md
+  - ../reference/entity_index.md
 ---
 
 # 인물과 세력

@@ -1,7 +1,18 @@
 ---
+id: DESIGN-NARRATIVE-DELIVERY
 title: 내러티브 전달 규칙
+document_type: design
 status: draft
-updated: 2026-07-21
+source_version: story-v1.5
+canonical_for:
+  - narrative_delivery_rules
+  - discovery_registration_flow
+last_reviewed:
+owner: game-design
+related:
+  - ../story/05_items_and_discoveries.md
+  - ../story/06_narrative_progression.md
+  - item_rules.md
 ---
 
 # 내러티브 전달 규칙

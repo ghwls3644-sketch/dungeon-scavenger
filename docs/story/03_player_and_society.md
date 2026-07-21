@@ -1,7 +1,19 @@
 ---
+id: STORY-PLAYER-SOCIETY
 title: 플레이어와 사회
+document_type: story
 status: draft
-updated: 2026-07-21
+source_version: story-v1.5
+canonical_for:
+  - player_identity
+  - scavenger_society
+  - economy_social_context
+last_reviewed:
+owner: narrative-design
+related:
+  - ../design/economy_rules.md
+  - ../reference/glossary.md
+  - ../reference/speaker_lexicon.md
 ---
 
 # 플레이어와 사회

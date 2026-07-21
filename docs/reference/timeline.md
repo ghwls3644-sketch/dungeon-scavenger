@@ -1,7 +1,17 @@
 ---
+id: REFERENCE-TIMELINE
 title: 사건 타임라인
+document_type: reference
 status: draft
-updated: 2026-07-21
+source_version: story-v1.5
+canonical_for:
+  - event_order
+last_reviewed:
+owner: narrative-design
+related:
+  - ../story/01_world_history.md
+  - ../story/03_player_and_society.md
+  - ../story/06_narrative_progression.md
 ---
 
 # 사건 타임라인

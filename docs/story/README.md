@@ -1,7 +1,17 @@
 ---
+id: STORY-INDEX
 title: Story 문서 안내
+document_type: story
 status: draft
-updated: 2026-07-21
+source_version: management-proposal-v0.2.1
+canonical_for:
+  - story_document_navigation
+last_reviewed:
+owner: narrative-design
+related:
+  - ../GDD.md
+  - ../reference/README.md
+  - ../project/open_questions.md
 ---
 
 # Story 문서 안내

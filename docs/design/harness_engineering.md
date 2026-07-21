@@ -1,7 +1,18 @@
 ---
+id: DESIGN-HARNESS-ENGINEERING
 title: 하네스 엔지니어링
+document_type: design
 status: draft
-updated: 2026-07-21
+source_version: gdd-v2.1
+canonical_for:
+  - harness_system_rules
+  - harness_design_constraints
+last_reviewed:
+owner: game-design
+related:
+  - ../GDD.md
+  - ../story/02_dungeon_canon.md
+  - repeat_exploration.md
 ---
 
 # 하네스 엔지니어링

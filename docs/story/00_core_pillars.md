@@ -1,7 +1,18 @@
 ---
+id: STORY-CORE-PILLARS
 title: 핵심 전제
+document_type: story
 status: draft
-updated: 2026-07-21
+source_version: story-v1.5
+canonical_for:
+  - core_pillars
+  - narrative_constraints
+last_reviewed:
+owner: narrative-design
+related:
+  - ../GDD.md
+  - 03_player_and_society.md
+  - ../project/decisions.md
 ---
 
 # 핵심 전제
