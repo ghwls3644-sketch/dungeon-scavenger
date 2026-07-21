@@ -48,6 +48,7 @@ related:
 - 표, 인용문, 코드 펜스는 누락 위험이 있어 제목 항목과 별도의 자식 ID로 추적한다.
 - 표 안의 대사 예시는 표와 함께 보존하고, 화자 표현 추출 시 `reference/speaker_lexicon.md`로 분리한다.
 - 일반 문단, 목록, 인라인 예시는 부모 제목의 줄 범위에 포함한다. 이관 검증 시 원본 범위와 대상 문서를 대조한다.
+- Entity와 Timeline의 교차 색인은 원본 ID를 해당 색인에 기록하되, Story 본문 이관을 대신하지 않으므로 제목 항목 상태를 조기 변경하지 않는다.
 - 대상 경로는 현재의 이관 계획이다. `planned` 상태에서는 신규 문서가 공식 기준이 아니다.
 
 ## 제목별 이관 계획
@@ -104,13 +105,13 @@ related:
 | STY-0048 | 2 | 7-4. 감정사와 감정 방식 | 458-468 | `story/04_characters_and_factions.md` | `move` | planned |
 | STY-0049 | 2 | 7-5. 고유 유물과 세력 반응 | 469-479 | `story/04_characters_and_factions.md` | `move` | planned |
 | STY-0050 | 2 | 7-6. 성직자와 봉인 관리인 정리 | 480-490 | `story/04_characters_and_factions.md` | `move` | planned |
-| STY-0051 | 2 | 7-7. NPC별 말투 기준 | 491-502 | `reference/speaker_lexicon.md`; `story/04_characters_and_factions.md` | `split` | planned |
+| STY-0051 | 2 | 7-7. NPC별 말투 기준 | 491-502 | `reference/speaker_lexicon.md`; `story/04_characters_and_factions.md` | `split` | split |
 | STY-0052 | 2 | 이 파트의 추가 검토 메모 | 503-509 | `project/open_questions.md` | `review` | planned |
 | STY-0053 | 1 | 8. 잔류물 체계 | 510-521 | `story/05_items_and_discoveries.md`; `design/item_rules.md` | `split` | planned |
 | STY-0054 | 2 | 8-1. UI 분류 색상 | 522-535 | `design/item_rules.md` | `move` | planned |
 | STY-0055 | 2 | 8-2. 분류별 처리 방식 | 536-549 | `story/05_items_and_discoveries.md`; `design/item_rules.md` | `split` | planned |
 | STY-0056 | 2 | 8-3. 핵심 기록물 보관 방식 | 550-560 | `story/05_items_and_discoveries.md`; `design/item_rules.md` | `split` | planned |
-| STY-0057 | 2 | 8-4. 잔재의 표현 방식 | 561-571 | `story/07_tone_and_writing_guide.md`; `reference/glossary.md`; `story/05_items_and_discoveries.md` | `split` | planned |
+| STY-0057 | 2 | 8-4. 잔재의 표현 방식 | 561-571 | `story/07_tone_and_writing_guide.md`; `reference/glossary.md`; `story/05_items_and_discoveries.md` | `split` | split |
 | STY-0058 | 2 | 8-5. 폐품 반복 등장의 설명 강도 | 572-582 | `story/05_items_and_discoveries.md`; `design/item_rules.md` | `split` | planned |
 | STY-0059 | 2 | 이 파트의 추가 검토 메모 | 583-589 | `project/open_questions.md` | `review` | planned |
 | STY-0060 | 1 | 9. 메인 스토리 진행 축 | 590-595 | `story/06_narrative_progression.md` | `move` | planned |
@@ -139,21 +140,21 @@ related:
 | STY-0083 | 2 | 11-7. 잔존 에너지 유실과 보상 노출 규칙 | 845-871 | `story/02_dungeon_canon.md`; `design/repeat_exploration.md` | `split` | planned |
 | STY-0084 | 2 | 11-8. 다른 수색꾼의 흔적 | 872-884 | `story/02_dungeon_canon.md`; `design/repeat_exploration.md` | `split` | planned |
 | STY-0085 | 2 | 이 파트의 추가 검토 메모 | 885-891 | `project/open_questions.md` | `review` | planned |
-| STY-0086 | 1 | 12. 톤과 분위기 | 892-897 | `story/07_tone_and_writing_guide.md` | `move` | planned |
-| STY-0087 | 2 | 12-1. 핵심 감정 | 898-909 | `story/07_tone_and_writing_guide.md` | `move` | planned |
-| STY-0088 | 2 | 12-2. 피해야 할 톤 | 910-919 | `story/07_tone_and_writing_guide.md` | `move` | planned |
-| STY-0089 | 2 | 12-3. 어울리는 톤 | 920-929 | `story/07_tone_and_writing_guide.md` | `move` | planned |
-| STY-0090 | 2 | 12-4. 보상 감정 | 930-945 | `story/07_tone_and_writing_guide.md` | `move` | planned |
-| STY-0091 | 2 | 12-5. 마왕을 다루는 감정 | 946-956 | `story/07_tone_and_writing_guide.md` | `move` | planned |
-| STY-0092 | 2 | 12-6. 공포의 방향 | 957-960 | `story/07_tone_and_writing_guide.md` | `move` | planned |
+| STY-0086 | 1 | 12. 톤과 분위기 | 892-897 | `story/07_tone_and_writing_guide.md` | `move` | moved |
+| STY-0087 | 2 | 12-1. 핵심 감정 | 898-909 | `story/07_tone_and_writing_guide.md` | `move` | moved |
+| STY-0088 | 2 | 12-2. 피해야 할 톤 | 910-919 | `story/07_tone_and_writing_guide.md` | `move` | moved |
+| STY-0089 | 2 | 12-3. 어울리는 톤 | 920-929 | `story/07_tone_and_writing_guide.md` | `move` | moved |
+| STY-0090 | 2 | 12-4. 보상 감정 | 930-945 | `story/07_tone_and_writing_guide.md` | `move` | moved |
+| STY-0091 | 2 | 12-5. 마왕을 다루는 감정 | 946-956 | `story/07_tone_and_writing_guide.md` | `move` | moved |
+| STY-0092 | 2 | 12-6. 공포의 방향 | 957-960 | `story/07_tone_and_writing_guide.md` | `move` | moved |
 | STY-0093 | 2 | 이 파트의 추가 검토 메모 | 961-967 | `project/open_questions.md` | `review` | planned |
 | STY-0094 | 1 | 13. 용어와 화자별 표현 | 968-969 | `reference/glossary.md`; `reference/speaker_lexicon.md` | `split` | planned |
 | STY-0095 | 2 | 13-1. 기본 용어 정리 | 970-986 | `reference/glossary.md` | `move` | moved |
 | STY-0096 | 2 | 13-2. 수색꾼 명칭 | 987-1007 | `reference/glossary.md`; `reference/speaker_lexicon.md` | `split` | split |
 | STY-0097 | 2 | 13-3. 폐던전 명칭 | 1008-1022 | `reference/glossary.md`; `story/02_dungeon_canon.md` | `split` | split |
-| STY-0098 | 2 | 13-4. 잔재 설명 장치 | 1023-1036 | `reference/glossary.md`; `story/07_tone_and_writing_guide.md` | `split` | planned |
-| STY-0099 | 2 | 13-5. 마왕 관련 용어 사용 | 1037-1056 | `story/01_world_history.md`; `story/04_characters_and_factions.md`; `story/06_narrative_progression.md`; `reference/speaker_lexicon.md` | `split` | planned |
-| STY-0100 | 2 | 13-6. 화자별 표현 | 1057-1068 | `reference/speaker_lexicon.md`; `story/04_characters_and_factions.md` | `split` | planned |
+| STY-0098 | 2 | 13-4. 잔재 설명 장치 | 1023-1036 | `reference/glossary.md`; `story/07_tone_and_writing_guide.md` | `split` | split |
+| STY-0099 | 2 | 13-5. 마왕 관련 용어 사용 | 1037-1056 | `story/01_world_history.md`; `story/04_characters_and_factions.md`; `story/06_narrative_progression.md`; `reference/speaker_lexicon.md` | `split` | split |
+| STY-0100 | 2 | 13-6. 화자별 표현 | 1057-1068 | `reference/speaker_lexicon.md`; `story/04_characters_and_factions.md` | `split` | split |
 | STY-0101 | 2 | 이 파트의 추가 검토 메모 | 1069-1075 | `project/open_questions.md` | `review` | planned |
 | STY-0102 | 1 | 14. GDD 반영용 추천 목차 | 1076-1101 | `project/gdd_mapping.md` | `move` | planned |
 | STY-0103 | 1 | 15. 이번 버전에서 확정된 핵심 변경점 | 1102-1133 | `project/decisions.md` | `move` | planned |
@@ -173,7 +174,7 @@ related:
 | TBL-009 | table | 418-427 | 7-1. 추천 NPC/세력 분류 | `STY-0045` | planned |
 | TBL-010 | table | 435-439 | 7-2. 연구자의 정보 변화 | `STY-0046` | planned |
 | TBL-011 | table | 462-465 | 7-4. 감정사와 감정 방식 | `STY-0048` | planned |
-| TBL-012 | table | 493-501 | 7-7. NPC별 말투 기준 | `STY-0051` | planned |
+| TBL-012 | table | 493-501 | 7-7. NPC별 말투 기준 | `STY-0051` | split |
 | TBL-013 | table | 514-520 | 8. 잔류물 체계 | `STY-0053` | planned |
 | TBL-014 | table | 526-532 | 8-1. UI 분류 색상 | `STY-0054` | planned |
 | TBL-015 | table | 540-546 | 8-2. 분류별 처리 방식 | `STY-0055` | planned |
@@ -184,15 +185,15 @@ related:
 | TBL-020 | table | 798-805 | 11-4. 랜덤성 적용 범위 추천 | `STY-0080` | planned |
 | TBL-021 | table | 815-821 | 11-5. 잔여 구역 활용 방식 | `STY-0081` | planned |
 | TBL-022 | table | 853-860 | 11-7. 잔존 에너지 유실과 보상 노출 규칙 | `STY-0083` | planned |
-| TBL-023 | table | 936-944 | 12-4. 보상 감정 | `STY-0090` | planned |
+| TBL-023 | table | 936-944 | 12-4. 보상 감정 | `STY-0090` | moved |
 | TBL-024 | table | 972-985 | 13-1. 기본 용어 정리 | `STY-0095` | moved |
 | TBL-025 | table | 993-1000 | 13-2. 수색꾼 명칭 | `STY-0096` | split |
-| TBL-026 | table | 1043-1051 | 13-5. 마왕 관련 용어 사용 | `STY-0099` | planned |
-| TBL-027 | table | 1059-1067 | 13-6. 화자별 표현 | `STY-0100` | planned |
+| TBL-026 | table | 1043-1051 | 13-5. 마왕 관련 용어 사용 | `STY-0099` | split |
+| TBL-027 | table | 1059-1067 | 13-6. 화자별 표현 | `STY-0100` | split |
 | QTE-001 | blockquote | 20-22 | 1-1. 현재 핵심 콘셉트 | `STY-0003` | planned |
 | QTE-002 | blockquote | 1004-1006 | 13-2. 수색꾼 명칭 | `STY-0096` | split |
-| QTE-003 | blockquote | 1029-1031 | 13-4. 잔재 설명 장치 | `STY-0098` | planned |
-| QTE-004 | blockquote | 1035 | 13-4. 잔재 설명 장치 | `STY-0098` | planned |
+| QTE-003 | blockquote | 1029-1031 | 13-4. 잔재 설명 장치 | `STY-0098` | split |
+| QTE-004 | blockquote | 1035 | 13-4. 잔재 설명 장치 | `STY-0098` | split |
 | FNC-001 | fenced-text | 1080-1096 | 14. GDD 반영용 추천 목차 | `STY-0102` | planned |
 
 ## 완료 조건

@@ -15,6 +15,7 @@ related:
   - decisions.md
   - open_questions.md
   - migration_manifest.md
+  - m2_reference_review.md
 ---
 
 # 프로젝트 문서
@@ -77,6 +78,7 @@ related:
 - [`migration_changes.md`](migration_changes.md): 분할 기간에 접수된 변경의 단일 대기열
 - [`story_v1.5_inventory.md`](story_v1.5_inventory.md): 스토리 원본의 장·소제목과 구조화 요소 전체 목록
 - [`document_changelog.md`](document_changelog.md): 문서 체계 자체의 변경 이력
+- [`m2_reference_review.md`](m2_reference_review.md): M2 Reference 책임 중복과 G-M2 검토 결과
 
 ## 경계 규칙
 

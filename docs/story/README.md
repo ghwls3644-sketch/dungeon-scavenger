@@ -42,6 +42,6 @@ related:
 
 ## 현재 상태
 
-파일 책임만 정의한 골격 단계다. 승인된 원문 이관 전까지 [`../archive/story_v1.5_full.md`](../archive/story_v1.5_full.md)가 스토리 원문 기준이며, 이 디렉터리의 본문은 아직 공식 설정을 대체하지 않는다.
+[`07_tone_and_writing_guide.md`](07_tone_and_writing_guide.md)는 `DOC-0103`에서 공통 톤과 설명 문체를 이관했다. 나머지 Story 문서는 아직 책임만 정의한 골격 단계다. 전체 전환 승인 전까지 [`../archive/story_v1.5_full.md`](../archive/story_v1.5_full.md)가 스토리 원문 기준이며, 이 디렉터리의 본문은 아직 공식 설정을 대체하지 않는다.
 
 미결정 사항은 [`../project/open_questions.md`](../project/open_questions.md), 이관 상태는 [`../project/migration_manifest.md`](../project/migration_manifest.md)에서 관리한다.

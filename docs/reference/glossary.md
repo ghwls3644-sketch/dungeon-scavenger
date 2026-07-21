@@ -225,7 +225,7 @@ related:
   - 정찰자는 공식 직업명이 아니라 일부 모험가가 사용하는 오해 섞인 호칭이다.
   - 도적과 잔반 처리는 비하 표현이며 공식 별칭이 아니다.
 - 상세 설정: [`../story/03_player_and_society.md`](../story/03_player_and_society.md)
-- 관련 화자 표현: [`speaker_lexicon.md`](speaker_lexicon.md) — `DOC-0102`에서 이관
+- 관련 화자 표현: [`speaker_lexicon.md#수색꾼`](speaker_lexicon.md#수색꾼)
 - 원본 추적:
   - `STY-0095`
   - `STY-0096`
@@ -257,6 +257,7 @@ related:
 - 관련 구현: [`../design/item_rules.md`](../design/item_rules.md)
 - 원본 추적:
   - `STY-0095`
+  - `STY-0098`
 
 ## 고유 유물
 

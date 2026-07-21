@@ -38,6 +38,7 @@ related:
 - 스토리 원본 상세 인벤토리: [`project/story_v1.5_inventory.md`](project/story_v1.5_inventory.md)
 - 분할 중 변경 대기열: [`project/migration_changes.md`](project/migration_changes.md)
 - 결정과 미결정 사항: [`project/decisions.md`](project/decisions.md), [`project/open_questions.md`](project/open_questions.md)
+- M2 Reference 검토 결과: [`project/m2_reference_review.md`](project/m2_reference_review.md)
 
 ## 원본 보존 규칙
 
@@ -49,4 +50,4 @@ related:
 
 ## 현재 단계
 
-문서 분할 단계 `M2 — 핵심 용어와 화자 표현 우선 추출`을 진행 중이다. `DOC-0101` 공식 용어 추출을 완료했으며 다음 작업은 `DOC-0102` 화자 표현 추출이다. 신규 문서는 최종 전환 전까지 `draft`다.
+문서 분할 단계 `M2 — 핵심 용어와 화자 표현 우선 추출`의 작업을 완료했으며 검토 관문 G-M2의 사용자 승인을 기다린다. 승인 후 다음 작업은 M3의 `DOC-0201` 핵심 전제 이관이다. 신규 문서는 최종 전환 전까지 `draft`다.

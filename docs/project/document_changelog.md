@@ -11,6 +11,7 @@ owner: documentation-maintainer
 related:
   - decisions.md
   - migration_manifest.md
+  - m2_reference_review.md
   - ../README.md
 ---
 
@@ -35,3 +36,7 @@ related:
 ## 변경 이력
 
 DOC-0003 검토 완료 후 기록을 시작한다.
+
+| 날짜 | 티켓 | 변경 | 이유 |
+|---|---|---|---|
+| 2026-07-21 | `DOC-0106` | [`m2_reference_review.md`](m2_reference_review.md) 생성 | Reference 우선 추출의 책임 중복, 원본 추적, G-M2 검토 결과를 활성 기준 문서와 분리해 보존하기 위해 추가했다. |
