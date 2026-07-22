@@ -55,7 +55,7 @@ related:
 | 대상 | 상태 | 다음 작업 |
 |---|---|---|
 | `docs/GDD.md` | `copied-active`, `verified` | 상호 링크와 책임별 기준 문서 연결 |
-| `docs/archive/story_v1.5_full.md` | `source-frozen`, `copied-archive`, `verified`, `pending-split` | G-M2 승인 후 M3 Story 대상에 순차 이관 |
+| `docs/archive/story_v1.5_full.md` | `source-frozen`, `copied-archive`, `verified`, `pending-split` | M3 Story 대상에 순차 이관. 다음 대상은 `DOC-0202` |
 | 두 구버전 제안서 | `copied-archive`, `verified` | 추가 작업 없음 |
 | 최신 분할 제안서 v0.2.1 | 활성 작업 지침 | M1~M6 완료 후 아카이브 여부 결정 |
 | 개발 단계별 제안서 v0.1 | 활성 참고 | 개발 프로젝트 문서에 반영 후 아카이브 |
@@ -93,4 +93,16 @@ M1 구조 작업은 완료했으며 2026-07-21 사용자의 다음 단계 진행
 
 `DOC-0101`은 공식 용어 12개를, `DOC-0102`는 화자 표현 8개 항목을 등록했다. `DOC-0103`은 공통 톤과 잔재 설명 문체를 분리했고, `DOC-0104`는 이름을 만들지 않고 개체·역할 ID 15개를 등록했다. `DOC-0105`는 확정 상대 순서 5개와 반복·조건부 과정 3개를 등록했다. `DOC-0106` 검토 결과는 [`m2_reference_review.md`](m2_reference_review.md)에 기록했으며 차단 수준의 누락이나 책임 충돌은 발견되지 않았다.
 
-M2 작업은 완료했으며 검토 관문 G-M2의 사용자 승인을 기다린다. 승인 후 다음 티켓은 M3의 `DOC-0201` 핵심 전제 이관이다.
+M2 작업은 완료했으며 2026-07-22 사용자의 다음 작업 진행 지시로 검토 관문 G-M2를 통과했다.
+
+## M3 진행 상태
+
+- [x] `DOC-0201` 핵심 전제를 `story/00_core_pillars.md`로 이관한다.
+- [ ] `DOC-0202` 세계 역사를 `story/01_world_history.md`로 이관한다.
+- [ ] `DOC-0203` 던전 정설을 `story/02_dungeon_canon.md`로 이관한다.
+- [ ] `DOC-0204` 플레이어와 사회를 `story/03_player_and_society.md`로 이관한다.
+- [ ] `DOC-0205` NPC와 세력을 `story/04_characters_and_factions.md`로 이관한다.
+- [ ] `DOC-0206` 아이템과 발견물을 `story/05_items_and_discoveries.md`로 이관한다.
+- [ ] `DOC-0207` 내러티브 진행을 `story/06_narrative_progression.md`로 이관한다.
+
+`DOC-0201`은 원본 `STY-0002`~`STY-0008`을 의미 변경 없이 이관하고 핵심 제약과 큰 설정 변경의 판단 경계를 명시했다. 사용자 검토 후 다음 티켓은 `DOC-0202` 세계 역사 이관이다.

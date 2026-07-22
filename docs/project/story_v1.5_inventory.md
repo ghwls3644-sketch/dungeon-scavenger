@@ -56,13 +56,13 @@ related:
 | ID | 단계 | 원본 장/소제목 | 원본 줄 | 예정 대상 | 이관 방식 | 상태 |
 |---|---:|---|---:|---|---|---|
 | STY-0001 | 1 | 스토리 정리 v1.5 — 수정 메모 반영본 | 1-15 | `archive/story_v1.5_full.md` | `archive-metadata` | planned |
-| STY-0002 | 1 | 1. 핵심 콘셉트 | 16-17 | `story/00_core_pillars.md` | `move` | planned |
-| STY-0003 | 2 | 1-1. 현재 핵심 콘셉트 | 18-27 | `story/00_core_pillars.md` | `move` | planned |
-| STY-0004 | 2 | 1-2. 마왕 관련 요소의 위치 | 28-42 | `story/00_core_pillars.md` | `move` | planned |
-| STY-0005 | 2 | 1-3. 시대적 위치 | 43-50 | `story/00_core_pillars.md` | `move` | planned |
-| STY-0006 | 2 | 1-4. 플레이어가 영웅이 아닌 이유 | 51-64 | `story/00_core_pillars.md` | `move` | planned |
-| STY-0007 | 2 | 1-5. 게임 초반 목표 | 65-78 | `story/00_core_pillars.md` | `move` | planned |
-| STY-0008 | 2 | 1-6. 전투보다 회피와 탈출이 중요한 이유 | 79-82 | `story/00_core_pillars.md` | `move` | planned |
+| STY-0002 | 1 | 1. 핵심 콘셉트 | 16-17 | `story/00_core_pillars.md` | `move` | moved |
+| STY-0003 | 2 | 1-1. 현재 핵심 콘셉트 | 18-27 | `story/00_core_pillars.md` | `move` | moved |
+| STY-0004 | 2 | 1-2. 마왕 관련 요소의 위치 | 28-42 | `story/00_core_pillars.md` | `move` | moved |
+| STY-0005 | 2 | 1-3. 시대적 위치 | 43-50 | `story/00_core_pillars.md` | `move` | moved |
+| STY-0006 | 2 | 1-4. 플레이어가 영웅이 아닌 이유 | 51-64 | `story/00_core_pillars.md` | `move` | moved |
+| STY-0007 | 2 | 1-5. 게임 초반 목표 | 65-78 | `story/00_core_pillars.md` | `move` | moved |
+| STY-0008 | 2 | 1-6. 전투보다 회피와 탈출이 중요한 이유 | 79-82 | `story/00_core_pillars.md` | `move` | moved |
 | STY-0009 | 2 | 이 파트의 추가 검토 메모 | 83-89 | `project/open_questions.md` | `review` | planned |
 | STY-0010 | 1 | 2. 세계의 과거사 | 90-91 | `story/01_world_history.md` | `move` | planned |
 | STY-0011 | 2 | 2-1. 마왕의 봉인 | 92-97 | `story/01_world_history.md` | `move` | planned |
