@@ -64,12 +64,12 @@ related:
 | STY-0007 | 2 | 1-5. 게임 초반 목표 | 65-78 | `story/00_core_pillars.md` | `move` | moved |
 | STY-0008 | 2 | 1-6. 전투보다 회피와 탈출이 중요한 이유 | 79-82 | `story/00_core_pillars.md` | `move` | moved |
 | STY-0009 | 2 | 이 파트의 추가 검토 메모 | 83-89 | `project/open_questions.md` | `review` | planned |
-| STY-0010 | 1 | 2. 세계의 과거사 | 90-91 | `story/01_world_history.md` | `move` | planned |
-| STY-0011 | 2 | 2-1. 마왕의 봉인 | 92-97 | `story/01_world_history.md` | `move` | planned |
-| STY-0012 | 2 | 2-2. 던전의 자연 발생 | 98-108 | `story/01_world_history.md` | `move` | planned |
-| STY-0013 | 2 | 2-3. 모험가 시대의 시작 | 109-114 | `story/01_world_history.md` | `move` | planned |
-| STY-0014 | 2 | 2-4. 폐던전과 잔여 구역의 등장 | 115-131 | `story/01_world_history.md` | `move` | planned |
-| STY-0015 | 2 | 2-5. 이 설정을 게임 안에서 다루는 깊이 | 132-143 | `story/01_world_history.md` | `move` | planned |
+| STY-0010 | 1 | 2. 세계의 과거사 | 90-91 | `story/01_world_history.md` | `move` | moved |
+| STY-0011 | 2 | 2-1. 마왕의 봉인 | 92-97 | `story/01_world_history.md` | `move` | moved |
+| STY-0012 | 2 | 2-2. 던전의 자연 발생 | 98-108 | `story/01_world_history.md` | `move` | moved |
+| STY-0013 | 2 | 2-3. 모험가 시대의 시작 | 109-114 | `story/01_world_history.md` | `move` | moved |
+| STY-0014 | 2 | 2-4. 폐던전과 잔여 구역의 등장 | 115-131 | `story/01_world_history.md` | `move` | moved |
+| STY-0015 | 2 | 2-5. 이 설정을 게임 안에서 다루는 깊이 | 132-143 | `story/01_world_history.md` | `move` | moved |
 | STY-0016 | 2 | 이 파트의 추가 검토 메모 | 144-150 | `project/open_questions.md` | `review` | planned |
 | STY-0017 | 1 | 3. 던전 코어와 폐던전의 원리 | 151-156 | `story/02_dungeon_canon.md` | `move` | planned |
 | STY-0018 | 2 | 3-1. 코어의 기능 | 157-169 | `story/02_dungeon_canon.md` | `move` | planned |
@@ -163,7 +163,7 @@ related:
 
 | ID | 유형 | 원본 줄 | 소유 제목 | 부모 ID | 상태 |
 |---|---|---:|---|---|---|
-| TBL-001 | table | 121-124 | 2-4. 폐던전과 잔여 구역의 등장 | `STY-0014` | planned |
+| TBL-001 | table | 121-124 | 2-4. 폐던전과 잔여 구역의 등장 | `STY-0014` | moved |
 | TBL-002 | table | 159-168 | 3-1. 코어의 기능 | `STY-0018` | planned |
 | TBL-003 | table | 271-282 | 4-5. 구역별 스토리 기능 | `STY-0029` | planned |
 | TBL-004 | table | 299-309 | 5-1. 플레이어 정리 | `STY-0032` | planned |
