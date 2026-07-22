@@ -85,18 +85,18 @@ related:
 | STY-0028 | 2 | 4-4. 왜 대형 길드가 다시 손대지 않는가 | 256-268 | `story/02_dungeon_canon.md` | `move` | moved |
 | STY-0029 | 2 | 4-5. 구역별 스토리 기능 | 269-283 | `story/02_dungeon_canon.md` | `move` | moved |
 | STY-0030 | 2 | 이 파트의 추가 검토 메모 | 284-290 | `project/open_questions.md` | `review` | planned |
-| STY-0031 | 1 | 5. 플레이어 캐릭터: 수색꾼 | 291-296 | `story/03_player_and_society.md` | `move` | planned |
-| STY-0032 | 2 | 5-1. 플레이어 정리 | 297-310 | `story/03_player_and_society.md` | `move` | planned |
-| STY-0033 | 2 | 5-2. 플레이어의 동기 | 311-316 | `story/03_player_and_society.md` | `move` | planned |
-| STY-0034 | 2 | 5-3. 성장 방향 | 317-330 | `story/03_player_and_society.md` | `move` | planned |
+| STY-0031 | 1 | 5. 플레이어 캐릭터: 수색꾼 | 291-296 | `story/03_player_and_society.md` | `move` | moved |
+| STY-0032 | 2 | 5-1. 플레이어 정리 | 297-310 | `story/03_player_and_society.md` | `move` | moved |
+| STY-0033 | 2 | 5-2. 플레이어의 동기 | 311-316 | `story/03_player_and_society.md` | `move` | moved |
+| STY-0034 | 2 | 5-3. 성장 방향 | 317-330 | `story/03_player_and_society.md` | `move` | moved |
 | STY-0035 | 2 | 이 파트의 추가 검토 메모 | 331-337 | `project/open_questions.md` | `review` | planned |
-| STY-0036 | 1 | 6. 사회와 경제 구조 | 338-341 | `story/03_player_and_society.md`; `design/economy_rules.md` | `split` | planned |
-| STY-0037 | 2 | 6-1. 던전 경제의 계층 구조 | 342-350 | `story/03_player_and_society.md`; `design/economy_rules.md` | `split` | planned |
-| STY-0038 | 2 | 6-2. 수색꾼 길드 | 351-362 | `story/03_player_and_society.md`; `design/economy_rules.md` | `split` | planned |
-| STY-0039 | 2 | 6-3. 회수품의 가격 구조 | 363-376 | `story/03_player_and_society.md`; `design/economy_rules.md` | `split` | planned |
-| STY-0040 | 2 | 6-4. 왜 길드나 군대가 직접 회수하지 않는가 | 377-382 | `story/03_player_and_society.md`; `design/economy_rules.md` | `split` | planned |
-| STY-0041 | 2 | 6-5. 회수품의 수요 | 383-392 | `story/03_player_and_society.md`; `design/economy_rules.md` | `split` | planned |
-| STY-0042 | 2 | 6-6. 수수료와 난이도 | 393-404 | `story/03_player_and_society.md`; `design/economy_rules.md` | `split` | planned |
+| STY-0036 | 1 | 6. 사회와 경제 구조 | 338-341 | `story/03_player_and_society.md`; `design/economy_rules.md` | `split` | split |
+| STY-0037 | 2 | 6-1. 던전 경제의 계층 구조 | 342-350 | `story/03_player_and_society.md`; `design/economy_rules.md` | `split` | split |
+| STY-0038 | 2 | 6-2. 수색꾼 길드 | 351-362 | `story/03_player_and_society.md`; `design/economy_rules.md` | `split` | split |
+| STY-0039 | 2 | 6-3. 회수품의 가격 구조 | 363-376 | `story/03_player_and_society.md`; `design/economy_rules.md` | `split` | split |
+| STY-0040 | 2 | 6-4. 왜 길드나 군대가 직접 회수하지 않는가 | 377-382 | `story/03_player_and_society.md`; `design/economy_rules.md` | `split` | split |
+| STY-0041 | 2 | 6-5. 회수품의 수요 | 383-392 | `story/03_player_and_society.md`; `design/economy_rules.md` | `split` | split |
+| STY-0042 | 2 | 6-6. 수수료와 난이도 | 393-404 | `story/03_player_and_society.md`; `design/economy_rules.md` | `split` | split |
 | STY-0043 | 2 | 이 파트의 추가 검토 메모 | 405-411 | `project/open_questions.md` | `review` | planned |
 | STY-0044 | 1 | 7. 주요 세력과 NPC | 412-415 | `story/04_characters_and_factions.md` | `move` | planned |
 | STY-0045 | 2 | 7-1. 추천 NPC/세력 분류 | 416-428 | `story/04_characters_and_factions.md` | `move` | planned |
@@ -166,10 +166,10 @@ related:
 | TBL-001 | table | 121-124 | 2-4. 폐던전과 잔여 구역의 등장 | `STY-0014` | moved |
 | TBL-002 | table | 159-168 | 3-1. 코어의 기능 | `STY-0018` | moved |
 | TBL-003 | table | 271-282 | 4-5. 구역별 스토리 기능 | `STY-0029` | moved |
-| TBL-004 | table | 299-309 | 5-1. 플레이어 정리 | `STY-0032` | planned |
-| TBL-005 | table | 344-349 | 6-1. 던전 경제의 계층 구조 | `STY-0037` | planned |
-| TBL-006 | table | 369-375 | 6-3. 회수품의 가격 구조 | `STY-0039` | planned |
-| TBL-007 | table | 385-391 | 6-5. 회수품의 수요 | `STY-0041` | planned |
+| TBL-004 | table | 299-309 | 5-1. 플레이어 정리 | `STY-0032` | moved |
+| TBL-005 | table | 344-349 | 6-1. 던전 경제의 계층 구조 | `STY-0037` | split |
+| TBL-006 | table | 369-375 | 6-3. 회수품의 가격 구조 | `STY-0039` | split |
+| TBL-007 | table | 385-391 | 6-5. 회수품의 수요 | `STY-0041` | split |
 | TBL-008 | table | 399-403 | 6-6. 수수료와 난이도 | `STY-0042` | planned |
 | TBL-009 | table | 418-427 | 7-1. 추천 NPC/세력 분류 | `STY-0045` | planned |
 | TBL-010 | table | 435-439 | 7-2. 연구자의 정보 변화 | `STY-0046` | planned |

@@ -55,7 +55,7 @@ related:
 | 대상 | 상태 | 다음 작업 |
 |---|---|---|
 | `docs/GDD.md` | `copied-active`, `verified` | 상호 링크와 책임별 기준 문서 연결 |
-| `docs/archive/story_v1.5_full.md` | `source-frozen`, `copied-archive`, `verified`, `pending-split` | M3 Story 대상에 순차 이관. 다음 대상은 `DOC-0204` |
+| `docs/archive/story_v1.5_full.md` | `source-frozen`, `copied-archive`, `verified`, `pending-split` | M3 Story 대상에 순차 이관. 다음 대상은 `DOC-0205` |
 | 두 구버전 제안서 | `copied-archive`, `verified` | 추가 작업 없음 |
 | 최신 분할 제안서 v0.2.1 | 활성 작업 지침 | M1~M6 완료 후 아카이브 여부 결정 |
 | 개발 단계별 제안서 v0.1 | 활성 참고 | 개발 프로젝트 문서에 반영 후 아카이브 |
@@ -100,9 +100,9 @@ M2 작업은 완료했으며 2026-07-22 사용자의 다음 작업 진행 지시
 - [x] `DOC-0201` 핵심 전제를 `story/00_core_pillars.md`로 이관한다.
 - [x] `DOC-0202` 세계 역사를 `story/01_world_history.md`로 이관한다.
 - [x] `DOC-0203` 던전 정설을 `story/02_dungeon_canon.md`로 이관한다.
-- [ ] `DOC-0204` 플레이어와 사회를 `story/03_player_and_society.md`로 이관한다.
+- [x] `DOC-0204` 플레이어와 사회를 `story/03_player_and_society.md`로 이관한다.
 - [ ] `DOC-0205` NPC와 세력을 `story/04_characters_and_factions.md`로 이관한다.
 - [ ] `DOC-0206` 아이템과 발견물을 `story/05_items_and_discoveries.md`로 이관한다.
 - [ ] `DOC-0207` 내러티브 진행을 `story/06_narrative_progression.md`로 이관한다.
 
-`DOC-0201`은 원본 `STY-0002`~`STY-0008`을 의미 변경 없이 이관하고 핵심 제약과 큰 설정 변경의 판단 경계를 명시했다. `DOC-0202`는 원본 `STY-0010`~`STY-0015`와 `TBL-001`을 이관하고 객관적 사실, 학계의 가설, 사회적 믿음의 경계를 명시했다. `DOC-0203`은 원본 3장·4장의 정설과 11장의 Story 책임, 13-3의 상세 의미를 이관했다. 11장의 실제 방문·랜덤 규칙은 `DOC-0302` 대상으로 남겼다. 사용자 검토 후 다음 티켓은 `DOC-0204` 플레이어와 사회 이관이다.
+`DOC-0201`은 원본 `STY-0002`~`STY-0008`을 의미 변경 없이 이관하고 핵심 제약과 큰 설정 변경의 판단 경계를 명시했다. `DOC-0202`는 원본 `STY-0010`~`STY-0015`와 `TBL-001`을 이관하고 객관적 사실, 학계의 가설, 사회적 믿음의 경계를 명시했다. `DOC-0203`은 원본 3장·4장의 정설과 11장의 Story 책임, 13-3의 상세 의미를 이관했다. 11장의 실제 방문·랜덤 규칙은 `DOC-0302` 대상으로 남겼다. `DOC-0204`는 원본 5장과 6장의 Story 책임을 이관하고 가격·수수료·난이도 보정을 `DOC-0304` 대상으로 분리했다. 사용자 검토 후 다음 티켓은 `DOC-0205` NPC와 세력 이관이다.
