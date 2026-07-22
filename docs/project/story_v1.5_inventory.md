@@ -107,12 +107,12 @@ related:
 | STY-0050 | 2 | 7-6. 성직자와 봉인 관리인 정리 | 480-490 | `story/04_characters_and_factions.md` | `move` | moved |
 | STY-0051 | 2 | 7-7. NPC별 말투 기준 | 491-502 | `reference/speaker_lexicon.md`; `story/04_characters_and_factions.md` | `split` | split |
 | STY-0052 | 2 | 이 파트의 추가 검토 메모 | 503-509 | `project/open_questions.md` | `review` | planned |
-| STY-0053 | 1 | 8. 잔류물 체계 | 510-521 | `story/05_items_and_discoveries.md`; `design/item_rules.md` | `split` | planned |
+| STY-0053 | 1 | 8. 잔류물 체계 | 510-521 | `story/05_items_and_discoveries.md`; `design/item_rules.md` | `split` | split |
 | STY-0054 | 2 | 8-1. UI 분류 색상 | 522-535 | `design/item_rules.md` | `move` | planned |
-| STY-0055 | 2 | 8-2. 분류별 처리 방식 | 536-549 | `story/05_items_and_discoveries.md`; `design/item_rules.md` | `split` | planned |
-| STY-0056 | 2 | 8-3. 핵심 기록물 보관 방식 | 550-560 | `story/05_items_and_discoveries.md`; `design/item_rules.md` | `split` | planned |
+| STY-0055 | 2 | 8-2. 분류별 처리 방식 | 536-549 | `story/05_items_and_discoveries.md`; `design/item_rules.md` | `split` | split |
+| STY-0056 | 2 | 8-3. 핵심 기록물 보관 방식 | 550-560 | `story/05_items_and_discoveries.md`; `design/item_rules.md`; `design/narrative_delivery.md` | `split` | split |
 | STY-0057 | 2 | 8-4. 잔재의 표현 방식 | 561-571 | `story/07_tone_and_writing_guide.md`; `reference/glossary.md`; `story/05_items_and_discoveries.md` | `split` | split |
-| STY-0058 | 2 | 8-5. 폐품 반복 등장의 설명 강도 | 572-582 | `story/05_items_and_discoveries.md`; `design/item_rules.md` | `split` | planned |
+| STY-0058 | 2 | 8-5. 폐품 반복 등장의 설명 강도 | 572-582 | `story/05_items_and_discoveries.md`; `design/item_rules.md`; `design/repeat_exploration.md` | `split` | split |
 | STY-0059 | 2 | 이 파트의 추가 검토 메모 | 583-589 | `project/open_questions.md` | `review` | planned |
 | STY-0060 | 1 | 9. 메인 스토리 진행 축 | 590-595 | `story/06_narrative_progression.md` | `move` | planned |
 | STY-0061 | 2 | 9-1. 1단계: 변두리 수색꾼의 생업 | 596-605 | `story/06_narrative_progression.md` | `move` | planned |
@@ -121,14 +121,14 @@ related:
 | STY-0064 | 2 | 9-4. 4단계: 선택적 떡밥과 장기 수집 | 629-641 | `story/06_narrative_progression.md` | `move` | planned |
 | STY-0065 | 2 | 9-5. 엔딩 또는 장기 목표의 방향 | 642-653 | `story/06_narrative_progression.md` | `move` | planned |
 | STY-0066 | 2 | 이 파트의 추가 검토 메모 | 654-660 | `project/open_questions.md` | `review` | planned |
-| STY-0067 | 1 | 10. 서브 스토리와 발견물 구조 | 661-664 | `story/05_items_and_discoveries.md`; `story/06_narrative_progression.md`; `design/narrative_delivery.md` | `split` | planned |
-| STY-0068 | 2 | 10-1. 서브 스토리 유형 | 665-676 | `story/05_items_and_discoveries.md`; `story/06_narrative_progression.md`; `design/narrative_delivery.md` | `split` | planned |
-| STY-0069 | 2 | 10-2. 발견물 획득 방식 | 677-689 | `story/05_items_and_discoveries.md`; `story/06_narrative_progression.md`; `design/narrative_delivery.md` | `split` | planned |
-| STY-0070 | 2 | 10-3. 텍스트 길이와 연구자 해설 | 690-701 | `story/05_items_and_discoveries.md`; `story/06_narrative_progression.md`; `design/narrative_delivery.md` | `split` | planned |
-| STY-0071 | 2 | 10-4. NPC 반응 범위 | 702-713 | `story/05_items_and_discoveries.md`; `story/06_narrative_progression.md`; `design/narrative_delivery.md` | `split` | planned |
-| STY-0072 | 2 | 10-5. 잔여 구역 단서와 지도 표현 | 714-729 | `story/05_items_and_discoveries.md`; `story/06_narrative_progression.md`; `design/narrative_delivery.md` | `split` | planned |
-| STY-0073 | 2 | 10-6. 실패한 수색꾼의 흔적 | 730-744 | `story/05_items_and_discoveries.md`; `story/06_narrative_progression.md`; `design/narrative_delivery.md` | `split` | planned |
-| STY-0074 | 2 | 10-7. 판매 차단 | 745-758 | `story/05_items_and_discoveries.md`; `story/06_narrative_progression.md`; `design/narrative_delivery.md` | `split` | planned |
+| STY-0067 | 1 | 10. 서브 스토리와 발견물 구조 | 661-664 | `story/05_items_and_discoveries.md`; `story/06_narrative_progression.md`; `design/narrative_delivery.md` | `split` | split |
+| STY-0068 | 2 | 10-1. 서브 스토리 유형 | 665-676 | `story/05_items_and_discoveries.md`; `story/06_narrative_progression.md`; `design/narrative_delivery.md` | `split` | split |
+| STY-0069 | 2 | 10-2. 발견물 획득 방식 | 677-689 | `story/05_items_and_discoveries.md`; `story/06_narrative_progression.md`; `design/narrative_delivery.md`; `design/repeat_exploration.md`; `design/item_rules.md` | `split` | split |
+| STY-0070 | 2 | 10-3. 텍스트 길이와 연구자 해설 | 690-701 | `story/05_items_and_discoveries.md`; `story/06_narrative_progression.md`; `design/narrative_delivery.md` | `split` | split |
+| STY-0071 | 2 | 10-4. NPC 반응 범위 | 702-713 | `story/05_items_and_discoveries.md`; `story/06_narrative_progression.md`; `design/narrative_delivery.md` | `split` | split |
+| STY-0072 | 2 | 10-5. 잔여 구역 단서와 지도 표현 | 714-729 | `story/05_items_and_discoveries.md`; `story/06_narrative_progression.md`; `design/narrative_delivery.md`; `design/repeat_exploration.md` | `split` | split |
+| STY-0073 | 2 | 10-6. 실패한 수색꾼의 흔적 | 730-744 | `story/05_items_and_discoveries.md`; `story/06_narrative_progression.md`; `design/narrative_delivery.md` | `split` | split |
+| STY-0074 | 2 | 10-7. 판매 차단 | 745-758 | `story/05_items_and_discoveries.md`; `story/06_narrative_progression.md`; `design/narrative_delivery.md`; `design/item_rules.md` | `split` | split |
 | STY-0075 | 2 | 이 파트의 추가 검토 메모 | 759-765 | `project/open_questions.md` | `review` | planned |
 | STY-0076 | 1 | 11. 반복 탐험의 서사 규칙 | 766-769 | `story/02_dungeon_canon.md`; `design/repeat_exploration.md` | `split` | split |
 | STY-0077 | 2 | 11-1. 반복되는 것 | 770-779 | `story/02_dungeon_canon.md`; `design/repeat_exploration.md` | `split` | split |
@@ -175,13 +175,13 @@ related:
 | TBL-010 | table | 435-439 | 7-2. 연구자의 정보 변화 | `STY-0046` | split |
 | TBL-011 | table | 462-465 | 7-4. 감정사와 감정 방식 | `STY-0048` | split |
 | TBL-012 | table | 493-501 | 7-7. NPC별 말투 기준 | `STY-0051` | split |
-| TBL-013 | table | 514-520 | 8. 잔류물 체계 | `STY-0053` | planned |
+| TBL-013 | table | 514-520 | 8. 잔류물 체계 | `STY-0053` | split |
 | TBL-014 | table | 526-532 | 8-1. UI 분류 색상 | `STY-0054` | planned |
-| TBL-015 | table | 540-546 | 8-2. 분류별 처리 방식 | `STY-0055` | planned |
-| TBL-016 | table | 667-675 | 10-1. 서브 스토리 유형 | `STY-0068` | planned |
-| TBL-017 | table | 683-688 | 10-2. 발견물 획득 방식 | `STY-0069` | planned |
-| TBL-018 | table | 720-726 | 10-5. 잔여 구역 단서와 지도 표현 | `STY-0072` | planned |
-| TBL-019 | table | 751-757 | 10-7. 판매 차단 | `STY-0074` | planned |
+| TBL-015 | table | 540-546 | 8-2. 분류별 처리 방식 | `STY-0055` | split |
+| TBL-016 | table | 667-675 | 10-1. 서브 스토리 유형 | `STY-0068` | moved |
+| TBL-017 | table | 683-688 | 10-2. 발견물 획득 방식 | `STY-0069` | split |
+| TBL-018 | table | 720-726 | 10-5. 잔여 구역 단서와 지도 표현 | `STY-0072` | moved |
+| TBL-019 | table | 751-757 | 10-7. 판매 차단 | `STY-0074` | split |
 | TBL-020 | table | 798-805 | 11-4. 랜덤성 적용 범위 추천 | `STY-0080` | planned |
 | TBL-021 | table | 815-821 | 11-5. 잔여 구역 활용 방식 | `STY-0081` | split |
 | TBL-022 | table | 853-860 | 11-7. 잔존 에너지 유실과 보상 노출 규칙 | `STY-0083` | planned |
