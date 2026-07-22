@@ -71,19 +71,19 @@ related:
 | STY-0014 | 2 | 2-4. 폐던전과 잔여 구역의 등장 | 115-131 | `story/01_world_history.md` | `move` | moved |
 | STY-0015 | 2 | 2-5. 이 설정을 게임 안에서 다루는 깊이 | 132-143 | `story/01_world_history.md` | `move` | moved |
 | STY-0016 | 2 | 이 파트의 추가 검토 메모 | 144-150 | `project/open_questions.md` | `review` | planned |
-| STY-0017 | 1 | 3. 던전 코어와 폐던전의 원리 | 151-156 | `story/02_dungeon_canon.md` | `move` | planned |
-| STY-0018 | 2 | 3-1. 코어의 기능 | 157-169 | `story/02_dungeon_canon.md` | `move` | planned |
-| STY-0019 | 2 | 3-2. 코어 방 | 170-182 | `story/02_dungeon_canon.md` | `move` | planned |
-| STY-0020 | 2 | 3-3. 살아 있는 던전과 죽어가는 던전의 차이 | 183-196 | `story/02_dungeon_canon.md` | `move` | planned |
-| STY-0021 | 2 | 3-4. 코어 파괴와 자연 소멸 | 197-202 | `story/02_dungeon_canon.md` | `move` | planned |
-| STY-0022 | 2 | 3-5. 던전의 최종 소멸 | 203-208 | `story/02_dungeon_canon.md` | `move` | planned |
+| STY-0017 | 1 | 3. 던전 코어와 폐던전의 원리 | 151-156 | `story/02_dungeon_canon.md` | `move` | moved |
+| STY-0018 | 2 | 3-1. 코어의 기능 | 157-169 | `story/02_dungeon_canon.md` | `move` | moved |
+| STY-0019 | 2 | 3-2. 코어 방 | 170-182 | `story/02_dungeon_canon.md` | `move` | moved |
+| STY-0020 | 2 | 3-3. 살아 있는 던전과 죽어가는 던전의 차이 | 183-196 | `story/02_dungeon_canon.md` | `move` | moved |
+| STY-0021 | 2 | 3-4. 코어 파괴와 자연 소멸 | 197-202 | `story/02_dungeon_canon.md` | `move` | moved |
+| STY-0022 | 2 | 3-5. 던전의 최종 소멸 | 203-208 | `story/02_dungeon_canon.md` | `move` | moved |
 | STY-0023 | 2 | 이 파트의 추가 검토 메모 | 209-215 | `project/open_questions.md` | `review` | planned |
-| STY-0024 | 1 | 4. 폐던전의 현재 상태 | 216-221 | `story/02_dungeon_canon.md` | `move` | planned |
-| STY-0025 | 2 | 4-1. 범람과 폐던전의 관계 | 222-229 | `story/02_dungeon_canon.md` | `move` | planned |
-| STY-0026 | 2 | 4-2. 아직 회수 가치가 남아 있는 이유 | 230-242 | `story/02_dungeon_canon.md` | `move` | planned |
-| STY-0027 | 2 | 4-3. 주요 위험 | 243-255 | `story/02_dungeon_canon.md` | `move` | planned |
-| STY-0028 | 2 | 4-4. 왜 대형 길드가 다시 손대지 않는가 | 256-268 | `story/02_dungeon_canon.md` | `move` | planned |
-| STY-0029 | 2 | 4-5. 구역별 스토리 기능 | 269-283 | `story/02_dungeon_canon.md` | `move` | planned |
+| STY-0024 | 1 | 4. 폐던전의 현재 상태 | 216-221 | `story/02_dungeon_canon.md` | `move` | moved |
+| STY-0025 | 2 | 4-1. 범람과 폐던전의 관계 | 222-229 | `story/02_dungeon_canon.md` | `move` | moved |
+| STY-0026 | 2 | 4-2. 아직 회수 가치가 남아 있는 이유 | 230-242 | `story/02_dungeon_canon.md` | `move` | moved |
+| STY-0027 | 2 | 4-3. 주요 위험 | 243-255 | `story/02_dungeon_canon.md` | `move` | moved |
+| STY-0028 | 2 | 4-4. 왜 대형 길드가 다시 손대지 않는가 | 256-268 | `story/02_dungeon_canon.md` | `move` | moved |
+| STY-0029 | 2 | 4-5. 구역별 스토리 기능 | 269-283 | `story/02_dungeon_canon.md` | `move` | moved |
 | STY-0030 | 2 | 이 파트의 추가 검토 메모 | 284-290 | `project/open_questions.md` | `review` | planned |
 | STY-0031 | 1 | 5. 플레이어 캐릭터: 수색꾼 | 291-296 | `story/03_player_and_society.md` | `move` | planned |
 | STY-0032 | 2 | 5-1. 플레이어 정리 | 297-310 | `story/03_player_and_society.md` | `move` | planned |
@@ -130,15 +130,15 @@ related:
 | STY-0073 | 2 | 10-6. 실패한 수색꾼의 흔적 | 730-744 | `story/05_items_and_discoveries.md`; `story/06_narrative_progression.md`; `design/narrative_delivery.md` | `split` | planned |
 | STY-0074 | 2 | 10-7. 판매 차단 | 745-758 | `story/05_items_and_discoveries.md`; `story/06_narrative_progression.md`; `design/narrative_delivery.md` | `split` | planned |
 | STY-0075 | 2 | 이 파트의 추가 검토 메모 | 759-765 | `project/open_questions.md` | `review` | planned |
-| STY-0076 | 1 | 11. 반복 탐험의 서사 규칙 | 766-769 | `story/02_dungeon_canon.md`; `design/repeat_exploration.md` | `split` | planned |
-| STY-0077 | 2 | 11-1. 반복되는 것 | 770-779 | `story/02_dungeon_canon.md`; `design/repeat_exploration.md` | `split` | planned |
-| STY-0078 | 2 | 11-2. 반복되지 않는 것 | 780-787 | `story/02_dungeon_canon.md`; `design/repeat_exploration.md` | `split` | planned |
-| STY-0079 | 2 | 11-3. 반복 개연성 | 788-793 | `story/02_dungeon_canon.md`; `design/repeat_exploration.md` | `split` | planned |
-| STY-0080 | 2 | 11-4. 랜덤성 적용 범위 추천 | 794-808 | `story/02_dungeon_canon.md`; `design/repeat_exploration.md` | `split` | planned |
-| STY-0081 | 2 | 11-5. 잔여 구역 활용 방식 | 809-832 | `story/02_dungeon_canon.md`; `design/repeat_exploration.md` | `split` | planned |
-| STY-0082 | 2 | 11-6. 고유 유물 회수 후 변화 | 833-844 | `story/02_dungeon_canon.md`; `design/repeat_exploration.md` | `split` | planned |
-| STY-0083 | 2 | 11-7. 잔존 에너지 유실과 보상 노출 규칙 | 845-871 | `story/02_dungeon_canon.md`; `design/repeat_exploration.md` | `split` | planned |
-| STY-0084 | 2 | 11-8. 다른 수색꾼의 흔적 | 872-884 | `story/02_dungeon_canon.md`; `design/repeat_exploration.md` | `split` | planned |
+| STY-0076 | 1 | 11. 반복 탐험의 서사 규칙 | 766-769 | `story/02_dungeon_canon.md`; `design/repeat_exploration.md` | `split` | split |
+| STY-0077 | 2 | 11-1. 반복되는 것 | 770-779 | `story/02_dungeon_canon.md`; `design/repeat_exploration.md` | `split` | split |
+| STY-0078 | 2 | 11-2. 반복되지 않는 것 | 780-787 | `story/02_dungeon_canon.md`; `design/repeat_exploration.md` | `split` | split |
+| STY-0079 | 2 | 11-3. 반복 개연성 | 788-793 | `story/02_dungeon_canon.md`; `design/repeat_exploration.md` | `split` | split |
+| STY-0080 | 2 | 11-4. 랜덤성 적용 범위 추천 | 794-808 | `story/02_dungeon_canon.md`; `design/repeat_exploration.md` | `split` | split |
+| STY-0081 | 2 | 11-5. 잔여 구역 활용 방식 | 809-832 | `story/02_dungeon_canon.md`; `design/repeat_exploration.md` | `split` | split |
+| STY-0082 | 2 | 11-6. 고유 유물 회수 후 변화 | 833-844 | `story/02_dungeon_canon.md`; `design/repeat_exploration.md` | `split` | split |
+| STY-0083 | 2 | 11-7. 잔존 에너지 유실과 보상 노출 규칙 | 845-871 | `story/02_dungeon_canon.md`; `design/repeat_exploration.md` | `split` | split |
+| STY-0084 | 2 | 11-8. 다른 수색꾼의 흔적 | 872-884 | `story/02_dungeon_canon.md`; `design/repeat_exploration.md` | `split` | split |
 | STY-0085 | 2 | 이 파트의 추가 검토 메모 | 885-891 | `project/open_questions.md` | `review` | planned |
 | STY-0086 | 1 | 12. 톤과 분위기 | 892-897 | `story/07_tone_and_writing_guide.md` | `move` | moved |
 | STY-0087 | 2 | 12-1. 핵심 감정 | 898-909 | `story/07_tone_and_writing_guide.md` | `move` | moved |
@@ -164,8 +164,8 @@ related:
 | ID | 유형 | 원본 줄 | 소유 제목 | 부모 ID | 상태 |
 |---|---|---:|---|---|---|
 | TBL-001 | table | 121-124 | 2-4. 폐던전과 잔여 구역의 등장 | `STY-0014` | moved |
-| TBL-002 | table | 159-168 | 3-1. 코어의 기능 | `STY-0018` | planned |
-| TBL-003 | table | 271-282 | 4-5. 구역별 스토리 기능 | `STY-0029` | planned |
+| TBL-002 | table | 159-168 | 3-1. 코어의 기능 | `STY-0018` | moved |
+| TBL-003 | table | 271-282 | 4-5. 구역별 스토리 기능 | `STY-0029` | moved |
 | TBL-004 | table | 299-309 | 5-1. 플레이어 정리 | `STY-0032` | planned |
 | TBL-005 | table | 344-349 | 6-1. 던전 경제의 계층 구조 | `STY-0037` | planned |
 | TBL-006 | table | 369-375 | 6-3. 회수품의 가격 구조 | `STY-0039` | planned |
@@ -183,7 +183,7 @@ related:
 | TBL-018 | table | 720-726 | 10-5. 잔여 구역 단서와 지도 표현 | `STY-0072` | planned |
 | TBL-019 | table | 751-757 | 10-7. 판매 차단 | `STY-0074` | planned |
 | TBL-020 | table | 798-805 | 11-4. 랜덤성 적용 범위 추천 | `STY-0080` | planned |
-| TBL-021 | table | 815-821 | 11-5. 잔여 구역 활용 방식 | `STY-0081` | planned |
+| TBL-021 | table | 815-821 | 11-5. 잔여 구역 활용 방식 | `STY-0081` | split |
 | TBL-022 | table | 853-860 | 11-7. 잔존 에너지 유실과 보상 노출 규칙 | `STY-0083` | planned |
 | TBL-023 | table | 936-944 | 12-4. 보상 감정 | `STY-0090` | moved |
 | TBL-024 | table | 972-985 | 13-1. 기본 용어 정리 | `STY-0095` | moved |
