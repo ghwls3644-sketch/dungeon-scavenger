@@ -55,7 +55,7 @@ related:
 
 | ID | 단계 | 원본 장/소제목 | 원본 줄 | 예정 대상 | 이관 방식 | 상태 |
 |---|---:|---|---:|---|---|---|
-| STY-0001 | 1 | 스토리 정리 v1.5 — 수정 메모 반영본 | 1-15 | `archive/story_v1.5_full.md` | `archive-metadata` | planned |
+| STY-0001 | 1 | 스토리 정리 v1.5 — 수정 메모 반영본 | 1-15 | `archive/story_v1.5_full.md` | `archive-metadata` | verified |
 | STY-0002 | 1 | 1. 핵심 콘셉트 | 16-17 | `story/00_core_pillars.md` | `move` | moved |
 | STY-0003 | 2 | 1-1. 현재 핵심 콘셉트 | 18-27 | `story/00_core_pillars.md` | `move` | moved |
 | STY-0004 | 2 | 1-2. 마왕 관련 요소의 위치 | 28-42 | `story/00_core_pillars.md` | `move` | moved |
@@ -148,7 +148,7 @@ related:
 | STY-0091 | 2 | 12-5. 마왕을 다루는 감정 | 946-956 | `story/07_tone_and_writing_guide.md` | `move` | moved |
 | STY-0092 | 2 | 12-6. 공포의 방향 | 957-960 | `story/07_tone_and_writing_guide.md` | `move` | moved |
 | STY-0093 | 2 | 이 파트의 추가 검토 메모 | 961-967 | `project/open_questions.md` | `review` | planned |
-| STY-0094 | 1 | 13. 용어와 화자별 표현 | 968-969 | `reference/glossary.md`; `reference/speaker_lexicon.md` | `split` | planned |
+| STY-0094 | 1 | 13. 용어와 화자별 표현 | 968-969 | `reference/glossary.md`; `reference/speaker_lexicon.md` | `split` | split |
 | STY-0095 | 2 | 13-1. 기본 용어 정리 | 970-986 | `reference/glossary.md` | `move` | moved |
 | STY-0096 | 2 | 13-2. 수색꾼 명칭 | 987-1007 | `reference/glossary.md`; `reference/speaker_lexicon.md` | `split` | split |
 | STY-0097 | 2 | 13-3. 폐던전 명칭 | 1008-1022 | `reference/glossary.md`; `story/02_dungeon_canon.md` | `split` | split |
@@ -190,7 +190,7 @@ related:
 | TBL-025 | table | 993-1000 | 13-2. 수색꾼 명칭 | `STY-0096` | split |
 | TBL-026 | table | 1043-1051 | 13-5. 마왕 관련 용어 사용 | `STY-0099` | split |
 | TBL-027 | table | 1059-1067 | 13-6. 화자별 표현 | `STY-0100` | split |
-| QTE-001 | blockquote | 20-22 | 1-1. 현재 핵심 콘셉트 | `STY-0003` | planned |
+| QTE-001 | blockquote | 20-22 | 1-1. 현재 핵심 콘셉트 | `STY-0003` | moved |
 | QTE-002 | blockquote | 1004-1006 | 13-2. 수색꾼 명칭 | `STY-0096` | split |
 | QTE-003 | blockquote | 1029-1031 | 13-4. 잔재 설명 장치 | `STY-0098` | split |
 | QTE-004 | blockquote | 1035 | 13-4. 잔재 설명 장치 | `STY-0098` | split |
