@@ -40,6 +40,20 @@ related:
 - 결정과 미결정 사항: [`project/decisions.md`](project/decisions.md), [`project/open_questions.md`](project/open_questions.md)
 - M2 Reference 검토 결과: [`project/m2_reference_review.md`](project/m2_reference_review.md)
 
+## 다른 환경에서 작업 이어가기
+
+다른 컴퓨터나 장소에서는 GitHub의 `origin/main`과 저장소 문서를 작업 인계 기준으로 삼는다.
+
+1. 저장소가 없다면 `git clone https://github.com/ghwls3644-sketch/dungeon-scavenger.git`으로 복제한다.
+2. 저장소 루트에서 `git status`를 실행한다. 커밋하지 않은 변경이나 브랜치 분기가 보이면 이를 버리지 말고 먼저 확인한다.
+3. 작업 트리가 깨끗하면 `git pull --ff-only origin main`으로 최신 내용을 받는다.
+4. `git log -1 --oneline`으로 현재 커밋을 확인한다.
+5. 루트의 [`AGENTS.md`](../AGENTS.md)와 이 문서를 읽고, [`project/migration_manifest.md`](project/migration_manifest.md)에서 현재 단계와 다음 티켓을 확인한다.
+6. Codex에는 “`AGENTS.md`와 `docs/README.md`, 이관 현황을 읽고 다음 티켓부터 계속 진행해”라고 요청한다.
+7. 티켓을 완료하면 검증 결과를 확인한 뒤 커밋·푸시 여부를 승인한다. 두 장소에서 동시에 `main`을 수정하지 않는다.
+
+GitHub 로그인 상태, Codex 대화 기록, 앱별 로컬 설정은 저장소에 포함되지 않으므로 새 환경에서 별도로 준비한다.
+
 ## 원본 보존 규칙
 
 - `../게임 기획 파일/`은 이관이 끝날 때까지 원본 보관 위치로 유지한다.
