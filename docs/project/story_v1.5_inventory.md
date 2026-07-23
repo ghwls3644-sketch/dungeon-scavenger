@@ -170,7 +170,7 @@ related:
 | TBL-005 | table | 344-349 | 6-1. 던전 경제의 계층 구조 | `STY-0037` | split |
 | TBL-006 | table | 369-375 | 6-3. 회수품의 가격 구조 | `STY-0039` | split |
 | TBL-007 | table | 385-391 | 6-5. 회수품의 수요 | `STY-0041` | split |
-| TBL-008 | table | 399-403 | 6-6. 수수료와 난이도 | `STY-0042` | planned |
+| TBL-008 | table | 399-403 | 6-6. 수수료와 난이도 | `STY-0042` | moved |
 | TBL-009 | table | 418-427 | 7-1. 추천 NPC/세력 분류 | `STY-0045` | moved |
 | TBL-010 | table | 435-439 | 7-2. 연구자의 정보 변화 | `STY-0046` | split |
 | TBL-011 | table | 462-465 | 7-4. 감정사와 감정 방식 | `STY-0048` | split |

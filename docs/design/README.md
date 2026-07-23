@@ -35,8 +35,8 @@ related:
 - Story의 원인과 개연성을 Design 수치로 덮어쓰지 않는다.
 - 사용자 표시 명칭은 [`../reference/glossary.md`](../reference/glossary.md)를 따른다.
 - 미결정 수치와 규칙은 [`../project/open_questions.md`](../project/open_questions.md)에 연결한다.
-- 현재 파일들은 골격 단계이며 아직 구현 기준으로 확정되지 않았다.
+- 현재 파일들은 이관 초안이며 아직 구현 기준으로 최종 승인되지 않았다.
 
 ## 현재 상태
 
-Story 이관 후 G-M3 예비 점검에서 Design 대상 규칙과 표가 남아 있음을 확인했다. `DOC-0301`에서 [`narrative_delivery.md`](narrative_delivery.md)에 정보 전달 규칙을, `DOC-0302`에서 [`repeat_exploration.md`](repeat_exploration.md)에 반복 탐험 규칙을, `DOC-0303`에서 [`item_rules.md`](item_rules.md)에 아이템 구현 규칙을 추출했다. 다음 티켓은 `DOC-0304` 경제 규칙 추출이다.
+Story 이관 후 G-M3 예비 점검에서 확인한 Design 티켓 `DOC-0301`~`DOC-0304`를 모두 완료했다. [`narrative_delivery.md`](narrative_delivery.md), [`repeat_exploration.md`](repeat_exploration.md), [`item_rules.md`](item_rules.md), [`economy_rules.md`](economy_rules.md)는 전체 전환 승인 전까지 `draft`이며, 다음 티켓은 Project 단계의 `DOC-0401` 확정 변경점 정리다.
