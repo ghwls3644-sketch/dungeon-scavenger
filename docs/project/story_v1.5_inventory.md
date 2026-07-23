@@ -114,12 +114,12 @@ related:
 | STY-0057 | 2 | 8-4. 잔재의 표현 방식 | 561-571 | `story/07_tone_and_writing_guide.md`; `reference/glossary.md`; `story/05_items_and_discoveries.md` | `split` | split |
 | STY-0058 | 2 | 8-5. 폐품 반복 등장의 설명 강도 | 572-582 | `story/05_items_and_discoveries.md`; `design/item_rules.md`; `design/repeat_exploration.md` | `split` | split |
 | STY-0059 | 2 | 이 파트의 추가 검토 메모 | 583-589 | `project/open_questions.md` | `review` | planned |
-| STY-0060 | 1 | 9. 메인 스토리 진행 축 | 590-595 | `story/06_narrative_progression.md` | `move` | planned |
-| STY-0061 | 2 | 9-1. 1단계: 변두리 수색꾼의 생업 | 596-605 | `story/06_narrative_progression.md` | `move` | planned |
-| STY-0062 | 2 | 9-2. 2단계: 폐던전의 규칙 학습 | 606-615 | `story/06_narrative_progression.md` | `move` | planned |
-| STY-0063 | 2 | 9-3. 3단계: 발견물을 통한 세계관 해설 | 616-628 | `story/06_narrative_progression.md` | `move` | planned |
-| STY-0064 | 2 | 9-4. 4단계: 선택적 떡밥과 장기 수집 | 629-641 | `story/06_narrative_progression.md` | `move` | planned |
-| STY-0065 | 2 | 9-5. 엔딩 또는 장기 목표의 방향 | 642-653 | `story/06_narrative_progression.md` | `move` | planned |
+| STY-0060 | 1 | 9. 메인 스토리 진행 축 | 590-595 | `story/06_narrative_progression.md` | `move` | moved |
+| STY-0061 | 2 | 9-1. 1단계: 변두리 수색꾼의 생업 | 596-605 | `story/06_narrative_progression.md` | `move` | moved |
+| STY-0062 | 2 | 9-2. 2단계: 폐던전의 규칙 학습 | 606-615 | `story/06_narrative_progression.md` | `move` | moved |
+| STY-0063 | 2 | 9-3. 3단계: 발견물을 통한 세계관 해설 | 616-628 | `story/06_narrative_progression.md` | `move` | moved |
+| STY-0064 | 2 | 9-4. 4단계: 선택적 떡밥과 장기 수집 | 629-641 | `story/06_narrative_progression.md` | `move` | moved |
+| STY-0065 | 2 | 9-5. 엔딩 또는 장기 목표의 방향 | 642-653 | `story/06_narrative_progression.md` | `move` | moved |
 | STY-0066 | 2 | 이 파트의 추가 검토 메모 | 654-660 | `project/open_questions.md` | `review` | planned |
 | STY-0067 | 1 | 10. 서브 스토리와 발견물 구조 | 661-664 | `story/05_items_and_discoveries.md`; `story/06_narrative_progression.md`; `design/narrative_delivery.md` | `split` | split |
 | STY-0068 | 2 | 10-1. 서브 스토리 유형 | 665-676 | `story/05_items_and_discoveries.md`; `story/06_narrative_progression.md`; `design/narrative_delivery.md` | `split` | split |

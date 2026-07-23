@@ -184,13 +184,13 @@ related:
 | `STY-0056` | 핵심 기록물과 연구자 보관의 의미 | `split`; Story 의미 이관, 등록·저장·재열람은 `DOC-0301`·`DOC-0303` |
 | `STY-0057` | 잔재의 기억 흔적 | `split`; 의미는 Story, 정의는 Glossary, 표현은 Tone Guide |
 | `STY-0058` | 폐품 반복 발견의 설명 강도와 개연성 | `split`; Story 개연성 이관, 방문별 노출과 스폰 규칙은 `DOC-0302`·`DOC-0303` |
-| `STY-0067` | 발견물 중심 전달 구조 | `split`; 발견물의 서사 역할은 Story, 진행·조건은 `DOC-0207`·`DOC-0301` |
-| `STY-0068`, `TBL-016` | 서브 스토리 유형과 발견물 기능 | `STY-0068`은 `split`; `TBL-016`은 Story로 `moved`, 배치·진행은 후속 티켓 |
+| `STY-0067` | 발견물 중심 전달 구조 | `split`; 발견물의 서사 역할은 이 문서, 정보 진행은 [`06_narrative_progression.md`](06_narrative_progression.md), 조건은 `DOC-0301` |
+| `STY-0068`, `TBL-016` | 서브 스토리 유형과 발견물 기능 | `STY-0068`은 `split`; `TBL-016`은 이 문서로 `moved`, 정보 진행은 [`06_narrative_progression.md`](06_narrative_progression.md), 배치는 `DOC-0301` |
 | `STY-0069`, `TBL-017` | 발견물의 장소 맥락 | `split`; 맥락은 Story, 랜덤 배치·반복·1회성 규칙은 `DOC-0301`~`DOC-0303` |
-| `STY-0070` | 발견물과 연구자 해설의 정보 층 | `split`; 서사 관계는 Story, 문체·진행·재열람 규칙은 관련 책임 문서 |
+| `STY-0070` | 발견물과 연구자 해설의 정보 층 | `split`; 서사 관계는 이 문서, 정보 진행은 [`06_narrative_progression.md`](06_narrative_progression.md), 문체·재열람 규칙은 관련 책임 문서 |
 | `STY-0071` | 발견물별 NPC 반응 범위 | `split`; 아이템과 담당자 관계는 Story, 반응 조건은 `DOC-0301` |
 | `STY-0072`, `TBL-018` | 지도 발견물과 잔여 구역 단서 | `STY-0072`는 `split`; `TBL-018`은 Story로 `moved`, 지도·구역 처리는 `DOC-0301`·`DOC-0302` |
-| `STY-0073` | 실패한 수색꾼의 흔적 | `split`; 흔적의 의미는 Story, 등장 순서와 조건은 후속 티켓 |
+| `STY-0073` | 실패한 수색꾼의 흔적 | `split`; 흔적의 의미는 이 문서, 정보 진행은 [`06_narrative_progression.md`](06_narrative_progression.md), 실제 등장 조건은 `DOC-0301` |
 | `STY-0074`, `TBL-019` | 중요 발견물의 보호 이유 | `split`; 서사 이유는 Story, 판매 차단은 `DOC-0303` |
 
 `STY-0054`, `TBL-014`의 UI 색상은 Story에 이관하지 않고 `DOC-0303` 대상으로 남긴다. `STY-0059`, `STY-0075` 추가 검토 메모는 확정 내용으로 넣지 않고 `DOC-0402`에서 [`../project/open_questions.md`](../project/open_questions.md)로 이관한다.
