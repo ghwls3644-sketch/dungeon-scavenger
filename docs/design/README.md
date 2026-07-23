@@ -39,4 +39,4 @@ related:
 
 ## 현재 상태
 
-Story 이관 후 G-M3 예비 점검에서 Design 대상 규칙과 표가 남아 있음을 확인했다. `DOC-0301`에서 [`narrative_delivery.md`](narrative_delivery.md)에 정보 전달 규칙을, `DOC-0302`에서 [`repeat_exploration.md`](repeat_exploration.md)에 반복 탐험 규칙을 추출했다. 다음 티켓은 `DOC-0303` 아이템 구현 규칙 추출이다.
+Story 이관 후 G-M3 예비 점검에서 Design 대상 규칙과 표가 남아 있음을 확인했다. `DOC-0301`에서 [`narrative_delivery.md`](narrative_delivery.md)에 정보 전달 규칙을, `DOC-0302`에서 [`repeat_exploration.md`](repeat_exploration.md)에 반복 탐험 규칙을, `DOC-0303`에서 [`item_rules.md`](item_rules.md)에 아이템 구현 규칙을 추출했다. 다음 티켓은 `DOC-0304` 경제 규칙 추출이다.

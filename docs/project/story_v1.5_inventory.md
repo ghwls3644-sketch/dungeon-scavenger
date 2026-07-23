@@ -95,7 +95,7 @@ related:
 | STY-0038 | 2 | 6-2. 수색꾼 길드 | 351-362 | `story/03_player_and_society.md`; `design/economy_rules.md` | `split` | split |
 | STY-0039 | 2 | 6-3. 회수품의 가격 구조 | 363-376 | `story/03_player_and_society.md`; `design/economy_rules.md` | `split` | split |
 | STY-0040 | 2 | 6-4. 왜 길드나 군대가 직접 회수하지 않는가 | 377-382 | `story/03_player_and_society.md`; `design/economy_rules.md` | `split` | split |
-| STY-0041 | 2 | 6-5. 회수품의 수요 | 383-392 | `story/03_player_and_society.md`; `design/economy_rules.md` | `split` | split |
+| STY-0041 | 2 | 6-5. 회수품의 수요 | 383-392 | `story/03_player_and_society.md`; `design/item_rules.md`; `design/economy_rules.md` | `split` | split |
 | STY-0042 | 2 | 6-6. 수수료와 난이도 | 393-404 | `story/03_player_and_society.md`; `design/economy_rules.md` | `split` | split |
 | STY-0043 | 2 | 이 파트의 추가 검토 메모 | 405-411 | `project/open_questions.md` | `review` | planned |
 | STY-0044 | 1 | 7. 주요 세력과 NPC | 412-415 | `story/04_characters_and_factions.md` | `move` | moved |
@@ -108,7 +108,7 @@ related:
 | STY-0051 | 2 | 7-7. NPC별 말투 기준 | 491-502 | `reference/speaker_lexicon.md`; `story/04_characters_and_factions.md` | `split` | split |
 | STY-0052 | 2 | 이 파트의 추가 검토 메모 | 503-509 | `project/open_questions.md` | `review` | planned |
 | STY-0053 | 1 | 8. 잔류물 체계 | 510-521 | `story/05_items_and_discoveries.md`; `design/item_rules.md` | `split` | split |
-| STY-0054 | 2 | 8-1. UI 분류 색상 | 522-535 | `design/item_rules.md` | `move` | planned |
+| STY-0054 | 2 | 8-1. UI 분류 색상 | 522-535 | `design/item_rules.md` | `move` | moved |
 | STY-0055 | 2 | 8-2. 분류별 처리 방식 | 536-549 | `story/05_items_and_discoveries.md`; `design/item_rules.md` | `split` | split |
 | STY-0056 | 2 | 8-3. 핵심 기록물 보관 방식 | 550-560 | `story/05_items_and_discoveries.md`; `design/item_rules.md`; `design/narrative_delivery.md` | `split` | split |
 | STY-0057 | 2 | 8-4. 잔재의 표현 방식 | 561-571 | `story/07_tone_and_writing_guide.md`; `reference/glossary.md`; `story/05_items_and_discoveries.md` | `split` | split |
@@ -176,7 +176,7 @@ related:
 | TBL-011 | table | 462-465 | 7-4. 감정사와 감정 방식 | `STY-0048` | split |
 | TBL-012 | table | 493-501 | 7-7. NPC별 말투 기준 | `STY-0051` | split |
 | TBL-013 | table | 514-520 | 8. 잔류물 체계 | `STY-0053` | split |
-| TBL-014 | table | 526-532 | 8-1. UI 분류 색상 | `STY-0054` | planned |
+| TBL-014 | table | 526-532 | 8-1. UI 분류 색상 | `STY-0054` | moved |
 | TBL-015 | table | 540-546 | 8-2. 분류별 처리 방식 | `STY-0055` | split |
 | TBL-016 | table | 667-675 | 10-1. 서브 스토리 유형 | `STY-0068` | moved |
 | TBL-017 | table | 683-688 | 10-2. 발견물 획득 방식 | `STY-0069` | split |

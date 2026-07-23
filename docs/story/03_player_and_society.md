@@ -173,7 +173,7 @@ related:
 | `STY-0038` | 수색꾼 길드와 허가·지원 | `split`; 사회적 역할 이관, 서비스 규칙은 `DOC-0304` |
 | `STY-0039`, `TBL-006` | 가격 주도권과 거래처 | `split`; 시장 배경 이관, 가격 계산은 `DOC-0304` |
 | `STY-0040` | 위험 외주화의 이유 | `split`; 사회적 이유 이관, 비용 구조는 `DOC-0304` |
-| `STY-0041`, `TBL-007` | 회수품의 수요 | `split`; 수요 배경 이관, 아이템 처리는 `DOC-0303`·`DOC-0304` |
+| `STY-0041`, `TBL-007` | 회수품의 수요 | `split`; 수요 배경은 이 문서, 판매·등록 처리는 [`../design/item_rules.md`](../design/item_rules.md), 가격 계산은 `DOC-0304` |
 | `STY-0042`, `TBL-008` | 수수료와 난이도 | Story의 생계 압박 이유만 이관; 수치·표는 `DOC-0304` |
 
 `STY-0035`, `STY-0043` 추가 검토 메모는 이 문서에 확정 내용으로 넣지 않고 `DOC-0402`에서 [`../project/open_questions.md`](../project/open_questions.md)로 이관한다.

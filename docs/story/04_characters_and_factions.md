@@ -111,7 +111,7 @@ NPC는 세계관 전체를 설명하는 인물보다, 플레이 루프를 도와
 
 감정사 [`NPC-004`](../reference/entity_index.md)는 큰 임무를 가진 핵심 인물이 아니라, 미확인 물품을 확인해주는 기능형 NPC로 둔다. 플레이어는 상황에 따라 감정사에게 여러 물품을 맡기거나 휴대용 감정 아이템으로 탐험 중 확인하는 두 가지 방식을 이용할 수 있다.
 
-감정사에게 맡기는 방식에는 비용이나 시간이, 휴대용 감정 아이템에는 사용 횟수·비용·정확도 제한이 붙을 수 있다. 이는 원본과 GDD가 제시하는 설계 방향을 보존한 것이며, 실제 제한과 수치는 이 Story 문서에서 확정하지 않는다. 해당 규칙은 `DOC-0303`에서 [`../design/item_rules.md`](../design/item_rules.md), `DOC-0304`에서 [`../design/economy_rules.md`](../design/economy_rules.md)로 이관한다.
+감정사에게 맡기는 방식에는 비용이나 시간이, 휴대용 감정 아이템에는 사용 횟수·비용·정확도 제한이 붙을 수 있다. 이는 원본과 GDD가 제시하는 설계 방향을 보존한 것이며, 실제 수치는 이 Story 문서에서 확정하지 않는다. 감정 상태와 제약 원칙은 [`../design/item_rules.md`](../design/item_rules.md), 비용은 `DOC-0304`에서 [`../design/economy_rules.md`](../design/economy_rules.md)로 이관한다.
 
 이 구조는 감정사를 스토리의 중심으로 만들지 않으면서도, 미확인 아이템 시스템과 자연스럽게 연결된다.
 
@@ -169,7 +169,7 @@ NPC는 세계관 전체를 설명하는 인물보다, 플레이 루프를 도와
 | `STY-0044`, `STY-0045`, `TBL-009` | 기능형 NPC 중심 원칙과 역할 분류 | `moved` |
 | `STY-0046`, `TBL-010` | 연구자의 지식 변화 | `split`; 지식·태도는 Story, 대사 예시는 Speaker Lexicon, 등록·해석 단계 연결은 [`../design/narrative_delivery.md`](../design/narrative_delivery.md) |
 | `STY-0047` | 튜토리얼 수색꾼의 역할과 조언 범위 | `split`; 역할은 Story, 실제 노출 경계는 [`../design/narrative_delivery.md`](../design/narrative_delivery.md) |
-| `STY-0048`, `TBL-011` | 감정사 역할과 두 감정 방식 | `split`; NPC 기능은 Story, 시간·횟수·정확도는 `DOC-0303`, 비용은 `DOC-0304` |
+| `STY-0048`, `TBL-011` | 감정사 역할과 두 감정 방식 | `split`; NPC 기능은 이 문서, 상태·제약 원칙은 [`../design/item_rules.md`](../design/item_rules.md), 비용은 `DOC-0304` |
 | `STY-0049` | 고유 유물의 제한된 NPC·세력 반응 | `split`; 서사 범위는 Story, 실제 반응 라우팅은 [`../design/narrative_delivery.md`](../design/narrative_delivery.md) |
 | `STY-0050` | 성직자와 봉인 관리인 정리 | `split`; 역할·지식은 Story, 발견물 반응 라우팅은 [`../design/narrative_delivery.md`](../design/narrative_delivery.md) |
 | `STY-0051`, `TBL-012` | 역할별 성격과 태도 | `split`; 태도 연결은 Story, 어휘·예시는 Speaker Lexicon |
@@ -180,4 +180,4 @@ NPC는 세계관 전체를 설명하는 인물보다, 플레이 루프를 도와
 
 ## 이관 상태
 
-`DOC-0205`에서 원본 7장의 NPC·세력 책임과 13장의 관련 지식·태도를 이관했다. 문서는 전체 전환 승인 전까지 `draft`이며 감정 규칙은 `DOC-0303`·`DOC-0304`, 정보 노출 조건은 후속 Narrative와 Design 티켓에서 이어서 이관한다.
+`DOC-0205`에서 원본 7장의 NPC·세력 책임과 13장의 관련 지식·태도를 이관했다. `DOC-0301`은 정보 노출 조건을 [`../design/narrative_delivery.md`](../design/narrative_delivery.md)로, `DOC-0303`은 감정 상태와 제약 원칙을 [`../design/item_rules.md`](../design/item_rules.md)로 분리했다. 문서는 전체 전환 승인 전까지 `draft`이며 감정 비용은 `DOC-0304`에서 이어서 이관한다.

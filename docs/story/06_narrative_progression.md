@@ -196,7 +196,7 @@ related:
 | `STY-0071` | 필요한 NPC만 반응하는 전달 범위 | `split`; 정보 순서는 이 문서, 역할은 Characters Story, 반응 라우팅은 [`../design/narrative_delivery.md`](../design/narrative_delivery.md) |
 | `STY-0072`, `TBL-018` | 지도 단서와 잔여 구역 이해 | `split`; 의미는 Items Story, 이해 순서는 이 문서, 정보 전달은 [`../design/narrative_delivery.md`](../design/narrative_delivery.md), 지도·구역 처리는 [`../design/repeat_exploration.md`](../design/repeat_exploration.md) |
 | `STY-0073` | 실패한 수색꾼 흔적의 연속 노출 | `split`; 흔적 의미는 Items Story, 진행 순서는 이 문서, 연속 전달은 [`../design/narrative_delivery.md`](../design/narrative_delivery.md), 방문 간 배치는 [`../design/repeat_exploration.md`](../design/repeat_exploration.md) |
-| `STY-0074`, `TBL-019` | 중요 발견물의 진행 보호 | `split`; 보호 이유는 Items Story, 판매 차단은 `DOC-0303` |
+| `STY-0074`, `TBL-019` | 중요 발견물의 진행 보호 | `split`; 보호 이유는 Items Story, 판매 차단은 [`../design/item_rules.md`](../design/item_rules.md) |
 | `STY-0099`, `TBL-026` | 연구자의 지식 변화 순서 | `split`; 진행 순서는 이 문서, 사실·태도·표현은 관련 Story와 Reference |
 
 `STY-0066`, `STY-0075` 추가 검토 메모는 이 문서에 확정 내용으로 넣지 않고 `DOC-0402`에서 [`../project/open_questions.md`](../project/open_questions.md)로 이관한다.
