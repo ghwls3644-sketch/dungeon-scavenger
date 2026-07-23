@@ -127,7 +127,7 @@ related:
 | STY-0070 | 2 | 10-3. 텍스트 길이와 연구자 해설 | 690-701 | `story/05_items_and_discoveries.md`; `story/06_narrative_progression.md`; `design/narrative_delivery.md` | `split` | split |
 | STY-0071 | 2 | 10-4. NPC 반응 범위 | 702-713 | `story/05_items_and_discoveries.md`; `story/06_narrative_progression.md`; `design/narrative_delivery.md` | `split` | split |
 | STY-0072 | 2 | 10-5. 잔여 구역 단서와 지도 표현 | 714-729 | `story/05_items_and_discoveries.md`; `story/06_narrative_progression.md`; `design/narrative_delivery.md`; `design/repeat_exploration.md` | `split` | split |
-| STY-0073 | 2 | 10-6. 실패한 수색꾼의 흔적 | 730-744 | `story/05_items_and_discoveries.md`; `story/06_narrative_progression.md`; `design/narrative_delivery.md` | `split` | split |
+| STY-0073 | 2 | 10-6. 실패한 수색꾼의 흔적 | 730-744 | `story/05_items_and_discoveries.md`; `story/06_narrative_progression.md`; `design/narrative_delivery.md`; `design/repeat_exploration.md` | `split` | split |
 | STY-0074 | 2 | 10-7. 판매 차단 | 745-758 | `story/05_items_and_discoveries.md`; `story/06_narrative_progression.md`; `design/narrative_delivery.md`; `design/item_rules.md` | `split` | split |
 | STY-0075 | 2 | 이 파트의 추가 검토 메모 | 759-765 | `project/open_questions.md` | `review` | planned |
 | STY-0076 | 1 | 11. 반복 탐험의 서사 규칙 | 766-769 | `story/02_dungeon_canon.md`; `design/repeat_exploration.md` | `split` | split |
@@ -182,9 +182,9 @@ related:
 | TBL-017 | table | 683-688 | 10-2. 발견물 획득 방식 | `STY-0069` | split |
 | TBL-018 | table | 720-726 | 10-5. 잔여 구역 단서와 지도 표현 | `STY-0072` | moved |
 | TBL-019 | table | 751-757 | 10-7. 판매 차단 | `STY-0074` | split |
-| TBL-020 | table | 798-805 | 11-4. 랜덤성 적용 범위 추천 | `STY-0080` | planned |
+| TBL-020 | table | 798-805 | 11-4. 랜덤성 적용 범위 추천 | `STY-0080` | moved |
 | TBL-021 | table | 815-821 | 11-5. 잔여 구역 활용 방식 | `STY-0081` | split |
-| TBL-022 | table | 853-860 | 11-7. 잔존 에너지 유실과 보상 노출 규칙 | `STY-0083` | planned |
+| TBL-022 | table | 853-860 | 11-7. 잔존 에너지 유실과 보상 노출 규칙 | `STY-0083` | moved |
 | TBL-023 | table | 936-944 | 12-4. 보상 감정 | `STY-0090` | moved |
 | TBL-024 | table | 972-985 | 13-1. 기본 용어 정리 | `STY-0095` | moved |
 | TBL-025 | table | 993-1000 | 13-2. 수색꾼 명칭 | `STY-0096` | split |

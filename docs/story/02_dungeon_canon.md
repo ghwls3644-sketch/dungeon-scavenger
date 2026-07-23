@@ -49,7 +49,7 @@ related:
 - 공식 표기와 짧은 정의는 [`../reference/glossary.md`](../reference/glossary.md)가 소유한다.
 - 방문 간 상태 전환, 랜덤 범위, 노출량과 저장 규칙은 [`../design/repeat_exploration.md`](../design/repeat_exploration.md)가 소유한다.
 - 아이템의 반복성·원본성과 처리 규칙은 [`../design/item_rules.md`](../design/item_rules.md)가 소유한다.
-- 원본 11장은 Story와 Design 책임이 섞여 있으므로 이 문서에는 서사 개연성과 표현 방향만 두고 구현 표와 수치 규칙은 `DOC-0302`로 남긴다.
+- 원본 11장은 Story와 Design 책임이 섞여 있으므로 이 문서에는 서사 개연성과 표현 방향만 두고 방문 간 상태 전환과 처리 규칙은 [`../design/repeat_exploration.md`](../design/repeat_exploration.md)에 둔다.
 
 ## 던전 코어와 폐던전의 원리
 
@@ -219,7 +219,7 @@ related:
 
 ### 랜덤성의 정설 경계
 
-정설이 허용하는 변화는 코어의 의도적인 방어·완전한 구조 재생성이 아니라 소멸 과정의 붕괴, 오작동, 접근 상태와 노출의 변화다. 방 구조, 아이템·위험·적 배치의 실제 랜덤 범위와 추천도 표 `TBL-020`은 `DOC-0302`에서 Design으로 이관한다.
+정설이 허용하는 변화는 코어의 의도적인 방어·완전한 구조 재생성이 아니라 소멸 과정의 붕괴, 오작동, 접근 상태와 노출의 변화다. 방 구조, 아이템·위험·적 배치의 실제 랜덤 범위와 추천도 표 `TBL-020`은 [`../design/repeat_exploration.md`](../design/repeat_exploration.md)가 소유한다.
 
 ### 잔여 구역의 서사적 역할
 
@@ -237,13 +237,13 @@ related:
 
 잔여 구역은 반드시 큰 던전 분량일 필요가 없다. 작은 방 하나, 짧은 우회 통로, 무너진 창고, 벽 뒤의 좁은 공간 정도로도 충분하다. 중요한 것은 플레이어가 “이미 끝난 폐던전에서도 아직 내가 찾아낸 것이 있다”는 감각을 얻는 것이다.
 
-구체적인 개방 단서와 지도 상태 변화는 `DOC-0302`에서 Design으로 이관한다.
+구체적인 개방 단서와 지도 상태 변화는 [`../design/repeat_exploration.md`](../design/repeat_exploration.md)가 소유한다.
 
 ### 고유 유물 회수 후의 소멸 방향
 
 고유 유물을 회수한 뒤에는 해당 구역에 약간의 변화가 생기면 좋다. 다만 위험도가 갑자기 높아지는 방향보다, 방이 사라지거나 상호작용이 줄어드는 방향이 폐던전의 소멸감과 더 잘 맞는다.
 
-원본이 제시한 서사 표현 예시는 다음과 같다. 실제 방문 간 상태 전환으로 채택할 항목은 `DOC-0302`에서 결정한다.
+원본이 제시한 서사 표현 예시는 다음과 같다. 실제 방문 간 상태 전환으로 채택한 항목은 [`../design/repeat_exploration.md`](../design/repeat_exploration.md)에 둔다.
 
 - 유물을 회수한 뒤 다음 방문에서 방 일부가 무너진다.
 - 더 이상 조사할 수 없는 오브젝트가 늘어난다.
@@ -255,7 +255,7 @@ related:
 
 핵심 개연성은 **잔존 에너지의 유실**이다. 코어가 파괴된 뒤에도 던전 내부에는 잔존 에너지가 남아 있고, 이 에너지는 시간이 지나며 조금씩 빠져나간다. 에너지가 유실되는 과정에서 잔해 밑에 묻혀 있던 폐품, 느슨해진 장치, 응축된 잔재, 이전에는 조사할 수 없던 오브젝트가 상호작용 가능한 상태로 드러난다.
 
-이 현상은 새 보물이나 고유 유물을 생성하는 것이 아니다. 탐험별 노출량, 보상·위험 감소 배제, 방 소실과 상태 저장 규칙 및 `TBL-022`는 `DOC-0302`에서 Design으로 이관한다.
+이 현상은 새 보물이나 고유 유물을 생성하는 것이 아니다. 탐험별 노출량, 보상·위험 감소 배제, 방 소실과 상태 저장 규칙 및 `TBL-022`는 [`../design/repeat_exploration.md`](../design/repeat_exploration.md)가 소유한다.
 
 ### 다른 수색꾼의 흔적
 
@@ -295,16 +295,16 @@ related:
 |---|---|---|
 | `STY-0017`~`STY-0022`, `TBL-002` | 던전 코어와 폐던전의 원리 | `moved` |
 | `STY-0024`~`STY-0029`, `TBL-003` | 폐던전의 현재 상태 | `moved` |
-| `STY-0076`~`STY-0079` | 반복 탐험의 전제와 개연성 | `split`; 실제 방문 규칙은 `DOC-0302` |
-| `STY-0080`, `TBL-020` | 랜덤성 적용 범위 | Story 경계만 기록; 표와 실제 범위는 `DOC-0302`에서 이관 |
-| `STY-0081`, `TBL-021` | 잔여 구역 활용 | `split`; 서사 역할 이관, 지도·상태 규칙은 `DOC-0302` |
-| `STY-0082` | 고유 유물 회수 후 변화 | `split`; 소멸 표현 이관, 상태 전환은 `DOC-0302` |
-| `STY-0083`, `TBL-022` | 잔존 에너지 유실과 보상 노출 | Story 개연성 이관; 노출량과 처리 표는 `DOC-0302` |
-| `STY-0084` | 다른 수색꾼의 흔적 | `split`; 서사 표현 이관, 등장 규칙은 `DOC-0302` |
+| `STY-0076`~`STY-0079` | 반복 탐험의 전제와 개연성 | `split`; 실제 방문 규칙은 [`../design/repeat_exploration.md`](../design/repeat_exploration.md) |
+| `STY-0080`, `TBL-020` | 랜덤성 적용 범위 | `STY-0080`은 `split`; Story 경계는 이 문서, `TBL-020`과 실제 범위는 Design으로 `moved` |
+| `STY-0081`, `TBL-021` | 잔여 구역 활용 | `split`; 서사 역할은 이 문서, 지도·상태 규칙은 [`../design/repeat_exploration.md`](../design/repeat_exploration.md) |
+| `STY-0082` | 고유 유물 회수 후 변화 | `split`; 소멸 표현은 이 문서, 상태 전환은 [`../design/repeat_exploration.md`](../design/repeat_exploration.md) |
+| `STY-0083`, `TBL-022` | 잔존 에너지 유실과 보상 노출 | `STY-0083`은 `split`; Story 개연성은 이 문서, `TBL-022`와 처리 규칙은 Design으로 `moved` |
+| `STY-0084` | 다른 수색꾼의 흔적 | `split`; 서사 표현은 이 문서, 등장 규칙은 [`../design/repeat_exploration.md`](../design/repeat_exploration.md) |
 | `STY-0097` | 폐던전 명칭과 개념 경계 | `split`; 공식 용어는 Glossary, 상세 의미는 Story |
 
 `STY-0023`, `STY-0030`, `STY-0085` 추가 검토 메모는 이 문서에 확정 내용으로 넣지 않고 `DOC-0402`에서 [`../project/open_questions.md`](../project/open_questions.md)로 이관한다.
 
 ## 이관 상태
 
-`DOC-0203`에서 원본 3장·4장의 정설과 11장의 Story 책임, 13-3의 상세 의미를 이관했다. 문서는 전체 전환 승인 전까지 `draft`이며 11장의 실제 규칙은 `DOC-0302`에서 이어서 이관한다.
+`DOC-0203`에서 원본 3장·4장의 정설과 11장의 Story 책임, 13-3의 상세 의미를 이관했다. `DOC-0302`는 11장의 방문 간 상태 전환과 처리 규칙을 [`../design/repeat_exploration.md`](../design/repeat_exploration.md)로 분리했다. 문서는 전체 전환 승인 전까지 `draft`다.
