@@ -100,11 +100,11 @@ related:
 | STY-0043 | 2 | 이 파트의 추가 검토 메모 | 405-411 | `project/open_questions.md` | `review` | planned |
 | STY-0044 | 1 | 7. 주요 세력과 NPC | 412-415 | `story/04_characters_and_factions.md` | `move` | moved |
 | STY-0045 | 2 | 7-1. 추천 NPC/세력 분류 | 416-428 | `story/04_characters_and_factions.md` | `move` | moved |
-| STY-0046 | 2 | 7-2. 연구자의 정보 변화 | 429-442 | `story/04_characters_and_factions.md`; `reference/speaker_lexicon.md` | `split` | split |
-| STY-0047 | 2 | 7-3. 튜토리얼 조력자 | 443-457 | `story/04_characters_and_factions.md` | `move` | moved |
+| STY-0046 | 2 | 7-2. 연구자의 정보 변화 | 429-442 | `story/04_characters_and_factions.md`; `reference/speaker_lexicon.md`; `design/narrative_delivery.md` | `split` | split |
+| STY-0047 | 2 | 7-3. 튜토리얼 조력자 | 443-457 | `story/04_characters_and_factions.md`; `design/narrative_delivery.md` | `split` | split |
 | STY-0048 | 2 | 7-4. 감정사와 감정 방식 | 458-468 | `story/04_characters_and_factions.md`; `design/item_rules.md`; `design/economy_rules.md` | `split` | split |
-| STY-0049 | 2 | 7-5. 고유 유물과 세력 반응 | 469-479 | `story/04_characters_and_factions.md` | `move` | moved |
-| STY-0050 | 2 | 7-6. 성직자와 봉인 관리인 정리 | 480-490 | `story/04_characters_and_factions.md` | `move` | moved |
+| STY-0049 | 2 | 7-5. 고유 유물과 세력 반응 | 469-479 | `story/04_characters_and_factions.md`; `design/narrative_delivery.md` | `split` | split |
+| STY-0050 | 2 | 7-6. 성직자와 봉인 관리인 정리 | 480-490 | `story/04_characters_and_factions.md`; `design/narrative_delivery.md` | `split` | split |
 | STY-0051 | 2 | 7-7. NPC별 말투 기준 | 491-502 | `reference/speaker_lexicon.md`; `story/04_characters_and_factions.md` | `split` | split |
 | STY-0052 | 2 | 이 파트의 추가 검토 메모 | 503-509 | `project/open_questions.md` | `review` | planned |
 | STY-0053 | 1 | 8. 잔류물 체계 | 510-521 | `story/05_items_and_discoveries.md`; `design/item_rules.md` | `split` | split |

@@ -167,11 +167,11 @@ NPC는 세계관 전체를 설명하는 인물보다, 플레이 루프를 도와
 | 원본 ID | 이관 내용 | 상태와 남은 책임 |
 |---|---|---|
 | `STY-0044`, `STY-0045`, `TBL-009` | 기능형 NPC 중심 원칙과 역할 분류 | `moved` |
-| `STY-0046`, `TBL-010` | 연구자의 지식 변화 | `split`; 지식·태도는 Story, 대사 예시는 Speaker Lexicon |
-| `STY-0047` | 튜토리얼 수색꾼의 역할과 조언 범위 | `moved`; 실제 노출 조건은 Design |
+| `STY-0046`, `TBL-010` | 연구자의 지식 변화 | `split`; 지식·태도는 Story, 대사 예시는 Speaker Lexicon, 등록·해석 단계 연결은 [`../design/narrative_delivery.md`](../design/narrative_delivery.md) |
+| `STY-0047` | 튜토리얼 수색꾼의 역할과 조언 범위 | `split`; 역할은 Story, 실제 노출 경계는 [`../design/narrative_delivery.md`](../design/narrative_delivery.md) |
 | `STY-0048`, `TBL-011` | 감정사 역할과 두 감정 방식 | `split`; NPC 기능은 Story, 시간·횟수·정확도는 `DOC-0303`, 비용은 `DOC-0304` |
-| `STY-0049` | 고유 유물의 제한된 NPC·세력 반응 | `moved`; 실제 반응 조건은 Design |
-| `STY-0050` | 성직자와 봉인 관리인 정리 | `moved` |
+| `STY-0049` | 고유 유물의 제한된 NPC·세력 반응 | `split`; 서사 범위는 Story, 실제 반응 라우팅은 [`../design/narrative_delivery.md`](../design/narrative_delivery.md) |
+| `STY-0050` | 성직자와 봉인 관리인 정리 | `split`; 역할·지식은 Story, 발견물 반응 라우팅은 [`../design/narrative_delivery.md`](../design/narrative_delivery.md) |
 | `STY-0051`, `TBL-012` | 역할별 성격과 태도 | `split`; 태도 연결은 Story, 어휘·예시는 Speaker Lexicon |
 | `STY-0099`, `TBL-026` | 마왕에 대한 지식 차이와 상인의 거래 태도 | `split`; 지식·태도는 Story, 진실·진행·표현은 관련 책임 문서 |
 | `STY-0100`, `TBL-027` | 화자별 성격과 표현 | `split`; 태도 연결은 Story, 어휘·예시는 Speaker Lexicon |

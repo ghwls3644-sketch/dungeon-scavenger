@@ -55,7 +55,7 @@ related:
 | 대상 | 상태 | 다음 작업 |
 |---|---|---|
 | `docs/GDD.md` | `copied-active`, `verified` | 상호 링크와 책임별 기준 문서 연결 |
-| `docs/archive/story_v1.5_full.md` | `source-frozen`, `copied-archive`, `verified`, `pending-split` | G-M3 예비 점검에서 남은 Design·Project 이관 확인. `DOC-0301`부터 계속 |
+| `docs/archive/story_v1.5_full.md` | `source-frozen`, `copied-archive`, `verified`, `pending-split` | G-M3 예비 점검에서 남은 Design·Project 이관 확인. `DOC-0302`부터 계속 |
 | 두 구버전 제안서 | `copied-archive`, `verified` | 추가 작업 없음 |
 | 최신 분할 제안서 v0.2.1 | 활성 작업 지침 | M1~M6 완료 후 아카이브 여부 결정 |
 | 개발 단계별 제안서 v0.1 | 활성 참고 | 개발 프로젝트 문서에 반영 후 아카이브 |
@@ -125,4 +125,15 @@ M2 작업은 완료했으며 2026-07-22 사용자의 다음 작업 진행 지시
 | Design 제목·표 | 5 | `DOC-0302`~`DOC-0304` |
 | 결정·GDD 연결 | 3 | `DOC-0401`, `DOC-0403` |
 
-완료된 Story·Reference 범위에서는 등록되지 않은 새 설정, 별도 표시가 필요한 의미 변경, 임의 용어 통일을 발견하지 못했다. 그러나 원본 표 4개와 GDD 목차 코드 펜스 1개를 포함한 후속 이관이 남아 있으므로 “모든 소제목이 `moved` 또는 `split` 이상”과 “구조화 요소 누락 없음” 조건은 아직 충족하지 않는다. 다음 티켓은 `DOC-0301` 정보 전달 규칙 추출이며, `DOC-0301`~`DOC-0304`와 `DOC-0401`~`DOC-0403`을 마친 뒤 G-M3를 다시 점검한다.
+완료된 Story·Reference 범위에서는 등록되지 않은 새 설정, 별도 표시가 필요한 의미 변경, 임의 용어 통일을 발견하지 못했다. 그러나 원본 표 4개와 GDD 목차 코드 펜스 1개를 포함한 후속 이관이 남아 있으므로 “모든 소제목이 `moved` 또는 `split` 이상”과 “구조화 요소 누락 없음” 조건은 아직 충족하지 않는다. `DOC-0301`~`DOC-0304`와 `DOC-0401`~`DOC-0403`을 마친 뒤 G-M3를 다시 점검한다.
+
+## Design 추출 진행 상태
+
+- [x] `DOC-0301` 정보 전달 규칙을 `design/narrative_delivery.md`로 추출한다.
+- [ ] `DOC-0302` 반복 탐험 규칙을 `design/repeat_exploration.md`로 추출한다.
+- [ ] `DOC-0303` 아이템 구현 규칙을 `design/item_rules.md`로 추출한다.
+- [ ] `DOC-0304` 경제 규칙을 `design/economy_rules.md`로 추출한다.
+
+`DOC-0301`은 원본 7장·8-3·10장과 GDD의 전달 흐름을 대조해 발견, 안전 귀환, 담당처 등록, 해설 해금, 재열람을 하나의 Design 흐름으로 정리했다. 구역별 발견물 후보의 서사 맥락, 필요한 NPC만 반응하는 라우팅, 튜토리얼 필수 정보, 선택 정보, 연속 단서와 판매 불가 안내의 경계를 명시했다. 원본에 없는 수집 개수, 해금 수치, UI 구조와 내부 식별자는 추가하지 않았다.
+
+다음 티켓은 `DOC-0302` 반복 탐험 규칙 추출이다.

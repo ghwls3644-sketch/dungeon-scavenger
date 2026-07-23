@@ -181,20 +181,20 @@ related:
 |---|---|---|
 | `STY-0053`, `TBL-013` | 분류별 세계관 의미·서사 기능·원본성 | `split`; Story 의미 이관, 재등장 데이터와 처리는 `DOC-0303` |
 | `STY-0055`, `TBL-015` | 분류별 처리의 서사 의미 | `split`; 원본 보호 이유는 Story, 판매·제작·감정 상태는 `DOC-0303` |
-| `STY-0056` | 핵심 기록물과 연구자 보관의 의미 | `split`; Story 의미 이관, 등록·저장·재열람은 `DOC-0301`·`DOC-0303` |
+| `STY-0056` | 핵심 기록물과 연구자 보관의 의미 | `split`; Story 의미 이관, 등록·재열람은 [`../design/narrative_delivery.md`](../design/narrative_delivery.md), 저장은 `DOC-0303` |
 | `STY-0057` | 잔재의 기억 흔적 | `split`; 의미는 Story, 정의는 Glossary, 표현은 Tone Guide |
 | `STY-0058` | 폐품 반복 발견의 설명 강도와 개연성 | `split`; Story 개연성 이관, 방문별 노출과 스폰 규칙은 `DOC-0302`·`DOC-0303` |
-| `STY-0067` | 발견물 중심 전달 구조 | `split`; 발견물의 서사 역할은 이 문서, 정보 진행은 [`06_narrative_progression.md`](06_narrative_progression.md), 조건은 `DOC-0301` |
-| `STY-0068`, `TBL-016` | 서브 스토리 유형과 발견물 기능 | `STY-0068`은 `split`; `TBL-016`은 이 문서로 `moved`, 정보 진행은 [`06_narrative_progression.md`](06_narrative_progression.md), 배치는 `DOC-0301` |
-| `STY-0069`, `TBL-017` | 발견물의 장소 맥락 | `split`; 맥락은 Story, 랜덤 배치·반복·1회성 규칙은 `DOC-0301`~`DOC-0303` |
+| `STY-0067` | 발견물 중심 전달 구조 | `split`; 발견물의 서사 역할은 이 문서, 정보 진행은 [`06_narrative_progression.md`](06_narrative_progression.md), 전달 조건은 [`../design/narrative_delivery.md`](../design/narrative_delivery.md) |
+| `STY-0068`, `TBL-016` | 서브 스토리 유형과 발견물 기능 | `STY-0068`은 `split`; `TBL-016`은 이 문서로 `moved`, 정보 진행은 [`06_narrative_progression.md`](06_narrative_progression.md), 후보 연결은 [`../design/narrative_delivery.md`](../design/narrative_delivery.md) |
+| `STY-0069`, `TBL-017` | 발견물의 장소 맥락 | `split`; 맥락은 Story, 후보 연결은 [`../design/narrative_delivery.md`](../design/narrative_delivery.md), 실제 배치·반복·1회성 규칙은 `DOC-0302`·`DOC-0303` |
 | `STY-0070` | 발견물과 연구자 해설의 정보 층 | `split`; 서사 관계는 이 문서, 정보 진행은 [`06_narrative_progression.md`](06_narrative_progression.md), 문체·재열람 규칙은 관련 책임 문서 |
-| `STY-0071` | 발견물별 NPC 반응 범위 | `split`; 아이템과 담당자 관계는 Story, 반응 조건은 `DOC-0301` |
-| `STY-0072`, `TBL-018` | 지도 발견물과 잔여 구역 단서 | `STY-0072`는 `split`; `TBL-018`은 Story로 `moved`, 지도·구역 처리는 `DOC-0301`·`DOC-0302` |
-| `STY-0073` | 실패한 수색꾼의 흔적 | `split`; 흔적의 의미는 이 문서, 정보 진행은 [`06_narrative_progression.md`](06_narrative_progression.md), 실제 등장 조건은 `DOC-0301` |
+| `STY-0071` | 발견물별 NPC 반응 범위 | `split`; 아이템과 담당자 관계는 Story, 반응 라우팅은 [`../design/narrative_delivery.md`](../design/narrative_delivery.md) |
+| `STY-0072`, `TBL-018` | 지도 발견물과 잔여 구역 단서 | `STY-0072`는 `split`; `TBL-018`은 Story로 `moved`, 정보 전달은 [`../design/narrative_delivery.md`](../design/narrative_delivery.md), 지도·구역 처리는 `DOC-0302` |
+| `STY-0073` | 실패한 수색꾼의 흔적 | `split`; 흔적의 의미는 이 문서, 정보 진행은 [`06_narrative_progression.md`](06_narrative_progression.md), 연속 전달은 [`../design/narrative_delivery.md`](../design/narrative_delivery.md), 실제 배치는 `DOC-0302` |
 | `STY-0074`, `TBL-019` | 중요 발견물의 보호 이유 | `split`; 서사 이유는 Story, 판매 차단은 `DOC-0303` |
 
 `STY-0054`, `TBL-014`의 UI 색상은 Story에 이관하지 않고 `DOC-0303` 대상으로 남긴다. `STY-0059`, `STY-0075` 추가 검토 메모는 확정 내용으로 넣지 않고 `DOC-0402`에서 [`../project/open_questions.md`](../project/open_questions.md)로 이관한다.
 
 ## 이관 상태
 
-`DOC-0206`에서 원본 8장의 아이템 의미·원본성과 10장의 발견물·단서 책임을 이관했다. 문서는 전체 전환 승인 전까지 `draft`이며 진행 순서는 `DOC-0207`, 전달·반복·아이템 구현 규칙은 `DOC-0301`~`DOC-0303`에서 이어서 이관한다.
+`DOC-0206`에서 원본 8장의 아이템 의미·원본성과 10장의 발견물·단서 책임을 이관했다. `DOC-0301`은 전달 규칙을 [`../design/narrative_delivery.md`](../design/narrative_delivery.md)로 분리했다. 문서는 전체 전환 승인 전까지 `draft`이며 반복·아이템 구현 규칙은 `DOC-0302`·`DOC-0303`에서 이어서 이관한다.

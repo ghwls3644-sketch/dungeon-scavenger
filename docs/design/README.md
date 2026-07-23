@@ -39,4 +39,4 @@ related:
 
 ## 현재 상태
 
-Story 이관 후 G-M3 예비 점검에서 Design 대상 규칙과 표가 남아 있음을 확인했다. 다음 티켓은 `DOC-0301`이며 [`narrative_delivery.md`](narrative_delivery.md)에 정보 전달 규칙을 추출한다.
+Story 이관 후 G-M3 예비 점검에서 Design 대상 규칙과 표가 남아 있음을 확인했다. `DOC-0301`에서 [`narrative_delivery.md`](narrative_delivery.md)에 정보 전달 규칙을 추출했으며, 다음 티켓은 `DOC-0302` 반복 탐험 규칙 추출이다.

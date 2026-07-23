@@ -117,7 +117,7 @@ related:
 | 중반 | 던전 발생이 봉인보다 지맥·마나 이상과 더 자주 겹친다고 봄 |
 | 후반 | 마왕의 이름은 던전을 설명하려 덧씌운 공포일 수 있으며 직접 인과의 증거가 부족하다고 정리 |
 
-이 표는 지식 변화의 순서만 정한다. 각 단계에서 연구자가 실제로 아는 내용은 [`04_characters_and_factions.md#연구자`](04_characters_and_factions.md), 사용하는 문장과 어휘는 [`../reference/speaker_lexicon.md#감정사--연구자`](../reference/speaker_lexicon.md#감정사--연구자)가 소유한다. 필요한 기록물 수와 전환 조건은 `DOC-0301`에서 정한다.
+이 표는 지식 변화의 순서만 정한다. 각 단계에서 연구자가 실제로 아는 내용은 [`04_characters_and_factions.md#연구자`](04_characters_and_factions.md), 사용하는 문장과 어휘는 [`../reference/speaker_lexicon.md#감정사--연구자`](../reference/speaker_lexicon.md#감정사--연구자)가 소유한다. 등록과 해석 단계의 연결은 [`../design/narrative_delivery.md`](../design/narrative_delivery.md)가 소유하며, 원본에 없는 기록물 수와 정확한 전환 조건은 아직 확정하지 않는다.
 
 ## 4단계 — 장기 수집과 자기 방식의 인정
 
@@ -188,14 +188,14 @@ related:
 | `STY-0061` | 1단계 변두리 수색꾼의 생업 | `moved` |
 | `STY-0062` | 2단계 폐던전 규칙 학습 | `moved` |
 | `STY-0063` | 3단계 발견물을 통한 세계 이해 | `moved` |
-| `STY-0064` | 선택적 떡밥과 장기 수집 | `moved`; 실제 해금 조건은 `DOC-0301` |
+| `STY-0064` | 선택적 떡밥과 장기 수집 | `moved`; 등록·해석 흐름은 [`../design/narrative_delivery.md`](../design/narrative_delivery.md) |
 | `STY-0065` | 수색꾼으로서의 완결·장기 목표 | `moved`; 완결 판정은 후속 Design |
 | `STY-0067`, `STY-0068`, `TBL-016` | 발견물 중심 전달과 서브 스토리 유형 | `split`; 유형·기능은 Items Story, 정보 순서는 이 문서, 배치·조건은 Design |
 | `STY-0069`, `TBL-017` | 발견물 획득과 반복성 | `split`; 맥락·원본성은 Items Story, 정보 진행은 이 문서, 실제 획득은 Design |
-| `STY-0070` | 짧은 발견물에서 연구자 해설로 깊어지는 순서 | `split`; 정보 깊이는 이 문서, 문체는 Tone Guide, 흐름은 `DOC-0301` |
-| `STY-0071` | 필요한 NPC만 반응하는 전달 범위 | `split`; 정보 순서는 이 문서, 역할은 Characters Story, 반응 조건은 `DOC-0301` |
-| `STY-0072`, `TBL-018` | 지도 단서와 잔여 구역 이해 | `split`; 의미는 Items Story, 이해 순서는 이 문서, 지도·구역 처리는 Design |
-| `STY-0073` | 실패한 수색꾼 흔적의 연속 노출 | `split`; 흔적 의미는 Items Story, 진행 순서는 이 문서, 등장 조건은 Design |
+| `STY-0070` | 짧은 발견물에서 연구자 해설로 깊어지는 순서 | `split`; 정보 깊이는 이 문서, 문체는 Tone Guide, 흐름은 [`../design/narrative_delivery.md`](../design/narrative_delivery.md) |
+| `STY-0071` | 필요한 NPC만 반응하는 전달 범위 | `split`; 정보 순서는 이 문서, 역할은 Characters Story, 반응 라우팅은 [`../design/narrative_delivery.md`](../design/narrative_delivery.md) |
+| `STY-0072`, `TBL-018` | 지도 단서와 잔여 구역 이해 | `split`; 의미는 Items Story, 이해 순서는 이 문서, 정보 전달은 [`../design/narrative_delivery.md`](../design/narrative_delivery.md), 지도·구역 처리는 `DOC-0302` |
+| `STY-0073` | 실패한 수색꾼 흔적의 연속 노출 | `split`; 흔적 의미는 Items Story, 진행 순서는 이 문서, 연속 전달은 [`../design/narrative_delivery.md`](../design/narrative_delivery.md), 실제 배치는 `DOC-0302` |
 | `STY-0074`, `TBL-019` | 중요 발견물의 진행 보호 | `split`; 보호 이유는 Items Story, 판매 차단은 `DOC-0303` |
 | `STY-0099`, `TBL-026` | 연구자의 지식 변화 순서 | `split`; 진행 순서는 이 문서, 사실·태도·표현은 관련 Story와 Reference |
 
@@ -203,4 +203,4 @@ related:
 
 ## 이관 상태
 
-`DOC-0207`에서 원본 9장의 메인 진행과 10장의 정보 노출 순서, 13장의 연구자 지식 진행을 이관했다. 문서는 전체 전환 승인 전까지 `draft`이며 실제 발견·등록·해금 조건은 `DOC-0301`에서 이어서 이관한다.
+`DOC-0207`에서 원본 9장의 메인 진행과 10장의 정보 노출 순서, 13장의 연구자 지식 진행을 이관했다. `DOC-0301`은 실제 발견·등록·재열람과 NPC 반응의 Design 책임을 [`../design/narrative_delivery.md`](../design/narrative_delivery.md)로 분리했다. 문서는 전체 전환 승인 전까지 `draft`다.
