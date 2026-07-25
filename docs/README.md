@@ -40,6 +40,7 @@ related:
 - 결정과 미결정 사항: [`project/decisions.md`](project/decisions.md), [`project/open_questions.md`](project/open_questions.md)
 - M2 Reference 검토 결과: [`project/m2_reference_review.md`](project/m2_reference_review.md)
 - M4 공식 용어 검수 결과: [`project/m4_term_review.md`](project/m4_term_review.md)
+- M4 Story·Design 중복 검수 결과: [`project/m4_story_design_review.md`](project/m4_story_design_review.md)
 
 ## 다른 환경에서 작업 이어가기
 
@@ -65,4 +66,4 @@ GitHub 로그인 상태, Codex 대화 기록, 앱별 로컬 설정은 저장소�
 
 ## 현재 단계
 
-검토 관문 G-M3를 통과하고 문서 분할 단계 `M3 — 1차 구조 이관`을 완료했다. `M4 — 세계관과 구현 규칙 분리`의 첫 티켓 `DOC-0501`에서 공식 용어 누락·중복 검수 보고서를 작성했으며, 기존 Glossary 12개 항목에는 직접 중복이 없고 독립 항목 누락 5개와 추가 검토 후보 8개를 확인했다. 다음 티켓은 `DOC-0502` Story/Design 상세 정의 중복 탐지다. 신규 문서는 최종 전환 전까지 `draft`다.
+검토 관문 G-M3를 통과하고 문서 분할 단계 `M3 — 1차 구조 이관`을 완료했다. `M4 — 세계관과 구현 규칙 분리`의 `DOC-0501`에서 공식 용어 누락·중복을, `DOC-0502`에서 Story 8개와 Design 5개의 상세 정의 중복을 검수했다. Story·Design 교차 중복·책임 혼합 후보 9건, Story 내부 상세 중복 후보 1건과 확정도 불일치 1건을 확인했으며, 다음 티켓은 `DOC-0503` 기준 문서 지정 및 상호 링크 전환이다. 신규 문서는 최종 전환 전까지 `draft`다.

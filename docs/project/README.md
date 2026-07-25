@@ -18,6 +18,7 @@ related:
   - migration_manifest.md
   - m2_reference_review.md
   - m4_term_review.md
+  - m4_story_design_review.md
 ---
 
 # 프로젝트 문서
@@ -82,6 +83,7 @@ related:
 - [`document_changelog.md`](document_changelog.md): 문서 체계 자체의 변경 이력
 - [`m2_reference_review.md`](m2_reference_review.md): M2 Reference 책임 중복과 G-M2 검토 결과
 - [`m4_term_review.md`](m4_term_review.md): 공식 용어 누락·중복과 후속 처리 후보
+- [`m4_story_design_review.md`](m4_story_design_review.md): Story·Design 상세 정의 중복, 책임 혼합과 확정도 차이
 
 ## 경계 규칙
 
