@@ -39,4 +39,4 @@ related:
 
 ## 현재 상태
 
-Story 이관 후 G-M3 예비 점검에서 확인한 Design 티켓 `DOC-0301`~`DOC-0304`를 모두 완료했다. [`narrative_delivery.md`](narrative_delivery.md), [`repeat_exploration.md`](repeat_exploration.md), [`item_rules.md`](item_rules.md), [`economy_rules.md`](economy_rules.md)는 전체 전환 승인 전까지 `draft`다. Project 단계의 `DOC-0401`~`DOC-0402`를 완료했으며 다음 티켓은 `DOC-0403` GDD 연결 정리다.
+Story 이관 후 G-M3 예비 점검에서 확인한 Design 티켓 `DOC-0301`~`DOC-0304`와 Project 티켓 `DOC-0401`~`DOC-0403`을 모두 완료했다. [`narrative_delivery.md`](narrative_delivery.md), [`repeat_exploration.md`](repeat_exploration.md), [`item_rules.md`](item_rules.md), [`economy_rules.md`](economy_rules.md)는 전체 전환 승인 전까지 `draft`다. 최종 G-M3 점검은 통과 조건을 충족해 사용자 승인을 기다리며, 승인 후 `M4 — 세계관과 구현 규칙 분리`의 티켓 범위를 정한다.

@@ -44,6 +44,6 @@ related:
 
 [`00_core_pillars.md`](00_core_pillars.md)는 `DOC-0201`에서 핵심 전제를, [`01_world_history.md`](01_world_history.md)는 `DOC-0202`에서 세계 역사를, [`02_dungeon_canon.md`](02_dungeon_canon.md)는 `DOC-0203`에서 던전 정설을, [`03_player_and_society.md`](03_player_and_society.md)는 `DOC-0204`에서 플레이어와 사회를, [`04_characters_and_factions.md`](04_characters_and_factions.md)는 `DOC-0205`에서 NPC와 세력을, [`05_items_and_discoveries.md`](05_items_and_discoveries.md)는 `DOC-0206`에서 아이템과 발견물을, [`06_narrative_progression.md`](06_narrative_progression.md)는 `DOC-0207`에서 내러티브 진행을, [`07_tone_and_writing_guide.md`](07_tone_and_writing_guide.md)는 `DOC-0103`에서 공통 톤과 설명 문체를 이관했다. 전체 전환 승인 전까지 [`../archive/story_v1.5_full.md`](../archive/story_v1.5_full.md)가 스토리 원문 기준이며, 이 디렉터리의 본문은 아직 공식 설정을 대체하지 않는다.
 
-Story 이관 티켓 `DOC-0201`~`DOC-0207`은 완료했다. G-M3 예비 점검 결과는 [`../project/migration_manifest.md`](../project/migration_manifest.md)에 기록했으며, Design과 Project `DOC-0401`~`DOC-0402`까지 완료했다. 마지막 Project 티켓 `DOC-0403`을 마친 뒤 관문을 다시 점검한다.
+Story 이관 티켓 `DOC-0201`~`DOC-0207`과 후속 Design 티켓 `DOC-0301`~`DOC-0304`, Project 티켓 `DOC-0401`~`DOC-0403`을 완료했다. 최종 G-M3 점검 결과는 [`../project/migration_manifest.md`](../project/migration_manifest.md)에 기록했으며 통과 조건을 충족해 사용자 승인을 기다린다. 승인 후 `M4 — 세계관과 구현 규칙 분리`의 티켓 범위를 정한다.
 
 미결정 사항은 [`../project/open_questions.md`](../project/open_questions.md), 이관 상태는 [`../project/migration_manifest.md`](../project/migration_manifest.md)에서 관리한다.

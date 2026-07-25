@@ -14,6 +14,7 @@ related:
   - ../README.md
   - decisions.md
   - open_questions.md
+  - gdd_mapping.md
   - migration_manifest.md
   - m2_reference_review.md
 ---

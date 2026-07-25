@@ -156,7 +156,7 @@ related:
 | STY-0099 | 2 | 13-5. 마왕 관련 용어 사용 | 1037-1056 | `story/01_world_history.md`; `story/04_characters_and_factions.md`; `story/06_narrative_progression.md`; `reference/speaker_lexicon.md` | `split` | split |
 | STY-0100 | 2 | 13-6. 화자별 표현 | 1057-1068 | `reference/speaker_lexicon.md`; `story/04_characters_and_factions.md` | `split` | split |
 | STY-0101 | 2 | 이 파트의 추가 검토 메모 | 1069-1075 | `project/open_questions.md` | `review` | moved |
-| STY-0102 | 1 | 14. GDD 반영용 추천 목차 | 1076-1101 | `project/gdd_mapping.md` | `move` | planned |
+| STY-0102 | 1 | 14. GDD 반영용 추천 목차 | 1076-1101 | `project/gdd_mapping.md` | `move` | moved |
 | STY-0103 | 1 | 15. 이번 버전에서 확정된 핵심 변경점 | 1102-1133 | `project/decisions.md` | `move` | moved |
 
 ## 구조화 요소 인벤토리
@@ -194,7 +194,7 @@ related:
 | QTE-002 | blockquote | 1004-1006 | 13-2. 수색꾼 명칭 | `STY-0096` | split |
 | QTE-003 | blockquote | 1029-1031 | 13-4. 잔재 설명 장치 | `STY-0098` | split |
 | QTE-004 | blockquote | 1035 | 13-4. 잔재 설명 장치 | `STY-0098` | split |
-| FNC-001 | fenced-text | 1080-1096 | 14. GDD 반영용 추천 목차 | `STY-0102` | planned |
+| FNC-001 | fenced-text | 1080-1096 | 14. GDD 반영용 추천 목차 | `STY-0102` | moved |
 
 ## 완료 조건
 
@@ -203,4 +203,4 @@ related:
 - [x] 모든 추가 검토 메모가 `project/open_questions.md` 대상으로 표시된다.
 - [x] 책임이 섞인 절이 `split`으로 표시된다.
 - [x] 모든 표, 인용 블록, 코드 펜스가 부모 제목과 연결된다.
-- [ ] 실제 이관 후 각 항목을 `moved`, `split`, `verified`로 갱신한다.
+- [x] 실제 이관 후 각 항목을 `moved`, `split`, `verified`로 갱신한다.
