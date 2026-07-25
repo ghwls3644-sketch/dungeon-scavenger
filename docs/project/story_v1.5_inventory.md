@@ -157,7 +157,7 @@ related:
 | STY-0100 | 2 | 13-6. 화자별 표현 | 1057-1068 | `reference/speaker_lexicon.md`; `story/04_characters_and_factions.md` | `split` | split |
 | STY-0101 | 2 | 이 파트의 추가 검토 메모 | 1069-1075 | `project/open_questions.md` | `review` | planned |
 | STY-0102 | 1 | 14. GDD 반영용 추천 목차 | 1076-1101 | `project/gdd_mapping.md` | `move` | planned |
-| STY-0103 | 1 | 15. 이번 버전에서 확정된 핵심 변경점 | 1102-1133 | `project/decisions.md` | `move` | planned |
+| STY-0103 | 1 | 15. 이번 버전에서 확정된 핵심 변경점 | 1102-1133 | `project/decisions.md` | `move` | moved |
 
 ## 구조화 요소 인벤토리
 

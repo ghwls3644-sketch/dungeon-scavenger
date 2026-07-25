@@ -39,4 +39,4 @@ related:
 
 ## 현재 상태
 
-Story 이관 후 G-M3 예비 점검에서 확인한 Design 티켓 `DOC-0301`~`DOC-0304`를 모두 완료했다. [`narrative_delivery.md`](narrative_delivery.md), [`repeat_exploration.md`](repeat_exploration.md), [`item_rules.md`](item_rules.md), [`economy_rules.md`](economy_rules.md)는 전체 전환 승인 전까지 `draft`이며, 다음 티켓은 Project 단계의 `DOC-0401` 확정 변경점 정리다.
+Story 이관 후 G-M3 예비 점검에서 확인한 Design 티켓 `DOC-0301`~`DOC-0304`를 모두 완료했다. [`narrative_delivery.md`](narrative_delivery.md), [`repeat_exploration.md`](repeat_exploration.md), [`item_rules.md`](item_rules.md), [`economy_rules.md`](economy_rules.md)는 전체 전환 승인 전까지 `draft`다. Project 단계의 `DOC-0401` 확정 변경점 정리를 완료했으며 다음 티켓은 `DOC-0402` 추가 검토 메모 정리다.

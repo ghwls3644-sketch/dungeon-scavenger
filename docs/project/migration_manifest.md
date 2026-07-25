@@ -55,7 +55,7 @@ related:
 | 대상 | 상태 | 다음 작업 |
 |---|---|---|
 | `docs/GDD.md` | `copied-active`, `verified` | 상호 링크와 책임별 기준 문서 연결 |
-| `docs/archive/story_v1.5_full.md` | `source-frozen`, `copied-archive`, `verified`, `pending-split` | Design 추출 완료. `DOC-0401`부터 Project 이관 계속 |
+| `docs/archive/story_v1.5_full.md` | `source-frozen`, `copied-archive`, `verified`, `pending-split` | 결정 이관 완료. `DOC-0402`부터 Project 이관 계속 |
 | 두 구버전 제안서 | `copied-archive`, `verified` | 추가 작업 없음 |
 | 최신 분할 제안서 v0.2.1 | 활성 작업 지침 | M1~M6 완료 후 아카이브 여부 결정 |
 | 개발 단계별 제안서 v0.1 | 활성 참고 | 개발 프로젝트 문서에 반영 후 아카이브 |
@@ -117,15 +117,15 @@ M2 작업은 완료했으며 2026-07-22 사용자의 다음 작업 진행 지시
 
 점검 전 `planned`였던 24개 가운데 `STY-0001`은 동결 아카이브의 문서 머리말로 이미 검증되었고, `STY-0094`는 하위 용어·화자 항목이 Reference와 Story로 모두 분할되었으며, `QTE-001`은 [`../story/00_core_pillars.md`](../story/00_core_pillars.md)에 원문 그대로 이관되어 있었다. 세 항목의 인벤토리 상태를 실제 결과에 맞게 보정했다.
 
-남은 `planned` 추적 행은 16개다.
+남은 `planned` 추적 행은 15개다.
 
 | 책임 | 추적 행 | 후속 티켓 |
 |---|---:|---|
 | 추가 검토 메모 | 13 | `DOC-0402` |
 | Design 제목·표 | 0 | 완료 |
-| 결정·GDD 연결 | 3 | `DOC-0401`, `DOC-0403` |
+| 결정·GDD 연결 | 2 | `DOC-0403` |
 
-완료된 Story·Reference·Design 범위에서는 등록되지 않은 새 설정, 별도 표시가 필요한 의미 변경, 임의 용어 통일을 발견하지 못했다. 원본 표의 후속 이관은 모두 끝났지만 GDD 목차 코드 펜스 1개와 Project 이관이 남아 있으므로 “모든 소제목이 `moved` 또는 `split` 이상”과 “구조화 요소 누락 없음” 조건은 아직 충족하지 않는다. `DOC-0401`~`DOC-0403`을 마친 뒤 G-M3를 다시 점검한다.
+완료된 Story·Reference·Design과 `DOC-0401` 결정 이관 범위에서는 등록되지 않은 새 설정, 별도 표시가 필요한 의미 변경, 임의 용어 통일을 발견하지 못했다. 원본 표의 후속 이관은 모두 끝났지만 GDD 목차 코드 펜스 1개와 나머지 Project 이관이 남아 있으므로 “모든 소제목이 `moved` 또는 `split` 이상”과 “구조화 요소 누락 없음” 조건은 아직 충족하지 않는다. `DOC-0402`와 `DOC-0403`을 마친 뒤 G-M3를 다시 점검한다.
 
 ## Design 추출 진행 상태
 
@@ -138,4 +138,12 @@ M2 작업은 완료했으며 2026-07-22 사용자의 다음 작업 진행 지시
 
 `DOC-0301`~`DOC-0304`의 Design 추출은 모두 완료했다.
 
-다음 티켓은 `DOC-0401` 확정 변경점 정리다.
+## Project 이관 진행 상태
+
+- [x] `DOC-0401` 확정 변경점을 `project/decisions.md`로 이관한다.
+- [ ] `DOC-0402` 추가 검토 메모를 `project/open_questions.md`로 이관한다.
+- [ ] `DOC-0403` GDD 추천 목차와 연결을 `project/gdd_mapping.md`로 이관한다.
+
+`DOC-0401`은 원본 `STY-0103`의 확정 변경점 30개를 통합 GDD의 기존 결정과 대조했다. `DEC-001`~`DEC-012`, `DEC-101`~`DEC-110`을 보존하고, 기존 ID로 독립 추적할 수 없던 원본 결정 6개에 `DEC-013`~`DEC-018`을 부여했다. 원본의 각 변경점은 [`decisions.md`](decisions.md)의 대응표에서 결정 ID와 연결했으며 `STY-0103`을 `moved`로 갱신했다.
+
+다음 티켓은 `DOC-0402` 추가 검토 메모 정리다.
