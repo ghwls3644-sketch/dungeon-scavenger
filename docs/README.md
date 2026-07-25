@@ -39,6 +39,7 @@ related:
 - 분할 중 변경 대기열: [`project/migration_changes.md`](project/migration_changes.md)
 - 결정과 미결정 사항: [`project/decisions.md`](project/decisions.md), [`project/open_questions.md`](project/open_questions.md)
 - M2 Reference 검토 결과: [`project/m2_reference_review.md`](project/m2_reference_review.md)
+- M4 공식 용어 검수 결과: [`project/m4_term_review.md`](project/m4_term_review.md)
 
 ## 다른 환경에서 작업 이어가기
 
@@ -64,4 +65,4 @@ GitHub 로그인 상태, Codex 대화 기록, 앱별 로컬 설정은 저장소�
 
 ## 현재 단계
 
-검토 관문 G-M3를 통과하고 문서 분할 단계 `M3 — 1차 구조 이관`의 Story 티켓 `DOC-0201`~`DOC-0207`, Design 티켓 `DOC-0301`~`DOC-0304`, Project 티켓 `DOC-0401`~`DOC-0404`를 완료했다. 원본 제목 103개와 구조화 요소 32개의 추적 및 빈 변경 대기열 검토를 마쳤다. 다음 티켓은 `DOC-0501` 공식 용어 누락·중복 탐지이며, `M4 — 세계관과 구현 규칙 분리`를 Reference 책임 범위부터 점검한다. 신규 문서는 최종 전환 전까지 `draft`다.
+검토 관문 G-M3를 통과하고 문서 분할 단계 `M3 — 1차 구조 이관`을 완료했다. `M4 — 세계관과 구현 규칙 분리`의 첫 티켓 `DOC-0501`에서 공식 용어 누락·중복 검수 보고서를 작성했으며, 기존 Glossary 12개 항목에는 직접 중복이 없고 독립 항목 누락 5개와 추가 검토 후보 8개를 확인했다. 다음 티켓은 `DOC-0502` Story/Design 상세 정의 중복 탐지다. 신규 문서는 최종 전환 전까지 `draft`다.

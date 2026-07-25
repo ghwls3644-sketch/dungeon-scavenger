@@ -13,6 +13,7 @@ related:
   - story_v1.5_inventory.md
   - gdd_mapping.md
   - migration_changes.md
+  - m4_term_review.md
   - ../archive/README.md
 ---
 
@@ -55,8 +56,8 @@ related:
 
 | 대상 | 상태 | 다음 작업 |
 |---|---|---|
-| `docs/GDD.md` | `copied-active`, `verified` | `DOC-0501` 공식 용어 누락·중복 탐지 |
-| `docs/archive/story_v1.5_full.md` | `source-frozen`, `copied-archive`, `verified` | M3 이관과 G-M3 검토 완료. M4 책임 분리 검토 |
+| `docs/GDD.md` | `copied-active`, `verified` | `DOC-0502` Story/Design 상세 정의 중복 탐지 |
+| `docs/archive/story_v1.5_full.md` | `source-frozen`, `copied-archive`, `verified` | M3 이관과 G-M3 검토 완료. M4 책임 분리 계속 |
 | 두 구버전 제안서 | `copied-archive`, `verified` | 추가 작업 없음 |
 | 최신 분할 제안서 v0.2.1 | 활성 작업 지침 | M1~M6 완료 후 아카이브 여부 결정 |
 | 개발 단계별 제안서 v0.1 | 활성 참고 | 개발 프로젝트 문서에 반영 후 아카이브 |
@@ -157,4 +158,13 @@ M2 작업은 완료했으며 2026-07-22 사용자의 다음 작업 진행 지시
 
 `DOC-0404`는 [`migration_changes.md`](migration_changes.md)에 등록된 대기·반영·반려 항목이 모두 0건임을 확인했다. 활성 문서에 반영할 내용이 없으므로 새 설정이나 결정을 만들지 않고 검토 기록만 남겼다.
 
-M3의 문서화된 티켓은 모두 완료했고 G-M3를 통과했다. 다음 티켓은 `DOC-0501` 공식 용어 누락·중복 탐지이며, M4 세계관과 구현 규칙 분리를 Reference 책임 범위부터 점검한다.
+M3의 문서화된 티켓은 모두 완료했고 G-M3를 통과했다.
+
+## M4 진행 상태
+
+- [x] `DOC-0501` 공식 용어 누락·중복을 탐지하고 검수 보고서를 작성한다.
+- [ ] `DOC-0502` Story/Design 상세 정의 중복을 탐지한다.
+
+`DOC-0501`은 원본 13-1 기본 용어 12개, 제안서의 핵심 검수 용어 15개와 파일럿 시드 23개, GDD 부록 A의 핵심 용어 14개를 현재 Glossary와 대조했다. 기존 용어 ID와 공식 표기의 직접 중복은 없었고 필수 필드도 모두 존재했다. 독립 항목 누락 5개와 추가 검토 후보 8개, 표기·의미 경계 후보를 [`m4_term_review.md`](m4_term_review.md)에 기록했으며 공식 표기·ID·상태는 새로 확정하지 않았다.
+
+다음 티켓은 `DOC-0502` Story/Design 상세 정의 중복 탐지다.

@@ -39,4 +39,4 @@ related:
 
 ## 현재 상태
 
-Story 이관 후 G-M3 예비 점검에서 확인한 Design 티켓 `DOC-0301`~`DOC-0304`와 Project 티켓 `DOC-0401`~`DOC-0404`를 모두 완료하고 G-M3를 통과했다. [`narrative_delivery.md`](narrative_delivery.md), [`repeat_exploration.md`](repeat_exploration.md), [`item_rules.md`](item_rules.md), [`economy_rules.md`](economy_rules.md)는 전체 전환 승인 전까지 `draft`다. 다음 티켓은 `DOC-0501` 공식 용어 누락·중복 탐지이며, `M4 — 세계관과 구현 규칙 분리`를 Reference 책임 범위부터 점검한다.
+Story 이관 후 확인한 Design 티켓 `DOC-0301`~`DOC-0304`와 Project 이관을 완료하고 G-M3를 통과했다. [`narrative_delivery.md`](narrative_delivery.md), [`repeat_exploration.md`](repeat_exploration.md), [`item_rules.md`](item_rules.md), [`economy_rules.md`](economy_rules.md)는 전체 전환 승인 전까지 `draft`다. `DOC-0501` 공식 용어 검수 결과는 [`../project/m4_term_review.md`](../project/m4_term_review.md)에 기록했으며 다음 티켓은 `DOC-0502` Story/Design 상세 정의 중복 탐지다.

@@ -44,6 +44,6 @@ related:
 
 [`00_core_pillars.md`](00_core_pillars.md)는 `DOC-0201`에서 핵심 전제를, [`01_world_history.md`](01_world_history.md)는 `DOC-0202`에서 세계 역사를, [`02_dungeon_canon.md`](02_dungeon_canon.md)는 `DOC-0203`에서 던전 정설을, [`03_player_and_society.md`](03_player_and_society.md)는 `DOC-0204`에서 플레이어와 사회를, [`04_characters_and_factions.md`](04_characters_and_factions.md)는 `DOC-0205`에서 NPC와 세력을, [`05_items_and_discoveries.md`](05_items_and_discoveries.md)는 `DOC-0206`에서 아이템과 발견물을, [`06_narrative_progression.md`](06_narrative_progression.md)는 `DOC-0207`에서 내러티브 진행을, [`07_tone_and_writing_guide.md`](07_tone_and_writing_guide.md)는 `DOC-0103`에서 공통 톤과 설명 문체를 이관했다. 전체 전환 승인 전까지 [`../archive/story_v1.5_full.md`](../archive/story_v1.5_full.md)가 스토리 원문 기준이며, 이 디렉터리의 본문은 아직 공식 설정을 대체하지 않는다.
 
-Story 이관 티켓 `DOC-0201`~`DOC-0207`과 후속 Design 티켓 `DOC-0301`~`DOC-0304`, Project 티켓 `DOC-0401`~`DOC-0404`를 완료하고 G-M3를 통과했다. 검토 결과는 [`../project/migration_manifest.md`](../project/migration_manifest.md)에 기록했다. 다음 티켓은 `DOC-0501` 공식 용어 누락·중복 탐지이며, `M4 — 세계관과 구현 규칙 분리`를 Reference 책임 범위부터 점검한다.
+Story 이관 티켓 `DOC-0201`~`DOC-0207`과 후속 Design·Project 이관을 완료하고 G-M3를 통과했다. `DOC-0501` 공식 용어 검수 결과는 [`../project/m4_term_review.md`](../project/m4_term_review.md)에 기록했다. 다음 티켓은 `DOC-0502` Story/Design 상세 정의 중복 탐지다.
 
 미결정 사항은 [`../project/open_questions.md`](../project/open_questions.md), 이관 상태는 [`../project/migration_manifest.md`](../project/migration_manifest.md)에서 관리한다.

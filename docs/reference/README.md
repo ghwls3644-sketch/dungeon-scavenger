@@ -13,6 +13,7 @@ related:
   - ../design/README.md
   - ../project/migration_manifest.md
   - ../project/m2_reference_review.md
+  - ../project/m4_term_review.md
 ---
 
 # Reference 문서 안내
@@ -73,3 +74,5 @@ related:
 ## 현재 상태
 
 `DOC-0101`에서 공식 용어를 [`glossary.md`](glossary.md)에, `DOC-0102`에서 화자 표현을 [`speaker_lexicon.md`](speaker_lexicon.md)에 등록했다. `DOC-0103`은 공통 문체를 [`../story/07_tone_and_writing_guide.md`](../story/07_tone_and_writing_guide.md)로 분리했고, `DOC-0104`는 기존 개체와 역할을 [`entity_index.md`](entity_index.md)에 등록했다. `DOC-0105`는 확정 상대 순서를 [`timeline.md`](timeline.md)에 등록했다. `DOC-0106` 책임 중복 검토 결과는 [`../project/m2_reference_review.md`](../project/m2_reference_review.md)에 기록했으며 G-M2 검토를 통과했다.
+
+`DOC-0501`은 [`../project/m4_term_review.md`](../project/m4_term_review.md)에서 기존 Glossary 12개 항목의 직접 중복이 없음을 확인하고, 독립 항목 누락 5개와 파일럿 시드 추가 검토 후보 8개를 분류했다. 이번 티켓에서는 공식 표기·ID·상태를 새로 확정하지 않았으며 다음 티켓은 `DOC-0502` Story/Design 상세 정의 중복 탐지다.

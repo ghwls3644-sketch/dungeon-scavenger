@@ -13,6 +13,7 @@ related:
   - ../story/README.md
   - speaker_lexicon.md
   - ../project/migration_manifest.md
+  - ../project/m4_term_review.md
 ---
 
 # 공식 용어집
@@ -292,3 +293,4 @@ related:
 - [`../story/README.md`](../story/README.md)
 - [`speaker_lexicon.md`](speaker_lexicon.md)
 - [`../project/migration_manifest.md`](../project/migration_manifest.md)
+- [`../project/m4_term_review.md`](../project/m4_term_review.md)
