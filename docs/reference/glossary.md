@@ -3,7 +3,7 @@ id: REFERENCE-GLOSSARY
 title: 공식 용어집
 document_type: reference
 status: draft
-source_version: story-v1.5
+source_version: story-v1.5+gdd-v2.1
 canonical_for:
   - official_terms
   - term_meaning_boundaries
@@ -14,6 +14,7 @@ related:
   - speaker_lexicon.md
   - ../project/migration_manifest.md
   - ../project/m4_term_review.md
+  - ../project/open_questions.md
 ---
 
 # 공식 용어집
@@ -102,11 +103,18 @@ related:
 | `TERM-DUNGEON-OVERFLOW` | 범람 | 마력 현상 | `confirmed` |
 | `TERM-DEAD-DUNGEON` | 폐던전 | 장소 / 상태 | `confirmed` |
 | `TERM-REMAINING-ZONE` | 잔여 구역 | 장소 | `confirmed` |
+| `TERM-ADVENTURER` | 모험가 | 직업 / 제도상 분류 | `confirmed` |
 | `TERM-SCAVENGER` | 수색꾼 | 직업 / 현장 명칭 | `confirmed` |
+| `TERM-SCOUTING-DISPATCH` | 정찰 파견 | 임무 | `confirmed` |
+| `TERM-RECOVERABLE-MATERIAL` | 잔류물 | 회수 대상 상위 분류 | `confirmed` |
+| `TERM-UNIDENTIFIED-ITEM` | 미확인 물품 | 아이템 상태 | `confirmed` |
 | `TERM-SCRAP` | 폐품 | 회수품 | `confirmed` |
 | `TERM-REMNANT` | 잔재 | 회수품 / 현상 | `confirmed` |
 | `TERM-UNIQUE-ARTIFACT` | 고유 유물 | 회수품 | `confirmed` |
 | `TERM-KEY-RECORD` | 핵심 기록물 | 기록물 | `confirmed` |
+| `TERM-APPRAISAL` | 감정 | 시스템 / 행위 | `confirmed` |
+| `TERM-RECOVERY-TAX` | 회수세 | 경제 비용 | `confirmed` |
+| `TERM-HARNESS-ENGINEERING` | 하네스 엔지니어링 | 기술 체계 / 시스템 | `confirmed` |
 
 ## 던전
 
@@ -217,10 +225,11 @@ related:
 - 공식 표기: 수색꾼
 - 짧은 정의: 폐던전에서 회수품을 찾아 생계를 잇는 사람을 현장에서 부르는 명칭.
 - 범위: 플레이어 주변과 실제 현장에서 사용하는 직업 정체성.
-- 허용 별칭:
-  - 모험가 — 제도상 넓은 분류에서만 사용한다.
-  - 폐던전 파견 인원 — 행정 문서에서 사용할 수 있다.
-  - 정찰 파견 — 직업명이 아니라 길드의 임무명으로만 사용한다.
+- 허용 별칭: 없음. 현장 직업명은 `수색꾼`을 사용한다.
+- 관련 표현:
+  - [`모험가`](#모험가) — 제도상 넓은 직업 분류.
+  - 폐던전 파견 인원 — 행정 문서의 설명 표현.
+  - [`정찰 파견`](#정찰-파견) — 길드의 임무명.
 - 폐기된 명칭: 없음.
 - 혼동 주의:
   - 정찰자는 공식 직업명이 아니라 일부 모험가가 사용하는 오해 섞인 호칭이다.
@@ -230,6 +239,68 @@ related:
 - 원본 추적:
   - `STY-0095`
   - `STY-0096`
+
+## 모험가
+
+- ID: `TERM-ADVENTURER`
+- 상태: `confirmed`
+- 분류: 직업 / 제도상 분류
+- 공식 표기: 모험가
+- 짧은 정의: 던전 탐사와 공략에 종사하는 사람을 제도상 넓게 가리키는 직업 분류.
+- 범위: 정예 공략자부터 하위 직종인 수색꾼까지 포함할 수 있는 상위 범주.
+- 혼동 주의: 현장에서 폐던전 회수를 생업으로 삼는 사람의 구체적인 직업 정체성은 [`수색꾼`](#수색꾼)이다.
+- 상세 설정: [`../story/03_player_and_society.md`](../story/03_player_and_society.md)
+- 원본 추적:
+  - `STY-0096`
+  - GDD 3-6
+- 관련 결정: [`DEC-002`](../project/decisions.md)
+
+## 정찰 파견
+
+- ID: `TERM-SCOUTING-DISPATCH`
+- 상태: `confirmed`
+- 분류: 임무
+- 공식 표기: 정찰 파견
+- 짧은 정의: 길드가 폐던전 조사와 회수를 위해 부여하는 임무 단위의 공식 표현.
+- 범위: 사람이 아니라 수행할 임무를 가리킨다.
+- 혼동 주의: [`수색꾼`](#수색꾼)의 직업 별칭이나 `정찰자`라는 별도 직업명이 아니다.
+- 상세 설정: [`../story/03_player_and_society.md`](../story/03_player_and_society.md)
+- 관련 화자 표현: [`speaker_lexicon.md#길드--행정`](speaker_lexicon.md#길드--행정)
+- 원본 추적:
+  - `STY-0096`
+  - GDD 3-6
+- 관련 결정: [`DEC-002`](../project/decisions.md)
+
+## 잔류물
+
+- ID: `TERM-RECOVERABLE-MATERIAL`
+- 상태: `confirmed`
+- 분류: 회수 대상 상위 분류
+- 공식 표기: 잔류물
+- 짧은 정의: 길드와 행정이 회수 가능한 물품 전체를 가리키는 상위 표현.
+- 범위: 미확인 물품, 폐품, 잔재, 고유 유물과 핵심 기록물처럼 회수 대상으로 다루는 물품군.
+- 혼동 주의: `회수품`은 일반 설명이나 실제로 들고 나온 물품을 가리킬 수 있지만, 아이템의 독립된 최종 분류는 아니다.
+- 상세 설정: [`../story/05_items_and_discoveries.md`](../story/05_items_and_discoveries.md)
+- 관련 구현: [`../design/item_rules.md`](../design/item_rules.md)
+- 관련 화자 표현: [`speaker_lexicon.md#길드--행정`](speaker_lexicon.md#길드--행정)
+- 원본 추적:
+  - GDD 8-1
+  - GDD 부록 A
+
+## 미확인 물품
+
+- ID: `TERM-UNIDENTIFIED-ITEM`
+- 상태: `confirmed`
+- 분류: 아이템 상태
+- 공식 표기: 미확인 물품
+- 짧은 정의: 아직 감정되지 않아 실제 분류와 가치를 알 수 없는 물품의 임시 상태.
+- 범위: 감정 전 표시와 처리에만 사용하며, 감정 뒤에는 실제 아이템 분류를 따른다.
+- 혼동 주의: 폐품·잔재·고유 유물과 나란한 독립 최종 분류가 아니다.
+- 상세 설정: [`../story/05_items_and_discoveries.md`](../story/05_items_and_discoveries.md)
+- 관련 구현: [`../design/item_rules.md#감정-상태`](../design/item_rules.md#감정-상태)
+- 원본 추적:
+  - GDD 8-1
+  - GDD 8-2
 
 ## 폐품
 
@@ -287,6 +358,51 @@ related:
 - 관련 구현: [`../design/narrative_delivery.md`](../design/narrative_delivery.md)
 - 원본 추적:
   - `STY-0095`
+
+## 감정
+
+- ID: `TERM-APPRAISAL`
+- 상태: `confirmed`
+- 분류: 시스템 / 행위
+- 공식 표기: 감정
+- 짧은 정의: 미확인 물품의 실제 분류와 가치를 판별하는 과정.
+- 범위: 감정사 또는 현장 감정 수단을 통해 물품 정보를 확인하는 시스템 의미.
+- 혼동 주의: 인물의 기분이나 정서를 뜻하는 일반어 `감정`과 문맥으로 구분한다.
+- 상세 설정: [`../story/05_items_and_discoveries.md#감정과-연구자-보관의-의미`](../story/05_items_and_discoveries.md#감정과-연구자-보관의-의미)
+- 관련 구현: [`../design/item_rules.md#감정-상태`](../design/item_rules.md#감정-상태), [`../design/economy_rules.md#비용-항목`](../design/economy_rules.md#비용-항목)
+- 원본 추적:
+  - GDD 8-2
+
+## 회수세
+
+- ID: `TERM-RECOVERY-TAX`
+- 상태: `confirmed`
+- 분류: 경제 비용
+- 공식 표기: 회수세
+- 짧은 정의: 길드가 회수품 판매와 정산 과정에서 부과하는 비용.
+- 범위: 폐던전 회수 경제의 공식 비용 항목.
+- 혼동 주의: 감정 비용이나 장비 수리비와 별도 항목이다.
+- 상세 설정: [`../story/03_player_and_society.md#왜-길드나-군대가-직접-회수하지-않는가`](../story/03_player_and_society.md#왜-길드나-군대가-직접-회수하지-않는가)
+- 관련 구현: [`../design/economy_rules.md#비용-항목`](../design/economy_rules.md#비용-항목)
+- 관련 화자 표현: [`speaker_lexicon.md#길드--행정`](speaker_lexicon.md#길드--행정)
+- 원본 추적:
+  - GDD 3-7
+  - GDD 10-3
+
+## 하네스 엔지니어링
+
+- ID: `TERM-HARNESS-ENGINEERING`
+- 상태: `confirmed`
+- 분류: 기술 체계 / 시스템
+- 공식 표기: 하네스 엔지니어링
+- 짧은 정의: 모듈식 작업 하네스로 분석·우회·안정화·견인·비상 대응을 수행하는 기술 체계.
+- 범위: 수색꾼의 생존·회수 장비와 그 조정 기술.
+- 혼동 주의: 정면 전투를 위한 강화복이나 공격력 중심 장비 체계가 아니다.
+- 상세 설정: [`../design/harness_engineering.md`](../design/harness_engineering.md)
+- 관련 제품 기준: [`../GDD.md#7-하네스-엔지니어링`](../GDD.md#7-하네스-엔지니어링)
+- 원본 추적:
+  - GDD 7장
+  - GDD 부록 A
 
 ## 관련 문서
 

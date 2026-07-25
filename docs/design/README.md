@@ -40,4 +40,4 @@ related:
 
 ## 현재 상태
 
-Story 이관 후 확인한 Design 티켓 `DOC-0301`~`DOC-0304`와 Project 이관을 완료하고 G-M3를 통과했다. [`narrative_delivery.md`](narrative_delivery.md), [`repeat_exploration.md`](repeat_exploration.md), [`item_rules.md`](item_rules.md), [`economy_rules.md`](economy_rules.md)는 전체 전환 승인 전까지 `draft`다. `DOC-0501` 공식 용어 검수 결과는 [`../project/m4_term_review.md`](../project/m4_term_review.md)에, `DOC-0502` Story·Design 상세 정의 중복 검수 결과는 [`../project/m4_story_design_review.md`](../project/m4_story_design_review.md)에 기록했다. 다음 티켓은 `DOC-0503` 기준 문서 지정 및 상호 링크 전환이다.
+Story 이관 후 확인한 Design 티켓 `DOC-0301`~`DOC-0304`와 Project 이관을 완료하고 G-M3를 통과했다. [`narrative_delivery.md`](narrative_delivery.md), [`repeat_exploration.md`](repeat_exploration.md), [`item_rules.md`](item_rules.md), [`economy_rules.md`](economy_rules.md)는 전체 전환 승인 전까지 `draft`다. `DOC-0501` 공식 용어 검수 결과는 [`../project/m4_term_review.md`](../project/m4_term_review.md)에, `DOC-0502` 중복 탐지와 `DOC-0503` 단일 출처 전환 결과는 [`../project/m4_story_design_review.md`](../project/m4_story_design_review.md)에 기록했다. Design은 상태·조건·처리·계산을 상세 소유하고 Story의 이유·지식·정보 내용을 요약 링크로 참조한다. 다음 티켓은 `DOC-0504` 화자 표현과 NPC 지식 정합성 검토다.

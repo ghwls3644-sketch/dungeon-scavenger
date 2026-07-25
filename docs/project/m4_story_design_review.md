@@ -82,6 +82,21 @@ related:
 |---|---|---|---|
 | 연구자의 초반·중반·후반 지식 변화 | [`NPC와 세력`](../story/04_characters_and_factions.md#연구자), [`내러티브 진행`](../story/06_narrative_progression.md#연구자의-지식-변화) | 판단 유보, 지맥·마나 이상 정황, 마왕과 던전의 직접 인과 부족이라는 세 단계가 두 표에 상세 정의되어 있다. 내용 충돌은 없지만 한쪽 수정 시 다른 쪽이 어긋날 수 있다. | NPC가 아는 실제 내용과 플레이어에게 열리는 진행 순서를 분리하되, 지식 내용의 상세 표는 한곳에만 남긴다. |
 
+## DOC-0503 기준 문서와 전환 결과
+
+| 주제 | 상세 기준 | 요약·링크로 전환한 위치 |
+|---|---|---|
+| 반복 요소와 1회성 요소 | 전체 후보·방문 상태는 [`repeat_exploration.md`](../design/repeat_exploration.md#반복-요소와-1회성-요소), 개별 아이템은 [`item_rules.md`](../design/item_rules.md#스폰과-반복-가능-여부) | [`02_dungeon_canon.md`](../story/02_dungeon_canon.md#반복-탐험이-가능한-세계관상-이유)는 반복 개연성과 원본성 요약만 유지 |
+| 고정 지도, 가변 요소와 잔여 구역 | 방문·개방·지도 상태는 [`repeat_exploration.md`](../design/repeat_exploration.md#고정-요소와-가변-요소), 단서의 서사 의미는 [`05_items_and_discoveries.md`](../story/05_items_and_discoveries.md#지도-발견물과-잔여-구역) | [`02_dungeon_canon.md`](../story/02_dungeon_canon.md#잔여-구역의-서사적-역할)는 세계관 의미, Design은 Story 단서 링크만 유지 |
+| 원본 회수 후 구역 변화와 보상 노출 | 방문 간 상태 전환과 노출 규칙은 [`repeat_exploration.md`](../design/repeat_exploration.md#고유-유물핵심-기록물-회수-후-전환) | [`02_dungeon_canon.md`](../story/02_dungeon_canon.md#고유-유물-회수-후의-소멸-방향)는 소멸의 표현 방향과 인과만 유지 |
+| 아이템 분류와 처리 | 원본성·서사 기능은 [`05_items_and_discoveries.md`](../story/05_items_and_discoveries.md#아이템-분류의-서사-의미), 처리·스폰·UI는 [`item_rules.md`](../design/item_rules.md#분류와-기본-처리) | Story의 처리 문장을 서사 의미로 줄이고 Design의 의미 열을 Story 링크로 전환 |
+| 감정 | 역할·서사 의미는 [`04_characters_and_factions.md`](../story/04_characters_and_factions.md#감정사와-감정-방식)와 [`05_items_and_discoveries.md`](../story/05_items_and_discoveries.md#감정과-연구자-보관의-의미), 상태·제약은 [`item_rules.md`](../design/item_rules.md#감정-상태), 비용은 [`economy_rules.md`](../design/economy_rules.md#비용-항목) | Story에서 횟수·비용·정확도 제약 상세를 제거하고 Design 링크로 전환 |
+| 기준가, 거래처와 비용 | 사회적 수요는 [`03_player_and_society.md`](../story/03_player_and_society.md), 계산·거래 보정은 [`economy_rules.md`](../design/economy_rules.md#기준가와-거래처) | Story의 거래처 표를 제거하고 감정 등급·위험 수당은 Design의 미확정 상태를 따르도록 정리 |
+| 발견·등록·해설·재열람 | 정보 깊이 순서는 [`06_narrative_progression.md`](../story/06_narrative_progression.md#발견물의-정보-전달-순서), 상태·조건은 [`narrative_delivery.md`](../design/narrative_delivery.md#기본-정보-전달-흐름) | Story의 5단계 구현 흐름을 짧은 정보 깊이 요약과 Design 링크로 전환 |
+| NPC 라우팅과 튜토리얼 | NPC 지식·튜토리얼 내용은 [`04_characters_and_factions.md`](../story/04_characters_and_factions.md), 실제 반응·노출은 [`narrative_delivery.md`](../design/narrative_delivery.md#npc-반응-라우팅) | [`05_items_and_discoveries.md`](../story/05_items_and_discoveries.md#필요한-담당자만-반응)의 담당자 표와 Design의 튜토리얼 목록을 각각 기준 링크로 전환 |
+| 필수·선택 정보와 연속 단서 | 정보 층·이해 순서는 [`06_narrative_progression.md`](../story/06_narrative_progression.md#필수-정보와-선택-정보), 단서 의미는 [`05_items_and_discoveries.md`](../story/05_items_and_discoveries.md#지도-발견물과-잔여-구역), 전달 조건은 [`narrative_delivery.md`](../design/narrative_delivery.md#필수-정보와-선택-정보) | Design의 정보 층 표와 단서 소재 목록을 Story 링크와 전달 조건으로 전환 |
+| 연구자의 지식 변화 | 실제 지식 내용은 [`04_characters_and_factions.md`](../story/04_characters_and_factions.md#연구자), 노출 순서는 [`06_narrative_progression.md`](../story/06_narrative_progression.md#연구자의-지식-변화), 해금 조건은 [`narrative_delivery.md`](../design/narrative_delivery.md#연구자-해석-단계) | `06_narrative_progression.md`의 중복 지식 표를 단계 순서 요약과 기준 링크로 전환 |
+
 ## 요약과 링크가 적정한 경계
 
 | 위치 | 판정 |
@@ -94,29 +109,28 @@ related:
 
 ## 정합성 확인
 
-- 교차 중복 후보의 반복·1회성 분류, 아이템 처리, 등록 흐름과 보호 방향은 서로 다른 결과를 요구하지 않는다.
-- 수치가 양쪽에서 다르게 확정된 사례는 없다.
+- 교차 중복·책임 혼합 후보 9건과 Story 내부 중복 후보 1건 모두 상세 기준과 요약 위치를 지정했다.
+- 기준이 아닌 위치의 반복 표·목록·상태 흐름을 짧은 요약과 상세 문서 링크로 전환했다.
+- 기준가·거래처 주제의 `감정 등급·위험 수당`은 Story의 확정 표현을 제거하고 Design의 미확정 상태를 따르게 해 확정도 차이를 해소했다.
+- 수치가 양쪽에서 다르게 확정된 사례는 없으며 Story·Design 구현용 수치·상태·코드 식별자를 만들지 않았다.
 - 활성 Story·Design 문서는 모두 `draft`이므로 문서 상태 필드 자체의 충돌은 없다.
-- 기준가·거래처 주제에서는 `감정 등급·위험 수당`의 확정도가 다르므로 단일 출처 전환 전에 확인이 필요하다.
-- 대부분의 중복 위치에 상대 문서 링크와 책임 선언이 이미 있다. `DOC-0503`은 새 구조를 만들기보다 상세 문장을 요약과 링크로 전환하는 작업이 중심이다.
+- Story의 세계관 이유·NPC 지식·정보 내용과 Design의 상태·조건·계산 책임이 서로 링크된다.
 
 ## 후속 작업
 
-1. `DOC-0503`에서 교차 중복 9건과 Story 내부 중복 1건의 상세 기준 문서를 지정한다.
-2. 기준이 아닌 위치는 필요한 한두 문장의 요약과 상세 문서 링크로 전환한다.
-3. 기준가·거래처 전환 전에 감정 등급과 위험 수당의 확정 상태를 GDD 기준으로 맞춘다.
-4. `DOC-0501`의 용어 누락·경계 후보는 상세 정의를 복제하지 않는 범위에서 함께 연결한다.
-5. 본문 전환 후 같은 목록·표·상태 관계가 둘 이상에 남지 않았는지 다시 검색한다.
+1. `DOC-0504`에서 화자 표현과 NPC 지식 범위가 새 공식 용어 링크와 충돌하지 않는지 검토한다.
+2. `DOC-0505`에서 핵심 설정·Entity·Timeline의 사실과 상태를 대조한다.
+3. `DOC-0506`에서 링크·누락 자동 검사를 최종 실행한다.
 
 ## 검토 결과
 
-- 판정: `보완 필요`
+- 판정: `DOC-0503 단일 출처 전환 완료`
 - 검토 문서: Story 8개, Design 5개
-- Story·Design 교차 중복·책임 혼합 후보: 9건
-- Story 내부 상세 중복 후보: 1건
-- 확정도 불일치: 1건
+- 전환한 Story·Design 교차 중복·책임 혼합 후보: 9건
+- 전환한 Story 내부 상세 중복 후보: 1건
+- 해소한 확정도 불일치: 1건
+- 미전환 후보: 0건
 - 직접 수치·상태 전환 충돌: 0건
-- 즉시 수정한 Story·Design 본문: 없음
-- 다음 티켓: `DOC-0503 — 기준 문서 지정 및 상호 링크 전환`
+- 다음 티켓: `DOC-0504 — 화자 표현과 NPC 지식 정합성 검토`
 
 이 보고서는 후속 보완이 끝날 때까지 `draft`다.

@@ -14,6 +14,8 @@ related:
   - story_v1.5_inventory.md
   - decisions.md
   - migration_changes.md
+  - m4_term_review.md
+  - ../reference/glossary.md
 ---
 
 # 열린 질문
@@ -54,6 +56,8 @@ related:
 | `Q-014` | 폐던전 사고 책임의 범위를 어디까지 시스템화할 것인가? | `provisional` | [`../story/03_player_and_society.md`](../story/03_player_and_society.md), [`../design/economy_rules.md`](../design/economy_rules.md) | 허가증 약관상 폐던전 내부 사고는 기본적으로 본인 책임으로 처리 | 사망·부상·장비 손실·의뢰 실패·민간 피해를 구분해 설계할 때 |
 | `Q-015` | 암시장 거래 선택지를 넣을 것인가? | `deferred` | [`../story/03_player_and_society.md`](../story/03_player_and_society.md), [`../story/05_items_and_discoveries.md`](../story/05_items_and_discoveries.md), [`../design/economy_rules.md`](../design/economy_rules.md) | 현재 범위에서 제외 | 경제 루프 검증 후 |
 | `Q-016` | 잔재에 환청·환시 연출을 넣을 것인가? | `deferred` | [`../story/05_items_and_discoveries.md`](../story/05_items_and_discoveries.md), [`../story/07_tone_and_writing_guide.md`](../story/07_tone_and_writing_guide.md), [`../design/narrative_delivery.md`](../design/narrative_delivery.md) | 텍스트 설명 중심 | 연출 예산 확정 후 |
+| `Q-017` | UI와 정산에서 감정 비용을 `감정료`와 `감정 수수료` 중 무엇으로 표시할 것인가? | `deferred` | [`../GDD.md`](../GDD.md), [`../design/economy_rules.md`](../design/economy_rules.md), [`../reference/glossary.md`](../reference/glossary.md) | 두 표기를 같은 비용 개념으로 추적하되 독립 공식 용어 등록은 보류 | 정산 UI 문구 확정 전 |
+| `Q-018` | 출입 자격을 물리적 `허가증` 아이템으로 확정할 것인가, `출입 허가`나 표식으로 표현할 것인가? | `deferred` | [`../story/03_player_and_society.md`](../story/03_player_and_society.md), [`../reference/glossary.md`](../reference/glossary.md) | `DEC-014`의 출입 자격만 유지하고 독립 아이템명은 확정하지 않음 | 허가·출정 UI와 아이템 목록 확정 전 |
 
 `Q-009`~`Q-011`은 GDD 19장에서 의도적으로 확정하지 않는 배경 여지로 분류한 항목이다. 현재 제품 구조를 막지 않으며 위 검토 조건이 생기기 전에는 결정을 요구하지 않는다.
 

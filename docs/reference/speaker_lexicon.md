@@ -121,7 +121,11 @@ related:
 - 예시:
   - 문서 표기 예: `회수 가능 물품`, `출입 허가`, `사고 책임`, `회수세`
 - 관련 공식 용어:
+  - [`TERM-RECOVERABLE-MATERIAL`](glossary.md#잔류물)
+  - [`TERM-RECOVERY-TAX`](glossary.md#회수세)
+  - [`TERM-ADVENTURER`](glossary.md#모험가)
   - [`TERM-SCAVENGER`](glossary.md#수색꾼)
+  - [`TERM-SCOUTING-DISPATCH`](glossary.md#정찰-파견)
 - 원본 추적:
   - `STY-0051`
   - `STY-0096`
@@ -150,6 +154,7 @@ related:
 - 관련 공식 용어:
   - [`TERM-SCRAP`](glossary.md#폐품)
   - [`TERM-REMNANT`](glossary.md#잔재)
+  - [`TERM-APPRAISAL`](glossary.md#감정)
 - 원본 추적:
   - `STY-0051`
   - `STY-0099`
@@ -178,7 +183,9 @@ related:
 - 예시:
   - “마왕이든 뭐든, 들고 나갈 수 있고 팔릴 물건이면 됐지.”
 - 관련 공식 용어:
+  - [`TERM-ADVENTURER`](glossary.md#모험가)
   - [`TERM-SCAVENGER`](glossary.md#수색꾼)
+  - [`TERM-SCOUTING-DISPATCH`](glossary.md#정찰-파견)
   - [`TERM-SCRAP`](glossary.md#폐품)
   - [`TERM-REMNANT`](glossary.md#잔재)
   - [`TERM-REMAINING-ZONE`](glossary.md#잔여-구역)
@@ -219,6 +226,8 @@ related:
   - [`TERM-DUNGEON`](glossary.md#던전)
   - [`TERM-DUNGEON-CORE`](glossary.md#코어)
   - [`TERM-REMNANT`](glossary.md#잔재)
+  - [`TERM-UNIDENTIFIED-ITEM`](glossary.md#미확인-물품)
+  - [`TERM-APPRAISAL`](glossary.md#감정)
 - 원본 추적:
   - `STY-0046`
   - `STY-0051`

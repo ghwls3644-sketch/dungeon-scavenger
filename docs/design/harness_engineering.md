@@ -13,6 +13,7 @@ related:
   - ../GDD.md
   - ../story/02_dungeon_canon.md
   - repeat_exploration.md
+  - ../reference/glossary.md
 ---
 
 # 하네스 엔지니어링
