@@ -199,7 +199,7 @@ related:
 | `STY-0074`, `TBL-019` | 중요 발견물의 진행 보호 | `split`; 보호 이유는 Items Story, 판매 차단은 [`../design/item_rules.md`](../design/item_rules.md) |
 | `STY-0099`, `TBL-026` | 연구자의 지식 변화 순서 | `split`; 진행 순서는 이 문서, 사실·태도·표현은 관련 Story와 Reference |
 
-`STY-0066`, `STY-0075` 추가 검토 메모는 이 문서에 확정 내용으로 넣지 않고 `DOC-0402`에서 [`../project/open_questions.md`](../project/open_questions.md)로 이관한다.
+`STY-0066`, `STY-0075` 추가 검토 메모는 이 문서에 확정 내용으로 넣지 않고 `DOC-0402`에서 [`../project/open_questions.md`](../project/open_questions.md)의 원본 대응표로 이관했다.
 
 ## 이관 상태
 

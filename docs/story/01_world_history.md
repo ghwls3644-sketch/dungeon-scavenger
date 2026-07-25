@@ -121,7 +121,7 @@ related:
 | `TBL-001` | 폐던전과 잔여 구역 범위 표 | `moved` |
 | `STY-0015` | 2-5. 이 설정을 게임 안에서 다루는 깊이 | `moved` |
 
-`STY-0016` 추가 검토 메모는 이 문서에 확정 내용으로 넣지 않고 `DOC-0402`에서 [`../project/open_questions.md`](../project/open_questions.md)로 이관한다.
+`STY-0016` 추가 검토 메모는 이 문서에 확정 내용으로 넣지 않고 `DOC-0402`에서 [`../project/open_questions.md`](../project/open_questions.md)의 질문 목록과 원본 대응표로 이관했다.
 
 ## 이관 상태
 

@@ -177,7 +177,7 @@ related:
 | `STY-0092` | 공포의 방향 | `moved` |
 | `STY-0098`, `QTE-003`, `QTE-004` | 잔재 설명 장치의 문체 예시 | `split` |
 
-12장 말미의 추가 검토 메모 `STY-0093`은 이 문서에서 확정하지 않고 [`../project/open_questions.md`](../project/open_questions.md) 이관 대상으로 남긴다.
+12장 말미의 추가 검토 메모 `STY-0093`은 이 문서에서 확정하지 않고 `DOC-0402`에서 [`../project/open_questions.md`](../project/open_questions.md)의 원본 대응표로 이관했다.
 
 ## 관련 문서
 

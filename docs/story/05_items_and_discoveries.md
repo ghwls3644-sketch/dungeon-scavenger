@@ -193,7 +193,7 @@ related:
 | `STY-0073` | 실패한 수색꾼의 흔적 | `split`; 흔적의 의미는 이 문서, 정보 진행은 [`06_narrative_progression.md`](06_narrative_progression.md), 연속 전달은 [`../design/narrative_delivery.md`](../design/narrative_delivery.md), 방문 간 배치는 [`../design/repeat_exploration.md`](../design/repeat_exploration.md) |
 | `STY-0074`, `TBL-019` | 중요 발견물의 보호 이유 | `split`; 서사 이유는 이 문서, 판매 차단은 [`../design/item_rules.md`](../design/item_rules.md) |
 
-`STY-0054`, `TBL-014`의 UI 색상은 Story에 이관하지 않고 [`../design/item_rules.md`](../design/item_rules.md)로 `moved`했다. `STY-0059`, `STY-0075` 추가 검토 메모는 확정 내용으로 넣지 않고 `DOC-0402`에서 [`../project/open_questions.md`](../project/open_questions.md)로 이관한다.
+`STY-0054`, `TBL-014`의 UI 색상은 Story에 이관하지 않고 [`../design/item_rules.md`](../design/item_rules.md)로 `moved`했다. `STY-0059`, `STY-0075` 추가 검토 메모는 확정 내용으로 넣지 않고 `DOC-0402`에서 [`../project/open_questions.md`](../project/open_questions.md)의 질문 목록과 원본 대응표로 이관했다.
 
 ## 이관 상태
 

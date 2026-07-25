@@ -176,7 +176,7 @@ related:
 | `STY-0041`, `TBL-007` | 회수품의 수요 | `split`; 수요 배경은 이 문서, 판매·등록 처리는 [`../design/item_rules.md`](../design/item_rules.md), 가격 계산은 [`../design/economy_rules.md`](../design/economy_rules.md) |
 | `STY-0042`, `TBL-008` | 수수료와 난이도 | `STY-0042`는 `split`; 생계 압박 이유는 이 문서, `TBL-008`과 경제 보정은 Design으로 `moved` |
 
-`STY-0035`, `STY-0043` 추가 검토 메모는 이 문서에 확정 내용으로 넣지 않고 `DOC-0402`에서 [`../project/open_questions.md`](../project/open_questions.md)로 이관한다.
+`STY-0035`, `STY-0043` 추가 검토 메모는 이 문서에 확정 내용으로 넣지 않고 `DOC-0402`에서 [`../project/open_questions.md`](../project/open_questions.md)의 질문 목록과 원본 대응표로 이관했다.
 
 ## 이관 상태
 

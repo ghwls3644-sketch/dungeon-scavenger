@@ -303,7 +303,7 @@ related:
 | `STY-0084` | 다른 수색꾼의 흔적 | `split`; 서사 표현은 이 문서, 등장 규칙은 [`../design/repeat_exploration.md`](../design/repeat_exploration.md) |
 | `STY-0097` | 폐던전 명칭과 개념 경계 | `split`; 공식 용어는 Glossary, 상세 의미는 Story |
 
-`STY-0023`, `STY-0030`, `STY-0085` 추가 검토 메모는 이 문서에 확정 내용으로 넣지 않고 `DOC-0402`에서 [`../project/open_questions.md`](../project/open_questions.md)로 이관한다.
+`STY-0023`, `STY-0030`, `STY-0085` 추가 검토 메모는 이 문서에 확정 내용으로 넣지 않고 `DOC-0402`에서 [`../project/open_questions.md`](../project/open_questions.md)의 질문 목록과 원본 대응표로 이관했다.
 
 ## 이관 상태
 

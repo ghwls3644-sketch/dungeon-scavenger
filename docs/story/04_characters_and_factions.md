@@ -176,7 +176,7 @@ NPC는 세계관 전체를 설명하는 인물보다, 플레이 루프를 도와
 | `STY-0099`, `TBL-026` | 마왕에 대한 지식 차이와 상인의 거래 태도 | `split`; 지식·태도는 Story, 진실·진행·표현은 관련 책임 문서 |
 | `STY-0100`, `TBL-027` | 화자별 성격과 표현 | `split`; 태도 연결은 Story, 어휘·예시는 Speaker Lexicon |
 
-`STY-0052` 추가 검토 메모는 이 문서에 확정 내용으로 넣지 않고 `DOC-0402`에서 [`../project/open_questions.md`](../project/open_questions.md)로 이관한다.
+`STY-0052` 추가 검토 메모는 이 문서에 확정 내용으로 넣지 않고 `DOC-0402`에서 [`../project/open_questions.md`](../project/open_questions.md)의 원본 대응표로 이관했다.
 
 ## 이관 상태
 

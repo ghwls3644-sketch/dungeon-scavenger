@@ -142,7 +142,7 @@ related:
 | `STY-0007` | 1-5. 게임 초반 목표 | `moved` |
 | `STY-0008` | 1-6. 전투보다 회피와 탈출이 중요한 이유 | `moved` |
 
-`STY-0009` 추가 검토 메모는 이 문서에 확정 내용으로 넣지 않고 `DOC-0402`에서 [`../project/open_questions.md`](../project/open_questions.md)로 이관한다.
+`STY-0009` 추가 검토 메모는 이 문서에 확정 내용으로 넣지 않고 `DOC-0402`에서 [`../project/open_questions.md`](../project/open_questions.md)의 질문 목록과 원본 대응표로 이관했다.
 
 ## 이관 상태
 
