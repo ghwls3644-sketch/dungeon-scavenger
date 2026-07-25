@@ -24,11 +24,15 @@
 
 ## Git and GitHub
 
-- At the start of a ticket, fetch `origin/main` and confirm the local branch has not diverged. Never discard remote or user changes.
+- At the start of a ticket, fetch `origin/main` and confirm the local branch has not diverged. Intentional, unpushed ticket commits may leave the local branch ahead of `origin/main`. Never discard remote or user changes.
 - After a ticket is complete and validated, show the user a concise change and validation summary before committing.
-- Ask whether to commit and push. Do not commit or push until the user explicitly approves the reviewed result.
+- Ask whether to commit the reviewed ticket. Do not commit until the user explicitly approves the reviewed result.
 - If the user requests revisions, apply them, validate again, and present the updated result for approval.
-- After approval, create one focused commit for the ticket and push it to `origin/main` in the same workflow.
+- After approval, create one focused commit for the ticket. A completed ticket must not remain mixed with the next ticket's working-tree changes.
+- Do not push merely because one ticket is complete. Continue committing later approved tickets locally until the user declares that the current daily allocation or work batch is complete.
+- Treat the end of a daily allocation or work batch as a user decision. Do not infer it from ticket count, elapsed time, inactivity, or wording that only approves a commit.
+- Push the accumulated commits to `origin/main` only when the user explicitly says the current allocation or work batch is complete, or explicitly asks to push.
+- Before pushing, fetch `origin/main` again and confirm the accumulated local commits can be published without discarding or overwriting remote changes.
 - Never force-push, rewrite published history, or bypass branch protection unless the user explicitly authorizes that exact operation.
 - If a push is rejected or the remote changed, stop and reconcile safely instead of forcing the update.
-- Report the commit hash, push result, validation performed, and next ticket in the completion message.
+- After each ticket commit, report the commit hash, validation performed, local-ahead state, and next ticket. When a batch is pushed, also report the push result and remote synchronization state.
