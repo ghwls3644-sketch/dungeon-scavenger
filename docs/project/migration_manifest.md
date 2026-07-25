@@ -15,6 +15,7 @@ related:
   - migration_changes.md
   - m4_term_review.md
   - m4_story_design_review.md
+  - m4_speaker_knowledge_review.md
   - ../archive/README.md
 ---
 
@@ -57,7 +58,7 @@ related:
 
 | 대상 | 상태 | 다음 작업 |
 |---|---|---|
-| `docs/GDD.md` | `copied-active`, `verified` | `DOC-0504` 화자 표현과 NPC 지식 정합성 검토 |
+| `docs/GDD.md` | `copied-active`, `verified` | `DOC-0505` 핵심 설정·Entity·Timeline 정합성 검토 |
 | `docs/archive/story_v1.5_full.md` | `source-frozen`, `copied-archive`, `verified` | M3 이관과 G-M3 검토 완료. M4 책임 분리 계속 |
 | 두 구버전 제안서 | `copied-archive`, `verified` | 추가 작업 없음 |
 | 최신 분할 제안서 v0.2.1 | 활성 작업 지침 | M1~M6 완료 후 아카이브 여부 결정 |
@@ -166,6 +167,7 @@ M3의 문서화된 티켓은 모두 완료했고 G-M3를 통과했다.
 - [x] `DOC-0501` 공식 용어 누락·중복을 탐지하고 검수 보고서를 작성한다.
 - [x] `DOC-0502` Story/Design 상세 정의 중복을 탐지한다.
 - [x] `DOC-0503` 기준 문서를 지정하고 상호 링크로 전환한다.
+- [x] `DOC-0504` 화자 표현과 NPC 지식 정합성을 검토한다.
 
 `DOC-0501`은 원본 13-1 기본 용어 12개, 제안서의 핵심 검수 용어 15개와 파일럿 시드 23개, GDD 부록 A의 핵심 용어 14개를 현재 Glossary와 대조했다. 기존 용어 ID와 공식 표기의 직접 중복은 없었고 필수 필드도 모두 존재했다. 독립 항목 누락 5개와 추가 검토 후보 8개, 표기·의미 경계 후보를 [`m4_term_review.md`](m4_term_review.md)에 기록했으며 공식 표기·ID·상태는 새로 확정하지 않았다.
 
@@ -173,4 +175,6 @@ M3의 문서화된 티켓은 모두 완료했고 G-M3를 통과했다.
 
 `DOC-0503`은 교차 중복 9건과 Story 내부 중복 1건의 상세 기준을 지정하고, 기준이 아닌 표·목록·상태 흐름을 요약과 상호 링크로 전환했다. `감정 등급·위험 수당`의 확정도 차이는 Design의 미확정 상태를 따르게 해소했다. Glossary에는 기존 결정과 GDD로 확정할 수 있는 핵심 누락 5개와 파일럿 후보 2개를 등록해 19개 항목을 만들었고, 표기가 미정인 `감정료 / 감정 수수료`와 `허가증 / 출입 허가`는 `Q-017`, `Q-018`로 분리했다.
 
-다음 티켓은 `DOC-0504` 화자 표현과 NPC 지식 정합성 검토다.
+`DOC-0504`는 Speaker Lexicon의 화자·집단 8개와 Glossary 공식 용어 19개, Story의 NPC·세력 지식 범위를 대조했다. 직접 표현·지식 충돌은 없었고, 감정사·연구자 결합 항목의 적용 범위와 일부 모험가 항목의 근거 링크를 사람 검토 보완 후보 2건으로 [`m4_speaker_knowledge_review.md`](m4_speaker_knowledge_review.md)에 기록했다. 이번 검토에서는 새 대사·지식·개체·식별자를 만들거나 기준 본문을 바꾸지 않았다.
+
+다음 티켓은 `DOC-0505` 핵심 설정·Entity·Timeline 정합성 검토다.

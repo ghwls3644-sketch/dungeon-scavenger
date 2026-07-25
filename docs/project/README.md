@@ -19,6 +19,7 @@ related:
   - m2_reference_review.md
   - m4_term_review.md
   - m4_story_design_review.md
+  - m4_speaker_knowledge_review.md
 ---
 
 # 프로젝트 문서
@@ -84,6 +85,7 @@ related:
 - [`m2_reference_review.md`](m2_reference_review.md): M2 Reference 책임 중복과 G-M2 검토 결과
 - [`m4_term_review.md`](m4_term_review.md): 공식 용어 누락·중복 검수와 `DOC-0503` 처리 결과
 - [`m4_story_design_review.md`](m4_story_design_review.md): Story·Design 상세 정의 중복 검수와 단일 출처 전환 결과
+- [`m4_speaker_knowledge_review.md`](m4_speaker_knowledge_review.md): 화자 표현과 NPC 지식 정합성 검수, 사람 검토 보완 후보
 
 ## 경계 규칙
 

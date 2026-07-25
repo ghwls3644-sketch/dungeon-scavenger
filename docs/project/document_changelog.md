@@ -44,3 +44,4 @@ DOC-0003 검토 완료 후 기록을 시작한다.
 | 2026-07-25 | `DOC-0501` | [`m4_term_review.md`](m4_term_review.md) 생성 | 공식 용어 누락·중복 검수 결과와 후속 처리 후보를 Glossary의 현재 정의와 분리해 추적하기 위해 추가했다. |
 | 2026-07-25 | `DOC-0502` | [`m4_story_design_review.md`](m4_story_design_review.md) 생성 | Story·Design 상세 정의 중복, 책임 혼합과 확정도 차이를 본문 전환 전에 별도 검수 결과로 추적하기 위해 추가했다. |
 | 2026-07-25 | `DOC-0503` | Story·Design 중복 10건을 단일 상세 출처와 요약 링크로 전환하고 [`glossary.md`](../reference/glossary.md)를 19개 항목으로 확장 | 세계관 이유·지식·정보와 상태·조건·계산의 상세 책임을 분리하고 공식 용어 누락을 해소하기 위해 변경했다. |
+| 2026-07-25 | `DOC-0504` | [`m4_speaker_knowledge_review.md`](m4_speaker_knowledge_review.md) 생성 | 화자 표현 8개와 NPC 지식 범위의 직접 충돌 및 사람 검토 보완 후보를 기준 본문과 분리해 추적하기 위해 추가했다. |

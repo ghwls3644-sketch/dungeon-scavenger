@@ -41,6 +41,7 @@ related:
 - M2 Reference 검토 결과: [`project/m2_reference_review.md`](project/m2_reference_review.md)
 - M4 공식 용어 검수 결과: [`project/m4_term_review.md`](project/m4_term_review.md)
 - M4 Story·Design 중복 검수 결과: [`project/m4_story_design_review.md`](project/m4_story_design_review.md)
+- M4 화자 표현·NPC 지식 검수 결과: [`project/m4_speaker_knowledge_review.md`](project/m4_speaker_knowledge_review.md)
 
 ## 다른 환경에서 작업 이어가기
 
@@ -66,4 +67,4 @@ GitHub 로그인 상태, Codex 대화 기록, 앱별 로컬 설정은 저장소�
 
 ## 현재 단계
 
-검토 관문 G-M3를 통과하고 문서 분할 단계 `M3 — 1차 구조 이관`을 완료했다. `M4 — 세계관과 구현 규칙 분리`의 `DOC-0501`~`DOC-0503`에서 공식 용어와 Story·Design 상세 정의를 검수하고 단일 출처 구조로 전환했다. Glossary는 근거가 확정된 19개 항목을 가지며, Story·Design 교차 중복 9건과 Story 내부 중복 1건은 상세 기준과 요약 링크를 분리했다. 다음 티켓은 `DOC-0504` 화자 표현과 NPC 지식 정합성 검토다. 신규 문서는 최종 전환 전까지 `draft`다.
+검토 관문 G-M3를 통과하고 문서 분할 단계 `M3 — 1차 구조 이관`을 완료했다. `M4 — 세계관과 구현 규칙 분리`의 `DOC-0501`~`DOC-0504`에서 공식 용어, Story·Design 상세 정의와 화자 표현·NPC 지식을 검수했다. Glossary는 근거가 확정된 19개 항목을 가지며, Story·Design 중복 10건은 단일 출처 구조로 전환했다. 화자·집단 8개에서는 직접 표현·지식 충돌이 없었고 역할 경계·근거 링크 보완 후보 2건을 사람 검토 대상으로 분리했다. 다음 티켓은 `DOC-0505` 핵심 설정·Entity·Timeline 정합성 검토다. 신규 문서는 최종 전환 전까지 `draft`다.
