@@ -55,8 +55,8 @@ related:
 
 | 대상 | 상태 | 다음 작업 |
 |---|---|---|
-| `docs/GDD.md` | `copied-active`, `verified` | [`project/gdd_mapping.md`](gdd_mapping.md)의 연결을 기준으로 M4 책임 분리 검토 |
-| `docs/archive/story_v1.5_full.md` | `source-frozen`, `copied-archive`, `verified` | M3 이관 완료. G-M3 승인 대기 |
+| `docs/GDD.md` | `copied-active`, `verified` | `DOC-0501` 공식 용어 누락·중복 탐지 |
+| `docs/archive/story_v1.5_full.md` | `source-frozen`, `copied-archive`, `verified` | M3 이관과 G-M3 검토 완료. M4 책임 분리 검토 |
 | 두 구버전 제안서 | `copied-archive`, `verified` | 추가 작업 없음 |
 | 최신 분할 제안서 v0.2.1 | 활성 작업 지침 | M1~M6 완료 후 아카이브 여부 결정 |
 | 개발 단계별 제안서 v0.1 | 활성 참고 | 개발 프로젝트 문서에 반영 후 아카이브 |
@@ -115,7 +115,7 @@ M2 작업은 완료했으며 2026-07-22 사용자의 다음 작업 진행 지시
 - 예비 점검일: 2026-07-23
 - 최종 재점검일: 2026-07-25
 - 점검 범위: 원본 제목 103개와 표·인용문·코드 펜스 32개
-- 결과: `통과 조건 충족 — 사용자 승인 대기`
+- 결과: `통과`
 
 예비 점검 전 `planned`였던 24개 가운데 `STY-0001`은 동결 아카이브의 문서 머리말로 이미 검증되었고, `STY-0094`는 하위 용어·화자 항목이 Reference와 Story로 모두 분할되었으며, `QTE-001`은 [`../story/00_core_pillars.md`](../story/00_core_pillars.md)에 원문 그대로 이관되어 있었다. 세 항목의 인벤토리 상태를 실제 결과에 맞게 보정했다.
 
@@ -129,7 +129,7 @@ M2 작업은 완료했으며 2026-07-22 사용자의 다음 작업 진행 지시
 | 원문 의미가 바뀐 문장이 별도로 표시되었는가? | 충족 | 별도 표시가 필요한 의미 변경을 발견하지 않음 |
 | 용어가 임의로 바뀌거나 통일되지 않았는가? | 충족 | Reference 기준 밖의 임의 용어 변경을 발견하지 않음 |
 
-`DOC-0403`은 원본 추천 목차와 코드 펜스를 [`gdd_mapping.md`](gdd_mapping.md)에 보존하고 13개 추천 절을 현재 Story·Design·Reference 및 통합 GDD에 연결했다. 현행 GDD의 번호와 내용은 변경하지 않았다. M3 실행은 완료했으며 G-M3 통과는 사용자 승인 후 확정한다.
+`DOC-0403`은 원본 추천 목차와 코드 펜스를 [`gdd_mapping.md`](gdd_mapping.md)에 보존하고 13개 추천 절을 현재 Story·Design·Reference 및 통합 GDD에 연결했다. 현행 GDD의 번호와 내용은 변경하지 않았다. `DOC-0404`는 [`migration_changes.md`](migration_changes.md)의 대기열을 검토해 M3 기간에 반영할 변경이 0건임을 확인했다. M3 실행은 완료했으며 2026-07-25 사용자의 다음 작업 진행 지시로 G-M3를 통과했다.
 
 ## Design 추출 진행 상태
 
@@ -147,6 +147,7 @@ M2 작업은 완료했으며 2026-07-22 사용자의 다음 작업 진행 지시
 - [x] `DOC-0401` 확정 변경점을 `project/decisions.md`로 이관한다.
 - [x] `DOC-0402` 추가 검토 메모를 `project/open_questions.md`로 이관한다.
 - [x] `DOC-0403` GDD 추천 목차와 연결을 `project/gdd_mapping.md`로 이관한다.
+- [x] `DOC-0404` 이관 중 변경 대기열을 검토하고 반영한다.
 
 `DOC-0401`은 원본 `STY-0103`의 확정 변경점 30개를 통합 GDD의 기존 결정과 대조했다. `DEC-001`~`DEC-012`, `DEC-101`~`DEC-110`을 보존하고, 기존 ID로 독립 추적할 수 없던 원본 결정 6개에 `DEC-013`~`DEC-018`을 부여했다. 원본의 각 변경점은 [`decisions.md`](decisions.md)의 대응표에서 결정 ID와 연결했으며 `STY-0103`을 `moved`로 갱신했다.
 
@@ -154,4 +155,6 @@ M2 작업은 완료했으며 2026-07-22 사용자의 다음 작업 진행 지시
 
 `DOC-0403`은 원본 `STY-0102`의 GDD 추천 목차 13개와 코드 펜스 `FNC-001`을 [`gdd_mapping.md`](gdd_mapping.md)에 보존했다. 각 추천 절을 현재 Story·Design·Reference 기준, 통합 GDD 절, 구현 영향 범위에 연결하고 `STY-0102`와 `FNC-001`을 `moved`로 갱신했다. 현행 GDD를 다시 쓰거나 새 설정·수치·상태·식별자를 추가하지 않았다.
 
-M3의 문서화된 티켓은 모두 완료했다. 다음 작업은 G-M3 검토 승인 후 M4 세계관과 구현 규칙 분리의 티켓 범위를 정하는 것이다.
+`DOC-0404`는 [`migration_changes.md`](migration_changes.md)에 등록된 대기·반영·반려 항목이 모두 0건임을 확인했다. 활성 문서에 반영할 내용이 없으므로 새 설정이나 결정을 만들지 않고 검토 기록만 남겼다.
+
+M3의 문서화된 티켓은 모두 완료했고 G-M3를 통과했다. 다음 티켓은 `DOC-0501` 공식 용어 누락·중복 탐지이며, M4 세계관과 구현 규칙 분리를 Reference 책임 범위부터 점검한다.
