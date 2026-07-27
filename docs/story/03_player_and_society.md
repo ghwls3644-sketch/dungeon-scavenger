@@ -71,7 +71,7 @@ related:
 | 내면 | 모험가를 아직 동경하지만 당장 생계 때문에 크게 드러내지 않음 |
 | 플레이 감정 | 욕심, 불안, 계산, 후회, 발견의 기쁨, 생환의 안도감 |
 
-이 표는 [`00_core_pillars.md`](00_core_pillars.md)의 핵심 제약을 플레이어 상세 관점에서 풀어 쓴다. 현재 플레이어 개체는 [`NPC-001`](../reference/entity_index.md)로 추적한다.
+이 표는 [`00_core_pillars.md`](00_core_pillars.md)의 핵심 제약을 플레이어 상세 관점에서 풀어 쓴다. 현재 플레이어 개체는 [`NPC-001`](../reference/entity_index.md), 개선 대상인 거점은 [`LOC-001`](../reference/entity_index.md)로 추적한다.
 
 ### 플레이어의 동기
 

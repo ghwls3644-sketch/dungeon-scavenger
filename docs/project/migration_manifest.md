@@ -16,6 +16,7 @@ related:
   - m4_term_review.md
   - m4_story_design_review.md
   - m4_speaker_knowledge_review.md
+  - m5_core_entity_timeline_review.md
   - ../archive/README.md
 ---
 
@@ -58,8 +59,8 @@ related:
 
 | 대상 | 상태 | 다음 작업 |
 |---|---|---|
-| `docs/GDD.md` | `copied-active`, `verified` | `DOC-0505` 핵심 설정·Entity·Timeline 정합성 검토 |
-| `docs/archive/story_v1.5_full.md` | `source-frozen`, `copied-archive`, `verified` | M3 이관과 G-M3 검토 완료. M4 책임 분리 계속 |
+| `docs/GDD.md` | `copied-active`, `verified` | `DOC-0506` 링크·누락 자동 검사 |
+| `docs/archive/story_v1.5_full.md` | `source-frozen`, `copied-archive`, `verified` | M3 이관과 G-M4 책임 분리 완료. M5 검토 계속 |
 | 두 구버전 제안서 | `copied-archive`, `verified` | 추가 작업 없음 |
 | 최신 분할 제안서 v0.2.1 | 활성 작업 지침 | M1~M6 완료 후 아카이브 여부 결정 |
 | 개발 단계별 제안서 v0.1 | 활성 참고 | 개발 프로젝트 문서에 반영 후 아카이브 |
@@ -71,7 +72,7 @@ related:
 | 상태 | 검사 시점 | 검사 결과가 필요한 다음 작업 |
 |---|---|---|
 | `완료` | `DOC-0505` 시작 전 | 완료 커밋과 결과물은 계획에 일치함. M4·M5 단계와 Git 인계 문구는 `MIG-CHG-002`로 정정 |
-| `예정` | `DOC-0505` 완료 후 | 설정·Entity·Timeline 충돌 처리를 확인한 뒤 `DOC-0506` 시작 |
+| `현재` | `DOC-0505` 완료 후 | 설정·Entity·Timeline 충돌 처리를 확인한 뒤 `DOC-0506` 시작 |
 | `예정` | `DOC-0506` 완료 후 | 링크·누락 검사와 G-M5 완료 조건을 확인한 뒤 `DOC-0601` 시작 |
 | `예정` | `DOC-0601` 완료 후 | 사람 검토 결과와 기준 전환 범위를 승인한 뒤 `DOC-0602` 시작 |
 | `예정` | `DOC-0603` 완료 후 | 새 문서 기준과 작업 규칙의 인계 가능성을 확인한 뒤 개발 티켓 시작 |
@@ -206,7 +207,7 @@ M4 완료와 G-M4 통과를 기록하고, 중복·용어·화자·Entity·Timeli
 - [x] `DOC-0502` Story/Design 상세 정의 중복을 탐지한다.
 - [x] `DOC-0503` 기준 문서를 지정하고 상호 링크로 전환한다.
 - [x] `DOC-0504` 화자 표현과 NPC 지식 정합성을 검토한다.
-- [ ] `DOC-0505` 핵심 설정·Entity·Timeline 정합성을 검토한다.
+- [x] `DOC-0505` 핵심 설정·Entity·Timeline 정합성을 검토한다.
 - [ ] `DOC-0506` 링크·누락 자동 검사를 실행한다.
 
 `DOC-0501`은 원본 13-1 기본 용어 12개, 제안서의 핵심 검수 용어 15개와 파일럿 시드 23개, GDD 부록 A의 핵심 용어 14개를 현재 Glossary와 대조했다. 기존 용어 ID와 공식 표기의 직접 중복은 없었고 필수 필드도 모두 존재했다. 독립 항목 누락 5개와 추가 검토 후보 8개, 표기·의미 경계 후보를 [`m4_term_review.md`](m4_term_review.md)에 기록했으며 공식 표기·ID·상태는 새로 확정하지 않았다.
@@ -217,4 +218,6 @@ M4 완료와 G-M4 통과를 기록하고, 중복·용어·화자·Entity·Timeli
 
 `DOC-0504`는 Speaker Lexicon의 화자·집단 8개와 Glossary 공식 용어 19개, Story의 NPC·세력 지식 범위를 대조했다. 직접 표현·지식 충돌은 없었고, 감정사·연구자 결합 항목의 적용 범위와 일부 모험가 항목의 근거 링크를 사람 검토 보완 후보 2건으로 [`m4_speaker_knowledge_review.md`](m4_speaker_knowledge_review.md)에 기록했다. 이번 검토에서는 새 대사·지식·개체·식별자를 만들거나 기준 본문을 바꾸지 않았다.
 
-다음 티켓은 `DOC-0505` 핵심 설정·Entity·Timeline 정합성 검토다.
+`DOC-0505`는 핵심 설정 10개와 Entity 15개, Timeline 사건 행 5개·반복 과정 3개를 Story, GDD와 결정 기록에 대조했다. Entity ID·이름·상태의 직접 충돌은 없었고 Story 역링크 3건을 보완했다. Timeline이 마왕 봉인과 던전 증가의 선후를 확정·미정으로 동시에 적은 모순 1건은 원본에 맞게 선후 미정으로 정정했다. 폐던전 범람 표현 차이는 `DEC-004`로 현재 해석을 확인했고 동결 GDD 3-4 문구는 `DOC-0601` 사람 검토 대상으로 분리했다. 결과는 [`m5_core_entity_timeline_review.md`](m5_core_entity_timeline_review.md)에 기록했다.
+
+현재는 `DOC-0505` 완료 후 정합성 검사 시점이다. 검사 결과를 사용자에게 보고하고 계속 진행하라는 지시를 받기 전에는 다음 티켓을 시작하지 않는다. 검사 통과 후 다음 티켓은 `DOC-0506` 링크·누락 자동 검사다.

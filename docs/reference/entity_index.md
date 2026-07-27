@@ -15,6 +15,7 @@ related:
   - ../story/03_player_and_society.md
   - ../story/04_characters_and_factions.md
   - ../story/05_items_and_discoveries.md
+  - ../project/m5_core_entity_timeline_review.md
 ---
 
 # 고유 개체 색인
@@ -115,4 +116,4 @@ related:
 
 ## 현재 상태
 
-`DOC-0104`에서 원본에 이미 존재하는 개체와 역할만 식별했다. 모든 이름은 미정이며 이 색인은 전체 이관 검토 전까지 `draft`다.
+`DOC-0104`에서 원본에 이미 존재하는 개체와 역할만 식별했다. `DOC-0505`는 15개 ID의 이름·상태와 Story 근거를 대조해 직접 충돌이 없음을 확인하고 `NPC-002`, `LOC-001`, `DGN-001`의 Story 역링크를 보완했다. 모든 이름은 미정이며 `DOC-0506` 자동 검사와 `DOC-0601` 사람 검토 전까지 이 색인은 `draft`다.

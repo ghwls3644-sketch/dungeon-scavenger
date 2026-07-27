@@ -42,6 +42,7 @@ related:
 - 공식 용어 검수 결과: [`project/m4_term_review.md`](project/m4_term_review.md)
 - Story·Design 중복 검수 결과: [`project/m4_story_design_review.md`](project/m4_story_design_review.md)
 - 화자 표현·NPC 지식 검수 결과: [`project/m4_speaker_knowledge_review.md`](project/m4_speaker_knowledge_review.md)
+- 핵심 설정·Entity·Timeline 검수 결과: [`project/m5_core_entity_timeline_review.md`](project/m5_core_entity_timeline_review.md)
 
 ## 다른 환경에서 작업 이어가기
 
@@ -91,6 +92,12 @@ GitHub 로그인 상태, Codex 대화 기록, 앱별 로컬 설정은 저장소�
 
 검토 관문 G-M3와 G-M4를 통과했다. `M3 — 1차 구조 이관`과 `M4 — 세계관과 구현 규칙 분리`를 완료했으며, Story는 세계관 이유·NPC 지식·정보 내용을, Design은 상태·조건·처리·계산을, Reference는 공식 명칭과 화자 표현을 상세 소유한다.
 
-현재는 `M5 — 중복 제거와 정합성 검토`를 진행 중이다. `DOC-0501`~`DOC-0504`에서 공식 용어, Story·Design 상세 정의와 화자 표현·NPC 지식을 검수했다. Glossary는 근거가 확정된 19개 항목을 가지며, Story·Design 중복 10건은 단일 출처 구조로 전환했다. 화자·집단 8개에서는 직접 표현·지식 충돌이 없었고 역할 경계·근거 링크 보완 후보 2건을 사람 검토 대상으로 분리했다. 다음 티켓은 `DOC-0505` 핵심 설정·Entity·Timeline 정합성 검토다. 신규 문서는 최종 전환 전까지 `draft`다.
+현재는 `M5 — 중복 제거와 정합성 검토`를 진행 중이다. `DOC-0501`~`DOC-0504`에서 공식 용어, Story·Design 상세 정의와 화자 표현·NPC 지식을 검수했다. Glossary는 근거가 확정된 19개 항목을 가지며, Story·Design 중복 10건은 단일 출처 구조로 전환했다. 화자·집단 8개에서는 직접 표현·지식 충돌이 없었고 역할 경계·근거 링크 보완 후보 2건을 사람 검토 대상으로 분리했다.
 
 `DOC-0505` 시작 전 정합성 검사는 완료했다. 완료 커밋과 결과물, 현재 단계와 다음 티켓은 서로 일치하며, 검사에서 발견한 M4·M5 단계 표기와 Git 인계 문구의 차이는 `MIG-CHG-002`로 정정했다.
+
+`DOC-0505`에서 핵심 설정 10개, Entity 15개와 Timeline을 대조했다. Entity의 직접 충돌은 없었고 Story 역링크 3건을 보완했다. Timeline이 마왕 봉인과 던전 증가의 선후를 원본보다 강하게 확정한 모순 1건은 선후 미정으로 정정했다. 폐던전 범람 표현의 차이는 기존 `DEC-004`로 현재 기준을 확인했으며, 동결 GDD 문구 1건은 `DOC-0601` 사람 검토 대상으로 전달한다. 신규 문서는 최종 전환 전까지 `draft`다.
+
+> ⛔ **정합성 검사할 때입니다 — `DOC-0505`에서 발견한 충돌이 해결되었거나 후속 사람 검토 대상으로 분리되었는지 확인한 뒤 `DOC-0506`을 시작합니다.**
+
+다음 티켓은 `DOC-0506` 링크·누락 자동 검사지만, 위 정합성 검사 결과를 사용자에게 보고하고 계속 진행하라는 지시를 받기 전에는 시작하지 않는다.

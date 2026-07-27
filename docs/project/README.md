@@ -20,6 +20,7 @@ related:
   - m4_term_review.md
   - m4_story_design_review.md
   - m4_speaker_knowledge_review.md
+  - m5_core_entity_timeline_review.md
 ---
 
 # 프로젝트 문서
@@ -86,6 +87,7 @@ related:
 - [`m4_term_review.md`](m4_term_review.md): 공식 용어 누락·중복 검수와 `DOC-0503` 처리 결과
 - [`m4_story_design_review.md`](m4_story_design_review.md): Story·Design 상세 정의 중복 검수와 단일 출처 전환 결과
 - [`m4_speaker_knowledge_review.md`](m4_speaker_knowledge_review.md): 화자 표현과 NPC 지식 정합성 검수, 사람 검토 보완 후보
+- [`m5_core_entity_timeline_review.md`](m5_core_entity_timeline_review.md): 핵심 설정·Entity·Timeline 충돌 검수와 처리 결과
 
 ## 경계 규칙
 

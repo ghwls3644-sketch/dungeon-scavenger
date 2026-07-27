@@ -14,6 +14,8 @@ related:
   - ../story/03_player_and_society.md
   - ../story/06_narrative_progression.md
   - entity_index.md
+  - ../project/decisions.md
+  - ../project/m5_core_entity_timeline_review.md
 ---
 
 # 사건 타임라인
@@ -42,17 +44,17 @@ related:
 - 이 문서는 사건의 상세 원인을 설명하지 않고 관련 Story 문서와 원본 ID를 연결한다.
 - 마왕과 던전 사이의 직접 인과가 없다는 사실을 시간상 선후 관계로 확대 해석하지 않는다.
 
-## 확정 상대 순서
+## 확정된 사건과 상대 순서
 
 | 순서 | 사건 또는 상태 | 시간 관계 | 정확도 | 상태 | 상세 문서 | 원본 추적 |
-|---:|---|---|---|---|---|---|
-| 1 | [`NPC-002`](entity_index.md) 마왕이 오래전에 봉인됨 | 모험가 시대의 성장보다 이전 | 상대 순서만 확정 | `confirmed` | [`../story/01_world_history.md`](../story/01_world_history.md) | `STY-0011` |
-| 2 | 자연 발생 던전이 늘고 모험가 시대와 던전 산업이 성장함 | 마왕 봉인 이후. 최초 던전 발생 시점은 미정 | 넓은 시대 구간만 확정 | `confirmed` | [`../story/01_world_history.md`](../story/01_world_history.md) | `STY-0012`, `STY-0013` |
-| 3 | 던전 공략이 누적되고 코어가 파괴된 폐던전과 잔여 구역이 생김 | 모험가 공략 활동이 자리 잡은 뒤 | 상대 순서만 확정 | `confirmed` | [`../story/01_world_history.md`](../story/01_world_history.md), [`../story/02_dungeon_canon.md`](../story/02_dungeon_canon.md) | `STY-0014` |
-| 4A | [`DGN-001`](entity_index.md)의 코어가 파괴되어 천천히 소멸하는 폐던전이 됨 | 현재의 반복 탐험보다 이전 | 현재 이전이라는 점만 확정 | `confirmed` | [`../story/02_dungeon_canon.md`](../story/02_dungeon_canon.md) | `STY-0021`, `STY-0076` |
-| 4B | [`NPC-001`](entity_index.md)은 게임 시작 시점에 이미 수색꾼으로 살아감 | 게임 시작 시점의 현재 상태 | 시작 상태만 확정 | `confirmed` | [`../story/03_player_and_society.md`](../story/03_player_and_society.md) | `STY-0031`, `STY-0032` |
+|---|---|---|---|---|---|---|
+| 독립 | [`NPC-002`](entity_index.md) 마왕이 오래전에 봉인됨 | 현재보다 오래전. 최초 던전 발생·모험가 시대와의 선후는 미정 | 현재 이전이라는 점만 확정 | `confirmed` | [`../story/01_world_history.md`](../story/01_world_history.md) | `STY-0011` |
+| 1 | 자연 발생 던전이 늘고 모험가 시대와 던전 산업이 성장함 | 던전 증가와 함께 모험가 직업·산업이 성장. 마왕 봉인과의 선후는 미정 | 넓은 시대 구간만 확정 | `confirmed` | [`../story/01_world_history.md`](../story/01_world_history.md) | `STY-0012`, `STY-0013` |
+| 2 | 던전 공략이 누적되고 코어가 파괴된 폐던전과 잔여 구역이 생김 | 모험가 공략 활동이 자리 잡은 뒤 | 상대 순서만 확정 | `confirmed` | [`../story/01_world_history.md`](../story/01_world_history.md), [`../story/02_dungeon_canon.md`](../story/02_dungeon_canon.md) | `STY-0014` |
+| 3A | [`DGN-001`](entity_index.md)의 코어가 파괴되어 천천히 소멸하는 폐던전이 됨 | 현재의 반복 탐험보다 이전 | 현재 이전이라는 점만 확정 | `confirmed` | [`../story/02_dungeon_canon.md`](../story/02_dungeon_canon.md) | `STY-0021`, `STY-0076` |
+| 3B | [`NPC-001`](entity_index.md)은 게임 시작 시점에 이미 수색꾼으로 살아감 | 게임 시작 시점의 현재 상태 | 시작 상태만 확정 | `confirmed` | [`../story/03_player_and_society.md`](../story/03_player_and_society.md) | `STY-0031`, `STY-0032` |
 
-`4A`와 `4B`의 상호 순서는 미정이다. 플레이어가 수색꾼이 된 시점과 주요 폐던전의 코어가 파괴된 시점 중 어느 쪽이 먼저인지는 원본에서 정하지 않았다.
+`독립`은 번호가 붙은 사건과의 선후를 확정하지 않는 과거 사건이다. `3A`와 `3B`의 상호 순서도 미정이다. 플레이어가 수색꾼이 된 시점과 주요 폐던전의 코어가 파괴된 시점 중 어느 쪽이 먼저인지는 원본에서 정하지 않았다.
 
 ## 반복·조건부 과정
 
@@ -82,4 +84,4 @@ related:
 
 ## 현재 상태
 
-`DOC-0105`에서 원본에 확정된 상대 순서 5개와 반복·조건부 과정 3개를 등록했다. 연도, 기간, 행위자 이름은 만들지 않았으며 이 색인은 전체 이관 검토 전까지 `draft`다.
+`DOC-0105`에서 원본에 확정된 사건 행 5개와 반복·조건부 과정 3개를 등록했다. `DOC-0505`는 마왕 봉인과 던전 증가의 선후를 동시에 확정·미정으로 적은 모순 1건을 발견해, 마왕 봉인을 다른 사건과의 선후가 미정인 독립 과거 사건으로 정정했다. 연도, 기간, 행위자 이름은 만들지 않았으며 `DOC-0506` 자동 검사와 `DOC-0601` 사람 검토 전까지 이 색인은 `draft`다.
