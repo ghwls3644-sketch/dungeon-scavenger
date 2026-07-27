@@ -39,9 +39,9 @@ related:
 - 분할 중 변경 대기열: [`project/migration_changes.md`](project/migration_changes.md)
 - 결정과 미결정 사항: [`project/decisions.md`](project/decisions.md), [`project/open_questions.md`](project/open_questions.md)
 - M2 Reference 검토 결과: [`project/m2_reference_review.md`](project/m2_reference_review.md)
-- M4 공식 용어 검수 결과: [`project/m4_term_review.md`](project/m4_term_review.md)
-- M4 Story·Design 중복 검수 결과: [`project/m4_story_design_review.md`](project/m4_story_design_review.md)
-- M4 화자 표현·NPC 지식 검수 결과: [`project/m4_speaker_knowledge_review.md`](project/m4_speaker_knowledge_review.md)
+- 공식 용어 검수 결과: [`project/m4_term_review.md`](project/m4_term_review.md)
+- Story·Design 중복 검수 결과: [`project/m4_story_design_review.md`](project/m4_story_design_review.md)
+- 화자 표현·NPC 지식 검수 결과: [`project/m4_speaker_knowledge_review.md`](project/m4_speaker_knowledge_review.md)
 
 ## 다른 환경에서 작업 이어가기
 
@@ -53,7 +53,8 @@ related:
 4. `git log -1 --oneline`으로 현재 커밋을 확인한다.
 5. 루트의 [`AGENTS.md`](../AGENTS.md)와 이 문서를 읽고, [`project/migration_manifest.md`](project/migration_manifest.md)에서 현재 단계와 다음 티켓을 확인한다.
 6. Codex에는 “`AGENTS.md`와 `docs/README.md`, 이관 현황을 읽고 다음 티켓부터 계속 진행해”라고 요청한다.
-7. 티켓을 완료하면 검증 결과를 확인한 뒤 커밋·푸시 여부를 승인한다. 두 장소에서 동시에 `main`을 수정하지 않는다.
+7. 티켓을 완료하면 검증 결과를 확인한 뒤 해당 티켓의 로컬 커밋 여부를 승인한다.
+8. 완료한 티켓 커밋은 로컬에 모아 두고, 사용자가 현재 작업 묶음의 종료를 선언하거나 명시적으로 push를 요청할 때만 `origin/main`에 push한다. 두 장소에서 동시에 `main`을 수정하지 않는다.
 
 GitHub 로그인 상태, Codex 대화 기록, 앱별 로컬 설정은 저장소에 포함되지 않으므로 새 환경에서 별도로 준비한다.
 
@@ -88,6 +89,8 @@ GitHub 로그인 상태, Codex 대화 기록, 앱별 로컬 설정은 저장소�
 
 ## 현재 단계
 
-검토 관문 G-M3를 통과하고 문서 분할 단계 `M3 — 1차 구조 이관`을 완료했다. `M4 — 세계관과 구현 규칙 분리`의 `DOC-0501`~`DOC-0504`에서 공식 용어, Story·Design 상세 정의와 화자 표현·NPC 지식을 검수했다. Glossary는 근거가 확정된 19개 항목을 가지며, Story·Design 중복 10건은 단일 출처 구조로 전환했다. 화자·집단 8개에서는 직접 표현·지식 충돌이 없었고 역할 경계·근거 링크 보완 후보 2건을 사람 검토 대상으로 분리했다. 다음 티켓은 `DOC-0505` 핵심 설정·Entity·Timeline 정합성 검토다. 신규 문서는 최종 전환 전까지 `draft`다.
+검토 관문 G-M3와 G-M4를 통과했다. `M3 — 1차 구조 이관`과 `M4 — 세계관과 구현 규칙 분리`를 완료했으며, Story는 세계관 이유·NPC 지식·정보 내용을, Design은 상태·조건·처리·계산을, Reference는 공식 명칭과 화자 표현을 상세 소유한다.
 
-> ⛔ **정합성 검사할 때입니다.** `DOC-0505`를 시작하기 전에 완료 커밋, 현재 진행 단계, M4·M5 명칭과 작업 범위, 다음 티켓이 처음 계획과 서로 맞는지 검사한다.
+현재는 `M5 — 중복 제거와 정합성 검토`를 진행 중이다. `DOC-0501`~`DOC-0504`에서 공식 용어, Story·Design 상세 정의와 화자 표현·NPC 지식을 검수했다. Glossary는 근거가 확정된 19개 항목을 가지며, Story·Design 중복 10건은 단일 출처 구조로 전환했다. 화자·집단 8개에서는 직접 표현·지식 충돌이 없었고 역할 경계·근거 링크 보완 후보 2건을 사람 검토 대상으로 분리했다. 다음 티켓은 `DOC-0505` 핵심 설정·Entity·Timeline 정합성 검토다. 신규 문서는 최종 전환 전까지 `draft`다.
+
+`DOC-0505` 시작 전 정합성 검사는 완료했다. 완료 커밋과 결과물, 현재 단계와 다음 티켓은 서로 일치하며, 검사에서 발견한 M4·M5 단계 표기와 Git 인계 문구의 차이는 `MIG-CHG-002`로 정정했다.
