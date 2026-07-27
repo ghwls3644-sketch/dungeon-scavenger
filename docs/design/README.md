@@ -14,6 +14,7 @@ related:
   - ../reference/README.md
   - ../project/m4_story_design_review.md
   - ../project/m5_core_entity_timeline_review.md
+  - ../project/m5_link_omission_review.md
 ---
 
 # Design 문서 안내
@@ -41,4 +42,4 @@ related:
 
 ## 현재 상태
 
-Story 이관 후 확인한 Design 티켓 `DOC-0301`~`DOC-0304`와 Project 이관을 완료하고 G-M3를 통과했다. [`narrative_delivery.md`](narrative_delivery.md), [`repeat_exploration.md`](repeat_exploration.md), [`item_rules.md`](item_rules.md), [`economy_rules.md`](economy_rules.md)는 전체 전환 승인 전까지 `draft`다. `DOC-0501` 공식 용어 검수 결과는 [`../project/m4_term_review.md`](../project/m4_term_review.md)에, `DOC-0502` 중복 탐지와 `DOC-0503` 단일 출처 전환 결과는 [`../project/m4_story_design_review.md`](../project/m4_story_design_review.md)에 기록했다. `DOC-0504` 화자 표현·NPC 지식 검수 결과는 [`../project/m4_speaker_knowledge_review.md`](../project/m4_speaker_knowledge_review.md)에 기록했다. `DOC-0505` 핵심 설정·Entity·Timeline 검수 결과는 [`../project/m5_core_entity_timeline_review.md`](../project/m5_core_entity_timeline_review.md)에 기록했으며 Design 본문 변경은 없었다. Design은 상태·조건·처리·계산을 상세 소유하고 Story의 이유·지식·정보 내용을 요약 링크로 참조한다. 현재는 `DOC-0505` 완료 후 정합성 검사 시점이며, 검사 통과 후 다음 티켓은 `DOC-0506` 링크·누락 자동 검사다.
+Story 이관 후 확인한 Design 티켓 `DOC-0301`~`DOC-0304`와 Project 이관을 완료하고 G-M3를 통과했다. [`narrative_delivery.md`](narrative_delivery.md), [`repeat_exploration.md`](repeat_exploration.md), [`item_rules.md`](item_rules.md), [`economy_rules.md`](economy_rules.md)는 전체 전환 승인 전까지 `draft`다. `DOC-0501` 공식 용어 검수 결과는 [`../project/m4_term_review.md`](../project/m4_term_review.md)에, `DOC-0502` 중복 탐지와 `DOC-0503` 단일 출처 전환 결과는 [`../project/m4_story_design_review.md`](../project/m4_story_design_review.md)에 기록했다. `DOC-0504` 화자 표현·NPC 지식 검수 결과는 [`../project/m4_speaker_knowledge_review.md`](../project/m4_speaker_knowledge_review.md)에 기록했다. `DOC-0505` 핵심 설정·Entity·Timeline 검수 결과는 [`../project/m5_core_entity_timeline_review.md`](../project/m5_core_entity_timeline_review.md)에 기록했으며 Design 본문 변경은 없었다. `DOC-0506` 링크·누락 검사 결과는 [`../project/m5_link_omission_review.md`](../project/m5_link_omission_review.md)에 기록했으며 Design 5개는 중앙 진입점에서 모두 접근 가능하다. Design은 상태·조건·처리·계산을 상세 소유하고 Story의 이유·지식·정보 내용을 요약 링크로 참조한다. 현재는 `DOC-0506` 완료 후 정합성 검사와 G-M5 검토 시점이다.

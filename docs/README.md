@@ -43,6 +43,7 @@ related:
 - Story·Design 중복 검수 결과: [`project/m4_story_design_review.md`](project/m4_story_design_review.md)
 - 화자 표현·NPC 지식 검수 결과: [`project/m4_speaker_knowledge_review.md`](project/m4_speaker_knowledge_review.md)
 - 핵심 설정·Entity·Timeline 검수 결과: [`project/m5_core_entity_timeline_review.md`](project/m5_core_entity_timeline_review.md)
+- 링크·누락 자동 검사 결과: [`project/m5_link_omission_review.md`](project/m5_link_omission_review.md)
 
 ## 다른 환경에서 작업 이어가기
 
@@ -98,6 +99,10 @@ GitHub 로그인 상태, Codex 대화 기록, 앱별 로컬 설정은 저장소�
 
 `DOC-0505`에서 핵심 설정 10개, Entity 15개와 Timeline을 대조했다. Entity의 직접 충돌은 없었고 Story 역링크 3건을 보완했다. Timeline이 마왕 봉인과 던전 증가의 선후를 원본보다 강하게 확정한 모순 1건은 선후 미정으로 정정했다. 폐던전 범람 표현의 차이는 기존 `DEC-004`로 현재 기준을 확인했으며, 동결 GDD 문구 1건은 `DOC-0601` 사람 검토 대상으로 전달한다. 신규 문서는 최종 전환 전까지 `draft`다.
 
-> ⛔ **정합성 검사할 때입니다 — `DOC-0505`에서 발견한 충돌이 해결되었거나 후속 사람 검토 대상으로 분리되었는지 확인한 뒤 `DOC-0506`을 시작합니다.**
+`DOC-0505` 완료 후 정합성 검사는 통과했다. 핵심 설정과 기존 결정, Entity 15개, Timeline 정정과 `DOC-0601` 후속 검토 연결이 서로 일치하며 사용자의 다음 작업 진행 지시로 `DOC-0506`을 시작했다.
 
-다음 티켓은 `DOC-0506` 링크·누락 자동 검사지만, 위 정합성 검사 결과를 사용자에게 보고하고 계속 진행하라는 지시를 받기 전에는 시작하지 않는다.
+`DOC-0506`에서 활성 Markdown의 상대 링크·앵커·탐색 경로, Front Matter, 원본 제목 103개와 구조화 요소 32개, Reference와 관리 ID를 자동 검사했다. 끊긴 링크, 탐색 불가능한 문서, 원본 이관 누락과 ID 중복은 발견되지 않았으며 G-M5 완료 조건 7개는 모두 충족 후보다.
+
+> ⛔ **정합성 검사할 때입니다 — `DOC-0506` 링크·누락 검사 결과와 M5 완료 조건 7개가 서로 맞는지 확인하고 G-M5 통과 여부를 판단합니다.**
+
+현재는 `DOC-0506` 완료 후 정합성 검사 시점이다. 검사 결과를 사용자에게 보고하고 계속 진행하라는 지시를 받기 전에는 G-M5 통과나 `DOC-0601`을 시작하지 않는다.
