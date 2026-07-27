@@ -15,6 +15,14 @@
 - Keep Story (why and what is true), Design (how it works), Reference (what it is called), and Project (decisions and status) responsibilities separate.
 - Record new migration-time content changes in `docs/project/migration_changes.md` before applying them to canonical documents.
 
+## Consistency-check reminders
+
+- Read the checkpoint table in `docs/README.md` and `docs/project/migration_manifest.md` before starting the next ticket.
+- When the current work reaches a recorded checkpoint, begin the user-facing status with `⛔ 정합성 검사할 때입니다`.
+- Immediately explain in plain language which completed work, current rules, or next tasks must match, report the result, and do not start the next ticket until the user directs work to continue.
+- Include `정합성 검사: 지금` or `정합성 검사: 아직 아님` in each ticket completion summary.
+- When a completed ticket changes the current or next checkpoint, update both checkpoint tables in the same ticket.
+
 ## Validation
 
 - Preserve the recorded SHA-256 hashes of frozen source documents.
