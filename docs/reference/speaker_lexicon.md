@@ -11,6 +11,7 @@ last_reviewed:
 owner: narrative-design
 related:
   - glossary.md
+  - ../story/03_player_and_society.md
   - ../story/04_characters_and_factions.md
   - ../story/06_narrative_progression.md
   - ../story/07_tone_and_writing_guide.md
@@ -198,7 +199,7 @@ related:
 ## 감정사 / 연구자
 
 - ID: `SPEAKER-APPRAISERS-RESEARCHERS`
-- 관련 인물/집단: 감정사와 연구자
+- 관련 인물/집단: 감정사와 연구자. 공통 분석 어휘는 함께 적용하고, 단계별 지식 변화와 아래 대사 예시는 연구자에게만 적용한다.
 - 선호 표현:
   - 마력 잔향
   - 기억 흔적
@@ -214,6 +215,7 @@ related:
   - [`../story/04_characters_and_factions.md`](../story/04_characters_and_factions.md)
   - [`../story/06_narrative_progression.md`](../story/06_narrative_progression.md)
 - 예시:
+  - 아래 예시는 모두 연구자 전용이며 감정사 대사 예시가 아니다.
   - `TBL-010` 연구자 정보 변화:
     - 초반: “마왕 전승과 던전 발생 기록이 함께 묶인 문헌은 많지만, 같은 원인이라고 보긴 어렵습니다.”
     - 중반: “당신이 가져온 기록을 보면, 던전 발생은 봉인보다 지맥 이상과 더 자주 겹칩니다.”
@@ -325,6 +327,7 @@ related:
   - 편견
   - 강함에 대한 오해
 - 지식 범위 문서:
+  - [`../story/03_player_and_society.md`](../story/03_player_and_society.md)
   - [`../story/04_characters_and_factions.md`](../story/04_characters_and_factions.md)
 - 예시:
   - 비하 표현: `도적`, `잔반 처리`
@@ -337,6 +340,7 @@ related:
 ## 관련 문서
 
 - [`glossary.md`](glossary.md)
+- [`../story/03_player_and_society.md`](../story/03_player_and_society.md)
 - [`../story/04_characters_and_factions.md`](../story/04_characters_and_factions.md)
 - [`../story/06_narrative_progression.md`](../story/06_narrative_progression.md)
 - [`../story/07_tone_and_writing_guide.md`](../story/07_tone_and_writing_guide.md)

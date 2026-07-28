@@ -15,6 +15,7 @@ related:
   - m4_story_design_review.md
   - m5_core_entity_timeline_review.md
   - m5_link_omission_review.md
+  - m6_human_review.md
   - ../README.md
 ---
 
@@ -49,3 +50,4 @@ DOC-0003 검토 완료 후 기록을 시작한다.
 | 2026-07-25 | `DOC-0504` | [`m4_speaker_knowledge_review.md`](m4_speaker_knowledge_review.md) 생성 | 화자 표현 8개와 NPC 지식 범위의 직접 충돌 및 사람 검토 보완 후보를 기준 본문과 분리해 추적하기 위해 추가했다. |
 | 2026-07-27 | `DOC-0505` | [`m5_core_entity_timeline_review.md`](m5_core_entity_timeline_review.md) 생성, Timeline 선후 모순 1건 정정과 Entity Story 역링크 3건 보완 | 핵심 설정·Entity·Timeline 대조 결과와 동결 GDD의 사람 검토 후보를 기준 본문과 분리해 추적하기 위해 변경했다. |
 | 2026-07-27 | `DOC-0506` | [`m5_link_omission_review.md`](m5_link_omission_review.md) 생성 | 활성 문서 링크·앵커, 탐색 경로, Front Matter와 원본 이관 누락 검사 결과를 기준 본문과 분리해 추적하기 위해 추가했다. |
+| 2026-07-28 | `DOC-0601` | [`m6_human_review.md`](m6_human_review.md) 생성, Speaker Lexicon의 적용 범위·근거 링크 2건 보완 | 사람 검토 승인 결과, 동결 GDD의 후속 개정 필요성과 다음 기준 상태 전환 후보를 한곳에서 확인하기 위해 변경했다. |

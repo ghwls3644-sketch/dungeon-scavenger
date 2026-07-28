@@ -17,6 +17,7 @@ related:
   - m4_story_design_review.md
   - m4_speaker_knowledge_review.md
   - m5_core_entity_timeline_review.md
+  - m6_human_review.md
   - ../README.md
   - ../story/README.md
   - ../design/README.md
@@ -123,9 +124,9 @@ Glossary의 상세 설정 링크 19개는 모두 Story 또는 Design의 실제 �
 
 Glossary 19개 항목은 모두 상세 설정 링크를 갖는다. Speaker Lexicon 8개 항목은 관련 집단, 선호·회피 표현, 말투, 지식 범위 문서와 예시 필드를 갖는다.
 
-## G-M5 완료 조건 예비 판정
+## G-M5 완료 조건 판정
 
-| G-M5 조건 | 예비 결과 | 근거 |
+| G-M5 조건 | 결과 | 근거 |
 |---|---|---|
 | 핵심 용어의 짧은 정의와 상세 정설 위치가 분명한가? | 충족 | Glossary 19개 필수 필드와 상세 설정 링크 19개 통과 |
 | 공식 용어와 은어가 섞이지 않았는가? | 충족 | Glossary와 Speaker Lexicon의 책임 분리, `DOC-0504` 직접 충돌 0건 |
@@ -135,7 +136,7 @@ Glossary 19개 항목은 모두 상세 설정 링크를 갖는다. Speaker Lexic
 | 분할 중 변경 요청이 모두 처리되었는가? | 충족 | [`migration_changes.md`](migration_changes.md)의 대기 중 변경 0건 |
 | Glossary와 Speaker Lexicon이 서로의 책임을 침범하지 않는가? | 충족 | `DOC-0504` 책임 경계 검수와 항목 필수 필드 검사 통과 |
 
-자동 검사와 기존 M5 검수 근거상 G-M5 조건 7개는 모두 충족 후보로 판정한다. 정식 G-M5 통과는 `DOC-0506` 완료 후 정합성 검사에서 결과와 후속 사람 검토 대상을 확인한 뒤 기록한다.
+자동 검사와 기존 M5 검수 근거상 G-M5 조건 7개는 모두 충족한다. `DOC-0506` 완료 후 정합성 검사에서 결과와 후속 사람 검토 대상을 확인했고, 사용자의 진행 지시에 따라 2026-07-28에 G-M5를 통과하고 `DOC-0601`을 시작했다.
 
 ## 발견 사항과 처리
 
@@ -152,8 +153,8 @@ Glossary 19개 항목은 모두 상세 설정 링크를 갖는다. Speaker Lexic
 - Front Matter·관련 경로 오류: 0건
 - 원본 제목·구조화 요소 누락: 0건
 - 추적·관리 ID 중복 또는 누락: 0건
-- G-M5 완료 조건: 7개 모두 충족 후보
-- 다음 단계: `DOC-0506 완료 후 정합성 검사와 G-M5 검토`
-- 검사 통과 후 다음 티켓: `DOC-0601 — 사람 검토 반영`
+- G-M5 완료 조건: 7개 모두 충족
+- G-M5 결과: `2026-07-28 통과`
+- 다음 티켓: `DOC-0601 — 사람 검토 반영`
 
-이 보고서는 `DOC-0601` 사람 검토가 끝날 때까지 `draft`다.
+`DOC-0601` 사람 검토 결과는 [`m6_human_review.md`](m6_human_review.md)에 기록했으며, 이 보고서는 자동 검사 이력으로 `draft`를 유지한다.
