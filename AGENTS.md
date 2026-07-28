@@ -3,10 +3,22 @@
 ## Canonical context
 
 - Start documentation work from `docs/README.md`.
-- Treat `docs/GDD.md` as the current product and system overview.
+- Treat `docs/GDD.md` as the current product and system overview, not as a replacement for detailed domain rules.
+- Use `confirmed` Story documents for world facts and narrative knowledge, `confirmed` Design documents for behavior and implementation rules, and `confirmed` Reference documents for official names and speaker expression.
+- Use `provisional` documents only within their stated limits. Do not use a `draft` document as a standalone implementation or content authority.
+- Start development-ticket document reading from `docs/project/development_handoff.md`.
 - Track source migration in `docs/project/migration_manifest.md` and `docs/project/story_v1.5_inventory.md`.
-- Do not edit files under `게임 기획 파일/` or `docs/archive/` unless the user explicitly requests an archival correction.
-- Until the document migration is formally approved, new Story, Design, and Reference documents remain drafts and do not replace the frozen source.
+- Treat files under `게임 기획 파일/` and `docs/archive/` as frozen evidence, not current working documents. Do not edit them unless the user explicitly requests an archival correction.
+
+## Document routing
+
+- For product direction, core loop, MVP scope, or cross-system impact, read `docs/GDD.md` and the linked detailed documents.
+- For world facts, causality, character knowledge, discoveries, or narrative progression, start from `docs/story/README.md`.
+- For state, conditions, calculations, item behavior, economy, or repeat exploration, start from `docs/design/README.md`.
+- For official terminology, speaker wording, entity IDs, or event order, start from `docs/reference/README.md`.
+- For approved decisions, unresolved questions, document status, or migration history, start from `docs/project/README.md`.
+- For development stage and ticket routing, use `docs/project/development_handoff.md`; consult the frozen development proposal only for historical stage and ticket structure.
+- Before changing a shared concept, follow links from the owning document and check its related Story, Design, Reference, GDD, decision, and open-question impact.
 
 ## Task scope
 

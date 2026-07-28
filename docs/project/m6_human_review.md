@@ -17,6 +17,7 @@ related:
   - m4_speaker_knowledge_review.md
   - m5_core_entity_timeline_review.md
   - m5_link_omission_review.md
+  - development_handoff.md
   - ../GDD.md
   - ../story/README.md
   - ../design/README.md
@@ -105,3 +106,12 @@ related:
 - Archive 경고: [`../archive/README.md`](../archive/README.md)에 현재 기준 문서 링크와 해시 보존 방식을 명시
 - 보존 원문: 직접 수정하지 않아 기록된 SHA-256 유지
 - 다음 티켓: `DOC-0603 — AGENTS 및 개발 문서 링크 갱신`
+
+## DOC-0603 기준 인계 결과
+
+- AGENTS가 GDD 개요와 `confirmed` Story·Design·Reference, 제한적 `provisional`, 단독 기준으로 사용할 수 없는 `draft`를 구분해 안내한다.
+- GDD가 새 공식 문서와 개발 인계 안내를 직접 연결하며, 상세 기준보다 우선하지 않는 제품·시스템 개요 역할을 명시한다.
+- 동결 개발 제안서는 수정하지 않고 [`development_handoff.md`](development_handoff.md)에서 기존 단계·티켓을 현재 기준 문서와 연결한다.
+- GDD 3-4의 옛 범람 표현을 `DEC-004`의 `사라진다`로 정정했다.
+- `게임 기획 파일/`과 Archive 보존 원문은 수정하지 않았다.
+- 다음 검사: `DOC-0603 완료 후 정합성 검사와 G-M6 검토`

@@ -15,6 +15,7 @@ related:
   - decisions.md
   - open_questions.md
   - gdd_mapping.md
+  - development_handoff.md
   - migration_manifest.md
   - m2_reference_review.md
   - m4_term_review.md
@@ -62,7 +63,7 @@ related:
 | `owner` | 최종 검토 책임 역할 |
 | `related` | 반드시 함께 읽어야 하는 실제 상대 경로 |
 
-`docs/GDD.md`와 `docs/archive/`의 동결 사본은 원본 해시 보존을 위해 이 형식으로 재작성하지 않는다. GDD의 현재 상태는 문서 본문의 기준 선언을 따르고, Archive는 현재 기준으로 사용하지 않는다.
+`docs/GDD.md`는 `DOC-0603`부터 활성 제품·시스템 개요로 관리하므로 이 Front Matter 형식으로 재작성하지 않고 본문의 기준 선언을 따른다. `게임 기획 파일/`의 GDD 원본과 `docs/archive/`의 보존 문서는 기록된 해시를 유지하며 현재 기준으로 사용하지 않는다.
 
 ## 문서 상태
 
@@ -81,6 +82,7 @@ related:
 - [`decisions.md`](decisions.md): 승인된 세계관·설계·운영 결정
 - [`open_questions.md`](open_questions.md): 미결정·가안·보류 항목
 - [`gdd_mapping.md`](gdd_mapping.md): Story·Reference·Design·GDD·구현 영향 연결
+- [`development_handoff.md`](development_handoff.md): 동결 개발 제안서의 단계·티켓과 현재 공식 문서 연결
 - [`migration_manifest.md`](migration_manifest.md): 원본, 활성 문서, 아카이브의 대응 관계와 검증 상태
 - [`migration_changes.md`](migration_changes.md): 분할 기간에 접수된 변경의 단일 대기열
 - [`story_v1.5_inventory.md`](story_v1.5_inventory.md): 스토리 원본의 장·소제목과 구조화 요소 전체 목록

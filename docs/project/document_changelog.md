@@ -52,3 +52,4 @@ DOC-0003 검토 완료 후 기록을 시작한다.
 | 2026-07-27 | `DOC-0506` | [`m5_link_omission_review.md`](m5_link_omission_review.md) 생성 | 활성 문서 링크·앵커, 탐색 경로, Front Matter와 원본 이관 누락 검사 결과를 기준 본문과 분리해 추적하기 위해 추가했다. |
 | 2026-07-28 | `DOC-0601` | [`m6_human_review.md`](m6_human_review.md) 생성, Speaker Lexicon의 적용 범위·근거 링크 2건 보완 | 사람 검토 승인 결과, 동결 GDD의 후속 개정 필요성과 다음 기준 상태 전환 후보를 한곳에서 확인하기 위해 변경했다. |
 | 2026-07-28 | `DOC-0602` | Story·Design·필수 Reference 17개를 `confirmed`, Entity Index·Timeline 2개를 `provisional`로 전환하고 Archive 경고 강화 | 검증을 마친 분할 문서를 공식 기준으로 사용하되, 미정 개체·시점과 상세 이관 전 Harness 골격의 제한을 상태로 분명히 하기 위해 변경했다. |
+| 2026-07-28 | `DOC-0603` | AGENTS와 GDD를 새 공식 문서 구조로 연결하고 [`development_handoff.md`](development_handoff.md)와 Reference 읽기 순서 추가 | 동결 개발 제안서를 수정하지 않으면서 다른 환경의 Codex가 현재 기준과 기존 개발 단계·티켓을 함께 찾을 수 있게 변경했다. |

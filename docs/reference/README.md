@@ -27,6 +27,14 @@ related:
 
 공식적으로 무엇이라 부르는지, 화자에 따라 어떻게 표현하는지, 고유 개체와 사건 순서를 어디서 찾는지 안내한다. 상세 정설은 Story, 작동 규칙은 Design에서 관리한다.
 
+## 권장 읽기 순서
+
+1. 공식 표기와 의미 경계는 [`glossary.md`](glossary.md)에서 확인한다.
+2. 대사·설명 문구 작업이면 [`speaker_lexicon.md`](speaker_lexicon.md)를 함께 읽는다.
+3. 고유 개체를 추적해야 할 때만 [`entity_index.md`](entity_index.md)를 확인한다.
+4. 사건 선후가 필요한 작업에서만 [`timeline.md`](timeline.md)를 확인한다.
+5. 각 항목이 연결한 Story·Design 문서에서 상세 사실과 작동 규칙을 읽는다.
+
 ## 문서별 책임
 
 | 문서 | 답하는 질문 |

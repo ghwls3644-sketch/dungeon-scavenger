@@ -12,6 +12,7 @@ owner: project-maintainer
 related:
   - ../GDD.md
   - story_v1.5_inventory.md
+  - development_handoff.md
   - ../story/README.md
   - ../design/README.md
   - ../reference/README.md
@@ -89,4 +90,4 @@ related:
 
 ## 이관 상태
 
-`DOC-0403`에서 원본 `STY-0102`와 `FNC-001`의 추천 구조를 보존하고, 13개 추천 절을 현재 Story·Design·Reference 기준과 통합 GDD 절에 연결했다. 현행 GDD의 번호나 내용을 바꾸지 않았으며 새 설정, 수치, 상태, 식별자, 미결정 사항의 해답을 추가하지 않았다. 이 문서는 전체 전환 승인 전까지 `draft`다.
+`DOC-0403`에서 원본 `STY-0102`와 `FNC-001`의 추천 구조를 보존하고, 13개 추천 절을 Story·Design·Reference 기준과 통합 GDD 절에 연결했다. `DOC-0603`은 GDD를 활성 제품·시스템 개요로 전환해 새 기준 문서와 [`development_handoff.md`](development_handoff.md)를 직접 연결하고, 승인된 `DEC-004`에 따라 3-4의 옛 범람 표현을 현재 규칙과 맞췄다. 새 설정, 수치, 식별자 또는 미결정 사항의 해답은 추가하지 않았다.

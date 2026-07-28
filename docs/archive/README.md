@@ -1,6 +1,6 @@
 # 문서 아카이브
 
-> **주의: 이 디렉터리의 문서는 현재 기준이 아닙니다.** 게임 설정과 구현 판단에는 [`../story/README.md`](../story/README.md), [`../design/README.md`](../design/README.md), [`../reference/README.md`](../reference/README.md)의 활성 문서를 사용하고, 이곳은 원문 대조·누락 검수·변경 이력 확인에만 사용합니다.
+> **주의: 이 디렉터리의 문서는 현재 기준이 아닙니다.** 제품 개요는 [`../GDD.md`](../GDD.md), 상세 설정과 구현 판단은 [`../story/README.md`](../story/README.md), [`../design/README.md`](../design/README.md), [`../reference/README.md`](../reference/README.md), 개발 티켓 인계는 [`../project/development_handoff.md`](../project/development_handoff.md)를 사용하고, 이곳은 원문 대조·누락 검수·변경 이력 확인에만 사용합니다.
 
 개별 보존 파일의 첫 줄에는 이 경고를 삽입하지 않는다. 원본과 바이트 단위로 같은 SHA-256을 유지하기 위해 경고는 이 README에서 관리한다.
 
