@@ -2,12 +2,12 @@
 id: DESIGN-ITEM-RULES
 title: 아이템 규칙
 document_type: design
-status: draft
+status: confirmed
 source_version: story-v1.5+gdd-v2.1
 canonical_for:
   - item_system_rules
   - item_persistence
-last_reviewed:
+last_reviewed: 2026-07-28
 owner: game-design
 related:
   - ../GDD.md
@@ -236,4 +236,4 @@ GDD의 `4-4. 실패 손실`, `4-5. 저장`, `6-3. 적재 모델`, `6-4. 가치 �
 
 ## 이관 상태
 
-`DOC-0303`에서 원본 7장·8장·10장의 아이템 구현 책임과 GDD의 데이터·저장·UI 규칙을 추출했다. 문서는 전체 전환 승인 전까지 `draft`다.
+`DOC-0303`에서 원본 7장·8장·10장의 아이템 구현 책임과 GDD의 데이터·저장·UI 규칙을 추출했다. 누락·정합성 검사와 사람 검토를 마쳐 `DOC-0602`에서 `confirmed`로 전환했다.

@@ -2,12 +2,12 @@
 id: STORY-ITEMS-DISCOVERIES
 title: 아이템과 발견물
 document_type: story
-status: draft
+status: confirmed
 source_version: story-v1.5
 canonical_for:
   - item_lore
   - discovery_narrative_roles
-last_reviewed:
+last_reviewed: 2026-07-28
 owner: narrative-design
 related:
   - ../GDD.md
@@ -189,4 +189,4 @@ related:
 
 ## 이관 상태
 
-`DOC-0206`에서 원본 8장의 아이템 의미·원본성과 10장의 발견물·단서 책임을 이관했다. `DOC-0301`은 전달 규칙을 [`../design/narrative_delivery.md`](../design/narrative_delivery.md)로, `DOC-0302`는 방문 간 배치와 노출 규칙을 [`../design/repeat_exploration.md`](../design/repeat_exploration.md)로, `DOC-0303`은 아이템 구현 규칙을 [`../design/item_rules.md`](../design/item_rules.md)로 분리했다. 문서는 전체 전환 승인 전까지 `draft`다.
+`DOC-0206`에서 원본 8장의 아이템 의미·원본성과 10장의 발견물·단서 책임을 이관했다. `DOC-0301`은 전달 규칙을 [`../design/narrative_delivery.md`](../design/narrative_delivery.md)로, `DOC-0302`는 방문 간 배치와 노출 규칙을 [`../design/repeat_exploration.md`](../design/repeat_exploration.md)로, `DOC-0303`은 아이템 구현 규칙을 [`../design/item_rules.md`](../design/item_rules.md)로 분리했다. 누락·정합성 검사와 사람 검토를 마쳐 `DOC-0602`에서 `confirmed`로 전환했다.

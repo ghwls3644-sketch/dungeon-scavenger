@@ -2,12 +2,12 @@
 id: DESIGN-REPEAT-EXPLORATION
 title: 반복 탐험 규칙
 document_type: design
-status: draft
+status: confirmed
 source_version: story-v1.5+gdd-v2.1
 canonical_for:
   - repeat_exploration_rules
   - visit_state_transitions
-last_reviewed:
+last_reviewed: 2026-07-28
 owner: game-design
 related:
   - ../GDD.md
@@ -241,4 +241,4 @@ GDD의 `4-3. 성공과 실패`, `4-4. 실패 손실`, `4-5. 저장`, `5-1. 공�
 
 ## 이관 상태
 
-`DOC-0302`에서 원본 11장의 반복 탐험 규칙과 GDD의 방문·저장 상태를 추출했다. 문서는 전체 전환 승인 전까지 `draft`다.
+`DOC-0302`에서 원본 11장의 반복 탐험 규칙과 GDD의 방문·저장 상태를 추출했다. 누락·정합성 검사와 사람 검토를 마쳐 `DOC-0602`에서 `confirmed`로 전환했다.

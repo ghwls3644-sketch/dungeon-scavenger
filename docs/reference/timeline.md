@@ -2,11 +2,11 @@
 id: REFERENCE-TIMELINE
 title: 사건 타임라인
 document_type: reference
-status: draft
+status: provisional
 source_version: story-v1.5
 canonical_for:
   - event_order
-last_reviewed:
+last_reviewed: 2026-07-28
 owner: narrative-design
 related:
   - ../story/01_world_history.md
@@ -84,4 +84,4 @@ related:
 
 ## 현재 상태
 
-`DOC-0105`에서 원본에 확정된 사건 행 5개와 반복·조건부 과정 3개를 등록했다. `DOC-0505`는 마왕 봉인과 던전 증가의 선후를 동시에 확정·미정으로 적은 모순 1건을 발견해, 마왕 봉인을 다른 사건과의 선후가 미정인 독립 과거 사건으로 정정했다. 연도, 기간, 행위자 이름은 만들지 않았으며 `DOC-0506` 자동 검사와 `DOC-0601` 사람 검토 전까지 이 색인은 `draft`다.
+`DOC-0105`에서 원본에 확정된 사건 행 5개와 반복·조건부 과정 3개를 등록했다. `DOC-0505`는 마왕 봉인과 던전 증가의 선후를 동시에 확정·미정으로 적은 모순 1건을 발견해, 마왕 봉인을 다른 사건과의 선후가 미정인 독립 과거 사건으로 정정했다. `DOC-0506` 자동 검사와 `DOC-0601` 사람 검토를 마쳐 `DOC-0602`에서 `provisional`로 전환했다. 연도·기간·행위자와 미정 선후는 새 설정으로 채우지 않는다.

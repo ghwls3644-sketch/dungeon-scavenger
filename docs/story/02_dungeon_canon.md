@@ -2,13 +2,13 @@
 id: STORY-DUNGEON-CANON
 title: 던전 정설
 document_type: story
-status: draft
+status: confirmed
 source_version: story-v1.5
 canonical_for:
   - dungeon_causality
   - dead_dungeon_detailed_rules
   - residual_zone_lore
-last_reviewed:
+last_reviewed: 2026-07-28
 owner: narrative-design
 related:
   - ../GDD.md
@@ -279,4 +279,4 @@ related:
 
 ## 이관 상태
 
-`DOC-0203`에서 원본 3장·4장의 정설과 11장의 Story 책임, 13-3의 상세 의미를 이관했다. `DOC-0302`는 11장의 방문 간 상태 전환과 처리 규칙을 [`../design/repeat_exploration.md`](../design/repeat_exploration.md)로 분리했다. 문서는 전체 전환 승인 전까지 `draft`다.
+`DOC-0203`에서 원본 3장·4장의 정설과 11장의 Story 책임, 13-3의 상세 의미를 이관했다. `DOC-0302`는 11장의 방문 간 상태 전환과 처리 규칙을 [`../design/repeat_exploration.md`](../design/repeat_exploration.md)로 분리했다. 누락·정합성 검사와 사람 검토를 마쳐 `DOC-0602`에서 `confirmed`로 전환했다.

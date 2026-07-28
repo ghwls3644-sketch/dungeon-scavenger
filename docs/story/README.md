@@ -2,11 +2,11 @@
 id: STORY-INDEX
 title: Story 문서 안내
 document_type: story
-status: draft
+status: confirmed
 source_version: management-proposal-v0.2.1
 canonical_for:
   - story_document_navigation
-last_reviewed:
+last_reviewed: 2026-07-28
 owner: narrative-design
 related:
   - ../GDD.md
@@ -47,8 +47,8 @@ related:
 
 ## 현재 상태
 
-[`00_core_pillars.md`](00_core_pillars.md)는 `DOC-0201`에서 핵심 전제를, [`01_world_history.md`](01_world_history.md)는 `DOC-0202`에서 세계 역사를, [`02_dungeon_canon.md`](02_dungeon_canon.md)는 `DOC-0203`에서 던전 정설을, [`03_player_and_society.md`](03_player_and_society.md)는 `DOC-0204`에서 플레이어와 사회를, [`04_characters_and_factions.md`](04_characters_and_factions.md)는 `DOC-0205`에서 NPC와 세력을, [`05_items_and_discoveries.md`](05_items_and_discoveries.md)는 `DOC-0206`에서 아이템과 발견물을, [`06_narrative_progression.md`](06_narrative_progression.md)는 `DOC-0207`에서 내러티브 진행을, [`07_tone_and_writing_guide.md`](07_tone_and_writing_guide.md)는 `DOC-0103`에서 공통 톤과 설명 문체를 이관했다. 전체 전환 승인 전까지 [`../archive/story_v1.5_full.md`](../archive/story_v1.5_full.md)가 스토리 원문 기준이며, 이 디렉터리의 본문은 아직 공식 설정을 대체하지 않는다.
+[`00_core_pillars.md`](00_core_pillars.md)는 `DOC-0201`에서 핵심 전제를, [`01_world_history.md`](01_world_history.md)는 `DOC-0202`에서 세계 역사를, [`02_dungeon_canon.md`](02_dungeon_canon.md)는 `DOC-0203`에서 던전 정설을, [`03_player_and_society.md`](03_player_and_society.md)는 `DOC-0204`에서 플레이어와 사회를, [`04_characters_and_factions.md`](04_characters_and_factions.md)는 `DOC-0205`에서 NPC와 세력을, [`05_items_and_discoveries.md`](05_items_and_discoveries.md)는 `DOC-0206`에서 아이템과 발견물을, [`06_narrative_progression.md`](06_narrative_progression.md)는 `DOC-0207`에서 내러티브 진행을, [`07_tone_and_writing_guide.md`](07_tone_and_writing_guide.md)는 `DOC-0103`에서 공통 톤과 설명 문체를 이관했다. `DOC-0602` 기준 전환 후 이 README와 Story 본문 8개가 현재 공식 Story 기준이다. [`../archive/story_v1.5_full.md`](../archive/story_v1.5_full.md)는 원문 대조와 이력 확인에만 사용한다.
 
-Story 이관 티켓 `DOC-0201`~`DOC-0207`과 후속 Design·Project 이관을 완료하고 G-M3를 통과했다. `DOC-0501` 공식 용어 검수 결과는 [`../project/m4_term_review.md`](../project/m4_term_review.md)에, `DOC-0502` 중복 탐지와 `DOC-0503` 단일 출처 전환 결과는 [`../project/m4_story_design_review.md`](../project/m4_story_design_review.md)에 기록했다. `DOC-0504`는 [`../project/m4_speaker_knowledge_review.md`](../project/m4_speaker_knowledge_review.md)에서 화자 표현과 NPC 지식을 대조해 직접 충돌 0건, 사람 검토 보완 후보 2건을 기록했다. `DOC-0505`는 [`../project/m5_core_entity_timeline_review.md`](../project/m5_core_entity_timeline_review.md)에서 핵심 설정과 Entity, Timeline을 대조해 Timeline 선후 모순 1건을 정정하고 Story의 Entity 역링크 3건을 보완했다. `DOC-0506` 링크·누락 검사 결과는 [`../project/m5_link_omission_review.md`](../project/m5_link_omission_review.md)에 기록했으며 Story 8개는 중앙 진입점에서 모두 접근 가능하고 Reference·Design으로 연결된다. Story는 세계관 이유·NPC 지식·정보 내용을 상세 소유하고 Design의 상태·조건·계산 기준을 요약 링크로 참조한다. G-M5 통과와 `DOC-0601` 사람 검토 후 이 README와 Story 본문 8개는 `confirmed` 전환 후보가 되었으며, 근거는 [`../project/m6_human_review.md`](../project/m6_human_review.md)에 있다. 실제 상태 변경 전까지 9개 문서는 `draft`를 유지한다.
+Story 이관 티켓 `DOC-0201`~`DOC-0207`과 후속 Design·Project 이관을 완료하고 G-M3를 통과했다. `DOC-0501` 공식 용어 검수 결과는 [`../project/m4_term_review.md`](../project/m4_term_review.md)에, `DOC-0502` 중복 탐지와 `DOC-0503` 단일 출처 전환 결과는 [`../project/m4_story_design_review.md`](../project/m4_story_design_review.md)에 기록했다. `DOC-0504`는 [`../project/m4_speaker_knowledge_review.md`](../project/m4_speaker_knowledge_review.md)에서 화자 표현과 NPC 지식을 대조해 직접 충돌 0건, 사람 검토 보완 후보 2건을 기록했다. `DOC-0505`는 [`../project/m5_core_entity_timeline_review.md`](../project/m5_core_entity_timeline_review.md)에서 핵심 설정과 Entity, Timeline을 대조해 Timeline 선후 모순 1건을 정정하고 Story의 Entity 역링크 3건을 보완했다. `DOC-0506` 링크·누락 검사 결과는 [`../project/m5_link_omission_review.md`](../project/m5_link_omission_review.md)에 기록했으며 Story 8개는 중앙 진입점에서 모두 접근 가능하고 Reference·Design으로 연결된다. Story는 세계관 이유·NPC 지식·정보 내용을 상세 소유하고 Design의 상태·조건·계산 기준을 요약 링크로 참조한다. G-M5 통과와 `DOC-0601` 사람 검토 후 `DOC-0602`에서 9개 문서를 `confirmed`로 전환했으며, 근거는 [`../project/m6_human_review.md`](../project/m6_human_review.md)에 있다.
 
 미결정 사항은 [`../project/open_questions.md`](../project/open_questions.md), 이관 상태는 [`../project/migration_manifest.md`](../project/migration_manifest.md)에서 관리한다.

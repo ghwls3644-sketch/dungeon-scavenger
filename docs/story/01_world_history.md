@@ -2,12 +2,12 @@
 id: STORY-WORLD-HISTORY
 title: 세계의 과거사
 document_type: story
-status: draft
+status: confirmed
 source_version: story-v1.5
 canonical_for:
   - world_history
   - historical_beliefs
-last_reviewed:
+last_reviewed: 2026-07-28
 owner: narrative-design
 related:
   - ../GDD.md
@@ -125,4 +125,4 @@ related:
 
 ## 이관 상태
 
-`DOC-0202`에서 [`../project/story_v1.5_inventory.md`](../project/story_v1.5_inventory.md)의 `STY-0010`~`STY-0015`와 `TBL-001`을 이관했다. 문서는 전체 전환 승인 전까지 `draft`다.
+`DOC-0202`에서 [`../project/story_v1.5_inventory.md`](../project/story_v1.5_inventory.md)의 `STY-0010`~`STY-0015`와 `TBL-001`을 이관했다. 누락·정합성 검사와 사람 검토를 마쳐 `DOC-0602`에서 `confirmed`로 전환했다.

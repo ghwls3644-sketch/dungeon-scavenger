@@ -46,8 +46,8 @@ related:
 | SRC-002 | `스토리 정리 v1.5.md` | `4191C100D5B3BFBEF291D3FD4D7588A3C5C31113A1827D33886CC8C90931292D` | 스토리 분할 원본 | `docs/archive/story_v1.5_full.md` | 바이트·해시 일치 |
 | SRC-003 | `스토리 문서 분할 및 관리 제안서 v0.1.md` | `A52337ED1CC3DECEBF8BD6840662E12FAFDDCFA95C3E5E8D5E1129FFBBEF796F` | 구버전 제안 | `docs/archive/story_document_management_proposal_v0.1.md` | 바이트·해시 일치 |
 | SRC-004 | `스토리 문서 분할 및 관리 제안서 v0.2.md` | `0BAC7F52CF21EDDCD4B720C7B5B8FF76F98FB452904CEBCC3E03C1EB2B220C67` | 구버전 제안 | `docs/archive/story_document_management_proposal_v0.2.md` | 바이트·해시 일치 |
-| SRC-005 | `스토리 문서 분할 및 관리 제안서 v0.2.1.md` | `B4451E06D8FFAF5D1A233FA1A639E783BA17973977398C12527333A7707319F0` | 최신 이관 지침 | 원본 위치에서 작업 중 참고 | 원본 해시 기록 |
-| SRC-006 | `게임 개발 단계별 제안서 v0.1.md` | `2EE29ACA36E74F5E0206AFF150ED610EBA8381E594B9091141E6F74CAA2B60C1` | 개발 단계·티켓 참고 | 개발 문서 이관 전까지 원본 위치에서 참고 | 원본 해시 기록 |
+| SRC-005 | `스토리 문서 분할 및 관리 제안서 v0.2.1.md` | `B4451E06D8FFAF5D1A233FA1A639E783BA17973977398C12527333A7707319F0` | 최신 이관 지침 | 원본 위치에서 작업 중 참고 | 현재 원본 해시 일치 |
+| SRC-006 | `게임 개발 단계별 제안서 v0.1.md` | `2EE29ACA36E74F5E0206AFF150ED610EBA8381E594B9091141E6F74CAA2B60C1` | 개발 단계·티켓 참고 | 개발 문서 이관 전까지 원본 위치에서 참고 | 현재 원본 해시 일치 |
 
 ## 상태 정의
 
@@ -55,17 +55,17 @@ related:
 - `copied-active`: 원본과 일치하는 사본이 활성 기준으로 사용됨
 - `copied-archive`: 원본과 일치하는 사본이 보관 전용으로 사용됨
 - `pending-split`: 세부 문서로의 책임별 이관을 기다림
-- `verified`: 바이트 길이와 SHA-256이 원본과 일치함
+- `verified`: 대상 사본이 원본과 바이트·SHA-256이 일치하거나, 사본이 없는 원본 참고 문서는 현재 파일의 SHA-256이 기록과 일치함
 
 ## 현재 상태
 
 | 대상 | 상태 | 다음 작업 |
 |---|---|---|
 | `docs/GDD.md` | `copied-active`, `verified` | `DOC-0601` 검토 완료. 동결 해제 후 첫 GDD 개정에서 3-4의 옛 범람 표현 정정 |
-| `docs/archive/story_v1.5_full.md` | `source-frozen`, `copied-archive`, `verified` | `DOC-0602`에서 Archive 경고 적용 |
+| `docs/archive/story_v1.5_full.md` | `source-frozen`, `copied-archive`, `verified` | Archive README 경고 적용 완료. 원문은 해시 보존을 위해 변경하지 않음 |
 | 두 구버전 제안서 | `copied-archive`, `verified` | 추가 작업 없음 |
-| 최신 분할 제안서 v0.2.1 | 활성 작업 지침 | M6 `DOC-0601` 완료. `DOC-0602` 기준 전환 대기 |
-| 개발 단계별 제안서 v0.1 | 활성 참고 | 개발 프로젝트 문서에 반영 후 아카이브 |
+| 최신 분할 제안서 v0.2.1 | `source-frozen`, `verified`, 활성 작업 지침 | `DOC-0603` 완료 후 아카이브 여부 결정 |
+| 개발 단계별 제안서 v0.1 | `source-frozen`, `verified`, 활성 참고 | `DOC-0603`에서 새 기준 문서 링크 반영 |
 
 ## 정합성 검사 지점
 
@@ -76,7 +76,7 @@ related:
 | `완료` | `DOC-0505` 시작 전 | 완료 커밋과 결과물은 계획에 일치함. M4·M5 단계와 Git 인계 문구는 `MIG-CHG-002`로 정정 |
 | `완료` | `DOC-0505` 완료 후 | 설정·Entity·Timeline 충돌 처리 일치. 사용자 진행 지시로 `DOC-0506` 시작 |
 | `완료` | `DOC-0506` 완료 후 | 링크·누락 검사와 G-M5 완료 조건 7개 일치. 2026-07-28 G-M5 통과 후 `DOC-0601` 시작 |
-| `현재` | `DOC-0601` 완료 후 | 사람 검토 결과와 기준 전환 범위를 승인한 뒤 `DOC-0602` 시작 |
+| `완료` | `DOC-0601` 완료 후 | 사람 검토 결과와 상태 전환 범위를 승인. 사용자 진행 지시로 `DOC-0602` 시작 |
 | `예정` | `DOC-0603` 완료 후 | 새 문서 기준과 작업 규칙의 인계 가능성을 확인한 뒤 개발 티켓 시작 |
 
 ## M0 완료 확인
@@ -245,9 +245,11 @@ G-M5 조건 7개는 모두 충족하며 2026-07-28에 검토 관문을 통과했
 ## M6 진행 상태
 
 - [x] `DOC-0601` 사람 검토 후보 3건을 승인 결과에 따라 반영하고 상태 승격 후보를 작성한다.
-- [ ] `DOC-0602` 승인된 문서를 기준 상태로 전환하고 Archive 경고를 적용한다.
+- [x] `DOC-0602` 검증을 마친 문서를 기준 상태로 전환하고 Archive 경고를 적용한다.
 - [ ] `DOC-0603` AGENTS와 GDD·개발 문서의 새 기준 링크를 갱신한다.
 
-`DOC-0601`은 감정사·연구자 항목의 연구자 전용 범위와 일부 모험가 항목의 사회적 근거 링크를 Speaker Lexicon에 반영했다. 현재 범람 규칙은 `DEC-004`의 `사라진다`를 유지하고, 동결 GDD 3-4의 옛 표현은 동결 해제 후 첫 GDD 개정 대상으로 승인했다. 사람 검토 결과와 `confirmed` 후보 18개, `provisional` 후보 2개는 [`m6_human_review.md`](m6_human_review.md)에 기록했다.
+`DOC-0601`은 감정사·연구자 항목의 연구자 전용 범위와 일부 모험가 항목의 사회적 근거 링크를 Speaker Lexicon에 반영했다. 현재 범람 규칙은 `DEC-004`의 `사라진다`를 유지하고, 동결 GDD 3-4의 옛 표현은 동결 해제 후 첫 GDD 개정 대상으로 승인했다.
 
-현재는 `DOC-0601` 완료 후 정합성 검사 시점이다. 사람 검토 결과, 미결정 표기와 문서 상태 승격 범위를 확인하고 사용자가 승인하기 전에는 `DOC-0602`를 시작하지 않는다.
+`DOC-0602` 전환 전 검증에서 추가 골격인 Harness Engineering은 상세 규칙 이관·검증이 남아 있음을 확인해 `MIG-CHG-005`로 `confirmed` 대상에서 제외했다. Story 9개, 이관을 마친 Design 5개와 필수 Reference 3개 등 17개 문서를 `confirmed`로, Entity Index와 Timeline 2개를 `provisional`로 전환했다. Archive 경고는 [`../archive/README.md`](../archive/README.md)에 현재 기준 문서 링크와 함께 강화했고, 개별 보존 원문은 기록된 해시를 유지했다. 사람 검토와 전환 근거는 [`m6_human_review.md`](m6_human_review.md)에 기록했다.
+
+현재 다음 티켓은 `DOC-0603 — AGENTS 및 개발 문서 링크 갱신`이다. 정합성 검사는 `DOC-0603` 완료 후 진행한다.

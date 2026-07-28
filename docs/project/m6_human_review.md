@@ -59,10 +59,10 @@ related:
 
 ### `confirmed` 후보
 
-다음 18개 문서는 원본 추적, 책임 분리, 중복 정리, 링크·누락 검사와 사람 검토를 마쳤으므로 `DOC-0602`에서 `confirmed`로 전환할 후보로 제안한다.
+다음 17개 문서는 원본 추적, 책임 분리, 중복 정리, 링크·누락 검사와 사람 검토를 마쳤으므로 `DOC-0602`에서 `confirmed`로 전환할 후보로 제안한다.
 
 - Story 9개: [`../story/README.md`](../story/README.md)와 Story 본문 8개
-- Design 6개: [`../design/README.md`](../design/README.md)와 Design 본문 5개
+- Design 5개: [`../design/README.md`](../design/README.md)와 이관·검증을 마친 Design 본문 4개
 - 필수 Reference 3개: [`../reference/README.md`](../reference/README.md), [`../reference/glossary.md`](../reference/glossary.md), [`../reference/speaker_lexicon.md`](../reference/speaker_lexicon.md)
 
 이 전환은 문서에 이미 적힌 확정 내용과 미결정 분리를 공식 개발 기준으로 승인하는 것이며, 미결정 수치나 이름까지 확정하는 뜻이 아니다.
@@ -77,6 +77,7 @@ related:
 ### 이번 상태 전환에서 제외
 
 - [`../GDD.md`](../GDD.md)는 Front Matter 상태 전환 대상이 아니며 동결 해제 전까지 직접 수정하지 않는다.
+- [`../design/harness_engineering.md`](../design/harness_engineering.md)는 추가 골격만 있고 상세 규칙 이관·검증이 남아 있으므로 `MIG-CHG-005`에 따라 `draft`를 유지한다.
 - Project의 이관 대장, 변경 대기열, 인벤토리와 단계별 검토 보고서는 전환 근거와 작업 이력을 기록하는 문서이므로 이번 제품 기준 상태 승격 대상에서 제외한다.
 - Archive 경고와 실제 상태 변경은 `DOC-0602`, AGENTS와 GDD·개발 문서 링크 갱신은 `DOC-0603` 범위다.
 
@@ -87,7 +88,20 @@ related:
 - Speaker Lexicon 본문 보완: 2건
 - GDD 후속 개정 기록: 1건
 - 새 설정·화자·대사·용어·ID·결정·열린 질문: 0건
-- `confirmed` 전환 후보: 18개
+- `confirmed` 전환 후보: 17개
 - `provisional` 전환 후보: 2개
 - 다음 검사: `DOC-0601 완료 후 정합성 검사`
 - 검사 통과와 사용자 승인 후 다음 티켓: `DOC-0602 — 기준 전환과 Archive 경고`
+
+## DOC-0602 전환 전 검증 정정
+
+`DOC-0602` 시작 시 [`harness_engineering.md`](../design/harness_engineering.md)가 상세 규칙 이관과 검증이 남은 추가 골격임을 확인했다. 이를 `confirmed`로 전환하면 문서의 완료 수준과 상태가 모순되므로 후보에서 제외하고 `draft`를 유지했다. 이 정정으로 `confirmed` 대상은 18개에서 17개가 되었으며, Story·Reference 범위와 `provisional` 대상 2개는 바뀌지 않았다.
+
+## DOC-0602 전환 결과
+
+- `confirmed`: Story 9개, Design 5개, 필수 Reference 3개로 총 17개
+- `provisional`: Entity Index와 Timeline 2개
+- `draft` 유지: Harness Engineering과 Project의 이관·검토 문서
+- Archive 경고: [`../archive/README.md`](../archive/README.md)에 현재 기준 문서 링크와 해시 보존 방식을 명시
+- 보존 원문: 직접 수정하지 않아 기록된 SHA-256 유지
+- 다음 티켓: `DOC-0603 — AGENTS 및 개발 문서 링크 갱신`

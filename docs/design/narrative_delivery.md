@@ -2,12 +2,12 @@
 id: DESIGN-NARRATIVE-DELIVERY
 title: 내러티브 전달 규칙
 document_type: design
-status: draft
+status: confirmed
 source_version: story-v1.5+gdd-v2.1
 canonical_for:
   - narrative_delivery_rules
   - discovery_registration_flow
-last_reviewed:
+last_reviewed: 2026-07-28
 owner: game-design
 related:
   - ../GDD.md
@@ -185,4 +185,4 @@ GDD의 `8-3. 획득 규칙`, `8-4. 보호 규칙`, `11-4. 전달 방식`과 거�
 
 ## 이관 상태
 
-`DOC-0301`에서 원본 7장·8-3·10장의 정보 전달 책임과 GDD의 안전 귀환·등록 흐름을 추출했다. 문서는 전체 전환 승인 전까지 `draft`다.
+`DOC-0301`에서 원본 7장·8-3·10장의 정보 전달 책임과 GDD의 안전 귀환·등록 흐름을 추출했다. 누락·정합성 검사와 사람 검토를 마쳐 `DOC-0602`에서 `confirmed`로 전환했다.

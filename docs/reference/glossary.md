@@ -2,12 +2,12 @@
 id: REFERENCE-GLOSSARY
 title: 공식 용어집
 document_type: reference
-status: draft
+status: confirmed
 source_version: story-v1.5+gdd-v2.1
 canonical_for:
   - official_terms
   - term_meaning_boundaries
-last_reviewed:
+last_reviewed: 2026-07-28
 owner: documentation-maintainer
 related:
   - ../story/README.md
@@ -92,7 +92,7 @@ related:
 
 ## 항목 목록
 
-`DOC-0101`에서 원본 13-1~13-3의 공식 용어와 의미 경계를 이관했다. 항목 상태는 원본에서 확정된 표기 여부를 나타내며, 용어집 문서 자체는 전체 이관 검토 전까지 `draft`다.
+`DOC-0101`에서 원본 13-1~13-3의 공식 용어와 의미 경계를 이관했다. 항목 상태는 원본에서 확정된 표기 여부를 나타낸다. 누락·정합성 검사와 사람 검토를 마쳐 용어집 문서는 `DOC-0602`에서 `confirmed`로 전환했다.
 
 | ID | 공식 표기 | 분류 | 상태 |
 |---|---|---|---|

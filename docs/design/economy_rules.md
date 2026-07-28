@@ -2,12 +2,12 @@
 id: DESIGN-ECONOMY-RULES
 title: 경제 규칙
 document_type: design
-status: draft
+status: confirmed
 source_version: story-v1.5+gdd-v2.1
 canonical_for:
   - economy_calculations
   - loss_mitigation_rules
-last_reviewed:
+last_reviewed: 2026-07-28
 owner: game-design
 related:
   - ../GDD.md
@@ -211,4 +211,4 @@ GDD의 `3-7. 사회와 경제`, `4-3. 성공과 실패`, `4-4. 실패 손실`, `
 
 ## 이관 상태
 
-`DOC-0304`에서 원본 6장·7-4의 경제 책임과 GDD의 정산·난이도·실패 안전망 규칙을 추출했다. 문서는 전체 전환 승인 전까지 `draft`다.
+`DOC-0304`에서 원본 6장·7-4의 경제 책임과 GDD의 정산·난이도·실패 안전망 규칙을 추출했다. 누락·정합성 검사와 사람 검토를 마쳐 `DOC-0602`에서 `confirmed`로 전환했다.

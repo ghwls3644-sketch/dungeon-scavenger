@@ -2,12 +2,12 @@
 id: REFERENCE-SPEAKER-LEXICON
 title: 화자별 표현
 document_type: reference
-status: draft
+status: confirmed
 source_version: story-v1.5
 canonical_for:
   - speaker_vocabulary
   - speaker_style_surface
-last_reviewed:
+last_reviewed: 2026-07-28
 owner: narrative-design
 related:
   - glossary.md

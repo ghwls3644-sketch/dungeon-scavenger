@@ -96,8 +96,8 @@ GitHub 로그인 상태, Codex 대화 기록, 앱별 로컬 설정은 저장소�
 
 현재는 `M6 — 최종 검수와 기준 전환`이다. `DOC-0601`에서 사람 검토 후보 3건을 승인 결과에 따라 처리했다. 감정사·연구자의 공동 어휘와 연구자 전용 지식·예시 범위를 구분했고, 일부 모험가 표현에 수색꾼의 사회적 위치 링크를 추가했다. 폐던전 범람 위험의 현재 규칙은 `DEC-004`의 `사라진다`를 유지하며, 동결 GDD 3-4의 옛 표현은 동결 해제 후 첫 GDD 개정 대상으로 남겼다.
 
-Story 9개, Design 6개와 필수 Reference 3개는 `confirmed` 전환 후보이며, Entity Index와 Timeline은 미정 이름·연도·기간을 유지하는 조건의 `provisional` 전환 후보다. 자세한 근거는 [`project/m6_human_review.md`](project/m6_human_review.md)에 있다. 실제 상태 변경과 Archive 경고는 아직 적용하지 않았다.
+`DOC-0602`에서 검증을 마친 Story 9개, Design 5개와 필수 Reference 3개 등 17개 문서를 `confirmed`로 전환했다. Entity Index와 Timeline은 미정 이름·연도·기간을 유지하는 조건으로 `provisional`로 전환했다. 상세 규칙 이관과 검증이 남은 Harness Engineering은 `draft`를 유지한다.
 
-> ⛔ **정합성 검사할 때입니다 — `DOC-0601` 사람 검토 결과, 미결정 표기와 문서 상태 승격 범위가 서로 맞는지 검사합니다.**
+Archive는 현재 기준이 아니라는 경고와 새 공식 문서 링크를 [`archive/README.md`](archive/README.md)에 표시했다. 개별 보존 원문은 기록된 SHA-256을 유지하기 위해 수정하지 않았다. 자세한 전환 근거는 [`project/m6_human_review.md`](project/m6_human_review.md)에 있다.
 
-현재는 `DOC-0601` 완료 후 정합성 검사 시점이다. 검사 결과와 상태 전환 범위를 사용자에게 보고하고 승인받기 전에는 `DOC-0602`를 시작하지 않는다.
+현재 다음 티켓은 `DOC-0603 — AGENTS 및 개발 문서 링크 갱신`이다. 다음 정합성 검사는 `DOC-0603` 완료 후 진행한다.

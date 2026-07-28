@@ -2,12 +2,12 @@
 id: STORY-TONE-WRITING
 title: 톤과 문체 가이드
 document_type: story
-status: draft
+status: confirmed
 source_version: story-v1.5
 canonical_for:
   - narrative_tone
   - writing_style
-last_reviewed:
+last_reviewed: 2026-07-28
 owner: narrative-design
 related:
   - 00_core_pillars.md
@@ -189,4 +189,4 @@ related:
 
 ## 이관 상태
 
-`DOC-0103`에서 원본 12장, 8-4, 13-4의 공통 톤과 설명 문체를 이관했다. 문서는 전체 이관 검토 전까지 `draft`다.
+`DOC-0103`에서 원본 12장, 8-4, 13-4의 공통 톤과 설명 문체를 이관했다. 누락·정합성 검사와 사람 검토를 마쳐 `DOC-0602`에서 `confirmed`로 전환했다.

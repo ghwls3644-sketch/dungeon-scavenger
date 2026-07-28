@@ -2,11 +2,11 @@
 id: DESIGN-INDEX
 title: Design 문서 안내
 document_type: design
-status: draft
+status: confirmed
 source_version: management-proposal-v0.2.1
 canonical_for:
   - design_document_navigation
-last_reviewed:
+last_reviewed: 2026-07-28
 owner: game-design
 related:
   - ../GDD.md
@@ -39,8 +39,8 @@ related:
 - Story의 원인과 개연성을 Design 수치로 덮어쓰지 않는다.
 - 사용자 표시 명칭은 [`../reference/glossary.md`](../reference/glossary.md)를 따른다.
 - 미결정 수치와 규칙은 [`../project/open_questions.md`](../project/open_questions.md)에 연결한다.
-- 현재 파일들은 이관 초안이며 아직 구현 기준으로 최종 승인되지 않았다.
+- `confirmed` 문서는 구현 기준으로 사용할 수 있다. [`harness_engineering.md`](harness_engineering.md)는 상세 규칙 이관·검증 전까지 `draft`이므로 단독 구현 기준으로 사용하지 않는다.
 
 ## 현재 상태
 
-Story 이관 후 확인한 Design 티켓 `DOC-0301`~`DOC-0304`와 Project 이관을 완료하고 G-M3를 통과했다. `DOC-0501` 공식 용어 검수 결과는 [`../project/m4_term_review.md`](../project/m4_term_review.md)에, `DOC-0502` 중복 탐지와 `DOC-0503` 단일 출처 전환 결과는 [`../project/m4_story_design_review.md`](../project/m4_story_design_review.md)에 기록했다. `DOC-0504` 화자 표현·NPC 지식 검수 결과는 [`../project/m4_speaker_knowledge_review.md`](../project/m4_speaker_knowledge_review.md)에 기록했다. `DOC-0505` 핵심 설정·Entity·Timeline 검수 결과는 [`../project/m5_core_entity_timeline_review.md`](../project/m5_core_entity_timeline_review.md)에 기록했으며 Design 본문 변경은 없었다. `DOC-0506` 링크·누락 검사 결과는 [`../project/m5_link_omission_review.md`](../project/m5_link_omission_review.md)에 기록했으며 Design 본문 5개는 중앙 진입점에서 모두 접근 가능하다. Design은 상태·조건·처리·계산을 상세 소유하고 Story의 이유·지식·정보 내용을 요약 링크로 참조한다. G-M5 통과와 `DOC-0601` 사람 검토 후 이 README와 Design 본문 5개는 `confirmed` 전환 후보가 되었으며, 근거는 [`../project/m6_human_review.md`](../project/m6_human_review.md)에 있다. 실제 상태 변경 전까지 6개 문서는 `draft`를 유지한다.
+Story 이관 후 확인한 Design 티켓 `DOC-0301`~`DOC-0304`와 Project 이관을 완료하고 G-M3를 통과했다. `DOC-0501` 공식 용어 검수 결과는 [`../project/m4_term_review.md`](../project/m4_term_review.md)에, `DOC-0502` 중복 탐지와 `DOC-0503` 단일 출처 전환 결과는 [`../project/m4_story_design_review.md`](../project/m4_story_design_review.md)에 기록했다. `DOC-0504` 화자 표현·NPC 지식 검수 결과는 [`../project/m4_speaker_knowledge_review.md`](../project/m4_speaker_knowledge_review.md)에 기록했다. `DOC-0505` 핵심 설정·Entity·Timeline 검수 결과는 [`../project/m5_core_entity_timeline_review.md`](../project/m5_core_entity_timeline_review.md)에 기록했으며 Design 본문 변경은 없었다. `DOC-0506` 링크·누락 검사 결과는 [`../project/m5_link_omission_review.md`](../project/m5_link_omission_review.md)에 기록했으며 Design 본문 5개는 중앙 진입점에서 모두 접근 가능하다. Design은 상태·조건·처리·계산을 상세 소유하고 Story의 이유·지식·정보 내용을 요약 링크로 참조한다. G-M5 통과와 `DOC-0601` 사람 검토 후 `DOC-0602`에서 이 README와 이관·검증을 마친 Design 본문 4개를 `confirmed`로 전환했다. 추가 골격인 [`harness_engineering.md`](harness_engineering.md)는 `MIG-CHG-005`에 따라 `draft`를 유지한다. 근거는 [`../project/m6_human_review.md`](../project/m6_human_review.md)에 있다.

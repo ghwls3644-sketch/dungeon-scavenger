@@ -76,6 +76,17 @@ related:
 - 상태: `applied`
 - 관련 결정·질문: `DEC-001`, `DEC-002`, `DEC-004`; 새 열린 질문 없음
 
+### MIG-CHG-005: 하네스 문서 상태 전환 범위 정정
+
+- 요청일: 2026-07-28
+- 요청 내용: `DOC-0602` 기준 전환에서 상세 규칙 이관과 검증이 남은 `docs/design/harness_engineering.md`를 `confirmed` 대상에서 제외하고 `draft`로 유지한다.
+- 변경 이유: 추가 골격만 있는 문서를 공식 구현 기준으로 승격하면 문서가 스스로 밝힌 완료 수준과 상태가 모순된다.
+- 영향받는 원본 절: GDD 7장
+- 반영 대상: `docs/project/m6_human_review.md`, Design·Project 안내와 이관 현황. `docs/design/harness_engineering.md`의 본문과 `draft` 상태는 유지했다.
+- 긴급도: 일반
+- 상태: `applied`
+- 관련 결정·질문: 새 설정 결정이나 열린 질문 없음
+
 ## 검토 기록
 
 | 검토일 | 티켓 | 대기열 결과 | 활성 문서 반영 |
@@ -85,8 +96,9 @@ related:
 | 2026-07-27 | `MIG-CHG-002` | M4·M5 단계 경계, G-M4 검사 결과와 Git 인계 문구의 차이를 정정 | 작업 안내와 이관 현황에 반영 |
 | 2026-07-27 | `DOC-0505` | `MIG-CHG-003`의 Timeline 선후 모순과 Entity 역링크를 정정하고 범람 표현의 현재 기준을 확인 | Timeline, Entity Index, 관련 Story 링크와 검토 보고서에 반영 |
 | 2026-07-28 | `DOC-0601` | `MIG-CHG-004`의 화자 적용 범위·근거 링크를 보완하고 GDD 후속 개정 방향을 승인 | Speaker Lexicon과 사람 검토 보고서에 반영. 동결 GDD는 변경하지 않음 |
+| 2026-07-28 | `DOC-0602` | `MIG-CHG-005`에 따라 상세 이관 전 Harness 골격을 공식 상태 전환에서 제외 | Harness는 `draft` 유지, `confirmed` 전환 범위를 17개로 정정 |
 
-`DOC-0404`에서는 M3 이관 중 접수된 변경이 없는 것을 확인했다. 이후 `MIG-CHG-001`~`MIG-CHG-004`를 반영했으며 현재 대기 중 변경은 없다.
+`DOC-0404`에서는 M3 이관 중 접수된 변경이 없는 것을 확인했다. 이후 `MIG-CHG-001`~`MIG-CHG-005`를 반영했으며 현재 대기 중 변경은 없다.
 
 ## 항목 양식
 

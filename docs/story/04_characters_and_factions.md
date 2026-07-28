@@ -2,13 +2,13 @@
 id: STORY-CHARACTERS-FACTIONS
 title: 인물과 세력
 document_type: story
-status: draft
+status: confirmed
 source_version: story-v1.5
 canonical_for:
   - character_knowledge
   - faction_roles
   - character_attitudes
-last_reviewed:
+last_reviewed: 2026-07-28
 owner: narrative-design
 related:
   - ../GDD.md
@@ -180,4 +180,4 @@ NPC는 세계관 전체를 설명하는 인물보다, 플레이 루프를 도와
 
 ## 이관 상태
 
-`DOC-0205`에서 원본 7장의 NPC·세력 책임과 13장의 관련 지식·태도를 이관했다. `DOC-0301`은 정보 노출 조건을 [`../design/narrative_delivery.md`](../design/narrative_delivery.md)로, `DOC-0303`은 감정 상태와 제약 원칙을 [`../design/item_rules.md`](../design/item_rules.md)로, `DOC-0304`는 감정 비용을 [`../design/economy_rules.md`](../design/economy_rules.md)로 분리했다. 문서는 전체 전환 승인 전까지 `draft`다.
+`DOC-0205`에서 원본 7장의 NPC·세력 책임과 13장의 관련 지식·태도를 이관했다. `DOC-0301`은 정보 노출 조건을 [`../design/narrative_delivery.md`](../design/narrative_delivery.md)로, `DOC-0303`은 감정 상태와 제약 원칙을 [`../design/item_rules.md`](../design/item_rules.md)로, `DOC-0304`는 감정 비용을 [`../design/economy_rules.md`](../design/economy_rules.md)로 분리했다. 누락·정합성 검사와 사람 검토를 마쳐 `DOC-0602`에서 `confirmed`로 전환했다.

@@ -2,11 +2,11 @@
 id: REFERENCE-INDEX
 title: Reference 문서 안내
 document_type: reference
-status: draft
+status: confirmed
 source_version: management-proposal-v0.2.1
 canonical_for:
   - reference_document_navigation
-last_reviewed:
+last_reviewed: 2026-07-28
 owner: documentation-maintainer
 related:
   - ../story/README.md
@@ -80,4 +80,4 @@ related:
 
 `DOC-0101`에서 공식 용어를 [`glossary.md`](glossary.md)에, `DOC-0102`에서 화자 표현을 [`speaker_lexicon.md`](speaker_lexicon.md)에 등록했다. `DOC-0103`은 공통 문체를 [`../story/07_tone_and_writing_guide.md`](../story/07_tone_and_writing_guide.md)로 분리했고, `DOC-0104`는 기존 개체와 역할을 [`entity_index.md`](entity_index.md)에 등록했다. `DOC-0105`는 확정 상대 순서를 [`timeline.md`](timeline.md)에 등록했다. `DOC-0106` 책임 중복 검토 결과는 [`../project/m2_reference_review.md`](../project/m2_reference_review.md)에 기록했으며 G-M2 검토를 통과했다.
 
-`DOC-0501`은 [`../project/m4_term_review.md`](../project/m4_term_review.md)에서 기존 Glossary의 누락과 후보를 분류했다. `DOC-0503`에서 근거가 확정된 핵심 누락 5개와 파일럿 후보 2개를 등록해 Glossary를 19개 항목으로 확장했고, 다른 후보는 Entity Index·Speaker Lexicon·Story 책임 또는 열린 질문 [`Q-017`](../project/open_questions.md), [`Q-018`](../project/open_questions.md)로 분리했다. Story·Design 단일 출처 전환 결과는 [`../project/m4_story_design_review.md`](../project/m4_story_design_review.md)에 기록했다. `DOC-0504`는 [`../project/m4_speaker_knowledge_review.md`](../project/m4_speaker_knowledge_review.md)에서 화자·집단 8개의 직접 표현·지식 충돌이 없음을 확인하고 역할 경계·근거 링크 보완 후보 2건을 사람 검토 대상으로 분리했다. `DOC-0505`는 [`../project/m5_core_entity_timeline_review.md`](../project/m5_core_entity_timeline_review.md)에서 Entity 15개의 직접 충돌이 없음을 확인하고 Timeline 선후 모순 1건과 Story 역링크 3건을 정정했다. `DOC-0506`은 [`../project/m5_link_omission_review.md`](../project/m5_link_omission_review.md)에서 Glossary 19개, Speaker Lexicon 8개, Entity 15개의 ID·필수 필드·상세 링크와 전체 탐색 경로를 검사해 누락과 중복이 없음을 확인했다. G-M5 통과 후 `DOC-0601`은 화자 항목 보완 2건을 반영하고, 이 README·Glossary·Speaker Lexicon을 `confirmed`, Entity Index·Timeline을 `provisional`로 전환할 후보로 [`../project/m6_human_review.md`](../project/m6_human_review.md)에 기록했다. 실제 상태 변경 전까지 다섯 문서는 `draft`를 유지한다.
+`DOC-0501`은 [`../project/m4_term_review.md`](../project/m4_term_review.md)에서 기존 Glossary의 누락과 후보를 분류했다. `DOC-0503`에서 근거가 확정된 핵심 누락 5개와 파일럿 후보 2개를 등록해 Glossary를 19개 항목으로 확장했고, 다른 후보는 Entity Index·Speaker Lexicon·Story 책임 또는 열린 질문 [`Q-017`](../project/open_questions.md), [`Q-018`](../project/open_questions.md)로 분리했다. Story·Design 단일 출처 전환 결과는 [`../project/m4_story_design_review.md`](../project/m4_story_design_review.md)에 기록했다. `DOC-0504`는 [`../project/m4_speaker_knowledge_review.md`](../project/m4_speaker_knowledge_review.md)에서 화자·집단 8개의 직접 표현·지식 충돌이 없음을 확인하고 역할 경계·근거 링크 보완 후보 2건을 사람 검토 대상으로 분리했다. `DOC-0505`는 [`../project/m5_core_entity_timeline_review.md`](../project/m5_core_entity_timeline_review.md)에서 Entity 15개의 직접 충돌이 없음을 확인하고 Timeline 선후 모순 1건과 Story 역링크 3건을 정정했다. `DOC-0506`은 [`../project/m5_link_omission_review.md`](../project/m5_link_omission_review.md)에서 Glossary 19개, Speaker Lexicon 8개, Entity 15개의 ID·필수 필드·상세 링크와 전체 탐색 경로를 검사해 누락과 중복이 없음을 확인했다. G-M5 통과와 `DOC-0601` 사람 검토 후 `DOC-0602`에서 이 README·Glossary·Speaker Lexicon을 `confirmed`, Entity Index·Timeline을 `provisional`로 전환했다. 미정 표기·이름·시점은 새 설정으로 채우지 않으며, 근거는 [`../project/m6_human_review.md`](../project/m6_human_review.md)에 있다.

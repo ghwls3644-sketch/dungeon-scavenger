@@ -2,13 +2,13 @@
 id: STORY-PLAYER-SOCIETY
 title: 플레이어와 사회
 document_type: story
-status: draft
+status: confirmed
 source_version: story-v1.5
 canonical_for:
   - player_identity
   - scavenger_society
   - economy_social_context
-last_reviewed:
+last_reviewed: 2026-07-28
 owner: narrative-design
 related:
   - ../GDD.md
@@ -170,4 +170,4 @@ related:
 
 ## 이관 상태
 
-`DOC-0204`에서 원본 5장과 6장의 Story 책임을 이관했다. `DOC-0304`는 가격·수수료·난이도 보정과 실패 안전망을 [`../design/economy_rules.md`](../design/economy_rules.md)로 분리했다. 문서는 전체 전환 승인 전까지 `draft`다.
+`DOC-0204`에서 원본 5장과 6장의 Story 책임을 이관했다. `DOC-0304`는 가격·수수료·난이도 보정과 실패 안전망을 [`../design/economy_rules.md`](../design/economy_rules.md)로 분리했다. 누락·정합성 검사와 사람 검토를 마쳐 `DOC-0602`에서 `confirmed`로 전환했다.
