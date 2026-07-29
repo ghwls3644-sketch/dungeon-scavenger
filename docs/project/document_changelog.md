@@ -56,3 +56,4 @@ DOC-0003 검토 완료 후 기록을 시작한다.
 | 2026-07-28 | `DOC-0603` | AGENTS와 GDD를 새 공식 문서 구조로 연결하고 [`development_handoff.md`](development_handoff.md)와 Reference 읽기 순서 추가 | 동결 개발 제안서를 수정하지 않으면서 다른 환경의 Codex가 현재 기준과 기존 개발 단계·티켓을 함께 찾을 수 있게 변경했다. |
 | 2026-07-29 | `DEV-0001` | [`project_context.md`](project_context.md), 루트 `project.godot`과 `.gitignore` 생성, `DEC-101`과 GDD 구현 기준을 Godot으로 전환 | 승인된 엔진·언어·렌더러·플랫폼과 재현 가능한 실행·검증 명령을 개발 시작 기준으로 고정하기 위해 변경했다. |
 | 2026-07-29 | `DEV-0002` | [`module_boundaries.md`](module_boundaries.md)와 `src/`, `tests/`의 모듈 폴더 생성, GDD 모듈 경계를 실제 Godot 경로로 연결 | 후속 기능이 화면·저장·게임 규칙의 책임을 섞지 않고 정해진 위치와 의존 방향을 따르게 하기 위해 변경했다. |
+| 2026-07-29 | `DEV-0003` | `GameState` Autoload, 최소 메인 장면과 개발용 상태 순환 UI 생성, GDD에 현재 활성 상태와 허용 전환 기록 | 화면이 직접 상태를 바꾸지 않고 중앙 인터페이스가 중복·잘못된 전환을 차단하는 실행 기반을 만들기 위해 변경했다. |

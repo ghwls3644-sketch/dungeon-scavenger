@@ -7,6 +7,11 @@ config_version=5
 
 config/name="Dungeon Scavenger"
 config/features=PackedStringArray("4.7", "GL Compatibility")
+run/main_scene="res://src/app/main.tscn"
+
+[autoload]
+
+GameState="*res://src/app/game_state.gd"
 
 [rendering]
 

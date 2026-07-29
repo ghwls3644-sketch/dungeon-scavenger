@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://src/ui/debug_state_panel.tscn" id="1_debug_panel"]
+
+[node name="Main" type="Node"]
+
+[node name="DebugStatePanel" parent="." instance=ExtResource("1_debug_panel")]

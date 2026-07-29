@@ -87,4 +87,6 @@ G-M6는 2026-07-29 정합성 검사에서 통과했다. `DEV-0001`은 Godot 4.7.
 
 `DEV-0002`는 실제 모듈 경계 9개와 책임·의존 방향을 [`module_boundaries.md`](module_boundaries.md)에 고정했다. 게임 코드와 장면은 추가하지 않았다.
 
-현재 다음 티켓은 `DEV-0003 — 기본 게임 상태 관리자`다.
+`DEV-0003`은 `GameState` Autoload와 개발용 메인 장면에서 `Boot`, `Title`, `Hub`, `Exploration`, `Results` 흐름을 연결했다. 중복·현재 상태·허용되지 않은 전환은 중앙 관리자가 거절하며 UI는 상태를 직접 변경하지 않는다.
+
+현재 다음 티켓은 `DEV-0004 — 입력 행동 추상화`다.
