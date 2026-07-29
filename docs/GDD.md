@@ -10,9 +10,9 @@
   - [`design/README.md`](design/README.md)
   - [`reference/README.md`](reference/README.md)
   - [`project/development_handoff.md`](project/development_handoff.md)
+  - [`project/project_context.md`](project/project_context.md)
   - [`project/decisions.md`](project/decisions.md)
   - [`project/open_questions.md`](project/open_questions.md)
-  - 통합 원본 작성 당시의 `GameCanvas.tsx` 프로토타입 정보
 - 이전 문서: `던전 루팅·탈출 게임 기획서 v2.0`
 
 ---
@@ -84,7 +84,7 @@
 | 월드 구조 | 거점과 하나의 반복 탐험형 폐던전 |
 | 맵 구조 | 고정된 큰 지도 + 구역별 제한적 변화 |
 | 목표 런 길이 | 15~25분 **[밸런스 조정]** |
-| 구현 기준안 | TypeScript + HTML5 Canvas **[설계 결정]** |
+| 구현 기준 | Godot 4.7.1 + GDScript + Compatibility **[설계 결정]** |
 | 초기 언어 | 한국어 |
 
 ## 1-3. 플레이어에게 약속하는 경험
@@ -811,14 +811,15 @@ MVP의 거점은 실제 이동 공간이 아니라 빠른 메뉴형 허브로 �
 
 ## 14-1. 구현 기준 **[설계 결정]**
 
-현재 `GameCanvas.tsx` 프로토타입과 엔진 없는 구현 선호를 살려 **React/Vite/TypeScript + HTML5 Canvas**를 기준안으로 삼는다.
+`DEV-0001`의 사용자 승인에 따라 **Godot 4.7.1 stable Standard + GDScript + Compatibility 렌더러**를 Windows PC 우선 구현 기준으로 사용한다.
 
-- React는 타이틀, 거점, 정산, 옵션 등 제품 UI를 담당한다.
-- Canvas 게임 루프는 이동, 충돌, 시야, 위험, 상호작용을 담당한다.
-- 게임 규칙은 React 컴포넌트와 분리한 TypeScript 모듈에 둔다.
-- Python은 콘텐츠 검수·데이터 변환·테스트 도구에만 선택적으로 사용한다.
+- Godot의 2D 장면·노드·리소스 구조로 탐험, 거점, 정산과 UI를 구성한다.
+- 게임 실행 코드는 GDScript로 작성한다.
+- Compatibility 렌더러를 사용해 2D 표현과 저사양 Windows PC 호환성을 우선한다.
+- Python은 콘텐츠 검수·데이터 변환·문서 검사 같은 저장소 보조 도구에만 선택적으로 사용한다.
+- React, Node.js, HTML5 Canvas, Docker와 PostgreSQL은 현재 게임 실행 스택에 포함하지 않는다.
 
-G0에서 현재 저장소 구조와 성능을 확인해 최종 확정한다. 다른 엔진으로 이전할 근거가 없다면 기존 프로토타입을 유지한다.
+정확한 엔진 버전과 실행·검증 명령은 [`project/project_context.md`](project/project_context.md)가 소유한다. 엔진 또는 렌더러 변경은 별도 검토와 사용자 승인 없이 진행하지 않는다.
 
 ## 14-2. 모듈 경계
 
@@ -1098,7 +1099,7 @@ docs/
 
 | ID | 결정 | 재검토 관문 |
 |---|---|---|
-| DEC-101 | TypeScript + HTML5 Canvas를 구현 기준안으로 사용 | G0 |
+| DEC-101 | Godot 4.7.1 + GDScript + Compatibility를 Windows PC 우선 구현 기준으로 사용 | G0 |
 | DEC-102 | 인벤토리는 제한 슬롯+무게 부담 단계를 사용 | G1 |
 | DEC-103 | 인벤토리와 지도에서 시간을 일시정지 | G1 |
 | DEC-104 | 기본 공격 없이 비상 무력화만 제공 | G1·G3 |

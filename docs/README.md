@@ -15,6 +15,7 @@ related:
   - design/README.md
   - reference/README.md
   - project/README.md
+  - project/project_context.md
 ---
 
 # 폐던전 수색꾼 문서 안내
@@ -39,13 +40,14 @@ related:
 - 분할 중 변경 대기열: [`project/migration_changes.md`](project/migration_changes.md)
 - 결정과 미결정 사항: [`project/decisions.md`](project/decisions.md), [`project/open_questions.md`](project/open_questions.md)
 - 개발 단계·티켓 인계: [`project/development_handoff.md`](project/development_handoff.md)
+- 개발 환경·실행 명령: [`project/project_context.md`](project/project_context.md)
 - M2 Reference 검토 결과: [`project/m2_reference_review.md`](project/m2_reference_review.md)
 - 공식 용어 검수 결과: [`project/m4_term_review.md`](project/m4_term_review.md)
 - Story·Design 중복 검수 결과: [`project/m4_story_design_review.md`](project/m4_story_design_review.md)
 - 화자 표현·NPC 지식 검수 결과: [`project/m4_speaker_knowledge_review.md`](project/m4_speaker_knowledge_review.md)
 - 핵심 설정·Entity·Timeline 검수 결과: [`project/m5_core_entity_timeline_review.md`](project/m5_core_entity_timeline_review.md)
 - 링크·누락 자동 검사 결과: [`project/m5_link_omission_review.md`](project/m5_link_omission_review.md)
-- M6 사람 검토와 승인 후보: [`project/m6_human_review.md`](project/m6_human_review.md)
+- M6 사람 검토와 전환 결과: [`project/m6_human_review.md`](project/m6_human_review.md)
 
 ## 다른 환경에서 작업 이어가기
 
@@ -55,7 +57,7 @@ related:
 2. 저장소 루트에서 `git status`를 실행한다. 커밋하지 않은 변경이나 브랜치 분기가 보이면 이를 버리지 말고 먼저 확인한다.
 3. 작업 트리가 깨끗하면 `git pull --ff-only origin main`으로 최신 내용을 받는다.
 4. `git log -1 --oneline`으로 현재 커밋을 확인한다.
-5. 루트의 [`AGENTS.md`](../AGENTS.md)와 이 문서를 읽고, [`project/migration_manifest.md`](project/migration_manifest.md)에서 현재 단계와 다음 티켓을 확인한다. 개발 작업이면 [`project/development_handoff.md`](project/development_handoff.md)에서 관련 공식 문서를 선택한다.
+5. 루트의 [`AGENTS.md`](../AGENTS.md)와 이 문서를 읽고, [`project/migration_manifest.md`](project/migration_manifest.md)에서 현재 단계와 다음 티켓을 확인한다. 개발 작업이면 [`project/development_handoff.md`](project/development_handoff.md)에서 관련 공식 문서를 선택하고 [`project/project_context.md`](project/project_context.md)에서 엔진과 실행 명령을 확인한다.
 6. Codex에는 “`AGENTS.md`와 `docs/README.md`, 이관 현황을 읽고 다음 티켓부터 계속 진행해”라고 요청한다.
 7. 티켓을 완료하면 검증 결과를 확인한 뒤 해당 티켓의 로컬 커밋 여부를 승인한다.
 8. 완료한 티켓 커밋은 로컬에 모아 두고, 사용자가 현재 작업 묶음의 종료를 선언하거나 명시적으로 push를 요청할 때만 `origin/main`에 push한다. 두 장소에서 동시에 `main`을 수정하지 않는다.
@@ -78,7 +80,7 @@ GitHub 로그인 상태, Codex 대화 기록, 앱별 로컬 설정은 저장소�
 | `DOC-0505` 완료 후 | 핵심 설정·Entity·Timeline 충돌이 모두 해결되었거나 열린 질문으로 분리되었는지 확인 | `DOC-0506` |
 | `DOC-0506` 완료 후 | 링크·누락 검사 결과와 M5 전체 완료 조건을 확인 | G-M5 검토 후 `DOC-0601` |
 | `DOC-0601` 완료 후 | 사람 검토 후보, 미결정 표기와 문서 상태 승격 범위를 확인 | 승인 후 `DOC-0602` |
-| `DOC-0603` 완료 후 | 새 기준 문서와 AGENTS 작업 규칙만으로 다른 환경에서 개발을 시작할 수 있는지 확인 | G-M6 통과 후 `DEV-0001` |
+| `DOC-0603` 완료 후 | 새 기준 문서와 AGENTS 작업 규칙만으로 다른 환경에서 개발을 시작할 수 있는지 확인. 2026-07-29 G-M6 통과 | `DEV-0001` |
 | `DEV-0006`, `DEV-0107`, `G2`, `G5`, `G6`, `G8` 도달 시 | 테스트·로그 기반, 첫 핵심 루프, 전체 제품 순환, 반복 상태, 저장 복구, 출시 회귀 검사를 각 단계에 맞게 확인 | 해당 개발 관문의 다음 작업 |
 
 평상시 티켓 완료 보고에도 `정합성 검사: 지금` 또는 `정합성 검사: 아직 아님`을 적어 다음 검사 시점을 놓치지 않게 한다.
@@ -95,7 +97,7 @@ GitHub 로그인 상태, Codex 대화 기록, 앱별 로컬 설정은 저장소�
 
 검토 관문 G-M3, G-M4와 G-M5를 통과했다. `M5 — 중복 제거와 정합성 검토`의 `DOC-0501`~`DOC-0506`에서 공식 용어, Story·Design 책임, 화자 표현·NPC 지식, 핵심 설정·Entity·Timeline과 활성 문서 링크·누락을 모두 검사했다. G-M5 완료 조건 7개는 2026-07-28 정합성 검사에서 모두 충족함을 확인했다.
 
-현재는 `M6 — 최종 검수와 기준 전환`이다. `DOC-0601`에서 사람 검토 후보 3건을 승인 결과에 따라 처리했다. 감정사·연구자의 공동 어휘와 연구자 전용 지식·예시 범위를 구분했고, 일부 모험가 표현에 수색꾼의 사회적 위치 링크를 추가했다. 폐던전 범람 위험의 현재 규칙은 `DEC-004`의 `사라진다`를 유지하며, 동결 GDD 3-4의 옛 표현은 동결 해제 후 첫 GDD 개정 대상으로 남겼다.
+`M6 — 최종 검수와 기준 전환`은 2026-07-29 G-M6 정합성 검사 통과로 완료했다. `DOC-0601`에서 사람 검토 후보 3건을 승인 결과에 따라 처리했다. 감정사·연구자의 공동 어휘와 연구자 전용 지식·예시 범위를 구분했고, 일부 모험가 표현에 수색꾼의 사회적 위치 링크를 추가했다. 폐던전 범람 위험의 현재 규칙은 `DEC-004`의 `사라진다`를 유지한다.
 
 `DOC-0602`에서 검증을 마친 Story 9개, Design 5개와 필수 Reference 3개 등 17개 문서를 `confirmed`로 전환했다. Entity Index와 Timeline은 미정 이름·연도·기간을 유지하는 조건으로 `provisional`로 전환했다. 상세 규칙 이관과 검증이 남은 Harness Engineering은 `draft`를 유지한다.
 
@@ -103,6 +105,6 @@ Archive는 현재 기준이 아니라는 경고와 새 공식 문서 링크를 [
 
 `DOC-0603`에서 AGENTS의 문서 탐색 규칙을 새 공식 구조로 전환하고, GDD에 Story·Design·Reference와 개발 인계 링크를 추가했다. 동결 개발 제안서는 수정하지 않고 [`project/development_handoff.md`](project/development_handoff.md)에서 기존 단계·티켓을 현재 기준 문서에 연결했다. GDD 3-4의 옛 범람 표현도 승인된 `DEC-004`의 `사라진다`로 정정했다.
 
-> ⛔ **정합성 검사할 때입니다 — 새 공식 문서와 AGENTS 작업 규칙만으로 다른 환경에서 개발 작업을 시작할 수 있는지 검사합니다.**
+`DEV-0001`에서 사용자가 승인한 Godot 4.7.1, GDScript, Compatibility 렌더러와 Windows PC 우선 기준을 [`project/project_context.md`](project/project_context.md)에 기록했다. 루트의 `project.godot`을 headless 편집기 명령으로 초기화해 설정을 실제로 읽을 수 있음을 확인했다.
 
-현재는 `DOC-0603` 완료 후 정합성 검사와 G-M6 검토 시점이다. 결과를 사용자에게 보고하고 계속 진행하라는 지시를 받기 전에는 `DEV-0001 — 프로젝트 컨텍스트 문서 생성`을 시작하지 않는다.
+현재 다음 티켓은 `DEV-0002 — 폴더·모듈 경계 생성`이다. 다음 정합성 검사는 `DEV-0006` 완료 후 진행한다.

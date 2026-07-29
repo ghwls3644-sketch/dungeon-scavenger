@@ -98,6 +98,17 @@ related:
 - 상태: `applied`
 - 관련 결정·질문: `DEC-004`; 새 설정 결정이나 열린 질문 없음
 
+### MIG-CHG-007: Godot 개발 기준 확정
+
+- 요청일: 2026-07-29
+- 요청 내용: `DEV-0001`에서 기존 TypeScript·React·HTML5 Canvas 기준안을 Godot 4.7.1, GDScript, Compatibility 렌더러, Windows PC 우선 기준으로 교체한다. Python은 문서 검사·데이터 변환용 보조 도구로만 유지하고 React·Node.js·Docker·PostgreSQL은 현재 게임 실행 스택에서 제외한다.
+- 변경 이유: 실제 저장소에 보존할 웹 프로토타입 코드가 없고, 사용자가 PC용 2D 싱글플레이 개발에 Godot을 사용하는 방향과 권장 구성을 승인했다.
+- 영향받는 원본 절: GDD 1-2, 14-1, 18-2; 개발 제안서 단계 0, `DEV-0001`
+- 반영 대상: `docs/GDD.md`, `docs/project/decisions.md`, `docs/project/project_context.md`, `project.godot`, 개발 인계·현황·변경 이력
+- 긴급도: 일반
+- 상태: `applied`
+- 관련 결정·질문: `DEC-101`; 새 열린 질문 없음
+
 ## 검토 기록
 
 | 검토일 | 티켓 | 대기열 결과 | 활성 문서 반영 |
@@ -109,8 +120,9 @@ related:
 | 2026-07-28 | `DOC-0601` | `MIG-CHG-004`의 화자 적용 범위·근거 링크를 보완하고 GDD 후속 개정 방향을 승인 | Speaker Lexicon과 사람 검토 보고서에 반영. 동결 GDD는 변경하지 않음 |
 | 2026-07-28 | `DOC-0602` | `MIG-CHG-005`에 따라 상세 이관 전 Harness 골격을 공식 상태 전환에서 제외 | Harness는 `draft` 유지, `confirmed` 전환 범위를 17개로 정정 |
 | 2026-07-28 | `DOC-0603` | `MIG-CHG-006`에 따라 AGENTS·GDD·개발 인계를 새 공식 문서 구조로 전환 | 활성 GDD와 개발 인계표에 링크를 반영하고 동결 원본 해시를 보존 |
+| 2026-07-29 | `DEV-0001` | `MIG-CHG-007`에 따라 `DEC-101`과 GDD의 웹 구현 기준안을 Godot 기준으로 교체 | 프로젝트 컨텍스트와 최소 Godot 설정에 엔진·언어·렌더러·플랫폼과 실행·검증 명령 반영 |
 
-`DOC-0404`에서는 M3 이관 중 접수된 변경이 없는 것을 확인했다. 이후 `MIG-CHG-001`~`MIG-CHG-006`을 반영했으며 현재 대기 중 변경은 없다.
+`DOC-0404`에서는 M3 이관 중 접수된 변경이 없는 것을 확인했다. 이후 `MIG-CHG-001`~`MIG-CHG-007`을 반영했으며 현재 대기 중 변경은 없다.
 
 ## 항목 양식
 

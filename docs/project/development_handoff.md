@@ -12,6 +12,7 @@ owner: project-maintainer
 related:
   - ../README.md
   - ../GDD.md
+  - project_context.md
   - ../story/README.md
   - ../design/README.md
   - ../reference/README.md
@@ -31,11 +32,12 @@ related:
 
 1. 저장소 작업 규칙인 [`../../AGENTS.md`](../../AGENTS.md)를 읽는다.
 2. 전체 문서 입구인 [`../README.md`](../README.md)에서 현재 단계와 정합성 검사 시점을 확인한다.
-3. 제품과 시스템 연결은 [`../GDD.md`](../GDD.md)에서 확인한다.
-4. 작업 규칙은 [`../design/README.md`](../design/README.md)에서 관련 `confirmed` Design 문서를 선택한다.
-5. 세계관 이유와 표시 명칭이 필요하면 [`../story/README.md`](../story/README.md), [`../reference/README.md`](../reference/README.md)를 함께 읽는다.
-6. 확정·미정 여부는 [`decisions.md`](decisions.md), [`open_questions.md`](open_questions.md)에서 확인한다.
-7. 개발 단계와 기존 티켓 ID가 필요할 때만 동결 개발 제안서를 참고한다.
+3. 엔진·언어·실행 명령은 [`project_context.md`](project_context.md)에서 확인한다.
+4. 제품과 시스템 연결은 [`../GDD.md`](../GDD.md)에서 확인한다.
+5. 작업 규칙은 [`../design/README.md`](../design/README.md)에서 관련 `confirmed` Design 문서를 선택한다.
+6. 세계관 이유와 표시 명칭이 필요하면 [`../story/README.md`](../story/README.md), [`../reference/README.md`](../reference/README.md)를 함께 읽는다.
+7. 확정·미정 여부는 [`decisions.md`](decisions.md), [`open_questions.md`](open_questions.md)에서 확인한다.
+8. 개발 단계와 기존 티켓 ID가 필요할 때만 동결 개발 제안서를 참고한다.
 
 상세 내용이 다르면 최신 사용자 결정, 결정 기록, 해당 책임의 `confirmed` 문서, GDD 개요, 동결 제안서 순서로 판단한다. `provisional` 문서는 문서에 적힌 제한 범위에서만 사용하고 `draft` 문서는 단독 구현 기준으로 사용하지 않는다.
 
@@ -43,6 +45,7 @@ related:
 
 | 개발 작업 | 먼저 읽을 기준 | 함께 확인할 문서 |
 |---|---|---|
+| 엔진·언어·렌더러·실행·검증 | [`project_context.md`](project_context.md) | [`../GDD.md`](../GDD.md) 14장, [`decisions.md`](decisions.md)의 `DEC-101` |
 | 제품 목표·핵심 루프·MVP 범위 | [`../GDD.md`](../GDD.md) | [`../story/00_core_pillars.md`](../story/00_core_pillars.md), [`decisions.md`](decisions.md) |
 | 반복 탐험·방문 상태·퇴각 | [`../design/repeat_exploration.md`](../design/repeat_exploration.md) | [`../story/02_dungeon_canon.md`](../story/02_dungeon_canon.md), [`../reference/glossary.md`](../reference/glossary.md) |
 | 아이템·감정·판매 보호·저장 상태 | [`../design/item_rules.md`](../design/item_rules.md) | [`../story/05_items_and_discoveries.md`](../story/05_items_and_discoveries.md), [`../reference/glossary.md`](../reference/glossary.md) |
@@ -56,7 +59,7 @@ related:
 
 | 동결 제안서 범위 | 현재 문서에서 확인할 내용 |
 |---|---|
-| 단계 0, `DEV-0001`~`DEV-0006` | AGENTS 작업 규칙, 문서 입구, 결정·질문 기록, GDD 제품 개요와 테스트·로그 관문 |
+| 단계 0, `DEV-0001`~`DEV-0006` | [`project_context.md`](project_context.md)의 Godot 실행 기준, AGENTS 작업 규칙, 결정·질문 기록, GDD 제품 개요와 테스트·로그 관문 |
 | 단계 1, `DEV-0101`~`DEV-0107` | GDD 핵심 탐험 범위와 관련 Design 문서, Story 핵심 전제 |
 | 단계 2, `DEV-0201`~`DEV-0206` | GDD 제품 흐름과 저장·상태 기준, 반복 탐험·아이템·경제 Design |
 | 단계 3~5 | 위험·인벤토리·지도·거점·경제·반복 데이터에 해당하는 `confirmed` Design 문서 |
@@ -77,4 +80,6 @@ related:
 
 `DOC-0603`에서 동결 개발 제안서의 단계·티켓 구조를 새 공식 문서 체계에 연결했다. 이 문서는 개발 작업의 탐색과 인계를 돕는 Project 문서이며, 게임 규칙의 상세 기준은 각 `confirmed` Story·Design·Reference 문서가 소유한다.
 
-G-M6 통과 후 첫 개발 티켓은 `DEV-0001 — 프로젝트 컨텍스트 문서 생성`이다. 엔진·버전·플랫폼·언어와 실행·테스트 명령을 실제 저장소 상태에 맞게 기록하기 전에는 이후 구현 티켓을 시작하지 않는다.
+G-M6는 2026-07-29 정합성 검사에서 통과했다. `DEV-0001`은 Godot 4.7.1, GDScript, Compatibility 렌더러와 Windows PC 우선 기준을 [`project_context.md`](project_context.md)에 기록하고 최소 프로젝트 설정의 headless 초기화를 검증했다.
+
+현재 다음 티켓은 `DEV-0002 — 폴더·모듈 경계 생성`이다.

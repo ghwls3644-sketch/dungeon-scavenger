@@ -12,6 +12,7 @@ last_reviewed:
 owner: documentation-maintainer
 related:
   - ../README.md
+  - project_context.md
   - decisions.md
   - open_questions.md
   - gdd_mapping.md
@@ -83,6 +84,7 @@ related:
 - [`open_questions.md`](open_questions.md): 미결정·가안·보류 항목
 - [`gdd_mapping.md`](gdd_mapping.md): Story·Reference·Design·GDD·구현 영향 연결
 - [`development_handoff.md`](development_handoff.md): 동결 개발 제안서의 단계·티켓과 현재 공식 문서 연결
+- [`project_context.md`](project_context.md): 확정 엔진·언어·플랫폼과 개발 실행·검증 명령
 - [`migration_manifest.md`](migration_manifest.md): 원본, 활성 문서, 아카이브의 대응 관계와 검증 상태
 - [`migration_changes.md`](migration_changes.md): 분할 기간에 접수된 변경의 단일 대기열
 - [`story_v1.5_inventory.md`](story_v1.5_inventory.md): 스토리 원본의 장·소제목과 구조화 요소 전체 목록

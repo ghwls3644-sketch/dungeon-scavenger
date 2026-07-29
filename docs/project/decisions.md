@@ -11,6 +11,7 @@ last_reviewed:
 owner: project-maintainer
 related:
   - ../GDD.md
+  - project_context.md
   - story_v1.5_inventory.md
   - open_questions.md
   - document_changelog.md
@@ -77,7 +78,7 @@ related:
 
 | ID | 결정 | 상태 | 영향 문서 | 재검토 관문 |
 |---|---|---|---|---|
-| `DEC-101` | TypeScript + HTML5 Canvas를 구현 기준안으로 사용 | `active` | [`../GDD.md`](../GDD.md) | G0 |
+| `DEC-101` | Godot 4.7.1 + GDScript + Compatibility를 Windows PC 우선 구현 기준으로 사용 | `active` | [`../GDD.md`](../GDD.md), [`project_context.md`](project_context.md) | G0 |
 | `DEC-102` | 인벤토리는 제한 슬롯+무게 부담 단계를 사용 | `active` | [`../design/item_rules.md`](../design/item_rules.md) | G1 |
 | `DEC-103` | 인벤토리와 지도에서 시간을 일시정지 | `active` | [`../GDD.md`](../GDD.md) | G1 |
 | `DEC-104` | 기본 공격 없이 비상 무력화만 제공 | `active` | [`../story/00_core_pillars.md`](../story/00_core_pillars.md), [`../design/harness_engineering.md`](../design/harness_engineering.md) | G1·G3 |
@@ -87,6 +88,10 @@ related:
 | `DEC-108` | 추적자는 고장 난 경비 골렘으로 시작 | `active` | [`../design/repeat_exploration.md`](../design/repeat_exploration.md) | G1·G3 |
 | `DEC-109` | 탐험 중 자유 저장을 제공하지 않음 | `active` | [`../design/item_rules.md`](../design/item_rules.md), [`../GDD.md`](../GDD.md) | G2 |
 | `DEC-110` | 첫 출시 목표는 하나의 완결된 폐던전 | `active` | [`../GDD.md`](../GDD.md), [`../story/06_narrative_progression.md`](../story/06_narrative_progression.md) | G5·G7 |
+
+### DEV-0001 G0 재검토
+
+2026-07-29에 사용자가 Godot 사용 방향과 권장 구성을 승인했다. `MIG-CHG-007`에 따라 `DEC-101`의 이전 TypeScript·HTML5 Canvas 기준안을 Godot 4.7.1, GDScript, Compatibility 렌더러와 Windows PC 우선 기준으로 교체했다. 원본 결정 문구는 동결 GDD와 Git 이력에서 추적하며, 현재 실행 기준은 [`project_context.md`](project_context.md)를 따른다.
 
 ## `STY-0103` 원본 대응
 
