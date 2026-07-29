@@ -11,6 +11,7 @@ owner: documentation-maintainer
 related:
   - decisions.md
   - migration_manifest.md
+  - module_boundaries.md
   - m2_reference_review.md
   - m4_story_design_review.md
   - m5_core_entity_timeline_review.md
@@ -54,3 +55,4 @@ DOC-0003 검토 완료 후 기록을 시작한다.
 | 2026-07-28 | `DOC-0602` | Story·Design·필수 Reference 17개를 `confirmed`, Entity Index·Timeline 2개를 `provisional`로 전환하고 Archive 경고 강화 | 검증을 마친 분할 문서를 공식 기준으로 사용하되, 미정 개체·시점과 상세 이관 전 Harness 골격의 제한을 상태로 분명히 하기 위해 변경했다. |
 | 2026-07-28 | `DOC-0603` | AGENTS와 GDD를 새 공식 문서 구조로 연결하고 [`development_handoff.md`](development_handoff.md)와 Reference 읽기 순서 추가 | 동결 개발 제안서를 수정하지 않으면서 다른 환경의 Codex가 현재 기준과 기존 개발 단계·티켓을 함께 찾을 수 있게 변경했다. |
 | 2026-07-29 | `DEV-0001` | [`project_context.md`](project_context.md), 루트 `project.godot`과 `.gitignore` 생성, `DEC-101`과 GDD 구현 기준을 Godot으로 전환 | 승인된 엔진·언어·렌더러·플랫폼과 재현 가능한 실행·검증 명령을 개발 시작 기준으로 고정하기 위해 변경했다. |
+| 2026-07-29 | `DEV-0002` | [`module_boundaries.md`](module_boundaries.md)와 `src/`, `tests/`의 모듈 폴더 생성, GDD 모듈 경계를 실제 Godot 경로로 연결 | 후속 기능이 화면·저장·게임 규칙의 책임을 섞지 않고 정해진 위치와 의존 방향을 따르게 하기 위해 변경했다. |

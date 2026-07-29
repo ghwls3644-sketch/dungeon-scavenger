@@ -824,16 +824,18 @@ MVP의 거점은 실제 이동 공간이 아니라 빠른 메뉴형 허브로 �
 ## 14-2. 모듈 경계
 
 ```text
-App/             부팅, 화면 흐름, 전역 게임 상태
-Core/            ID, 이벤트, 시간, 공통 타입
-Gameplay/        플레이어, 탐색, 상호작용, 위험, 인벤토리, 탈출
-Harness/         모듈, 충전, 분석, 작업, 비상 행동
-Meta/            거점, 경제, 감정, 연구, 장비, 성장
-Infrastructure/  저장, 설정, 입력, 오디오, 로그
-UI/              타이틀, HUD, 지도, 인벤토리, 거점, 정산, 옵션
-Data/            아이템, 방, 루트, 위험, 경제, 텍스트
-Tests/           단위, 통합, 스모크, 시드 재현
+res://src/app/             부팅, 화면 흐름, 전역 게임 상태
+res://src/core/            ID, 이벤트, 시간, 공통 타입
+res://src/gameplay/        플레이어, 탐색, 상호작용, 위험, 인벤토리, 탈출
+res://src/harness/         모듈, 충전, 분석, 작업, 비상 행동
+res://src/meta/            거점, 경제, 감정, 연구, 장비, 성장
+res://src/infrastructure/  저장, 설정, 입력, 오디오, 로그
+res://src/ui/              타이틀, HUD, 지도, 인벤토리, 거점, 정산, 옵션
+res://src/data/            아이템, 방, 루트, 위험, 경제, 텍스트
+res://tests/               단위, 통합, 스모크, 시드 재현
 ```
+
+실제 파일 배치와 모듈 간 의존 방향은 [`project/module_boundaries.md`](project/module_boundaries.md)를 따른다.
 
 ## 14-3. 주요 상태
 

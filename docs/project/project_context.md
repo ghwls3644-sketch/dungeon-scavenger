@@ -15,6 +15,7 @@ related:
   - ../../project.godot
   - ../README.md
   - ../GDD.md
+  - module_boundaries.md
   - development_handoff.md
   - decisions.md
   - open_questions.md
@@ -72,7 +73,7 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 & $env:GODOT_BIN --editor --path .
 ```
 
-현재 `DEV-0001` 결과에는 플레이 가능한 메인 장면이 없다. 이 명령으로 프로젝트가 오류 없이 편집기에 열리는 것까지 확인한다. 폴더·모듈 경계는 `DEV-0002`, 기본 게임 상태와 실행 장면은 후속 티켓에서 만든다.
+현재 플레이 가능한 메인 장면은 없다. 이 명령으로 프로젝트가 오류 없이 편집기에 열리는 것까지 확인한다. 폴더·모듈 경계는 [`module_boundaries.md`](module_boundaries.md)에 기록했으며 기본 게임 상태와 실행 장면은 `DEV-0003`에서 만든다.
 
 ### 최소 스모크 검사
 
@@ -89,11 +90,16 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 - 개인 내보내기 자격 증명인 `export_credentials.cfg`는 버전 관리하지 않는다.
 - 엔진 실행 파일, 편집기 설정과 로컬 캐시는 저장소에 넣지 않는다.
 - 현재 기본 해상도, 플레이 가능한 메인 장면, 입력 행동, 저장 형식과 테스트 플러그인은 아직 확정하지 않는다.
-- 기능·장면·폴더를 추가하기 전에 해당 개발 티켓의 범위와 연결 문서를 확인한다.
+- 기능·장면·폴더를 추가하기 전에 해당 개발 티켓의 범위와 [`module_boundaries.md`](module_boundaries.md)를 확인한다.
 
 ## DEV-0001 검증 결과
 
 - Godot 버전: `4.7.1.stable.official.a13da4feb`
 - `project.godot` Compatibility 설정 로드: 통과
 - Headless 편집기 초기화와 종료 코드 `0`: 통과
-- 다음 티켓: `DEV-0002 — 폴더·모듈 경계 생성`
+
+## DEV-0002 구조 결과
+
+- `DEV-0002` 폴더·모듈 경계: [`module_boundaries.md`](module_boundaries.md)
+- 장면·스크립트·리소스와 테스트 코드: 추가하지 않음
+- 다음 티켓: `DEV-0003 — 기본 게임 상태 관리자`

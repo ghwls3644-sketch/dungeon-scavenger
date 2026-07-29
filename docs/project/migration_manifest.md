@@ -14,6 +14,7 @@ related:
   - gdd_mapping.md
   - development_handoff.md
   - project_context.md
+  - module_boundaries.md
   - migration_changes.md
   - m4_term_review.md
   - m4_story_design_review.md
@@ -278,7 +279,7 @@ G-M5 조건 7개는 모두 충족하며 2026-07-28에 검토 관문을 통과했
 ## 개발 단계 0 진행 상태
 
 - [x] `DEV-0001` 프로젝트 컨텍스트 문서와 최소 Godot 설정을 생성하고 실행·검증 명령을 확인한다.
-- [ ] `DEV-0002` 폴더·모듈 경계를 생성한다.
+- [x] `DEV-0002` Godot 소스 폴더와 모듈별 책임·의존 경계를 생성한다.
 - [ ] `DEV-0003` 기본 게임 상태 관리자를 만든다.
 - [ ] `DEV-0004` 입력 행동을 추상화한다.
 - [ ] `DEV-0005` 안정적 데이터 ID와 기본 정의를 만든다.
@@ -286,4 +287,6 @@ G-M5 조건 7개는 모두 충족하며 2026-07-28에 검토 관문을 통과했
 
 `DEV-0001`에서 사용자가 Godot 4.7.1, GDScript, Compatibility 렌더러와 Windows PC 우선 기준을 승인했다. `MIG-CHG-007`에 따라 `DEC-101`과 GDD의 이전 TypeScript·HTML5 Canvas 기준안을 교체하고 [`project_context.md`](project_context.md)에 설치·실행·headless 스모크 검사 명령을 기록했다. 루트 `project.godot`은 Godot 4.7.1에서 오류 없이 초기화되었다.
 
-현재 다음 티켓은 `DEV-0002 — 폴더·모듈 경계 생성`이다. 다음 정합성 검사는 `DEV-0006` 완료 후 진행한다.
+`DEV-0002`에서 동결 제안서의 8개 영역과 현재 GDD의 독립 Harness 영역을 대조해 `res://src/` 아래 8개 소스 모듈과 `res://tests/` 경계를 생성했다. [`module_boundaries.md`](module_boundaries.md)에 각 폴더의 책임, 금지 책임과 순환을 막는 의존 방향을 기록했으며 게임 코드·장면·리소스는 추가하지 않았다.
+
+현재 다음 티켓은 `DEV-0003 — 기본 게임 상태 관리자`다. 다음 정합성 검사는 `DEV-0006` 완료 후 진행한다.

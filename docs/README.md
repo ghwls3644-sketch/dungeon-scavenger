@@ -16,6 +16,7 @@ related:
   - reference/README.md
   - project/README.md
   - project/project_context.md
+  - project/module_boundaries.md
 ---
 
 # 폐던전 수색꾼 문서 안내
@@ -41,6 +42,7 @@ related:
 - 결정과 미결정 사항: [`project/decisions.md`](project/decisions.md), [`project/open_questions.md`](project/open_questions.md)
 - 개발 단계·티켓 인계: [`project/development_handoff.md`](project/development_handoff.md)
 - 개발 환경·실행 명령: [`project/project_context.md`](project/project_context.md)
+- 소스 폴더·모듈 책임: [`project/module_boundaries.md`](project/module_boundaries.md)
 - M2 Reference 검토 결과: [`project/m2_reference_review.md`](project/m2_reference_review.md)
 - 공식 용어 검수 결과: [`project/m4_term_review.md`](project/m4_term_review.md)
 - Story·Design 중복 검수 결과: [`project/m4_story_design_review.md`](project/m4_story_design_review.md)
@@ -107,4 +109,6 @@ Archive는 현재 기준이 아니라는 경고와 새 공식 문서 링크를 [
 
 `DEV-0001`에서 사용자가 승인한 Godot 4.7.1, GDScript, Compatibility 렌더러와 Windows PC 우선 기준을 [`project/project_context.md`](project/project_context.md)에 기록했다. 루트의 `project.godot`을 headless 편집기 명령으로 초기화해 설정을 실제로 읽을 수 있음을 확인했다.
 
-현재 다음 티켓은 `DEV-0002 — 폴더·모듈 경계 생성`이다. 다음 정합성 검사는 `DEV-0006` 완료 후 진행한다.
+`DEV-0002`에서 Godot 소스를 `app`, `core`, `gameplay`, `harness`, `meta`, `infrastructure`, `ui`, `data`, `tests` 경계로 나눴다. 실제 경로, 책임과 의존 방향은 [`project/module_boundaries.md`](project/module_boundaries.md)에 기록했다.
+
+현재 다음 티켓은 `DEV-0003 — 기본 게임 상태 관리자`다. 다음 정합성 검사는 `DEV-0006` 완료 후 진행한다.
