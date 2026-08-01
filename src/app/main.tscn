@@ -1,7 +1,9 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="PackedScene" path="res://src/ui/debug_state_panel.tscn" id="1_debug_panel"]
+[ext_resource type="Script" path="res://src/app/dev_entry.gd" id="2_dev_entry"]
 
 [node name="Main" type="Node"]
+script = ExtResource("2_dev_entry")
 
 [node name="DebugStatePanel" parent="." instance=ExtResource("1_debug_panel")]

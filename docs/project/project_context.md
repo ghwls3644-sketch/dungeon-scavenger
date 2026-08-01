@@ -13,13 +13,16 @@ owner: project-maintainer
 related:
   - ../../AGENTS.md
   - ../../project.godot
+  - ../../src/app/dev_entry.gd
   - ../../src/app/game_state.gd
   - ../../src/app/main.tscn
   - ../../src/core/stable_id.gd
   - ../../src/data/content_definition.gd
   - ../../src/data/item_definition.gd
+  - ../../src/infrastructure/game_log.gd
   - ../../src/infrastructure/input_actions.gd
   - ../../src/ui/debug_state_panel.tscn
+  - ../../tests/smoke/game_state_flow_smoke.tscn
   - ../README.md
   - ../GDD.md
   - module_boundaries.md
@@ -90,13 +93,13 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 
 현재 메인 장면은 실제 게임 플레이가 아니라 `DEV-0003` 상태 전환을 확인하는 개발 화면이다. 버튼을 누르면 `Boot → Title → Hub → Exploration → Results → Hub` 순서로 현재 상태가 바뀐다.
 
-### 최소 스모크 검사
+### 프로젝트 초기화 검사
 
 ```powershell
 & $env:GODOT_BIN --headless --editor --path . --quit
 ```
 
-종료 코드가 `0`이면 현재 프로젝트 설정을 Godot 4.7.1이 읽고 초기화할 수 있다는 뜻이다. 정식 단위·통합 테스트 구조는 `DEV-0006`에서 추가하며, 그전까지 이 명령을 프로젝트 기반 검사로 사용한다.
+종료 코드가 `0`이면 현재 프로젝트 설정을 Godot 4.7.1이 읽고 초기화할 수 있다는 뜻이다.
 
 ### 메인 장면 Headless 스모크
 
@@ -105,6 +108,22 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 ```
 
 종료 코드가 `0`이고 오류 로그가 없으면 메인 장면, `GameState` Autoload와 개발 UI를 초기화할 수 있다는 뜻이다.
+
+### 상태 전환 자동 스모크 검사
+
+```powershell
+& $env:GODOT_BIN --headless --path . res://tests/smoke/game_state_flow_smoke.tscn
+```
+
+이 한 명령은 `Boot → Title → Hub → Exploration → Results → Hub`를 순서대로 검증한다. 모든 전환과 최종 상태가 맞으면 `state_flow_passed` 로그를 남기고 종료 코드 `0`을 반환하며, 실패하면 오류 로그와 0이 아닌 종료 코드를 반환한다.
+
+### 개발 상태 직접 진입
+
+```powershell
+& $env:GODOT_BIN --path . -- --dev-state=Exploration
+```
+
+현재 사용할 수 있는 값은 `Boot`, `Title`, `Hub`, `Exploration`, `Results`다. 이 인수는 디버그 빌드에서만 동작한다. 메인 개발 장면은 요청한 상태까지 `GameState`의 허용 전환을 순서대로 요청하며 중앙 상태 관리자를 우회하지 않는다.
 
 ## 저장소 규칙
 
@@ -115,6 +134,7 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 - 현재 기본 해상도, 실제 게임 플레이 장면, 저장 형식과 테스트 플러그인은 아직 확정하지 않는다.
 - 입력 행동과 키보드·마우스 기본 연결은 `DEV-0004`에서 추가했다. 컨트롤러의 첫 출시 포함 여부는 `Q-006` 결정 전까지 확정하지 않는다.
 - 안정적 ID와 표시 이름을 분리한 공통 콘텐츠·아이템 정의는 `DEV-0005`에서 추가했다. 실제 콘텐츠와 밸런스 값은 아직 추가하지 않는다.
+- 상태 전환 스모크 장면, 공통 로그 형식과 개발 상태 진입 인수는 `DEV-0006`에서 추가했다. 테스트 장면은 출시 코드가 참조하지 않는다.
 - 기능·장면·폴더를 추가하기 전에 해당 개발 티켓의 범위와 [`module_boundaries.md`](module_boundaries.md)를 확인한다.
 
 ## DEV-0001 검증 결과
@@ -153,4 +173,13 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 - 분리 원칙: `stable_id`와 `display_name`은 서로를 자동 변경하지 않는 독립 필드
 - 아이템 필드: 분류, 무게, 슬롯 크기, 가치 최솟값·최댓값, 판매 보호
 - 검증: Godot 4.7.1에서 클래스 등록, 유효성 검사, 표시 이름 변경 후 ID 유지와 Headless 메인 장면 실행 통과
-- 다음 티켓: `DEV-0006 — 테스트·로그·디버그 진입점`
+
+## DEV-0006 테스트·로그·디버그 진입점 결과
+
+- 로그 API: `res://src/infrastructure/game_log.gd`의 `GameLog`
+- 상태 전환 로그: 시작·완료·거절 이벤트와 현재·요청 상태 및 거절 사유
+- 개발 진입점: 메인 장면의 `--dev-state=<상태>` 사용자 인수
+- 스모크 장면: `res://tests/smoke/game_state_flow_smoke.tscn`
+- 검증: Godot 4.7.1에서 프로젝트 초기화, 메인 장면, 상태 전환 스모크 명령과 `Exploration` 직접 진입 통과
+- 저장 데이터 영향: 없음
+- 다음 절차: G0 정합성 검사. 통과 후 `DEV-0101 — 플레이어 이동과 카메라`

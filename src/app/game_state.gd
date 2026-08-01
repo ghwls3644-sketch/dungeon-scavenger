@@ -60,6 +60,11 @@ func request_transition(target_state: int) -> bool:
 		return _reject_transition(target_state, REASON_NOT_ALLOWED)
 
 	_transition_in_progress = true
+	GameLog.info(
+		&"GameState",
+		&"transition_started",
+		"from=%s to=%s" % [get_state_name(_current_state), get_state_name(target_state)]
+	)
 	transition_started.emit(_current_state, target_state)
 	_complete_transition.call_deferred(target_state)
 	return true
@@ -91,10 +96,24 @@ func _complete_transition(target_state: State) -> void:
 	var previous_state := _current_state
 	_current_state = target_state
 	_transition_in_progress = false
+	GameLog.info(
+		&"GameState",
+		&"transition_completed",
+		"from=%s to=%s" % [get_state_name(previous_state), get_state_name(_current_state)]
+	)
 	state_changed.emit(previous_state, _current_state)
 
 
 func _reject_transition(target_state: int, reason: StringName) -> bool:
+	GameLog.warning(
+		&"GameState",
+		&"transition_rejected",
+		"current=%s requested=%s reason=%s" % [
+			get_state_name(_current_state),
+			get_state_name(target_state),
+			reason,
+		]
+	)
 	transition_rejected.emit(_current_state, target_state, reason)
 	return false
 
