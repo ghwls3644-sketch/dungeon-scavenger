@@ -8,7 +8,7 @@ canonical_for:
   - source_tree_layout
   - module_responsibilities
   - module_dependency_rules
-last_reviewed: 2026-07-29
+last_reviewed: 2026-08-01
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -92,5 +92,7 @@ res://
 - `DEV-0002`에서 위 9개 경계를 만들고 각 폴더는 `.gitkeep`만 둔 상태로 시작했다.
 - `DEV-0003`에서 `src/app/`에 `GameState` Autoload와 최소 조립 장면을, `src/ui/`에 개발용 상태 표시 UI를 추가했다.
 - `GameState`만 현재 상태와 허용 전환을 바꾸며, 메인 장면의 UI는 공개 전환 인터페이스에 요청만 보낸다.
-- 입력 행동은 `DEV-0004`, 안정적 데이터 ID와 기본 정의는 `DEV-0005`, 정식 테스트·로그·디버그 진입점은 `DEV-0006` 범위다.
-- 다음 티켓은 `DEV-0004 — 입력 행동 추상화`다.
+- `DEV-0004`에서 `src/infrastructure/input_actions.gd`가 행동 이름과 Godot 입력 조회를 소유하고, `project.godot`이 키보드·마우스 기본 연결을 소유하도록 했다.
+- 게임 규칙과 UI는 실제 키 코드를 참조하지 않고 `InputActions`의 공개 행동 이름과 조회 API만 사용한다.
+- 안정적 데이터 ID와 기본 정의는 `DEV-0005`, 정식 테스트·로그·디버그 진입점은 `DEV-0006` 범위다.
+- 다음 티켓은 `DEV-0005 — 안정적 데이터 ID와 기본 정의`다.

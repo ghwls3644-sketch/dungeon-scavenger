@@ -281,7 +281,7 @@ G-M5 조건 7개는 모두 충족하며 2026-07-28에 검토 관문을 통과했
 - [x] `DEV-0001` 프로젝트 컨텍스트 문서와 최소 Godot 설정을 생성하고 실행·검증 명령을 확인한다.
 - [x] `DEV-0002` Godot 소스 폴더와 모듈별 책임·의존 경계를 생성한다.
 - [x] `DEV-0003` 기본 게임 상태 관리자와 개발용 순환 화면을 만든다.
-- [ ] `DEV-0004` 입력 행동을 추상화한다.
+- [x] `DEV-0004` 입력 행동을 추상화한다.
 - [ ] `DEV-0005` 안정적 데이터 ID와 기본 정의를 만든다.
 - [ ] `DEV-0006` 테스트·로그·디버그 진입점을 만든다.
 
@@ -291,4 +291,6 @@ G-M5 조건 7개는 모두 충족하며 2026-07-28에 검토 관문을 통과했
 
 `DEV-0003`에서 `res://src/app/game_state.gd`를 `GameState` Autoload로 등록하고 최소 메인 장면을 연결했다. `Boot → Title → Hub → Exploration → Results → Hub` 개발 흐름과 중복·현재 상태·허용되지 않은 전환 거절을 실제 Godot 실행으로 확인했다. GDD의 나머지 계획 상태는 관련 기능 티켓 전까지 구현하지 않는다.
 
-현재 다음 티켓은 `DEV-0004 — 입력 행동 추상화`다. 다음 정합성 검사는 `DEV-0006` 완료 후 진행한다.
+`DEV-0004`에서 `move_left`, `move_right`, `move_up`, `move_down`, `aim_look`, `interact`, `use_harness`, `use_tool`, `inventory`, `map`, `quick_drop`, `pause` 행동을 `InputMap`에 등록했다. 키보드·마우스 기본 입력은 `project.godot`에 집중하고 `res://src/infrastructure/input_actions.gd`가 행동 이름과 입력 조회 API를 제공한다. Godot 4.7.1에서 12개 행동과 11개 기본 키 연결, 프로젝트 초기화와 메인 장면 실행을 확인했다.
+
+현재 다음 티켓은 `DEV-0005 — 안정적 데이터 ID와 기본 정의`다. 다음 정합성 검사는 `DEV-0006` 완료 후 진행한다.
