@@ -91,4 +91,6 @@ G-M6는 2026-07-29 정합성 검사에서 통과했다. `DEV-0001`은 Godot 4.7.
 
 `DEV-0004`는 GDD 12장의 행동을 `InputMap`에 등록하고 `res://src/infrastructure/input_actions.gd`에 행동 이름과 조회 API를 모았다. 키보드·마우스 기본 입력은 프로젝트 설정 한곳에서만 물리 키를 사용하며 컨트롤러 입력은 `Q-006` 결정 전까지 추가하지 않는다.
 
-현재 다음 티켓은 `DEV-0005 — 안정적 데이터 ID와 기본 정의`다.
+`DEV-0005`는 `res://src/core/stable_id.gd`에 공용 안정적 ID 검증을, `res://src/data/content_definition.gd`와 `item_definition.gd`에 표시 이름과 분리된 ID 및 아이템 기본 필드를 추가했다. 아이템 분류는 확정된 네 분류만 사용하고 실제 콘텐츠·밸런스 값과 저장 형식은 추가하지 않았다.
+
+현재 다음 티켓은 `DEV-0006 — 테스트·로그·디버그 진입점`이다.

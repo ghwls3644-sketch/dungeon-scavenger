@@ -15,6 +15,9 @@ related:
   - ../../project.godot
   - ../../src/app/game_state.gd
   - ../../src/app/main.tscn
+  - ../../src/core/stable_id.gd
+  - ../../src/data/content_definition.gd
+  - ../../src/data/item_definition.gd
   - ../../src/infrastructure/input_actions.gd
   - ../../src/ui/debug_state_panel.tscn
   - ../README.md
@@ -111,6 +114,7 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 - 엔진 실행 파일, 편집기 설정과 로컬 캐시는 저장소에 넣지 않는다.
 - 현재 기본 해상도, 실제 게임 플레이 장면, 저장 형식과 테스트 플러그인은 아직 확정하지 않는다.
 - 입력 행동과 키보드·마우스 기본 연결은 `DEV-0004`에서 추가했다. 컨트롤러의 첫 출시 포함 여부는 `Q-006` 결정 전까지 확정하지 않는다.
+- 안정적 ID와 표시 이름을 분리한 공통 콘텐츠·아이템 정의는 `DEV-0005`에서 추가했다. 실제 콘텐츠와 밸런스 값은 아직 추가하지 않는다.
 - 기능·장면·폴더를 추가하기 전에 해당 개발 티켓의 범위와 [`module_boundaries.md`](module_boundaries.md)를 확인한다.
 
 ## DEV-0001 검증 결과
@@ -140,4 +144,13 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 - 조준·대상 방향: `aim_look` 행동 ID와 포인터 위치 조회 API를 제공하며 별도 키는 연결하지 않음
 - 입력 API: `res://src/infrastructure/input_actions.gd`의 `InputActions`
 - 검증: Godot 4.7.1에서 행동 12개, 기본 키 연결 11개, Headless 프로젝트 초기화와 메인 장면 실행 통과
-- 다음 티켓: `DEV-0005 — 안정적 데이터 ID와 기본 정의`
+
+## DEV-0005 데이터 ID와 기본 정의 결과
+
+- 공용 ID 검증: `res://src/core/stable_id.gd`의 `StableId`
+- 공통 콘텐츠 정의: `res://src/data/content_definition.gd`의 `ContentDefinition`
+- 아이템 기본 정의: `res://src/data/item_definition.gd`의 `ItemDefinition`
+- 분리 원칙: `stable_id`와 `display_name`은 서로를 자동 변경하지 않는 독립 필드
+- 아이템 필드: 분류, 무게, 슬롯 크기, 가치 최솟값·최댓값, 판매 보호
+- 검증: Godot 4.7.1에서 클래스 등록, 유효성 검사, 표시 이름 변경 후 ID 유지와 Headless 메인 장면 실행 통과
+- 다음 티켓: `DEV-0006 — 테스트·로그·디버그 진입점`

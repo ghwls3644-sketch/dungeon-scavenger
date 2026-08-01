@@ -282,7 +282,7 @@ G-M5 조건 7개는 모두 충족하며 2026-07-28에 검토 관문을 통과했
 - [x] `DEV-0002` Godot 소스 폴더와 모듈별 책임·의존 경계를 생성한다.
 - [x] `DEV-0003` 기본 게임 상태 관리자와 개발용 순환 화면을 만든다.
 - [x] `DEV-0004` 입력 행동을 추상화한다.
-- [ ] `DEV-0005` 안정적 데이터 ID와 기본 정의를 만든다.
+- [x] `DEV-0005` 안정적 데이터 ID와 기본 정의를 만든다.
 - [ ] `DEV-0006` 테스트·로그·디버그 진입점을 만든다.
 
 `DEV-0001`에서 사용자가 Godot 4.7.1, GDScript, Compatibility 렌더러와 Windows PC 우선 기준을 승인했다. `MIG-CHG-007`에 따라 `DEC-101`과 GDD의 이전 TypeScript·HTML5 Canvas 기준안을 교체하고 [`project_context.md`](project_context.md)에 설치·실행·headless 스모크 검사 명령을 기록했다. 루트 `project.godot`은 Godot 4.7.1에서 오류 없이 초기화되었다.
@@ -293,4 +293,6 @@ G-M5 조건 7개는 모두 충족하며 2026-07-28에 검토 관문을 통과했
 
 `DEV-0004`에서 `move_left`, `move_right`, `move_up`, `move_down`, `aim_look`, `interact`, `use_harness`, `use_tool`, `inventory`, `map`, `quick_drop`, `pause` 행동을 `InputMap`에 등록했다. 키보드·마우스 기본 입력은 `project.godot`에 집중하고 `res://src/infrastructure/input_actions.gd`가 행동 이름과 입력 조회 API를 제공한다. Godot 4.7.1에서 12개 행동과 11개 기본 키 연결, 프로젝트 초기화와 메인 장면 실행을 확인했다.
 
-현재 다음 티켓은 `DEV-0005 — 안정적 데이터 ID와 기본 정의`다. 다음 정합성 검사는 `DEV-0006` 완료 후 진행한다.
+`DEV-0005`에서 `StableId` 검증과 `ContentDefinition`, `ItemDefinition` 리소스를 추가했다. `ItemDefinition`은 확정된 네 분류와 무게, 슬롯 크기, 가치 범위, 판매 보호 필드만 정의하며 실제 콘텐츠와 밸런스 값은 포함하지 않는다. Godot 4.7.1에서 표시 이름 변경이 안정적 ID에 영향을 주지 않고 유효하지 않은 ID가 검출됨을 확인했다.
+
+현재 다음 티켓은 `DEV-0006 — 테스트·로그·디버그 진입점`이다. 다음 정합성 검사는 `DEV-0006` 완료 후 진행한다.
