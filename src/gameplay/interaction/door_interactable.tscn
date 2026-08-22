@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://src/gameplay/interaction/door_interactable.gd" id="1_door"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_interaction"]
+size = Vector2(76, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_barrier"]
+size = Vector2(24, 72)
+
+[node name="DoorInteractable" type="Area2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_door")
+open_prompt = "문 열기"
+close_prompt = "문 닫기"
+
+[node name="DoorVisual" type="Polygon2D" parent="."]
+unique_name_in_owner = true
+polygon = PackedVector2Array(-12, -36, 12, -36, 12, 36, -12, 36)
+color = Color(0.48, 0.3, 0.18, 1)
+
+[node name="InteractionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_interaction")
+
+[node name="Barrier" type="StaticBody2D" parent="."]
+
+[node name="BarrierCollision" type="CollisionShape2D" parent="Barrier"]
+unique_name_in_owner = true
+shape = SubResource("RectangleShape2D_barrier")

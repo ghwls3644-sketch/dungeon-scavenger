@@ -7,7 +7,7 @@ source_version: gdd-v2.1+management-proposal-v0.2.1
 canonical_for:
   - document_navigation
   - canonical_source_routing
-last_reviewed:
+last_reviewed: 2026-08-22
 owner: documentation-maintainer
 related:
   - GDD.md
@@ -123,4 +123,6 @@ Archive는 현재 기준이 아니라는 경고와 새 공식 문서 링크를 [
 
 `DEV-0101`에서 `CharacterBody2D` 기반 플레이어 이동과 자식 `Camera2D`를 추가했다. 이동은 `InputActions`의 방향 벡터만 사용하며, 시제품 속도 `240 px/s`는 플레이어 장면에 조정 가능한 값으로 둔다. 실제 플레이어 장면을 사용하는 이동·카메라·일시정지 자동 검사와 수동 테스트 공간을 Godot 4.7.1에서 검증했다. 테스트 공간의 일시정지 조작은 이번 완료 조건 확인용이며 제품 전체의 일시정지 흐름을 대신하지 않는다.
 
-현재 다음 개발 작업은 `DEV-0102 — 상호작용 시스템`이다. 다음 정합성 검사는 `DEV-0107` 완료 뒤 첫 핵심 탐험 순환을 대상으로 한다.
+`DEV-0102`에서 상호작용 대상 감지, 안내 표시와 실행을 각각 `InteractionDetector`, `InteractionPrompt`, `InteractionController`로 분리했다. 시험용 회수품과 문은 같은 `Interactable` 인터페이스를 사용한다. 회수품 제거, 문 열림·닫힘과 충돌·안내 갱신을 Godot 4.7.1 자동 검사와 수동 테스트 공간에서 확인했다. 인벤토리 적재와 실제 콘텐츠·문 잠금 규칙은 추가하지 않았다.
+
+현재 다음 개발 작업은 `DEV-0103 — 최소 아이템·인벤토리`다. 다음 정합성 검사는 `DEV-0107` 완료 뒤 첫 핵심 탐험 순환을 대상으로 한다.

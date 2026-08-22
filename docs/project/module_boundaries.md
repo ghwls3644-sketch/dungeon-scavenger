@@ -8,7 +8,7 @@ canonical_for:
   - source_tree_layout
   - module_responsibilities
   - module_dependency_rules
-last_reviewed: 2026-08-01
+last_reviewed: 2026-08-22
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -101,4 +101,7 @@ res://
 - `DEV-0006` 완료 뒤 정합성 검사에서 위 경계와 프로젝트 기반이 일치함을 확인했고, 2026-08-01 사용자의 진행 지시에 따라 G0를 통과했다.
 - `DEV-0101`에서 `src/gameplay/player/`가 `CharacterBody2D` 기반 플레이어 이동과 자식 `Camera2D`를 소유하도록 했다. 이동 제어기는 `InputActions`의 공개 조회 API에만 의존한다.
 - `tests/fixtures/`는 이동·카메라와 일시정지를 직접 확인하는 개발 공간을, `tests/smoke/`는 실제 플레이어 장면을 자동 검증하는 장면을 소유한다. 테스트 공간의 일시정지 조작은 출시 플레이 흐름이 참조하지 않는다.
-- 다음 개발 작업은 `DEV-0102 — 상호작용 시스템`이며, 다음 정합성 검사는 `DEV-0107` 완료 뒤 진행한다.
+- `DEV-0102`에서 `src/gameplay/interaction/`이 공통 대상 인터페이스, 대상 감지와 상호작용 실행을 소유하도록 했다. 플레이어 장면은 감지기와 실행기를 조립하고 실제 입력 키 대신 `InputActions.INTERACT`를 사용한다.
+- `src/ui/interaction_prompt.*`는 현재 대상의 안내 문구만 표시하며 대상 선택이나 상호작용 결과를 결정하지 않는다. 시험용 회수품과 문은 같은 `Interactable` 인터페이스를 사용한다.
+- `tests/fixtures/interaction_test_space.tscn`은 수동 확인 공간을, `tests/smoke/interaction_system_smoke.tscn`은 감지·안내·실행과 두 대상의 공통 인터페이스 검증을 소유한다.
+- 다음 개발 작업은 `DEV-0103 — 최소 아이템·인벤토리`이며, 다음 정합성 검사는 `DEV-0107` 완료 뒤 진행한다.

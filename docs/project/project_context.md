@@ -8,7 +8,7 @@ canonical_for:
   - development_environment
   - engine_and_language
   - development_commands
-last_reviewed: 2026-08-01
+last_reviewed: 2026-08-22
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -21,11 +21,17 @@ related:
   - ../../src/data/item_definition.gd
   - ../../src/infrastructure/game_log.gd
   - ../../src/infrastructure/input_actions.gd
+  - ../../src/gameplay/interaction/interactable.gd
+  - ../../src/gameplay/interaction/interaction_controller.gd
+  - ../../src/gameplay/interaction/interaction_detector.gd
   - ../../src/gameplay/player/player_controller.gd
   - ../../src/gameplay/player/player.tscn
   - ../../src/ui/debug_state_panel.tscn
+  - ../../src/ui/interaction_prompt.tscn
+  - ../../tests/fixtures/interaction_test_space.tscn
   - ../../tests/fixtures/movement_test_space.tscn
   - ../../tests/smoke/game_state_flow_smoke.tscn
+  - ../../tests/smoke/interaction_system_smoke.tscn
   - ../../tests/smoke/player_movement_smoke.tscn
   - ../README.md
   - ../GDD.md
@@ -145,6 +151,22 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 
 실제 플레이어 장면의 수평 이동, 대각선 속도 정규화, 자식 카메라 추적과 `SceneTree` 일시정지 중 정지를 검사한다. 모두 맞으면 `player_movement_passed` 로그와 종료 코드 `0`을 반환한다.
 
+### 상호작용 수동 테스트
+
+```powershell
+& $env:GODOT_BIN --path . res://tests/fixtures/interaction_test_space.tscn
+```
+
+플레이어를 회수품과 문 가까이 이동해 안내가 나타나는지 확인하고 `E`로 상호작용한다. 회수품은 제거되고 문은 열림·닫힘에 따라 통행과 안내가 바뀐다. 시험용 대상이므로 실제 아이템 적재나 문 잠금 규칙은 포함하지 않는다.
+
+### 상호작용 자동 검사
+
+```powershell
+& $env:GODOT_BIN --headless --path . res://tests/smoke/interaction_system_smoke.tscn
+```
+
+실제 플레이어의 감지기·실행기와 안내 UI를 사용해 회수품과 문이 공통 인터페이스를 따르는지, 가까운 대상 감지와 안내, 회수품 제거, 문 상태·충돌·안내 갱신이 일치하는지 검사한다. 모두 맞으면 `interaction_system_passed` 로그와 종료 코드 `0`을 반환한다.
+
 ## 저장소 규칙
 
 - `project.godot`은 버전 관리한다.
@@ -218,4 +240,20 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 - 일시정지 범위: 테스트 공간이 `SceneTree.paused`를 전환하고 플레이어는 정지함. 제품 전체 일시정지 흐름은 추가하지 않음
 - 저장 데이터 영향: 없음
 - 다음 개발 작업: `DEV-0102 — 상호작용 시스템`
+- 다음 정합성 검사: `DEV-0107` 완료 뒤
+
+## DEV-0102 상호작용 시스템 결과
+
+- 공통 대상 인터페이스: `res://src/gameplay/interaction/interactable.gd`
+- 대상 감지: `res://src/gameplay/interaction/interaction_detector.gd`
+- 입력 실행: `res://src/gameplay/interaction/interaction_controller.gd`
+- 안내 UI: `res://src/ui/interaction_prompt.tscn`
+- 플레이어 연결: 실제 키 코드 없이 `InputActions.INTERACT`를 사용하는 감지기와 실행기를 플레이어 장면에 조립
+- 공통 구현 예: 시험용 회수품과 문이 모두 `Interactable`을 상속
+- 수동 테스트 공간: `res://tests/fixtures/interaction_test_space.tscn`
+- 자동 검사: `res://tests/smoke/interaction_system_smoke.tscn`
+- 검증: Godot 4.7.1에서 프로젝트 초기화, 상호작용 자동 검사, 기존 이동·카메라 및 상태 전환 자동 검사와 테스트 공간 초기화 통과
+- 제외 범위: 인벤토리 적재, 실제 아이템 콘텐츠, 문 잠금·하네스 우회, 저장 상태
+- 저장 데이터 영향: 없음
+- 다음 개발 작업: `DEV-0103 — 최소 아이템·인벤토리`
 - 다음 정합성 검사: `DEV-0107` 완료 뒤

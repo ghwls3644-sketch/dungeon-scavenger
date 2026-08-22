@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://tests/fixtures/interaction_test_space.gd" id="1_space"]
+[ext_resource type="PackedScene" path="res://src/gameplay/player/player.tscn" id="2_player"]
+[ext_resource type="PackedScene" path="res://src/gameplay/interaction/pickup_interactable.tscn" id="3_pickup"]
+[ext_resource type="PackedScene" path="res://src/gameplay/interaction/door_interactable.tscn" id="4_door"]
+[ext_resource type="PackedScene" path="res://src/ui/interaction_prompt.tscn" id="5_prompt"]
+
+[node name="InteractionTestSpace" type="Node2D"]
+script = ExtResource("1_space")
+
+[node name="Floor" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-640, -360, 640, -360, 640, 360, -640, 360)
+color = Color(0.045, 0.06, 0.08, 1)
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+
+[node name="PickupInteractable" parent="." instance=ExtResource("3_pickup")]
+position = Vector2(70, 0)
+
+[node name="DoorInteractable" parent="." instance=ExtResource("4_door")]
+position = Vector2(260, 0)
+
+[node name="Overlay" type="CanvasLayer" parent="."]
+
+[node name="Instructions" type="Label" parent="Overlay"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 400.0
+offset_bottom = 48.0
+text = "WASD: 이동  |  E: 상호작용"
+
+[node name="ResultStatus" type="Label" parent="Overlay"]
+unique_name_in_owner = true
+offset_left = 16.0
+offset_top = 48.0
+offset_right = 400.0
+offset_bottom = 80.0
+text = "상호작용 대상을 확인하세요"
+
+[node name="InteractionPrompt" parent="Overlay" instance=ExtResource("5_prompt")]
+offset_left = 416.0
+offset_top = 560.0
+offset_right = 736.0
+offset_bottom = 592.0
+interaction_source_path = NodePath("../../Player/InteractionController")

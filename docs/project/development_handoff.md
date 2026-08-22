@@ -7,7 +7,7 @@ source_version: development-proposal-v0.1+gdd-v2.1
 canonical_for:
   - development_document_handoff
   - development_ticket_routing
-last_reviewed:
+last_reviewed: 2026-08-22
 owner: project-maintainer
 related:
   - ../README.md
@@ -99,4 +99,6 @@ G-M6는 2026-07-29 정합성 검사에서 통과했다. `DEV-0001`은 Godot 4.7.
 
 `DEV-0101`은 `res://src/gameplay/player/`에 `CharacterBody2D` 이동과 자식 `Camera2D`를 추가했다. 이동은 `InputActions`를 사용하며 시제품 속도는 플레이어 장면에서 조정한다. `res://tests/fixtures/movement_test_space.tscn`은 이동과 일시정지를 직접 확인하고, `res://tests/smoke/player_movement_smoke.tscn`은 실제 플레이어 장면의 이동 속도 정규화, 카메라 추적과 일시정지 중 정지를 자동 검증한다.
 
-현재 다음 개발 작업은 `DEV-0102 — 상호작용 시스템`이다. 다음 정합성 검사는 `DEV-0107` 완료 뒤 진행한다.
+`DEV-0102`는 `res://src/gameplay/interaction/`에 공통 `Interactable`, 감지기와 입력 실행기를 추가하고 `res://src/ui/interaction_prompt.tscn`에 안내 표시를 분리했다. 플레이어 장면은 감지기와 실행기를 조립한다. 시험용 회수품과 문은 같은 인터페이스를 사용하며 자동 검사에서 감지, 안내, 회수와 문 열림·닫힘을 확인한다.
+
+현재 다음 개발 작업은 `DEV-0103 — 최소 아이템·인벤토리`다. 다음 정합성 검사는 `DEV-0107` 완료 뒤 진행한다.
