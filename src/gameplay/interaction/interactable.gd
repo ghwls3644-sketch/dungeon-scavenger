@@ -20,7 +20,8 @@ func interact(interactor: Node) -> bool:
 	if not is_interaction_available(interactor):
 		return false
 
-	_perform_interaction(interactor)
+	if not _perform_interaction(interactor):
+		return false
 	interacted.emit(interactor)
 	return true
 
@@ -29,5 +30,6 @@ func set_interaction_enabled(enabled: bool) -> void:
 	_interaction_enabled = enabled
 
 
-func _perform_interaction(_interactor: Node) -> void:
+func _perform_interaction(_interactor: Node) -> bool:
 	push_error("Interactable subclasses must implement _perform_interaction().")
+	return false

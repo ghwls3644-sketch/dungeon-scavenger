@@ -1,10 +1,21 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://tests/fixtures/interaction_test_space.gd" id="1_space"]
 [ext_resource type="PackedScene" path="res://src/gameplay/player/player.tscn" id="2_player"]
 [ext_resource type="PackedScene" path="res://src/gameplay/interaction/pickup_interactable.tscn" id="3_pickup"]
 [ext_resource type="PackedScene" path="res://src/gameplay/interaction/door_interactable.tscn" id="4_door"]
 [ext_resource type="PackedScene" path="res://src/ui/interaction_prompt.tscn" id="5_prompt"]
+[ext_resource type="Script" path="res://src/data/item_definition.gd" id="6_item_definition"]
+
+[sub_resource type="Resource" id="Resource_test_pickup"]
+script = ExtResource("6_item_definition")
+stable_id = &"test_interaction_pickup"
+display_name = "시험용 회수품"
+category = &"scrap"
+weight = 0.5
+slot_size = 1
+value_min = 0
+value_max = 0
 
 [node name="InteractionTestSpace" type="Node2D"]
 script = ExtResource("1_space")
@@ -17,6 +28,7 @@ color = Color(0.045, 0.06, 0.08, 1)
 
 [node name="PickupInteractable" parent="." instance=ExtResource("3_pickup")]
 position = Vector2(70, 0)
+item_definition = SubResource("Resource_test_pickup")
 
 [node name="DoorInteractable" parent="." instance=ExtResource("4_door")]
 position = Vector2(260, 0)

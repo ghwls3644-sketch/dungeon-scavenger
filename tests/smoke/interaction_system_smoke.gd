@@ -26,8 +26,11 @@ func _run_interaction_checks() -> void:
 	var player: PlayerController = PLAYER_SCENE.instantiate()
 	player.movement_speed = 0.0
 	add_child(player)
+	var inventory := player.get_node("Inventory") as PlayerInventory
+	inventory.configure_capacity(1, 1.0, 2.0)
 
 	var pickup: PickupInteractable = PICKUP_SCENE.instantiate()
+	pickup.item_definition = _create_test_item()
 	pickup.position = Vector2(40.0, 0.0)
 	add_child(pickup)
 
@@ -84,3 +87,13 @@ func _expect(condition: bool, message: String) -> void:
 
 func _on_pickup_collected(_interactor: Node) -> void:
 	_pickup_collected = true
+
+
+func _create_test_item() -> ItemDefinition:
+	var item := ItemDefinition.new()
+	item.stable_id = &"test_interaction_pickup"
+	item.display_name = "Test interaction pickup"
+	item.category = ItemDefinition.CATEGORY_SCRAP
+	item.weight = 0.5
+	item.slot_size = 1
+	return item

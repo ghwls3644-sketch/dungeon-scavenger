@@ -1,0 +1,82 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://tests/fixtures/inventory_test_space.gd" id="1_space"]
+[ext_resource type="PackedScene" path="res://src/gameplay/player/player.tscn" id="2_player"]
+[ext_resource type="PackedScene" path="res://src/gameplay/interaction/pickup_interactable.tscn" id="3_pickup"]
+[ext_resource type="PackedScene" path="res://src/ui/interaction_prompt.tscn" id="4_prompt"]
+[ext_resource type="PackedScene" path="res://src/ui/inventory_panel.tscn" id="5_inventory_panel"]
+[ext_resource type="Script" path="res://src/data/item_definition.gd" id="6_item_definition"]
+
+[sub_resource type="Resource" id="Resource_light_item"]
+script = ExtResource("6_item_definition")
+stable_id = &"test_light_item"
+display_name = "시험용 가벼운 회수품"
+category = &"scrap"
+weight = 1.0
+slot_size = 1
+value_min = 0
+value_max = 0
+
+[sub_resource type="Resource" id="Resource_heavy_item"]
+script = ExtResource("6_item_definition")
+stable_id = &"test_heavy_item"
+display_name = "시험용 무거운 회수품"
+category = &"scrap"
+weight = 2.5
+slot_size = 1
+value_min = 0
+value_max = 0
+
+[sub_resource type="Resource" id="Resource_overflow_item"]
+script = ExtResource("6_item_definition")
+stable_id = &"test_overflow_item"
+display_name = "시험용 한도 초과 회수품"
+category = &"scrap"
+weight = 0.5
+slot_size = 1
+value_min = 0
+value_max = 0
+
+[node name="InventoryTestSpace" type="Node2D"]
+script = ExtResource("1_space")
+
+[node name="Floor" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-640, -360, 640, -360, 640, 360, -640, 360)
+color = Color(0.045, 0.06, 0.08, 1)
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+
+[node name="LightPickup" parent="." instance=ExtResource("3_pickup")]
+position = Vector2(70, 0)
+item_definition = SubResource("Resource_light_item")
+
+[node name="HeavyPickup" parent="." instance=ExtResource("3_pickup")]
+position = Vector2(190, 0)
+item_definition = SubResource("Resource_heavy_item")
+
+[node name="OverflowPickup" parent="." instance=ExtResource("3_pickup")]
+position = Vector2(310, 0)
+item_definition = SubResource("Resource_overflow_item")
+
+[node name="Overlay" type="CanvasLayer" parent="."]
+
+[node name="Instructions" type="Label" parent="Overlay"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 560.0
+offset_bottom = 80.0
+text = "왼쪽부터 E로 회수 | Tab: 인벤토리\n세 번째 회수품은 슬롯 한도로 거절됩니다."
+
+[node name="InteractionPrompt" parent="Overlay" instance=ExtResource("4_prompt")]
+offset_left = 416.0
+offset_top = 560.0
+offset_right = 736.0
+offset_bottom = 592.0
+interaction_source_path = NodePath("../../Player/InteractionController")
+
+[node name="InventoryPanel" parent="Overlay" instance=ExtResource("5_inventory_panel")]
+offset_left = 276.0
+offset_top = 96.0
+offset_right = 876.0
+offset_bottom = 516.0
+inventory_source_path = NodePath("../../Player/Inventory")

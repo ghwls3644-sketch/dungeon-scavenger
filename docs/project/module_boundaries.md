@@ -104,4 +104,7 @@ res://
 - `DEV-0102`에서 `src/gameplay/interaction/`이 공통 대상 인터페이스, 대상 감지와 상호작용 실행을 소유하도록 했다. 플레이어 장면은 감지기와 실행기를 조립하고 실제 입력 키 대신 `InputActions.INTERACT`를 사용한다.
 - `src/ui/interaction_prompt.*`는 현재 대상의 안내 문구만 표시하며 대상 선택이나 상호작용 결과를 결정하지 않는다. 시험용 회수품과 문은 같은 `Interactable` 인터페이스를 사용한다.
 - `tests/fixtures/interaction_test_space.tscn`은 수동 확인 공간을, `tests/smoke/interaction_system_smoke.tscn`은 감지·안내·실행과 두 대상의 공통 인터페이스 검증을 소유한다.
-- 다음 개발 작업은 `DEV-0103 — 최소 아이템·인벤토리`이며, 다음 정합성 검사는 `DEV-0107` 완료 뒤 진행한다.
+- `DEV-0103`에서 `src/gameplay/inventory/`가 실행 중 아이템 목록, 슬롯·무게 합계와 단계, 선택·버리기 규칙을 소유하도록 했다. 시험용 회수품은 공개 `PlayerInventory` 명령으로 획득을 요청하며 슬롯 한도 거절 여부를 직접 결정하지 않는다.
+- `src/ui/inventory_panel.*`는 공개 인벤토리 상태를 표시하고 열기·닫기·일반 버리기 명령을 전달한다. 슬롯·무게 규칙은 계산하지 않으며 `DEC-103`에 따라 화면이 열린 동안 `SceneTree` 일시정지만 제어한다.
+- `tests/fixtures/inventory_test_space.tscn`은 시험용 한도·무게 값으로 직접 확인할 공간을, `tests/smoke/inventory_system_smoke.tscn`은 획득·한도 거절·무게 단계·화면 표시·버리기와 일시정지를 자동 검증하는 장면을 소유한다. 출시 코드는 이 테스트 값과 장면을 참조하지 않는다.
+- 다음 개발 작업은 `DEV-0104 — 가치와 회수 결과`이며, 다음 정합성 검사는 `DEV-0107` 완료 뒤 진행한다.

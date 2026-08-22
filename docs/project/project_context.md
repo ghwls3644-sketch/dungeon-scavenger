@@ -24,13 +24,17 @@ related:
   - ../../src/gameplay/interaction/interactable.gd
   - ../../src/gameplay/interaction/interaction_controller.gd
   - ../../src/gameplay/interaction/interaction_detector.gd
+  - ../../src/gameplay/inventory/player_inventory.gd
   - ../../src/gameplay/player/player_controller.gd
   - ../../src/gameplay/player/player.tscn
   - ../../src/ui/debug_state_panel.tscn
+  - ../../src/ui/inventory_panel.tscn
   - ../../src/ui/interaction_prompt.tscn
+  - ../../tests/fixtures/inventory_test_space.tscn
   - ../../tests/fixtures/interaction_test_space.tscn
   - ../../tests/fixtures/movement_test_space.tscn
   - ../../tests/smoke/game_state_flow_smoke.tscn
+  - ../../tests/smoke/inventory_system_smoke.tscn
   - ../../tests/smoke/interaction_system_smoke.tscn
   - ../../tests/smoke/player_movement_smoke.tscn
   - ../README.md
@@ -167,6 +171,22 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 
 실제 플레이어의 감지기·실행기와 안내 UI를 사용해 회수품과 문이 공통 인터페이스를 따르는지, 가까운 대상 감지와 안내, 회수품 제거, 문 상태·충돌·안내 갱신이 일치하는지 검사한다. 모두 맞으면 `interaction_system_passed` 로그와 종료 코드 `0`을 반환한다.
 
+### 아이템·인벤토리 수동 테스트
+
+```powershell
+& $env:GODOT_BIN --path . res://tests/fixtures/inventory_test_space.tscn
+```
+
+플레이어를 시험용 회수품 가까이 이동해 `E`로 획득하고 `Tab`으로 인벤토리 화면을 연다. 슬롯 한도, 무게 합계와 정상·부담·과적 표시가 실제 적재 상태와 일치하는지, 일반 버리기의 확인 창과 화면을 연 동안 일시정지를 직접 확인한다. 한도와 무게 단계는 검사 전용 값이며 제품 밸런스가 아니다.
+
+### 아이템·인벤토리 자동 검사
+
+```powershell
+& $env:GODOT_BIN --headless --path . res://tests/smoke/inventory_system_smoke.tscn
+```
+
+실제 플레이어, 회수품과 인벤토리 화면을 사용해 획득, 슬롯 한도 초과 거절, 무게 합계·단계와 화면 표시, 버린 뒤 갱신, 화면을 열고 닫을 때의 일시정지를 검사한다. 모두 맞으면 `inventory_system_passed` 로그와 종료 코드 `0`을 반환한다.
+
 ## 저장소 규칙
 
 - `project.godot`은 버전 관리한다.
@@ -256,4 +276,21 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 - 제외 범위: 인벤토리 적재, 실제 아이템 콘텐츠, 문 잠금·하네스 우회, 저장 상태
 - 저장 데이터 영향: 없음
 - 다음 개발 작업: `DEV-0103 — 최소 아이템·인벤토리`
+- 다음 정합성 검사: `DEV-0107` 완료 뒤
+
+## DEV-0103 최소 아이템·인벤토리 결과
+
+- 실행 중 인벤토리: `res://src/gameplay/inventory/player_inventory.gd`
+- 인벤토리 UI: `res://src/ui/inventory_panel.tscn`
+- 플레이어 연결: 플레이어 장면의 `Inventory` 자식과 회수품의 공개 획득 요청
+- 상태와 명령: 아이템 목록, 사용·전체 슬롯, 전체 무게, 정상·부담·과적 단계, 선택과 일반 버리기
+- 한도 처리: 슬롯 한도 초과 시 획득을 거절하고 회수품을 남기며, 무게가 과적 단계여도 획득과 이동 가능 상태는 유지
+- 화면 동작: `Tab`으로 열고 닫으며 열린 동안 `SceneTree`를 일시정지하고, 일반 버리기는 확인 창을 거침
+- 제품 값 분리: 플레이어 장면에는 슬롯·무게 기준을 확정하지 않고, 시험용 한도와 무게 단계는 테스트 자료에만 둠
+- 수동 테스트 공간: `res://tests/fixtures/inventory_test_space.tscn`
+- 자동 검사: `res://tests/smoke/inventory_system_smoke.tscn`
+- 검증: Godot 4.7.1에서 프로젝트 초기화, 아이템·인벤토리 자동 검사, 기존 상호작용·이동·카메라·상태 전환 자동 검사와 두 상호작용 테스트 공간 초기화 통과
+- 제외 범위: 실제 아이템 콘텐츠, `Q-005`의 과적 이동 감속, 빠른 버리기 유지 시간, 저장 상태
+- 저장 데이터 영향: 없음
+- 다음 개발 작업: `DEV-0104 — 가치와 회수 결과`
 - 다음 정합성 검사: `DEV-0107` 완료 뒤

@@ -1,0 +1,55 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/ui/inventory_panel.gd" id="1_panel"]
+
+[node name="InventoryPanel" type="PanelContainer"]
+process_mode = 3
+visible = false
+custom_minimum_size = Vector2(600, 420)
+offset_right = 600.0
+offset_bottom = 420.0
+script = ExtResource("1_panel")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
+text = "인벤토리"
+theme_override_font_sizes/font_size = 24
+
+[node name="Summary" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+text = "슬롯 0/0 | 무게 0.0 | 상태 정상"
+
+[node name="ItemList" type="ItemList" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(560, 250)
+size_flags_vertical = 3
+
+[node name="Buttons" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+theme_override_constants/separation = 12
+
+[node name="DropButton" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
+unique_name_in_owner = true
+text = "선택 물품 버리기"
+
+[node name="CloseButton" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
+unique_name_in_owner = true
+text = "닫기"
+
+[node name="Status" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+text = "물품을 선택하세요."
+
+[node name="DropConfirmation" type="ConfirmationDialog" parent="."]
+unique_name_in_owner = true
+title = "물품 버리기"
+dialog_text = "선택한 물품을 버리겠습니까?"
+ok_button_text = "버리기"
+cancel_button_text = "취소"

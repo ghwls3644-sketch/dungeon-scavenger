@@ -3,9 +3,11 @@ extends Node2D
 @onready var _pickup: PickupInteractable = $PickupInteractable
 @onready var _door: DoorInteractable = $DoorInteractable
 @onready var _result_status: Label = %ResultStatus
+@onready var _inventory: PlayerInventory = $Player/Inventory
 
 
 func _ready() -> void:
+	_inventory.configure_capacity(1, 1.0, 2.0)
 	_pickup.collected.connect(_on_pickup_collected)
 	_door.open_state_changed.connect(_on_door_open_state_changed)
 
