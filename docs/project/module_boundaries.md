@@ -8,7 +8,7 @@ canonical_for:
   - source_tree_layout
   - module_responsibilities
   - module_dependency_rules
-last_reviewed: 2026-08-22
+last_reviewed: 2026-08-24
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -107,4 +107,7 @@ res://
 - `DEV-0103`에서 `src/gameplay/inventory/`가 실행 중 아이템 목록, 슬롯·무게 합계와 단계, 선택·버리기 규칙을 소유하도록 했다. 시험용 회수품은 공개 `PlayerInventory` 명령으로 획득을 요청하며 슬롯 한도 거절 여부를 직접 결정하지 않는다.
 - `src/ui/inventory_panel.*`는 공개 인벤토리 상태를 표시하고 열기·닫기·일반 버리기 명령을 전달한다. 슬롯·무게 규칙은 계산하지 않으며 `DEC-103`에 따라 화면이 열린 동안 `SceneTree` 일시정지만 제어한다.
 - `tests/fixtures/inventory_test_space.tscn`은 시험용 한도·무게 값으로 직접 확인할 공간을, `tests/smoke/inventory_system_smoke.tscn`은 획득·한도 거절·무게 단계·화면 표시·버리기와 일시정지를 자동 검증하는 장면을 소유한다. 출시 코드는 이 테스트 값과 장면을 참조하지 않는다.
-- 다음 개발 작업은 `DEV-0104 — 가치와 회수 결과`이며, 다음 정합성 검사는 `DEV-0107` 완료 뒤 진행한다.
+- `DEV-0104`에서 `src/gameplay/recovery/`가 인벤토리에서 전달받은 현재 회수품 목록과 예상 가치 합계를 고정하도록 했다. 실제 판매·비용·순이익 계산은 `meta`의 후속 책임으로 남겨 둔다.
+- `src/ui/item_value_text.gd`는 예상 가치 범위와 비화폐 보상 문구를, `src/ui/recovery_result_panel.*`는 회수품별 가치와 결과 합계 표시를 소유한다. UI는 포함 물품이나 합계를 결정하지 않는다.
+- `tests/fixtures/recovery_result_test_space.tscn`은 회수 결과 표시를 직접 확인하는 공간을, `tests/smoke/recovery_result_smoke.tscn`은 들고 나온 물품만 포함되는지와 가치 합계·비화폐 보상 분리를 자동 검증하는 장면을 소유한다.
+- 다음 개발 작업은 `DEV-0105 — 최소 위험 요소`이며, 다음 정합성 검사는 `DEV-0107` 완료 뒤 진행한다.

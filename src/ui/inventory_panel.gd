@@ -87,6 +87,12 @@ func get_displayed_item_count() -> int:
 	return _item_list.item_count
 
 
+func get_displayed_item_text(index: int) -> String:
+	if index < 0 or index >= _item_list.item_count:
+		return ""
+	return _item_list.get_item_text(index)
+
+
 func _render() -> void:
 	_item_list.clear()
 	if _inventory == null:
@@ -112,11 +118,12 @@ func _render() -> void:
 
 func _format_item(item: ItemDefinition) -> String:
 	var protection_text := "보호" if item.sale_protected else "일반"
-	return "%s | %d칸 | 무게 %.1f | %s | %s" % [
+	return "%s | %d칸 | 무게 %.1f | %s | %s | %s" % [
 		item.display_name,
 		item.slot_size,
 		item.weight,
 		_get_category_text(item.category),
+		ItemValueText.format_item_value(item),
 		protection_text,
 	]
 

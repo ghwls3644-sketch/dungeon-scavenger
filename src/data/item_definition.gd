@@ -21,6 +21,10 @@ const CATEGORY_IDS := [
 @export var sale_protected := false
 
 
+func has_monetary_value() -> bool:
+	return category not in [CATEGORY_UNIQUE_ARTIFACT, CATEGORY_CORE_RECORD]
+
+
 func get_validation_errors() -> PackedStringArray:
 	var errors := super.get_validation_errors()
 
@@ -30,6 +34,8 @@ func get_validation_errors() -> PackedStringArray:
 		errors.append("weight must not be negative.")
 	if slot_size < 0:
 		errors.append("slot_size must not be negative.")
+	if value_min < 0 or value_max < 0:
+		errors.append("value range must not be negative.")
 	if value_min > value_max:
 		errors.append("value_min must not be greater than value_max.")
 

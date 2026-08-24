@@ -8,7 +8,7 @@ canonical_for:
   - development_environment
   - engine_and_language
   - development_commands
-last_reviewed: 2026-08-22
+last_reviewed: 2026-08-24
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -27,16 +27,21 @@ related:
   - ../../src/gameplay/inventory/player_inventory.gd
   - ../../src/gameplay/player/player_controller.gd
   - ../../src/gameplay/player/player.tscn
+  - ../../src/gameplay/recovery/recovery_result.gd
   - ../../src/ui/debug_state_panel.tscn
   - ../../src/ui/inventory_panel.tscn
   - ../../src/ui/interaction_prompt.tscn
+  - ../../src/ui/item_value_text.gd
+  - ../../src/ui/recovery_result_panel.tscn
   - ../../tests/fixtures/inventory_test_space.tscn
   - ../../tests/fixtures/interaction_test_space.tscn
   - ../../tests/fixtures/movement_test_space.tscn
+  - ../../tests/fixtures/recovery_result_test_space.tscn
   - ../../tests/smoke/game_state_flow_smoke.tscn
   - ../../tests/smoke/inventory_system_smoke.tscn
   - ../../tests/smoke/interaction_system_smoke.tscn
   - ../../tests/smoke/player_movement_smoke.tscn
+  - ../../tests/smoke/recovery_result_smoke.tscn
   - ../README.md
   - ../GDD.md
   - module_boundaries.md
@@ -187,6 +192,22 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 
 실제 플레이어, 회수품과 인벤토리 화면을 사용해 획득, 슬롯 한도 초과 거절, 무게 합계·단계와 화면 표시, 버린 뒤 갱신, 화면을 열고 닫을 때의 일시정지를 검사한다. 모두 맞으면 `inventory_system_passed` 로그와 종료 코드 `0`을 반환한다.
 
+### 회수 결과 수동 테스트
+
+```powershell
+& $env:GODOT_BIN --path . res://tests/fixtures/recovery_result_test_space.tscn
+```
+
+일반 회수품의 개별 예상 가치 범위와 합계, 고유 유물의 등록·정보 보상 분리 표시를 직접 확인한다. 이 장면의 물품과 가치 범위는 검사 전용 자료이며 실제 콘텐츠나 제품 밸런스가 아니다.
+
+### 회수 결과 자동 검사
+
+```powershell
+& $env:GODOT_BIN --headless --path . res://tests/smoke/recovery_result_smoke.tscn
+```
+
+현재 인벤토리 물품으로 회수 결과를 만들고, 버린 물품과 슬롯 한도로 거절된 물품이 제외되는지, 일반 회수품의 가치 합계와 비화폐 보상 구분이 화면 표시와 일치하는지 검사한다. 모두 맞으면 `recovery_result_passed` 로그와 종료 코드 `0`을 반환한다.
+
 ## 저장소 규칙
 
 - `project.godot`은 버전 관리한다.
@@ -293,4 +314,19 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 - 제외 범위: 실제 아이템 콘텐츠, `Q-005`의 과적 이동 감속, 빠른 버리기 유지 시간, 저장 상태
 - 저장 데이터 영향: 없음
 - 다음 개발 작업: `DEV-0104 — 가치와 회수 결과`
+- 다음 정합성 검사: `DEV-0107` 완료 뒤
+
+## DEV-0104 가치와 회수 결과
+
+- 회수 결과: `res://src/gameplay/recovery/recovery_result.gd`
+- 가치 표시: `res://src/ui/item_value_text.gd`
+- 결과 UI: `res://src/ui/recovery_result_panel.tscn`
+- 포함 기준: 결과를 만드는 시점의 현재 인벤토리 물품만 고정하며 버린 물품과 획득 거절 물품은 제외
+- 가치 처리: 일반 회수품의 최솟값·최댓값을 각각 합산하고 고유 유물·핵심 기록물은 화폐 합계 대신 등록·정보 보상으로 구분
+- 수동 테스트 공간: `res://tests/fixtures/recovery_result_test_space.tscn`
+- 자동 검사: `res://tests/smoke/recovery_result_smoke.tscn`
+- 검증: Godot 4.7.1에서 프로젝트 초기화, 회수 결과와 기존 아이템·인벤토리·상호작용·이동·카메라·상태 전환 자동 검사, 회수 결과와 기존 테스트 공간 초기화 통과
+- 제외 범위: 실제 판매액, 감정·거래처 보정, 회수세·감정료·수리비, 순이익, 저장, 귀환·실패 판정
+- 저장 데이터 영향: 없음
+- 다음 개발 작업: `DEV-0105 — 최소 위험 요소`
 - 다음 정합성 검사: `DEV-0107` 완료 뒤

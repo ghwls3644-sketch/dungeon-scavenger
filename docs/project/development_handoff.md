@@ -7,7 +7,7 @@ source_version: development-proposal-v0.1+gdd-v2.1
 canonical_for:
   - development_document_handoff
   - development_ticket_routing
-last_reviewed: 2026-08-22
+last_reviewed: 2026-08-24
 owner: project-maintainer
 related:
   - ../README.md
@@ -103,4 +103,6 @@ G-M6는 2026-07-29 정합성 검사에서 통과했다. `DEV-0001`은 Godot 4.7.
 
 `DEV-0103`은 `res://src/gameplay/inventory/player_inventory.gd`에 획득, 슬롯 한도, 무게 합계·단계, 선택과 일반 버리기 규칙을 추가했다. `res://src/ui/inventory_panel.tscn`은 같은 상태를 표시하고 열려 있는 동안 시간을 멈추며, 일반 버리기 전에 확인을 요청한다. 실제 콘텐츠와 제품 밸런스 값은 추가하지 않았고, `Q-005`가 열려 있으므로 이동 감속과 빠른 버리기도 구현하지 않았다. 시험용 한도·무게 값은 테스트 자료 안에서만 사용한다.
 
-현재 다음 개발 작업은 `DEV-0104 — 가치와 회수 결과`다. 다음 정합성 검사는 `DEV-0107` 완료 뒤 진행한다.
+`DEV-0104`는 `res://src/gameplay/recovery/recovery_result.gd`가 현재 인벤토리 물품을 회수 결과로 고정하고 화폐 가치 범위를 합산하도록 했다. `res://src/ui/inventory_panel.tscn`과 `recovery_result_panel.tscn`은 개별 예상 가치와 결과 합계를 표시한다. 고유 유물·핵심 기록물은 화폐 합계에서 제외하고 등록·정보 보상으로 구분한다. 버린 물품과 슬롯 한도로 획득이 거절된 물품이 결과에서 빠지는지는 자동 검사로 확인한다. 판매·비용·순이익, 저장과 귀환·실패 판정은 추가하지 않았다.
+
+현재 다음 개발 작업은 `DEV-0105 — 최소 위험 요소`다. 다음 정합성 검사는 `DEV-0107` 완료 뒤 진행한다.

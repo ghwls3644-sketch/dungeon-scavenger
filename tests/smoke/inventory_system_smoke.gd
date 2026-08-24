@@ -34,9 +34,9 @@ func _run_inventory_checks() -> void:
 	add_child(panel)
 	panel.bind_inventory(inventory)
 
-	var light_item := _create_test_item(&"test_light_item", "Light test item", 1.0)
-	var heavy_item := _create_test_item(&"test_heavy_item", "Heavy test item", 2.5)
-	var overflow_item := _create_test_item(&"test_overflow_item", "Overflow test item", 0.5)
+	var light_item := _create_test_item(&"test_light_item", "Light test item", 1.0, 10, 20)
+	var heavy_item := _create_test_item(&"test_heavy_item", "Heavy test item", 2.5, 30, 40)
+	var overflow_item := _create_test_item(&"test_overflow_item", "Overflow test item", 0.5, 100, 200)
 
 	await _collect_with_pickup(player, light_item, true)
 	_expect(inventory.get_used_slots() == 1, "First pickup did not use one slot.")
@@ -51,6 +51,7 @@ func _run_inventory_checks() -> void:
 	_expect(panel.get_summary_text().contains("슬롯 2/2"), "Inventory UI slot summary was incorrect.")
 	_expect(panel.get_summary_text().contains("무게 3.5"), "Inventory UI weight summary was incorrect.")
 	_expect(panel.get_summary_text().contains("과적"), "Inventory UI weight stage was incorrect.")
+	_expect(panel.get_displayed_item_text(0).contains("예상 가치 10~20"), "Inventory UI did not show the item value range.")
 
 	await _collect_with_pickup(player, overflow_item, false)
 	_expect(_last_rejection_reason == PlayerInventory.REJECT_SLOT_LIMIT, "Slot overflow did not report the slot-limit reason.")
@@ -88,13 +89,21 @@ func _collect_with_pickup(player: PlayerController, item: ItemDefinition, should
 		await get_tree().process_frame
 
 
-func _create_test_item(id: StringName, display_name: String, weight: float) -> ItemDefinition:
+func _create_test_item(
+	id: StringName,
+	display_name: String,
+	weight: float,
+	value_min: int,
+	value_max: int
+) -> ItemDefinition:
 	var item := ItemDefinition.new()
 	item.stable_id = id
 	item.display_name = display_name
 	item.category = ItemDefinition.CATEGORY_SCRAP
 	item.weight = weight
 	item.slot_size = 1
+	item.value_min = value_min
+	item.value_max = value_max
 	return item
 
 
