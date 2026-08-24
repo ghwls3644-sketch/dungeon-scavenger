@@ -24,20 +24,27 @@ related:
   - ../../src/gameplay/interaction/interactable.gd
   - ../../src/gameplay/interaction/interaction_controller.gd
   - ../../src/gameplay/interaction/interaction_detector.gd
+  - ../../src/gameplay/hazards/hazard_detector.gd
+  - ../../src/gameplay/hazards/stabilizable_hazard.gd
+  - ../../src/gameplay/hazards/unstable_debris_hazard.tscn
   - ../../src/gameplay/inventory/player_inventory.gd
   - ../../src/gameplay/player/player_controller.gd
   - ../../src/gameplay/player/player.tscn
   - ../../src/gameplay/recovery/recovery_result.gd
+  - ../../src/harness/harness_controller.gd
   - ../../src/ui/debug_state_panel.tscn
+  - ../../src/ui/harness_status.tscn
   - ../../src/ui/inventory_panel.tscn
   - ../../src/ui/interaction_prompt.tscn
   - ../../src/ui/item_value_text.gd
   - ../../src/ui/recovery_result_panel.tscn
   - ../../tests/fixtures/inventory_test_space.tscn
   - ../../tests/fixtures/interaction_test_space.tscn
+  - ../../tests/fixtures/hazard_harness_test_space.tscn
   - ../../tests/fixtures/movement_test_space.tscn
   - ../../tests/fixtures/recovery_result_test_space.tscn
   - ../../tests/smoke/game_state_flow_smoke.tscn
+  - ../../tests/smoke/hazard_harness_smoke.tscn
   - ../../tests/smoke/inventory_system_smoke.tscn
   - ../../tests/smoke/interaction_system_smoke.tscn
   - ../../tests/smoke/player_movement_smoke.tscn
@@ -208,6 +215,22 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 
 현재 인벤토리 물품으로 회수 결과를 만들고, 버린 물품과 슬롯 한도로 거절된 물품이 제외되는지, 일반 회수품의 가치 합계와 비화폐 보상 구분이 화면 표시와 일치하는지 검사한다. 모두 맞으면 `recovery_result_passed` 로그와 종료 코드 `0`을 반환한다.
 
+### 위험·하네스 수동 테스트
+
+```powershell
+& $env:GODOT_BIN --path . res://tests/fixtures/hazard_harness_test_space.tscn
+```
+
+플레이어를 불안정한 잔해로 이동해 붕괴 전에 먼지·진동 징후가 표시되는지 확인하고, 안내가 보일 때 `Q`로 하네스 안정화를 실행한다. 장면의 충전량, 안정화 비용과 경고 시간은 검사 전용 시제품 값이며 제품 밸런스가 아니다.
+
+### 위험·하네스 자동 검사
+
+```powershell
+& $env:GODOT_BIN --headless --path . res://tests/smoke/hazard_harness_smoke.tscn
+```
+
+사전 징후와 하네스 안내가 붕괴보다 먼저 표시되는지, 경고 중 안정화하면 시험 충전이 줄고 붕괴가 멈추는지, 대응하지 않고 범위 안에 남으면 붕괴와 포착 이벤트가 발생하는지 검사한다. 모두 맞으면 `hazard_harness_passed` 로그와 종료 코드 `0`을 반환한다.
+
 ## 저장소 규칙
 
 - `project.godot`은 버전 관리한다.
@@ -329,4 +352,21 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 - 제외 범위: 실제 판매액, 감정·거래처 보정, 회수세·감정료·수리비, 순이익, 저장, 귀환·실패 판정
 - 저장 데이터 영향: 없음
 - 다음 개발 작업: `DEV-0105 — 최소 위험 요소`
+- 다음 정합성 검사: `DEV-0107` 완료 뒤
+
+## DEV-0105 최소 위험 요소
+
+- 공통 안정화 대상: `res://src/gameplay/hazards/stabilizable_hazard.gd`
+- 위험 감지: `res://src/gameplay/hazards/hazard_detector.gd`
+- 시험 위험: `res://src/gameplay/hazards/unstable_debris_hazard.tscn`
+- 하네스 사용: `res://src/harness/harness_controller.gd`
+- 상태 UI: `res://src/ui/harness_status.tscn`
+- 위험 흐름: 플레이어 진입 → 먼지·진동 징후와 경고 시간 → `Q` 안정화 또는 붕괴·범위 안 포착
+- 수동 테스트 공간: `res://tests/fixtures/hazard_harness_test_space.tscn`
+- 자동 검사: `res://tests/smoke/hazard_harness_smoke.tscn`
+- 검증: Godot 4.7.1에서 프로젝트 초기화, 위험·하네스와 기존 회수 결과·인벤토리·상호작용·이동·카메라·상태 전환 자동 검사, 새 장면과 기존 테스트 공간 초기화 통과
+- 시제품 값: 시험 충전량, 안정화 비용과 경고 시간은 조정 가능하며 제품 밸런스로 확정하지 않음
+- 제외 범위: 피해·건강·부상, 행동 불능·실패 연결, 최종 하네스 모듈 구성·충전 밸런스·내구도
+- 저장 데이터 영향: 없음
+- 다음 개발 작업: `DEV-0106 — 출구·귀환·실패`
 - 다음 정합성 검사: `DEV-0107` 완료 뒤

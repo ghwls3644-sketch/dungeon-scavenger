@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/ui/harness_status.gd" id="1_status"]
+
+[node name="HarnessStatus" type="PanelContainer"]
+custom_minimum_size = Vector2(280, 72)
+offset_right = 280.0
+offset_bottom = 72.0
+script = ExtResource("1_status")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 8
+
+[node name="Status" type="Label" parent="MarginContainer"]
+unique_name_in_owner = true
+text = "하네스 충전 0/0"

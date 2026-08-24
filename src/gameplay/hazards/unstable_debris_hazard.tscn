@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://src/gameplay/hazards/unstable_debris_hazard.gd" id="1_hazard"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hazard"]
+size = Vector2(96, 96)
+
+[node name="UnstableDebrisHazard" type="Area2D"]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_hazard")
+stabilization_charge_cost = 1
+harness_prompt = "불안정한 잔해 안정화"
+warning_duration = 2.0
+
+[node name="WarningGlow" type="Polygon2D" parent="."]
+unique_name_in_owner = true
+visible = false
+polygon = PackedVector2Array(-56, -56, 56, -56, 56, 56, -56, 56)
+color = Color(0.96, 0.68, 0.16, 0.4)
+
+[node name="Debris" type="Polygon2D" parent="."]
+unique_name_in_owner = true
+polygon = PackedVector2Array(-42, -34, -20, -48, 8, -38, 40, -46, 48, -8, 34, 38, 4, 46, -34, 36, -48, 4)
+color = Color(0.36, 0.38, 0.42, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hazard")
+
+[node name="Status" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = -110.0
+offset_top = -82.0
+offset_right = 110.0
+offset_bottom = -50.0
+text = "불안정한 잔해"
+horizontal_alignment = 1
+
+[node name="WarningTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true

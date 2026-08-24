@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://tests/fixtures/hazard_harness_test_space.gd" id="1_space"]
+[ext_resource type="PackedScene" path="res://src/gameplay/player/player.tscn" id="2_player"]
+[ext_resource type="PackedScene" path="res://src/gameplay/hazards/unstable_debris_hazard.tscn" id="3_hazard"]
+[ext_resource type="PackedScene" path="res://src/ui/harness_status.tscn" id="4_status"]
+
+[node name="HazardHarnessTestSpace" type="Node2D"]
+script = ExtResource("1_space")
+
+[node name="Floor" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-640, -360, 640, -360, 640, 360, -640, 360)
+color = Color(0.045, 0.06, 0.08, 1)
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(-220, 0)
+
+[node name="UnstableDebrisHazard" parent="." instance=ExtResource("3_hazard")]
+unique_name_in_owner = true
+position = Vector2(120, 0)
+warning_duration = 2.5
+
+[node name="Overlay" type="CanvasLayer" parent="."]
+
+[node name="Instructions" type="Label" parent="Overlay"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 760.0
+offset_bottom = 48.0
+text = "WASD: 잔해에 접근 | 먼지·진동 징후가 보이면 Q: 하네스 안정화"
+
+[node name="ResultStatus" type="Label" parent="Overlay"]
+unique_name_in_owner = true
+offset_left = 16.0
+offset_top = 52.0
+offset_right = 760.0
+offset_bottom = 84.0
+text = "불안정한 잔해에 접근해 사전 징후를 확인하세요."
+
+[node name="HarnessStatus" parent="Overlay" instance=ExtResource("4_status")]
+offset_left = 16.0
+offset_top = 100.0
+offset_right = 296.0
+offset_bottom = 172.0
+source_path = NodePath("../../Player/HarnessController")

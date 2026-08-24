@@ -110,4 +110,8 @@ res://
 - `DEV-0104`에서 `src/gameplay/recovery/`가 인벤토리에서 전달받은 현재 회수품 목록과 예상 가치 합계를 고정하도록 했다. 실제 판매·비용·순이익 계산은 `meta`의 후속 책임으로 남겨 둔다.
 - `src/ui/item_value_text.gd`는 예상 가치 범위와 비화폐 보상 문구를, `src/ui/recovery_result_panel.*`는 회수품별 가치와 결과 합계 표시를 소유한다. UI는 포함 물품이나 합계를 결정하지 않는다.
 - `tests/fixtures/recovery_result_test_space.tscn`은 회수 결과 표시를 직접 확인하는 공간을, `tests/smoke/recovery_result_smoke.tscn`은 들고 나온 물품만 포함되는지와 가치 합계·비화폐 보상 분리를 자동 검증하는 장면을 소유한다.
-- 다음 개발 작업은 `DEV-0105 — 최소 위험 요소`이며, 다음 정합성 검사는 `DEV-0107` 완료 뒤 진행한다.
+- `DEV-0105`에서 `src/gameplay/hazards/`가 위험 대상의 사전 징후, 경고 상태, 안정화 가능 여부, 붕괴와 범위 안 포착 이벤트를 소유하도록 했다. 실제 피해·부상·실패 판정은 이 모듈이 임의로 결정하지 않는다.
+- `src/harness/harness_controller.gd`는 플레이어의 공개 위험 감지 결과를 받아 `use_harness` 입력, 시험 충전과 안정화 명령을 소유한다. 위험은 하네스 내부 상태를 직접 바꾸지 않으며, 하네스는 공개 `stabilize` 명령만 요청한다.
+- `src/ui/harness_status.*`는 현재 충전과 `Q` 안정화 안내만 표시한다. 충전 소모와 대상 가능 여부는 계산하지 않는다.
+- `tests/fixtures/hazard_harness_test_space.tscn`은 사전 징후와 `Q` 안정화를 직접 확인하는 공간을, `tests/smoke/hazard_harness_smoke.tscn`은 안정화와 미대응 분기를 자동 검증하는 장면을 소유한다. 충전·비용·경고 시간은 테스트와 장면에서 조정하는 시제품 값이다.
+- 다음 개발 작업은 `DEV-0106 — 출구·귀환·실패`이며, 다음 정합성 검사는 `DEV-0107` 완료 뒤 진행한다.
