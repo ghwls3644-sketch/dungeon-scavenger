@@ -44,11 +44,13 @@ related:
   - ../../src/ui/recovery_result_panel.tscn
   - ../../tests/fixtures/inventory_test_space.tscn
   - ../../tests/fixtures/interaction_test_space.tscn
+  - ../../tests/fixtures/core_loop_playtest_space.tscn
   - ../../tests/fixtures/exploration_end_test_space.tscn
   - ../../tests/fixtures/hazard_harness_test_space.tscn
   - ../../tests/fixtures/movement_test_space.tscn
   - ../../tests/fixtures/recovery_result_test_space.tscn
   - ../../tests/smoke/game_state_flow_smoke.tscn
+  - ../../tests/smoke/core_loop_playtest_smoke.tscn
   - ../../tests/smoke/exploration_end_smoke.tscn
   - ../../tests/smoke/hazard_harness_smoke.tscn
   - ../../tests/smoke/inventory_system_smoke.tscn
@@ -253,6 +255,22 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 
 실제 플레이어의 감지기와 상호작용 실행기를 사용해 입구 생환, 현재 물품의 회수 결과 인계, 위험 징후 뒤 포착과 실패, 현재 탐험 물품 손실, 실패 결과의 회수 목록 부재와 종료 상태 덮어쓰기 방지를 검사한다. 모두 맞으면 `exploration_end_passed` 로그와 종료 코드 `0`을 반환한다.
 
+### 첫 핵심 루프 수동 플레이테스트
+
+```powershell
+& $env:GODOT_BIN --path . res://tests/fixtures/core_loop_playtest_space.tscn
+```
+
+입구에서 안전 경로와 위험 보상 경로를 선택한다. 안전 경로의 저가 회수품 두 개로 시험 슬롯을 채운 뒤 그대로 귀환하거나, 위험 경로의 붕괴 징후를 `Q`로 안정화하고 `Tab` 인벤토리에서 기존 물품 하나를 버려 고가 잔재로 교체한 뒤 같은 입구로 돌아온다. 위험에 대응하지 않으면 현재 회수품을 잃고 실패한다. 슬롯·무게·가치·충전·경고 시간은 선택 재현을 위한 테스트 전용 값이다.
+
+### 첫 핵심 루프 자동 검사
+
+```powershell
+& $env:GODOT_BIN --headless --path . res://tests/smoke/core_loop_playtest_smoke.tscn
+```
+
+실제 플레이테스트 장면으로 안전 경로 회수와 생환, 위험 경로의 사전 징후·하네스 충전 사용·안정화, 슬롯 한도 거절 뒤 저가품 버리기와 고가품 교체, 입구 생환 결과, 미대응 위험의 실패와 회수품 손실을 검사한다. 모두 맞으면 `core_loop_playtest_passed` 로그와 종료 코드 `0`을 반환한다.
+
 ## 저장소 규칙
 
 - `project.godot`은 버전 관리한다.
@@ -409,3 +427,18 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 - 저장 데이터 영향: 없음
 - 다음 개발 작업: `DEV-0107 — 첫 핵심 루프 플레이테스트 장면`
 - 다음 정합성 검사: `DEV-0107` 완료 뒤
+
+## DEV-0107 첫 핵심 루프 플레이테스트 결과
+
+- 플레이테스트 장면: `res://tests/fixtures/core_loop_playtest_space.tscn`
+- 자동 검사: `res://tests/smoke/core_loop_playtest_smoke.tscn`
+- 공간 구성: 같은 입구에서 갈라지는 안전 경로와 위험 보상 경로, 위험을 통과해야 닿는 고가 잔재
+- 적재 선택: 시험 슬롯 두 개가 찬 뒤 저가품 하나를 버려 고가품으로 교체하거나 안전 회수품만 들고 귀환
+- 위험 선택: 시험 하네스 충전 하나를 써서 붕괴를 안정화하거나 돌아가며, 미대응 시 실패
+- 종료: 안전 경로와 위험 대응 경로는 같은 입구 생환, 위험 미대응은 현재 회수품 손실과 실패
+- 검증: Godot 4.7.1에서 프로젝트·메인·플레이테스트 장면 초기화, 핵심 루프와 기존 상태 전환·이동·상호작용·인벤토리·회수 결과·위험·하네스·탐험 종료 자동 검사 통과
+- 시제품 값: 슬롯 2개, 부담 2.5, 과적 4.0, 시험 아이템 무게·가치, 하네스 충전 1과 경고 시간은 테스트 전용이며 제품 값이 아님
+- 저장 데이터 영향: 없음
+- G1 검사 잔여: 사람 플레이테스트, `Q-004`·`Q-005`, GDD 15-2의 단계 1 티켓 밖 항목 처리 방향
+- 다음 작업: 사용자 정합성 검사 검토 뒤 `DEV-0201` 또는 보완 작업
+- 정합성 검사: 지금

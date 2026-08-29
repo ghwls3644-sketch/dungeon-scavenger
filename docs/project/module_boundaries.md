@@ -118,4 +118,6 @@ res://
 - `src/gameplay/recovery/entrance_exit.*`는 공통 `Interactable`을 통해 활성 탐험의 생환만 요청한다. 위험 모듈은 계속 포착 이벤트만 내며, 시험 공간의 조립 코드가 이 공개 이벤트를 탐험 실패 명령에 연결한다.
 - `src/ui/exploration_outcome_panel.*`은 생환의 회수 결과와 실패의 손실 개수를 표시할 뿐 종료 상태, 포함 물품이나 손실을 결정하지 않는다.
 - `tests/fixtures/exploration_end_test_space.tscn`은 입구 생환과 위험 포착 실패를 직접 확인하는 공간을, `tests/smoke/exploration_end_smoke.tscn`은 두 종료 분기, 물품 인계·손실과 종료 상태 잠금을 자동 검증하는 장면을 소유한다.
-- 다음 개발 작업은 `DEV-0107 — 첫 핵심 루프 플레이테스트 장면`이며, `DEV-0107` 완료 뒤 정합성 검사를 진행한다.
+- `DEV-0107`에서 `tests/fixtures/core_loop_playtest_space.tscn`이 기존 공개 모듈을 안전 경로·위험 보상 경로가 있는 작은 던전으로 조립했다. 시험용 아이템·슬롯·무게·가치·하네스 충전과 경고 시간은 `tests` 안에만 있으며 출시 코드와 제품 데이터가 참조하지 않는다.
+- `tests/smoke/core_loop_playtest_smoke.tscn`은 같은 플레이테스트 장면으로 안전 생환, 위험 대응과 적재 교체 뒤 생환, 미대응 실패를 자동 검증한다. 테스트 조립 코드는 모듈 내부 상태를 직접 바꾸지 않고 공개 명령·상태·이벤트를 사용한다.
+- 현재 `DEV-0107` 완료 뒤 G1 정합성 검사 시점이다. 계획상 다음 티켓은 `DEV-0201`이지만 사용자 진행 지시 전에는 시작하지 않는다.
