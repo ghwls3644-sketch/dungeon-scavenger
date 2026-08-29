@@ -84,6 +84,14 @@ func get_items() -> Array[ItemDefinition]:
 	return _items.duplicate()
 
 
+func take_all_items() -> Array[ItemDefinition]:
+	var taken_items := _items.duplicate()
+	_items.clear()
+	_selected_index = -1
+	inventory_changed.emit()
+	return taken_items
+
+
 func get_selected_index() -> int:
 	return _selected_index
 

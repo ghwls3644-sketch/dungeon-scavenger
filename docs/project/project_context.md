@@ -30,9 +30,13 @@ related:
   - ../../src/gameplay/inventory/player_inventory.gd
   - ../../src/gameplay/player/player_controller.gd
   - ../../src/gameplay/player/player.tscn
+  - ../../src/gameplay/recovery/entrance_exit.tscn
+  - ../../src/gameplay/recovery/exploration_outcome.gd
+  - ../../src/gameplay/recovery/exploration_run.gd
   - ../../src/gameplay/recovery/recovery_result.gd
   - ../../src/harness/harness_controller.gd
   - ../../src/ui/debug_state_panel.tscn
+  - ../../src/ui/exploration_outcome_panel.tscn
   - ../../src/ui/harness_status.tscn
   - ../../src/ui/inventory_panel.tscn
   - ../../src/ui/interaction_prompt.tscn
@@ -40,10 +44,12 @@ related:
   - ../../src/ui/recovery_result_panel.tscn
   - ../../tests/fixtures/inventory_test_space.tscn
   - ../../tests/fixtures/interaction_test_space.tscn
+  - ../../tests/fixtures/exploration_end_test_space.tscn
   - ../../tests/fixtures/hazard_harness_test_space.tscn
   - ../../tests/fixtures/movement_test_space.tscn
   - ../../tests/fixtures/recovery_result_test_space.tscn
   - ../../tests/smoke/game_state_flow_smoke.tscn
+  - ../../tests/smoke/exploration_end_smoke.tscn
   - ../../tests/smoke/hazard_harness_smoke.tscn
   - ../../tests/smoke/inventory_system_smoke.tscn
   - ../../tests/smoke/interaction_system_smoke.tscn
@@ -231,6 +237,22 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 
 사전 징후와 하네스 안내가 붕괴보다 먼저 표시되는지, 경고 중 안정화하면 시험 충전이 줄고 붕괴가 멈추는지, 대응하지 않고 범위 안에 남으면 붕괴와 포착 이벤트가 발생하는지 검사한다. 모두 맞으면 `hazard_harness_passed` 로그와 종료 코드 `0`을 반환한다.
 
+### 탐험 종료 수동 테스트
+
+```powershell
+& $env:GODOT_BIN --path . res://tests/fixtures/exploration_end_test_space.tscn
+```
+
+왼쪽 입구로 이동해 `E`로 생환하거나 오른쪽 불안정한 잔해 범위에 남아 실패한다. 생환은 시험용 회수품을 정산 대상으로 표시하고, 실패는 같은 물품을 잃어 회수 결과가 생기지 않는지 직접 확인한다. 이 장면은 종료 흐름 검사 전용이며 실제 던전 구성이나 제품 밸런스가 아니다.
+
+### 탐험 종료 자동 검사
+
+```powershell
+& $env:GODOT_BIN --headless --path . res://tests/smoke/exploration_end_smoke.tscn
+```
+
+실제 플레이어의 감지기와 상호작용 실행기를 사용해 입구 생환, 현재 물품의 회수 결과 인계, 위험 징후 뒤 포착과 실패, 현재 탐험 물품 손실, 실패 결과의 회수 목록 부재와 종료 상태 덮어쓰기 방지를 검사한다. 모두 맞으면 `exploration_end_passed` 로그와 종료 코드 `0`을 반환한다.
+
 ## 저장소 규칙
 
 - `project.godot`은 버전 관리한다.
@@ -369,4 +391,21 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 - 제외 범위: 피해·건강·부상, 행동 불능·실패 연결, 최종 하네스 모듈 구성·충전 밸런스·내구도
 - 저장 데이터 영향: 없음
 - 다음 개발 작업: `DEV-0106 — 출구·귀환·실패`
+- 다음 정합성 검사: `DEV-0107` 완료 뒤
+
+## DEV-0106 출구·귀환·실패 결과
+
+- 탐험 종료 상태: `res://src/gameplay/recovery/exploration_run.gd`
+- 종료 결과: `res://src/gameplay/recovery/exploration_outcome.gd`
+- 입구 생환 상호작용: `res://src/gameplay/recovery/entrance_exit.tscn`
+- 결과 UI: `res://src/ui/exploration_outcome_panel.tscn`
+- 생환 처리: 입구 상호작용으로 현재 인벤토리를 비우고 그 물품을 기존 `RecoveryResult`에 고정
+- 실패 처리: 공개 실패 명령으로 현재 인벤토리를 비우고 손실 개수만 남기며 회수 결과는 만들지 않음
+- 종료 잠금: 활성 탐험의 첫 생환 또는 실패만 확정하고 이후 반대 결과 요청을 거절
+- 수동 테스트 공간: `res://tests/fixtures/exploration_end_test_space.tscn`
+- 자동 검사: `res://tests/smoke/exploration_end_smoke.tscn`
+- 검증: Godot 4.7.1에서 프로젝트 초기화, 탐험 종료와 기존 위험·하네스·회수 결과·인벤토리·상호작용·이동·카메라·상태 전환 자동 검사 통과
+- 제외 범위: 실제 피해·건강·부상, 퇴로 상실 시간과 비상 탈출, 영구 장비 손상·수리비, 저장과 거점 정산·반영, 완성 던전 구성
+- 저장 데이터 영향: 없음
+- 다음 개발 작업: `DEV-0107 — 첫 핵심 루프 플레이테스트 장면`
 - 다음 정합성 검사: `DEV-0107` 완료 뒤
