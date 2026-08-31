@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://tests/fixtures/broken_guard_golem_test_space.gd" id="1_space"]
+[ext_resource type="PackedScene" path="res://src/gameplay/player/player.tscn" id="2_player"]
+[ext_resource type="PackedScene" path="res://src/gameplay/hazards/broken_guard_golem.tscn" id="3_golem"]
+
+[node name="BrokenGuardGolemTestSpace" type="Node2D"]
+script = ExtResource("1_space")
+
+[node name="Floor" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-576, -324, 576, -324, 576, 324, -576, 324)
+color = Color(0.045, 0.052, 0.06, 1)
+
+[node name="ScratchTrail" type="Line2D" parent="."]
+points = PackedVector2Array(300, -140, 300, 170)
+width = 6.0
+default_color = Color(0.34, 0.28, 0.23, 0.8)
+
+[node name="DetectionGuide" type="Polygon2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(300, 0)
+polygon = PackedVector2Array(160, 0, 147.82, 61.23, 113.14, 113.14, 61.23, 147.82, 0, 160, -61.23, 147.82, -113.14, 113.14, -147.82, 61.23, -160, 0, -147.82, -61.23, -113.14, -113.14, -61.23, -147.82, 0, -160, 61.23, -147.82, 113.14, -113.14, 147.82, -61.23)
+color = Color(0.68, 0.36, 0.12, 0.1)
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(0, 0)
+
+[node name="BrokenGuardGolem" parent="." instance=ExtResource("3_golem")]
+unique_name_in_owner = true
+position = Vector2(300, -80)
+patrol_offset = Vector2(0, 160)
+suspicion_duration = 1.2
+search_duration = 2.5
+
+[node name="Overlay" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="ColorRect" parent="Overlay"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 720.0
+offset_bottom = 126.0
+color = Color(0.02, 0.025, 0.035, 0.9)
+
+[node name="Instructions" type="Label" parent="Overlay/Panel"]
+offset_left = 16.0
+offset_top = 10.0
+offset_right = 688.0
+offset_bottom = 34.0
+text = "WASD: 이동 | 갈색 흔적과 발소리를 확인한 뒤 탐지 범위에 들어갔다가 벗어나세요."
+
+[node name="StateStatus" type="Label" parent="Overlay/Panel"]
+unique_name_in_owner = true
+offset_left = 16.0
+offset_top = 42.0
+offset_right = 688.0
+offset_bottom = 66.0
+text = "현재 상태: 순찰"
+
+[node name="EventStatus" type="Label" parent="Overlay/Panel"]
+unique_name_in_owner = true
+offset_left = 16.0
+offset_top = 74.0
+offset_right = 688.0
+offset_bottom = 98.0
+text = "영구 처치와 피해는 이번 확인 범위에 포함되지 않습니다."

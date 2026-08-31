@@ -25,6 +25,7 @@ related:
   - ../../src/gameplay/interaction/interaction_controller.gd
   - ../../src/gameplay/interaction/interaction_detector.gd
   - ../../src/gameplay/interaction/inspectable_pickup_interactable.tscn
+  - ../../src/gameplay/hazards/broken_guard_golem.tscn
   - ../../src/gameplay/hazards/hazard_detector.gd
   - ../../src/gameplay/hazards/stabilizable_hazard.gd
   - ../../src/gameplay/hazards/unstable_debris_hazard.tscn
@@ -46,6 +47,7 @@ related:
   - ../../src/ui/recovery_result_panel.tscn
   - ../../tests/fixtures/inventory_test_space.tscn
   - ../../tests/fixtures/inspection_unidentified_test_space.tscn
+  - ../../tests/fixtures/broken_guard_golem_test_space.tscn
   - ../../tests/fixtures/interaction_test_space.tscn
   - ../../tests/fixtures/core_loop_playtest_space.tscn
   - ../../tests/fixtures/exploration_end_test_space.tscn
@@ -53,6 +55,7 @@ related:
   - ../../tests/fixtures/movement_test_space.tscn
   - ../../tests/fixtures/recovery_result_test_space.tscn
   - ../../tests/smoke/game_state_flow_smoke.tscn
+  - ../../tests/smoke/broken_guard_golem_smoke.tscn
   - ../../tests/smoke/core_loop_playtest_smoke.tscn
   - ../../tests/smoke/exploration_end_smoke.tscn
   - ../../tests/smoke/hazard_harness_smoke.tscn
@@ -291,6 +294,22 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 
 조사와 회수가 한 번의 상호작용으로 합쳐지지 않는지, 조사 정보에 외형·무게·위험 정보가 남는지, 현재 탐험의 감정 상태가 인벤토리와 생환 결과까지 전달되는지 검사한다. 감정 전 실제 분류·가치와 결과 합계가 노출되지 않으면 `inspection_unidentified_passed` 로그와 종료 코드 `0`을 반환한다.
 
+### 고장 난 경비 골렘 수동 테스트
+
+```powershell
+& $env:GODOT_BIN --path . res://tests/fixtures/broken_guard_golem_test_space.tscn
+```
+
+갈색 긁힌 흔적과 순찰 중 발소리 단서를 확인하고 탐지 범위에 들어간다. 즉시 추적하지 않고 탐지음과 의심 상태가 먼저 나타나는지, 계속 머무르면 추적하는지, 범위를 벗어나면 마지막 위치 수색 뒤 순찰로 돌아가는지 확인한다. 장면의 탐지 범위·속도·대기 시간은 검사 전용 값이다.
+
+### 고장 난 경비 골렘 자동 검사
+
+```powershell
+& $env:GODOT_BIN --headless --path . res://tests/smoke/broken_guard_golem_smoke.tscn
+```
+
+순찰 이동과 발소리·긁힌 흔적, 탐지음이 추적보다 먼저 나타나는지 검사한다. 지속 감지 뒤 추적, 시야 상실 뒤 마지막 위치 수색과 순찰 복귀, 외부 소음 조사와 경보 추적, 영구 처치 불가가 맞으면 `broken_guard_golem_passed` 로그와 종료 코드 `0`을 반환한다.
+
 ## 저장소 규칙
 
 - `project.godot`은 버전 관리한다.
@@ -476,4 +495,20 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 - 제외 범위: 거점·휴대용 감정 실행, 하네스 분석, 실제 아이템 콘텐츠·밸런스, 저장 스키마
 - 저장 데이터 영향: 없음. 감정 상태는 현재 탐험의 실행 중 물품에만 유지
 - 다음 개발 작업: `DEV-0109 — 고장 난 경비 골렘`
+- 정합성 검사: 아직 아님 — 다음 검사는 `DEV-0111` 완료 뒤
+
+## DEV-0109 고장 난 경비 골렘 결과
+
+- 골렘 장면: `res://src/gameplay/hazards/broken_guard_golem.tscn`
+- 실행 중 상태: 지정 구간 순찰, 마지막 위치로 이동하는 의심, 적극 이동하는 추적, 시야 상실 뒤 수색과 순찰 복귀
+- 사전 단서: 순찰 중 발소리·긁힌 흔적을 표시하고 감지 시 탐지음이 있는 의심 단계를 추적보다 먼저 거침
+- 외부 연결: 소음 위치 조사와 경보 위치 추적을 공개 명령으로 요청하며 상태 변경·경고·추적·수색 이벤트를 공개
+- 영구 처치: 허용하지 않으며 기본 공격·반복 피해·실패 판정을 구현하지 않음
+- 수동 테스트 공간: `res://tests/fixtures/broken_guard_golem_test_space.tscn`
+- 자동 검사: `res://tests/smoke/broken_guard_golem_smoke.tscn`
+- 검증: Godot 4.7.1 프로젝트 초기화, 새 골렘 검사와 기존 스모크 검사 9개 통과
+- 시제품 값: 순찰 구간, 이동 속도, 탐지 범위와 의심·수색 시간은 조정 가능하며 제품 밸런스로 확정하지 않음
+- 제외 범위: 하네스 비상 방전, 문 차단·투척 유인물, 전투 피해·부상·탐험 실패 연결, 최종 인공지능·경로 탐색·콘텐츠 배치, 저장 스키마
+- 저장 데이터 영향: 없음. 골렘 상태와 마지막 위치는 현재 장면 실행 중에만 유지
+- 다음 개발 작업: `DEV-0110 — 하네스 분석과 비상 방전`
 - 정합성 검사: 아직 아님 — 다음 검사는 `DEV-0111` 완료 뒤

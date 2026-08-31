@@ -124,4 +124,6 @@ res://
 - `src/gameplay/interaction/inspectable_pickup_interactable.*`은 같은 `Interactable` 경계 안에서 첫 조사와 다음 회수를 구분한다. 조사 대상은 인벤토리 한도나 감정 상태를 직접 결정하지 않고 공개 인벤토리 명령에 미확인 상태의 회수를 요청한다.
 - `src/ui/inventory_panel.gd`, `item_value_text.gd`, `recovery_result_panel.gd`는 공개 감정 상태를 읽어 숨겨야 할 분류·가치를 표시하지 않는다. 숨겨진 가치를 합계에서 제외하는 규칙은 `RecoveryResult`가 소유하며 UI는 다시 계산하지 않는다.
 - `tests/fixtures/inspection_unidentified_test_space.tscn`은 조사·회수·생환을 직접 확인하는 개발 공간을, `tests/smoke/inspection_unidentified_smoke.tscn`은 조사 정보와 미확인 상태 전달·정보 비노출을 자동 검증한다. 시험 물품·무게·가치와 위험 힌트는 테스트 전용이다.
-- 2026-08-31 G1 정합성 검사와 사용자 지시에 따라 보완 작업을 진행한다. 현재 다음 개발 작업은 `DEV-0109 — 고장 난 경비 골렘`이며 다음 정합성 검사는 `DEV-0111` 완료 뒤다.
+- `DEV-0109`에서 `src/gameplay/hazards/broken_guard_golem.*`이 골렘의 순찰·의심·추적·수색 상태, 마지막 위치와 외부 소음·경보 요청을 소유하도록 했다. 골렘은 공개 상태·이벤트를 제공하며 전투 피해나 탐험 실패를 직접 결정하지 않는다.
+- `tests/fixtures/broken_guard_golem_test_space.tscn`은 사전 흔적, 탐지음과 상태 하강을 직접 확인하는 개발 공간을, `tests/smoke/broken_guard_golem_smoke.tscn`은 순찰·탐지·추적·수색·소음·경보 흐름을 자동 검증한다. 이동·탐지·대기 수치는 조정 가능한 시제품 값이다.
+- 2026-08-31 G1 정합성 검사와 사용자 지시에 따라 보완 작업을 진행한다. 현재 다음 개발 작업은 `DEV-0110 — 하네스 분석과 비상 방전`이며 다음 정합성 검사는 `DEV-0111` 완료 뒤다.
