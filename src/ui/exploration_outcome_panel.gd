@@ -34,6 +34,10 @@ func get_recovery_summary_text() -> String:
 	return _recovery_result_panel.get_summary_text()
 
 
+func get_recovery_displayed_item_text(index: int) -> String:
+	return _recovery_result_panel.get_displayed_item_text(index)
+
+
 func _render() -> void:
 	if _outcome == null:
 		_title.text = "탐험 결과 없음"

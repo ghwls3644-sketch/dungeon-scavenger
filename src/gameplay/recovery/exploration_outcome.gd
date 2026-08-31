@@ -18,6 +18,15 @@ static func safe_return(recovered_items: Array[ItemDefinition]) -> ExplorationOu
 	return outcome
 
 
+static func safe_return_inventory_items(
+	recovered_items: Array[InventoryItem]
+) -> ExplorationOutcome:
+	var outcome := ExplorationOutcome.new()
+	outcome._result = Result.SAFE_RETURN
+	outcome._recovery_result = RecoveryResult.from_recovered_inventory_items(recovered_items)
+	return outcome
+
+
 static func failure(lost_item_count: int) -> ExplorationOutcome:
 	var outcome := ExplorationOutcome.new()
 	outcome._result = Result.FAILURE

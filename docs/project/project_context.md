@@ -8,7 +8,7 @@ canonical_for:
   - development_environment
   - engine_and_language
   - development_commands
-last_reviewed: 2026-08-24
+last_reviewed: 2026-08-31
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -24,10 +24,12 @@ related:
   - ../../src/gameplay/interaction/interactable.gd
   - ../../src/gameplay/interaction/interaction_controller.gd
   - ../../src/gameplay/interaction/interaction_detector.gd
+  - ../../src/gameplay/interaction/inspectable_pickup_interactable.tscn
   - ../../src/gameplay/hazards/hazard_detector.gd
   - ../../src/gameplay/hazards/stabilizable_hazard.gd
   - ../../src/gameplay/hazards/unstable_debris_hazard.tscn
   - ../../src/gameplay/inventory/player_inventory.gd
+  - ../../src/gameplay/inventory/inventory_item.gd
   - ../../src/gameplay/player/player_controller.gd
   - ../../src/gameplay/player/player.tscn
   - ../../src/gameplay/recovery/entrance_exit.tscn
@@ -43,6 +45,7 @@ related:
   - ../../src/ui/item_value_text.gd
   - ../../src/ui/recovery_result_panel.tscn
   - ../../tests/fixtures/inventory_test_space.tscn
+  - ../../tests/fixtures/inspection_unidentified_test_space.tscn
   - ../../tests/fixtures/interaction_test_space.tscn
   - ../../tests/fixtures/core_loop_playtest_space.tscn
   - ../../tests/fixtures/exploration_end_test_space.tscn
@@ -54,6 +57,7 @@ related:
   - ../../tests/smoke/exploration_end_smoke.tscn
   - ../../tests/smoke/hazard_harness_smoke.tscn
   - ../../tests/smoke/inventory_system_smoke.tscn
+  - ../../tests/smoke/inspection_unidentified_smoke.tscn
   - ../../tests/smoke/interaction_system_smoke.tscn
   - ../../tests/smoke/player_movement_smoke.tscn
   - ../../tests/smoke/recovery_result_smoke.tscn
@@ -271,6 +275,22 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 
 실제 플레이테스트 장면으로 안전 경로 회수와 생환, 위험 경로의 사전 징후·하네스 충전 사용·안정화, 슬롯 한도 거절 뒤 저가품 버리기와 고가품 교체, 입구 생환 결과, 미대응 위험의 실패와 회수품 손실을 검사한다. 모두 맞으면 `core_loop_playtest_passed` 로그와 종료 코드 `0`을 반환한다.
 
+### 조사·미확인 물품 수동 테스트
+
+```powershell
+& $env:GODOT_BIN --path . res://tests/fixtures/inspection_unidentified_test_space.tscn
+```
+
+시험 물품 가까이에서 첫 `E`로 조사해 외형·무게·위험 정보를 확인하고, 두 번째 `E`로 미확인 상태의 물품을 회수한다. `Tab` 인벤토리와 왼쪽 입구 생환 결과에서 실제 분류와 가치가 숨겨지고 미확인 개수만 표시되는지 확인한다. 시험 물품과 값은 실제 콘텐츠·밸런스가 아니다.
+
+### 조사·미확인 물품 자동 검사
+
+```powershell
+& $env:GODOT_BIN --headless --path . res://tests/smoke/inspection_unidentified_smoke.tscn
+```
+
+조사와 회수가 한 번의 상호작용으로 합쳐지지 않는지, 조사 정보에 외형·무게·위험 정보가 남는지, 현재 탐험의 감정 상태가 인벤토리와 생환 결과까지 전달되는지 검사한다. 감정 전 실제 분류·가치와 결과 합계가 노출되지 않으면 `inspection_unidentified_passed` 로그와 종료 코드 `0`을 반환한다.
+
 ## 저장소 규칙
 
 - `project.godot`은 버전 관리한다.
@@ -439,6 +459,21 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 - 검증: Godot 4.7.1에서 프로젝트·메인·플레이테스트 장면 초기화, 핵심 루프와 기존 상태 전환·이동·상호작용·인벤토리·회수 결과·위험·하네스·탐험 종료 자동 검사 통과
 - 시제품 값: 슬롯 2개, 부담 2.5, 과적 4.0, 시험 아이템 무게·가치, 하네스 충전 1과 경고 시간은 테스트 전용이며 제품 값이 아님
 - 저장 데이터 영향: 없음
-- G1 검사 잔여: 사람 플레이테스트, `Q-004`·`Q-005`, GDD 15-2의 단계 1 티켓 밖 항목 처리 방향
-- 다음 작업: 사용자 정합성 검사 검토 뒤 `DEV-0201` 또는 보완 작업
-- 정합성 검사: 지금
+- G1 검사 결과: 2026-08-31 기존 자동 검사에 회귀 없음. 별도 조사·미확인 물품·경비 골렘·하네스 분석과 비상 방전 및 사람 플레이테스트가 남음
+- 다음 개발 작업: 사용자 지시에 따라 `DEV-0108 — 조사와 미확인 물품`
+- 정합성 검사: 아직 아님 — 다음 검사는 `DEV-0111` 완료 뒤
+
+## DEV-0108 조사와 미확인 물품 결과
+
+- 현재 탐험 물품 상태: `res://src/gameplay/inventory/inventory_item.gd`가 아이템 정의와 감정 여부를 분리하며 실제 분류·가치는 정의에 유지
+- 조사 대상: `res://src/gameplay/interaction/inspectable_pickup_interactable.tscn`에서 첫 상호작용은 정보 확인, 다음 상호작용은 회수로 구분
+- 조사 정보: 외형을 나타내는 표시 이름, 무게와 위험 힌트만 공개하며 감정 상태를 바꾸지 않음
+- 인벤토리·결과 UI: 미확인 상태에서는 실제 분류, 가치 범위와 보호 여부를 숨기고 미확인 물품임을 문자로 표시
+- 생환 결과: 미확인 상태를 유지하고 숨겨진 실제 가치를 예상 가치 합계에서 제외하며 미확인 개수를 별도 표시
+- 수동 테스트 공간: `res://tests/fixtures/inspection_unidentified_test_space.tscn`
+- 자동 검사: `res://tests/smoke/inspection_unidentified_smoke.tscn`
+- 검증: Godot 4.7.1 프로젝트 초기화, 새 조사·미확인 물품 검사와 기존 스모크 검사 8개 통과
+- 제외 범위: 거점·휴대용 감정 실행, 하네스 분석, 실제 아이템 콘텐츠·밸런스, 저장 스키마
+- 저장 데이터 영향: 없음. 감정 상태는 현재 탐험의 실행 중 물품에만 유지
+- 다음 개발 작업: `DEV-0109 — 고장 난 경비 골렘`
+- 정합성 검사: 아직 아님 — 다음 검사는 `DEV-0111` 완료 뒤

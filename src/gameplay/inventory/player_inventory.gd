@@ -20,7 +20,7 @@ const REJECT_SLOT_LIMIT: StringName = &"slot_limit"
 @export var burden_weight := 0.0
 @export var overload_weight := 0.0
 
-var _items: Array[ItemDefinition] = []
+var _items: Array[InventoryItem] = []
 var _selected_index := -1
 
 
@@ -42,20 +42,25 @@ func get_configuration_errors() -> PackedStringArray:
 	return errors
 
 
-func try_add_item(item: ItemDefinition) -> bool:
+func try_add_item(item: ItemDefinition, starts_identified := true) -> bool:
+	return try_add_inventory_item(InventoryItem.from_definition(item, starts_identified))
+
+
+func try_add_inventory_item(item: InventoryItem) -> bool:
+	var definition := item.get_definition() if item != null else null
 	if not _is_valid_inventory_item(item):
-		item_add_rejected.emit(item, REJECT_INVALID_ITEM)
+		item_add_rejected.emit(definition, REJECT_INVALID_ITEM)
 		return false
 	if not get_configuration_errors().is_empty():
-		item_add_rejected.emit(item, REJECT_INVALID_CONFIGURATION)
+		item_add_rejected.emit(definition, REJECT_INVALID_CONFIGURATION)
 		return false
-	if get_used_slots() + item.slot_size > slot_capacity:
-		item_add_rejected.emit(item, REJECT_SLOT_LIMIT)
+	if get_used_slots() + definition.slot_size > slot_capacity:
+		item_add_rejected.emit(definition, REJECT_SLOT_LIMIT)
 		return false
 
 	_items.append(item)
 	_selected_index = _items.size() - 1
-	item_added.emit(item)
+	item_added.emit(definition)
 	inventory_changed.emit()
 	return true
 
@@ -73,23 +78,41 @@ func drop_selected_item() -> ItemDefinition:
 		return null
 
 	var dropped_item := _items[_selected_index]
+	var definition := dropped_item.get_definition()
 	_items.remove_at(_selected_index)
 	_selected_index = mini(_selected_index, _items.size() - 1)
-	item_dropped.emit(dropped_item)
+	item_dropped.emit(definition)
 	inventory_changed.emit()
-	return dropped_item
+	return definition
 
 
 func get_items() -> Array[ItemDefinition]:
+	var definitions: Array[ItemDefinition] = []
+	for item in _items:
+		definitions.append(item.get_definition())
+	return definitions
+
+
+func get_inventory_items() -> Array[InventoryItem]:
 	return _items.duplicate()
 
 
 func take_all_items() -> Array[ItemDefinition]:
+	var taken_items := get_items()
+	_clear_items()
+	return taken_items
+
+
+func take_all_inventory_items() -> Array[InventoryItem]:
 	var taken_items := _items.duplicate()
+	_clear_items()
+	return taken_items
+
+
+func _clear_items() -> void:
 	_items.clear()
 	_selected_index = -1
 	inventory_changed.emit()
-	return taken_items
 
 
 func get_selected_index() -> int:
@@ -99,14 +122,14 @@ func get_selected_index() -> int:
 func get_used_slots() -> int:
 	var used_slots := 0
 	for item in _items:
-		used_slots += item.slot_size
+		used_slots += item.get_definition().slot_size
 	return used_slots
 
 
 func get_total_weight() -> float:
 	var total_weight := 0.0
 	for item in _items:
-		total_weight += item.weight
+		total_weight += item.get_definition().weight
 	return total_weight
 
 
@@ -119,9 +142,7 @@ func get_weight_stage() -> WeightStage:
 	return WeightStage.NORMAL
 
 
-func _is_valid_inventory_item(item: ItemDefinition) -> bool:
-	return (
-		item != null
-		and item.slot_size > 0
-		and item.get_validation_errors().is_empty()
-	)
+func _is_valid_inventory_item(item: InventoryItem) -> bool:
+	if item == null or not item.is_valid():
+		return false
+	return item.get_definition().slot_size > 0

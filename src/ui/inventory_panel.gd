@@ -100,7 +100,7 @@ func _render() -> void:
 		_drop_button.disabled = true
 		return
 
-	var items := _inventory.get_items()
+	var items := _inventory.get_inventory_items()
 	for item in items:
 		_item_list.add_item(_format_item(item))
 
@@ -116,14 +116,22 @@ func _render() -> void:
 	]
 
 
-func _format_item(item: ItemDefinition) -> String:
-	var protection_text := "보호" if item.sale_protected else "일반"
+func _format_item(item: InventoryItem) -> String:
+	var definition := item.get_definition()
+	if not item.is_identified():
+		return "%s | %d칸 | 무게 %.1f | 미확인 물품 | 가치 미확인 | 보호 여부 미확인" % [
+			definition.display_name,
+			definition.slot_size,
+			definition.weight,
+		]
+
+	var protection_text := "보호" if definition.sale_protected else "일반"
 	return "%s | %d칸 | 무게 %.1f | %s | %s | %s" % [
-		item.display_name,
-		item.slot_size,
-		item.weight,
-		_get_category_text(item.category),
-		ItemValueText.format_item_value(item),
+		definition.display_name,
+		definition.slot_size,
+		definition.weight,
+		_get_category_text(definition.category),
+		ItemValueText.format_inventory_item_value(item),
 		protection_text,
 	]
 

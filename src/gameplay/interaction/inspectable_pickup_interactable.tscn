@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://src/gameplay/interaction/inspectable_pickup_interactable.gd" id="1_inspectable"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pickup"]
+radius = 18.0
+
+[node name="InspectablePickupInteractable" type="Area2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_inspectable")
+interaction_prompt = "회수하기"
+starts_identified = false
+
+[node name="Body" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, -14, 14, 0, 0, 14, -14, 0)
+color = Color(0.52, 0.54, 0.58, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_pickup")

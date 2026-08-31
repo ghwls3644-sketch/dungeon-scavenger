@@ -4,6 +4,7 @@ extends Interactable
 signal collected(interactor: Node)
 
 @export var item_definition: ItemDefinition
+@export var starts_identified := true
 
 
 func is_interaction_available(interactor: Node = null) -> bool:
@@ -16,7 +17,7 @@ func _perform_interaction(interactor: Node) -> bool:
 	var inventory := interactor.get_node_or_null("Inventory") as PlayerInventory
 	if inventory == null:
 		return false
-	if not inventory.try_add_item(item_definition):
+	if not inventory.try_add_item(item_definition, starts_identified):
 		return false
 
 	set_interaction_enabled(false)

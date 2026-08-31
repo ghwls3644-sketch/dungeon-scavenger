@@ -33,8 +33,8 @@ func complete_safe_return() -> bool:
 	if not _can_complete():
 		return false
 
-	var recovered_items := _inventory.take_all_items()
-	_outcome = ExplorationOutcome.safe_return(recovered_items)
+	var recovered_items := _inventory.take_all_inventory_items()
+	_outcome = ExplorationOutcome.safe_return_inventory_items(recovered_items)
 	_finish(State.SAFE_RETURN)
 	return true
 
@@ -43,7 +43,7 @@ func complete_failure() -> bool:
 	if not _can_complete():
 		return false
 
-	var lost_item_count := _inventory.take_all_items().size()
+	var lost_item_count := _inventory.take_all_inventory_items().size()
 	_outcome = ExplorationOutcome.failure(lost_item_count)
 	_finish(State.FAILURE)
 	return true

@@ -1,0 +1,106 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://tests/fixtures/inspection_unidentified_test_space.gd" id="1_space"]
+[ext_resource type="PackedScene" path="res://src/gameplay/player/player.tscn" id="2_player"]
+[ext_resource type="PackedScene" path="res://src/gameplay/interaction/inspectable_pickup_interactable.tscn" id="3_inspectable"]
+[ext_resource type="Script" path="res://src/data/item_definition.gd" id="4_item_definition"]
+[ext_resource type="Script" path="res://src/gameplay/recovery/exploration_run.gd" id="5_run"]
+[ext_resource type="PackedScene" path="res://src/gameplay/recovery/entrance_exit.tscn" id="6_exit"]
+[ext_resource type="PackedScene" path="res://src/ui/interaction_prompt.tscn" id="7_prompt"]
+[ext_resource type="PackedScene" path="res://src/ui/inventory_panel.tscn" id="8_inventory"]
+[ext_resource type="PackedScene" path="res://src/ui/exploration_outcome_panel.tscn" id="9_outcome"]
+
+[sub_resource type="Resource" id="Resource_unknown_scrap"]
+script = ExtResource("4_item_definition")
+stable_id = &"test_unknown_scrap"
+display_name = "봉인된 금속 상자"
+category = &"scrap"
+weight = 1.5
+slot_size = 1
+value_min = 15
+value_max = 25
+
+[sub_resource type="Resource" id="Resource_unknown_residue"]
+script = ExtResource("4_item_definition")
+stable_id = &"test_unknown_residue"
+display_name = "맥동하는 유리 덩어리"
+category = &"residue"
+weight = 2.0
+slot_size = 1
+value_min = 90
+value_max = 120
+
+[node name="InspectionUnidentifiedTestSpace" type="Node2D"]
+script = ExtResource("1_space")
+
+[node name="Floor" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-640, -360, 640, -360, 640, 360, -640, 360)
+color = Color(0.045, 0.06, 0.08, 1)
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+unique_name_in_owner = true
+position = Vector2(-40, 0)
+
+[node name="ExplorationRun" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_run")
+inventory_path = NodePath("../Player/Inventory")
+
+[node name="EntranceExit" parent="." instance=ExtResource("6_exit")]
+unique_name_in_owner = true
+position = Vector2(-220, 0)
+exploration_run_path = NodePath("../ExplorationRun")
+
+[node name="UnknownScrapPickup" parent="." instance=ExtResource("3_inspectable")]
+unique_name_in_owner = true
+position = Vector2(100, -70)
+item_definition = SubResource("Resource_unknown_scrap")
+inspection_summary = "잠금 장치가 녹슨 금속 상자입니다."
+risk_hint = "특이 위험 없음"
+
+[node name="UnknownResiduePickup" parent="." instance=ExtResource("3_inspectable")]
+unique_name_in_owner = true
+position = Vector2(280, 70)
+item_definition = SubResource("Resource_unknown_residue")
+inspection_summary = "내부에서 희미한 맥동이 느껴집니다."
+risk_hint = "마력 반응 있음"
+
+[node name="Overlay" type="CanvasLayer" parent="."]
+
+[node name="Instructions" type="Label" parent="Overlay"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 1120.0
+offset_bottom = 72.0
+text = "DEV-0108 조사와 미확인 물품 | WASD 이동 · 첫 E 조사 · 두 번째 E 회수 · Tab 인벤토리\n두 물품을 조사·회수한 뒤 왼쪽 입구에서 E로 생환하세요."
+
+[node name="Status" type="Label" parent="Overlay"]
+unique_name_in_owner = true
+offset_left = 16.0
+offset_top = 78.0
+offset_right = 1120.0
+offset_bottom = 112.0
+text = "조사하면 외형·무게·위험 정보만 확인되고 실제 분류와 가치는 숨겨집니다."
+
+[node name="InteractionPrompt" parent="Overlay" instance=ExtResource("7_prompt")]
+offset_left = 430.0
+offset_top = 610.0
+offset_right = 750.0
+offset_bottom = 642.0
+interaction_source_path = NodePath("../../Player/InteractionController")
+prefix_text = "[E] "
+
+[node name="InventoryPanel" parent="Overlay" instance=ExtResource("8_inventory")]
+unique_name_in_owner = true
+offset_left = 300.0
+offset_top = 120.0
+offset_right = 900.0
+offset_bottom = 540.0
+inventory_source_path = NodePath("../../Player/Inventory")
+
+[node name="ExplorationOutcomePanel" parent="Overlay" instance=ExtResource("9_outcome")]
+unique_name_in_owner = true
+offset_left = 260.0
+offset_top = 100.0
+offset_right = 940.0
+offset_bottom = 600.0

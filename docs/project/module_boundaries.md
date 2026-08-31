@@ -8,7 +8,7 @@ canonical_for:
   - source_tree_layout
   - module_responsibilities
   - module_dependency_rules
-last_reviewed: 2026-08-24
+last_reviewed: 2026-08-31
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -114,10 +114,14 @@ res://
 - `src/harness/harness_controller.gd`는 플레이어의 공개 위험 감지 결과를 받아 `use_harness` 입력, 시험 충전과 안정화 명령을 소유한다. 위험은 하네스 내부 상태를 직접 바꾸지 않으며, 하네스는 공개 `stabilize` 명령만 요청한다.
 - `src/ui/harness_status.*`는 현재 충전과 `Q` 안정화 안내만 표시한다. 충전 소모와 대상 가능 여부는 계산하지 않는다.
 - `tests/fixtures/hazard_harness_test_space.tscn`은 사전 징후와 `Q` 안정화를 직접 확인하는 공간을, `tests/smoke/hazard_harness_smoke.tscn`은 안정화와 미대응 분기를 자동 검증하는 장면을 소유한다. 충전·비용·경고 시간은 테스트와 장면에서 조정하는 시제품 값이다.
-- `DEV-0106`에서 `src/gameplay/recovery/`가 입구 생환 명령, 탐험의 단일 종료 상태와 생환·실패 결과를 소유하도록 했다. `PlayerInventory.take_all_items()`는 현재 탐험 물품을 공개 명령으로 인계하고 비우며, 회수 모듈은 생환 물품만 기존 `RecoveryResult`에 넣는다.
+- `DEV-0106`에서 `src/gameplay/recovery/`가 입구 생환 명령, 탐험의 단일 종료 상태와 생환·실패 결과를 소유하도록 했다. `PlayerInventory`는 현재 탐험 물품을 공개 명령으로 인계하고 비우며, 회수 모듈은 생환 물품만 기존 `RecoveryResult`에 넣는다.
 - `src/gameplay/recovery/entrance_exit.*`는 공통 `Interactable`을 통해 활성 탐험의 생환만 요청한다. 위험 모듈은 계속 포착 이벤트만 내며, 시험 공간의 조립 코드가 이 공개 이벤트를 탐험 실패 명령에 연결한다.
 - `src/ui/exploration_outcome_panel.*`은 생환의 회수 결과와 실패의 손실 개수를 표시할 뿐 종료 상태, 포함 물품이나 손실을 결정하지 않는다.
 - `tests/fixtures/exploration_end_test_space.tscn`은 입구 생환과 위험 포착 실패를 직접 확인하는 공간을, `tests/smoke/exploration_end_smoke.tscn`은 두 종료 분기, 물품 인계·손실과 종료 상태 잠금을 자동 검증하는 장면을 소유한다.
 - `DEV-0107`에서 `tests/fixtures/core_loop_playtest_space.tscn`이 기존 공개 모듈을 안전 경로·위험 보상 경로가 있는 작은 던전으로 조립했다. 시험용 아이템·슬롯·무게·가치·하네스 충전과 경고 시간은 `tests` 안에만 있으며 출시 코드와 제품 데이터가 참조하지 않는다.
 - `tests/smoke/core_loop_playtest_smoke.tscn`은 같은 플레이테스트 장면으로 안전 생환, 위험 대응과 적재 교체 뒤 생환, 미대응 실패를 자동 검증한다. 테스트 조립 코드는 모듈 내부 상태를 직접 바꾸지 않고 공개 명령·상태·이벤트를 사용한다.
-- 현재 `DEV-0107` 완료 뒤 G1 정합성 검사 시점이다. 계획상 다음 티켓은 `DEV-0201`이지만 사용자 진행 지시 전에는 시작하지 않는다.
+- `DEV-0108`에서 `src/gameplay/inventory/inventory_item.gd`가 불변 아이템 정의와 현재 탐험의 감정 여부를 분리한다. `ItemDefinition`에는 실행 중 상태를 추가하지 않으며 `PlayerInventory`와 회수 모듈은 공개 실행 중 물품 상태를 전달한다.
+- `src/gameplay/interaction/inspectable_pickup_interactable.*`은 같은 `Interactable` 경계 안에서 첫 조사와 다음 회수를 구분한다. 조사 대상은 인벤토리 한도나 감정 상태를 직접 결정하지 않고 공개 인벤토리 명령에 미확인 상태의 회수를 요청한다.
+- `src/ui/inventory_panel.gd`, `item_value_text.gd`, `recovery_result_panel.gd`는 공개 감정 상태를 읽어 숨겨야 할 분류·가치를 표시하지 않는다. 숨겨진 가치를 합계에서 제외하는 규칙은 `RecoveryResult`가 소유하며 UI는 다시 계산하지 않는다.
+- `tests/fixtures/inspection_unidentified_test_space.tscn`은 조사·회수·생환을 직접 확인하는 개발 공간을, `tests/smoke/inspection_unidentified_smoke.tscn`은 조사 정보와 미확인 상태 전달·정보 비노출을 자동 검증한다. 시험 물품·무게·가치와 위험 힌트는 테스트 전용이다.
+- 2026-08-31 G1 정합성 검사와 사용자 지시에 따라 보완 작업을 진행한다. 현재 다음 개발 작업은 `DEV-0109 — 고장 난 경비 골렘`이며 다음 정합성 검사는 `DEV-0111` 완료 뒤다.
