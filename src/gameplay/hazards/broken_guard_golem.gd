@@ -84,7 +84,7 @@ func can_be_permanently_defeated() -> bool:
 
 
 func investigate_noise(source_position: Vector2) -> bool:
-	if _state == State.CHASE:
+	if _state == State.CHASE or is_instance_valid(_tracked_target):
 		return false
 
 	_begin_suspicion(source_position, null, false)
@@ -92,6 +92,9 @@ func investigate_noise(source_position: Vector2) -> bool:
 
 
 func raise_alarm(last_known_position: Vector2) -> bool:
+	# A current visual target is stronger evidence than an external position.
+	if is_instance_valid(_tracked_target):
+		return true
 	if _state == State.CHASE:
 		_last_known_position = last_known_position
 		return true

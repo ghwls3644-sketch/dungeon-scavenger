@@ -43,6 +43,7 @@ func _run_checks() -> void:
 	var first_text := inventory_panel.get_displayed_item_text(0)
 	_expect(first_text.contains("봉인된 금속 상자"), "Inventory hid the visible appearance name.")
 	_expect(first_text.contains("무게 1.5"), "Inventory hid the visible weight.")
+	_expect(first_text.contains("특이 위험 없음"), "Inventory lost the first inspected risk hint.")
 	_expect(first_text.contains("미확인 물품"), "Inventory did not label the item as unidentified.")
 	_expect(first_text.contains("가치 미확인"), "Inventory did not hide the value.")
 	_expect(not first_text.contains("폐품"), "Inventory leaked the underlying scrap category.")
@@ -57,6 +58,8 @@ func _run_checks() -> void:
 	var second_text := inventory_panel.get_displayed_item_text(1)
 	_expect(second_text.contains("맥동하는 유리 덩어리"), "Inventory hid the second appearance name.")
 	_expect(second_text.contains("무게 2.0"), "Inventory hid the second visible weight.")
+	_expect(second_text.contains("마력 반응 있음"), "Inventory lost the second inspected risk hint after pickup removal.")
+	_expect(inventory.get_inventory_items()[1].get_risk_hint() == "마력 반응 있음", "Runtime item did not retain its inspected risk information.")
 	_expect(not second_text.contains("잔재"), "Inventory leaked the underlying residue category.")
 	_expect(not second_text.contains("90~120"), "Inventory leaked the second value range.")
 
@@ -82,6 +85,9 @@ func _run_checks() -> void:
 	_expect(outcome_panel.get_recovery_summary_text().contains("30~40"), "Result UI did not preserve known value.")
 	_expect(outcome_panel.get_recovery_displayed_item_text(0).contains("가치 미확인"), "Result UI leaked the first value.")
 	_expect(outcome_panel.get_recovery_displayed_item_text(1).contains("가치 미확인"), "Result UI leaked the second value.")
+	_expect(outcome_panel.get_recovery_displayed_item_text(0).contains("특이 위험 없음"), "Return result lost the first inspected risk hint.")
+	_expect(outcome_panel.get_recovery_displayed_item_text(1).contains("마력 반응 있음"), "Return result lost the second inspected risk hint.")
+	_expect(result.get_recovered_inventory_items()[1].get_risk_hint() == "마력 반응 있음", "Risk information was not carried through the run outcome.")
 
 	space.queue_free()
 	await get_tree().process_frame

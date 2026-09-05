@@ -34,3 +34,7 @@ func _perform_interaction(interactor: Node) -> bool:
 		inspection_completed.emit(inspection_summary, risk_hint)
 		return true
 	return super._perform_interaction(interactor)
+
+
+func _get_inventory_risk_hint() -> String:
+	return risk_hint if _inspected else ""

@@ -45,9 +45,11 @@ func _render() -> void:
 
 	for item in _result.get_recovered_inventory_items():
 		var definition := item.get_definition()
-		_item_list.add_item("%s | %s" % [
+		var risk_text := " | %s" % item.get_risk_hint() if not item.get_risk_hint().is_empty() else ""
+		_item_list.add_item("%s | %s%s" % [
 			definition.display_name,
 			ItemValueText.format_inventory_item_value(item),
+			risk_text,
 		])
 
 	_summary.text = "회수품 %d개 | 예상 가치 합계 %s" % [

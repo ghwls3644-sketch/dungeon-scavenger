@@ -13,6 +13,7 @@ var _failure_run: ExplorationRun
 func _ready() -> void:
 	await _check_safe_return()
 	await _check_failure()
+	_check_reentrant_completion()
 
 	if _failures.is_empty():
 		GameLog.info(&"SmokeTest", &"exploration_end_passed")
@@ -60,8 +61,9 @@ func _check_safe_return() -> void:
 	_expect(outcome != null and outcome.is_safe_return(), "Safe return did not create a success outcome.")
 	_expect(inventory.get_items().is_empty(), "Returned items remained in the exploration inventory.")
 	_expect(outcome.get_recovery_result().get_item_count() == 2, "Safe return did not hand over all carried items.")
-	_expect(outcome.get_recovery_result().get_recovered_items().has(first_item), "First carried item was missing after safe return.")
-	_expect(outcome.get_recovery_result().get_recovered_items().has(second_item), "Second carried item was missing after safe return.")
+	var recovered_ids := outcome.get_recovery_result().get_recovered_items().map(func(item: ItemDefinition): return item.stable_id)
+	_expect(recovered_ids.has(first_item.stable_id), "First carried item was missing after safe return.")
+	_expect(recovered_ids.has(second_item.stable_id), "Second carried item was missing after safe return.")
 	_expect(not exploration_run.complete_failure(), "A completed safe return was overwritten by failure.")
 	_expect(not entrance_exit.is_interaction_available(player), "Entrance remained available after exploration ended.")
 
@@ -131,6 +133,40 @@ func _check_failure() -> void:
 	_failure_run = null
 	_failure_player = null
 	await get_tree().process_frame
+
+
+func _check_reentrant_completion() -> void:
+	for safe_return in [true, false]:
+		var inventory := PlayerInventory.new()
+		add_child(inventory)
+		inventory.configure_capacity(3, 4.0, 7.0)
+		_expect(inventory.try_add_item(_create_test_item(&"test_reentry", "Reentry item")), "Reentry setup could not add an item.")
+		var run := ExplorationRun.new()
+		run.bind_inventory(inventory)
+		add_child(run)
+		var replacement_inventory := PlayerInventory.new()
+		add_child(replacement_inventory)
+		var outcomes: Array[ExplorationOutcome] = []
+		run.run_ended.connect(func(outcome: ExplorationOutcome): outcomes.append(outcome))
+		var nested_requests: Array[bool] = []
+		inventory.inventory_changed.connect(func():
+			nested_requests.append(run.complete_safe_return())
+			nested_requests.append(run.complete_failure())
+			nested_requests.append(run.bind_inventory(replacement_inventory)), CONNECT_ONE_SHOT)
+		var completed := run.complete_safe_return() if safe_return else run.complete_failure()
+		_expect(completed, "The first completion request was rejected.")
+		_expect(nested_requests == [false, false, false], "Completion allowed a reentrant end or inventory rebind.")
+		_expect(outcomes.size() == 1, "A single completion emitted multiple terminal outcomes.")
+		_expect(run.get_outcome().is_safe_return() == safe_return, "A nested request changed the terminal result.")
+		_expect(inventory.get_items().is_empty(), "Completion did not clear the original inventory.")
+		if safe_return:
+			_expect(run.get_outcome().get_recovery_result().get_item_count() == 1, "Reentrant request lost the safe-return item.")
+		else:
+			_expect(run.get_outcome().get_lost_item_count() == 1, "Reentrant request changed the loss count.")
+		_expect(not run.complete_safe_return() and not run.complete_failure(), "Completed run accepted another terminal request.")
+		run.queue_free()
+		inventory.queue_free()
+		replacement_inventory.queue_free()
 
 
 func _on_failure_body_caught(body: Node2D) -> void:

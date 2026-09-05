@@ -28,12 +28,15 @@ static func from_recovered_inventory_items(
 func get_recovered_items() -> Array[ItemDefinition]:
 	var definitions: Array[ItemDefinition] = []
 	for item in _recovered_items:
-		definitions.append(item.get_definition())
+		definitions.append(item.get_definition().duplicate(true) as ItemDefinition)
 	return definitions
 
 
 func get_recovered_inventory_items() -> Array[InventoryItem]:
-	return _recovered_items.duplicate()
+	var copies: Array[InventoryItem] = []
+	for item in _recovered_items:
+		copies.append(item.copy())
+	return copies
 
 
 func get_item_count() -> int:
@@ -61,12 +64,13 @@ func _capture(recovered_items: Array[InventoryItem]) -> void:
 		if item == null or not item.is_valid():
 			continue
 
-		_recovered_items.append(item)
-		if not item.is_identified():
+		var captured_item := item.copy()
+		_recovered_items.append(captured_item)
+		if not captured_item.is_identified():
 			_unidentified_item_count += 1
 			continue
 
-		var definition := item.get_definition()
+		var definition := captured_item.get_definition()
 		if definition.has_monetary_value():
 			_total_value_min += definition.value_min
 			_total_value_max += definition.value_max

@@ -25,14 +25,19 @@ func _ready() -> void:
 		bind_inventory(get_node_or_null(inventory_source_path) as PlayerInventory)
 
 
+func _input(event: InputEvent) -> void:
+	# Handle closing before focused controls consume Tab as focus navigation.
+	if visible and event.is_action_pressed(InputActions.INVENTORY):
+		get_viewport().set_input_as_handled()
+		close_inventory()
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if not event.is_action_pressed(InputActions.INVENTORY):
 		return
 
 	get_viewport().set_input_as_handled()
-	if visible:
-		close_inventory()
-	else:
+	if not visible:
 		open_inventory()
 
 
@@ -47,6 +52,8 @@ func bind_inventory(inventory: PlayerInventory) -> void:
 			_inventory.inventory_changed.disconnect(_render)
 		if _inventory.item_add_rejected.is_connected(_on_item_add_rejected):
 			_inventory.item_add_rejected.disconnect(_on_item_add_rejected)
+		if _inventory.item_drop_rejected.is_connected(_on_item_drop_rejected):
+			_inventory.item_drop_rejected.disconnect(_on_item_drop_rejected)
 
 	_inventory = inventory
 	if _inventory == null:
@@ -55,6 +62,7 @@ func bind_inventory(inventory: PlayerInventory) -> void:
 
 	_inventory.inventory_changed.connect(_render)
 	_inventory.item_add_rejected.connect(_on_item_add_rejected)
+	_inventory.item_drop_rejected.connect(_on_item_drop_rejected)
 	_render()
 
 
@@ -118,18 +126,21 @@ func _render() -> void:
 
 func _format_item(item: InventoryItem) -> String:
 	var definition := item.get_definition()
+	var risk_text := " | %s" % item.get_risk_hint() if not item.get_risk_hint().is_empty() else ""
 	if not item.is_identified():
-		return "%s | %d칸 | 무게 %.1f | 미확인 물품 | 가치 미확인 | 보호 여부 미확인" % [
+		return "%s | %d칸 | 무게 %.1f%s | 미확인 물품 | 가치 미확인 | 보호 여부 미확인" % [
 			definition.display_name,
 			definition.slot_size,
 			definition.weight,
+			risk_text,
 		]
 
-	var protection_text := "보호" if definition.sale_protected else "일반"
-	return "%s | %d칸 | 무게 %.1f | %s | %s | %s" % [
+	var protection_text := "보호" if definition.is_protected() else "일반"
+	return "%s | %d칸 | 무게 %.1f%s | %s | %s | %s" % [
 		definition.display_name,
 		definition.slot_size,
 		definition.weight,
+		risk_text,
 		_get_category_text(definition.category),
 		ItemValueText.format_inventory_item_value(item),
 		protection_text,
@@ -183,9 +194,12 @@ func _on_drop_confirmed() -> void:
 		return
 	var dropped_item := _inventory.drop_selected_item()
 	if dropped_item == null:
-		_status.text = "버릴 물품을 선택하세요."
 		return
 	_status.text = "%s을(를) 버렸습니다." % dropped_item.display_name
+
+
+func _on_item_drop_rejected(reason: StringName) -> void:
+	_status.text = "이 물품은 버릴 수 없습니다." if reason == PlayerInventory.REJECT_PROTECTED_ITEM else "버릴 물품을 선택하세요."
 
 
 func _on_item_add_rejected(_item: ItemDefinition, reason: StringName) -> void:

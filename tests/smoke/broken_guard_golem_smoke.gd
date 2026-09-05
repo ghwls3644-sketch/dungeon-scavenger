@@ -69,7 +69,15 @@ func _run_broken_guard_golem_checks() -> void:
 	_expect(golem.get_status_text().contains("탐지음"), "Suspicious state did not expose a detection-sound clue.")
 
 	var distance_before_chase: float = golem.global_position.distance_to(player.global_position)
-	await get_tree().create_timer(0.1).timeout
+	var visible_position: Vector2 = golem.get_last_known_position()
+	for _request in range(3):
+		_expect(not golem.investigate_noise(Vector2(-400.0, 200.0)), "Noise replaced a currently detected player.")
+		_expect(golem.raise_alarm(Vector2(-400.0, 200.0)), "Alarm was rejected during visual detection.")
+		_expect(_warning_count == 1, "External requests restarted the visual warning.")
+		if golem.get_state() == GOLEM_SCRIPT.State.SUSPICIOUS:
+			_expect(golem.get_last_known_position().is_equal_approx(visible_position), "External position replaced visual evidence.")
+		await get_tree().create_timer(0.04).timeout
+	_expect(golem.get_node("DetectionArea").overlaps_body(player), "Mixed-signal check lost physical contact with the player.")
 	_expect(golem.get_state() == GOLEM_SCRIPT.State.CHASE, "Golem did not chase after sustained detection.")
 	_expect(_chase_count == 1, "Sustained detection did not emit one chase event.")
 	await get_tree().create_timer(0.05).timeout

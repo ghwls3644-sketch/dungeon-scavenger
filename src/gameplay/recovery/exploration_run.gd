@@ -14,6 +14,7 @@ enum State {
 var _state: State = State.ACTIVE
 var _inventory: PlayerInventory
 var _outcome: ExplorationOutcome
+var _completion_in_progress := false
 
 
 func _ready() -> void:
@@ -33,6 +34,7 @@ func complete_safe_return() -> bool:
 	if not _can_complete():
 		return false
 
+	_completion_in_progress = true
 	var recovered_items := _inventory.take_all_inventory_items()
 	_outcome = ExplorationOutcome.safe_return_inventory_items(recovered_items)
 	_finish(State.SAFE_RETURN)
@@ -43,6 +45,7 @@ func complete_failure() -> bool:
 	if not _can_complete():
 		return false
 
+	_completion_in_progress = true
 	var lost_item_count := _inventory.take_all_inventory_items().size()
 	_outcome = ExplorationOutcome.failure(lost_item_count)
 	_finish(State.FAILURE)
@@ -54,7 +57,7 @@ func get_state() -> State:
 
 
 func is_active() -> bool:
-	return _state == State.ACTIVE
+	return _state == State.ACTIVE and not _completion_in_progress
 
 
 func get_outcome() -> ExplorationOutcome:
@@ -67,6 +70,7 @@ func _can_complete() -> bool:
 
 func _finish(next_state: State) -> void:
 	_state = next_state
+	_completion_in_progress = false
 	GameLog.info(
 		&"ExplorationRun",
 		&"run_ended",

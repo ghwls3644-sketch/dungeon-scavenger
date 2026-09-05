@@ -106,9 +106,10 @@ func _check_risk_reward_route() -> void:
 	var result := outcome.get_recovery_result()
 	_expect(outcome != null and outcome.is_safe_return(), "Risk-reward route did not end in safe return.")
 	_expect(result.get_item_count() == 2, "Risk-reward route recovered the wrong item count.")
-	_expect(not result.get_recovered_items().has(safe_light_item), "Dropped low-value item appeared in the result.")
-	_expect(result.get_recovered_items().has(safe_heavy_item), "Retained safe item was missing from the result.")
-	_expect(result.get_recovered_items().has(risk_reward_item), "High-value risk reward was missing from the result.")
+	var recovered_ids := result.get_recovered_items().map(func(item: ItemDefinition): return item.stable_id)
+	_expect(not recovered_ids.has(safe_light_item.stable_id), "Dropped low-value item appeared in the result.")
+	_expect(recovered_ids.has(safe_heavy_item.stable_id), "Retained safe item was missing from the result.")
+	_expect(recovered_ids.has(risk_reward_item.stable_id), "High-value risk reward was missing from the result.")
 	_expect(result.get_total_value_min() == 130, "Risk-reward minimum value total was incorrect.")
 	_expect(result.get_total_value_max() == 180, "Risk-reward maximum value total was incorrect.")
 

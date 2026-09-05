@@ -7,6 +7,7 @@ var _failures := PackedStringArray()
 
 func _ready() -> void:
 	_run_recovery_result_checks()
+	_check_result_snapshot()
 
 	if _failures.is_empty():
 		GameLog.info(&"SmokeTest", &"recovery_result_passed")
@@ -47,13 +48,13 @@ func _run_recovery_result_checks() -> void:
 	_expect(not inventory.try_add_item(rejected_item), "Slot overflow item was unexpectedly recovered.")
 
 	var result := RecoveryResult.from_recovered_items(inventory.get_items())
-	var result_items := result.get_recovered_items()
+	var result_ids := result.get_recovered_items().map(func(item: ItemDefinition): return item.stable_id)
 	_expect(result.get_item_count() == 3, "Recovery result item count did not match carried items.")
-	_expect(result_items.has(low_value_item), "First carried item was missing from recovery result.")
-	_expect(result_items.has(high_value_item), "Second carried item was missing from recovery result.")
-	_expect(result_items.has(unique_item), "Non-monetary carried item was missing from recovery result.")
-	_expect(not result_items.has(dropped_item), "Dropped item was included in recovery result.")
-	_expect(not result_items.has(rejected_item), "Rejected item was included in recovery result.")
+	_expect(result_ids.has(low_value_item.stable_id), "First carried item was missing from recovery result.")
+	_expect(result_ids.has(high_value_item.stable_id), "Second carried item was missing from recovery result.")
+	_expect(result_ids.has(unique_item.stable_id), "Non-monetary carried item was missing from recovery result.")
+	_expect(not result_ids.has(dropped_item.stable_id), "Dropped item was included in recovery result.")
+	_expect(not result_ids.has(rejected_item.stable_id), "Rejected item was included in recovery result.")
 	_expect(result.get_total_value_min() == 40, "Minimum expected value total was incorrect.")
 	_expect(result.get_total_value_max() == 60, "Maximum expected value total was incorrect.")
 	_expect(result.get_non_monetary_reward_count() == 1, "Non-monetary reward count was incorrect.")
@@ -68,6 +69,48 @@ func _run_recovery_result_checks() -> void:
 	_expect(panel.get_displayed_item_text(0).contains("예상 가치 10~20"), "Result UI did not show the item value range.")
 	_expect(panel.get_displayed_item_text(2).contains("등록·정보 보상"), "Result UI showed a price for a unique item.")
 	_expect(panel.get_note_text().contains("현재 회수품만 포함"), "Result UI did not explain the recovery scope.")
+
+
+func _check_result_snapshot() -> void:
+	var known_definition := _create_test_item(&"test_snapshot_known", "Known at return", ItemDefinition.CATEGORY_SCRAP, 10, 20)
+	var unknown_definition := _create_test_item(&"test_snapshot_unknown", "Unknown at return", ItemDefinition.CATEGORY_RESIDUE, 100, 150)
+	var unique_definition := _create_test_item(&"test_snapshot_unique", "Unique at return", ItemDefinition.CATEGORY_UNIQUE_ARTIFACT, 900, 900)
+	var unknown := InventoryItem.from_definition(unknown_definition, false, "마력 반응 있음")
+	var source: Array[InventoryItem] = [InventoryItem.from_definition(known_definition), unknown, InventoryItem.from_definition(unique_definition)]
+	var result := RecoveryResult.from_recovered_inventory_items(source)
+	unknown.identify()
+	known_definition.display_name = "Changed after return"
+	known_definition.value_min = 1000
+	known_definition.value_max = 2000
+	unknown_definition.category = ItemDefinition.CATEGORY_SCRAP
+	unique_definition.category = ItemDefinition.CATEGORY_SCRAP
+	source.clear()
+
+	# Both getter paths must return detached copies, including item definitions.
+	var exposed := result.get_recovered_inventory_items()
+	exposed[1].identify()
+	exposed[0].get_definition().display_name = "Changed via getter"
+	exposed.clear()
+	var exposed_definitions := result.get_recovered_items()
+	exposed_definitions[0].value_min = 3000
+	exposed_definitions[0].value_max = 4000
+	exposed_definitions.clear()
+
+	_expect(result.get_item_count() == 3, "Source or getter mutation changed snapshot membership.")
+	_expect(result.get_total_value_min() == 10 and result.get_total_value_max() == 20, "Snapshot totals changed after capture.")
+	_expect(result.get_unidentified_item_count() == 1, "Snapshot unidentified count changed after later identification.")
+	_expect(result.get_non_monetary_reward_count() == 1, "Snapshot reward count changed after definition mutation.")
+	var retained := result.get_recovered_inventory_items()
+	_expect(not retained[1].is_identified(), "Snapshot exposed identification performed after return.")
+	_expect(retained[1].get_risk_hint() == "마력 반응 있음", "Snapshot lost known risk information.")
+	_expect(retained[1].get_definition().category == ItemDefinition.CATEGORY_RESIDUE, "Snapshot shared mutable source definitions.")
+	var panel: RecoveryResultPanel = RESULT_PANEL_SCENE.instantiate()
+	add_child(panel)
+	panel.bind_result(result)
+	_expect(panel.get_displayed_item_text(0) == "Known at return | 예상 가치 10~20", "Snapshot item display diverged from its captured totals.")
+	_expect(panel.get_displayed_item_text(1).contains("가치 미확인"), "Snapshot UI leaked a later identification.")
+	_expect(panel.get_summary_text().contains("10~20") and panel.get_summary_text().contains("미확인 물품 1개"), "Snapshot summary no longer matched item rows.")
+	panel.queue_free()
 
 
 func _create_test_item(

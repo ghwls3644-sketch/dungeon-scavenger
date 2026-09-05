@@ -5,6 +5,7 @@ signal inventory_changed
 signal item_added(item: ItemDefinition)
 signal item_dropped(item: ItemDefinition)
 signal item_add_rejected(item: ItemDefinition, reason: StringName)
+signal item_drop_rejected(reason: StringName)
 
 enum WeightStage {
 	NORMAL,
@@ -15,6 +16,8 @@ enum WeightStage {
 const REJECT_INVALID_ITEM: StringName = &"invalid_item"
 const REJECT_INVALID_CONFIGURATION: StringName = &"invalid_configuration"
 const REJECT_SLOT_LIMIT: StringName = &"slot_limit"
+const REJECT_PROTECTED_ITEM: StringName = &"protected_item"
+const REJECT_NO_SELECTION: StringName = &"no_selection"
 
 @export var slot_capacity := 0
 @export var burden_weight := 0.0
@@ -42,8 +45,8 @@ func get_configuration_errors() -> PackedStringArray:
 	return errors
 
 
-func try_add_item(item: ItemDefinition, starts_identified := true) -> bool:
-	return try_add_inventory_item(InventoryItem.from_definition(item, starts_identified))
+func try_add_item(item: ItemDefinition, starts_identified := true, known_risk_hint := "") -> bool:
+	return try_add_inventory_item(InventoryItem.from_definition(item, starts_identified, known_risk_hint))
 
 
 func try_add_inventory_item(item: InventoryItem) -> bool:
@@ -75,10 +78,15 @@ func select_item(index: int) -> bool:
 
 func drop_selected_item() -> ItemDefinition:
 	if _selected_index < 0 or _selected_index >= _items.size():
+		item_drop_rejected.emit(REJECT_NO_SELECTION)
 		return null
 
 	var dropped_item := _items[_selected_index]
 	var definition := dropped_item.get_definition()
+	if definition.is_protected():
+		item_drop_rejected.emit(REJECT_PROTECTED_ITEM)
+		return null
+
 	_items.remove_at(_selected_index)
 	_selected_index = mini(_selected_index, _items.size() - 1)
 	item_dropped.emit(definition)

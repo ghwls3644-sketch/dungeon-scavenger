@@ -10,6 +10,7 @@ var _last_rejection_reason: StringName
 
 func _ready() -> void:
 	await _run_inventory_checks()
+	await _check_protected_drops()
 	get_tree().paused = false
 
 	if _failures.is_empty():
@@ -70,6 +71,99 @@ func _run_inventory_checks() -> void:
 	_expect(panel.get_summary_text().contains("부담"), "UI weight stage did not update after dropping.")
 	panel.close_inventory()
 	_expect(not get_tree().paused, "Closing the inventory did not resume the scene tree.")
+	await _check_keyboard_close(panel)
+	panel.queue_free()
+	player.queue_free()
+	await get_tree().process_frame
+
+
+func _check_keyboard_close(panel: InventoryPanel) -> void:
+	for control_path in ["%ItemList", "%DropButton", "%CloseButton"]:
+		_send_inventory_key()
+		await get_tree().process_frame
+		_expect(panel.visible and get_tree().paused, "Inventory key did not open and pause.")
+		(panel.get_node(control_path) as Control).grab_focus()
+		_send_inventory_key()
+		await get_tree().process_frame
+		_expect(not panel.visible, "Tab was consumed by focused inventory control: %s." % control_path)
+		_expect(not get_tree().paused, "Keyboard close did not restore running time.")
+		panel.close_inventory()
+
+	get_tree().paused = true
+	panel.open_inventory()
+	(panel.get_node("%ItemList") as Control).grab_focus()
+	_send_inventory_key()
+	await get_tree().process_frame
+	_expect(not panel.visible and get_tree().paused, "Keyboard close lost a pre-existing pause.")
+	panel.close_inventory()
+	get_tree().paused = false
+
+
+func _send_inventory_key() -> void:
+	var event := InputEventKey.new()
+	event.keycode = KEY_TAB
+	event.physical_keycode = KEY_TAB
+	event.pressed = true
+	get_viewport().push_input(event)
+	var released := event.duplicate() as InputEventKey
+	released.pressed = false
+	get_viewport().push_input(released)
+
+
+func _check_protected_drops() -> void:
+	var inventory := PlayerInventory.new()
+	add_child(inventory)
+	inventory.configure_capacity(3, 4.0, 7.0)
+	var panel: InventoryPanel = INVENTORY_PANEL_SCENE.instantiate()
+	add_child(panel)
+	panel.bind_inventory(inventory)
+	var rejections: Array[StringName] = []
+	inventory.item_drop_rejected.connect(func(reason: StringName): rejections.append(reason))
+	var dropped: Array[ItemDefinition] = []
+	inventory.item_dropped.connect(func(item: ItemDefinition): dropped.append(item))
+
+	for category in [ItemDefinition.CATEGORY_UNIQUE_ARTIFACT, ItemDefinition.CATEGORY_CORE_RECORD, ItemDefinition.CATEGORY_SCRAP]:
+		for identified in [false, true]:
+			var item := _create_test_item(&"test_protected_drop", "Sealed test item", 1.0, 100, 150)
+			item.category = category
+			# Unique categories must be protected even without the explicit flag.
+			item.sale_protected = category == ItemDefinition.CATEGORY_SCRAP
+			_expect(inventory.try_add_item(item, identified), "Protected item was rejected at collection.")
+			panel.open_inventory()
+			(panel.get_node("%DropButton") as Button).pressed.emit()
+			var confirmation := panel.get_node("%DropConfirmation") as ConfirmationDialog
+			_expect(confirmation.visible, "Ordinary drop did not request confirmation.")
+			_expect(inventory.get_used_slots() == 1, "Requesting confirmation already removed an item.")
+			confirmation.confirmed.emit()
+			confirmation.hide()
+			_expect(inventory.get_items().has(item), "Confirmation bypassed protection.")
+			_expect(inventory.get_used_slots() == 1 and is_equal_approx(inventory.get_total_weight(), 1.0), "Rejected drop changed capacity or weight.")
+			_expect(inventory.get_selected_index() == 0, "Rejected drop changed selection.")
+			_expect(panel.get_status_text() == "이 물품은 버릴 수 없습니다.", "Protected drop did not show a neutral rejection.")
+			if not identified:
+				var text := panel.get_displayed_item_text(0)
+				_expect(text.contains("보호 여부 미확인") and not text.contains("100~150"), "Drop rejection revealed hidden item information.")
+			panel.close_inventory()
+			inventory.take_all_inventory_items()
+
+	_expect(rejections.size() == 6 and dropped.is_empty(), "Protected drops emitted success or missed a rejection.")
+	for reason in rejections:
+		_expect(reason == PlayerInventory.REJECT_PROTECTED_ITEM, "Protected drop reported the wrong reason.")
+	var ordinary := _create_test_item(&"test_ordinary_drop", "Ordinary test item", 1.0, 10, 20)
+	_expect(inventory.try_add_item(ordinary, false), "Ordinary unidentified item was rejected.")
+	panel.open_inventory()
+	(panel.get_node("%DropButton") as Button).pressed.emit()
+	var confirmation := panel.get_node("%DropConfirmation") as ConfirmationDialog
+	confirmation.hide()
+	_expect(inventory.get_items().has(ordinary), "Cancelling a drop removed the item.")
+	(panel.get_node("%DropButton") as Button).pressed.emit()
+	confirmation.confirmed.emit()
+	confirmation.hide()
+	_expect(inventory.get_items().is_empty() and dropped.size() == 1, "Confirmation did not drop an ordinary unidentified item.")
+	panel.close_inventory()
+	panel.queue_free()
+	inventory.queue_free()
+	await get_tree().process_frame
 
 
 func _collect_with_pickup(player: PlayerController, item: ItemDefinition, should_succeed: bool) -> void:

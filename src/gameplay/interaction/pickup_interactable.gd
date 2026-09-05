@@ -17,7 +17,7 @@ func _perform_interaction(interactor: Node) -> bool:
 	var inventory := interactor.get_node_or_null("Inventory") as PlayerInventory
 	if inventory == null:
 		return false
-	if not inventory.try_add_item(item_definition, starts_identified):
+	if not inventory.try_add_item(item_definition, starts_identified, _get_inventory_risk_hint()):
 		return false
 
 	set_interaction_enabled(false)
@@ -25,3 +25,7 @@ func _perform_interaction(interactor: Node) -> bool:
 	hide()
 	queue_free()
 	return true
+
+
+func _get_inventory_risk_hint() -> String:
+	return ""

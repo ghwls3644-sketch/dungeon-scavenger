@@ -25,6 +25,10 @@ func has_monetary_value() -> bool:
 	return category not in [CATEGORY_UNIQUE_ARTIFACT, CATEGORY_CORE_RECORD]
 
 
+func is_protected() -> bool:
+	return sale_protected or category in [CATEGORY_UNIQUE_ARTIFACT, CATEGORY_CORE_RECORD]
+
+
 func get_validation_errors() -> PackedStringArray:
 	var errors := super.get_validation_errors()
 
