@@ -8,6 +8,7 @@ var _tree_was_paused := false
 
 @onready var _summary: Label = %Summary
 @onready var _item_list: ItemList = %ItemList
+@onready var _selection_details: RichTextLabel = %SelectionDetails
 @onready var _status: Label = %Status
 @onready var _drop_button: Button = %DropButton
 @onready var _close_button: Button = %CloseButton
@@ -97,8 +98,13 @@ func get_displayed_item_text(index: int) -> String:
 	return _item_list.get_item_text(index)
 
 
+func get_selection_details_text() -> String:
+	return _selection_details.text
+
+
 func _render() -> void:
 	_item_list.clear()
+	_selection_details.text = "물품을 선택하면 상세 정보를 볼 수 있습니다."
 	if _inventory == null:
 		_summary.text = "인벤토리 연결 없음"
 		_drop_button.disabled = true
@@ -111,6 +117,7 @@ func _render() -> void:
 	var selected_index := _inventory.get_selected_index()
 	if selected_index >= 0 and selected_index < items.size():
 		_item_list.select(selected_index)
+		_selection_details.text = _format_item_details(items[selected_index])
 	_drop_button.disabled = selected_index < 0
 	_summary.text = "슬롯 %d/%d | 무게 %.1f | 상태 %s" % [
 		_inventory.get_used_slots(),
@@ -141,6 +148,19 @@ func _format_item(item: InventoryItem) -> String:
 		ItemValueText.format_inventory_item_value(item),
 		protection_text,
 	]
+
+
+func _format_item_details(item: InventoryItem) -> String:
+	var definition := item.get_definition()
+	var category := _get_category_text(definition.category) if item.is_identified() else "미확인 물품"
+	var protection := ("보호" if definition.is_protected() else "일반") if item.is_identified() else "보호 여부 미확인"
+	var text := "%s\n%d칸 · 무게 %.1f\n%s · %s · %s" % [
+		definition.display_name, definition.slot_size, definition.weight,
+		category, ItemValueText.format_inventory_item_value(item), protection,
+	]
+	if not item.get_risk_hint().is_empty():
+		text += "\n위험 정보: %s" % item.get_risk_hint()
+	return text
 
 
 func _get_weight_stage_text(stage: PlayerInventory.WeightStage) -> String:

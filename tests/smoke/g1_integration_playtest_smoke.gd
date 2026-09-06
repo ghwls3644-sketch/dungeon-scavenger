@@ -12,6 +12,7 @@ func _ready() -> void:
 	await _check_bypass_capacity(3)
 	await _check_failure_route()
 	await _check_inventory_after_analysis_click()
+	await _check_response_comparison()
 	if _failures.is_empty():
 		GameLog.info(&"SmokeTest", &"g1_integration_playtest_passed")
 		get_tree().quit(0)
@@ -237,6 +238,57 @@ func _check_inventory_after_analysis_click() -> void:
 	await _frames(3)
 	window.size = original_size
 	await _frames(3)
+
+
+func _check_response_comparison() -> void:
+	var free_report: Dictionary = await _run_direct_response_route(false)
+	var response_report: Dictionary = await _run_direct_response_route(true)
+	_expect(free_report.walked_pixels == response_report.walked_pixels, "Response comparison changed its physical route.")
+	_expect(free_report.recovered_count == 2 and response_report.recovered_count == 2, "Response comparison changed its reward.")
+	_expect(free_report.maximum_weight == response_report.maximum_weight, "Response comparison changed its load.")
+	_expect(free_report.charge_remaining == 3 and response_report.charge_remaining == 1, "Response comparison did not preserve its charge tradeoff.")
+	_expect(free_report.counts.chases > 0 and free_report.chased_seconds > 0.0, "Continuous movement bypassed all pursuit pressure.")
+	_expect(response_report.chased_seconds < free_report.chased_seconds, "Discharge did not reduce pursuit on the same route.")
+	_expect(response_report.warning_seconds < free_report.warning_seconds, "Stabilization did not shorten the collapse warning.")
+
+
+func _run_direct_response_route(use_response: bool) -> Dictionary:
+	var space = PLAYTEST_SCENE.instantiate()
+	add_child(space)
+	space.start_playtest(2, true)
+	var player := space.get_node("Player") as PlayerController
+	var hazard := space.get_node("RiskHazard") as UnstableDebrisHazard
+	for point in [Vector2(-500, 200), Vector2(-275, 200), Vector2(-220, 200)]:
+		await _walk(player, point)
+	_expect(hazard.get_state() == UnstableDebrisHazard.State.WARNING, "Direct route skipped the collapse warning.")
+	if use_response:
+		_press_key(KEY_Q)
+		_expect(hazard.get_state() == UnstableDebrisHazard.State.STABILIZED, "Direct route could not stabilize the warning.")
+	await _walk(player, Vector2(-70, 200))
+	await _walk(player, Vector2(200, 220))
+	_press_key(KEY_E)
+	await _frames(3)
+	await _walk(player, Vector2(365, 220))
+	if use_response:
+		_press_key(KEY_Q)
+		_expect((space.get_node("BrokenGuardGolem") as BrokenGuardGolem).get_state() == BrokenGuardGolem.State.DISABLED, "Direct route could not discharge at the encounter.")
+	await _walk(player, Vector2(630, 220))
+	_press_key(KEY_E)
+	await _frames(3)
+	_press_key(KEY_E)
+	await _frames(3)
+	for point in [Vector2(365, 220), Vector2(200, 220), Vector2(-70, 200), Vector2(-275, 200), Vector2(-500, 200), Vector2(-650, 0), Vector2(-720, 0)]:
+		await _walk(player, point)
+	_press_key(KEY_E)
+	await _frames(3)
+	var report: Dictionary = space.get_report()
+	_expect(report.outcome == "safe_return" and report.unidentified_count == 1, "Direct comparison did not safely return with the unknown item.")
+	_expect(report.counts.drops == 0 and report.counts.bypass_entries == 0, "Direct comparison introduced a different choice or path.")
+	var expected_actions := 1 if use_response else 0
+	_expect(report.counts.stabilizations == expected_actions and report.counts.discharges == expected_actions, "Direct comparison used incorrect actions.")
+	space.queue_free()
+	await _frames(3)
+	return report
 
 
 func _click_button(button: Button) -> void:

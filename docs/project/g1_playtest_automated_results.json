@@ -9,7 +9,9 @@
     "two_slot_risk_route",
     "two_slot_bypass",
     "three_slot_bypass",
-    "unanswered_collapse"
+    "unanswered_collapse",
+    "direct_route_without_charge",
+    "direct_route_with_stabilization_and_discharge"
   ],
   "runs": [
     {
@@ -17,6 +19,7 @@
       "burden_weight": 2.5,
       "burdened_seconds": 7.45,
       "charge_remaining": 0,
+      "chased_seconds": 1.12,
       "counts": {
         "analyses": 1,
         "bypass_entries": 1,
@@ -105,7 +108,7 @@
         {
           "details": {},
           "event": "golem_chase",
-          "seconds": 13.18
+          "seconds": 12.48
         },
         {
           "details": {},
@@ -166,17 +169,19 @@
       "slot_capacity": 2,
       "source": "automated",
       "unidentified_count": 1,
-      "walked_pixels": 4888.0
+      "walked_pixels": 4888.0,
+      "warning_seconds": 0.05
     },
     {
       "active_seconds": 15.93,
       "burden_weight": 2.5,
       "burdened_seconds": 4.05,
       "charge_remaining": 3,
+      "chased_seconds": 5.48,
       "counts": {
         "analyses": 0,
         "bypass_entries": 2,
-        "chases": 0,
+        "chases": 1,
         "discharges": 0,
         "drops": 1,
         "golem_warnings": 1,
@@ -250,6 +255,11 @@
         },
         {
           "details": {},
+          "event": "golem_chase",
+          "seconds": 8.35
+        },
+        {
+          "details": {},
           "event": "bypass_entered",
           "seconds": 8.62
         },
@@ -273,17 +283,19 @@
       "slot_capacity": 2,
       "source": "automated",
       "unidentified_count": 1,
-      "walked_pixels": 3664.0
+      "walked_pixels": 3664.0,
+      "warning_seconds": 0.0
     },
     {
       "active_seconds": 15.9,
       "burden_weight": 2.5,
       "burdened_seconds": 4.02,
       "charge_remaining": 3,
+      "chased_seconds": 5.4,
       "counts": {
         "analyses": 0,
         "bypass_entries": 2,
-        "chases": 0,
+        "chases": 1,
         "discharges": 0,
         "drops": 0,
         "golem_warnings": 1,
@@ -340,6 +352,11 @@
         },
         {
           "details": {},
+          "event": "golem_chase",
+          "seconds": 8.35
+        },
+        {
+          "details": {},
           "event": "bypass_entered",
           "seconds": 8.58
         },
@@ -363,13 +380,15 @@
       "slot_capacity": 3,
       "source": "automated",
       "unidentified_count": 1,
-      "walked_pixels": 3664.0
+      "walked_pixels": 3664.0,
+      "warning_seconds": 0.0
     },
     {
-      "active_seconds": 9.32,
+      "active_seconds": 7.5,
       "burden_weight": 2.5,
       "burdened_seconds": 0.0,
       "charge_remaining": 3,
+      "chased_seconds": 0.0,
       "counts": {
         "analyses": 0,
         "bypass_entries": 0,
@@ -407,14 +426,14 @@
         {
           "details": {},
           "event": "hazard_caught",
-          "seconds": 9.32
+          "seconds": 7.5
         },
         {
           "details": {
             "outcome": "failure"
           },
           "event": "ended",
-          "seconds": 9.32
+          "seconds": 7.5
         }
       ],
       "lost_count": 1,
@@ -429,7 +448,201 @@
       "slot_capacity": 2,
       "source": "automated",
       "unidentified_count": 0,
-      "walked_pixels": 1504.0
+      "walked_pixels": 1504.0,
+      "warning_seconds": 1.2
+    },
+    {
+      "active_seconds": 12.7,
+      "burden_weight": 2.5,
+      "burdened_seconds": 1.98,
+      "charge_remaining": 3,
+      "chased_seconds": 7.28,
+      "counts": {
+        "analyses": 0,
+        "bypass_entries": 0,
+        "chases": 1,
+        "discharges": 0,
+        "drops": 0,
+        "golem_warnings": 1,
+        "inspections": 1,
+        "inventory_opens": 0,
+        "pickups": 2,
+        "slot_rejections": 0,
+        "stabilizations": 0
+      },
+      "events": [
+        {
+          "details": {
+            "automated": true,
+            "slots": 2
+          },
+          "event": "started",
+          "seconds": 0.0
+        },
+        {
+          "details": {},
+          "event": "hazard_warning",
+          "seconds": 2.33
+        },
+        {
+          "details": {
+            "id": "test_g1_known"
+          },
+          "event": "pickup",
+          "seconds": 4.27
+        },
+        {
+          "details": {},
+          "event": "golem_warning",
+          "seconds": 4.72
+        },
+        {
+          "details": {},
+          "event": "golem_chase",
+          "seconds": 5.42
+        },
+        {
+          "details": {},
+          "event": "inspection",
+          "seconds": 6.2
+        },
+        {
+          "details": {
+            "id": "test_g1_unknown"
+          },
+          "event": "pickup",
+          "seconds": 6.25
+        },
+        {
+          "details": {
+            "outcome": "safe_return"
+          },
+          "event": "ended",
+          "seconds": 12.7
+        }
+      ],
+      "lost_count": 0,
+      "maximum_weight": 5.0,
+      "movement_slowdown_enabled": false,
+      "outcome": "safe_return",
+      "overload_weight": 4.0,
+      "overloaded_seconds": 6.45,
+      "paused_seconds": 0.0,
+      "peak_slots": 2,
+      "recovered_count": 2,
+      "slot_capacity": 2,
+      "source": "automated",
+      "unidentified_count": 1,
+      "walked_pixels": 2844.0,
+      "warning_seconds": 1.2
+    },
+    {
+      "active_seconds": 12.7,
+      "burden_weight": 2.5,
+      "burdened_seconds": 1.98,
+      "charge_remaining": 1,
+      "chased_seconds": 1.38,
+      "counts": {
+        "analyses": 0,
+        "bypass_entries": 0,
+        "chases": 1,
+        "discharges": 1,
+        "drops": 0,
+        "golem_warnings": 2,
+        "inspections": 1,
+        "inventory_opens": 0,
+        "pickups": 2,
+        "slot_rejections": 0,
+        "stabilizations": 1
+      },
+      "events": [
+        {
+          "details": {
+            "automated": true,
+            "slots": 2
+          },
+          "event": "started",
+          "seconds": 0.0
+        },
+        {
+          "details": {},
+          "event": "hazard_warning",
+          "seconds": 2.33
+        },
+        {
+          "details": {},
+          "event": "stabilized",
+          "seconds": 2.38
+        },
+        {
+          "details": {
+            "id": "test_g1_known"
+          },
+          "event": "pickup",
+          "seconds": 4.27
+        },
+        {
+          "details": {},
+          "event": "golem_warning",
+          "seconds": 4.72
+        },
+        {
+          "details": {},
+          "event": "discharged",
+          "seconds": 5.05
+        },
+        {
+          "details": {},
+          "event": "inspection",
+          "seconds": 6.2
+        },
+        {
+          "details": {
+            "id": "test_g1_unknown"
+          },
+          "event": "pickup",
+          "seconds": 6.25
+        },
+        {
+          "details": {},
+          "event": "golem_warning",
+          "seconds": 7.07
+        },
+        {
+          "details": {},
+          "event": "golem_chase",
+          "seconds": 7.77
+        },
+        {
+          "details": {
+            "outcome": "safe_return"
+          },
+          "event": "ended",
+          "seconds": 12.7
+        }
+      ],
+      "lost_count": 0,
+      "maximum_weight": 5.0,
+      "movement_slowdown_enabled": false,
+      "outcome": "safe_return",
+      "overload_weight": 4.0,
+      "overloaded_seconds": 6.45,
+      "paused_seconds": 0.0,
+      "peak_slots": 2,
+      "recovered_count": 2,
+      "slot_capacity": 2,
+      "source": "automated",
+      "unidentified_count": 1,
+      "walked_pixels": 2844.0,
+      "warning_seconds": 0.05
     }
-  ]
+  ],
+  "test_conditions": {
+    "collapse_warning_seconds": 1.2,
+    "golem_warning_seconds": 0.7,
+    "golem_chase_speed": 210.0,
+    "golem_discharge_seconds": 2.0,
+    "player_speed": 240.0,
+    "movement_slowdown_enabled": false
+  }
 }

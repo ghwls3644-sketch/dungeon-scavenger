@@ -11,6 +11,7 @@ var _last_rejection_reason: StringName
 func _ready() -> void:
 	await _run_inventory_checks()
 	await _check_protected_drops()
+	await _check_selection_details()
 	get_tree().paused = false
 
 	if _failures.is_empty():
@@ -160,6 +161,42 @@ func _check_protected_drops() -> void:
 	confirmation.confirmed.emit()
 	confirmation.hide()
 	_expect(inventory.get_items().is_empty() and dropped.size() == 1, "Confirmation did not drop an ordinary unidentified item.")
+	panel.close_inventory()
+	panel.queue_free()
+	inventory.queue_free()
+	await get_tree().process_frame
+
+
+func _check_selection_details() -> void:
+	var inventory := PlayerInventory.new()
+	add_child(inventory)
+	inventory.configure_capacity(3, 4.0, 7.0)
+	var panel: InventoryPanel = INVENTORY_PANEL_SCENE.instantiate()
+	add_child(panel)
+	panel.bind_inventory(inventory)
+	var known := _create_test_item(&"test_details_known", "Known detail item", 1.0, 10, 20)
+	var unknown := _create_test_item(&"test_details_unknown", "Unknown detail item", 2.5, 1234, 5678)
+	unknown.category = ItemDefinition.CATEGORY_RESIDUE
+	unknown.sale_protected = true
+	var long_hint := "시험용 긴 위험 안내입니다. ".repeat(40)
+	inventory.try_add_item(known)
+	inventory.try_add_item(unknown, false, long_hint)
+	panel.open_inventory()
+	for i in range(5):
+		await get_tree().process_frame
+	var details := panel.get_selection_details_text()
+	_expect(details.contains(unknown.display_name) and details.contains(long_hint), "Selected details lost the full name or long risk hint.")
+	_expect(details.contains("무게 2.5") and details.contains("가치 미확인") and details.contains("보호 여부 미확인"), "Selected unknown details omitted a public field.")
+	_expect(not details.contains("잔재") and not details.contains("1234") and not details.contains("5678"), "Selected details exposed the unknown category or value.")
+	var details_view := panel.get_node("%SelectionDetails") as RichTextLabel
+	_expect(details_view.scroll_active and details_view.get_content_height() > details_view.size.y, "Long details cannot be read by scrolling.")
+	_expect(panel.get_global_rect().size.y <= 534.0, "Long details expanded the inventory beyond its usable height.")
+	inventory.select_item(0)
+	details = panel.get_selection_details_text()
+	_expect(details.contains(known.display_name) and details.contains("예상 가치 10~20") and details.contains("일반"), "Selection did not refresh known value and protection.")
+	_expect(not details.contains(long_hint), "Selection retained the previous item's risk information.")
+	inventory.take_all_inventory_items()
+	_expect(not panel.get_selection_details_text().contains(known.display_name), "Empty inventory retained stale selected details.")
 	panel.close_inventory()
 	panel.queue_free()
 	inventory.queue_free()

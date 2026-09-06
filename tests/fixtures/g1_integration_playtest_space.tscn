@@ -113,13 +113,14 @@ risk_hint = "희미한 진동이 느껴집니다."
 [node name="RiskHazard" parent="." instance=ExtResource("6_hazard")]
 unique_name_in_owner = true
 position = Vector2(-170, 200)
-warning_duration = 3.0
+warning_duration = 1.2
 
 [node name="BrokenGuardGolem" parent="." instance=ExtResource("13_golem")]
 unique_name_in_owner = true
 position = Vector2(460, 170)
 patrol_offset = Vector2(0, 100)
-suspicion_duration = 1.4
+suspicion_duration = 0.7
+chase_speed = 210.0
 search_duration = 2.5
 discharge_duration = 2.0
 

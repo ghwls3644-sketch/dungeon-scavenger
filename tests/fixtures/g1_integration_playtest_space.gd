@@ -19,6 +19,8 @@ var _maximum_weight := 0.0
 var _peak_slots := 0
 var _burdened_seconds := 0.0
 var _overloaded_seconds := 0.0
+var _chased_seconds := 0.0
+var _warning_seconds := 0.0
 var _events: Array[Dictionary] = []
 var _counts := {
 	"inspections": 0, "pickups": 0, "drops": 0, "slot_rejections": 0,
@@ -103,6 +105,10 @@ func _process(delta: float) -> void:
 		_paused_seconds += delta
 		return
 	_active_seconds += delta
+	if _golem.get_state() == BrokenGuardGolem.State.CHASE:
+		_chased_seconds += delta
+	if _hazard.get_state() == UnstableDebrisHazard.State.WARNING:
+		_warning_seconds += delta
 	_walked_pixels += _player.global_position.distance_to(_last_position)
 	_last_position = _player.global_position
 	match _inventory.get_weight_stage():
@@ -147,6 +153,8 @@ func get_report() -> Dictionary:
 		"peak_slots": _peak_slots,
 		"burdened_seconds": snappedf(_burdened_seconds, 0.01),
 		"overloaded_seconds": snappedf(_overloaded_seconds, 0.01),
+		"chased_seconds": snappedf(_chased_seconds, 0.01),
+		"warning_seconds": snappedf(_warning_seconds, 0.01),
 		"charge_remaining": _harness.get_current_charge(),
 		"recovered_count": _recovered_count,
 		"unidentified_count": _unknown_count,
@@ -249,7 +257,7 @@ func _on_discharged(_target: BrokenGuardGolem) -> void:
 
 func _on_hazard_warning(_duration: float) -> void:
 	_record(&"hazard_warning")
-	_choice_status.text = "먼지와 진동이 커집니다. Q로 안정화하거나 물러나세요."
+	_choice_status.text = "먼지와 진동이 커집니다. Q로 안정화하거나 신속히 통과·후퇴하세요."
 
 
 func _on_body_caught(body: Node2D) -> void:
@@ -299,12 +307,12 @@ func _on_run_ended(outcome: ExplorationOutcome) -> void:
 		"가방 %d칸 비교\n탐험 %.1f초 · 가방 확인 %.1f초\n최대 무게 %.1f · 최대 사용 %d칸"
 		+ "\n부담 %.1f초 · 과적 %.1f초\n조사 %d · 회수 %d · 버리기 %d"
 		+ "\n가방 부족 %d · 우회 통과 %d\n정밀 분석 %d · 안정화 %d · 방전 %d"
-		+ "\n추적 %d · 남은 충전 %d\n\n기록을 복사해 플레이 의견과 함께 남겨 주세요."
+		+ "\n추적 %d회 · %.1f초 · 붕괴 경고 %.1f초 · 남은 충전 %d\n\n기록을 복사해 플레이 의견과 함께 남겨 주세요."
 	) % [
 		_inventory.slot_capacity, _active_seconds, _paused_seconds, _maximum_weight, _peak_slots,
 		_burdened_seconds, _overloaded_seconds, _counts.inspections, _counts.pickups, _counts.drops,
 		_counts.slot_rejections, _counts.bypass_entries, _counts.analyses, _counts.stabilizations,
-		_counts.discharges, _counts.chases, _harness.get_current_charge(),
+		_counts.discharges, _counts.chases, _chased_seconds, _warning_seconds, _harness.get_current_charge(),
 	]
 	_report_panel.show()
 	_load_status.hide()
