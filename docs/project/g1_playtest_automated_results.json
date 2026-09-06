@@ -1,0 +1,435 @@
+{
+  "task": "DEV-0111",
+  "engine": "4.7.1.stable.official.a13da4feb",
+  "execution": "headless --fixed-fps 60",
+  "scene": "res://tests/smoke/g1_integration_playtest_smoke.tscn",
+  "human_playtest": "not_performed",
+  "timing_note": "Simulated active seconds from scripted input; not human run duration or product balance evidence.",
+  "case_order": [
+    "two_slot_risk_route",
+    "two_slot_bypass",
+    "three_slot_bypass",
+    "unanswered_collapse"
+  ],
+  "runs": [
+    {
+      "active_seconds": 22.85,
+      "burden_weight": 2.5,
+      "burdened_seconds": 7.45,
+      "charge_remaining": 0,
+      "counts": {
+        "analyses": 1,
+        "bypass_entries": 1,
+        "chases": 1,
+        "discharges": 1,
+        "drops": 2,
+        "golem_warnings": 1,
+        "inspections": 1,
+        "inventory_opens": 3,
+        "pickups": 4,
+        "slot_rejections": 2,
+        "stabilizations": 1
+      },
+      "events": [
+        {
+          "details": {
+            "automated": true,
+            "slots": 2
+          },
+          "event": "started",
+          "seconds": 0.0
+        },
+        {
+          "details": {
+            "id": "test_g1_light"
+          },
+          "event": "pickup",
+          "seconds": 2.33
+        },
+        {
+          "details": {
+            "id": "test_g1_heavy"
+          },
+          "event": "pickup",
+          "seconds": 3.88
+        },
+        {
+          "details": {},
+          "event": "precise_analysis",
+          "seconds": 9.18
+        },
+        {
+          "details": {},
+          "event": "hazard_warning",
+          "seconds": 9.42
+        },
+        {
+          "details": {},
+          "event": "inventory_open",
+          "seconds": 9.47
+        },
+        {
+          "details": {},
+          "event": "stabilized",
+          "seconds": 9.47
+        },
+        {
+          "details": {},
+          "event": "slot_rejected",
+          "seconds": 11.3
+        },
+        {
+          "details": {},
+          "event": "inventory_open",
+          "seconds": 11.33
+        },
+        {
+          "details": {
+            "id": "test_g1_light"
+          },
+          "event": "drop",
+          "seconds": 11.33
+        },
+        {
+          "details": {
+            "id": "test_g1_known"
+          },
+          "event": "pickup",
+          "seconds": 11.33
+        },
+        {
+          "details": {},
+          "event": "golem_warning",
+          "seconds": 11.78
+        },
+        {
+          "details": {},
+          "event": "golem_chase",
+          "seconds": 13.18
+        },
+        {
+          "details": {},
+          "event": "discharged",
+          "seconds": 13.6
+        },
+        {
+          "details": {},
+          "event": "inspection",
+          "seconds": 14.75
+        },
+        {
+          "details": {},
+          "event": "slot_rejected",
+          "seconds": 14.78
+        },
+        {
+          "details": {},
+          "event": "inventory_open",
+          "seconds": 14.82
+        },
+        {
+          "details": {
+            "id": "test_g1_heavy"
+          },
+          "event": "drop",
+          "seconds": 14.82
+        },
+        {
+          "details": {
+            "id": "test_g1_unknown"
+          },
+          "event": "pickup",
+          "seconds": 14.82
+        },
+        {
+          "details": {},
+          "event": "bypass_entered",
+          "seconds": 15.53
+        },
+        {
+          "details": {
+            "outcome": "safe_return"
+          },
+          "event": "ended",
+          "seconds": 22.85
+        }
+      ],
+      "lost_count": 0,
+      "maximum_weight": 5.0,
+      "movement_slowdown_enabled": false,
+      "outcome": "safe_return",
+      "overload_weight": 4.0,
+      "overloaded_seconds": 11.52,
+      "paused_seconds": 0.38,
+      "peak_slots": 2,
+      "recovered_count": 2,
+      "slot_capacity": 2,
+      "source": "automated",
+      "unidentified_count": 1,
+      "walked_pixels": 4888.0
+    },
+    {
+      "active_seconds": 15.93,
+      "burden_weight": 2.5,
+      "burdened_seconds": 4.05,
+      "charge_remaining": 3,
+      "counts": {
+        "analyses": 0,
+        "bypass_entries": 2,
+        "chases": 0,
+        "discharges": 0,
+        "drops": 1,
+        "golem_warnings": 1,
+        "inspections": 1,
+        "inventory_opens": 1,
+        "pickups": 3,
+        "slot_rejections": 1,
+        "stabilizations": 0
+      },
+      "events": [
+        {
+          "details": {
+            "automated": true,
+            "slots": 2
+          },
+          "event": "started",
+          "seconds": 0.0
+        },
+        {
+          "details": {
+            "id": "test_g1_light"
+          },
+          "event": "pickup",
+          "seconds": 2.33
+        },
+        {
+          "details": {
+            "id": "test_g1_heavy"
+          },
+          "event": "pickup",
+          "seconds": 3.88
+        },
+        {
+          "details": {},
+          "event": "bypass_entered",
+          "seconds": 6.68
+        },
+        {
+          "details": {},
+          "event": "golem_warning",
+          "seconds": 7.65
+        },
+        {
+          "details": {},
+          "event": "inspection",
+          "seconds": 7.87
+        },
+        {
+          "details": {},
+          "event": "slot_rejected",
+          "seconds": 7.9
+        },
+        {
+          "details": {},
+          "event": "inventory_open",
+          "seconds": 7.93
+        },
+        {
+          "details": {
+            "id": "test_g1_light"
+          },
+          "event": "drop",
+          "seconds": 7.93
+        },
+        {
+          "details": {
+            "id": "test_g1_unknown"
+          },
+          "event": "pickup",
+          "seconds": 7.93
+        },
+        {
+          "details": {},
+          "event": "bypass_entered",
+          "seconds": 8.62
+        },
+        {
+          "details": {
+            "outcome": "safe_return"
+          },
+          "event": "ended",
+          "seconds": 15.93
+        }
+      ],
+      "lost_count": 0,
+      "maximum_weight": 4.5,
+      "movement_slowdown_enabled": false,
+      "outcome": "safe_return",
+      "overload_weight": 4.0,
+      "overloaded_seconds": 8.0,
+      "paused_seconds": 0.07,
+      "peak_slots": 2,
+      "recovered_count": 2,
+      "slot_capacity": 2,
+      "source": "automated",
+      "unidentified_count": 1,
+      "walked_pixels": 3664.0
+    },
+    {
+      "active_seconds": 15.9,
+      "burden_weight": 2.5,
+      "burdened_seconds": 4.02,
+      "charge_remaining": 3,
+      "counts": {
+        "analyses": 0,
+        "bypass_entries": 2,
+        "chases": 0,
+        "discharges": 0,
+        "drops": 0,
+        "golem_warnings": 1,
+        "inspections": 1,
+        "inventory_opens": 0,
+        "pickups": 3,
+        "slot_rejections": 0,
+        "stabilizations": 0
+      },
+      "events": [
+        {
+          "details": {
+            "automated": true,
+            "slots": 3
+          },
+          "event": "started",
+          "seconds": 0.0
+        },
+        {
+          "details": {
+            "id": "test_g1_light"
+          },
+          "event": "pickup",
+          "seconds": 2.33
+        },
+        {
+          "details": {
+            "id": "test_g1_heavy"
+          },
+          "event": "pickup",
+          "seconds": 3.88
+        },
+        {
+          "details": {},
+          "event": "bypass_entered",
+          "seconds": 6.68
+        },
+        {
+          "details": {},
+          "event": "golem_warning",
+          "seconds": 7.65
+        },
+        {
+          "details": {},
+          "event": "inspection",
+          "seconds": 7.87
+        },
+        {
+          "details": {
+            "id": "test_g1_unknown"
+          },
+          "event": "pickup",
+          "seconds": 7.9
+        },
+        {
+          "details": {},
+          "event": "bypass_entered",
+          "seconds": 8.58
+        },
+        {
+          "details": {
+            "outcome": "safe_return"
+          },
+          "event": "ended",
+          "seconds": 15.9
+        }
+      ],
+      "lost_count": 0,
+      "maximum_weight": 5.5,
+      "movement_slowdown_enabled": false,
+      "outcome": "safe_return",
+      "overload_weight": 4.0,
+      "overloaded_seconds": 8.0,
+      "paused_seconds": 0.0,
+      "peak_slots": 3,
+      "recovered_count": 3,
+      "slot_capacity": 3,
+      "source": "automated",
+      "unidentified_count": 1,
+      "walked_pixels": 3664.0
+    },
+    {
+      "active_seconds": 9.32,
+      "burden_weight": 2.5,
+      "burdened_seconds": 0.0,
+      "charge_remaining": 3,
+      "counts": {
+        "analyses": 0,
+        "bypass_entries": 0,
+        "chases": 0,
+        "discharges": 0,
+        "drops": 0,
+        "golem_warnings": 0,
+        "inspections": 0,
+        "inventory_opens": 0,
+        "pickups": 1,
+        "slot_rejections": 0,
+        "stabilizations": 0
+      },
+      "events": [
+        {
+          "details": {
+            "automated": true,
+            "slots": 2
+          },
+          "event": "started",
+          "seconds": 0.0
+        },
+        {
+          "details": {
+            "id": "test_g1_light"
+          },
+          "event": "pickup",
+          "seconds": 2.28
+        },
+        {
+          "details": {},
+          "event": "hazard_warning",
+          "seconds": 6.3
+        },
+        {
+          "details": {},
+          "event": "hazard_caught",
+          "seconds": 9.32
+        },
+        {
+          "details": {
+            "outcome": "failure"
+          },
+          "event": "ended",
+          "seconds": 9.32
+        }
+      ],
+      "lost_count": 1,
+      "maximum_weight": 1.0,
+      "movement_slowdown_enabled": false,
+      "outcome": "failure",
+      "overload_weight": 4.0,
+      "overloaded_seconds": 0.0,
+      "paused_seconds": 0.0,
+      "peak_slots": 1,
+      "recovered_count": 0,
+      "slot_capacity": 2,
+      "source": "automated",
+      "unidentified_count": 0,
+      "walked_pixels": 1504.0
+    }
+  ]
+}

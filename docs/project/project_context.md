@@ -53,6 +53,7 @@ related:
   - ../../tests/fixtures/exploration_end_test_space.tscn
   - ../../tests/fixtures/hazard_harness_test_space.tscn
   - ../../tests/fixtures/harness_actions_test_space.tscn
+  - ../../tests/fixtures/g1_integration_playtest_space.tscn
   - ../../tests/fixtures/movement_test_space.tscn
   - ../../tests/fixtures/recovery_result_test_space.tscn
   - ../../tests/smoke/game_state_flow_smoke.tscn
@@ -61,6 +62,7 @@ related:
   - ../../tests/smoke/exploration_end_smoke.tscn
   - ../../tests/smoke/hazard_harness_smoke.tscn
   - ../../tests/smoke/harness_actions_smoke.tscn
+  - ../../tests/smoke/g1_integration_playtest_smoke.tscn
   - ../../tests/smoke/inventory_system_smoke.tscn
   - ../../tests/smoke/inspection_unidentified_smoke.tscn
   - ../../tests/smoke/interaction_system_smoke.tscn
@@ -72,6 +74,7 @@ related:
   - development_handoff.md
   - decisions.md
   - open_questions.md
+  - g1_playtest_review.md
 ---
 
 # 프로젝트 컨텍스트
@@ -328,6 +331,22 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 
 무료·정밀 분석, 분석 버튼과 실제 `Q` 입력, 분석·안정화·방전의 공동 충전, 중복 분석·충전 부족·잘못된 비용·범위 이탈·대상 삭제·중첩 요청·실행 거절을 검사한다. 방전 중 이동 정지, 재방전·소음·경보·재진입으로 정지가 해제되지 않는지, 일시정지 중 시간이 멈추는지, 탈출 또는 잔류에 맞게 복귀하는지도 확인한다. 모두 맞으면 `harness_actions_passed` 로그와 종료 코드 `0`을 반환한다.
 
+### G1 통합 플레이테스트
+
+```powershell
+& $env:GODOT_BIN --path . --resolution 1280x800 res://tests/fixtures/g1_integration_playtest_space.tscn
+```
+
+시작 화면에서 가방 2칸·3칸을 골라 같은 입구로 귀환한다. 결과에서 시간·적재·충전·추적 기록을 복사하고 조건을 다시 선택할 수 있다. [G1 검토 기록](g1_playtest_review.md)에 현재 컴퓨터의 실행 명령과 사람 확인 순서가 있다.
+
+### G1 통합 자동 검사
+
+```powershell
+& $env:GODOT_BIN --headless --fixed-fps 60 --path . --log-file "$env:TEMP/dungeon-g1-smoke.log" --quit-after 20000 res://tests/smoke/g1_integration_playtest_smoke.tscn
+```
+
+실제 이동 입력으로 위험 대응 귀환, 같은 우회 경로의 가방 2칸·3칸 비교, 붕괴 잔류 실패를 검사한다. 조사·미확인 정보·충전 사용·일시정지·결과 고정도 함께 검증한다. 성공 시 `g1_integration_playtest_passed`와 종료 코드 `0`을 반환한다. 고정 프레임 실행은 검사 가속용이며 측정 시간을 사람 플레이 시간으로 사용하지 않는다.
+
 ## 저장소 규칙
 
 - `project.godot`은 버전 관리한다.
@@ -560,3 +579,16 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 - 상태: 구현·자동 검증 완료, 검증 결과 검토 후 사용자 커밋 승인
 - 다음 작업: `DEV-0111 — G1 통합 플레이테스트와 수치 검토`
 - 정합성 검사: 아직 아님 — 다음 검사는 `DEV-0111` 완료 뒤
+
+## DEV-0111 G1 통합 플레이테스트 결과
+
+- 장면: `res://tests/fixtures/g1_integration_playtest_space.tscn`. 입구·저가 통로·붕괴 통로·우회로에 기존 물품·골렘·하네스·생환·실패를 연결
+- 조건 비교: 시작 시 2칸 또는 3칸. 같은 무게 단계·배치·속도·충전으로 비교하며 최종 제품 수치를 확정하지 않음
+- 기록: 탐험·가방 확인 시간, 이동 거리, 최대 무게·칸 수, 부담·과적 시간, 조사·회수·교체·충전·추적·우회·결과 사건. 종료 뒤 고정하고 화면에서 복사
+- 검증: Godot 4.7.1 프로젝트 초기화, 스모크 장면 12개 통과. 새 자동 검사에서 실제 이동으로 네 시나리오 확인. 시작·분석·결과 렌더링 및 결과 패널 겹침·기본 높이 검사
+- 표시 보완: 회수 결과의 긴 설명·요약에 줄바꿈을 적용하고 목록 최소 높이를 줄여 결과와 기록을 함께 표시
+- 자료: [G1 검토 기록](g1_playtest_review.md), [자동 실행 원본](g1_playtest_automated_results.json)
+- 저장 데이터 영향: 없음. 측정 JSON은 테스트 자료이며 제품 저장 형식이 아님
+- 상태: 통합 장면·자동 검증·검토 자료 준비 완료, 검증 결과 검토 후 사용자 커밋 승인 완료. 사람 플레이테스트 미수행
+- 정합성 검사: 지금 — GDD 15-2 기능 연결은 일치. GDD 20-1 사람 판단과 `Q-004`·`Q-005`는 대기
+- 다음 절차: 사람 기록과 미확정 항목을 검토하고 사용자 진행 지시를 받은 뒤 `DEV-0201`. G1 통과를 미리 선언하지 않음

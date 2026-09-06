@@ -1,0 +1,316 @@
+[gd_scene load_steps=20 format=3]
+
+[ext_resource type="Script" path="res://tests/fixtures/g1_integration_playtest_space.gd" id="1_space"]
+[ext_resource type="PackedScene" path="res://src/gameplay/player/player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://src/gameplay/recovery/exploration_run.gd" id="3_run"]
+[ext_resource type="PackedScene" path="res://src/gameplay/recovery/entrance_exit.tscn" id="4_exit"]
+[ext_resource type="PackedScene" path="res://src/gameplay/interaction/pickup_interactable.tscn" id="5_pickup"]
+[ext_resource type="PackedScene" path="res://src/gameplay/hazards/unstable_debris_hazard.tscn" id="6_hazard"]
+[ext_resource type="PackedScene" path="res://src/ui/interaction_prompt.tscn" id="7_prompt"]
+[ext_resource type="PackedScene" path="res://src/ui/inventory_panel.tscn" id="8_inventory"]
+[ext_resource type="PackedScene" path="res://src/ui/harness_status.tscn" id="9_harness"]
+[ext_resource type="PackedScene" path="res://src/ui/exploration_outcome_panel.tscn" id="10_outcome"]
+[ext_resource type="Script" path="res://src/data/item_definition.gd" id="11_item"]
+[ext_resource type="PackedScene" path="res://src/gameplay/interaction/inspectable_pickup_interactable.tscn" id="12_unknown"]
+[ext_resource type="PackedScene" path="res://src/gameplay/hazards/broken_guard_golem.tscn" id="13_golem"]
+
+[sub_resource type="Resource" id="Item_light"]
+script = ExtResource("11_item")
+stable_id = &"test_g1_light"
+display_name = "시험용 가벼운 폐품"
+category = &"scrap"
+weight = 1.0
+slot_size = 1
+value_min = 10
+value_max = 20
+
+[sub_resource type="Resource" id="Item_heavy"]
+script = ExtResource("11_item")
+stable_id = &"test_g1_heavy"
+display_name = "시험용 무거운 폐품"
+category = &"scrap"
+weight = 2.0
+slot_size = 1
+value_min = 30
+value_max = 40
+
+[sub_resource type="Resource" id="Item_known"]
+script = ExtResource("11_item")
+stable_id = &"test_g1_known"
+display_name = "시험용 정밀 부품"
+category = &"scrap"
+weight = 2.5
+slot_size = 1
+value_min = 80
+value_max = 110
+
+[sub_resource type="Resource" id="Item_unknown"]
+script = ExtResource("11_item")
+stable_id = &"test_g1_unknown"
+display_name = "시험용 낡은 장치"
+category = &"residue"
+weight = 2.5
+slot_size = 1
+value_min = 200
+value_max = 280
+
+[sub_resource type="RectangleShape2D" id="BypassShape"]
+size = Vector2(200, 100)
+
+[sub_resource type="StyleBoxFlat" id="PanelStyle"]
+bg_color = Color(0.075, 0.09, 0.12, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.25, 0.32, 0.39, 1)
+
+[node name="G1IntegrationPlaytestSpace" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_space")
+
+[node name="OverviewCamera" type="Camera2D" parent="."]
+position = Vector2(160, -100)
+zoom = Vector2(0.6, 0.6)
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+unique_name_in_owner = true
+position = Vector2(-650, 0)
+collision_mask = 8
+
+[node name="ExplorationRun" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_run")
+inventory_path = NodePath("../Player/Inventory")
+
+[node name="EntranceExit" parent="." instance=ExtResource("4_exit")]
+unique_name_in_owner = true
+position = Vector2(-720, 0)
+exploration_run_path = NodePath("../ExplorationRun")
+
+[node name="SafeLightPickup" parent="." instance=ExtResource("5_pickup")]
+unique_name_in_owner = true
+position = Vector2(-230, -200)
+item_definition = SubResource("Item_light")
+
+[node name="SafeHeavyPickup" parent="." instance=ExtResource("5_pickup")]
+unique_name_in_owner = true
+position = Vector2(120, -200)
+item_definition = SubResource("Item_heavy")
+
+[node name="KnownRewardPickup" parent="." instance=ExtResource("5_pickup")]
+unique_name_in_owner = true
+position = Vector2(200, 220)
+item_definition = SubResource("Item_known")
+
+[node name="UnknownPickup" parent="." instance=ExtResource("12_unknown")]
+unique_name_in_owner = true
+position = Vector2(630, 220)
+item_definition = SubResource("Item_unknown")
+inspection_summary = "표면이 갈라진 금속 장치입니다."
+risk_hint = "희미한 진동이 느껴집니다."
+
+[node name="RiskHazard" parent="." instance=ExtResource("6_hazard")]
+unique_name_in_owner = true
+position = Vector2(-170, 200)
+warning_duration = 3.0
+
+[node name="BrokenGuardGolem" parent="." instance=ExtResource("13_golem")]
+unique_name_in_owner = true
+position = Vector2(460, 170)
+patrol_offset = Vector2(0, 100)
+suspicion_duration = 1.4
+search_duration = 2.5
+discharge_duration = 2.0
+
+[node name="BypassMarker" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(630, 0)
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BypassMarker"]
+shape = SubResource("BypassShape")
+
+[node name="EntryLabel" type="Label" parent="."]
+offset_left = -760.0
+offset_top = 75.0
+offset_right = -420.0
+offset_bottom = 115.0
+theme_override_font_sizes/font_size = 26
+text = "같은 입구로 돌아오기"
+
+[node name="SafeLabel" type="Label" parent="."]
+offset_left = -420.0
+offset_top = -320.0
+offset_right = 260.0
+offset_bottom = -280.0
+theme_override_font_sizes/font_size = 26
+text = "위쪽 경로 · 가벼운 폐품과 무거운 폐품"
+
+[node name="RiskLabel" type="Label" parent="."]
+offset_left = -720.0
+offset_top = 270.0
+offset_right = -320.0
+offset_bottom = 310.0
+theme_override_font_sizes/font_size = 26
+text = "아래쪽 경로 · 붕괴 징후"
+
+[node name="KnownLabel" type="Label" parent="."]
+offset_left = 60.0
+offset_top = 285.0
+offset_right = 410.0
+offset_bottom = 325.0
+theme_override_font_sizes/font_size = 26
+text = "정밀 부품 · 무게 2.5"
+
+[node name="UnknownLabel" type="Label" parent="."]
+offset_left = 505.0
+offset_top = 285.0
+offset_right = 805.0
+offset_bottom = 325.0
+theme_override_font_sizes/font_size = 26
+text = "미확인 장치 · 조사 가능"
+
+[node name="BypassLabel" type="Label" parent="."]
+offset_left = 525.0
+offset_top = -100.0
+offset_right = 765.0
+offset_bottom = -60.0
+theme_override_font_sizes/font_size = 26
+text = "먼 쪽 우회로"
+
+[node name="Overlay" type="CanvasLayer" parent="."]
+
+[node name="Instructions" type="Label" parent="Overlay"]
+offset_left = 16.0
+offset_top = 12.0
+offset_right = 700.0
+offset_bottom = 62.0
+text = "통합 플레이테스트\nWASD 이동 · E 조사/회수/귀환 · Q 안정화/방전 · Tab 가방"
+
+[node name="ChoiceStatus" type="Label" parent="Overlay"]
+unique_name_in_owner = true
+offset_left = 16.0
+offset_top = 66.0
+offset_right = 710.0
+offset_bottom = 112.0
+autowrap_mode = 3
+text = "조건을 고른 뒤 시작하세요. 물품을 더 챙길지, 돌아갈지 직접 결정합니다."
+
+[node name="LoadStatus" type="Label" parent="Overlay"]
+unique_name_in_owner = true
+offset_left = 16.0
+offset_top = 115.0
+offset_right = 710.0
+offset_bottom = 144.0
+text = "가방 크기만 바꾸어 비교합니다. 무게에 따른 이동 감속은 아직 없습니다."
+
+[node name="HarnessStatus" parent="Overlay" instance=ExtResource("9_harness")]
+unique_name_in_owner = true
+theme_override_styles/panel = SubResource("PanelStyle")
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -400.0
+offset_top = 12.0
+offset_right = -16.0
+offset_bottom = 84.0
+source_path = NodePath("../../Player/HarnessController")
+
+[node name="InteractionPrompt" parent="Overlay" instance=ExtResource("7_prompt")]
+unique_name_in_owner = true
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -240.0
+offset_top = -50.0
+offset_right = 240.0
+offset_bottom = -18.0
+horizontal_alignment = 1
+prefix_text = "[E] "
+
+[node name="InventoryPanel" parent="Overlay" instance=ExtResource("8_inventory")]
+unique_name_in_owner = true
+theme_override_styles/panel = SubResource("PanelStyle")
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -210.0
+offset_right = 300.0
+offset_bottom = 210.0
+inventory_source_path = NodePath("../../Player/Inventory")
+
+[node name="ExplorationOutcomePanel" parent="Overlay" instance=ExtResource("10_outcome")]
+unique_name_in_owner = true
+theme_override_styles/panel = SubResource("PanelStyle")
+offset_left = 16.0
+offset_top = 136.0
+offset_right = 696.0
+offset_bottom = 636.0
+
+[node name="ReportPanel" type="PanelContainer" parent="Overlay"]
+unique_name_in_owner = true
+theme_override_styles/panel = SubResource("PanelStyle")
+offset_left = 712.0
+offset_top = 136.0
+offset_right = 1136.0
+offset_bottom = 636.0
+
+[node name="Margin" type="MarginContainer" parent="Overlay/ReportPanel"]
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Content" type="VBoxContainer" parent="Overlay/ReportPanel/Margin"]
+theme_override_constants/separation = 12
+
+[node name="ReportText" type="Label" parent="Overlay/ReportPanel/Margin/Content"]
+unique_name_in_owner = true
+size_flags_vertical = 3
+autowrap_mode = 3
+text = "선택 기록"
+
+[node name="CopyButton" type="Button" parent="Overlay/ReportPanel/Margin/Content"]
+unique_name_in_owner = true
+text = "기록 복사"
+
+[node name="RetryButton" type="Button" parent="Overlay/ReportPanel/Margin/Content"]
+unique_name_in_owner = true
+text = "조건을 다시 골라 시작"
+
+[node name="StartPanel" type="PanelContainer" parent="Overlay"]
+unique_name_in_owner = true
+theme_override_styles/panel = SubResource("PanelStyle")
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -310.0
+offset_top = -135.0
+offset_right = 310.0
+offset_bottom = 135.0
+
+[node name="Margin" type="MarginContainer" parent="Overlay/StartPanel"]
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Content" type="VBoxContainer" parent="Overlay/StartPanel/Margin"]
+theme_override_constants/separation = 16
+
+[node name="Introduction" type="Label" parent="Overlay/StartPanel/Margin/Content"]
+autowrap_mode = 3
+text = "물품을 살펴보고 같은 입구로 돌아오세요.\n가방에 무엇을 남길지, 충전을 어디에 쓸지 선택합니다.\n짧은 비교용 장면이며 모든 수치는 시험 값입니다.\n골렘은 추적 압박을 주며, 붕괴 범위에 남으면 회수품을 잃습니다."
+
+[node name="LoadChoice" type="OptionButton" parent="Overlay/StartPanel/Margin/Content"]
+unique_name_in_owner = true
+
+[node name="StartButton" type="Button" parent="Overlay/StartPanel/Margin/Content"]
+unique_name_in_owner = true
+text = "탐험 시작"

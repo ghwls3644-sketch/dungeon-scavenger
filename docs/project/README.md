@@ -26,6 +26,7 @@ related:
   - m5_core_entity_timeline_review.md
   - m5_link_omission_review.md
   - m6_human_review.md
+  - g1_playtest_review.md
 ---
 
 # 프로젝트 문서
@@ -98,6 +99,7 @@ related:
 - [`m5_core_entity_timeline_review.md`](m5_core_entity_timeline_review.md): 핵심 설정·Entity·Timeline 충돌 검수와 처리 결과
 - [`m5_link_omission_review.md`](m5_link_omission_review.md): 활성 문서 링크·앵커, 원본 이관 누락과 G-M5 완료 조건 검사 결과
 - [`m6_human_review.md`](m6_human_review.md): 사람 검토 승인 결과, 상태 전환 후보와 `DOC-0602` 적용 결과
+- [`g1_playtest_review.md`](g1_playtest_review.md): G1 통합 장면 실행 방법, 자동 실행 자료, 사람 질문과 현재 정합성 검사 결과
 
 ## 경계 규칙
 
