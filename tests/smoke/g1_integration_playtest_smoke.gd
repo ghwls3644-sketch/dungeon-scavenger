@@ -11,6 +11,7 @@ func _ready() -> void:
 	await _check_bypass_capacity(2)
 	await _check_bypass_capacity(3)
 	await _check_failure_route()
+	await _check_inventory_after_analysis_click()
 	if _failures.is_empty():
 		GameLog.info(&"SmokeTest", &"g1_integration_playtest_passed")
 		get_tree().quit(0)
@@ -32,9 +33,11 @@ func _check_integrated_risk_route() -> void:
 	var original_position := player.position
 	Input.action_press(InputActions.MOVE_RIGHT)
 	_press_key(KEY_E)
+	_press_key(KEY_TAB)
 	await _frames(10)
 	_release_movement()
 	_expect(player.position.is_equal_approx(original_position), "Player moved before choosing a test condition.")
+	_expect(not panel.visible and not get_tree().paused, "Inventory opened before choosing a test condition.")
 	_expect(space.get_report().outcome == "not_started", "Pre-start input ended the run.")
 	_expect(space.start_playtest(2, true), "Two-slot condition did not start.")
 	_expect(not space.start_playtest(3, true), "A second start reset an active run.")
@@ -184,6 +187,70 @@ func _check_failure_route() -> void:
 	await _frames(3)
 
 
+func _check_inventory_after_analysis_click() -> void:
+	# Headless windows default to 64x64; use a playable size for real GUI hit testing.
+	var window := get_window()
+	var original_size := window.size
+	window.size = Vector2i(1152, 648)
+	var space = PLAYTEST_SCENE.instantiate()
+	add_child(space)
+	space.start_playtest(2, true)
+	var player := space.get_node("Player") as PlayerController
+	var harness := player.get_node("HarnessController") as HarnessController
+	var hazard := space.get_node("RiskHazard") as UnstableDebrisHazard
+	var panel := space.get_node("%InventoryPanel") as InventoryPanel
+	var button := space.get_node("%HarnessStatus").get_node("%AnalyzeButton") as Button
+	await _walk(player, Vector2(-500, 200))
+	await _walk(player, Vector2(-275, 200))
+	_expect(button.is_visible_in_tree() and not button.disabled, "Analysis button was not clickable before the hazard.")
+	_click_button(button)
+	await _frames(2)
+	_expect(harness.get_current_charge() == 2, "Mouse click did not purchase precise analysis.")
+	_expect(button.has_focus() and button.disabled, "Analysis click did not retain focus on the completed button.")
+
+	_press_key(KEY_TAB)
+	_expect(panel.visible and get_tree().paused, "Focused completed analysis button swallowed inventory opening.")
+	var active_before: float = space.get_report().active_seconds
+	await _frames(8)
+	_expect(is_equal_approx(space.get_report().active_seconds, active_before), "Time advanced in the inventory after an analysis click.")
+	_press_key(KEY_TAB)
+	_expect(not panel.visible and not get_tree().paused, "Inventory did not close and resume after analysis.")
+	panel.close_inventory()
+
+	await _walk(player, Vector2(-220, 200))
+	_expect(hazard.get_state() == UnstableDebrisHazard.State.WARNING, "Focus regression route did not reach the warning.")
+	_expect(button.has_focus() and not button.disabled, "Warning did not re-enable the focused analysis button.")
+	_press_key(KEY_TAB)
+	_expect(panel.visible and get_tree().paused, "Focused active analysis button swallowed inventory opening.")
+	active_before = space.get_report().active_seconds
+	var warning_timer := hazard.get_node("WarningTimer") as Timer
+	var warning_before := warning_timer.time_left
+	await _frames(8)
+	_expect(is_equal_approx(space.get_report().active_seconds, active_before), "Warning-phase inventory did not stop exploration time.")
+	_expect(is_equal_approx(warning_timer.time_left, warning_before), "Collapse warning advanced while the inventory was open.")
+	_press_key(KEY_TAB)
+	_expect(not panel.visible and not get_tree().paused, "Closing the warning-phase inventory did not resume time.")
+	panel.close_inventory()
+	await _frames(3)
+	_expect(warning_timer.time_left < warning_before, "Collapse warning did not resume after closing the inventory.")
+	space.queue_free()
+	await _frames(3)
+	window.size = original_size
+	await _frames(3)
+
+
+func _click_button(button: Button) -> void:
+	var event := InputEventMouseButton.new()
+	event.button_index = MOUSE_BUTTON_LEFT
+	event.position = button.get_global_rect().get_center()
+	event.global_position = event.position
+	event.pressed = true
+	get_viewport().push_input(event, true)
+	var release := event.duplicate() as InputEventMouseButton
+	release.pressed = false
+	get_viewport().push_input(release, true)
+
+
 func _collect_safe_items(space: Node2D) -> void:
 	var player := space.get_node("Player") as PlayerController
 	await _walk(player, Vector2(-500, -200))
@@ -243,10 +310,12 @@ func _release_movement() -> void:
 
 func _press_key(code: Key) -> void:
 	var event := InputEventKey.new()
+	event.keycode = code
 	event.physical_keycode = code
 	event.pressed = true
 	get_viewport().push_input(event)
 	var release := InputEventKey.new()
+	release.keycode = code
 	release.physical_keycode = code
 	get_viewport().push_input(release)
 

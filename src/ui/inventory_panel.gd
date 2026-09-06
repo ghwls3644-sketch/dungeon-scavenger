@@ -26,18 +26,14 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	# Handle closing before focused controls consume Tab as focus navigation.
-	if visible and event.is_action_pressed(InputActions.INVENTORY):
-		get_viewport().set_input_as_handled()
-		close_inventory()
-
-
-func _unhandled_input(event: InputEvent) -> void:
+	# Handle both directions before focused controls consume Tab as focus navigation.
 	if not event.is_action_pressed(InputActions.INVENTORY):
 		return
 
 	get_viewport().set_input_as_handled()
-	if not visible:
+	if visible:
+		close_inventory()
+	else:
 		open_inventory()
 
 
