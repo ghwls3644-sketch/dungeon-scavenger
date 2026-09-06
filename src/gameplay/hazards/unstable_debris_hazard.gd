@@ -40,6 +40,22 @@ func get_status_text() -> String:
 	return _status.text
 
 
+func get_basic_analysis() -> String:
+	return get_status_text()
+
+
+func get_precise_analysis() -> String:
+	match _state:
+		State.WARNING:
+			return "붕괴 경고 중입니다. 경고가 끝나기 전에 안정화하면 붕괴를 막을 수 있습니다."
+		State.STABILIZED:
+			return "안정화가 끝났습니다. 이번 잔해 붕괴 위험은 멈췄습니다."
+		State.TRIGGERED:
+			return "이미 붕괴했습니다. 하네스 안정화로 되돌릴 수 없습니다."
+		_:
+			return "접근하면 붕괴 경고가 시작됩니다. 경고 중에만 안정화할 수 있습니다."
+
+
 func begin_warning() -> bool:
 	if _state != State.IDLE:
 		return false

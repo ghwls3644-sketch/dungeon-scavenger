@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/ui/harness_status.gd" id="1_status"]
 
 [node name="HarnessStatus" type="PanelContainer"]
-custom_minimum_size = Vector2(280, 72)
+custom_minimum_size = Vector2(380, 72)
 offset_right = 280.0
 offset_bottom = 72.0
 script = ExtResource("1_status")
@@ -14,6 +14,25 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 8
 
-[node name="Status" type="Label" parent="MarginContainer"]
+[node name="Content" type="VBoxContainer" parent="MarginContainer"]
+theme_override_constants/separation = 8
+
+[node name="Status" type="Label" parent="MarginContainer/Content"]
 unique_name_in_owner = true
 text = "하네스 충전 0/0"
+
+[node name="Analysis" type="Label" parent="MarginContainer/Content"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(350, 0)
+autowrap_mode = 3
+
+[node name="AnalyzeButton" type="Button" parent="MarginContainer/Content"]
+unique_name_in_owner = true
+visible = false
+text = "정밀 분석"
+
+[node name="Feedback" type="Label" parent="MarginContainer/Content"]
+unique_name_in_owner = true
+visible = false
+autowrap_mode = 3

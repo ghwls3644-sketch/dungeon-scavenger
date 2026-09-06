@@ -11,6 +11,7 @@ enum State {
 	SUSPICIOUS,
 	CHASE,
 	SEARCH,
+	DISABLED,
 }
 
 @export var patrol_offset := Vector2(180.0, 0.0)
@@ -20,6 +21,9 @@ enum State {
 @export var search_speed := 65.0
 @export var suspicion_duration := 0.8
 @export var search_duration := 1.5
+@export var analysis_charge_cost := 1
+@export var discharge_charge_cost := 1
+@export var discharge_duration := 1.5
 
 var _state: State = State.PATROL
 var _patrol_origin := Vector2.ZERO
@@ -35,6 +39,7 @@ var _heading_to_patrol_end := true
 @onready var _detection_area: Area2D = %DetectionArea
 @onready var _suspicion_timer: Timer = %SuspicionTimer
 @onready var _search_timer: Timer = %SearchTimer
+@onready var _discharge_timer: Timer = %DischargeTimer
 
 
 func _ready() -> void:
@@ -45,6 +50,7 @@ func _ready() -> void:
 	_detection_area.body_exited.connect(_on_detection_body_exited)
 	_suspicion_timer.timeout.connect(_on_suspicion_timeout)
 	_search_timer.timeout.connect(_on_search_timeout)
+	_discharge_timer.timeout.connect(_on_discharge_timeout)
 	_render_state()
 
 
@@ -83,8 +89,54 @@ func can_be_permanently_defeated() -> bool:
 	return false
 
 
+func get_analysis_charge_cost() -> int:
+	return analysis_charge_cost
+
+
+func get_basic_analysis() -> String:
+	return get_status_text()
+
+
+func get_precise_analysis() -> String:
+	match _state:
+		State.SUSPICIOUS:
+			return "탐지된 위치를 확인하고 있습니다. 계속 노출되면 추적을 시작합니다."
+		State.CHASE:
+			return "추적 중입니다. 비상 방전으로 잠시 멈춘 사이 탐지 범위에서 벗어나세요."
+		State.SEARCH:
+			return "마지막으로 확인한 위치를 수색합니다. 다시 탐지되지 않으면 순찰로 돌아갑니다."
+		State.DISABLED:
+			return "비상 방전으로 잠시 정지했습니다. 곧 다시 움직이며 영구 처치는 되지 않습니다."
+		_:
+			return "순찰 중입니다. 탐지 뒤 경고를 거쳐 추적합니다. 비상 방전은 잠시만 움직임을 멈춥니다."
+
+
+func get_discharge_charge_cost() -> int:
+	return discharge_charge_cost
+
+
+func can_emergency_discharge() -> bool:
+	return _state != State.DISABLED and is_finite(discharge_duration) and discharge_duration > 0.0
+
+
+func emergency_discharge() -> bool:
+	if not can_emergency_discharge():
+		return false
+
+	if is_instance_valid(_tracked_target):
+		_last_known_position = _tracked_target.global_position
+	_tracked_target = null
+	_alarm_escalation = false
+	_suspicion_timer.stop()
+	_search_timer.stop()
+	velocity = Vector2.ZERO
+	_discharge_timer.start(discharge_duration)
+	_set_state(State.DISABLED)
+	return true
+
+
 func investigate_noise(source_position: Vector2) -> bool:
-	if _state == State.CHASE or is_instance_valid(_tracked_target):
+	if _state in [State.CHASE, State.DISABLED] or is_instance_valid(_tracked_target):
 		return false
 
 	_begin_suspicion(source_position, null, false)
@@ -92,6 +144,8 @@ func investigate_noise(source_position: Vector2) -> bool:
 
 
 func raise_alarm(last_known_position: Vector2) -> bool:
+	if _state == State.DISABLED:
+		return false
 	# A current visual target is stronger evidence than an external position.
 	if is_instance_valid(_tracked_target):
 		return true
@@ -104,7 +158,7 @@ func raise_alarm(last_known_position: Vector2) -> bool:
 
 
 func _on_detection_body_entered(body: Node2D) -> void:
-	if not body is PlayerController:
+	if not body is PlayerController or _state == State.DISABLED:
 		return
 	if _state == State.CHASE:
 		if _tracked_target == null:
@@ -115,6 +169,8 @@ func _on_detection_body_entered(body: Node2D) -> void:
 
 
 func _on_detection_body_exited(body: Node2D) -> void:
+	if not is_inside_tree() or is_queued_for_deletion():
+		return
 	if body != _tracked_target:
 		return
 
@@ -143,6 +199,18 @@ func _on_search_timeout() -> void:
 	_heading_to_patrol_end = false
 	_patrol_destination = _patrol_origin
 	_set_state(State.PATROL)
+
+
+func _on_discharge_timeout() -> void:
+	if _state != State.DISABLED:
+		return
+
+	# Reacquire only bodies still present; an escaped player is no longer tracked.
+	for body in _detection_area.get_overlapping_bodies():
+		if body is PlayerController and not body.is_queued_for_deletion():
+			_begin_suspicion(body.global_position, body, true)
+			return
+	_begin_search()
 
 
 func _begin_suspicion(
@@ -199,6 +267,10 @@ func _set_state(next_state: State) -> void:
 
 func _render_state() -> void:
 	match _state:
+		State.DISABLED:
+			_body.color = Color(0.2, 0.65, 0.72, 1.0)
+			_warning_glow.hide()
+			_status.text = "비상 방전: 잠시 정지 중"
 		State.SUSPICIOUS:
 			_body.color = Color(0.78, 0.58, 0.2, 1.0)
 			_warning_glow.show()

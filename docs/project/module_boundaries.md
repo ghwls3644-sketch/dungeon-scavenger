@@ -8,7 +8,7 @@ canonical_for:
   - source_tree_layout
   - module_responsibilities
   - module_dependency_rules
-last_reviewed: 2026-08-31
+last_reviewed: 2026-09-06
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -63,7 +63,7 @@ res://
 | `res://src/data/` | 아이템·방·루트·위험·경제·텍스트의 정의와 콘텐츠 값 | 실행 중 상태 변경, 화면 흐름, 저장 시점 결정 |
 | `res://tests/` | 단위·통합·스모크 검사와 테스트 전용 자료 | 출시 게임 기능과 실제 콘텐츠 |
 
-`src/harness/`는 코드 위치만 예약한다. [`harness_engineering.md`](../design/harness_engineering.md)가 `draft`인 동안 비어 있는 하네스 상세 규칙을 추정해 구현하지 않는다.
+`src/harness/`는 GDD에 확정된 하네스 행동과 충전을 구현한다. [`harness_engineering.md`](../design/harness_engineering.md)가 `draft`인 동안 비어 있는 모듈·성장·최종 수치를 추정해 구현하지 않는다.
 
 ## 의존 방향
 
@@ -111,8 +111,8 @@ res://
 - `src/ui/item_value_text.gd`는 예상 가치 범위와 비화폐 보상 문구를, `src/ui/recovery_result_panel.*`는 회수품별 가치와 결과 합계 표시를 소유한다. UI는 포함 물품이나 합계를 결정하지 않는다.
 - `tests/fixtures/recovery_result_test_space.tscn`은 회수 결과 표시를 직접 확인하는 공간을, `tests/smoke/recovery_result_smoke.tscn`은 들고 나온 물품만 포함되는지와 가치 합계·비화폐 보상 분리를 자동 검증하는 장면을 소유한다.
 - `DEV-0105`에서 `src/gameplay/hazards/`가 위험 대상의 사전 징후, 경고 상태, 안정화 가능 여부, 붕괴와 범위 안 포착 이벤트를 소유하도록 했다. 실제 피해·부상·실패 판정은 이 모듈이 임의로 결정하지 않는다.
-- `src/harness/harness_controller.gd`는 플레이어의 공개 위험 감지 결과를 받아 `use_harness` 입력, 시험 충전과 안정화 명령을 소유한다. 위험은 하네스 내부 상태를 직접 바꾸지 않으며, 하네스는 공개 `stabilize` 명령만 요청한다.
-- `src/ui/harness_status.*`는 현재 충전과 `Q` 안정화 안내만 표시한다. 충전 소모와 대상 가능 여부는 계산하지 않는다.
+- `src/harness/harness_controller.gd`는 플레이어의 공개 위험 감지 결과를 받아 `use_harness` 입력, 시험 충전과 안정화 명령을 소유한다. `DEV-0110`에서 정밀 분석·비상 방전과 공통 충전 처리를 확장했다. 위험은 하네스 내부 상태를 직접 바꾸지 않으며 하네스는 대상의 공개 조회·명령만 사용한다.
+- `src/ui/harness_status.*`는 현재 충전·기본 분석·구매한 정밀 분석과 `Q` 행동을 표시하고 분석 버튼을 공개 명령에 연결한다. 버튼 활성 여부도 하네스에 조회하며 충전 소모와 대상 규칙을 결정하지 않는다.
 - `tests/fixtures/hazard_harness_test_space.tscn`은 사전 징후와 `Q` 안정화를 직접 확인하는 공간을, `tests/smoke/hazard_harness_smoke.tscn`은 안정화와 미대응 분기를 자동 검증하는 장면을 소유한다. 충전·비용·경고 시간은 테스트와 장면에서 조정하는 시제품 값이다.
 - `DEV-0106`에서 `src/gameplay/recovery/`가 입구 생환 명령, 탐험의 단일 종료 상태와 생환·실패 결과를 소유하도록 했다. `PlayerInventory`는 현재 탐험 물품을 공개 명령으로 인계하고 비우며, 회수 모듈은 생환 물품만 기존 `RecoveryResult`에 넣는다.
 - `src/gameplay/recovery/entrance_exit.*`는 공통 `Interactable`을 통해 활성 탐험의 생환만 요청한다. 위험 모듈은 계속 포착 이벤트만 내며, 시험 공간의 조립 코드가 이 공개 이벤트를 탐험 실패 명령에 연결한다.
@@ -130,4 +130,7 @@ res://
 - `InventoryItem`은 조사로 알게 된 위험 정보도 소유한다. 조사 회수품이 이 정보를 공개 획득 명령으로 전달하고 인벤토리와 회수 결과 UI가 표시한다.
 - `RecoveryResult`는 생성 시 물품 정의·감정·위험 정보를 복사하고 조회에서도 분리된 복사본을 반환한다. 회수품 일치 검사는 객체 참조 대신 안정적 ID를 사용한다. `ExplorationRun`은 인벤토리 변경 알림 전에 종료 처리를 잠근다.
 - 인벤토리의 열기 입력은 미처리 입력 경로를 유지하고, 열린 화면의 닫기 입력만 GUI 포커스 처리 전에 받는다. 골렘은 감지 중인 대상을 외부 소음·경보로 교체하지 않는다.
-- 2026-08-31 G1 정합성 검사와 사용자 지시에 따라 보완 작업을 진행한다. `DEV-0109-R1`은 검증 결과 검토 후 사용자가 커밋을 승인했으며 다음 기능 작업은 `DEV-0110 — 하네스 분석과 비상 방전`, 다음 정합성 검사는 `DEV-0111` 완료 뒤다.
+- `DEV-0110`에서 `HazardDetector`가 범위 안 잔해·골렘 중 대응 가능 여부와 거리에 따라 하네스 대상을 공개한다. 기존 안정화 대상 조회도 유지한다. 각 위험은 기본·정밀 분석 정보와 물리적 행동 가능 여부를 소유한다.
+- `BrokenGuardGolem`은 비상 방전에 따른 임시 정지·복귀와 현재 탐지 여부를 소유한다. `HarnessController`는 비용 검증·공동 충전·중첩 명령 차단·정밀 분석 표시 수명을 소유하며 골렘 내부 타이머나 추적 대상을 직접 변경하지 않는다.
+- `tests/fixtures/harness_actions_test_space.tscn`은 분석·안정화·방전 확인 공간을, `tests/smoke/harness_actions_smoke.tscn`은 공동 충전과 임시 정지·복귀의 자동 검사를 소유한다. 제품 수치와 통합 플레이테스트의 사람 판단을 대신하지 않는다.
+- `DEV-0110`은 구현·자동 검증을 마쳤으며 검증 결과 검토 후 사용자가 커밋을 승인했다. 다음 작업은 `DEV-0111 — G1 통합 플레이테스트와 수치 검토`, 다음 정합성 검사는 `DEV-0111` 완료 뒤다.

@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://tests/fixtures/harness_actions_test_space.gd" id="1_space"]
+[ext_resource type="PackedScene" path="res://src/gameplay/player/player.tscn" id="2_player"]
+[ext_resource type="PackedScene" path="res://src/gameplay/hazards/unstable_debris_hazard.tscn" id="3_hazard"]
+[ext_resource type="PackedScene" path="res://src/gameplay/hazards/broken_guard_golem.tscn" id="4_golem"]
+[ext_resource type="PackedScene" path="res://src/ui/harness_status.tscn" id="5_status"]
+
+[node name="HarnessActionsTestSpace" type="Node2D"]
+script = ExtResource("1_space")
+
+[node name="Floor" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-900, -600, 900, -600, 900, 600, -900, 600)
+color = Color(0.045, 0.052, 0.06, 1)
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(0, 160)
+
+[node name="UnstableDebrisHazard" parent="." instance=ExtResource("3_hazard")]
+position = Vector2(-220, 80)
+warning_duration = 4.0
+analysis_charge_cost = 1
+stabilization_charge_cost = 1
+
+[node name="BrokenGuardGolem" parent="." instance=ExtResource("4_golem")]
+position = Vector2(280, 40)
+patrol_offset = Vector2(0, 180)
+suspicion_duration = 1.2
+search_duration = 2.5
+analysis_charge_cost = 1
+discharge_charge_cost = 1
+discharge_duration = 2.0
+
+[node name="Overlay" type="CanvasLayer" parent="."]
+
+[node name="Instructions" type="Label" parent="Overlay"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 1080.0
+offset_bottom = 48.0
+text = "WASD: 이동 | 왼쪽 잔해 · 오른쪽 골렘에 접근 | 정밀 분석 버튼: 충전 사용 | Q: 안정화·비상 방전"
+
+[node name="EventStatus" type="Label" parent="Overlay"]
+unique_name_in_owner = true
+offset_left = 16.0
+offset_top = 52.0
+offset_right = 1080.0
+offset_bottom = 84.0
+text = "기본 분석은 무료입니다. 세 번 쓸 수 있는 충전을 분석과 위험 대응에 나누어 사용하세요."
+
+[node name="HarnessStatus" parent="Overlay" instance=ExtResource("5_status")]
+offset_left = 16.0
+offset_top = 100.0
+offset_right = 396.0
+offset_bottom = 172.0
+source_path = NodePath("../../Player/HarnessController")

@@ -8,7 +8,7 @@ canonical_for:
   - development_environment
   - engine_and_language
   - development_commands
-last_reviewed: 2026-08-31
+last_reviewed: 2026-09-06
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -52,6 +52,7 @@ related:
   - ../../tests/fixtures/core_loop_playtest_space.tscn
   - ../../tests/fixtures/exploration_end_test_space.tscn
   - ../../tests/fixtures/hazard_harness_test_space.tscn
+  - ../../tests/fixtures/harness_actions_test_space.tscn
   - ../../tests/fixtures/movement_test_space.tscn
   - ../../tests/fixtures/recovery_result_test_space.tscn
   - ../../tests/smoke/game_state_flow_smoke.tscn
@@ -59,6 +60,7 @@ related:
   - ../../tests/smoke/core_loop_playtest_smoke.tscn
   - ../../tests/smoke/exploration_end_smoke.tscn
   - ../../tests/smoke/hazard_harness_smoke.tscn
+  - ../../tests/smoke/harness_actions_smoke.tscn
   - ../../tests/smoke/inventory_system_smoke.tscn
   - ../../tests/smoke/inspection_unidentified_smoke.tscn
   - ../../tests/smoke/interaction_system_smoke.tscn
@@ -310,6 +312,22 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 
 순찰 이동과 발소리·긁힌 흔적, 탐지음이 추적보다 먼저 나타나는지 검사한다. 지속 감지 뒤 추적, 시야 상실 뒤 마지막 위치 수색과 순찰 복귀, 외부 소음 조사와 경보 추적, 영구 처치 불가가 맞으면 `broken_guard_golem_passed` 로그와 종료 코드 `0`을 반환한다.
 
+### 하네스 분석·비상 방전 수동 테스트
+
+```powershell
+& $env:GODOT_BIN --path . res://tests/fixtures/harness_actions_test_space.tscn
+```
+
+왼쪽 잔해와 오른쪽 골렘에 접근해 무료 기본 분석을 읽는다. 정밀 분석 버튼은 표시된 충전을 쓰며, `Q`는 현재 안내된 안정화·비상 방전을 실행한다. 충전 3을 분석과 위험 대응에 나누어 사용하고 정지한 골렘의 탐지 범위에서 벗어나 본다. 충전량·비용 1·정지 2초는 이 확인 공간의 시험 값이다.
+
+### 하네스 분석·비상 방전 자동 검사
+
+```powershell
+& $env:GODOT_BIN --headless --path . res://tests/smoke/harness_actions_smoke.tscn
+```
+
+무료·정밀 분석, 분석 버튼과 실제 `Q` 입력, 분석·안정화·방전의 공동 충전, 중복 분석·충전 부족·잘못된 비용·범위 이탈·대상 삭제·중첩 요청·실행 거절을 검사한다. 방전 중 이동 정지, 재방전·소음·경보·재진입으로 정지가 해제되지 않는지, 일시정지 중 시간이 멈추는지, 탈출 또는 잔류에 맞게 복귀하는지도 확인한다. 모두 맞으면 `harness_actions_passed` 로그와 종료 코드 `0`을 반환한다.
+
 ## 저장소 규칙
 
 - `project.godot`은 버전 관리한다.
@@ -526,4 +544,19 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 - 저장 데이터 영향: 없음. 실제 콘텐츠·제품 수치·저장 스키마와 하네스 분석·비상 방전은 추가하지 않았다.
 - 상태: 구현·자동 검증 완료, 검증 결과 검토 후 사용자 커밋 승인
 - 다음 기능 작업: `DEV-0110 — 하네스 분석과 비상 방전`
+- 정합성 검사: 아직 아님 — 다음 검사는 `DEV-0111` 완료 뒤
+
+## DEV-0110 하네스 분석과 비상 방전 결과
+
+- 분석: 가까운 잔해·골렘의 기본 상태는 무료, 현재 상태와 대응 방법의 정밀 분석은 충전 사용. 같은 대상·상태의 연속 구매를 막고 대상·상태 변경 및 범위 이탈 시 이전 표시를 지움
+- 공동 자원: 정밀 분석·기존 안정화·비상 방전이 같은 하네스 충전을 사용. 비용 검증·중첩 요청 차단·실행 거절 시 반환은 하네스가 소유
+- 조작: 비용을 표시한 정밀 분석 버튼과 기존 `Q` 안정화·방전. 대응 가능한 대상 우선, 같은 조건에서는 가까운 대상 선택
+- 골렘: 잠시 이동과 의심·수색 타이머 정지. 정지 중 재방전·소음·경보·플레이어 재진입으로 취소·연장되지 않음. 복귀 시 현재 감지한 플레이어를 경고 뒤 추적하거나 마지막 위치 수색 뒤 순찰
+- 수동 테스트 공간: `res://tests/fixtures/harness_actions_test_space.tscn`
+- 자동 검사: `res://tests/smoke/harness_actions_smoke.tscn`
+- 검증: Godot 4.7.1 프로젝트·메인·새 수동 장면 초기화 및 새 분석·방전 검사와 기존 스모크 검사를 합친 11개 통과. 분석 버튼 포커스 중 `Q`, 빈 충전, 반복·범위 이탈·삭제·중첩 요청·실행 거절, 정지·일시정지·탈출·재진입 복귀 확인
+- 제외 범위: 물품 감정·가격 공개, 모듈 성장·내구도·충전 복구, 피해·최종 인공지능·제품 수치, 통합 맵과 사람 플레이테스트
+- 저장 데이터 영향: 없음. 분석 표시·충전·골렘 정지는 현재 장면 실행 중 상태이며 상세 Harness Engineering은 `draft` 유지
+- 상태: 구현·자동 검증 완료, 검증 결과 검토 후 사용자 커밋 승인
+- 다음 작업: `DEV-0111 — G1 통합 플레이테스트와 수치 검토`
 - 정합성 검사: 아직 아님 — 다음 검사는 `DEV-0111` 완료 뒤
