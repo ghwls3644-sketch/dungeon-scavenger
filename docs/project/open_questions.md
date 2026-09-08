@@ -7,7 +7,7 @@ source_version: story-v1.5+gdd-v2.1
 canonical_for:
   - unresolved_questions
   - provisional_rules
-last_reviewed: 2026-09-06
+last_reviewed: 2026-09-08
 owner: project-maintainer
 related:
   - ../GDD.md
@@ -43,8 +43,8 @@ related:
 | `Q-001` | `Flooded` 방은 실제 침수 구역인가, 마력 침식 구역인가? | `provisional` | [`../GDD.md`](../GDD.md) | 첫 던전의 기능 중복을 줄이기 위해 마력 침식 구역 권장 | G0·레벨 데이터 정리 전 |
 | `Q-002` | 봉쇄된 하층을 첫 출시에서 실제로 여는가? | `provisional` | [`../GDD.md`](../GDD.md), [`../story/02_dungeon_canon.md`](../story/02_dungeon_canon.md), [`../story/06_narrative_progression.md`](../story/06_narrative_progression.md) | 결말용 짧은 최종 구역까지만 개방 | G5 콘텐츠 범위 확정 전 |
 | `Q-003` | 플레이어의 이름·성별·외형을 고정하는가? | `provisional` | [`../GDD.md`](../GDD.md), [`../story/03_player_and_society.md`](../story/03_player_and_society.md) | 최소 외형 선택 또는 중성적 기본 캐릭터 | G7 아트 제작 전 |
-| `Q-004` | 한 런의 정확한 목표 시간은 얼마인가? | `provisional` | [`../GDD.md`](../GDD.md), [`../design/repeat_exploration.md`](../design/repeat_exploration.md) | 15~25분 범위에서 G1 테스트로 결정 | G1 종료 시 |
-| `Q-005` | 슬롯 수·무게 단계·감속률은 얼마인가? | `provisional` | [`../GDD.md`](../GDD.md), [`../design/item_rules.md`](../design/item_rules.md) | 수치 없이 구조만 고정 | G1 플레이테스트 |
+| `Q-004` | 한 런의 정확한 목표 시간은 얼마인가? | `provisional` | [`../GDD.md`](../GDD.md), [`../design/repeat_exploration.md`](../design/repeat_exploration.md) | 15~25분 가안 유지, 작은 자동 시험 맵으로 확정하지 않음 | 탐험 분량을 갖춘 후속 사람 플레이 검토 |
+| `Q-005` | 슬롯 수·무게 단계·감속률은 얼마인가? | `provisional` | [`../GDD.md`](../GDD.md), [`../design/item_rules.md`](../design/item_rules.md) | 수치 없이 구조만 고정 | 적재 선택·무게 효과를 비교할 수 있는 후속 플레이 검토 |
 | `Q-006` | 컨트롤러를 첫 출시 필수로 포함하는가? | `provisional` | [`../GDD.md`](../GDD.md) | 키보드·마우스 먼저, G6에서 포함 여부 결정 | G6 시작 전 |
 | `Q-007` | 세션 중단용 임시 저장을 제공하는가? | `provisional` | [`../GDD.md`](../GDD.md), [`../design/item_rules.md`](../design/item_rules.md), [`../design/repeat_exploration.md`](../design/repeat_exploration.md) | 장기 런이 확정될 때만 추가 | G6 저장 UX 검토 |
 | `Q-008` | 최종 그림체는 픽셀, 페인터리 2D, 단순 벡터 중 무엇인가? | `provisional` | [`../GDD.md`](../GDD.md) | 탑다운 가독성 표본 비교 후 결정 | 정식 아트 제작 전 |
@@ -66,6 +66,8 @@ related:
 `DEV-0111`은 같은 우회 경로에서 가방 2칸·3칸을 비교하고 탐험·가방 확인 시간과 적재 기록을 수집한다. [G1 검토 기록](g1_playtest_review.md)에 자동 자료와 사람 질문을 남겼다. 자동 입력의 짧은 시간으로 15~25분 가안의 정확한 목표를 선택할 수 없고, 무게 감속도 아직 구현되지 않아 최종 감속률을 판단할 근거가 없다. 실제 사람 검토와 미확정 항목 처리에 관한 사용자 판단 전까지 `Q-004`·`Q-005`는 `provisional`로 유지하며 G1 통과를 선언하지 않는다.
 
 2026-09-06 후속 보완에서는 통합 시험 장면의 경고 시간·추적 속도를 조정하고, 같은 경로에서 무료 통과와 충전 대응의 추적·경고 시간을 비교했다. 두 조건 모두 생환할 수 있으며 자동 기록은 대응에 따른 상태 유지 시간의 차이만 보여 준다. 사람의 긴장감·판단 부담이나 최종 런 시간·슬롯·무게·감속 수치를 결정한 근거로 사용하지 않는다.
+
+2026-09-08 사용자의 작업 재개 지시에 따라 `DEV-0201`의 제품 시작 흐름을 진행한다. 위 사람 확인과 미정 수치는 별도 후속 항목으로 유지한다. 실제 플레이 의견 없이 G1 사람 평가를 통과 처리하지 않으며, 이미 완료한 기술 검사를 반복해 타이틀·거점 개발을 막지 않는다.
 
 ## 원본 추가 검토 메모 대응
 

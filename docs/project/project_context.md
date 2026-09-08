@@ -8,7 +8,7 @@ canonical_for:
   - development_environment
   - engine_and_language
   - development_commands
-last_reviewed: 2026-09-06
+last_reviewed: 2026-09-08
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -16,6 +16,11 @@ related:
   - ../../src/app/dev_entry.gd
   - ../../src/app/game_state.gd
   - ../../src/app/main.tscn
+  - ../../src/app/game_entry.gd
+  - ../../src/app/dev_main.tscn
+  - ../../src/ui/title_screen.tscn
+  - ../../src/ui/hub_placeholder.tscn
+  - ../../tests/smoke/title_screen_smoke.tscn
   - ../../src/core/stable_id.gd
   - ../../src/data/content_definition.gd
   - ../../src/data/item_definition.gd
@@ -137,7 +142,9 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 & $env:GODOT_BIN --path .
 ```
 
-현재 메인 장면은 실제 게임 플레이가 아니라 `DEV-0003` 상태 전환을 확인하는 개발 화면이다. 버튼을 누르면 `Boot → Title → Hub → Exploration → Results → Hub` 순서로 현재 상태가 바뀐다.
+현재 메인 장면은 `DEV-0201`의 임시 타이틀이다. 자동으로 `Boot → Title`에 진입하고 새 게임을 누르면 중앙 상태 전환으로 거점 도착 안내까지 이동한다. 옵션은 준비 중 안내의 열기·닫기를 제공하며 종료는 게임 프로세스를 닫는다. 거점 기능은 `DEV-0202`에서 이어 붙인다.
+
+실제 진행 저장 기능이 아직 없어 기본 실행의 이어하기는 비활성화된다. `GameEntry.configure_continue()`에 저장 유무 조회와 복원 요청을 연결하면 결과에 따라 버튼이 갱신되고, 복원 성공 시에만 거점에 진입한다. 이 연결부는 동기식 `bool` 반환 계약이며 테스트 공급자는 실제 저장 파일을 만들지 않는다. 진행 저장·복원은 `DEV-0205` 범위다.
 
 ### 프로젝트 초기화 검사
 
@@ -153,7 +160,17 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 & $env:GODOT_BIN --headless --path . --quit-after 2
 ```
 
-종료 코드가 `0`이고 오류 로그가 없으면 메인 장면, `GameState` Autoload와 개발 UI를 초기화할 수 있다는 뜻이다.
+종료 코드가 `0`이고 오류 로그가 없으면 메인 장면, `GameState` Autoload와 임시 타이틀을 초기화할 수 있다는 뜻이다.
+
+### 타이틀 자동 검사
+
+```powershell
+& $env:GODOT_BIN --headless --fixed-fps 60 --path . --log-file "$env:TEMP/dungeon-title-new.log" --quit-after 1000 res://tests/smoke/title_screen_smoke.tscn
+& $env:GODOT_BIN --headless --fixed-fps 60 --path . --log-file "$env:TEMP/dungeon-title-continue.log" --quit-after 1000 res://tests/smoke/title_screen_smoke.tscn -- --title-case=continue
+& $env:GODOT_BIN --headless --fixed-fps 60 --path . --log-file "$env:TEMP/dungeon-title-quit.log" --quit-after 1000 res://tests/smoke/title_screen_smoke.tscn -- --title-case=quit
+```
+
+첫 두 실행은 `title_screen_passed`와 종료 코드 `0`을 확인한다. 종료 분기는 `title_screen_quit_requested` 뒤 `GameEntry`의 `quit_requested` 로그와 종료 코드 `0`을 확인한다. 오류 로그 없이 세 조건을 모두 만족해야 통과다. 실제 마우스·Enter·Esc 입력, 옵션 포커스 복원·메뉴 차단, 저장 유무·조회 후 기록 소실·복원 실패·중첩 요청과 거점 단일 진입을 확인한다. 1152×648에서 타이틀 카드가 화면 안에 들어오는지도 검사한다.
 
 ### 상태 전환 자동 스모크 검사
 
@@ -169,7 +186,7 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 & $env:GODOT_BIN --path . -- --dev-state=Exploration
 ```
 
-현재 사용할 수 있는 값은 `Boot`, `Title`, `Hub`, `Exploration`, `Results`다. 이 인수는 디버그 빌드에서만 동작한다. 메인 개발 장면은 요청한 상태까지 `GameState`의 허용 전환을 순서대로 요청하며 중앙 상태 관리자를 우회하지 않는다.
+현재 사용할 수 있는 값은 `Boot`, `Title`, `Hub`, `Exploration`, `Results`다. 이 인수는 디버그 빌드에서만 동작한다. 메인 장면은 인수가 있으면 `res://src/app/dev_main.tscn`의 기존 개발 화면으로 진입하며, 요청한 상태까지 `GameState`의 허용 전환을 순서대로 요청한다. 인수 없이 개발 상태 버튼을 확인하려면 이 별도 장면을 직접 실행한다.
 
 ### 이동·카메라 수동 테스트
 
@@ -589,8 +606,21 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 - 표시 보완: 회수 결과의 긴 설명·요약 줄바꿈과 목록 최소 높이를 조정. 가방에는 선택한 물품의 상세 표시와 긴 설명 스크롤을 추가하고 미확인 분류·가치·보호 여부를 계속 숨김
 - 자료: [G1 검토 기록](g1_playtest_review.md), [자동 실행 원본](g1_playtest_automated_results.json)
 - 저장 데이터 영향: 없음. 측정 JSON은 테스트 자료이며 제품 저장 형식이 아님
-- 상태: 통합 장면·자동 검증·검토 자료는 `eabc705`, 분석 버튼 클릭 후 Tab 가방 열기 오류 보완은 `a1aae2f`에 사용자 승인으로 커밋. 가독성·시험 조건 보완은 검증 결과 검토 후 사용자 커밋 승인. 사람 플레이테스트 미수행
+- 상태: 통합 장면·자동 검증·검토 자료는 `eabc705`, 분석 버튼 클릭 후 Tab 가방 열기 오류 보완은 `a1aae2f`, 가독성·시험 조건 보완은 `9412620`에 사용자 승인으로 커밋. 사람 플레이테스트 미수행
 - 입력 보완 검증: 가방 열기·닫기를 UI 포커스 이동보다 먼저 처리. 실제 클릭과 논리·물리 키 코드가 있는 Tab 이벤트로 수정 전 실패·수정 후 통과 확인. 분석 버튼이 비활성·활성인 두 상태에서 가방 열기와 탐험·붕괴 시간 정지·재개 확인
 - 추가 화면·경로 보완: 선택한 미확인 물품의 상세 정보가 1280×800 화면과 기본 1152×648 배치에서 표시됨. 통합 시험 조건은 붕괴 경고 1.2초·골렘 의심 0.7초·추적 속도 210. 같은 경로·회수품 2개 조건에서 안정화·방전 사용 시 추적 7.28→1.38초, 경고 유지 1.20→0.05초. 충전 없이도 생환 가능하며 제품 수치·피해 규칙은 확정하지 않음
-- 정합성 검사: 지금 — 스모크 장면 12개 통과와 현재 조건의 기록 6개 확보. GDD 20-1 사람 판단·`Q-004`·`Q-005`는 대기
-- 다음 절차: [G1 검토 기록](g1_playtest_review.md)의 사람 질문·미확정 항목을 검토한 뒤 사용자 진행 지시에 따라 `DEV-0201`. G1 통과를 미리 선언하지 않음
+- 정합성 상태: 기술 검사 완료 — 스모크 장면 12개 통과와 현재 조건의 기록 6개 확보. GDD 20-1 사람 판단·`Q-004`·`Q-005`는 후속 확인
+- 다음 절차: 2026-09-08 사용자 작업 재개 지시에 따라 `DEV-0201` 진행. [G1 검토 기록](g1_playtest_review.md)의 사람 평가를 통과한 것으로 기록하지 않음
+
+## DEV-0201 게임 시작 처리와 임시 타이틀 결과
+
+- 진입: `GameEntry`가 자동 `Boot → Title`과 새 게임·이어하기 요청을 기존 `GameState`에 연결. 거점 도착 안내 뒤의 실제 거점·출정은 다음 작업
+- 표시: `TitleScreen`이 새 게임·이어하기·옵션·종료와 저장 상태 안내를 표시. 옵션은 임시 안내이며 Esc·돌아가기 버튼으로 닫으면 선택 위치 복원
+- 저장 연결: 저장 유무·복원 콜백이 모두 유효할 때 조회 결과로 이어하기 상태 결정. 실행 직전 유무 재확인, 실패 시 타이틀 유지, 중첩 시작 요청 차단. 공급자 미연결 상태는 이어하기 불가
+- 개발 진입: 기존 `dev_entry.gd`와 개발 상태 UI는 `dev_main.tscn`으로 유지. 기본 타이틀과 `--dev-state` 경로 분리
+- 검증: Godot 4.7.1 프로젝트 초기화, 스모크 장면 13개, 이어하기·종료 별도 실행, 기본 실행·개발 진입 5종 통과. 실제 입력으로 메뉴·옵션·저장 분기를 확인하고 1152×648 타이틀·옵션·거점 안내를 렌더링
+- 제외 범위: 거점·출정·정산, 화면·음량 설정 변경, 실제 저장·불러오기와 파일 형식, G1 사람 평가·최종 수치 결정
+- 저장 데이터 영향: 없음. 파일 생성·삭제·덮어쓰기 없음. 새 게임도 저장 기록을 지우지 않음
+- 상태: 구현·검증 완료, 검증 결과 검토 후 사용자 커밋 승인
+- 다음 작업: `DEV-0202 — 임시 거점과 출정`
+- 정합성 검사: 아직 아님 — 다음 단계 검사는 `DEV-0206` 완료 뒤 G2
