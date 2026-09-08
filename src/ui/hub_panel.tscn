@@ -1,0 +1,93 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://src/ui/hub_panel.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="CardStyle"]
+bg_color = Color(0.12, 0.105, 0.085, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.37, 0.31, 0.24, 1)
+content_margin_left = 32.0
+content_margin_top = 24.0
+content_margin_right = 32.0
+content_margin_bottom = 24.0
+
+[node name="HubPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.09, 0.075, 0.055, 1)
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Card" type="PanelContainer" parent="Center"]
+custom_minimum_size = Vector2(560, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("CardStyle")
+
+[node name="Content" type="VBoxContainer" parent="Center/Card"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="Center/Card/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "거점 · 출정 준비"
+
+[node name="Destination" type="Label" parent="Center/Card/Content"]
+layout_mode = 2
+text = "목적지: 시험 구역\n회수품을 챙겨 같은 입구로 돌아오세요."
+autowrap_mode = 2
+
+[node name="BagChoice" type="OptionButton" parent="Center/Card/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 44)
+
+[node name="PreparationDetails" type="Label" parent="Center/Card/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 2
+
+[node name="PrototypeNotice" type="Label" parent="Center/Card/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.72, 0.68, 0.6, 1)
+text = "시험용 조건입니다. 무게에 따른 이동 감속은 아직 없습니다."
+autowrap_mode = 2
+
+[node name="DepartureButton" type="Button" parent="Center/Card/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 48)
+text = "출정"
+
+[node name="HubQuitButton" type="Button" parent="Center/Card/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 44)
+text = "종료"
+
+[node name="HubStatus" type="Label" parent="Center/Card/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 24)
+theme_override_font_sizes/font_size = 16
+autowrap_mode = 2

@@ -19,7 +19,12 @@ related:
   - ../../src/app/game_entry.gd
   - ../../src/app/dev_main.tscn
   - ../../src/ui/title_screen.tscn
-  - ../../src/ui/hub_placeholder.tscn
+  - ../../src/ui/hub_panel.tscn
+  - ../../src/ui/expedition_results_screen.tscn
+  - ../../src/meta/hub_state.gd
+  - ../../src/core/expedition_loadout.gd
+  - ../../src/app/prototype_exploration.tscn
+  - ../../tests/smoke/hub_departure_smoke.tscn
   - ../../tests/smoke/title_screen_smoke.tscn
   - ../../src/core/stable_id.gd
   - ../../src/data/content_definition.gd
@@ -142,7 +147,7 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 & $env:GODOT_BIN --path .
 ```
 
-현재 메인 장면은 `DEV-0201`의 임시 타이틀이다. 자동으로 `Boot → Title`에 진입하고 새 게임을 누르면 중앙 상태 전환으로 거점 도착 안내까지 이동한다. 옵션은 준비 중 안내의 열기·닫기를 제공하며 종료는 게임 프로세스를 닫는다. 거점 기능은 `DEV-0202`에서 이어 붙인다.
+현재 메인 장면은 자동으로 `Boot → Title`에 진입한다. 새 게임을 누르면 거점에서 가방 2칸·3칸과 준비 조건을 확인한 뒤 시험 구역으로 출정할 수 있다. 선택한 조건은 실제 탐험의 가방·무게 단계·하네스 충전에 적용되며 생환·실패 뒤 결과 화면으로 이동한다. 정산·거점 반영은 다음 `DEV-0203` 범위여서 현재 결과 화면에서는 결과 확인과 종료까지 제공한다. 타이틀 옵션은 준비 중 안내의 열기·닫기를 제공하며 종료는 게임 프로세스를 닫는다.
 
 실제 진행 저장 기능이 아직 없어 기본 실행의 이어하기는 비활성화된다. `GameEntry.configure_continue()`에 저장 유무 조회와 복원 요청을 연결하면 결과에 따라 버튼이 갱신되고, 복원 성공 시에만 거점에 진입한다. 이 연결부는 동기식 `bool` 반환 계약이며 테스트 공급자는 실제 저장 파일을 만들지 않는다. 진행 저장·복원은 `DEV-0205` 범위다.
 
@@ -171,6 +176,22 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 ```
 
 첫 두 실행은 `title_screen_passed`와 종료 코드 `0`을 확인한다. 종료 분기는 `title_screen_quit_requested` 뒤 `GameEntry`의 `quit_requested` 로그와 종료 코드 `0`을 확인한다. 오류 로그 없이 세 조건을 모두 만족해야 통과다. 실제 마우스·Enter·Esc 입력, 옵션 포커스 복원·메뉴 차단, 저장 유무·조회 후 기록 소실·복원 실패·중첩 요청과 거점 단일 진입을 확인한다. 1152×648에서 타이틀 카드가 화면 안에 들어오는지도 검사한다.
+
+### 거점과 출정 수동 확인
+
+기본 실행에서 새 게임 → 가방 선택 → 출정 순서로 이동한다. 거점에 표시된 칸 수·무게 단계·충전과 탐험 HUD·가방 화면을 비교한다. `WASD`로 이동하고 `E`로 조사·회수·입구 귀환, `Q`로 안정화·비상 방전, `Tab`으로 가방을 열고 닫는다. 분석은 기존 하네스 표시의 정밀 분석 버튼을 사용한다.
+
+위쪽 폐품을 회수한 뒤 같은 입구로 돌아오면 생환 결과를 확인할 수 있다. 아래쪽 잔해가 경고하는 동안 대응하지 않고 범위 안에 머무르면 실패하며 현재 회수품을 잃는다. 종료 뒤 가방·하네스 입력은 탐험을 다시 진행시키지 않는다. 가방·충전·배치는 시제품 조건이며 최종 장비·비용·이동 감속을 확정한 것이 아니다. 별도의 G1 비교 장면과 사람 평가 절차는 그대로 유지한다.
+
+### 거점과 출정 자동 검사
+
+```powershell
+& $env:GODOT_BIN --headless --fixed-fps 60 --path . --log-file "$env:TEMP/dungeon-departure-two.log" --quit-after 20000 res://tests/smoke/hub_departure_smoke.tscn
+& $env:GODOT_BIN --headless --fixed-fps 60 --path . --log-file "$env:TEMP/dungeon-departure-three.log" --quit-after 20000 res://tests/smoke/hub_departure_smoke.tscn -- --departure-case=three
+& $env:GODOT_BIN --headless --fixed-fps 60 --path . --log-file "$env:TEMP/dungeon-departure-failure.log" --quit-after 20000 res://tests/smoke/hub_departure_smoke.tscn -- --departure-case=failure
+```
+
+각 실행에서 `hub_departure_passed`와 종료 코드 `0`, 오류 로그 없음을 확인한다. 준비 전 입력 차단·잘못된 데이터 거절·중복 출정 차단, 준비와 탐험 데이터의 복사본 분리, 실제 이동·회수·가방 일시정지·충전 소비와 종료 뒤 결과 보관·탐험 정리를 검사한다. 가방 2칸·3칸은 세 번째 물품의 적재 여부가 달라지고, 실패 분기는 손실만 남아야 한다. 결과 UI의 기본 해상도 경계도 검사한다.
 
 ### 상태 전환 자동 스모크 검사
 
@@ -614,7 +635,7 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 
 ## DEV-0201 게임 시작 처리와 임시 타이틀 결과
 
-- 진입: `GameEntry`가 자동 `Boot → Title`과 새 게임·이어하기 요청을 기존 `GameState`에 연결. 거점 도착 안내 뒤의 실제 거점·출정은 다음 작업
+- 진입: `GameEntry`가 자동 `Boot → Title`과 새 게임·이어하기 요청을 기존 `GameState`에 연결. 당시의 거점 도착 안내는 후속 DEV-0202에서 준비·출정 화면으로 대체
 - 표시: `TitleScreen`이 새 게임·이어하기·옵션·종료와 저장 상태 안내를 표시. 옵션은 임시 안내이며 Esc·돌아가기 버튼으로 닫으면 선택 위치 복원
 - 저장 연결: 저장 유무·복원 콜백이 모두 유효할 때 조회 결과로 이어하기 상태 결정. 실행 직전 유무 재확인, 실패 시 타이틀 유지, 중첩 시작 요청 차단. 공급자 미연결 상태는 이어하기 불가
 - 개발 진입: 기존 `dev_entry.gd`와 개발 상태 UI는 `dev_main.tscn`으로 유지. 기본 타이틀과 `--dev-state` 경로 분리
@@ -622,5 +643,20 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 - 제외 범위: 거점·출정·정산, 화면·음량 설정 변경, 실제 저장·불러오기와 파일 형식, G1 사람 평가·최종 수치 결정
 - 저장 데이터 영향: 없음. 파일 생성·삭제·덮어쓰기 없음. 새 게임도 저장 기록을 지우지 않음
 - 상태: 구현·검증 완료, 검증 결과 검토 후 사용자 커밋 승인
-- 다음 작업: `DEV-0202 — 임시 거점과 출정`
+- 커밋: 사용자 승인으로 `f21d120`
+- 후속 작업: `DEV-0202 — 임시 거점과 출정`, 아래 결과 참고
+- 정합성 검사: 아직 아님 — 다음 단계 검사는 `DEV-0206` 완료 뒤 G2
+
+## DEV-0202 임시 거점과 출정 결과
+
+- 거점: `HubState`가 가방 선택과 준비 조건을 보관하고 `HubPanel`이 표시·출정 요청을 담당
+- 데이터 인계: `ExpeditionLoadout` 복사본으로 슬롯·무게 단계·충전을 검증하고 실제 탐험 인벤토리·하네스에 적용. 탐험 중 변화가 거점 준비와 출정 당시 기록을 바꾸지 않음
+- 실행 장면: `res://src/app/prototype_exploration.tscn`. 기존 G1 배치와 시제품 조건으로 이동·조사·회수·위험·하네스·입구 귀환·실패를 연결
+- 흐름: `GameEntry`가 `Hub → Exploration → Results`를 요청하고 결과를 보관한 뒤 탐험 장면 정리. 출정 전·종료 후 조작과 중복 출정 차단
+- 자동 검사: `res://tests/smoke/hub_departure_smoke.tscn`, 가방 2칸·3칸 생환과 붕괴 실패의 세 실행
+- 검증: Godot 4.7.1 프로젝트 초기화, 스모크 장면 14개와 출정·타이틀 추가 분기 네 개, 기본 실행·개발 진입 5종 통과. 1152×648 거점·탐험·결과 렌더링과 경계 확인
+- 범위: 기존 G1 비교 자료·사람 평가 대기 유지. 정산·거점 반영, 최종 장비·비용·밸런스와 실제 설정·진행 저장은 후속 작업
+- 저장 데이터 영향: 없음. 준비·탐험·결과는 실행 중 상태이며 파일 생성·삭제·덮어쓰기 없음
+- 상태: 구현·검증 완료, 검증 결과 검토 후 사용자 커밋 승인
+- 다음 작업: `DEV-0203 — 귀환 정산과 거점 반영`
 - 정합성 검사: 아직 아님 — 다음 단계 검사는 `DEV-0206` 완료 뒤 G2
