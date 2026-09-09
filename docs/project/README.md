@@ -27,6 +27,7 @@ related:
   - m5_link_omission_review.md
   - m6_human_review.md
   - g1_playtest_review.md
+  - g2_flow_review.md
 ---
 
 # 프로젝트 문서
@@ -100,6 +101,7 @@ related:
 - [`m5_link_omission_review.md`](m5_link_omission_review.md): 활성 문서 링크·앵커, 원본 이관 누락과 G-M5 완료 조건 검사 결과
 - [`m6_human_review.md`](m6_human_review.md): 사람 검토 승인 결과, 상태 전환 후보와 `DOC-0602` 적용 결과
 - [`g1_playtest_review.md`](g1_playtest_review.md): G1 통합 장면 실행 방법, 자동 실행 자료, 사람 질문과 현재 정합성 검사 결과
+- [`g2_flow_review.md`](g2_flow_review.md): G2 전체 흐름의 반복 검사 명령·체크리스트·자동 실행 원본과 완료 범위
 
 ## 경계 규칙
 

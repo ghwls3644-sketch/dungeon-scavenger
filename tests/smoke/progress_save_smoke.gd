@@ -32,7 +32,10 @@ func _ready() -> void:
 	var settings := GameSettings.new()
 	settings.master_volume = 37
 	var settings_store := SettingsStore.new(_directory.path_join("settings.cfg"))
-	_expect(settings_store.save_settings(settings) == OK, "Cannot prepare separate settings fixture.")
+	if "--existing-settings" in OS.get_cmdline_user_args():
+		_expect(FileAccess.file_exists(_directory.path_join("settings.cfg")), "Shared settings record is missing.")
+	else:
+		_expect(settings_store.save_settings(settings) == OK, "Cannot prepare separate settings fixture.")
 	_settings_bytes = FileAccess.get_file_as_bytes(_directory.path_join("settings.cfg"))
 	_entry = MAIN.instantiate()
 	_entry.configure_progress(_store)
@@ -40,6 +43,7 @@ func _ready() -> void:
 	add_child(_entry)
 	_title = _entry.get_node("Interface/TitleScreen")
 	await _frames(5)
+	_expect(is_equal_approx(AudioServer.get_bus_volume_linear(0), 0.37), "Progress startup did not apply the saved audio setting.")
 	if _case == "read":
 		await _check_restart()
 	elif _case in ["replace", "invalid", "future", "unknown_id"]:

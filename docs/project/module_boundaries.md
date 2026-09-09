@@ -18,6 +18,7 @@ related:
   - ../design/README.md
   - project_context.md
   - development_handoff.md
+  - g2_flow_review.md
   - decisions.md
 ---
 
@@ -161,3 +162,6 @@ res://
 - `src/infrastructure/progress_store.gd`는 설정과 별도 파일의 JSON 입출력·크기 한도·버전 검사·임시 파일 교체만 맡는다. 물품 생성·정산·자동 저장 시점은 결정하지 않는다. 게임 노드나 리소스를 파일에서 실행·생성하지 않고 원시 데이터만 읽는다.
 - `GameEntry`가 실제 저장 유무·복원을 기존 이어하기 연결부에 공급하고, 거점 후보 상태의 검증·저장 성공 후에만 반영한다. 새 게임 교체 확인·재시도·중복 요청 차단과 중앙 상태 전환도 조정한다. `TitleScreen`은 확인 창과 요청 전달, `HubPanel`·`ExpeditionResultsScreen`은 저장 결과 안내만 맡는다.
 - `tests/smoke/progress_save_smoke.*`는 임시 파일로 큰 정수·ID 복원·설정 분리·손상·버전·교체 확인·쓰기 실패 재시도를 검사한다. 기존 `hub_departure_smoke.*`의 실제 입력으로 만든 파일을 별도 프로세스에서 읽어 복원·재출정도 검사한다. 테스트는 `configure_progress()`로 임시 경로를 주입하며 사용자 진행을 바꾸지 않는다.
+
+- `DEV-0206`의 `tests/run_g2_checks.ps1`은 Godot 프로세스 실행·시간 제한·로그·통과 판정과 반복 결과 기록만 소유한다. 게임 규칙은 구현하지 않는다. 저장·정산 조작은 임시 경로를 주입한 검사 장면에서 수행하고, 기본 실행 검사는 실제 메인 장면의 읽기·부팅만 확인한다. 기존 세 검사 장면이 같은 임시 설정·진행 파일을 이어 사용해 실행 사이의 연결을 확인한다.
+- [G2 검사 기록](g2_flow_review.md)은 체크리스트·원본 결과·완료 범위를 소유한다. 게임 기능·저장 스키마·모듈 간 제품 의존 방향은 변경하지 않았다.
