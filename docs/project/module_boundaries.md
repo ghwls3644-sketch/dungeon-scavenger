@@ -155,3 +155,9 @@ res://
 - `src/infrastructure/settings_store.gd`는 설정 전용 버전 1 파일의 읽기·검증·임시 파일 교체와 지원하지 않는 버전 보존을 맡는다. `settings_runtime.gd`는 검증된 값을 실제 Window·AudioServer에 적용한다. 진행 데이터와 거점 규칙은 소유하지 않는다.
 - `GameEntry`가 부팅 시 설정을 읽어 적용하고, 타이틀의 적용 요청은 파일 저장 성공 후 엔진에 전달한다. `TitleScreen`은 적용 전 선택·안내·포커스와 요청 전달만 맡는다. 테스트는 `configure_settings()`로 임시 경로를 연결하며 실제 사용자 설정을 바꾸지 않는다.
 - 정산 계산·중복 방지·복사본 보호는 `tests/smoke/settlement_smoke.*`, 실제 입력의 세 번 출정과 재산 유지는 기존 `hub_departure_smoke.*`가 확인한다. 반복 방문은 같은 시제품 장면을 새로 조립하며 기존 G1 비교 자료와 제품의 방문별 영구 상태 설계는 유지한다.
+
+- `DEV-0205`의 `src/data/item_catalog.gd`와 `prototype_item_catalog.tres`는 기존 물품 ID와 독립 정의의 대응을 소유한다. `prototype_light`·`prototype_heavy`·`prototype_known`·`prototype_unknown` 리소스는 기존 시제품 장면의 값·이름·ID를 그대로 옮겼다. 탐험과 저장 복원이 같은 정의를 사용하며 G1 테스트 원본은 유지한다.
+- `HubState`가 저장 가능한 거점 상태의 범위·검증과 ID 기반 복원을 소유한다. 실행 중 탐험·정산 대기는 저장용 상태로 내보내지 않는다. `copy()`로 만든 후보 상태에 정산·준비 변경을 적용하고, 기존 상태는 저장 성공 전까지 유지한다. UI나 디스크를 참조하지 않는다.
+- `src/infrastructure/progress_store.gd`는 설정과 별도 파일의 JSON 입출력·크기 한도·버전 검사·임시 파일 교체만 맡는다. 물품 생성·정산·자동 저장 시점은 결정하지 않는다. 게임 노드나 리소스를 파일에서 실행·생성하지 않고 원시 데이터만 읽는다.
+- `GameEntry`가 실제 저장 유무·복원을 기존 이어하기 연결부에 공급하고, 거점 후보 상태의 검증·저장 성공 후에만 반영한다. 새 게임 교체 확인·재시도·중복 요청 차단과 중앙 상태 전환도 조정한다. `TitleScreen`은 확인 창과 요청 전달, `HubPanel`·`ExpeditionResultsScreen`은 저장 결과 안내만 맡는다.
+- `tests/smoke/progress_save_smoke.*`는 임시 파일로 큰 정수·ID 복원·설정 분리·손상·버전·교체 확인·쓰기 실패 재시도를 검사한다. 기존 `hub_departure_smoke.*`의 실제 입력으로 만든 파일을 별도 프로세스에서 읽어 복원·재출정도 검사한다. 테스트는 `configure_progress()`로 임시 경로를 주입하며 사용자 진행을 바꾸지 않는다.

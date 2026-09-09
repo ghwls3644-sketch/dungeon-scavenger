@@ -59,7 +59,7 @@ focus_mode = 2
 [node name="Notice" type="Label" parent="NextStep"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
-text = "시험 가격으로 판매합니다. 이번 시험에서는 비용을 차감하지 않습니다.\n감정·등록·진행 저장은 아직 준비 중입니다."
+text = "시험 가격으로 판매합니다. 이번 시험에서는 비용을 차감하지 않습니다.\n정산 확인 후 자동 저장합니다.\n종료하면 이번 정산은 반영되지 않습니다."
 autowrap_mode = 2
 
 [node name="SettleButton" type="Button" parent="NextStep"]

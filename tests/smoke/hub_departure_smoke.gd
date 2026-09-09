@@ -17,6 +17,13 @@ func _ready() -> void:
 	)
 	var entry: GameEntry = MAIN_SCENE.instantiate()
 	entry.configure_settings(SettingsStore.new(OS.get_environment("TEMP").path_join("dungeon-departure-%d.cfg" % OS.get_process_id())))
+	var progress_path := OS.get_environment("TEMP").path_join("dungeon-hub-progress-%d-%d.json" % [OS.get_process_id(), Time.get_ticks_usec()])
+	for argument in OS.get_cmdline_user_args():
+		if argument.begins_with("--progress-test-directory="):
+			var directory := argument.trim_prefix("--progress-test-directory=")
+			DirAccess.make_dir_recursive_absolute(directory)
+			progress_path = directory.path_join("progress.json")
+	entry.configure_progress(ProgressStore.new(progress_path))
 	add_child(entry)
 	await _frames(5)
 	var hub: HubPanel = entry.get_node("Interface/HubPanel")

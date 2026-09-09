@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/data/item_definition.gd" id="1_item"]
+
+[resource]
+script = ExtResource("1_item")
+stable_id = &"test_g1_light"
+display_name = "시험용 가벼운 폐품"
+category = &"scrap"
+weight = 1.0
+slot_size = 1
+value_min = 10
+value_max = 20

@@ -4,6 +4,7 @@ extends Node
 const DEV_SCENE := preload("res://src/app/dev_main.tscn")
 const EXPLORATION_SCENE := preload("res://src/app/prototype_exploration.tscn")
 const PROTOTYPE_ECONOMY := preload("res://src/data/prototype_economy.tres")
+const ITEM_CATALOG := preload("res://src/data/prototype_item_catalog.tres")
 
 var _has_saved_game := Callable()
 var _restore_saved_game := Callable()
@@ -16,6 +17,9 @@ var _expedition_id := 0
 var _settling := false
 var _settings_store := SettingsStore.new()
 var _settings_notice := ""
+var _progress_store := ProgressStore.new()
+var _continue_overridden := false
+var _awaiting_new_game_confirmation := false
 
 @onready var _title: TitleScreen = $Interface/TitleScreen
 @onready var _hub: HubPanel = $Interface/HubPanel
@@ -29,7 +33,12 @@ func _ready() -> void:
 				get_tree().change_scene_to_packed.call_deferred(DEV_SCENE)
 				return
 	_initialize_settings()
+	if not _continue_overridden:
+		_has_saved_game = _has_progress
+		_restore_saved_game = _restore_progress
 	_title.new_game_requested.connect(_on_new_game_requested)
+	_title.new_game_confirmed.connect(_on_new_game_confirmed)
+	_title.new_game_cancelled.connect(func(): _awaiting_new_game_confirmation = false)
 	_title.continue_requested.connect(_on_continue_requested)
 	_title.quit_requested.connect(_on_quit_requested)
 	_hub.configure_bag_choices(_hub_state.get_available_bag_slots())
@@ -45,6 +54,30 @@ func _ready() -> void:
 func configure_settings(store: SettingsStore) -> void:
 	if not is_node_ready() and store != null:
 		_settings_store = store
+
+
+func configure_progress(store: ProgressStore) -> void:
+	if not is_node_ready() and store != null:
+		_progress_store = store
+
+
+func _has_progress() -> bool:
+	return HubState.from_save_data(_progress_store.load_data(), ITEM_CATALOG) != null
+
+
+func _restore_progress() -> bool:
+	var restored := HubState.from_save_data(_progress_store.load_data(), ITEM_CATALOG)
+	if restored == null:
+		return false
+	_hub_state = restored
+	return true
+
+
+func _save_hub(candidate: HubState, replace_existing: bool = false) -> bool:
+	var data := candidate.to_save_data()
+	if HubState.from_save_data(data, ITEM_CATALOG) == null:
+		return false
+	return _progress_store.save_data(data, replace_existing) == OK
 
 
 func _initialize_settings() -> void:
@@ -71,6 +104,7 @@ func _on_settings_requested(settings: GameSettings) -> void:
 
 
 func configure_continue(has_saved_game: Callable, restore_saved_game: Callable) -> void:
+	_continue_overridden = true
 	_has_saved_game = has_saved_game
 	_restore_saved_game = restore_saved_game
 	if is_node_ready():
@@ -78,7 +112,10 @@ func configure_continue(has_saved_game: Callable, restore_saved_game: Callable) 
 
 
 func refresh_continue() -> void:
-	_title.set_menu_state(_can_continue(), _starting)
+	var available := _can_continue()
+	_title.set_menu_state(available, _starting)
+	if not _continue_overridden and not available and _progress_store.has_file():
+		_title.set_status("진행 기록을 읽지 못했습니다. 기존 파일은 유지됩니다.")
 
 
 func _boot() -> void:
@@ -93,15 +130,38 @@ func _can_continue() -> bool:
 
 
 func _can_start() -> bool:
-	return not _starting and GameState.get_current_state() == GameState.State.TITLE and not _title.is_options_open()
+	return not _starting and not GameState.is_transition_in_progress() \
+		and GameState.get_current_state() == GameState.State.TITLE \
+		and not _title.is_options_open() and not _title.is_new_game_confirmation_open()
 
 
 func _on_new_game_requested() -> void:
 	if not _can_start():
 		return
+	if _progress_store.has_file():
+		_awaiting_new_game_confirmation = true
+		_title.confirm_new_game()
+		return
+	_start_new_game(false)
+
+
+func _on_new_game_confirmed() -> void:
+	if not _awaiting_new_game_confirmation:
+		return
+	_awaiting_new_game_confirmation = false
+	_start_new_game(true)
+
+
+func _start_new_game(replace_existing: bool) -> void:
+	if not _can_start():
+		return
 	_starting = true
-	_hub_state = HubState.new()
 	_title.set_menu_state(false, true)
+	var fresh := HubState.new()
+	if not _save_hub(fresh, replace_existing):
+		_restore_title("새 게임을 저장하지 못했습니다. 기존 기록을 유지합니다. 다시 시도해 주세요.")
+		return
+	_hub_state = fresh
 	_enter_hub()
 
 
@@ -148,6 +208,7 @@ func _on_state_changed(_previous_state: int, current_state: int) -> void:
 		_hub.render_preparation(_hub_state.create_departure_loadout(), _departing)
 		_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items())
 		_hub.present()
+		_hub.set_status("진행이 저장되어 있습니다.")
 	if current_state == GameState.State.EXPLORATION and _exploration != null:
 		_exploration.start_exploration()
 		_departing = false
@@ -176,8 +237,14 @@ func get_hub_stored_items() -> Array[InventoryItem]:
 func _on_bag_slots_selected(slots: int) -> void:
 	if GameState.get_current_state() != GameState.State.HUB or _departing:
 		return
-	_hub_state.select_bag_slots(slots)
+	var candidate := _hub_state.copy()
+	if not candidate.select_bag_slots(slots):
+		return
+	var saved := _save_hub(candidate)
+	if saved:
+		_hub_state = candidate
 	_hub.render_preparation(_hub_state.create_departure_loadout(), false)
+	_hub.set_status("준비 상태를 저장했습니다." if saved else "저장하지 못해 이전 준비 상태를 유지합니다. 다시 선택해 주세요.")
 
 
 func _on_departure_requested() -> void:
@@ -232,10 +299,13 @@ func _on_settlement_requested() -> void:
 		return
 	_settling = true
 	_results.set_busy(true)
-	if not _hub_state.apply_settlement(_expedition_id):
+	var candidate := _hub_state.copy()
+	if not candidate.apply_settlement(_expedition_id) or not _save_hub(candidate):
 		_settling = false
 		_results.set_busy(false)
+		_results.set_status("정산을 저장하지 못했습니다. 다시 눌러 저장해 주세요. 종료하면 이번 정산은 반영되지 않습니다.")
 		return
+	_hub_state = candidate
 	GameState.request_transition(GameState.State.HUB)
 
 

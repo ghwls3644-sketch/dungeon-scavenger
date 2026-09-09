@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3]
+[gd_scene load_steps=18 format=3]
 
 [ext_resource type="Script" path="res://src/app/prototype_exploration.gd" id="1_space"]
 [ext_resource type="PackedScene" path="res://src/gameplay/player/player.tscn" id="2_player"]
@@ -9,49 +9,17 @@
 [ext_resource type="PackedScene" path="res://src/ui/interaction_prompt.tscn" id="7_prompt"]
 [ext_resource type="PackedScene" path="res://src/ui/inventory_panel.tscn" id="8_inventory"]
 [ext_resource type="PackedScene" path="res://src/ui/harness_status.tscn" id="9_harness"]
-[ext_resource type="Script" path="res://src/data/item_definition.gd" id="11_item"]
+
 [ext_resource type="PackedScene" path="res://src/gameplay/interaction/inspectable_pickup_interactable.tscn" id="12_unknown"]
 [ext_resource type="PackedScene" path="res://src/gameplay/hazards/broken_guard_golem.tscn" id="13_golem"]
 
-[sub_resource type="Resource" id="Item_light"]
-script = ExtResource("11_item")
-stable_id = &"test_g1_light"
-display_name = "시험용 가벼운 폐품"
-category = &"scrap"
-weight = 1.0
-slot_size = 1
-value_min = 10
-value_max = 20
+[ext_resource type="Resource" path="res://src/data/prototype_light.tres" id="Item_light"]
 
-[sub_resource type="Resource" id="Item_heavy"]
-script = ExtResource("11_item")
-stable_id = &"test_g1_heavy"
-display_name = "시험용 무거운 폐품"
-category = &"scrap"
-weight = 2.0
-slot_size = 1
-value_min = 30
-value_max = 40
+[ext_resource type="Resource" path="res://src/data/prototype_heavy.tres" id="Item_heavy"]
 
-[sub_resource type="Resource" id="Item_known"]
-script = ExtResource("11_item")
-stable_id = &"test_g1_known"
-display_name = "시험용 정밀 부품"
-category = &"scrap"
-weight = 2.5
-slot_size = 1
-value_min = 80
-value_max = 110
+[ext_resource type="Resource" path="res://src/data/prototype_known.tres" id="Item_known"]
 
-[sub_resource type="Resource" id="Item_unknown"]
-script = ExtResource("11_item")
-stable_id = &"test_g1_unknown"
-display_name = "시험용 낡은 장치"
-category = &"residue"
-weight = 2.5
-slot_size = 1
-value_min = 200
-value_max = 280
+[ext_resource type="Resource" path="res://src/data/prototype_unknown.tres" id="Item_unknown"]
 
 [sub_resource type="RectangleShape2D" id="BypassShape"]
 size = Vector2(200, 100)
@@ -91,22 +59,22 @@ exploration_run_path = NodePath("../ExplorationRun")
 [node name="SafeLightPickup" parent="." instance=ExtResource("5_pickup")]
 unique_name_in_owner = true
 position = Vector2(-230, -200)
-item_definition = SubResource("Item_light")
+item_definition = ExtResource("Item_light")
 
 [node name="SafeHeavyPickup" parent="." instance=ExtResource("5_pickup")]
 unique_name_in_owner = true
 position = Vector2(120, -200)
-item_definition = SubResource("Item_heavy")
+item_definition = ExtResource("Item_heavy")
 
 [node name="KnownRewardPickup" parent="." instance=ExtResource("5_pickup")]
 unique_name_in_owner = true
 position = Vector2(200, 220)
-item_definition = SubResource("Item_known")
+item_definition = ExtResource("Item_known")
 
 [node name="UnknownPickup" parent="." instance=ExtResource("12_unknown")]
 unique_name_in_owner = true
 position = Vector2(630, 220)
-item_definition = SubResource("Item_unknown")
+item_definition = ExtResource("Item_unknown")
 inspection_summary = "표면이 갈라진 금속 장치입니다."
 risk_hint = "희미한 진동이 느껴집니다."
 

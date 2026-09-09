@@ -47,7 +47,7 @@ func get_stored_items() -> Array[InventoryItem]:
 
 
 func begin_expedition() -> int:
-	if _active_expedition_id != 0:
+	if _active_expedition_id != 0 or _next_expedition_id >= 9223372036854775807:
 		return 0
 	_active_expedition_id = _next_expedition_id
 	_next_expedition_id += 1
@@ -59,6 +59,71 @@ func cancel_expedition(expedition_id: int) -> bool:
 		return false
 	_active_expedition_id = 0
 	return true
+
+
+func copy() -> HubState:
+	var result := HubState.new()
+	result._loadout = _loadout.copy()
+	result._money = _money
+	result._stored_items = get_stored_items()
+	result._next_expedition_id = _next_expedition_id
+	result._active_expedition_id = _active_expedition_id
+	result._pending_settlement = _pending_settlement
+	return result
+
+
+func to_save_data() -> Dictionary:
+	if _active_expedition_id != 0 or _pending_settlement != null:
+		return {}
+	var items: Array[Dictionary] = []
+	for item in _stored_items:
+		items.append({
+			"id": String(item.get_definition().stable_id),
+			"identified": item.is_identified(),
+			"risk_hint": item.get_risk_hint(),
+		})
+	# Decimal strings preserve the full int64 range through JSON.
+	return {
+		"money": str(_money),
+		"bag_slots": _loadout.slot_capacity,
+		"next_expedition_id": str(_next_expedition_id),
+		"stored_items": items,
+	}
+
+
+static func from_save_data(data: Dictionary, catalog: ItemCatalog) -> HubState:
+	if catalog == null or not catalog.is_valid() or data.size() != 4:
+		return null
+	var money := _read_nonnegative_integer(data.get("money"))
+	var next_id := _read_nonnegative_integer(data.get("next_expedition_id"))
+	var slots: Variant = data.get("bag_slots")
+	var items: Variant = data.get("stored_items")
+	if money < 0 or next_id <= 0 or typeof(slots) not in [TYPE_INT, TYPE_FLOAT] \
+			or not is_finite(float(slots)) or slots != floor(float(slots)) \
+			or int(slots) not in PROTOTYPE_BAG_SLOTS or typeof(items) != TYPE_ARRAY:
+		return null
+	var restored := HubState.new()
+	restored._money = money
+	restored._next_expedition_id = next_id
+	restored.select_bag_slots(int(slots))
+	for raw_item in items:
+		if typeof(raw_item) != TYPE_DICTIONARY or raw_item.size() != 3 \
+				or typeof(raw_item.get("id")) != TYPE_STRING \
+				or typeof(raw_item.get("identified")) != TYPE_BOOL \
+				or typeof(raw_item.get("risk_hint")) != TYPE_STRING:
+			return null
+		var definition := catalog.find_item(StringName(raw_item.id))
+		if definition == null:
+			return null
+		restored._stored_items.append(InventoryItem.from_definition(definition, raw_item.identified, raw_item.risk_hint))
+	return restored
+
+
+static func _read_nonnegative_integer(value: Variant) -> int:
+	if typeof(value) != TYPE_STRING or not value.is_valid_int():
+		return -1
+	var number: int = value.to_int()
+	return number if number >= 0 and str(number) == value else -1
 
 
 func prepare_settlement(expedition_id: int, outcome: ExplorationOutcome, rule: EconomyRule) -> bool:

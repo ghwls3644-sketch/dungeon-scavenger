@@ -19,6 +19,7 @@ func _ready() -> void:
 	)
 	_entry = MAIN_SCENE.instantiate()
 	_entry.configure_settings(SettingsStore.new(OS.get_environment("TEMP").path_join("dungeon-title-%d.cfg" % OS.get_process_id())))
+	_entry.configure_progress(ProgressStore.new(OS.get_environment("TEMP").path_join("dungeon-title_screen_smoke-progress-%d-%d.json" % [OS.get_process_id(), Time.get_ticks_usec()])))
 	add_child(_entry)
 	_title = _entry.get_node("Interface/TitleScreen")
 	await _frames(5)

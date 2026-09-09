@@ -2,6 +2,8 @@ class_name TitleScreen
 extends Control
 
 signal new_game_requested
+signal new_game_confirmed
+signal new_game_cancelled
 signal continue_requested
 signal quit_requested
 signal settings_requested(settings: GameSettings)
@@ -25,6 +27,7 @@ var _settings_writable := false
 @onready var _volume_value: Label = %VolumeValue
 @onready var _apply: Button = %ApplySettingsButton
 @onready var _options_status: Label = %OptionsStatus
+@onready var _new_game_confirm: ConfirmationDialog = %NewGameConfirm
 
 
 func _ready() -> void:
@@ -47,7 +50,28 @@ func _ready() -> void:
 		_on_settings_edited()
 	)
 	_apply.pressed.connect(_request_settings)
+	_new_game_confirm.confirmed.connect(func():
+		_new_game_confirm.hide()
+		_render_buttons()
+		new_game_confirmed.emit()
+	)
+	_new_game_confirm.canceled.connect(func():
+		_new_game_confirm.hide()
+		_render_buttons()
+		new_game_cancelled.emit()
+		focus_start()
+	)
 	_render_buttons()
+
+
+func confirm_new_game() -> void:
+	_new_game_confirm.popup_centered()
+	_new_game_confirm.get_cancel_button().grab_focus()
+	_render_buttons()
+
+
+func is_new_game_confirmation_open() -> bool:
+	return _new_game_confirm.visible
 
 
 func configure_settings(settings: GameSettings, notice: String = "", writable: bool = true) -> void:
@@ -97,6 +121,7 @@ func present() -> void:
 func dismiss() -> void:
 	hide()
 	_options.hide()
+	_new_game_confirm.hide()
 	_render_buttons()
 
 
@@ -116,7 +141,7 @@ func is_options_open() -> bool:
 
 
 func focus_start() -> void:
-	if is_visible_in_tree() and not _busy and not _options.visible:
+	if is_visible_in_tree() and not _busy and not _options.visible and not _new_game_confirm.visible:
 		if _continue_available:
 			_continue.grab_focus()
 		else:
@@ -124,7 +149,7 @@ func focus_start() -> void:
 
 
 func _render_buttons() -> void:
-	var blocked := _busy or _options.visible
+	var blocked := _busy or _options.visible or _new_game_confirm.visible
 	_new_game.disabled = blocked
 	_continue.disabled = blocked or not _continue_available
 	_options_button.disabled = blocked

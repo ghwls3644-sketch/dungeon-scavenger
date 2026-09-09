@@ -5,6 +5,7 @@ signal settlement_requested
 signal quit_requested
 
 @onready var _settle: Button = $NextStep/SettleButton
+@onready var _default_notice: String = $NextStep/Notice.text
 
 
 func _ready() -> void:
@@ -13,6 +14,7 @@ func _ready() -> void:
 
 
 func present_result(outcome: ExplorationOutcome, settlement: SettlementResult) -> void:
+	$NextStep/Notice.text = _default_notice
 	$OutcomePanel.bind_outcome(outcome)
 	_settle.disabled = settlement == null
 	$NextStep/Title.text = "실패 결과" if outcome != null and outcome.is_failure() else "귀환 정산"
@@ -43,6 +45,10 @@ func present_result(outcome: ExplorationOutcome, settlement: SettlementResult) -
 func set_busy(busy: bool) -> void:
 	_settle.disabled = busy
 	$NextStep/QuitButton.disabled = busy
+
+
+func set_status(message: String) -> void:
+	$NextStep/Notice.text = message
 
 
 static func get_storage_reason(item: InventoryItem) -> String:

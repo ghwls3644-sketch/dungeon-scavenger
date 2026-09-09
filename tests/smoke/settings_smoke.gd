@@ -104,6 +104,7 @@ func _check_ui() -> void:
 		fixture.save(path)
 	_entry = MAIN_SCENE.instantiate()
 	_entry.configure_settings(store)
+	_entry.configure_progress(ProgressStore.new(OS.get_environment("TEMP").path_join("dungeon-settings_smoke-progress-%d-%d.json" % [OS.get_process_id(), Time.get_ticks_usec()])))
 	add_child(_entry)
 	_title = _entry.get_node("Interface/TitleScreen")
 	await _frames(5)
