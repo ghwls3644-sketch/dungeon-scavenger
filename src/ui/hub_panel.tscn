@@ -38,56 +38,92 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Card" type="PanelContainer" parent="Center"]
-custom_minimum_size = Vector2(560, 0)
+custom_minimum_size = Vector2(1008, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("CardStyle")
 
-[node name="Content" type="VBoxContainer" parent="Center/Card"]
+[node name="Content" type="HBoxContainer" parent="Center/Card"]
 layout_mode = 2
 theme_override_constants/separation = 14
 
-[node name="Title" type="Label" parent="Center/Card/Content"]
+[node name="Preparation" type="VBoxContainer" parent="Center/Card/Content"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="Center/Card/Content/Preparation"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "거점 · 출정 준비"
 
-[node name="Destination" type="Label" parent="Center/Card/Content"]
+[node name="Destination" type="Label" parent="Center/Card/Content/Preparation"]
 layout_mode = 2
 text = "목적지: 시험 구역\n회수품을 챙겨 같은 입구로 돌아오세요."
 autowrap_mode = 2
 
-[node name="BagChoice" type="OptionButton" parent="Center/Card/Content"]
+[node name="BagChoice" type="OptionButton" parent="Center/Card/Content/Preparation"]
 unique_name_in_owner = true
 layout_mode = 2
 custom_minimum_size = Vector2(0, 44)
 
-[node name="PreparationDetails" type="Label" parent="Center/Card/Content"]
+[node name="PreparationDetails" type="Label" parent="Center/Card/Content/Preparation"]
 unique_name_in_owner = true
 layout_mode = 2
 autowrap_mode = 2
 
-[node name="PrototypeNotice" type="Label" parent="Center/Card/Content"]
+[node name="PrototypeNotice" type="Label" parent="Center/Card/Content/Preparation"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 theme_override_colors/font_color = Color(0.72, 0.68, 0.6, 1)
 text = "시험용 조건입니다. 무게에 따른 이동 감속은 아직 없습니다."
 autowrap_mode = 2
 
-[node name="DepartureButton" type="Button" parent="Center/Card/Content"]
+[node name="DepartureButton" type="Button" parent="Center/Card/Content/Preparation"]
 unique_name_in_owner = true
 layout_mode = 2
 custom_minimum_size = Vector2(0, 48)
 text = "출정"
 
-[node name="HubQuitButton" type="Button" parent="Center/Card/Content"]
+[node name="HubQuitButton" type="Button" parent="Center/Card/Content/Preparation"]
 unique_name_in_owner = true
 layout_mode = 2
 custom_minimum_size = Vector2(0, 44)
 text = "종료"
 
-[node name="HubStatus" type="Label" parent="Center/Card/Content"]
+[node name="HubStatus" type="Label" parent="Center/Card/Content/Preparation"]
 unique_name_in_owner = true
 layout_mode = 2
 custom_minimum_size = Vector2(0, 24)
 theme_override_font_sizes/font_size = 16
+autowrap_mode = 2
+
+[node name="Holdings" type="VBoxContainer" parent="Center/Card/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 16
+
+[node name="Money" type="Label" parent="Center/Card/Content/Holdings"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "보유금 0"
+
+[node name="StoredCount" type="Label" parent="Center/Card/Content/Holdings"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "거점 보관 0개"
+
+[node name="StoredItems" type="RichTextLabel" parent="Center/Card/Content/Holdings"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 260)
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 18
+selection_enabled = true
+focus_mode = 2
+
+[node name="StorageNotice" type="Label" parent="Center/Card/Content/Holdings"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "미확인·보호 물품은 보관합니다.\n감정·등록·진행 저장은 준비 중입니다.\n게임을 종료하면 이번 진행은 사라집니다."
 autowrap_mode = 2

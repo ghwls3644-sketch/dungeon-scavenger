@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="PackedScene" path="res://src/ui/exploration_outcome_panel.tscn" id="4_outcome"]
+[ext_resource type="Script" path="res://src/ui/expedition_results_screen.gd" id="1_screen"]
 
 [node name="ExpeditionResultsScreen" type="Control"]
 visible = false
@@ -10,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_screen")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -26,21 +28,44 @@ offset_bottom = 572.0
 
 [node name="NextStep" type="VBoxContainer" parent="."]
 offset_left = 728.0
-offset_top = 72.0
+offset_top = 32.0
 offset_right = 1120.0
-offset_bottom = 400.0
-theme_override_constants/separation = 24
+offset_bottom = 610.0
+theme_override_constants/separation = 12
 
 [node name="Title" type="Label" parent="NextStep"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
-text = "탐험 종료"
+text = "귀환 정산"
+
+[node name="NetIncome" type="Label" parent="NextStep"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 34
+text = "순이익 +0"
+
+[node name="Totals" type="Label" parent="NextStep"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+autowrap_mode = 2
+
+[node name="Items" type="RichTextLabel" parent="NextStep"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 148)
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 18
+selection_enabled = true
+focus_mode = 2
 
 [node name="Notice" type="Label" parent="NextStep"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "회수·손실 결과를 확인할 수 있습니다.\n정산 기능은 준비 중입니다."
+theme_override_font_sizes/font_size = 16
+text = "시험 가격으로 판매합니다. 이번 시험에서는 비용을 차감하지 않습니다.\n감정·등록·진행 저장은 아직 준비 중입니다."
 autowrap_mode = 2
+
+[node name="SettleButton" type="Button" parent="NextStep"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 48)
+text = "정산하고 거점으로"
 
 [node name="QuitButton" type="Button" parent="NextStep"]
 layout_mode = 2

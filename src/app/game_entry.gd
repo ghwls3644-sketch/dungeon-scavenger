@@ -3,6 +3,7 @@ extends Node
 
 const DEV_SCENE := preload("res://src/app/dev_main.tscn")
 const EXPLORATION_SCENE := preload("res://src/app/prototype_exploration.tscn")
+const PROTOTYPE_ECONOMY := preload("res://src/data/prototype_economy.tres")
 
 var _has_saved_game := Callable()
 var _restore_saved_game := Callable()
@@ -11,10 +12,12 @@ var _departing := false
 var _hub_state := HubState.new()
 var _exploration: PrototypeExploration
 var _pending_outcome: ExplorationOutcome
+var _expedition_id := 0
+var _settling := false
 
 @onready var _title: TitleScreen = $Interface/TitleScreen
 @onready var _hub: HubPanel = $Interface/HubPanel
-@onready var _results: Control = $Interface/Results
+@onready var _results: ExpeditionResultsScreen = $Interface/Results
 
 
 func _ready() -> void:
@@ -30,7 +33,8 @@ func _ready() -> void:
 	_hub.bag_slots_selected.connect(_on_bag_slots_selected)
 	_hub.departure_requested.connect(_on_departure_requested)
 	_hub.quit_requested.connect(_on_quit_requested)
-	$Interface/Results/NextStep/QuitButton.pressed.connect(_on_quit_requested)
+	_results.settlement_requested.connect(_on_settlement_requested)
+	_results.quit_requested.connect(_on_quit_requested)
 	GameState.state_changed.connect(_on_state_changed)
 	_boot.call_deferred()
 
@@ -106,15 +110,20 @@ func _on_state_changed(_previous_state: int, current_state: int) -> void:
 	else:
 		_title.dismiss()
 	if _hub.visible:
+		if _settling:
+			_pending_outcome = null
+			_expedition_id = 0
+			_settling = false
 		_hub.render_preparation(_hub_state.create_departure_loadout(), _departing)
+		_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items())
 		_hub.present()
 	if current_state == GameState.State.EXPLORATION and _exploration != null:
 		_exploration.start_exploration()
 		_departing = false
 	if _results.visible:
-		$Interface/Results/OutcomePanel.bind_outcome(_pending_outcome)
 		_discard_exploration()
-		$Interface/Results/NextStep/QuitButton.grab_focus()
+		_results.set_busy(false)
+		_results.present_result(_pending_outcome, _hub_state.get_pending_settlement())
 
 
 func get_departure_preview() -> ExpeditionLoadout:
@@ -123,6 +132,14 @@ func get_departure_preview() -> ExpeditionLoadout:
 
 func get_pending_outcome() -> ExplorationOutcome:
 	return _pending_outcome
+
+
+func get_hub_money() -> int:
+	return _hub_state.get_money()
+
+
+func get_hub_stored_items() -> Array[InventoryItem]:
+	return _hub_state.get_stored_items()
 
 
 func _on_bag_slots_selected(slots: int) -> void:
@@ -145,13 +162,19 @@ func _on_departure_requested() -> void:
 	if not _exploration.prepare_departure(loadout):
 		_cancel_departure()
 		return
-	_exploration.exploration_ended.connect(_on_exploration_ended)
+	_expedition_id = _hub_state.begin_expedition()
+	if _expedition_id == 0:
+		_cancel_departure()
+		return
+	_exploration.exploration_ended.connect(_on_exploration_ended.bind(_expedition_id))
 	if not GameState.request_transition(GameState.State.EXPLORATION):
 		_cancel_departure()
 
 
 func _cancel_departure() -> void:
 	_discard_exploration()
+	_hub_state.cancel_expedition(_expedition_id)
+	_expedition_id = 0
 	_departing = false
 	_hub.render_preparation(_hub_state.create_departure_loadout(), false)
 	_hub.set_status("출정 준비를 확인해 주세요.")
@@ -163,11 +186,26 @@ func _discard_exploration() -> void:
 		_exploration = null
 
 
-func _on_exploration_ended(outcome: ExplorationOutcome) -> void:
-	if GameState.get_current_state() != GameState.State.EXPLORATION or _pending_outcome != null:
+func _on_exploration_ended(outcome: ExplorationOutcome, expedition_id: int) -> void:
+	if GameState.get_current_state() != GameState.State.EXPLORATION or _pending_outcome != null or expedition_id != _expedition_id:
 		return
 	_pending_outcome = outcome
+	_hub_state.prepare_settlement(expedition_id, outcome, PROTOTYPE_ECONOMY)
 	GameState.request_transition(GameState.State.RESULTS)
+
+
+func _on_settlement_requested() -> void:
+	if _settling or GameState.get_current_state() != GameState.State.RESULTS or GameState.is_transition_in_progress():
+		return
+	if _pending_outcome == null or get_tree().paused:
+		return
+	_settling = true
+	_results.set_busy(true)
+	if not _hub_state.apply_settlement(_expedition_id):
+		_settling = false
+		_results.set_busy(false)
+		return
+	GameState.request_transition(GameState.State.HUB)
 
 
 func _on_quit_requested() -> void:

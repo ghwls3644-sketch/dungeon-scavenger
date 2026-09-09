@@ -107,7 +107,60 @@ func _ready() -> void:
 	hub.departure_requested.emit()
 	await _frames(4)
 	_expect(not get_tree().paused and entry.get_pending_outcome() == outcome and _departure_count == 1, "Ended exploration accepted input or replaced the pending result.")
+	await _check_settlement_and_redeparture(entry, hub, slots, failure_case)
 	_finish()
+
+
+func _check_settlement_and_redeparture(entry: GameEntry, hub: HubPanel, slots: int, failed: bool) -> void:
+	var money := 0 if failed else 40
+	var stored_count := 1 if not failed and slots == 3 else 0
+	var results: ExpeditionResultsScreen = entry.get_node("Interface/Results")
+	_expect(entry.get_hub_money() == 0 and entry.get_hub_stored_items().is_empty(), "Result preview already changed hub holdings.")
+	_click(results.get_node("NextStep/SettleButton"))
+	_click(results.get_node("NextStep/SettleButton"))
+	results.settlement_requested.emit()
+	await _frames(5)
+	_expect(GameState.get_current_state() == GameState.State.HUB and hub.visible and not results.visible, "Settlement did not return to the hub.")
+	_expect(entry.get_pending_outcome() == null and entry.get_hub_money() == money and entry.get_hub_stored_items().size() == stored_count, "Settlement lost items or paid twice.")
+	_expect(hub.get_node("%Money").text == "보유금 %d" % money, "Hub did not display the new balance.")
+	if stored_count > 0:
+		var stored := entry.get_hub_stored_items()
+		_expect(not stored[0].is_identified() and stored[0].get_definition().stable_id == &"test_g1_unknown", "Unknown recovery was sold or identified.")
+		_expect("감정 대기" in hub.get_node("%StoredItems").text, "Hub hid the retained item.")
+	results.settlement_requested.emit()
+	_press_key(KEY_TAB)
+	await _frames(3)
+	_expect(not get_tree().paused and entry.get_hub_money() == money, "Hidden result screen reapplied settlement.")
+	_click(hub.get_node("%DepartureButton"))
+	await _frames(6)
+	var world: PrototypeExploration = entry.get_node("PrototypeExploration")
+	var inventory: PlayerInventory = world.get_node("Player/Inventory")
+	var player: PlayerController = world.get_node("Player")
+	_expect(_departure_count == 2 and inventory.get_used_slots() == 0 and inventory.slot_capacity == slots, "Next expedition did not start with a fresh configured bag.")
+	_expect(world.get_node("Player/HarnessController").get_current_charge() == 3, "Next expedition did not apply its starting charge.")
+	for point in [Vector2(-500, -200), Vector2(-275, -200)]:
+		await _walk(player, point)
+	_press_key(KEY_E)
+	await _frames(3)
+	_expect(inventory.get_used_slots() == 1, "Repeated expedition did not restore prototype pickups.")
+	for point in [Vector2(-500, -200), Vector2(-500, 200), Vector2(-170, 200)]:
+		await _walk(player, point)
+	await _frames(100)
+	_expect(entry.get_pending_outcome() != null and entry.get_pending_outcome().is_failure(), "Repeated expedition did not fail on collapse.")
+	_click(results.get_node("NextStep/SettleButton"))
+	await _frames(5)
+	_expect(GameState.get_current_state() == GameState.State.HUB and entry.get_hub_money() == money and entry.get_hub_stored_items().size() == stored_count, "Failure took prior money or stored items.")
+	_click(hub.get_node("%DepartureButton"))
+	await _frames(6)
+	world = entry.get_node("PrototypeExploration")
+	player = world.get_node("Player")
+	await _walk(player, Vector2(-720, 0))
+	_press_key(KEY_E)
+	await _frames(5)
+	_expect(entry.get_pending_outcome().is_safe_return(), "Re-departure after failure was blocked.")
+	_click(results.get_node("NextStep/SettleButton"))
+	await _frames(5)
+	_expect(_departure_count == 3 and entry.get_hub_money() == money and entry.get_hub_stored_items().size() == stored_count, "Empty return paid for old recoveries or erased storage.")
 
 
 func _check_loadout_boundary() -> void:

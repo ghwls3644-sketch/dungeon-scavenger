@@ -40,6 +40,21 @@ func set_status(message: String) -> void:
 	_status.text = message
 
 
+func render_holdings(money: int, items: Array[InventoryItem]) -> void:
+	%Money.text = "보유금 %d" % money
+	%StoredCount.text = "거점 보관 %d개" % items.size()
+	var lines := PackedStringArray()
+	for item in items:
+		var detail := "%s · 무게 %.1f\n%s" % [
+			item.get_definition().display_name, item.get_definition().weight,
+			ExpeditionResultsScreen.get_storage_reason(item),
+		]
+		if not item.get_risk_hint().is_empty():
+			detail += "\n" + item.get_risk_hint()
+		lines.append(detail)
+	%StoredItems.text = "\n\n".join(lines) if not lines.is_empty() else "보관 중인 물품이 없습니다."
+
+
 func present() -> void:
 	show()
 	_departure.grab_focus()

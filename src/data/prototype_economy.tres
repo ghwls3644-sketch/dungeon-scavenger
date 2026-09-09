@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EconomyRule" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/data/economy_rule.gd" id="1_rule"]
+
+[resource]
+script = ExtResource("1_rule")
+base_prices = Dictionary[StringName, int]({
+&"test_g1_light": 10,
+&"test_g1_heavy": 30,
+&"test_g1_known": 80
+})

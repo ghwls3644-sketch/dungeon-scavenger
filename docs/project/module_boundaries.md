@@ -8,7 +8,7 @@ canonical_for:
   - source_tree_layout
   - module_responsibilities
   - module_dependency_rules
-last_reviewed: 2026-09-08
+last_reviewed: 2026-09-09
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -146,3 +146,8 @@ res://
 - `GameEntry`는 거점 선택 요청을 준비 상태에 반영하고 출정 시 복사본을 `src/app/prototype_exploration.*`에 전달한다. 이 조립 장면은 기존 플레이어·물품·위험·하네스·회수 모듈에 데이터를 적용하고 시작·종료 시 조작을 관리한다. 거점 상태를 참조하거나 수정하지 않는다.
 - `src/ui/hub_panel.*`은 준비 조건 표시와 선택·출정 요청을, `src/ui/expedition_results_screen.tscn`은 기존 종료 결과 표시와 후속 기능 안내를 맡는다. `GameEntry`는 결과를 보관하고 탐험 장면을 정리하며 정산·거점 반영은 `DEV-0203`에 둔다.
 - 시제품 배치와 값은 기존 G1 조건을 재사용하지만 실행 코드에서 `tests`를 참조하지 않는다. G1 비교 장면·측정 원본은 유지하고, 출정 데이터 분리·실제 입력 경로·종료 정리는 `tests/smoke/hub_departure_smoke.*`가 검사한다. 실제 저장 파일과 최종 장비·비용·밸런스 규칙은 추가하지 않는다.
+- `DEV-0203`의 `src/data/economy_rule.gd`와 `prototype_economy.tres`는 안정적 ID별 시험 판매가를 소유한다. 기존 아이템의 예상 가치 범위를 수정하거나 예상가를 실제 판매가로 자동 전환하지 않는다. 세율·수리비 등 아직 없는 비용 시스템은 포함하지 않는다.
+- `src/meta/settlement_result.gd`는 기존 `ExplorationOutcome`의 공개 회수 결과를 읽어 판매 내역·수입·비용·순이익과 보관품을 계산한다. 미확인·보호·가격 미설정 물품을 보관 대상으로 분리하고 결과는 복사본으로 조회한다. 탐험 모듈은 거점·경제 모듈을 참조하지 않는다.
+- `HubState`는 실행 중 돈·보관품과 출정 번호를 소유하며 정산 준비와 반영을 구분한다. 같은 출정의 중복 정산과 이전 출정 요청을 거절하고 실패는 기존 돈·보관품을 바꾸지 않는다. 가격·보호 판정은 `SettlementResult`와 기존 공개 아이템 정의를 따른다.
+- `GameEntry`는 탐험 종료 결과·출정 번호를 거점 정산에 연결하고 확인 요청 후 중앙 상태 관리자를 통해 거점으로 돌아온다. `ExpeditionResultsScreen`과 `HubPanel`은 계산된 결과와 공개 물품 정보만 표시한다. 거점 감정·등록·연구·보관품 꺼내기·디스크 저장을 수행하지 않는다.
+- 정산 계산·중복 방지·복사본 보호는 `tests/smoke/settlement_smoke.*`, 실제 입력의 세 번 출정과 재산 유지는 기존 `hub_departure_smoke.*`가 확인한다. 반복 방문은 같은 시제품 장면을 새로 조립하며 기존 G1 비교 자료와 제품의 방문별 영구 상태 설계는 유지한다.
