@@ -4,9 +4,13 @@ extends Control
 signal new_game_requested
 signal continue_requested
 signal quit_requested
+signal settings_requested(settings: GameSettings)
 
 var _continue_available := false
 var _busy := false
+var _settings := GameSettings.new()
+var _settings_notice := ""
+var _settings_writable := false
 
 @onready var _new_game: Button = %NewGameButton
 @onready var _continue: Button = %ContinueButton
@@ -15,6 +19,12 @@ var _busy := false
 @onready var _options: Control = %OptionsOverlay
 @onready var _back: Button = %OptionsBackButton
 @onready var _status: Label = %Status
+@onready var _screen_mode: OptionButton = %ScreenMode
+@onready var _window_size: OptionButton = %WindowSize
+@onready var _volume: HSlider = %MasterVolume
+@onready var _volume_value: Label = %VolumeValue
+@onready var _apply: Button = %ApplySettingsButton
+@onready var _options_status: Label = %OptionsStatus
 
 
 func _ready() -> void:
@@ -23,7 +33,60 @@ func _ready() -> void:
 	_quit.pressed.connect(func(): quit_requested.emit())
 	_options_button.pressed.connect(_open_options)
 	_back.pressed.connect(_close_options)
+	_screen_mode.add_item("창 모드")
+	_screen_mode.add_item("전체 화면")
+	for window_size in GameSettings.WINDOW_SIZES:
+		_window_size.add_item("%d × %d" % [window_size.x, window_size.y])
+	_screen_mode.item_selected.connect(func(_index: int):
+		_window_size.disabled = _screen_mode.selected == 1 or not _settings_writable
+		_on_settings_edited()
+	)
+	_window_size.item_selected.connect(func(_index: int): _on_settings_edited())
+	_volume.value_changed.connect(func(value: float):
+		_volume_value.text = "%d%%" % int(value)
+		_on_settings_edited()
+	)
+	_apply.pressed.connect(_request_settings)
 	_render_buttons()
+
+
+func configure_settings(settings: GameSettings, notice: String = "", writable: bool = true) -> void:
+	_settings = settings.copy()
+	_settings_notice = notice
+	_settings_writable = writable
+	if is_node_ready():
+		_render_settings()
+
+
+func set_options_status(message: String) -> void:
+	_options_status.text = message
+
+
+func _render_settings() -> void:
+	_screen_mode.select(1 if _settings.screen_mode == "fullscreen" else 0)
+	_window_size.select(_settings.window_size_index)
+	_screen_mode.disabled = not _settings_writable
+	_window_size.disabled = _screen_mode.selected == 1 or not _settings_writable
+	_volume.editable = _settings_writable
+	_volume.set_value_no_signal(_settings.master_volume)
+	_volume_value.text = "%d%%" % _settings.master_volume
+	_apply.disabled = not _settings_writable
+	_options_status.text = _settings_notice if not _settings_notice.is_empty() else "적용을 누르면 저장됩니다. 돌아가기·Esc는 변경을 취소합니다."
+
+
+func _on_settings_edited() -> void:
+	if _settings_writable:
+		_options_status.text = "변경한 설정은 아직 저장되지 않았습니다. 적용을 눌러 저장하세요."
+
+
+func _request_settings() -> void:
+	if _busy or not is_visible_in_tree() or not _options.visible or not _settings_writable:
+		return
+	var candidate := GameSettings.new()
+	candidate.screen_mode = "fullscreen" if _screen_mode.selected == 1 else "windowed"
+	candidate.window_size_index = _window_size.selected
+	candidate.master_volume = int(_volume.value)
+	settings_requested.emit(candidate)
 
 
 func present() -> void:
@@ -72,6 +135,7 @@ func _open_options() -> void:
 	if _busy or not is_visible_in_tree():
 		return
 	_options.show()
+	_render_settings()
 	_render_buttons()
 	_back.grab_focus()
 

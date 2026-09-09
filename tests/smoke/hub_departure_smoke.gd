@@ -16,6 +16,7 @@ func _ready() -> void:
 			_departure_count += 1
 	)
 	var entry: GameEntry = MAIN_SCENE.instantiate()
+	entry.configure_settings(SettingsStore.new(OS.get_environment("TEMP").path_join("dungeon-departure-%d.cfg" % OS.get_process_id())))
 	add_child(entry)
 	await _frames(5)
 	var hub: HubPanel = entry.get_node("Interface/HubPanel")

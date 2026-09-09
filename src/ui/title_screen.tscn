@@ -143,23 +143,101 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Card" type="PanelContainer" parent="OptionsOverlay/Center"]
-custom_minimum_size = Vector2(440, 0)
+custom_minimum_size = Vector2(620, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("CardStyle")
 
 [node name="Content" type="VBoxContainer" parent="OptionsOverlay/Center/Card"]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 12
 
 [node name="Title" type="Label" parent="OptionsOverlay/Center/Card/Content"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "옵션"
 
-[node name="Notice" type="Label" parent="OptionsOverlay/Center/Card/Content"]
+[node name="SettingsGrid" type="GridContainer" parent="OptionsOverlay/Center/Card/Content"]
 layout_mode = 2
-text = "화면·음량 설정은 준비 중입니다."
+theme_override_constants/h_separation = 24
+theme_override_constants/v_separation = 12
+columns = 2
+
+[node name="ModeLabel" type="Label" parent="OptionsOverlay/Center/Card/Content/SettingsGrid"]
+layout_mode = 2
+text = "화면 모드"
+
+[node name="ScreenMode" type="OptionButton" parent="OptionsOverlay/Center/Card/Content/SettingsGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/focus = SubResource("FocusStyle")
+
+[node name="SizeLabel" type="Label" parent="OptionsOverlay/Center/Card/Content/SettingsGrid"]
+layout_mode = 2
+text = "창 크기"
+
+[node name="WindowSize" type="OptionButton" parent="OptionsOverlay/Center/Card/Content/SettingsGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/focus = SubResource("FocusStyle")
+
+[node name="VolumeLabel" type="Label" parent="OptionsOverlay/Center/Card/Content/SettingsGrid"]
+layout_mode = 2
+text = "전체 음량"
+
+[node name="VolumeRow" type="HBoxContainer" parent="OptionsOverlay/Center/Card/Content/SettingsGrid"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="MasterVolume" type="HSlider" parent="OptionsOverlay/Center/Card/Content/SettingsGrid/VolumeRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+value = 100.0
+step = 1.0
+
+[node name="VolumeValue" type="Label" parent="OptionsOverlay/Center/Card/Content/SettingsGrid/VolumeRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+text = "100%"
+horizontal_alignment = 2
+
+[node name="DisplayHint" type="Label" parent="OptionsOverlay/Center/Card/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "전체 화면은 모니터 크기에 맞춥니다. 창 크기는 창 모드에서 적용됩니다."
 autowrap_mode = 2
+
+[node name="Divider" type="HSeparator" parent="OptionsOverlay/Center/Card/Content"]
+layout_mode = 2
+
+[node name="InputGuide" type="Label" parent="OptionsOverlay/Center/Card/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "기본 조작\nW A S D 이동  ·  E 조사·회수·상호작용\nQ 하네스 대응  ·  Tab 가방  ·  Esc 닫기"
+autowrap_mode = 2
+
+[node name="OptionsStatus" type="Label" parent="OptionsOverlay/Center/Card/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "적용을 누르면 저장됩니다. 돌아가기·Esc는 변경을 취소합니다."
+autowrap_mode = 2
+
+[node name="ApplySettingsButton" type="Button" parent="OptionsOverlay/Center/Card/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_styles/normal = SubResource("ButtonStyle")
+theme_override_styles/focus = SubResource("FocusStyle")
+text = "적용"
 
 [node name="OptionsBackButton" type="Button" parent="OptionsOverlay/Center/Card/Content"]
 unique_name_in_owner = true

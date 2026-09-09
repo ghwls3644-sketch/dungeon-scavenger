@@ -152,7 +152,7 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 & $env:GODOT_BIN --path .
 ```
 
-현재 메인 장면은 자동으로 `Boot → Title`에 진입한다. 새 게임을 누르면 거점에서 가방 2칸·3칸과 준비 조건을 확인한 뒤 시험 구역으로 출정할 수 있다. 선택한 조건은 실제 탐험의 가방·무게 단계·하네스 충전에 적용되며 생환·실패 뒤 결과 화면으로 이동한다. `정산하고 거점으로`를 누르면 판매액이 보유금에 반영되고 미판매 회수품은 거점에 보관된다. 실패는 `거점으로 돌아가기`로 기존 돈·보관품을 유지하며 복귀한다. 같은 실행에서 다시 출정할 수 있다. 타이틀 옵션은 준비 중 안내의 열기·닫기를 제공하며 종료는 게임 프로세스를 닫는다.
+현재 메인 장면은 자동으로 `Boot → Title`에 진입한다. 새 게임을 누르면 거점에서 가방 2칸·3칸과 준비 조건을 확인한 뒤 시험 구역으로 출정할 수 있다. 선택한 조건은 실제 탐험의 가방·무게 단계·하네스 충전에 적용되며 생환·실패 뒤 결과 화면으로 이동한다. `정산하고 거점으로`를 누르면 판매액이 보유금에 반영되고 미판매 회수품은 거점에 보관된다. 실패는 `거점으로 돌아가기`로 기존 돈·보관품을 유지하며 복귀한다. 같은 실행에서 다시 출정할 수 있다. 타이틀 옵션에서 화면 모드·창 크기·전체 음량을 적용·저장할 수 있으며 종료는 게임 프로세스를 닫는다.
 
 현재 정산은 별도 리소스의 시험 가격을 사용하는 임시 기능이다. 감정 전 물품·보호 물품·판매가 미설정 물품은 보관하고 실제 감정·등록·유료 서비스·마모 비용은 적용하지 않는다. 보관품을 탐험 가방으로 꺼내는 기능과 진행 저장도 아직 없으므로 게임을 종료하면 실행 중 돈·보관품은 사라진다. 저장·복원은 `DEV-0205`에서 연결한다.
 
@@ -183,6 +183,27 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 ```
 
 첫 두 실행은 `title_screen_passed`와 종료 코드 `0`을 확인한다. 종료 분기는 `title_screen_quit_requested` 뒤 `GameEntry`의 `quit_requested` 로그와 종료 코드 `0`을 확인한다. 오류 로그 없이 세 조건을 모두 만족해야 통과다. 실제 마우스·Enter·Esc 입력, 옵션 포커스 복원·메뉴 차단, 저장 유무·조회 후 기록 소실·복원 실패·중첩 요청과 거점 단일 진입을 확인한다. 1152×648에서 타이틀 카드가 화면 안에 들어오는지도 검사한다.
+
+### 설정 저장과 자동 검사
+
+타이틀 → 옵션에서 창 모드·전체 화면, 창 크기 1152×648·1280×720·1600×900, 전체 음량 0~100을 바꿀 수 있다. `적용`은 파일 저장 성공 후 화면·음량을 반영하고, 돌아가기·Esc는 적용 전 변경을 취소한다. 음량 0은 Master 버스를 음소거하며 다시 올리면 해제한다. 기본 조작 안내도 표시한다.
+
+`user://settings.cfg`는 설정 전용 파일이다. `settings/schema_version=1`, `display/screen_mode`는 `windowed` 또는 `fullscreen`, `display/window_size_index`는 0·1·2 순서의 위 창 크기, `audio/master_volume`은 정수 0~100을 저장한다. 크기 인덱스의 의미를 바꾸려면 버전을 변경해야 한다. 진행 데이터·보유금·보관품은 포함하지 않으며 이 파일만 있어도 이어하기는 활성화되지 않는다. 최초 로드는 파일을 만들지 않고, 적용 시 같은 폴더의 `.tmp` 파일 쓰기가 성공한 뒤 교체한다.
+
+기본값은 창 모드·1152×648·음량 100이다. 누락·잘못된 타입·범위의 파일은 기본값으로 실행하고 옵션에 안내하며, 사용자가 적용해야 다시 저장한다. 지원하지 않는 버전은 편집을 막아 원본을 보존한다. 저장 실패는 안내와 함께 기존 파일·적용값을 유지한다. 전체 화면은 모니터 크기에 맞추고 창 크기 선택을 비활성화한다. 더 작은 모니터에서는 창을 사용 가능 영역 안으로 줄인다. UI·게임 좌표는 1152×648을 기준으로 비율을 유지해 확대·축소한다.
+
+```powershell
+& $env:GODOT_BIN --headless --fixed-fps 60 --path . --log-file "$env:TEMP/dungeon-settings.log" --quit-after 3000 res://tests/smoke/settings_smoke.tscn
+& $env:GODOT_BIN --headless --fixed-fps 60 --path . --log-file "$env:TEMP/dungeon-settings-invalid.log" --quit-after 3000 res://tests/smoke/settings_smoke.tscn -- --settings-case=invalid
+& $env:GODOT_BIN --headless --fixed-fps 60 --path . --log-file "$env:TEMP/dungeon-settings-future.log" --quit-after 3000 res://tests/smoke/settings_smoke.tscn -- --settings-case=future
+$settingsTestDir = Join-Path $env:TEMP ("dungeon-settings-restart-" + [guid]::NewGuid().ToString('N'))
+& $env:GODOT_BIN --headless --fixed-fps 60 --path . --log-file "$env:TEMP/dungeon-settings-write.log" --quit-after 3000 res://tests/smoke/settings_smoke.tscn -- --settings-case=write "--settings-test-directory=$settingsTestDir"
+& $env:GODOT_BIN --headless --fixed-fps 60 --path . --log-file "$env:TEMP/dungeon-settings-read.log" --quit-after 3000 res://tests/smoke/settings_smoke.tscn -- --settings-case=read "--settings-test-directory=$settingsTestDir"
+```
+
+각 실행은 `settings_passed`와 조건명, 종료 코드 `0`, 오류 로그 없음을 확인한다. `default`는 파일 교체·실패 시 보존·복사본 분리·타입과 범위·버전 검사, 실제 키보드·마우스의 수정·취소·적용·실패 안내, Master 버스 음량·음소거를 검사한다. `invalid`·`future`는 잘못된 파일과 다른 버전의 기본값·UI 안내·파일 보존을 검사한다. `write`와 `read`는 같은 임시 폴더를 사용하는 **별도 프로세스**로 전체 화면·창 크기 2번·음량 37 복원을 확인한다. 테스트는 실제 사용자 설정 경로 대신 임시 경로를 주입한다.
+
+실제 창 전환은 위 `default`·`write`·`read`에서 `--headless`를 빼고 실행한다. `default`는 창 크기 세 종류와 전체 화면 전환을 확인하며, `read`는 부팅 직후 전체 화면 적용도 확인한다. 1600×900 창을 수용할 수 있는 모니터에서 실행한다. 마지막에 `--settings-render`를 추가하면 검사 폴더에 `options.png`를 만든다. 화면 설정 확인 시간·자동 복귀, 고급 그래픽·키 변경·접근성과 저장 복구 강화는 G6 범위다.
 
 ### 거점과 출정 수동 확인
 
@@ -408,7 +429,7 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 - Godot이 생성하는 `.godot/` 캐시는 버전 관리하지 않는다.
 - 개인 내보내기 자격 증명인 `export_credentials.cfg`는 버전 관리하지 않는다.
 - 엔진 실행 파일, 편집기 설정과 로컬 캐시는 저장소에 넣지 않는다.
-- 현재 기본 해상도, 실제 게임 플레이 장면, 저장 형식과 테스트 플러그인은 아직 확정하지 않는다.
+- 최종 지원 해상도·콘텐츠 장면·진행 저장 형식은 후속 범위에서 확정한다. 현재 시제품 장면과 설정 전용 버전 1 형식은 위 실행 기준을 따른다.
 - 입력 행동과 키보드·마우스 기본 연결은 `DEV-0004`에서 추가했다. 컨트롤러의 첫 출시 포함 여부는 `Q-006` 결정 전까지 확정하지 않는다.
 - 안정적 ID와 표시 이름을 분리한 공통 콘텐츠·아이템 정의는 `DEV-0005`에서 추가했다. 실제 콘텐츠와 밸런스 값은 아직 추가하지 않는다.
 - 상태 전환 스모크 장면, 공통 로그 형식과 개발 상태 진입 인수는 `DEV-0006`에서 추가했다. 테스트 장면은 출시 코드가 참조하지 않는다.
@@ -689,5 +710,16 @@ $env:GODOT_BIN = "C:\Tools\Godot\Godot_v4.7.1-stable_win64_console.exe"
 - 저장 데이터 영향: 실행 중 보유금·보관품 추가. 실제 파일 저장·불러오기는 `DEV-0205`에서 연결하며 현재 종료 시 소실
 - 제외 범위: 최종 가격·통화·비용·안전망 수치, 거래처 보정·감정·등록·연구·보관품 꺼내기, 방문별 영구 진행과 G1 사람 평가
 - 상태: 구현·검증 완료, 검증 결과 검토 후 사용자 커밋 승인
-- 다음 작업: `DEV-0204 — 설정 저장`
+- 후속 작업: `DEV-0204 — 설정 저장`, 아래 결과 참고
+- 정합성 검사: 아직 아님 — 다음 단계 검사는 `DEV-0206` 완료 뒤 G2
+
+## DEV-0204 설정 저장 결과
+
+- 기능: 타이틀 옵션의 화면 모드·창 크기·전체 음량 선택, 변경 대기·적용 성공·실패 안내, 취소와 포커스 복원, 기본 입력 안내
+- 저장: 설정 전용 `user://settings.cfg` 버전 1. 임시 파일 쓰기 후 교체, 첫 실행·잘못된 값의 기본값 적용, 지원하지 않는 버전 보존
+- 적용: 부팅과 저장 성공 후 실제 창·Master 버스 갱신. 창 크기 3종, 전체 화면, 음량 0의 음소거·복원, 고정 논리 좌표의 비율 유지
+- 검증: Godot 4.7.1 스모크 장면 16개, 기존 출정·타이틀 추가 분기 4개, 잘못된 설정·다른 버전 부팅, 별도 프로세스 저장·재실행 통과. 실제 그래픽 실행에서 화면 모드·창 크기 3종·재실행 복원과 화면 배치 확인
+- 저장 데이터 영향: 사용자 설정 파일만 추가. 게임 진행 기록은 아직 저장하지 않으며 `DEV-0205`에서 연결
+- 상태: 구현·검증 완료, 검증 결과 검토 후 사용자 커밋 승인
+- G2 진행: 6개 작업 중 4개 완료, 2개 남음 — `DEV-0205` 진행 저장·이어하기, `DEV-0206` 전체 흐름 검사
 - 정합성 검사: 아직 아님 — 다음 단계 검사는 `DEV-0206` 완료 뒤 G2

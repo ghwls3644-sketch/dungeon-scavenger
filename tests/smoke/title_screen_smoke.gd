@@ -18,6 +18,7 @@ func _ready() -> void:
 			_hub_transitions += 1
 	)
 	_entry = MAIN_SCENE.instantiate()
+	_entry.configure_settings(SettingsStore.new(OS.get_environment("TEMP").path_join("dungeon-title-%d.cfg" % OS.get_process_id())))
 	add_child(_entry)
 	_title = _entry.get_node("Interface/TitleScreen")
 	await _frames(5)

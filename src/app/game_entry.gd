@@ -14,6 +14,8 @@ var _exploration: PrototypeExploration
 var _pending_outcome: ExplorationOutcome
 var _expedition_id := 0
 var _settling := false
+var _settings_store := SettingsStore.new()
+var _settings_notice := ""
 
 @onready var _title: TitleScreen = $Interface/TitleScreen
 @onready var _hub: HubPanel = $Interface/HubPanel
@@ -26,6 +28,7 @@ func _ready() -> void:
 			if argument.begins_with("--dev-state="):
 				get_tree().change_scene_to_packed.call_deferred(DEV_SCENE)
 				return
+	_initialize_settings()
 	_title.new_game_requested.connect(_on_new_game_requested)
 	_title.continue_requested.connect(_on_continue_requested)
 	_title.quit_requested.connect(_on_quit_requested)
@@ -37,6 +40,34 @@ func _ready() -> void:
 	_results.quit_requested.connect(_on_quit_requested)
 	GameState.state_changed.connect(_on_state_changed)
 	_boot.call_deferred()
+
+
+func configure_settings(store: SettingsStore) -> void:
+	if not is_node_ready() and store != null:
+		_settings_store = store
+
+
+func _initialize_settings() -> void:
+	var error := _settings_store.load_settings()
+	if error == ERR_UNAVAILABLE:
+		_settings_notice = "다른 버전의 설정입니다. 기본값으로 실행하며 기존 파일은 유지합니다."
+	elif error != OK:
+		_settings_notice = "설정을 읽지 못해 기본값으로 실행했습니다. 적용하면 다시 저장합니다."
+	SettingsRuntime.apply(_settings_store.get_settings(), get_window())
+	_title.configure_settings(_settings_store.get_settings(), _settings_notice, _settings_store.is_writable())
+	_title.settings_requested.connect(_on_settings_requested)
+
+
+func _on_settings_requested(settings: GameSettings) -> void:
+	if _starting or GameState.get_current_state() != GameState.State.TITLE or not _title.is_options_open():
+		return
+	if _settings_store.save_settings(settings) != OK:
+		_title.set_options_status("설정을 저장하지 못했습니다. 기존 설정을 유지합니다.")
+		return
+	SettingsRuntime.apply(_settings_store.get_settings(), get_window())
+	_settings_notice = ""
+	_title.configure_settings(_settings_store.get_settings())
+	_title.set_options_status("설정을 적용하고 저장했습니다.")
 
 
 func configure_continue(has_saved_game: Callable, restore_saved_game: Callable) -> void:
