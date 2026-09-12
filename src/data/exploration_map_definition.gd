@@ -6,6 +6,7 @@ extends Resource
 @export var entrance_position: Vector2
 @export var regions: Array[MapRegionDefinition] = []
 @export var routes: Array[PackedVector2Array] = []
+@export var passages: Array[MapPassageDefinition] = []
 
 
 func get_validation_errors() -> PackedStringArray:
@@ -33,4 +34,15 @@ func get_validation_errors() -> PackedStringArray:
 		for point in route:
 			if not point.is_finite() or not bounds.has_point(point):
 				errors.append("Map route point must be inside the map.")
+	var passage_ids: Dictionary = {}
+	for passage in passages:
+		if passage == null:
+			errors.append("Map passage must not be null.")
+			continue
+		errors.append_array(passage.get_validation_errors())
+		if passage_ids.has(passage.stable_id):
+			errors.append("Map passage IDs must be unique.")
+		passage_ids[passage.stable_id] = true
+		if not bounds.has_point(passage.start) or not bounds.has_point(passage.end):
+			errors.append("Map passage must be inside the map.")
 	return errors

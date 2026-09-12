@@ -3,8 +3,11 @@ extends RefCounted
 
 signal changed
 
+enum PassageStatus { UNKNOWN, OPEN, BLOCKED }
+
 var _definition: ExplorationMapDefinition
 var _visited: Dictionary = {}
+var _passage_observations: Dictionary = {}
 var _current_region: StringName = &""
 var _position := Vector2.ZERO
 
@@ -55,3 +58,35 @@ func get_player_position() -> Vector2:
 
 func get_visited_count() -> int:
 	return _visited.size()
+
+func observe_passage(passage_id: StringName, status: PassageStatus) -> bool:
+	if _definition == null or status not in [PassageStatus.OPEN, PassageStatus.BLOCKED]:
+		return false
+	var known_id := false
+	for passage in _definition.passages:
+		if passage.stable_id == passage_id:
+			known_id = true
+			break
+	if not known_id:
+		return false
+	if get_passage_status(passage_id) != status:
+		_passage_observations[passage_id] = status
+		changed.emit()
+	return true
+
+
+func get_passage_status(passage_id: StringName) -> PassageStatus:
+	return _passage_observations.get(passage_id, PassageStatus.UNKNOWN)
+
+
+func get_observed_passage_count() -> int:
+	return _passage_observations.size()
+
+
+func get_passage_count_by_status(status: PassageStatus) -> int:
+	var count := 0
+	if _definition != null:
+		for passage in _definition.passages:
+			if get_passage_status(passage.stable_id) == status:
+				count += 1
+	return count

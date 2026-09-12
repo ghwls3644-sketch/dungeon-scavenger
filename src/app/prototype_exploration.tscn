@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3]
+[gd_scene load_steps=20 format=3]
 
 [ext_resource type="Script" path="res://src/app/prototype_exploration.gd" id="1_space"]
 [ext_resource type="PackedScene" path="res://src/gameplay/player/player.tscn" id="2_player"]
@@ -23,6 +23,8 @@
 
 [ext_resource type="PackedScene" path="res://src/ui/exploration_map_panel.tscn" id="14_map"]
 
+[ext_resource type="Script" path="res://src/gameplay/exploration/map_passage_survey.gd" id="15_survey"]
+
 [sub_resource type="RectangleShape2D" id="BypassShape"]
 size = Vector2(200, 100)
 
@@ -37,6 +39,12 @@ border_color = Color(0.25, 0.32, 0.39, 1)
 [node name="PrototypeExploration" type="Node2D"]
 process_mode = 1
 script = ExtResource("1_space")
+
+[node name="MapPassageSurvey" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("15_survey")
+observation_distance = 96.0
+obstruction_mask = 8
 
 [node name="OverviewCamera" type="Camera2D" parent="."]
 position = Vector2(160, -100)

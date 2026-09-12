@@ -29,6 +29,7 @@ func _draw() -> void:
 	for route in _definition.routes:
 		for index in range(route.size() - 1):
 			draw_dashed_line(_project(route[index], origin, scale_factor), _project(route[index + 1], origin, scale_factor), Color("#91a3b5"), 2.0, 7.0)
+	_draw_passages(origin, scale_factor, font)
 	var entrance := _project(_definition.entrance_position, origin, scale_factor)
 	draw_rect(Rect2(entrance - Vector2(7, 7), Vector2(14, 14)), Color("#f0efe7"), false, 2.0)
 	draw_string(font, entrance + Vector2(-10, 32), "출구", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color("#f0efe7"))
@@ -38,3 +39,27 @@ func _draw() -> void:
 
 func _project(point: Vector2, origin: Vector2, scale_factor: float) -> Vector2:
 	return origin + (point - _definition.bounds.position) * scale_factor
+
+func _draw_passages(origin: Vector2, scale_factor: float, font: Font) -> void:
+	for passage in _definition.passages:
+		var start := _project(passage.start, origin, scale_factor)
+		var end := _project(passage.end, origin, scale_factor)
+		var center := (start + end) * 0.5
+		var status := _state.get_passage_status(passage.stable_id)
+		var color := Color("#b7c4cf")
+		var label := "미확인"
+		if status == ExplorationMapState.PassageStatus.UNKNOWN:
+			draw_dashed_line(start, end, color, 2.0, 5.0)
+		else:
+			color = Color("#89dac3") if status == ExplorationMapState.PassageStatus.OPEN else Color("#ef9a91")
+			draw_line(start, end, color, 3.0)
+			if status == ExplorationMapState.PassageStatus.OPEN:
+				label = "열림"
+				draw_circle(center, 6.0, color, false, 2.0)
+			else:
+				label = "막힘"
+				draw_line(center - Vector2(6, 6), center + Vector2(6, 6), color, 3.0)
+				draw_line(center + Vector2(-6, 6), center + Vector2(6, -6), color, 3.0)
+		var text_position := center + (Vector2(12, 24) if absf(end.x - start.x) > absf(end.y - start.y) else Vector2(12, -10))
+		draw_rect(Rect2(text_position + Vector2(-3, -17), Vector2(font.get_string_size(label, HORIZONTAL_ALIGNMENT_LEFT, -1, 16).x + 6, 23)), Color("#101823"))
+		draw_string(font, text_position, label, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, color)

@@ -171,3 +171,9 @@ res://
 - `PrototypeExploration`은 실제 플레이어 위치를 지도 상태에 전달하고 출정·종료에 지도 입력을 연결한다. 지도와 가방의 `opening` 신호를 조정해 기존 화면을 닫은 다음 새 화면이 일시정지를 인계받도록 한다.
 - `src/ui/exploration_map_panel.*`은 지도 표시·닫기 요청·일시정지 복원을, `exploration_map_canvas.gd`는 공개 경로·방문·현재 위치와 출구 그리기를 맡는다. 방문 판정과 저장 규칙은 구현하지 않는다.
 - `tests/smoke/exploration_map_smoke.*`는 지도 정의 분리·실제 이동·메뉴 전환·출정 전/종료 후 차단·장면 정리·새 출정의 관찰 초기화와 화면 확인을 소유한다. 기존 G1 자료·진행 파일 계약은 변경하지 않는다.
+
+- `DEV-0302`의 `src/data/map_passage_definition.gd`는 짧은 공개 연결 구간의 ID·이름·양 끝점·이동 여유 반경만 소유한다. `ExplorationMapDefinition`은 통로 배열과 유효성 검사를 포함하며 실제 막힘 상태는 저장하지 않는다.
+- `src/gameplay/exploration/map_passage_survey.gd`는 가까운 끝점까지의 시야와 이동 폭의 실제 충돌을 물리 프레임에서 확인한다. `ExplorationMapState`의 공개 관찰 명령에 결과를 전달하며 UI나 디스크를 참조하지 않는다. 현장을 떠나면 마지막 관찰을 그대로 유지한다.
+- `PrototypeExploration`은 관찰기·플레이어·지도 상태를 조립하고 출정·종료에 관찰을 켜고 끈다. 실제 벽·위험·보상 배치는 바꾸지 않는다.
+- `ExplorationMapCanvas`와 `ExplorationMapPanel`은 관찰된 상태의 선·모양·문자·개수만 표시한다. 지도 열기나 그리기에서 물리 공간을 조회하지 않는다.
+- `tests/smoke/map_passage_smoke.*`는 실제 이동·벽 충돌·시야 가림·원격 상태 유지·재관찰·이동 폭·일시정지·종료/새 출정과 화면을 검증한다. 동적 장벽은 이 검사에서만 만들며 플레이용 지형이나 G1 원본을 바꾸지 않는다.

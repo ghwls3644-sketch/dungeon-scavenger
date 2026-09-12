@@ -29,6 +29,7 @@ var _finished := false
 
 func _ready() -> void:
 	_map_state.configure(MAP_DEFINITION)
+	%MapPassageSurvey.configure(_map_state, _player)
 	%ExplorationMapPanel.bind_map(_map_state)
 	%ExplorationMapPanel.opening.connect(_inventory_panel.close_inventory)
 	_inventory_panel.opening.connect(%ExplorationMapPanel.close_map)
@@ -88,6 +89,7 @@ func start_exploration() -> bool:
 
 
 func _set_simulation_enabled(enabled: bool) -> void:
+	%MapPassageSurvey.set_observation_enabled(enabled)
 	var mode := Node.PROCESS_MODE_PAUSABLE if enabled else Node.PROCESS_MODE_DISABLED
 	_player.process_mode = mode
 	_hazard.process_mode = mode

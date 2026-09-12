@@ -47,6 +47,11 @@ func open_map() -> void:
 	_tree_was_paused = get_tree().paused
 	%MapCanvas.bind_map(_state)
 	%VisitSummary.text = "이번 탐험에서 확인한 곳  %d / %d" % [_state.get_visited_count(), _state.get_definition().regions.size()]
+	%PassageSummary.text = "확인한 통로  %d / %d   ·   열림 %d   ·   막힘 %d" % [
+		_state.get_observed_passage_count(), _state.get_definition().passages.size(),
+		_state.get_passage_count_by_status(ExplorationMapState.PassageStatus.OPEN),
+		_state.get_passage_count_by_status(ExplorationMapState.PassageStatus.BLOCKED),
+	]
 	show()
 	get_tree().paused = true
 	%CloseMapButton.grab_focus()
@@ -62,3 +67,6 @@ func close_map() -> void:
 func _exit_tree() -> void:
 	if visible and get_tree() != null:
 		get_tree().paused = _tree_was_paused
+
+func get_passage_summary_text() -> String:
+	return %PassageSummary.text
