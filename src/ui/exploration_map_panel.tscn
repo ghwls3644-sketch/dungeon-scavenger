@@ -1,0 +1,87 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://src/ui/exploration_map_panel.gd" id="1_panel"]
+[ext_resource type="Script" path="res://src/ui/exploration_map_canvas.gd" id="2_canvas"]
+
+[sub_resource type="StyleBoxFlat" id="CardStyle"]
+bg_color = Color(0.055, 0.075, 0.105, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.4, 0.47, 0.53, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_left = 8
+corner_radius_bottom_right = 8
+content_margin_left = 24.0
+content_margin_top = 20.0
+content_margin_right = 24.0
+content_margin_bottom = 20.0
+
+[node name="ExplorationMapPanel" type="Control"]
+process_mode = 3
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_panel")
+
+[node name="Shade" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.02, 0.03, 0.05, 0.92)
+
+[node name="Center" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Card" type="PanelContainer" parent="Center"]
+custom_minimum_size = Vector2(900, 550)
+theme_override_styles/panel = SubResource("CardStyle")
+
+[node name="Content" type="VBoxContainer" parent="Center/Card"]
+theme_override_constants/separation = 10
+
+[node name="Header" type="HBoxContainer" parent="Center/Card/Content"]
+
+[node name="Title" type="Label" parent="Center/Card/Content/Header"]
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+text = "탐험 지도"
+
+[node name="PauseNotice" type="Label" parent="Center/Card/Content/Header"]
+theme_override_colors/font_color = Color(0.91, 0.8, 0.54, 1)
+text = "탐험 일시정지"
+
+[node name="Description" type="Label" parent="Center/Card/Content"]
+text = "공식 경로를 바탕으로 한 개요입니다. 현재 통행 여부는 현장에서 확인하세요."
+
+[node name="MapCanvas" type="Control" parent="Center/Card/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 340)
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("2_canvas")
+
+[node name="Legend" type="Label" parent="Center/Card/Content"]
+text = "점선: 공식 경로    네모: 출구    삼각형: 내 위치\n방문한 곳은 밝게 표시합니다. 물품과 위험의 위치는 표시하지 않습니다."
+theme_override_colors/font_color = Color(0.72, 0.78, 0.84, 1)
+
+[node name="Footer" type="HBoxContainer" parent="Center/Card/Content"]
+theme_override_constants/separation = 16
+
+[node name="VisitSummary" type="Label" parent="Center/Card/Content/Footer"]
+unique_name_in_owner = true
+size_flags_horizontal = 3
+text = ""
+
+[node name="CloseMapButton" type="Button" parent="Center/Card/Content/Footer"]
+unique_name_in_owner = true
+text = "닫기 · M / Esc"

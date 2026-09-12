@@ -11,6 +11,9 @@ const WALLS: Array[Rect2] = [
 	Rect2(-250, 20, 160, 140), Rect2(-250, 240, 160, 116),
 ]
 
+const MAP_DEFINITION := preload("res://src/data/prototype_exploration_map.tres")
+
+var _map_state := ExplorationMapState.new()
 var _loadout: ExpeditionLoadout
 var _started := false
 var _finished := false
@@ -25,6 +28,10 @@ var _finished := false
 
 
 func _ready() -> void:
+	_map_state.configure(MAP_DEFINITION)
+	%ExplorationMapPanel.bind_map(_map_state)
+	%ExplorationMapPanel.opening.connect(_inventory_panel.close_inventory)
+	_inventory_panel.opening.connect(%ExplorationMapPanel.close_map)
 	_build_walls()
 	_player.get_node("Camera2D").enabled = false
 	_hazard.get_node("Status").add_theme_font_size_override("font_size", 22)
@@ -40,6 +47,15 @@ func _ready() -> void:
 	_hazard.warning_started.connect(func(_duration: float): %ChoiceStatus.text = "먼지와 진동이 커집니다. Q로 안정화하거나 신속히 통과·후퇴하세요.")
 	_hazard.body_caught.connect(_on_body_caught)
 	_run.run_ended.connect(_on_run_ended)
+
+
+func _physics_process(_delta: float) -> void:
+	if _started and not _finished:
+		_map_state.observe_position(_player.position)
+
+
+func get_map_state() -> ExplorationMapState:
+	return _map_state
 
 
 func prepare_departure(loadout: ExpeditionLoadout) -> bool:
@@ -59,6 +75,8 @@ func start_exploration() -> bool:
 	if _loadout == null or _started or _finished:
 		return false
 	_started = true
+	_map_state.observe_position(_player.position)
+	%ExplorationMapPanel.set_input_enabled(true)
 	$OverviewCamera.enabled = true
 	$Overlay.show()
 	_set_simulation_enabled(true)
@@ -97,6 +115,7 @@ func _on_run_ended(outcome: ExplorationOutcome) -> void:
 	if not _started or _finished:
 		return
 	_finished = true
+	%ExplorationMapPanel.set_input_enabled(false)
 	_inventory_panel.close_inventory()
 	_inventory_panel.process_mode = Node.PROCESS_MODE_DISABLED
 	_set_simulation_enabled(false)

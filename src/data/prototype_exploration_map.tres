@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="ExplorationMapDefinition" load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://src/data/exploration_map_definition.gd" id="1_map"]
+[ext_resource type="Script" path="res://src/data/map_region_definition.gd" id="2_region"]
+
+[sub_resource type="Resource" id="Entry"]
+script = ExtResource("2_region")
+stable_id = &"prototype_entry"
+display_name = "입구"
+bounds = Rect2(-776, -356, 376, 712)
+
+[sub_resource type="Resource" id="North"]
+script = ExtResource("2_region")
+stable_id = &"prototype_north"
+display_name = "위쪽 경로"
+bounds = Rect2(-400, -356, 900, 336)
+
+[sub_resource type="Resource" id="South"]
+script = ExtResource("2_region")
+stable_id = &"prototype_south"
+display_name = "아래쪽 경로"
+bounds = Rect2(-400, 20, 900, 336)
+
+[sub_resource type="Resource" id="Bypass"]
+script = ExtResource("2_region")
+stable_id = &"prototype_bypass"
+display_name = "우회로"
+bounds = Rect2(500, -356, 276, 712)
+
+[resource]
+script = ExtResource("1_map")
+bounds = Rect2(-800, -380, 1600, 760)
+entrance_position = Vector2(-720, 0)
+regions = Array[ExtResource("2_region")]([SubResource("Entry"), SubResource("North"), SubResource("South"), SubResource("Bypass")])
+routes = Array[PackedVector2Array]([PackedVector2Array(-720, 0, -650, 0, -500, -200, 630, -200, 630, 220, -500, 220, -650, 0)])

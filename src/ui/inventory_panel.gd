@@ -1,6 +1,8 @@
 class_name InventoryPanel
 extends PanelContainer
 
+signal opening
+
 @export var inventory_source_path: NodePath
 
 var _inventory: PlayerInventory
@@ -66,6 +68,7 @@ func bind_inventory(inventory: PlayerInventory) -> void:
 func open_inventory() -> void:
 	if visible:
 		return
+	opening.emit()
 	_tree_was_paused = get_tree().paused
 	show()
 	get_tree().paused = true

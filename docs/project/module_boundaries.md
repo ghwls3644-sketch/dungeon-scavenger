@@ -8,7 +8,7 @@ canonical_for:
   - source_tree_layout
   - module_responsibilities
   - module_dependency_rules
-last_reviewed: 2026-09-09
+last_reviewed: 2026-09-12
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -165,3 +165,9 @@ res://
 
 - `DEV-0206`의 `tests/run_g2_checks.ps1`은 Godot 프로세스 실행·시간 제한·로그·통과 판정과 반복 결과 기록만 소유한다. 게임 규칙은 구현하지 않는다. 저장·정산 조작은 임시 경로를 주입한 검사 장면에서 수행하고, 기본 실행 검사는 실제 메인 장면의 읽기·부팅만 확인한다. 기존 세 검사 장면이 같은 임시 설정·진행 파일을 이어 사용해 실행 사이의 연결을 확인한다.
 - [G2 검사 기록](g2_flow_review.md)은 체크리스트·원본 결과·완료 범위를 소유한다. 게임 기능·저장 스키마·모듈 간 제품 의존 방향은 변경하지 않았다.
+
+- `DEV-0301`의 `src/data/exploration_map_definition.gd`·`map_region_definition.gd`·`prototype_exploration_map.tres`는 기존 시험 구역의 공개 경로·범위·입구 정의만 소유한다. 실행 중 방문 기록이나 물품·위험·미발견 공간의 위치는 포함하지 않는다.
+- `src/gameplay/exploration/exploration_map_state.gd`는 정의의 독립 복사본과 현재 탐험의 위치·방문 표시를 소유한다. UI·저장·실제 입력을 참조하지 않는다. 정의 조회에서도 복사본을 반환한다.
+- `PrototypeExploration`은 실제 플레이어 위치를 지도 상태에 전달하고 출정·종료에 지도 입력을 연결한다. 지도와 가방의 `opening` 신호를 조정해 기존 화면을 닫은 다음 새 화면이 일시정지를 인계받도록 한다.
+- `src/ui/exploration_map_panel.*`은 지도 표시·닫기 요청·일시정지 복원을, `exploration_map_canvas.gd`는 공개 경로·방문·현재 위치와 출구 그리기를 맡는다. 방문 판정과 저장 규칙은 구현하지 않는다.
+- `tests/smoke/exploration_map_smoke.*`는 지도 정의 분리·실제 이동·메뉴 전환·출정 전/종료 후 차단·장면 정리·새 출정의 관찰 초기화와 화면 확인을 소유한다. 기존 G1 자료·진행 파일 계약은 변경하지 않는다.

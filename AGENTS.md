@@ -56,3 +56,8 @@
 - Never force-push, rewrite published history, or bypass branch protection unless the user explicitly authorizes that exact operation.
 - If a push is rejected or the remote changed, stop and reconcile safely instead of forcing the update.
 - After each ticket commit, report the commit hash, validation performed, local-ahead state, and next ticket. When a batch is pushed, also report the push result and remote synchronization state.
+
+## User-facing language
+
+- Explain progress in plain Korean. Use ‘작업’ or ‘다음 할 일’ for units of work.
+- Always include the DEV work ID and work name in completion reports, together with completion status, validation results, commit status, next work, and the consistency-check timing. Keep the explanation in plain Korean.

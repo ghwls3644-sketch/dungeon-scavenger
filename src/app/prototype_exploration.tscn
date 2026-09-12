@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3]
+[gd_scene load_steps=19 format=3]
 
 [ext_resource type="Script" path="res://src/app/prototype_exploration.gd" id="1_space"]
 [ext_resource type="PackedScene" path="res://src/gameplay/player/player.tscn" id="2_player"]
@@ -20,6 +20,8 @@
 [ext_resource type="Resource" path="res://src/data/prototype_known.tres" id="Item_known"]
 
 [ext_resource type="Resource" path="res://src/data/prototype_unknown.tres" id="Item_unknown"]
+
+[ext_resource type="PackedScene" path="res://src/ui/exploration_map_panel.tscn" id="14_map"]
 
 [sub_resource type="RectangleShape2D" id="BypassShape"]
 size = Vector2(200, 100)
@@ -156,7 +158,7 @@ offset_left = 16.0
 offset_top = 12.0
 offset_right = 700.0
 offset_bottom = 62.0
-text = "시험 구역\nWASD 이동 · E 조사/회수/귀환 · Q 안정화/방전 · Tab 가방"
+text = "시험 구역\nWASD 이동 · E 조사/회수/귀환 · Q 안정화/방전 · Tab 가방 · M 지도"
 
 [node name="ChoiceStatus" type="Label" parent="Overlay"]
 unique_name_in_owner = true
@@ -212,3 +214,6 @@ offset_top = -210.0
 offset_right = 300.0
 offset_bottom = 210.0
 inventory_source_path = NodePath("../../Player/Inventory")
+
+[node name="ExplorationMapPanel" parent="Overlay" instance=ExtResource("14_map")]
+unique_name_in_owner = true
