@@ -47,7 +47,7 @@ custom_minimum_size = Vector2(900, 550)
 theme_override_styles/panel = SubResource("CardStyle")
 
 [node name="Content" type="VBoxContainer" parent="Center/Card"]
-theme_override_constants/separation = 10
+theme_override_constants/separation = 8
 
 [node name="Header" type="HBoxContainer" parent="Center/Card/Content"]
 
@@ -67,15 +67,31 @@ text = "마지막으로 확인한 통로 상태입니다. 현장을 떠난 뒤 �
 unique_name_in_owner = true
 text = ""
 
+[node name="MarkerTools" type="HBoxContainer" parent="Center/Card/Content"]
+theme_override_constants/separation = 16
+
+[node name="EditMarkersButton" type="Button" parent="Center/Card/Content/MarkerTools"]
+unique_name_in_owner = true
+toggle_mode = true
+text = "표식 편집"
+
+[node name="MarkerSummary" type="Label" parent="Center/Card/Content/MarkerTools"]
+unique_name_in_owner = true
+text = "개인 표식  0개"
+
+[node name="MarkerHelp" type="Label" parent="Center/Card/Content/MarkerTools"]
+unique_name_in_owner = true
+text = "내 메모를 남기려면 표식 편집을 켜세요."
+
 [node name="MapCanvas" type="Control" parent="Center/Card/Content"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 340)
+custom_minimum_size = Vector2(0, 300)
 size_flags_vertical = 3
-mouse_filter = 2
+mouse_filter = 0
 script = ExtResource("2_canvas")
 
 [node name="Legend" type="Label" parent="Center/Card/Content"]
-text = "점선: 공식 경로·미확인    실선·원: 열림    X: 막힘    네모: 출구    삼각형: 내 위치\n열림 표시는 안전을 보장하지 않습니다. 물품과 위험의 위치는 표시하지 않습니다."
+text = "점선: 공식 경로·미확인    실선·원: 열림    X: 막힘    네모: 출구    삼각형: 내 위치    마름모·번호: 내 표식\n열림은 안전을 보장하지 않습니다. 개인 표식은 이번 탐험의 메모이며 확인한 사실과 다릅니다."
 theme_override_colors/font_color = Color(0.72, 0.78, 0.84, 1)
 
 [node name="Footer" type="HBoxContainer" parent="Center/Card/Content"]

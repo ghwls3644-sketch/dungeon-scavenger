@@ -1,12 +1,19 @@
 class_name ExplorationMapCanvas
 extends Control
 
+signal marker_requested(position: Vector2, marker_id: int)
+
+var _editing := false
 var _state: ExplorationMapState
 var _definition: ExplorationMapDefinition
 
 
 func bind_map(state: ExplorationMapState) -> void:
+	if _state != null and _state.changed.is_connected(queue_redraw):
+		_state.changed.disconnect(queue_redraw)
 	_state = state
+	if _state != null:
+		_state.changed.connect(queue_redraw)
 	_definition = state.get_definition() if state != null else null
 	queue_redraw()
 
@@ -14,8 +21,10 @@ func bind_map(state: ExplorationMapState) -> void:
 func _draw() -> void:
 	if _definition == null or _state == null:
 		return
-	var scale_factor := minf((size.x - 32.0) / _definition.bounds.size.x, (size.y - 32.0) / _definition.bounds.size.y)
-	var origin := (size - _definition.bounds.size * scale_factor) * 0.5
+	var scale_factor := _map_scale()
+	if scale_factor <= 0.0:
+		return
+	var origin := _map_origin(scale_factor)
 	var font := get_theme_default_font()
 	for region in _definition.regions:
 		var rect := Rect2(_project(region.bounds.position, origin, scale_factor), region.bounds.size * scale_factor)
@@ -33,6 +42,7 @@ func _draw() -> void:
 	var entrance := _project(_definition.entrance_position, origin, scale_factor)
 	draw_rect(Rect2(entrance - Vector2(7, 7), Vector2(14, 14)), Color("#f0efe7"), false, 2.0)
 	draw_string(font, entrance + Vector2(-10, 32), "출구", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color("#f0efe7"))
+	_draw_markers(origin, scale_factor, font)
 	var player := _project(_state.get_player_position(), origin, scale_factor)
 	draw_colored_polygon(PackedVector2Array([player + Vector2(0, -9), player + Vector2(8, 7), player + Vector2(-8, 7)]), Color("#e8cd89"))
 
@@ -63,3 +73,64 @@ func _draw_passages(origin: Vector2, scale_factor: float, font: Font) -> void:
 		var text_position := center + (Vector2(12, 24) if absf(end.x - start.x) > absf(end.y - start.y) else Vector2(12, -10))
 		draw_rect(Rect2(text_position + Vector2(-3, -17), Vector2(font.get_string_size(label, HORIZONTAL_ALIGNMENT_LEFT, -1, 16).x + 6, 23)), Color("#101823"))
 		draw_string(font, text_position, label, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, color)
+
+
+func set_editing(enabled: bool) -> void:
+	_editing = enabled
+	mouse_default_cursor_shape = Control.CURSOR_CROSS if enabled else Control.CURSOR_ARROW
+
+
+func world_to_map(position: Vector2) -> Vector2:
+	if _definition == null:
+		return Vector2.ZERO
+	var scale_factor := _map_scale()
+	return _project(position, _map_origin(scale_factor), scale_factor)
+
+
+func _map_scale() -> float:
+	return minf((size.x - 32.0) / _definition.bounds.size.x, (size.y - 32.0) / _definition.bounds.size.y)
+
+
+func _map_origin(scale_factor: float) -> Vector2:
+	return (size - _definition.bounds.size * scale_factor) * 0.5
+
+
+func _gui_input(event: InputEvent) -> void:
+	if not _editing or not is_visible_in_tree() or _state == null or _definition == null:
+		return
+	if not event is InputEventMouseButton or event.button_index != MOUSE_BUTTON_LEFT or not event.pressed:
+		return
+	var scale_factor := _map_scale()
+	if scale_factor <= 0.0:
+		return
+	var position_on_map: Vector2 = event.position
+	var world_position := (position_on_map - _map_origin(scale_factor)) / scale_factor + _definition.bounds.position
+	if not _definition.bounds.has_point(world_position):
+		return
+	# Hit testing uses pixels so selecting a note works at every map size.
+	var nearest_id := -1
+	var nearest_distance := 14.0
+	var markers := _state.get_markers()
+	for marker_id: int in markers:
+		var distance := position_on_map.distance_to(world_to_map(markers[marker_id]))
+		if distance < nearest_distance:
+			nearest_id = marker_id
+			nearest_distance = distance
+	marker_requested.emit(world_position, nearest_id)
+	accept_event()
+
+
+func _draw_markers(origin: Vector2, scale_factor: float, font: Font) -> void:
+	var markers := _state.get_markers()
+	for marker_id: int in markers:
+		var center := _project(markers[marker_id], origin, scale_factor)
+		var diamond := PackedVector2Array([center + Vector2(0, -10), center + Vector2(10, 0), center + Vector2(0, 10), center + Vector2(-10, 0), center + Vector2(0, -10)])
+		draw_colored_polygon(diamond, Color("#101823"))
+		draw_polyline(diamond, Color("#d6b3ff"), 2.0, true)
+		var label := str(marker_id)
+		var width := font.get_string_size(label, HORIZONTAL_ALIGNMENT_LEFT, -1, 14).x
+		var text_position := center + Vector2(14, -12)
+		text_position.x = clampf(text_position.x, 2.0, size.x - width - 4.0)
+		text_position.y = maxf(text_position.y, 18.0)
+		draw_rect(Rect2(text_position + Vector2(-2, -15), Vector2(width + 4, 20)), Color("#101823"))
+		draw_string(font, text_position, label, HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color("#d6b3ff"))

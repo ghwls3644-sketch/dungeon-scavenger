@@ -10,6 +10,8 @@ var _visited: Dictionary = {}
 var _passage_observations: Dictionary = {}
 var _current_region: StringName = &""
 var _position := Vector2.ZERO
+var _markers: Dictionary = {}
+var _next_marker_id := 1
 
 
 func configure(definition: ExplorationMapDefinition) -> bool:
@@ -90,3 +92,32 @@ func get_passage_count_by_status(status: PassageStatus) -> int:
 			if get_passage_status(passage.stable_id) == status:
 				count += 1
 	return count
+
+
+# Personal notes never change visits, passage observations, or the fixed map.
+func add_marker(position: Vector2) -> int:
+	if _definition == null or not position.is_finite() or not _definition.bounds.has_point(position):
+		return -1
+	for marker_id: int in _markers:
+		if (_markers[marker_id] as Vector2).is_equal_approx(position):
+			return marker_id
+	var marker_id := _next_marker_id
+	_next_marker_id += 1
+	_markers[marker_id] = position
+	changed.emit()
+	return marker_id
+
+
+func remove_marker(marker_id: int) -> bool:
+	if not _markers.erase(marker_id):
+		return false
+	changed.emit()
+	return true
+
+
+func get_markers() -> Dictionary:
+	return _markers.duplicate()
+
+
+func get_marker_count() -> int:
+	return _markers.size()

@@ -11,12 +11,20 @@ var _input_enabled := false
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	%CloseMapButton.pressed.connect(close_map)
+	%EditMarkersButton.toggled.connect(_set_marker_editing)
+	%MapCanvas.marker_requested.connect(_on_marker_requested)
 	hide()
 
 
 func bind_map(state: ExplorationMapState) -> void:
 	close_map()
+	if _state != null and _state.changed.is_connected(_refresh_marker_summary):
+		_state.changed.disconnect(_refresh_marker_summary)
 	_state = state
+	if _state != null:
+		_state.changed.connect(_refresh_marker_summary)
+	%MapCanvas.bind_map(state)
+	_refresh_marker_summary()
 
 
 func set_input_enabled(enabled: bool) -> void:
@@ -52,12 +60,16 @@ func open_map() -> void:
 		_state.get_passage_count_by_status(ExplorationMapState.PassageStatus.OPEN),
 		_state.get_passage_count_by_status(ExplorationMapState.PassageStatus.BLOCKED),
 	]
+	_refresh_marker_summary()
 	show()
 	get_tree().paused = true
 	%CloseMapButton.grab_focus()
 
 
 func close_map() -> void:
+	if is_node_ready():
+		%EditMarkersButton.set_pressed_no_signal(false)
+		_set_marker_editing(false)
 	if not visible:
 		return
 	hide()
@@ -70,3 +82,21 @@ func _exit_tree() -> void:
 
 func get_passage_summary_text() -> String:
 	return %PassageSummary.text
+
+
+func _set_marker_editing(enabled: bool) -> void:
+	%MapCanvas.set_editing(enabled and visible and _input_enabled)
+	%MarkerHelp.text = "빈 곳 클릭: 추가 · 표식 클릭: 삭제" if enabled else "내 메모를 남기려면 표식 편집을 켜세요."
+
+
+func _on_marker_requested(position: Vector2, marker_id: int) -> void:
+	if not visible or not _input_enabled or _state == null or not %EditMarkersButton.button_pressed:
+		return
+	if marker_id >= 0:
+		_state.remove_marker(marker_id)
+	else:
+		_state.add_marker(position)
+
+
+func _refresh_marker_summary() -> void:
+	%MarkerSummary.text = "개인 표식  %d개" % (_state.get_marker_count() if _state != null else 0)
