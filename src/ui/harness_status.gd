@@ -61,7 +61,7 @@ func _render(prompt: String, should_show_prompt: bool, current_charge: int, char
 
 	var basic := _source.get_basic_analysis() if is_instance_valid(_source) else ""
 	_analysis.visible = not basic.is_empty()
-	_analyze_button.visible = _analysis.visible
+	_analyze_button.visible = _analysis.visible and _source.get_analysis_charge_cost() > 0
 	_analysis.text = ""
 	if basic.is_empty():
 		return

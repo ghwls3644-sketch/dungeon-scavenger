@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MapRegionDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/data/map_region_definition.gd" id="1_region"]
+
+[resource]
+script = ExtResource("1_region")
+stable_id = &"prototype_remaining_zone"
+display_name = "잔여 구역"
+bounds = Rect2(-76, -596, 352, 216)

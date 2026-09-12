@@ -56,7 +56,10 @@ func open_map() -> void:
 	opening.emit()
 	_tree_was_paused = get_tree().paused
 	%MapCanvas.bind_map(_state)
-	%VisitSummary.text = "이번 탐험에서 확인한 곳  %d / %d" % [_state.get_visited_count(), _state.get_definition().regions.size()]
+	var discovered := _state.get_discovered_region_count()
+	%VisitSummary.text = "기본 구역  %d / %d" % [_state.get_visited_count() - discovered, _state.get_definition().regions.size()]
+	if discovered > 0:
+		%VisitSummary.text += " · 잔여 구역 발견 %d" % discovered
 	%PassageSummary.text = "확인한 통로  %d / %d   ·   열림 %d   ·   막힘 %d" % [
 		_state.get_observed_passage_count(), _state.get_definition().passages.size(),
 		_state.get_passage_count_by_status(ExplorationMapState.PassageStatus.OPEN),

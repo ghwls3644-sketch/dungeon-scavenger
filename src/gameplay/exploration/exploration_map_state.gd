@@ -13,6 +13,7 @@ var _position := Vector2.ZERO
 var _markers: Dictionary = {}
 var _next_marker_id := 1
 var _clues: Dictionary = {}
+var _discovered_regions: Dictionary = {}
 
 
 func configure(definition: ExplorationMapDefinition) -> bool:
@@ -35,7 +36,7 @@ func observe_position(position: Vector2) -> void:
 		return
 	_position = position
 	var current: StringName = &""
-	for region in _definition.regions:
+	for region in get_known_regions():
 		if region.bounds.has_point(position):
 			current = region.stable_id
 			break
@@ -97,7 +98,7 @@ func get_passage_count_by_status(status: PassageStatus) -> int:
 
 # Personal notes never change visits, passage observations, or the fixed map.
 func add_marker(position: Vector2) -> int:
-	if _definition == null or not position.is_finite() or not _definition.bounds.has_point(position):
+	if _definition == null or not position.is_finite() or not get_known_bounds().has_point(position):
 		return -1
 	for marker_id: int in _markers:
 		if (_markers[marker_id] as Vector2).is_equal_approx(position):
@@ -147,3 +148,43 @@ func get_clues() -> Array[MapClueDefinition]:
 	for clue_id: StringName in _clues:
 		copies.append(get_clue(clue_id))
 	return copies
+
+
+# Only actual entry publishes a region. The fixed official map stays unchanged.
+func discover_region(region: MapRegionDefinition, position: Vector2) -> bool:
+	if _definition == null or region == null or not region.get_validation_errors().is_empty():
+		return false
+	if not position.is_finite() or not region.bounds.has_point(position):
+		return false
+	for known in _definition.regions:
+		if known.stable_id == region.stable_id or known.bounds.intersects(region.bounds):
+			return false
+	if _discovered_regions.has(region.stable_id):
+		return true
+	for known: MapRegionDefinition in _discovered_regions.values():
+		if known.bounds.intersects(region.bounds):
+			return false
+	_discovered_regions[region.stable_id] = region.duplicate(true)
+	observe_position(position)
+	return true
+
+
+func get_discovered_region_count() -> int:
+	return _discovered_regions.size()
+
+
+func get_known_regions() -> Array[MapRegionDefinition]:
+	var copies: Array[MapRegionDefinition] = []
+	if _definition != null:
+		for region in _definition.regions:
+			copies.append(region.duplicate(true) as MapRegionDefinition)
+	for region: MapRegionDefinition in _discovered_regions.values():
+		copies.append(region.duplicate(true) as MapRegionDefinition)
+	return copies
+
+
+func get_known_bounds() -> Rect2:
+	var bounds := _definition.bounds if _definition != null else Rect2()
+	for region: MapRegionDefinition in _discovered_regions.values():
+		bounds = bounds.merge(region.bounds)
+	return bounds

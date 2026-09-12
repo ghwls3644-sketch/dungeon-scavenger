@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://src/gameplay/exploration/remaining_zone_entrance.gd" id="1_gate"]
+
+[sub_resource type="RectangleShape2D" id="GateShape"]
+size = Vector2(120, 24)
+
+[sub_resource type="RectangleShape2D" id="SenseShape"]
+size = Vector2(100, 24)
+
+[sub_resource type="RectangleShape2D" id="TopShape"]
+size = Vector2(400, 24)
+
+[sub_resource type="RectangleShape2D" id="SideShape"]
+size = Vector2(24, 240)
+
+[node name="RemainingZoneEntrance" type="Area2D"]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_gate")
+harness_prompt = "입구 안정화"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("SenseShape")
+
+[node name="Barrier" type="StaticBody2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Barrier"]
+shape = SubResource("GateShape")
+
+[node name="RoomWalls" type="StaticBody2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="Top" type="CollisionShape2D" parent="RoomWalls"]
+position = Vector2(0, -240)
+shape = SubResource("TopShape")
+
+[node name="Left" type="CollisionShape2D" parent="RoomWalls"]
+position = Vector2(-188, -132)
+shape = SubResource("SideShape")
+
+[node name="Right" type="CollisionShape2D" parent="RoomWalls"]
+position = Vector2(188, -132)
+shape = SubResource("SideShape")

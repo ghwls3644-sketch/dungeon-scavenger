@@ -3,9 +3,9 @@ extends Node2D
 
 signal exploration_ended(outcome: ExplorationOutcome)
 
-# Same fixed layout as the G1 comparison fixture; this scene is a playable prototype.
+# Extends the prototype with one optional northern room. G1 fixtures stay fixed.
 const WALLS: Array[Rect2] = [
-	Rect2(-800, -380, 1600, 24), Rect2(-800, 356, 1600, 24),
+	Rect2(-800, -380, 840, 24), Rect2(160, -380, 640, 24), Rect2(-800, 356, 1600, 24),
 	Rect2(-800, -380, 24, 760), Rect2(776, -380, 24, 760),
 	Rect2(-360, -20, 840, 40),
 	Rect2(-250, 20, 160, 140), Rect2(-250, 240, 160, 116),
@@ -29,6 +29,9 @@ var _finished := false
 
 func _ready() -> void:
 	_map_state.configure(MAP_DEFINITION)
+	%RemainingZoneEntrance.configure(_map_state, _player)
+	%RemainingZoneEntrance.opened.connect(func(): %ChoiceStatus.text = "입구가 안정화되었습니다. 안쪽을 살펴본 뒤 같은 길로 돌아올 수 있습니다.")
+	%RemainingZoneEntrance.discovered.connect(func(): %ChoiceStatus.text = "잔여 구역 발견 · 지도에 이번 탐험의 발견을 기록했습니다. 귀환은 원래 입구에서 할 수 있습니다.")
 	%MapClue.configure(_map_state)
 	%MapClue.clue_read.connect(_on_map_clue_read)
 	%MapPassageSurvey.configure(_map_state, _player)
@@ -55,6 +58,7 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if _started and not _finished:
 		_map_state.observe_position(_player.position)
+		$OverviewCamera.position.y = minf(-100.0, _player.position.y + 80.0)
 
 
 func get_map_state() -> ExplorationMapState:
@@ -91,6 +95,7 @@ func start_exploration() -> bool:
 
 
 func _set_simulation_enabled(enabled: bool) -> void:
+	%RemainingZoneEntrance.set_exploration_active(enabled)
 	%MapClue.set_interaction_enabled(enabled)
 	%MapPassageSurvey.set_observation_enabled(enabled)
 	var mode := Node.PROCESS_MODE_PAUSABLE if enabled else Node.PROCESS_MODE_DISABLED

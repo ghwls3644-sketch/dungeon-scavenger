@@ -26,15 +26,19 @@ func _draw() -> void:
 		return
 	var origin := _map_origin(scale_factor)
 	var font := get_theme_default_font()
-	for region in _definition.regions:
+	for region in _state.get_known_regions():
 		var rect := Rect2(_project(region.bounds.position, origin, scale_factor), region.bounds.size * scale_factor)
 		var visited := _state.is_visited(region.stable_id)
 		var current := region.stable_id == _state.get_current_region_id()
 		draw_rect(rect, Color("#233e43") if visited else Color("#19212d"))
 		draw_rect(rect, Color("#e8cd89") if current else Color("#637282"), false, 3.0 if current else 1.0)
-		draw_string(font, rect.position + Vector2(12, 25), region.display_name, HORIZONTAL_ALIGNMENT_LEFT, rect.size.x - 24, 18, Color("#f0efe7"))
+		# Small discovered rooms need their labels outside the player/marker area.
+		var compact := rect.size.y < 70.0
+		var label_origin := Vector2(rect.end.x + 28, rect.position.y) if compact else rect.position + Vector2(8, 0)
+		var label_width := 120.0 if compact else rect.size.x - 16.0
+		draw_string(font, label_origin + Vector2(0, 23), region.display_name, HORIZONTAL_ALIGNMENT_LEFT, label_width, 16, Color("#f0efe7"))
 		var status := "현재 위치" if current else ("방문함" if visited else "미방문")
-		draw_string(font, rect.position + Vector2(12, 49), status, HORIZONTAL_ALIGNMENT_LEFT, rect.size.x - 24, 16, Color("#e8cd89") if current else Color("#b7c4cf"))
+		draw_string(font, label_origin + Vector2(0, 44), status, HORIZONTAL_ALIGNMENT_LEFT, label_width, 14, Color("#e8cd89") if current else Color("#b7c4cf"))
 	for route in _definition.routes:
 		for index in range(route.size() - 1):
 			draw_dashed_line(_project(route[index], origin, scale_factor), _project(route[index + 1], origin, scale_factor), Color("#91a3b5"), 2.0, 7.0)
@@ -48,7 +52,7 @@ func _draw() -> void:
 
 
 func _project(point: Vector2, origin: Vector2, scale_factor: float) -> Vector2:
-	return origin + (point - _definition.bounds.position) * scale_factor
+	return origin + (point - _state.get_known_bounds().position) * scale_factor
 
 func _draw_passages(origin: Vector2, scale_factor: float, font: Font) -> void:
 	for passage in _definition.passages:
@@ -88,11 +92,11 @@ func world_to_map(position: Vector2) -> Vector2:
 
 
 func _map_scale() -> float:
-	return minf((size.x - 32.0) / _definition.bounds.size.x, (size.y - 32.0) / _definition.bounds.size.y)
+	return minf((size.x - 32.0) / _state.get_known_bounds().size.x, (size.y - 32.0) / _state.get_known_bounds().size.y)
 
 
 func _map_origin(scale_factor: float) -> Vector2:
-	return (size - _definition.bounds.size * scale_factor) * 0.5
+	return (size - _state.get_known_bounds().size * scale_factor) * 0.5
 
 
 func _gui_input(event: InputEvent) -> void:
@@ -104,8 +108,8 @@ func _gui_input(event: InputEvent) -> void:
 	if scale_factor <= 0.0:
 		return
 	var position_on_map: Vector2 = event.position
-	var world_position := (position_on_map - _map_origin(scale_factor)) / scale_factor + _definition.bounds.position
-	if not _definition.bounds.has_point(world_position):
+	var world_position := (position_on_map - _map_origin(scale_factor)) / scale_factor + _state.get_known_bounds().position
+	if not _state.get_known_bounds().has_point(world_position):
 		return
 	# Hit testing uses pixels so selecting a note works at every map size.
 	var nearest_id := -1

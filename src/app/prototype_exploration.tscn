@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3]
+[gd_scene load_steps=24 format=3]
 
 [ext_resource type="Script" path="res://src/app/prototype_exploration.gd" id="1_space"]
 [ext_resource type="PackedScene" path="res://src/gameplay/player/player.tscn" id="2_player"]
@@ -28,6 +28,9 @@
 [ext_resource type="PackedScene" path="res://src/gameplay/interaction/map_clue_interactable.tscn" id="16_clue"]
 [ext_resource type="Resource" path="res://src/data/prototype_map_clue.tres" id="17_clue_data"]
 
+[ext_resource type="PackedScene" path="res://src/gameplay/exploration/remaining_zone_entrance.tscn" id="18_remaining"]
+[ext_resource type="Resource" path="res://src/data/prototype_remaining_region.tres" id="19_region"]
+
 [sub_resource type="RectangleShape2D" id="BypassShape"]
 size = Vector2(200, 100)
 
@@ -54,6 +57,10 @@ position = Vector2(160, -100)
 zoom = Vector2(0.6, 0.6)
 enabled = false
 
+[node name="RemainingZoneEntrance" parent="." instance=ExtResource("18_remaining")]
+unique_name_in_owner = true
+position = Vector2(100, -368)
+region_definition = ExtResource("19_region")
 [node name="Player" parent="." instance=ExtResource("2_player")]
 unique_name_in_owner = true
 position = Vector2(-650, 0)
@@ -73,6 +80,7 @@ exploration_run_path = NodePath("../ExplorationRun")
 unique_name_in_owner = true
 position = Vector2(-530, 140)
 clue_definition = ExtResource("17_clue_data")
+
 
 [node name="SafeLightPickup" parent="." instance=ExtResource("5_pickup")]
 unique_name_in_owner = true
