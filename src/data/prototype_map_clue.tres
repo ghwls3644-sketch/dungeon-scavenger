@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MapClueDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/data/map_clue_definition.gd" id="1_clue"]
+
+[resource]
+script = ExtResource("1_clue")
+stable_id = &"prototype_margin_clue"
+display_name = "손상된 공략도"
+hint_text = "위쪽 경로 바깥으로 짧은 선이 덧그려져 있습니다. 끝부분은 찢겨 있습니다."

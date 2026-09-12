@@ -61,6 +61,7 @@ theme_override_colors/font_color = Color(0.91, 0.8, 0.54, 1)
 text = "탐험 일시정지"
 
 [node name="Description" type="Label" parent="Center/Card/Content"]
+unique_name_in_owner = true
 text = "마지막으로 확인한 통로 상태입니다. 현장을 떠난 뒤 바뀐 상태는 다시 확인해야 합니다."
 
 [node name="PassageSummary" type="Label" parent="Center/Card/Content"]
@@ -68,6 +69,7 @@ unique_name_in_owner = true
 text = ""
 
 [node name="MarkerTools" type="HBoxContainer" parent="Center/Card/Content"]
+unique_name_in_owner = true
 theme_override_constants/separation = 16
 
 [node name="EditMarkersButton" type="Button" parent="Center/Card/Content/MarkerTools"]
@@ -90,7 +92,30 @@ size_flags_vertical = 3
 mouse_filter = 0
 script = ExtResource("2_canvas")
 
+[node name="ClueView" type="VBoxContainer" parent="Center/Card/Content"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 300)
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="Heading" type="Label" parent="Center/Card/Content/ClueView"]
+theme_override_font_sizes/font_size = 22
+text = "살펴본 단서"
+
+[node name="Notice" type="Label" parent="Center/Card/Content/ClueView"]
+text = "부분 단서입니다. 실제 위치와 통행 여부는 현장에서 확인하세요."
+theme_override_colors/font_color = Color(0.91, 0.8, 0.54, 1)
+
+[node name="ClueText" type="RichTextLabel" parent="Center/Card/Content/ClueView"]
+unique_name_in_owner = true
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = false
+text = "아직 살펴본 단서가 없습니다."
+
 [node name="Legend" type="Label" parent="Center/Card/Content"]
+unique_name_in_owner = true
 text = "점선: 공식 경로·미확인    실선·원: 열림    X: 막힘    네모: 출구    삼각형: 내 위치    마름모·번호: 내 표식\n열림은 안전을 보장하지 않습니다. 개인 표식은 이번 탐험의 메모이며 확인한 사실과 다릅니다."
 theme_override_colors/font_color = Color(0.72, 0.78, 0.84, 1)
 
@@ -101,6 +126,10 @@ theme_override_constants/separation = 16
 unique_name_in_owner = true
 size_flags_horizontal = 3
 text = ""
+
+[node name="CluesButton" type="Button" parent="Center/Card/Content/Footer"]
+unique_name_in_owner = true
+text = "단서 보기 · 0"
 
 [node name="CloseMapButton" type="Button" parent="Center/Card/Content/Footer"]
 unique_name_in_owner = true

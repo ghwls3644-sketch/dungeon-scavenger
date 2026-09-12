@@ -29,6 +29,8 @@ var _finished := false
 
 func _ready() -> void:
 	_map_state.configure(MAP_DEFINITION)
+	%MapClue.configure(_map_state)
+	%MapClue.clue_read.connect(_on_map_clue_read)
 	%MapPassageSurvey.configure(_map_state, _player)
 	%ExplorationMapPanel.bind_map(_map_state)
 	%ExplorationMapPanel.opening.connect(_inventory_panel.close_inventory)
@@ -89,6 +91,7 @@ func start_exploration() -> bool:
 
 
 func _set_simulation_enabled(enabled: bool) -> void:
+	%MapClue.set_interaction_enabled(enabled)
 	%MapPassageSurvey.set_observation_enabled(enabled)
 	var mode := Node.PROCESS_MODE_PAUSABLE if enabled else Node.PROCESS_MODE_DISABLED
 	_player.process_mode = mode
@@ -149,3 +152,7 @@ func _build_walls() -> void:
 		shape.position = rect.get_center()
 		walls.add_child(shape)
 	add_child(walls)
+
+
+func _on_map_clue_read(clue: MapClueDefinition) -> void:
+	%ChoiceStatus.text = "%s\nM 지도 → 단서 보기에서 다시 읽을 수 있습니다." % clue.hint_text

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3]
+[gd_scene load_steps=22 format=3]
 
 [ext_resource type="Script" path="res://src/app/prototype_exploration.gd" id="1_space"]
 [ext_resource type="PackedScene" path="res://src/gameplay/player/player.tscn" id="2_player"]
@@ -24,6 +24,9 @@
 [ext_resource type="PackedScene" path="res://src/ui/exploration_map_panel.tscn" id="14_map"]
 
 [ext_resource type="Script" path="res://src/gameplay/exploration/map_passage_survey.gd" id="15_survey"]
+
+[ext_resource type="PackedScene" path="res://src/gameplay/interaction/map_clue_interactable.tscn" id="16_clue"]
+[ext_resource type="Resource" path="res://src/data/prototype_map_clue.tres" id="17_clue_data"]
 
 [sub_resource type="RectangleShape2D" id="BypassShape"]
 size = Vector2(200, 100)
@@ -65,6 +68,11 @@ inventory_path = NodePath("../Player/Inventory")
 unique_name_in_owner = true
 position = Vector2(-720, 0)
 exploration_run_path = NodePath("../ExplorationRun")
+
+[node name="MapClue" parent="." instance=ExtResource("16_clue")]
+unique_name_in_owner = true
+position = Vector2(-530, 140)
+clue_definition = ExtResource("17_clue_data")
 
 [node name="SafeLightPickup" parent="." instance=ExtResource("5_pickup")]
 unique_name_in_owner = true

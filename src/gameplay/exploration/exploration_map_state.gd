@@ -12,6 +12,7 @@ var _current_region: StringName = &""
 var _position := Vector2.ZERO
 var _markers: Dictionary = {}
 var _next_marker_id := 1
+var _clues: Dictionary = {}
 
 
 func configure(definition: ExplorationMapDefinition) -> bool:
@@ -121,3 +122,28 @@ func get_markers() -> Dictionary:
 
 func get_marker_count() -> int:
 	return _markers.size()
+
+
+func record_clue(clue: MapClueDefinition) -> bool:
+	if _definition == null or clue == null or not clue.get_validation_errors().is_empty():
+		return false
+	# Re-reading never replaces or duplicates the first observation.
+	if not _clues.has(clue.stable_id):
+		_clues[clue.stable_id] = clue.duplicate(true)
+		changed.emit()
+	return true
+
+
+func has_clue(clue_id: StringName) -> bool:
+	return _clues.has(clue_id)
+
+
+func get_clue(clue_id: StringName) -> MapClueDefinition:
+	return _clues[clue_id].duplicate(true) as MapClueDefinition if _clues.has(clue_id) else null
+
+
+func get_clues() -> Array[MapClueDefinition]:
+	var copies: Array[MapClueDefinition] = []
+	for clue_id: StringName in _clues:
+		copies.append(get_clue(clue_id))
+	return copies
