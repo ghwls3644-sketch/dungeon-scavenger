@@ -28,6 +28,7 @@ var _finished := false
 
 
 func _ready() -> void:
+	%GolemHearing.noise_heard.connect(_on_movement_noise_heard)
 	%QuickDropController.status_changed.connect(_update_quick_drop_status)
 	_inventory_panel.opening.connect(%QuickDropController.cancel_hold)
 	%ExplorationMapPanel.opening.connect(%QuickDropController.cancel_hold)
@@ -99,6 +100,8 @@ func start_exploration() -> bool:
 
 
 func _set_simulation_enabled(enabled: bool) -> void:
+	%MovementNoiseEmitter.set_active(enabled)
+	%GolemHearing.set_active(enabled)
 	%QuickDropController.set_active(enabled)
 	%RemainingZoneEntrance.set_exploration_active(enabled)
 	%MapClue.set_interaction_enabled(enabled)
@@ -120,10 +123,11 @@ func _on_pickup_rejected(_item: ItemDefinition, reason: StringName) -> void:
 
 
 func _update_load_status() -> void:
-	%LoadStatus.text = "가방 %d/%d칸 · 무게 %.1f · %s · 이동 %d%% · 충전 %d/%d" % [
+	%LoadStatus.text = "가방 %d/%d칸 · 무게 %.1f · %s · 이동 %d%% · 소음 %s · 충전 %d/%d" % [
 		_inventory.get_used_slots(), _inventory.slot_capacity, _inventory.get_total_weight(),
 		["정상", "부담", "과적"][_inventory.get_weight_stage()],
 		roundi(_player.get_movement_speed_multiplier() * 100.0),
+		["작음", "큼", "매우 큼"][_inventory.get_weight_stage()],
 		_harness.get_current_charge(), _harness.get_charge_capacity(),
 	]
 
@@ -174,6 +178,10 @@ func _update_quick_drop_status() -> void:
 		%QuickDropStatus.text = "버리기 준비 %d%% · %s\nG를 놓으면 취소" % [roundi(%QuickDropController.get_progress() * 100.0), item.get_definition().display_name]
 	else:
 		%QuickDropStatus.text = "G 길게 누르기 · %s 버리기" % item.get_definition().display_name
+
+
+func _on_movement_noise_heard(escalated: bool) -> void:
+	%ChoiceStatus.text = "큰 이동 소음이 반복되어 골렘의 경보가 높아졌습니다. 추적에 대비하세요." if escalated else "이동 소음에 골렘이 반응했습니다. 멈추거나 짐을 줄여 소음을 낮출 수 있습니다."
 
 
 func _on_map_clue_read(clue: MapClueDefinition) -> void:

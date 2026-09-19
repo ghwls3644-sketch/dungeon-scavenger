@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3]
+[gd_scene load_steps=29 format=3]
 
 [ext_resource type="Script" path="res://src/app/prototype_exploration.gd" id="1_space"]
 [ext_resource type="PackedScene" path="res://src/gameplay/player/player.tscn" id="2_player"]
@@ -35,6 +35,10 @@
 
 [ext_resource type="Resource" path="res://src/data/prototype_load_movement.tres" id="21_load_movement"]
 
+[ext_resource type="Script" path="res://src/gameplay/player/movement_noise_emitter.gd" id="22_noise"]
+[ext_resource type="Script" path="res://src/gameplay/hazards/golem_hearing.gd" id="23_hearing"]
+[ext_resource type="Resource" path="res://src/data/prototype_load_noise.tres" id="24_noise_rule"]
+
 [sub_resource type="RectangleShape2D" id="BypassShape"]
 size = Vector2(200, 100)
 
@@ -62,6 +66,19 @@ process_mode = 3
 script = ExtResource("20_quick_drop")
 inventory_path = NodePath("../Player/Inventory")
 hold_duration = 0.6
+
+[node name="MovementNoiseEmitter" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("22_noise")
+player_path = NodePath("../Player")
+inventory_path = NodePath("../Player/Inventory")
+noise_rule = ExtResource("24_noise_rule")
+
+[node name="GolemHearing" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("23_hearing")
+source_path = NodePath("../MovementNoiseEmitter")
+golem_path = NodePath("../BrokenGuardGolem")
 
 [node name="OverviewCamera" type="Camera2D" parent="."]
 position = Vector2(160, -100)

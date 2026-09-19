@@ -135,8 +135,12 @@ func emergency_discharge() -> bool:
 	return true
 
 
+func can_investigate_noise() -> bool:
+	return _state not in [State.CHASE, State.DISABLED] and not is_instance_valid(_tracked_target) and not _alarm_escalation
+
+
 func investigate_noise(source_position: Vector2) -> bool:
-	if _state in [State.CHASE, State.DISABLED] or is_instance_valid(_tracked_target):
+	if not can_investigate_noise():
 		return false
 
 	_begin_suspicion(source_position, null, false)
@@ -169,7 +173,7 @@ func _on_detection_body_entered(body: Node2D) -> void:
 
 
 func _on_detection_body_exited(body: Node2D) -> void:
-	if not is_inside_tree() or is_queued_for_deletion():
+	if not is_inside_tree() or is_queued_for_deletion() or not _search_timer.is_inside_tree():
 		return
 	if body != _tracked_target:
 		return
