@@ -28,6 +28,10 @@ var _finished := false
 
 
 func _ready() -> void:
+	%QuickDropController.status_changed.connect(_update_quick_drop_status)
+	_inventory_panel.opening.connect(%QuickDropController.cancel_hold)
+	%ExplorationMapPanel.opening.connect(%QuickDropController.cancel_hold)
+	_inventory.item_dropped.connect(func(item: ItemDefinition): %ChoiceStatus.text = "%s을(를) 버렸습니다." % item.display_name)
 	_map_state.configure(MAP_DEFINITION)
 	%RemainingZoneEntrance.configure(_map_state, _player)
 	%RemainingZoneEntrance.opened.connect(func(): %ChoiceStatus.text = "입구가 안정화되었습니다. 안쪽을 살펴본 뒤 같은 길로 돌아올 수 있습니다.")
@@ -95,6 +99,7 @@ func start_exploration() -> bool:
 
 
 func _set_simulation_enabled(enabled: bool) -> void:
+	%QuickDropController.set_active(enabled)
 	%RemainingZoneEntrance.set_exploration_active(enabled)
 	%MapClue.set_interaction_enabled(enabled)
 	%MapPassageSurvey.set_observation_enabled(enabled)
@@ -157,6 +162,16 @@ func _build_walls() -> void:
 		shape.position = rect.get_center()
 		walls.add_child(shape)
 	add_child(walls)
+
+
+func _update_quick_drop_status() -> void:
+	var item := _inventory.get_quick_drop_item()
+	if item == null:
+		%QuickDropStatus.text = "빠른 버리기 · Tab 가방에서 물품을 직접 선택하세요."
+	elif %QuickDropController.is_holding():
+		%QuickDropStatus.text = "버리기 준비 %d%% · %s\nG를 놓으면 취소" % [roundi(%QuickDropController.get_progress() * 100.0), item.get_definition().display_name]
+	else:
+		%QuickDropStatus.text = "G 길게 누르기 · %s 버리기" % item.get_definition().display_name
 
 
 func _on_map_clue_read(clue: MapClueDefinition) -> void:

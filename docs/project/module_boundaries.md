@@ -8,7 +8,7 @@ canonical_for:
   - source_tree_layout
   - module_responsibilities
   - module_dependency_rules
-last_reviewed: 2026-09-12
+last_reviewed: 2026-09-19
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -194,3 +194,8 @@ res://
 - `ExplorationMapState`는 발견 범위 검증·중복 방지·복사본·방문·공개된 범위 계산을 맡는다. 기본 지도 정의와 별도로 실제로 발견한 구역만 합친 조회를 제공하며 단서·개인 표식·기존 통로 관찰을 바꾸지 않는다.
 - `PrototypeExploration`은 기존 위쪽 벽 일부를 입구에 연결하고, 방 바닥을 플레이어보다 먼저 그리도록 배치한다. 카메라의 세로 이동·현장 안내·출정/종료 활성 상태를 조립한다. `ExplorationMapCanvas`는 알려진 범위로 지도와 클릭 좌표를 함께 변환하며, `ExplorationMapPanel`은 기본 방문 수와 추가 발견 수를 구분한다.
 - `tests/smoke/remaining_zone_smoke.*`는 실제 이동의 막힘·개방·진입·후퇴·귀환, 단서 없이 탐색·충전 부족·중복·정지·종료/새 출정, 정보 분리·화면 크기 변경·표식 좌표와 실제 그래픽의 캐릭터 가림을 검증한다. 원래 G1 비교 장면·진행 저장·회수품과 영구 상태는 수정하지 않는다.
+
+- `DEV-0306`에서 `PlayerInventory`는 자동 강조와 별도로 명시적으로 선택한 빠른 버리기 개체를 소유한다. 개체 동일성·현재 보유·실제 보호를 재검사한 뒤 기존 제거·슬롯·무게 갱신을 공유하며 대상 제거와 전체 인계에서 선택을 비운다.
+- `src/gameplay/inventory/quick_drop_controller.gd`는 입력 행동과 조정 가능한 길게 누르기 시간·취소·재입력 제한을 맡는다. 정지 중에도 취소·키 해제를 처리하되 물품 제거는 활성 탐험·시간 진행 상태에서만 인벤토리 공개 명령에 요청한다.
+- `PrototypeExploration`은 출정·종료·메뉴 취소 연결과 공개 대상·진행률·완료 안내를 맡는다. `InventoryPanel`은 클릭·키보드 선택을 전달하고 시제품에서만 대상 안내를 표시한다. 기존 G1 비교 장면에는 빠른 버리기 입력이나 안내를 추가하지 않는다.
+- `tests/smoke/quick_drop_smoke.*`는 실제 이동·회수·선택·누르기, 보호·개체 구분·연속 방지·중단과 귀환/실패·새 출정 및 화면을 검증한다. 저장 스키마·이동 속도·아이템 정의·최종 제품 수치는 변경하지 않는다.

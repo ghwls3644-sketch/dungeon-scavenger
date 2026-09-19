@@ -4,6 +4,7 @@ extends PanelContainer
 signal opening
 
 @export var inventory_source_path: NodePath
+@export var show_quick_drop_hint := false
 
 var _inventory: PlayerInventory
 var _tree_was_paused := false
@@ -20,6 +21,9 @@ var _tree_was_paused := false
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_item_list.item_selected.connect(_on_item_selected)
+	# Clicking an already highlighted acquisition is still an explicit selection.
+	_item_list.item_clicked.connect(_on_item_clicked)
+	%QuickDropHint.visible = show_quick_drop_hint
 	_drop_button.pressed.connect(_on_drop_pressed)
 	_close_button.pressed.connect(close_inventory)
 	_drop_confirmation.confirmed.connect(_on_drop_confirmed)
@@ -113,6 +117,8 @@ func _render() -> void:
 		_drop_button.disabled = true
 		return
 
+	var quick_item := _inventory.get_quick_drop_item()
+	%QuickDropHint.text = "빠른 버리기: %s\n가방을 닫고 G 길게 누르기" % quick_item.get_definition().display_name if quick_item != null else "빠른 버리기: 물품을 직접 선택하세요. 보호 물품은 제외됩니다."
 	var items := _inventory.get_inventory_items()
 	for item in items:
 		_item_list.add_item(_format_item(item))
@@ -188,6 +194,11 @@ func _get_category_text(category: StringName) -> String:
 			return "핵심 기록물"
 		_:
 			return "미분류"
+
+
+func _on_item_clicked(index: int, _position: Vector2, button: int) -> void:
+	if button == MOUSE_BUTTON_LEFT:
+		_on_item_selected(index)
 
 
 func _on_item_selected(index: int) -> void:

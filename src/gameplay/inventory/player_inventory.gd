@@ -25,6 +25,8 @@ const REJECT_NO_SELECTION: StringName = &"no_selection"
 
 var _items: Array[InventoryItem] = []
 var _selected_index := -1
+# Explicit player selection, independent of automatic list highlighting.
+var _quick_drop_item: InventoryItem
 
 
 func configure_capacity(capacity: int, burden_threshold: float, overload_threshold: float) -> void:
@@ -72,6 +74,7 @@ func select_item(index: int) -> bool:
 	if index < 0 or index >= _items.size():
 		return false
 	_selected_index = index
+	_quick_drop_item = _items[index] if not _items[index].get_definition().is_protected() else null
 	inventory_changed.emit()
 	return true
 
@@ -87,7 +90,29 @@ func drop_selected_item() -> ItemDefinition:
 		item_drop_rejected.emit(REJECT_PROTECTED_ITEM)
 		return null
 
-	_items.remove_at(_selected_index)
+	return _drop_item_at(_selected_index)
+
+
+func get_quick_drop_item() -> InventoryItem:
+	if _quick_drop_item == null or not _items.has(_quick_drop_item) or _quick_drop_item.get_definition().is_protected():
+		return null
+	return _quick_drop_item
+
+
+func drop_quick_drop_item(expected_item: InventoryItem) -> ItemDefinition:
+	if expected_item == null or expected_item != get_quick_drop_item():
+		return null
+	return _drop_item_at(_items.find(expected_item))
+
+
+func _drop_item_at(index: int) -> ItemDefinition:
+	var item := _items[index]
+	var definition := item.get_definition()
+	if item == _quick_drop_item:
+		_quick_drop_item = null
+	_items.remove_at(index)
+	if index < _selected_index:
+		_selected_index -= 1
 	_selected_index = mini(_selected_index, _items.size() - 1)
 	item_dropped.emit(definition)
 	inventory_changed.emit()
@@ -120,6 +145,7 @@ func take_all_inventory_items() -> Array[InventoryItem]:
 func _clear_items() -> void:
 	_items.clear()
 	_selected_index = -1
+	_quick_drop_item = null
 	inventory_changed.emit()
 
 

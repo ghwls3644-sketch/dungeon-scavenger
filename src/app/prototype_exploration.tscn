@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3]
+[gd_scene load_steps=25 format=3]
 
 [ext_resource type="Script" path="res://src/app/prototype_exploration.gd" id="1_space"]
 [ext_resource type="PackedScene" path="res://src/gameplay/player/player.tscn" id="2_player"]
@@ -31,6 +31,8 @@
 [ext_resource type="PackedScene" path="res://src/gameplay/exploration/remaining_zone_entrance.tscn" id="18_remaining"]
 [ext_resource type="Resource" path="res://src/data/prototype_remaining_region.tres" id="19_region"]
 
+[ext_resource type="Script" path="res://src/gameplay/inventory/quick_drop_controller.gd" id="20_quick_drop"]
+
 [sub_resource type="RectangleShape2D" id="BypassShape"]
 size = Vector2(200, 100)
 
@@ -51,6 +53,13 @@ unique_name_in_owner = true
 script = ExtResource("15_survey")
 observation_distance = 96.0
 obstruction_mask = 8
+
+[node name="QuickDropController" type="Node" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+script = ExtResource("20_quick_drop")
+inventory_path = NodePath("../Player/Inventory")
+hold_duration = 0.6
 
 [node name="OverviewCamera" type="Camera2D" parent="."]
 position = Vector2(160, -100)
@@ -213,6 +222,16 @@ offset_right = -16.0
 offset_bottom = 84.0
 source_path = NodePath("../../Player/HarnessController")
 
+[node name="QuickDropStatus" type="Label" parent="Overlay"]
+unique_name_in_owner = true
+offset_left = 16.0
+offset_top = 148.0
+offset_right = 710.0
+offset_bottom = 196.0
+theme_override_styles/normal = SubResource("PanelStyle")
+autowrap_mode = 3
+mouse_filter = 2
+
 [node name="InteractionPrompt" parent="Overlay" instance=ExtResource("7_prompt")]
 unique_name_in_owner = true
 anchor_left = 0.5
@@ -238,6 +257,7 @@ offset_top = -210.0
 offset_right = 300.0
 offset_bottom = 210.0
 inventory_source_path = NodePath("../../Player/Inventory")
+show_quick_drop_hint = true
 
 [node name="ExplorationMapPanel" parent="Overlay" instance=ExtResource("14_map")]
 unique_name_in_owner = true

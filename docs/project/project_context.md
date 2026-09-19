@@ -8,7 +8,7 @@ canonical_for:
   - development_environment
   - engine_and_language
   - development_commands
-last_reviewed: 2026-09-12
+last_reviewed: 2026-09-19
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -856,3 +856,18 @@ $progressTestDir = Join-Path $env:TEMP ('dungeon-progress-restart-' + [guid]::Ne
 - 상태: 승인된 G2 시제품 순환 범위의 기술 검사 완료·통과, 결과 검토 후 사용자 커밋 승인
 - G2 진행: 6개 작업 중 6개 완료, 남은 작업 0개. 다음 개발 단계는 G3 탐험 확장의 첫 작업 범위 확정
 - 정합성 검사: 지금 — G2 결과 확인 완료·통과. 다음 정기 단계 검사는 G5 반복성 완료 후이며 G1 사람 평가는 기존 후속 확인으로 유지
+
+## DEV-0306 빠른 버리기 검사
+
+기본 실행에서 출정하고 물품을 회수한다. Tab 가방에서 물품 행을 직접 클릭하거나 방향키로 선택한 뒤 가방을 닫는다. 화면에 표시된 대상에 G를 길게 누르면 한 개를 버리고 슬롯·무게가 갱신된다. 짧게 누르거나 메뉴를 열면 취소되고, 보호 물품 선택은 대상을 비운다. 획득 직후의 자동 강조만으로는 빠른 버리기 대상을 정하지 않는다.
+
+```powershell
+& $env:GODOT_BIN --headless --path . --fixed-fps 60 res://tests/smoke/quick_drop_smoke.tscn
+```
+
+성공 표시는 `quick_drop_passed`와 종료 코드 0이다. 실제 이동·회수·클릭·키 입력, 동일 정의의 서로 다른 개체, 보호 물품·감정 전 상태·보호 변경, 짧은 누르기·반복 입력·메뉴·정지·포커스 이탈·일반 버리기·귀환/실패·재출정을 검사한다. 누르기 시간 0·음수·비유한 값도 거절한다. `QuickDropController.hold_duration`과 시제품 장면의 0.6초는 제품 확정 수치가 아니다.
+
+그래픽 확인은 같은 명령에서 `--headless`를 빼고 끝에 `-- --quick-drop-render-directory=<임시 폴더>`를 붙이면 가방 선택·진행 중·버린 뒤 화면 3장을 저장한다. 검사는 기존 사용자 저장·설정 파일을 수정하지 않는다. 전체 검사 실행기는 새 스모크 장면을 자동 포함하며 한 번 실행할 때 총 46개 프로세스(스모크 장면 23개 포함)를 확인한다.
+
+
+2026-09-19 최종 검증: Godot 4.7.1에서 `-Repetitions 1` 전체 46/46 실행, 별도 그래픽 검사와 1152×648 화면 3장 확인 통과. 엔진 오류·경고가 없고 설정·진행 저장 순환이 유지되었다. 활성 Markdown 상대 링크·앵커와 보존 원본 SHA-256 6개, `git diff --check`도 통과했다. 구현·검증 완료, 결과 검토 후 사용자 로컬 커밋 승인.
