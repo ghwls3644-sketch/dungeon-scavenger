@@ -147,6 +147,14 @@ func investigate_noise(source_position: Vector2) -> bool:
 	return true
 
 
+func investigate_lure(source_position: Vector2) -> bool:
+	# A lure can redirect a sound-only chase, but cannot erase stronger evidence.
+	if not source_position.is_finite() or _state == State.DISABLED or is_instance_valid(_tracked_target) or _alarm_escalation:
+		return false
+	_begin_suspicion(source_position, null, false)
+	return true
+
+
 func raise_alarm(last_known_position: Vector2) -> bool:
 	if _state == State.DISABLED:
 		return false

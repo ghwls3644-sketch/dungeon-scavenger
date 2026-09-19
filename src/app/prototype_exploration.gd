@@ -28,6 +28,11 @@ var _finished := false
 
 
 func _ready() -> void:
+	%NoiseLureController.status_changed.connect(_update_tool_status)
+	%NoiseLureController.lure_landed.connect(_on_lure_landed)
+	%NoiseLureController.throw_rejected.connect(func(reason: String): %ChoiceStatus.text = reason)
+	_inventory_panel.opening.connect(%NoiseLureController.cancel_pending)
+	%ExplorationMapPanel.opening.connect(%NoiseLureController.cancel_pending)
 	%GolemHearing.noise_heard.connect(_on_movement_noise_heard)
 	%QuickDropController.status_changed.connect(_update_quick_drop_status)
 	_inventory_panel.opening.connect(%QuickDropController.cancel_hold)
@@ -100,6 +105,7 @@ func start_exploration() -> bool:
 
 
 func _set_simulation_enabled(enabled: bool) -> void:
+	%NoiseLureController.set_active(enabled)
 	%MovementNoiseEmitter.set_active(enabled)
 	%GolemHearing.set_active(enabled)
 	%QuickDropController.set_active(enabled)
@@ -182,6 +188,19 @@ func _update_quick_drop_status() -> void:
 
 func _on_movement_noise_heard(escalated: bool) -> void:
 	%ChoiceStatus.text = "큰 이동 소음이 반복되어 골렘의 경보가 높아졌습니다. 추적에 대비하세요." if escalated else "이동 소음에 골렘이 반응했습니다. 멈추거나 짐을 줄여 소음을 낮출 수 있습니다."
+
+
+func _update_tool_status() -> void:
+	var tool: NoiseLureController = %NoiseLureController
+	%ToolStatus.text = "소음 유인물 %d/%d · F 투척\n마우스로 목표 위치 지정\n%s" % [
+		tool.get_remaining_uses(), tool.get_capacity(),
+		"투척 중" if tool.is_in_flight() else "플레이어를 못 본 골렘을 유인합니다.",
+	]
+
+
+func _on_lure_landed(position: Vector2, radius: float) -> void:
+	var heard: bool = %GolemHearing.hear_lure(position, radius)
+	%ChoiceStatus.text = "골렘이 소음 유인물이 떨어진 위치를 확인합니다." if heard else "소음 유인물이 떨어졌습니다."
 
 
 func _on_map_clue_read(clue: MapClueDefinition) -> void:

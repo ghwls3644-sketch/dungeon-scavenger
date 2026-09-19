@@ -66,6 +66,15 @@ func _on_noise_emitted(source_position: Vector2, radius: float, loud: bool) -> v
 		noise_heard.emit(escalated)
 
 
+func hear_lure(position: Vector2, radius: float) -> bool:
+	if not _can_listen() or not position.is_finite() or not is_finite(radius) or radius <= 0.0:
+		return false
+	if _golem.global_position.distance_to(position) > radius:
+		return false
+	# Lure noise never adds to or clears the movement-noise alarm history.
+	return _golem.investigate_lure(position)
+
+
 func _on_golem_state_changed(_previous: int, current: int) -> void:
 	if current in [BrokenGuardGolem.State.DISABLED, BrokenGuardGolem.State.CHASE, BrokenGuardGolem.State.PATROL]:
 		_loud_times.clear()

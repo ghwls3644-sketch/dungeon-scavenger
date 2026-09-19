@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="NoiseLureRule" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/data/noise_lure_rule.gd" id="1_rule"]
+
+[resource]
+script = ExtResource("1_rule")
+starting_uses = 2
+minimum_distance = 24.0
+maximum_distance = 300.0
+wall_clearance = 8.0
+flight_duration = 0.3
+hearing_radius = 320.0
+marker_duration = 1.0
