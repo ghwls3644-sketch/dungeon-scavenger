@@ -120,8 +120,10 @@ func _on_pickup_rejected(_item: ItemDefinition, reason: StringName) -> void:
 
 
 func _update_load_status() -> void:
-	%LoadStatus.text = "가방 %d/%d칸 · 무게 %.1f · 하네스 충전 %d/%d" % [
+	%LoadStatus.text = "가방 %d/%d칸 · 무게 %.1f · %s · 이동 %d%% · 충전 %d/%d" % [
 		_inventory.get_used_slots(), _inventory.slot_capacity, _inventory.get_total_weight(),
+		["정상", "부담", "과적"][_inventory.get_weight_stage()],
+		roundi(_player.get_movement_speed_multiplier() * 100.0),
 		_harness.get_current_charge(), _harness.get_charge_capacity(),
 	]
 

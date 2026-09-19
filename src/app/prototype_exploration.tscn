@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3]
+[gd_scene load_steps=26 format=3]
 
 [ext_resource type="Script" path="res://src/app/prototype_exploration.gd" id="1_space"]
 [ext_resource type="PackedScene" path="res://src/gameplay/player/player.tscn" id="2_player"]
@@ -32,6 +32,8 @@
 [ext_resource type="Resource" path="res://src/data/prototype_remaining_region.tres" id="19_region"]
 
 [ext_resource type="Script" path="res://src/gameplay/inventory/quick_drop_controller.gd" id="20_quick_drop"]
+
+[ext_resource type="Resource" path="res://src/data/prototype_load_movement.tres" id="21_load_movement"]
 
 [sub_resource type="RectangleShape2D" id="BypassShape"]
 size = Vector2(200, 100)
@@ -74,6 +76,7 @@ region_definition = ExtResource("19_region")
 unique_name_in_owner = true
 position = Vector2(-650, 0)
 collision_mask = 8
+load_movement_rule = ExtResource("21_load_movement")
 
 [node name="ExplorationRun" type="Node" parent="."]
 unique_name_in_owner = true
