@@ -5,6 +5,7 @@ signal state_changed(previous_state: int, current_state: int)
 signal warning_started(last_known_position: Vector2)
 signal chase_started(last_known_position: Vector2)
 signal search_started(last_known_position: Vector2)
+signal sight_lost(last_known_position: Vector2)
 
 enum State {
 	PATROL,
@@ -24,6 +25,9 @@ enum State {
 @export var analysis_charge_cost := 1
 @export var discharge_charge_cost := 1
 @export var discharge_duration := 1.5
+# Opt in on the current expedition; historical G1 fixtures retain their baseline.
+@export var use_sight_occlusion := false
+@export_flags_2d_physics var sight_blocker_mask := 9
 
 var _state: State = State.PATROL
 var _patrol_origin := Vector2.ZERO
@@ -51,10 +55,15 @@ func _ready() -> void:
 	_suspicion_timer.timeout.connect(_on_suspicion_timeout)
 	_search_timer.timeout.connect(_on_search_timeout)
 	_discharge_timer.timeout.connect(_on_discharge_timeout)
+	if use_sight_occlusion:
+		for timer in [_suspicion_timer, _search_timer, _discharge_timer]:
+			timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
 	_render_state()
 
 
 func _physics_process(_delta: float) -> void:
+	if use_sight_occlusion and _state != State.DISABLED:
+		_refresh_visual_target()
 	match _state:
 		State.PATROL:
 			if _move_toward_position(_patrol_destination, patrol_speed):
@@ -94,6 +103,8 @@ func get_analysis_charge_cost() -> int:
 
 
 func get_basic_analysis() -> String:
+	if use_sight_occlusion:
+		return "%s\n벽·닫힌 문 뒤로 숨으면 마지막으로 본 위치를 수색합니다. 소음은 들릴 수 있습니다." % get_status_text()
 	return get_status_text()
 
 
@@ -102,6 +113,8 @@ func get_precise_analysis() -> String:
 		State.SUSPICIOUS:
 			return "탐지된 위치를 확인하고 있습니다. 계속 노출되면 추적을 시작합니다."
 		State.CHASE:
+			if use_sight_occlusion:
+				return "추적 중입니다. 벽·닫힌 문으로 시야를 끊거나 비상 방전으로 잠시 멈출 수 있습니다. 소음에는 주의하세요."
 			return "추적 중입니다. 비상 방전으로 잠시 멈춘 사이 탐지 범위에서 벗어나세요."
 		State.SEARCH:
 			return "마지막으로 확인한 위치를 수색합니다. 다시 탐지되지 않으면 순찰로 돌아갑니다."
@@ -170,6 +183,8 @@ func raise_alarm(last_known_position: Vector2) -> bool:
 
 
 func _on_detection_body_entered(body: Node2D) -> void:
+	if use_sight_occlusion:
+		return # Evaluate live overlaps and blockers together on the physics tick.
 	if not body is PlayerController or _state == State.DISABLED:
 		return
 	if _state == State.CHASE:
@@ -181,6 +196,8 @@ func _on_detection_body_entered(body: Node2D) -> void:
 
 
 func _on_detection_body_exited(body: Node2D) -> void:
+	if use_sight_occlusion:
+		return # Preserve the last visible position, never the hidden exit position.
 	if not is_inside_tree() or is_queued_for_deletion() or not _search_timer.is_inside_tree():
 		return
 	if body != _tracked_target:
@@ -193,6 +210,8 @@ func _on_detection_body_exited(body: Node2D) -> void:
 
 
 func _on_suspicion_timeout() -> void:
+	if use_sight_occlusion and _refresh_visual_target():
+		return # A newly acquired target must receive its entire warning duration.
 	if _state != State.SUSPICIOUS:
 		return
 
@@ -216,6 +235,10 @@ func _on_search_timeout() -> void:
 func _on_discharge_timeout() -> void:
 	if _state != State.DISABLED:
 		return
+	if use_sight_occlusion:
+		_begin_search()
+		_refresh_visual_target()
+		return
 
 	# Reacquire only bodies still present; an escaped player is no longer tracked.
 	for body in _detection_area.get_overlapping_bodies():
@@ -223,6 +246,46 @@ func _on_discharge_timeout() -> void:
 			_begin_suspicion(body.global_position, body, true)
 			return
 	_begin_search()
+
+
+func has_visual_contact() -> bool:
+	return is_instance_valid(_tracked_target)
+
+
+func _can_see(body: Node2D) -> bool:
+	if not is_instance_valid(body) or body.is_queued_for_deletion() or not body is PlayerController:
+		return false
+	if not body.can_process() or not _detection_area.overlaps_body(body):
+		return false
+	var query := PhysicsRayQueryParameters2D.create(global_position, body.global_position, sight_blocker_mask)
+	query.exclude = [get_rid(), (body as PlayerController).get_rid()]
+	query.hit_from_inside = true
+	return get_world_2d().direct_space_state.intersect_ray(query).is_empty()
+
+
+func _refresh_visual_target() -> bool:
+	if not can_process() or is_queued_for_deletion() or _state == State.DISABLED:
+		return false
+	if is_instance_valid(_tracked_target):
+		if _can_see(_tracked_target):
+			_last_known_position = _tracked_target.global_position
+			return false
+		_begin_search()
+		sight_lost.emit(_last_known_position)
+	elif _tracked_target != null:
+		_begin_search()
+		sight_lost.emit(_last_known_position)
+	for body in _detection_area.get_overlapping_bodies():
+		if not _can_see(body):
+			continue
+		if _state == State.CHASE:
+			# An already escalated sound/alarm chase keeps its urgency.
+			_tracked_target = body
+			_last_known_position = body.global_position
+		else:
+			_begin_suspicion(body.global_position, body, true)
+		return true
+	return false
 
 
 func _begin_suspicion(

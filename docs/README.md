@@ -7,7 +7,7 @@ source_version: gdd-v2.1+management-proposal-v0.2.1
 canonical_for:
   - document_navigation
   - canonical_source_routing
-last_reviewed: 2026-09-19
+last_reviewed: 2026-09-21
 owner: documentation-maintainer
 related:
   - GDD.md
@@ -104,7 +104,7 @@ GitHub 로그인 상태, Codex 대화 기록, 앱별 로컬 설정은 저장소�
 
 ## 현재 단계
 
-**G3 탐험 확장: DEV-0309 — 소음 유인 도구 구현·검증 완료, 사용자 로컬 커밋 승인.** `DEV-0306 — 빠른 버리기`는 `3dabfdf`, `DEV-0307 — 무게 단계의 이동 영향`은 `218163e`, `DEV-0308 — 적재 이동 소음과 골렘 반응`은 `0fd1ec2`에 로컬 커밋했다. 다음 작업은 `DEV-0310`이며 작업명·범위는 착수 때 G3 잔여 범위와 현재 기준을 대조해 확정한다. G2 완료 근거는 [검사 기록](project/g2_flow_review.md)에 유지한다. 아래는 단계별 이력이다.
+**G3 탐험 확장: DEV-0310 — 골렘 시야 차단과 재탐지 구현·검증 완료, 사용자 로컬 커밋 승인.** `DEV-0309 — 소음 유인 도구`까지 `c178ae7`로 원격에 반영했다. 현재 출정의 벽·닫힌 문이 직접 탐지를 막고, 시야 상실 시 마지막으로 본 위치를 수색하며 재노출은 경고부터 시작한다. 다음 번호는 `DEV-0311`이며 작업명·범위는 착수 때 G3 잔여 범위와 현재 기준을 대조해 확정한다. G3 전체 완료를 뜻하지 않는다. G2 완료 근거는 [검사 기록](project/g2_flow_review.md)에 유지한다. 아래는 단계별 이력이다.
 
 검토 관문 G-M3, G-M4와 G-M5를 통과했다. `M5 — 중복 제거와 정합성 검토`의 `DOC-0501`~`DOC-0506`에서 공식 용어, Story·Design 책임, 화자 표현·NPC 지식, 핵심 설정·Entity·Timeline과 활성 문서 링크·누락을 모두 검사했다. G-M5 완료 조건 7개는 2026-07-28 정합성 검사에서 모두 충족함을 확인했다.
 

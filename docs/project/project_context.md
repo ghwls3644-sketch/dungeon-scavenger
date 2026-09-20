@@ -8,7 +8,7 @@ canonical_for:
   - development_environment
   - engine_and_language
   - development_commands
-last_reviewed: 2026-09-19
+last_reviewed: 2026-09-21
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -930,3 +930,26 @@ $progressTestDir = Join-Path $env:TEMP ('dungeon-progress-restart-' + [guid]::Ne
 - 검사 소스 SHA-256: `45126acc1d088880e2353f71cd7facc493e657e8e488bcade7b15bc6bfe02374`
 - 화면 원본: `C:/Users/makist_code_04/AppData/Local/Temp/dungeon-lure-render-1a79cd016ee742ac85f599b9fbaa8989/`
 - 정합성 검사: 아직 아님 — 다음 정기 검사는 G5 완료 후. 다음 번호는 `DEV-0310`이며 작업명·범위는 착수 때 확정한다.
+
+## DEV-0310 골렘 시야 차단과 재탐지 검사
+
+현재 출정 장면만 `use_sight_occlusion`을 켠다. 기존 탐지 반경 안에서 골렘 중심과 플레이어 중심 사이를 실제 충돌체로 검사한다. 차단 마스크 9는 기존 문(층 1)과 벽·잔여 구역 입구(층 8)를 포함한다. 자기 몸과 대상 몸, 조사·위험 Area2D는 시야를 가리지 않는다. 전방 시야각·벽 차음·길찾기나 새 문 배치는 추가하지 않는다. G1 비교 장면은 기존 반경 탐지를 유지한다.
+
+```powershell
+& $env:GODOT_BIN --headless --path . --fixed-fps 60 res://tests/smoke/golem_sight_smoke.tscn
+& ./tests/run_g2_checks.ps1 -GodotBin $env:GODOT_BIN -Repetitions 1 -TimeoutSeconds 60
+```
+
+성공 표시는 `golem_sight_passed`와 종료 코드 0이다. 실제 이동으로 중앙 벽에 숨기·노출·범위 이탈을 검사하며, 같은 반경 안에서 E로 시험 문을 열고 닫아 경고 취소·재탐지를 확인한다. 가려진 이후의 위치 비공개, 경고 시간과 중복 통지, 방전 후 숨기/재노출, 소음·유인물·경보 우선순위, 지도·가방 정지, 대상 제거·출정 전·귀환/실패·새 출정도 검사한다. 시험 문은 검사 장면에서만 추가한다. 기존 소리 기반 추적이 이미 시작됐다면 직접 탐지로 진행 중인 추적을 낮추지 않는다.
+
+그래픽 확인은 첫 명령에서 `--headless`를 빼고 끝에 `-- --sight-render-directory=<임시 폴더>`를 붙인다. 가림·경고·수색·분석 화면 4장을 저장한다. 실제 이동은 입력으로 실행하며, 화면 캡처 뒤에도 벽 모서리를 충분히 벗어나는 경로로 검사한다. 하네스 기본·정밀 분석의 긴 설명과 도구 안내는 세로 배치로 서로 겹치지 않는다.
+
+수동 확인은 출정 후 골렘 주변 벽의 끝을 이용한다. 골렘이 보이는 쪽에 계속 서 있으면 경고 후 추적한다. 벽 반대쪽으로 숨으면 마지막으로 본 위치를 수색하고, 다시 드러나면 새 경고가 시작된다. 과적 소음이나 유인물은 벽 너머로 들릴 수 있으므로 시야 차단과 소음 차단은 다르다. 가까이서 하네스 기본 분석으로 대응 안내를 읽을 수 있다.
+
+2026-09-21 최종 검증: **50/50 실행**(스모크 장면 27개 포함), 별도 그래픽 검사와 1152×648 화면 4장 통과. 엔진 오류·경고가 없고 기존 정산·저장·재실행 흐름을 유지했다. 첫 샌드박스 초기화는 인증서·편집기 설정 폴더 권한 때문에 실패했으며 정상 권한으로 재실행해 통과했다. 대상 제거 검사는 항상 플레이어가 있는 앱 계약과 분리하고, 그래픽 검사에서 드러난 모서리 경로의 한 프레임 차이를 보완했다. G1 사람 평가·최종 수치와 다음 정기 검사 시점은 유지한다. 검증 결과 검토 후 사용자가 로컬 커밋을 승인했다.
+
+- 전체 검사 원본: `C:/Users/user/AppData/Local/Temp/dungeon-g2-20260920-233511-2f8048655b4945d0a93d974db89e2def/results.json`
+- 검사 소스 SHA-256: `417a32adfa5092b1242b736b6a560f6bcaeff99a94ceaf4329fcf29780eb3152`
+- 문서 검사: 활성 Markdown 43개 내 상대 링크·앵커 1,065개, 동결 원본 SHA-256 6개와 아카이브 사본 3개 일치, `git diff --check` 통과.
+- 화면 원본: `C:/Users/user/AppData/Local/Temp/dungeon-sight-0c5823adfb1840908bf9685ec92ee527/`
+- 정합성 검사: 아직 아님 — 다음 정기 검사는 G5 완료 후. 다음 번호는 `DEV-0311`이며 이름·범위는 착수 때 확정한다.

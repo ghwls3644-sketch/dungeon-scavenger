@@ -25,7 +25,7 @@ func _ready() -> void:
 	_expect(world.prepare_departure(_loadout()) and world.start_exploration(), "Exploration could not start.")
 	await _frames(3)
 	_expect(state.get_current_region_id() == &"prototype_entry" and state.get_visited_count() == 1, "Entrance was not the only initially visited region.")
-	world.get_node("Overlay/HarnessStatus/%AnalyzeButton").grab_focus()
+	world.get_node("%HarnessStatus/%AnalyzeButton").grab_focus()
 	_press_key(KEY_M)
 	await _frames(3)
 	_expect(panel.visible and get_tree().paused, "M with HUD focus did not pause and open map.")

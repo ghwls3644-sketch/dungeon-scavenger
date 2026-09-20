@@ -28,6 +28,7 @@ var _finished := false
 
 
 func _ready() -> void:
+	_golem.sight_lost.connect(func(_position: Vector2): %ChoiceStatus.text = "골렘의 시야를 벗어났습니다. 마지막으로 본 위치를 수색하며 소음에는 반응할 수 있습니다.")
 	%NoiseLureController.status_changed.connect(_update_tool_status)
 	%NoiseLureController.lure_landed.connect(_on_lure_landed)
 	%NoiseLureController.throw_rejected.connect(func(reason: String): %ChoiceStatus.text = reason)
