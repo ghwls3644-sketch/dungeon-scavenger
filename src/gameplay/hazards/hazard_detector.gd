@@ -86,9 +86,9 @@ func _update_current_hazard(force_emit := false) -> void:
 
 	var information := ""
 	if nearest is StabilizableHazard:
-		information = nearest.get_precise_analysis()
+		information = nearest.get_basic_analysis() + "\n" + nearest.get_precise_analysis()
 	elif nearest is BrokenGuardGolem:
-		information = nearest.get_precise_analysis()
+		information = nearest.get_basic_analysis() + "\n" + nearest.get_precise_analysis()
 	if force_emit or nearest != _current_target or information != _current_information:
 		_current_target = nearest
 		_current_information = information

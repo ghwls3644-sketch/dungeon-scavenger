@@ -1,6 +1,7 @@
-[gd_scene load_steps=31 format=3]
+[gd_scene load_steps=32 format=3]
 
 [ext_resource type="Script" path="res://src/app/prototype_exploration.gd" id="1_space"]
+[ext_resource type="PackedScene" path="res://src/gameplay/hazards/malfunctioning_trap.tscn" id="27_trap"]
 [ext_resource type="PackedScene" path="res://src/gameplay/player/player.tscn" id="2_player"]
 [ext_resource type="Script" path="res://src/gameplay/recovery/exploration_run.gd" id="3_run"]
 [ext_resource type="PackedScene" path="res://src/gameplay/recovery/entrance_exit.tscn" id="4_exit"]
@@ -99,6 +100,11 @@ enabled = false
 unique_name_in_owner = true
 position = Vector2(100, -368)
 region_definition = ExtResource("19_region")
+
+[node name="MalfunctioningTrap" parent="." instance=ExtResource("27_trap")]
+unique_name_in_owner = true
+position = Vector2(210, -520)
+
 [node name="Player" parent="." instance=ExtResource("2_player")]
 unique_name_in_owner = true
 position = Vector2(-650, 0)

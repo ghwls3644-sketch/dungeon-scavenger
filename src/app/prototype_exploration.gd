@@ -28,6 +28,8 @@ var _finished := false
 
 
 func _ready() -> void:
+	%MalfunctioningTrap.body_caught.connect(_on_body_caught)
+	%MalfunctioningTrap.stabilized.connect(func(): %ChoiceStatus.text = "함정을 잠시 멈췄습니다. 불빛이 다시 점멸하면 물러나세요.")
 	_golem.sight_lost.connect(func(_position: Vector2): %ChoiceStatus.text = "골렘의 시야를 벗어났습니다. 마지막으로 본 위치를 수색하며 소음에는 반응할 수 있습니다.")
 	%NoiseLureController.status_changed.connect(_update_tool_status)
 	%NoiseLureController.lure_landed.connect(_on_lure_landed)
@@ -43,6 +45,7 @@ func _ready() -> void:
 	%RemainingZoneEntrance.configure(_map_state, _player)
 	%RemainingZoneEntrance.opened.connect(func(): %ChoiceStatus.text = "입구가 안정화되었습니다. 안쪽을 살펴본 뒤 같은 길로 돌아올 수 있습니다.")
 	%RemainingZoneEntrance.discovered.connect(func(): %ChoiceStatus.text = "잔여 구역 발견 · 지도에 이번 탐험의 발견을 기록했습니다. 귀환은 원래 입구에서 할 수 있습니다.")
+	%RemainingZoneEntrance.discovered.connect(func(): %MalfunctioningTrap.set_exploration_active(true))
 	%MapClue.configure(_map_state)
 	%MapClue.clue_read.connect(_on_map_clue_read)
 	%MapPassageSurvey.configure(_map_state, _player)
@@ -106,6 +109,8 @@ func start_exploration() -> bool:
 
 
 func _set_simulation_enabled(enabled: bool) -> void:
+	if not enabled:
+		%MalfunctioningTrap.set_exploration_active(false)
 	%NoiseLureController.set_active(enabled)
 	%MovementNoiseEmitter.set_active(enabled)
 	%GolemHearing.set_active(enabled)
