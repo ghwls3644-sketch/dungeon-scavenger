@@ -1,6 +1,7 @@
-[gd_scene load_steps=32 format=3]
+[gd_scene load_steps=33 format=3]
 
 [ext_resource type="Script" path="res://src/app/prototype_exploration.gd" id="1_space"]
+[ext_resource type="PackedScene" path="res://src/gameplay/interaction/temporary_door.tscn" id="28_door"]
 [ext_resource type="PackedScene" path="res://src/gameplay/hazards/malfunctioning_trap.tscn" id="27_trap"]
 [ext_resource type="PackedScene" path="res://src/gameplay/player/player.tscn" id="2_player"]
 [ext_resource type="Script" path="res://src/gameplay/recovery/exploration_run.gd" id="3_run"]
@@ -164,6 +165,10 @@ chase_speed = 210.0
 search_duration = 2.5
 discharge_duration = 2.0
 
+[node name="RetreatDoor" parent="." instance=ExtResource("28_door")]
+unique_name_in_owner = true
+position = Vector2(628, 0)
+
 [node name="BypassMarker" type="Area2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(630, 0)
@@ -219,7 +224,7 @@ offset_top = -100.0
 offset_right = 765.0
 offset_bottom = -60.0
 theme_override_font_sizes/font_size = 26
-text = "먼 쪽 우회로"
+text = "우회로 · E 문 개폐"
 
 [node name="Overlay" type="CanvasLayer" parent="."]
 

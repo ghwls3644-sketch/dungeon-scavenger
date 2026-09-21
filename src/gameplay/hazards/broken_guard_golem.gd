@@ -6,6 +6,7 @@ signal warning_started(last_known_position: Vector2)
 signal chase_started(last_known_position: Vector2)
 signal search_started(last_known_position: Vector2)
 signal sight_lost(last_known_position: Vector2)
+signal obstacle_contacted(obstacle: Node2D)
 
 enum State {
 	PATROL,
@@ -326,6 +327,10 @@ func _move_toward_position(destination: Vector2, speed: float) -> bool:
 
 	velocity = offset.normalized() * maxf(speed, 0.0)
 	move_and_slide()
+	for index in range(get_slide_collision_count()):
+		var obstacle := get_slide_collision(index).get_collider() as Node2D
+		if obstacle != null:
+			obstacle_contacted.emit(obstacle)
 	return false
 
 

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DoorHoldRule" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/data/door_hold_rule.gd" id="1_rule"]
+
+[resource]
+script = ExtResource("1_rule")
+hold_duration = 6.0
+release_warning_duration = 1.0
+push_open_duration = 1.2
+charge_cost = 1

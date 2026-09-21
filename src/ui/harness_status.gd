@@ -5,6 +5,7 @@ extends PanelContainer
 
 var _source: HarnessController
 var _prompt_visible := false
+var _displayed_context: Array[String] = []
 
 @onready var _status: Label = %Status
 @onready var _analysis: Label = %Analysis
@@ -54,12 +55,17 @@ func is_prompt_visible() -> bool:
 
 
 func _render(prompt: String, should_show_prompt: bool, current_charge: int, charge_capacity: int) -> void:
+	var basic := _source.get_basic_analysis() if is_instance_valid(_source) else ""
+	var precise := _source.get_precise_analysis() if is_instance_valid(_source) else ""
+	var context: Array[String] = [prompt, basic, precise]
+	if context != _displayed_context:
+		_feedback.hide()
+		_displayed_context = context
 	_prompt_visible = should_show_prompt
 	_status.text = "하네스 충전 %d/%d" % [current_charge, charge_capacity]
 	if should_show_prompt:
 		_status.text += "\n[Q] %s" % prompt
 
-	var basic := _source.get_basic_analysis() if is_instance_valid(_source) else ""
 	_analysis.visible = not basic.is_empty()
 	_analyze_button.visible = _analysis.visible and _source.get_analysis_charge_cost() > 0
 	_analysis.text = ""
@@ -67,7 +73,6 @@ func _render(prompt: String, should_show_prompt: bool, current_charge: int, char
 		return
 
 	_analysis.text = "기본 분석 · 무료\n%s" % basic
-	var precise := _source.get_precise_analysis()
 	var cost := _source.get_analysis_charge_cost()
 	_analyze_button.disabled = not _source.can_analyze_current_target()
 	_analyze_button.text = "정밀 분석 · 충전 %d" % cost

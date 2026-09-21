@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://src/gameplay/interaction/temporary_door.gd" id="1_door"]
+[ext_resource type="Resource" path="res://src/data/prototype_door_hold.tres" id="2_rule"]
+[ext_resource type="Script" path="res://src/gameplay/hazards/door_hold_target.gd" id="3_target"]
+
+[sub_resource type="RectangleShape2D" id="InteractionShape"]
+size = Vector2(296, 48)
+
+[sub_resource type="RectangleShape2D" id="BarrierShape"]
+size = Vector2(296, 24)
+
+[node name="TemporaryDoor" type="Area2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_door")
+hold_rule = ExtResource("2_rule")
+
+[node name="DoorVisual" type="Polygon2D" parent="."]
+unique_name_in_owner = true
+polygon = PackedVector2Array(-148, -12, 148, -12, 148, 12, -148, 12)
+
+[node name="InteractionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("InteractionShape")
+
+[node name="Barrier" type="StaticBody2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="BarrierCollision" type="CollisionShape2D" parent="Barrier"]
+unique_name_in_owner = true
+shape = SubResource("BarrierShape")
+
+[node name="HoldTarget" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("3_target")
+harness_prompt = "문 임시 고정"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HoldTarget"]
+shape = SubResource("InteractionShape")
+
+[node name="Status" type="Label" parent="."]
+offset_left = -210.0
+offset_top = -58.0
+offset_right = 210.0
+offset_bottom = -20.0
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1

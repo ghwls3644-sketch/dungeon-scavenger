@@ -28,6 +28,9 @@ var _finished := false
 
 
 func _ready() -> void:
+	_golem.obstacle_contacted.connect(%RetreatDoor.note_obstacle_contact)
+	%RetreatDoor.status_changed.connect($Player/InteractionDetector.refresh_current_interactable)
+	%RetreatDoor.held.connect(func(): %ChoiceStatus.text = "문을 잠시 고정했습니다. 해제 안내를 확인하고 거리를 벌리세요.")
 	%MalfunctioningTrap.body_caught.connect(_on_body_caught)
 	%MalfunctioningTrap.stabilized.connect(func(): %ChoiceStatus.text = "함정을 잠시 멈췄습니다. 불빛이 다시 점멸하면 물러나세요.")
 	_golem.sight_lost.connect(func(_position: Vector2): %ChoiceStatus.text = "골렘의 시야를 벗어났습니다. 마지막으로 본 위치를 수색하며 소음에는 반응할 수 있습니다.")
@@ -56,6 +59,9 @@ func _ready() -> void:
 	_player.get_node("Camera2D").enabled = false
 	_hazard.get_node("Status").add_theme_font_size_override("font_size", 22)
 	_golem.get_node("Status").add_theme_font_size_override("font_size", 22)
+	_golem.get_node("Status").z_index = 1
+	_golem.get_node("Status").add_theme_color_override("font_outline_color", Color("#0a1018"))
+	_golem.get_node("Status").add_theme_constant_override("outline_size", 4)
 	_set_simulation_enabled(false)
 	_inventory_panel.process_mode = Node.PROCESS_MODE_DISABLED
 	$Overlay.hide()
@@ -109,6 +115,7 @@ func start_exploration() -> bool:
 
 
 func _set_simulation_enabled(enabled: bool) -> void:
+	%RetreatDoor.set_exploration_active(enabled)
 	if not enabled:
 		%MalfunctioningTrap.set_exploration_active(false)
 	%NoiseLureController.set_active(enabled)
