@@ -45,6 +45,9 @@ func _ready() -> void:
 	%ExplorationMapPanel.opening.connect(%QuickDropController.cancel_hold)
 	_inventory.item_dropped.connect(func(item: ItemDefinition): %ChoiceStatus.text = "%s을(를) 버렸습니다." % item.display_name)
 	_map_state.configure(MAP_DEFINITION)
+	%ReturnRouteStatus.bind_map(_map_state)
+	_inventory_panel.opening.connect(%ReturnRouteStatus.hide)
+	%ExplorationMapPanel.opening.connect(%ReturnRouteStatus.hide)
 	%RemainingZoneEntrance.configure(_map_state, _player)
 	%RemainingZoneEntrance.opened.connect(func(): %ChoiceStatus.text = "입구가 안정화되었습니다. 안쪽을 살펴본 뒤 같은 길로 돌아올 수 있습니다.")
 	%RemainingZoneEntrance.discovered.connect(func(): %ChoiceStatus.text = "잔여 구역 발견 · 지도에 이번 탐험의 발견을 기록했습니다. 귀환은 원래 입구에서 할 수 있습니다.")
@@ -79,6 +82,11 @@ func _physics_process(_delta: float) -> void:
 	if _started and not _finished:
 		_map_state.observe_position(_player.position)
 		$OverviewCamera.position.y = minf(-100.0, _player.position.y + 80.0)
+		%ReturnRouteStatus.refresh(
+			get_global_transform_with_canvas(),
+			$Player/InteractionDetector.get_current_interactable() == %EntranceExit,
+			_inventory_panel.visible or %ExplorationMapPanel.visible,
+		)
 
 
 func get_map_state() -> ExplorationMapState:
@@ -115,6 +123,7 @@ func start_exploration() -> bool:
 
 
 func _set_simulation_enabled(enabled: bool) -> void:
+	%ReturnRouteStatus.set_active(enabled)
 	%RetreatDoor.set_exploration_active(enabled)
 	if not enabled:
 		%MalfunctioningTrap.set_exploration_active(false)

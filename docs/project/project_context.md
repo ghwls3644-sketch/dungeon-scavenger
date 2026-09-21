@@ -8,7 +8,7 @@ canonical_for:
   - development_environment
   - engine_and_language
   - development_commands
-last_reviewed: 2026-09-21
+last_reviewed: 2026-09-22
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -997,3 +997,24 @@ $progressTestDir = Join-Path $env:TEMP ('dungeon-progress-restart-' + [guid]::Ne
 - 문서 검사: 활성 Markdown 링크·앵커, 동결 원본 SHA-256 6개와 아카이브 사본 3개 일치, `git diff --check` 통과.
 - 화면 원본: `C:/Users/user/AppData/Local/Temp/dungeon-door-cb9f8b88a3914b5bb6229c6952a9cc56/`
 - 정합성 검사: 아직 아님 — 다음 정기 검사는 G5 완료 후. 다음 번호는 `DEV-0313`이며 작업명·범위는 착수 때 정한다.
+
+## DEV-0313 입구 방향과 관찰한 퇴로 안내 검사
+
+현재 출정 HUD의 [입구 방향 안내](../../src/ui/return_route_status.gd)는 기존 지도의 입구·플레이어 위치와 마지막으로 관찰한 통로 수만 읽는다. 화면 변환을 반영한 화살표와 여덟 방향 문구를 표시하고, 실제 입구가 상호작용 대상으로 선택되면 E 귀환 안내로 바꾼다. 화살표는 통행 경로나 안전한 길을 보장하지 않는다. 열림·막힘·미확인 기록은 M 지도에서 위치와 함께 확인한다.
+
+```powershell
+& $env:GODOT_BIN --headless --path . --fixed-fps 60 res://tests/smoke/return_route_smoke.tscn
+& ./tests/run_g2_checks.ps1 -GodotBin $env:GODOT_BIN -Repetitions 1 -TimeoutSeconds 60
+```
+
+성공 표시는 `return_route_passed`와 종료 코드 0이다. 여덟 방향·카메라 회전/이동·반전/비균일 배율·영벡터·잘못된 지도 바인딩과 표시 중 지도 상태 불변성을 검사한다. 실제 출정과 이동, 입구 선택·E 귀환, 열림/막힘 관찰과 지도 일치, 멀리서 달라진 문 비공개·재접근 갱신, 잔여 구역 발견·카메라 추적, 메뉴 숨김/정지, 귀환/실패 후 비우기·새 출정 초기화도 포함한다. 먼 문을 직접 여는 호출은 정보 경계를 검증하기 위한 검사 전용 설정이다.
+
+그래픽 확인은 첫 명령에서 `--headless`를 빼고 끝에 `-- --return-render-directory=<임시 폴더>`를 붙인다. 입구·아래쪽 이동·문 관찰·잔여 구역·넓은 화면 5장을 저장한다. 기본 화면에서 붕괴 경고 범위·아래쪽 플레이어·경로 설명, 두 크기에서 뷰포트와 기존 조작 안내와의 겹침을 검사한다. 수동 확인은 출정 뒤 화면 왼쪽 아래의 방향을 보며 이동하고, 문을 가까이서 관찰한 뒤 M 지도와 기록을 비교한다. 입구에 돌아와 E 안내가 나타나면 실제 귀환한다.
+
+2026-09-22 최종 검증: **53/53 실행**(스모크 장면 30개 포함), 별도 그래픽 검사와 1152×648·1600×900 화면 5장 통과. 엔진 오류·경고 없음. 첫 화면에서 안내판이 붕괴 위험을 가리는 문제를 발견해 작게 줄여 하단으로 옮기고 기존 경로 설명 위치를 보완했다. 기존 G1 비교·정산·저장·재실행 흐름을 유지했다. 검증 결과 검토 후 사용자가 로컬 커밋을 승인했다.
+
+- 전체 검사 원본: `C:/Users/user/AppData/Local/Temp/dungeon-g2-20260921-223823-711fc9eb5670401e982fbb320f4672f4/results.json`
+- 검사 소스 SHA-256: `98ea79a5270baa7c3c3745eef62b705fca6e45f3aa4dc5acdc84f56a55fce312`
+- 문서 검사: 활성 Markdown 링크·앵커, 동결 원본 SHA-256 6개와 아카이브 사본 3개 일치, `git diff --check` 통과.
+- 화면 원본: `C:/Users/user/AppData/Local/Temp/dungeon-return-756fa45b63c444a5b15c4119f02c92ff/`
+- 정합성 검사: 아직 아님 — 다음 정기 검사는 G5 완료 후. 다음 번호는 `DEV-0314`이며 작업명·범위는 착수 때 정한다.
