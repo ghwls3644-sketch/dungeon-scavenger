@@ -8,7 +8,7 @@ canonical_for:
   - project_document_navigation
   - document_metadata_rules
   - document_status_rules
-last_reviewed:
+last_reviewed: 2026-09-22
 owner: documentation-maintainer
 related:
   - ../README.md
@@ -28,11 +28,14 @@ related:
   - m6_human_review.md
   - g1_playtest_review.md
   - g2_flow_review.md
+  - g3_exploration_review.md
 ---
 
 # 프로젝트 문서
 
 이 디렉터리는 문서 이관과 개발 과정의 결정, 미결정 사항, 변경 이력을 관리한다.
+
+현재 G3의 연결 검사와 남은 범위는 [탐험 확장 통합 검토](g3_exploration_review.md), 다음 작업은 [개발 인계](development_handoff.md)에서 확인한다.
 
 ## 공통 Front Matter
 

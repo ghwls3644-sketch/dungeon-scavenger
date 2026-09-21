@@ -1060,3 +1060,25 @@ $progressTestDir = Join-Path $env:TEMP ('dungeon-progress-restart-' + [guid]::Ne
 - 문서 검사: 활성 Markdown 링크·앵커, 동결 원본 SHA-256 6개와 아카이브 사본 3개 일치, `git diff --check` 통과.
 - 화면 원본: `C:/Users/user/AppData/Local/Temp/dungeon-category-ecf877b00d6e494f9e9d4b3800f024c1/`
 - 정합성 검사: 아직 아님 — 다음 정기 검사는 G5 완료 후. 다음 번호는 `DEV-0316`이며 작업명·범위는 착수 때 정한다.
+
+## DEV-0316 탐험 확장 통합 검증
+
+[G3 통합 검토](g3_exploration_review.md)에 완료 조건별 근거·남은 범위와 수동 확인 순서를 기록했다. [새 통합 검사](../../tests/smoke/g3_exploration_flow_smoke.gd)는 기존 출정 데이터로 무료 우회와 제한 자원 경로를 실제 입력으로 진행한다. 회수·비교·빠른 버리기·귀환과 잔여 구역·함정·문·유인물·메뉴가 같은 출정에서 함께 작동하는지 확인한다.
+
+```powershell
+& $env:GODOT_BIN --headless --path . --fixed-fps 60 --quit-after 18000 res://tests/smoke/g3_exploration_flow_smoke.tscn
+& ./tests/run_g2_checks.ps1 -GodotBin $env:GODOT_BIN -Repetitions 2 -TimeoutSeconds 60
+```
+
+성공 표시는 `g3_exploration_flow_passed`와 종료 코드 0이다. 화면 저장은 첫 명령의 `--headless`를 빼고 `-- --g3-render-directory=<새 임시 폴더> --g3-report-path=<새 임시 JSON 경로>`를 붙인다. 검사에서 원래 물품을 직접 회수하며 적 속도·자원·위험을 바꾸거나 순간 이동하지 않는다. 기존 `value_comparison_smoke.gd`의 도우미를 사용하지만 두 경로만 실행한다.
+
+2026-09-22 최종 검증: 스모크 장면 33개를 포함한 전체 검사 두 차례 **110/110 실행**, 별도 그래픽 실행과 실제 화면 4장 확인. 두 경로 모두 회수품 2개·예상 가치 90~130으로 생환했고, 버리기 뒤 속도 132→192 px/s·소음 반경 260→180 px가 일치했다. 기본값으로 두는 시험 수치를 최종 밸런스로 확정하지 않는다. 엔진 오류·경고 및 예외 적용은 없었다. 소스는 검사 전후 동일하며 제품 코드와 저장 스키마는 변경하지 않았다. 검증 결과 검토 후 사용자가 로컬 커밋을 승인했다.
+
+골렘 접촉 손실·실패와 건강·부상은 미구현이므로 G3 전체 완료·실제 포착 회피 효과를 선언하지 않는다. 다음 보완 후보는 **DEV-0317 — 골렘 접촉 위험과 생존 피드백**이다.
+
+- 전체 원본: [g3_automated_results.json](g3_automated_results.json), 당시 임시 경로 `C:/Users/user/AppData/Local/Temp/dungeon-g2-20260921-233753-1ed903a2afe7486a8d410e33e1f55776/results.json`
+- 그래픽 경로 측정: [g3_route_results.json](g3_route_results.json)
+- 검사 소스 SHA-256: `d17b96de4ff05179c21e7b905f2619023287d84259370cedca96b2b13ff3ca4c`
+- 문서 검사: 활성 Markdown 링크·앵커, 동결 원본 SHA-256 6개와 아카이브 사본 3개 일치, `git diff --check` 통과.
+- 화면 원본: `C:/Users/user/AppData/Local/Temp/dungeon-g3-52490ec93bfb4fdaa5a9a7785d4a9ccd/`
+- 정합성 검사: 아직 아님 — 다음 정기 검사는 G5 완료 후. G1 사람 평가와 Q-004/Q-005는 유지한다.

@@ -1,0 +1,39 @@
+{
+	"passed": true,
+	"routes": [
+		{
+			"discovered_regions": 0,
+			"expected_value": [
+				90,
+				130
+			],
+			"noise_after_drop": 180.0,
+			"noise_before_drop": 260.0,
+			"physics_frames": 1445,
+			"recovered_items": 2,
+			"remaining_charge": 3,
+			"remaining_lures": 2,
+			"route": "free_bypass",
+			"safe_return": true,
+			"speed_after_drop": 192.0,
+			"speed_before_drop": 132.0
+		},
+		{
+			"discovered_regions": 1,
+			"expected_value": [
+				90,
+				130
+			],
+			"noise_after_drop": 180.0,
+			"noise_before_drop": 260.0,
+			"physics_frames": 2345,
+			"recovered_items": 2,
+			"remaining_charge": 0,
+			"remaining_lures": 1,
+			"route": "limited_tools",
+			"safe_return": true,
+			"speed_after_drop": 192.0,
+			"speed_before_drop": 132.0
+		}
+	]
+}
