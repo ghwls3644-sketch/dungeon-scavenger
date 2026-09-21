@@ -318,12 +318,13 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -440.0
-offset_top = -280.0
+offset_top = -314.0
 offset_right = 440.0
-offset_bottom = 280.0
+offset_bottom = 314.0
 inventory_source_path = NodePath("../../Player/Inventory")
 show_quick_drop_hint = true
 show_value_comparison = true
+show_category_icons = true
 
 [node name="ExplorationMapPanel" parent="Overlay" instance=ExtResource("14_map")]
 unique_name_in_owner = true

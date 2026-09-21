@@ -6,6 +6,7 @@ signal opening
 @export var inventory_source_path: NodePath
 @export var show_quick_drop_hint := false
 @export var show_value_comparison := false
+@export var show_category_icons := false
 
 var _inventory: PlayerInventory
 var _tree_was_paused := false
@@ -32,6 +33,14 @@ func _ready() -> void:
 		_item_list.custom_minimum_size.y = 156.0
 		_item_list.resized.connect(_fit_comparison_rows)
 		_fit_comparison_rows.call_deferred()
+	if show_category_icons:
+		_item_list.fixed_icon_size = Vector2i(24, 24)
+		_item_list.custom_minimum_size.y = 258.0
+		_item_list.resized.connect(_item_list.ensure_current_is_visible)
+		_selection_details.custom_minimum_size.y = 112.0
+		for side in ["left", "top", "right", "bottom"]:
+			$MarginContainer.add_theme_constant_override("margin_" + side, 16)
+		$MarginContainer/VBoxContainer.add_theme_constant_override("separation", 6)
 	_drop_button.pressed.connect(_on_drop_pressed)
 	_close_button.pressed.connect(close_inventory)
 	_drop_confirmation.confirmed.connect(_on_drop_confirmed)
@@ -129,13 +138,15 @@ func _render() -> void:
 	%QuickDropHint.text = "빠른 버리기: %s\n가방을 닫고 G 길게 누르기" % quick_item.get_definition().display_name if quick_item != null else "빠른 버리기: 물품을 직접 선택하세요. 보호 물품은 제외됩니다."
 	var items := _inventory.get_inventory_items()
 	for item in items:
-		_item_list.add_item(_format_item(item))
+		_item_list.add_item(_format_item(item), ItemCategoryIcon.for_item(item) if show_category_icons else null)
 		if show_value_comparison:
 			_item_list.set_item_tooltip(_item_list.item_count - 1, _format_item_details(item))
 
 	var selected_index := _inventory.get_selected_index()
 	if selected_index >= 0 and selected_index < items.size():
 		_item_list.select(selected_index)
+		if show_category_icons:
+			_item_list.ensure_current_is_visible()
 		_selection_details.text = _format_item_details(items[selected_index])
 	_drop_button.disabled = selected_index < 0
 	_summary.text = "슬롯 %d/%d | 무게 %.1f | 상태 %s" % [
