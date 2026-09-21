@@ -27,6 +27,14 @@ theme_override_font_sizes/font_size = 24
 unique_name_in_owner = true
 text = "슬롯 0/0 | 무게 0.0 | 상태 정상"
 
+[node name="ComparisonHint" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "무게 1당 = 예상 가치 ÷ 무게 · 비교값이며 실제 판매가는 달라질 수 있습니다."
+theme_override_font_sizes/font_size = 14
+autowrap_mode = 3
+
 [node name="ItemList" type="ItemList" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(560, 100)

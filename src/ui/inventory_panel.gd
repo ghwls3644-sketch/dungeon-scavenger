@@ -5,6 +5,7 @@ signal opening
 
 @export var inventory_source_path: NodePath
 @export var show_quick_drop_hint := false
+@export var show_value_comparison := false
 
 var _inventory: PlayerInventory
 var _tree_was_paused := false
@@ -24,6 +25,13 @@ func _ready() -> void:
 	# Clicking an already highlighted acquisition is still an explicit selection.
 	_item_list.item_clicked.connect(_on_item_clicked)
 	%QuickDropHint.visible = show_quick_drop_hint
+	%ComparisonHint.visible = show_value_comparison
+	if show_value_comparison:
+		_item_list.icon_mode = ItemList.ICON_MODE_TOP
+		_item_list.max_text_lines = 2
+		_item_list.custom_minimum_size.y = 156.0
+		_item_list.resized.connect(_fit_comparison_rows)
+		_fit_comparison_rows.call_deferred()
 	_drop_button.pressed.connect(_on_drop_pressed)
 	_close_button.pressed.connect(close_inventory)
 	_drop_confirmation.confirmed.connect(_on_drop_confirmed)
@@ -122,6 +130,8 @@ func _render() -> void:
 	var items := _inventory.get_inventory_items()
 	for item in items:
 		_item_list.add_item(_format_item(item))
+		if show_value_comparison:
+			_item_list.set_item_tooltip(_item_list.item_count - 1, _format_item_details(item))
 
 	var selected_index := _inventory.get_selected_index()
 	if selected_index >= 0 and selected_index < items.size():
@@ -136,8 +146,19 @@ func _render() -> void:
 	]
 
 
+func _fit_comparison_rows() -> void:
+	_item_list.fixed_column_width = maxi(1, int(_item_list.size.x) - 32)
+
+
 func _format_item(item: InventoryItem) -> String:
 	var definition := item.get_definition()
+	if show_value_comparison:
+		var category := _get_category_text(definition.category) if item.is_identified() else "미확인 물품"
+		var protection := ("보호" if definition.is_protected() else "일반") if item.is_identified() else "보호 여부 미확인"
+		return "%s | %s | %s\n%d칸 · 무게 %.1f · %s · %s" % [
+			definition.display_name, category, protection, definition.slot_size, definition.weight,
+			ItemValueText.format_inventory_item_value(item), ItemValueText.format_weight_value(item),
+		]
 	var risk_text := " | %s" % item.get_risk_hint() if not item.get_risk_hint().is_empty() else ""
 	if not item.is_identified():
 		return "%s | %d칸 | 무게 %.1f%s | 미확인 물품 | 가치 미확인 | 보호 여부 미확인" % [
@@ -167,6 +188,8 @@ func _format_item_details(item: InventoryItem) -> String:
 		definition.display_name, definition.slot_size, definition.weight,
 		category, ItemValueText.format_inventory_item_value(item), protection,
 	]
+	if show_value_comparison:
+		text += "\n%s" % ItemValueText.format_weight_value(item)
 	if not item.get_risk_hint().is_empty():
 		text += "\n위험 정보: %s" % item.get_risk_hint()
 	return text
