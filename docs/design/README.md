@@ -6,7 +6,7 @@ status: confirmed
 source_version: management-proposal-v0.2.1
 canonical_for:
   - design_document_navigation
-last_reviewed: 2026-07-28
+last_reviewed: 2026-09-24
 owner: game-design
 related:
   - ../GDD.md
@@ -33,6 +33,7 @@ related:
 | [`item_rules.md`](item_rules.md) | 아이템이 데이터와 시스템에서 어떻게 작동하는가? |
 | [`economy_rules.md`](economy_rules.md) | 가격·비용·손실·수익은 어떻게 계산되는가? |
 | [`harness_engineering.md`](harness_engineering.md) | 하네스는 어떤 자원과 모듈 규칙으로 위험에 대응하는가? |
+| [`survival_rules.md`](survival_rules.md) (`draft`) | 건강·부상과 퇴로 상실의 기존 요구는 무엇이며 어떤 시제품 규칙을 검토해야 하는가? |
 
 ## 경계 규칙
 
@@ -40,6 +41,7 @@ related:
 - 사용자 표시 명칭은 [`../reference/glossary.md`](../reference/glossary.md)를 따른다.
 - 미결정 수치와 규칙은 [`../project/open_questions.md`](../project/open_questions.md)에 연결한다.
 - `confirmed` 문서는 구현 기준으로 사용할 수 있다. [`harness_engineering.md`](harness_engineering.md)는 상세 규칙 이관·검증 전까지 `draft`이므로 단독 구현 기준으로 사용하지 않는다.
+- `DEV-0318`의 [`survival_rules.md`](survival_rules.md)는 기존 요구와 새 시제품 제안을 나눈 `draft` 검토안이다. 피해·회복·퇴로 규칙을 확정한 문서가 아니며 단독 구현 기준으로 사용하지 않는다. 실제 미정 항목은 `Q-019`~`Q-021`, 후속 작업 순서는 개발 인계가 소유한다.
 
 ## 현재 상태
 

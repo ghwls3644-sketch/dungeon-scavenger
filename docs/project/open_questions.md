@@ -7,7 +7,7 @@ source_version: story-v1.5+gdd-v2.1
 canonical_for:
   - unresolved_questions
   - provisional_rules
-last_reviewed: 2026-09-19
+last_reviewed: 2026-09-24
 owner: project-maintainer
 related:
   - ../GDD.md
@@ -16,6 +16,8 @@ related:
   - migration_changes.md
   - m4_term_review.md
   - ../reference/glossary.md
+  - ../design/survival_rules.md
+  - g3_exploration_review.md
 ---
 
 # 열린 질문
@@ -58,6 +60,9 @@ related:
 | `Q-016` | 잔재에 환청·환시 연출을 넣을 것인가? | `deferred` | [`../story/05_items_and_discoveries.md`](../story/05_items_and_discoveries.md), [`../story/07_tone_and_writing_guide.md`](../story/07_tone_and_writing_guide.md), [`../design/narrative_delivery.md`](../design/narrative_delivery.md) | 텍스트 설명 중심 | 연출 예산 확정 후 |
 | `Q-017` | UI와 정산에서 감정 비용을 `감정료`와 `감정 수수료` 중 무엇으로 표시할 것인가? | `deferred` | [`../GDD.md`](../GDD.md), [`../design/economy_rules.md`](../design/economy_rules.md), [`../reference/glossary.md`](../reference/glossary.md) | 두 표기를 같은 비용 개념으로 추적하되 독립 공식 용어 등록은 보류 | 정산 UI 문구 확정 전 |
 | `Q-018` | 출입 자격을 물리적 `허가증` 아이템으로 확정할 것인가, `출입 허가`나 표식으로 표현할 것인가? | `deferred` | [`../story/03_player_and_society.md`](../story/03_player_and_society.md), [`../reference/glossary.md`](../reference/glossary.md) | `DEC-014`의 출입 자격만 유지하고 독립 아이템명은 확정하지 않음 | 허가·출정 UI와 아이템 목록 확정 전 |
+| `Q-019` | 건강 잔량·위험별 피해와 행동 불능, 출정 간 회복을 어떻게 단순화할 것인가? | `provisional` | [GDD 6-2](../GDD.md#6-2-플레이어-상태), [`../design/survival_rules.md`](../design/survival_rules.md), [`../design/economy_rules.md`](../design/economy_rules.md) | 기존 위험의 실패 처리를 유지. 건강·일반 피해 제안은 검토안이며 적용된 규칙·값으로 해석하지 않음 | DEV-0319에서 시험 적용 범위·데이터를 기록할 때, 최종 회복·비용은 G4 안전망과 사람 평가 때 |
+| `Q-020` | 부상의 발생·중첩·해제와 이동/상호작용 효율을 어떻게 연결할 것인가? | `provisional` | [GDD 6-2·12-3](../GDD.md#6-2-플레이어-상태), [`../design/survival_rules.md`](../design/survival_rules.md), [`../design/item_rules.md`](../design/item_rules.md) | 일시적인 불이익이라는 요구만 유지. 지속 시간·계수·작업 시간은 미정, 부상 해제와 건강 회복을 구분하는 방향 검토 | DEV-0319 상태·이동·HUD, 후속 조사/회수 시간 작업의 착수 및 사람 평가 |
+| `Q-021` | 실제 퇴로 상실의 판정과 제한 시간, 비상 탈출의 성공·실패·비용·회수품 처리는 무엇인가? | `provisional` | [GDD 4-3·9-1](../GDD.md#4-3-성공과-실패), [`../design/survival_rules.md`](../design/survival_rules.md), [`../design/repeat_exploration.md`](../design/repeat_exploration.md), [`../design/economy_rules.md`](../design/economy_rules.md) | 현재 입구 귀환·마지막 관찰 지도 기록 유지. 비상 탈출 실패는 기존 손실 원칙을 따르되 성공 처리·자원·시간은 정하지 않음 | 퇴로 변화 시제품 착수 전 실제 차단·대체 길 범위 설정, 비상 탈출 구현 전 성공/실패 처리 결정 |
 
 `Q-009`~`Q-011`은 GDD 19장에서 의도적으로 확정하지 않는 배경 여지로 분류한 항목이다. 현재 제품 구조를 막지 않으며 위 검토 조건이 생기기 전에는 결정을 요구하지 않는다.
 
@@ -105,6 +110,16 @@ related:
 | `STY-0093` 964 | 가벼운 유머는 허용해도 된다. 다만 던전 내부의 위험감이 무너지지 않는 선에서 사용한다. | [`../story/07_tone_and_writing_guide.md`](../story/07_tone_and_writing_guide.md) |
 | `STY-0101` 1071 | “수색꾼”은 현장 명칭으로 유지한다. 공식 문서에서는 넓은 의미의 “모험가”나 임무 단위의 “정찰 파견”으로 처리할 수 있다. | [`decisions.md`](decisions.md)의 `DEC-002` |
 | `STY-0101` 1072 | 봉인 관리인은 용어 목록에서 제거한다. 필요하다면 성직자가 그 역할의 일부를 흡수한다. | [`decisions.md`](decisions.md)의 `DEC-017` |
+
+## 생존 규칙 검토 경계
+
+2026-09-24 `DEV-0318`에서 `Q-019`~`Q-021`을 추가했다. 새로운 세계관 질문을 만든 것이 아니라 GDD 4-3·6-2·9-1·12-3에 요구된 건강·부상·퇴로 상실의 상세 처리 공백을 추적한다. 기존 `Q-014`는 허가 약관과 사회적 사고 책임의 범위다. 이를 근거로 피해 수치·치료비·보험·구조자의 정체를 결정하지 않는다.
+
+[생존 규칙 검토안](../design/survival_rules.md)은 건강 잔량과 일시적 부상을 분리하고, 기존 함정을 첫 일반 피해 비교 후보로 사용하는 방향을 제안한다. 건강 2·일반 피해 1 예시는 동작 비교를 위한 가안이다. 현재 구현은 여전히 붕괴·함정·골렘 포착의 실패 처리이며 이번 문서 작성으로 바뀌지 않는다. 제안의 채택 범위·시험 값은 후속 구현 작업에서 GDD·confirmed Design과 함께 검토하고 이관 변경 기록에 먼저 남긴다. 질문이나 문서의 등록을 새 규칙 승인으로 기록하지 않는다.
+
+검토안의 비상 탈출 성공에 대한 회수품 처리는 미정이다. 현재 기준이 정한 것은 제한 시간 만료 또는 비상 탈출 실패의 손실이며, 성공을 무료 귀환이나 전량 손실로 임의 해석하지 않는다. 마지막으로 관찰한 막힌 길을 실제 퇴로 상실로 간주하지 않는다. 부상 시간·이동 계수·상호작용 시간과 비상 탈출 시간/비용은 최종 값뿐 아니라 구현용 시험 값도 후속 착수에서 따로 기록한다.
+
+G1 사람 평가·`Q-004`·`Q-005`와 기존 안전망 비용 미정 상태는 유지한다. 새로운 건강·부상·퇴로 시제품의 자동 검사를 통과하더라도 해당 사람 평가와 최종 밸런스가 해결된 것으로 처리하지 않는다.
 
 ## 이관 상태
 

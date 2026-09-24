@@ -1107,3 +1107,24 @@ $progressTestDir = Join-Path $env:TEMP ('dungeon-progress-restart-' + [guid]::Ne
 - 화면 원본: `C:/Users/user/AppData/Local/Temp/dungeon-dev0317-d62d861e461440628aeb029c687f4198/`
 - 문서 검사: 활성 Markdown 링크·앵커, 동결 원본 SHA-256 6개·아카이브 사본 3개, `git diff --check` 통과.
 - 정합성 검사: 아직 아님 — 다음 정기 검사는 G5 완료 후. 다음 번호는 `DEV-0318`이며 남은 생존 규칙과 시제품 범위를 착수 때 정리한다. G3 전체 완료는 선언하지 않으며 사람 평가·Q-004/Q-005·최종 수치는 기존 후속 상태를 유지한다.
+
+## DEV-0318 생존 규칙과 시제품 범위 정리 검사
+
+2026-09-24 [생존 규칙 검토안](../design/survival_rules.md)을 `draft`로 작성했다. GDD·confirmed Design의 요구, 현재 구현과 새 제안의 경계를 [G3 대조표](g3_exploration_review.md#dev-0318-생존-규칙-범위-대조)에 기록했고, Q-019~Q-021과 [후속 작업 순서](development_handoff.md#dev-0318--생존-규칙과-시제품-범위-정리)를 연결했다. 기존 DEC-103~105·109와 Q-014를 새 피해/치료/탈출 수치의 승인 근거로 확장하지 않았다.
+
+이번 검증 대상은 문서다. `src`·`tests`·`project.godot`와 기존 검증 JSON을 변경하지 않았으며 게임·그래픽 자동 검사를 재실행하지 않았다. DEV-0317의 57/57과 화면 8장은 이전 작업에서 얻은 근거다. 소스 일치는 다음과 같이 확인한다.
+
+```powershell
+. ./tests/run_g2_checks.ps1
+$survivalSourceHash = Get-G2SourceHash (Get-Location).Path
+$survivalBaseline = Get-Content -Raw ./docs/project/dev0317_automated_results.json | ConvertFrom-Json
+if ($survivalSourceHash -ne $survivalBaseline.source_tree_sha256) {
+    throw 'DEV-0317 검증 소스와 현재 소스가 다릅니다.'
+}
+git diff --check
+git diff --name-only
+```
+
+검증 시점 소스 SHA-256은 `36adfb1a4176151190da6cebd1c680cf07a4d0c28d37d6aa8f4a9ebba37d0d49`로 기존 보고서와 같다. 바이트 기준 해시이므로 다른 환경의 줄바꿈까지 보증하지 않는다. 문서 대조에서는 건강 잔량과 부상 시간, 함정 주기별 중복 통지, 기존 골렘/붕괴 실패, 즉시 E 처리와 향후 작업 시간, 실제 통로와 마지막 관찰 기록, 실패 손실과 저장 소유권을 확인했다. 검토안을 구현 완료나 확정 설계로 표기하지 않았고 새 질문의 근거·후속 검토 시점을 적었다.
+
+활성 Markdown 상대 링크·앵커, 새 문서의 Front Matter/상태·책임·진입 링크, 동결 원본 SHA-256 6개·아카이브 사본 3개 및 `git diff --check`를 확인했다. 다음은 `DEV-0319 — 건강·부상 상태와 HUD`다. 문서 작성·검증 완료, 사용자 로컬 커밋 승인. **정합성 검사: 아직 아님** — 다음 정기 검사는 G5 완료 후이며 G3 전체 완료·사람 평가·최종 수치를 새로 승인하지 않는다.

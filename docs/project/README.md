@@ -8,7 +8,7 @@ canonical_for:
   - project_document_navigation
   - document_metadata_rules
   - document_status_rules
-last_reviewed: 2026-09-22
+last_reviewed: 2026-09-24
 owner: documentation-maintainer
 related:
   - ../README.md
@@ -36,6 +36,7 @@ related:
 이 디렉터리는 문서 이관과 개발 과정의 결정, 미결정 사항, 변경 이력을 관리한다.
 
 현재 G3의 연결 검사와 남은 범위는 [탐험 확장 통합 검토](g3_exploration_review.md), 다음 작업은 [개발 인계](development_handoff.md)에서 확인한다.
+`DEV-0318`의 [생존 규칙 검토안](../design/survival_rules.md)은 `draft`이며 현재 실행 규칙을 바꾸지 않는다. 건강·부상·퇴로 상실의 미정 사항은 [Q-019~Q-021](open_questions.md#생존-규칙-검토-경계), 작업 순서는 [DEV-0318 인계](development_handoff.md#dev-0318--생존-규칙과-시제품-범위-정리)를 따른다.
 
 ## 공통 Front Matter
 
@@ -105,6 +106,7 @@ related:
 - [`m6_human_review.md`](m6_human_review.md): 사람 검토 승인 결과, 상태 전환 후보와 `DOC-0602` 적용 결과
 - [`g1_playtest_review.md`](g1_playtest_review.md): G1 통합 장면 실행 방법, 자동 실행 자료, 사람 질문과 현재 정합성 검사 결과
 - [`g2_flow_review.md`](g2_flow_review.md): G2 전체 흐름의 반복 검사 명령·체크리스트·자동 실행 원본과 완료 범위
+- [`g3_exploration_review.md`](g3_exploration_review.md): G3 통합 근거·남은 범위와 생존 규칙/현재 구현의 대조
 
 ## 경계 규칙
 
