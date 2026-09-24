@@ -89,11 +89,20 @@ func _ready() -> void:
 		_press_key(KEY_E)
 		await _frames(3)
 		_expect(inventory.get_used_slots() == slots, "Prepared capacity did not govern actual pickup acceptance.")
+		# The current expedition now requires evading the nearby pursuing golem.
+		for frame in range(240):
+			if world.get_node("%GolemContactThreat").is_warning():
+				break
+			await _frames(1)
+		_expect(world.get_node("%GolemContactThreat").is_warning(), "Golem never reached the returning player.")
+		_press_key(KEY_Q)
+		await _frames(3)
+		_expect(world.get_node("%BrokenGuardGolem").get_state() == BrokenGuardGolem.State.DISABLED and harness.get_current_charge() == 2, "Return route failed to discharge the golem.")
 		for point in [Vector2(630, -200), Vector2(-500, -200), Vector2(-500, 200), Vector2(-220, 200)]:
 			await _walk(player, point)
 		_press_key(KEY_Q)
 		await _frames(3)
-		_expect(harness.get_current_charge() == 2, "Prepared harness could not stabilize the return route.")
+		_expect(harness.get_current_charge() == 1, "Prepared harness could not stabilize the return route after discharge.")
 		_expect(entry.get_departure_preview().starting_charge == 3 and world.get_start_loadout().starting_charge == 3, "Run consumption changed hub or departure data.")
 		for point in [Vector2(-500, 200), Vector2(-650, 0), Vector2(-720, 0)]:
 			await _walk(player, point)

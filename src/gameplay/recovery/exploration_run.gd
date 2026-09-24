@@ -41,13 +41,13 @@ func complete_safe_return() -> bool:
 	return true
 
 
-func complete_failure() -> bool:
+func complete_failure(cause: StringName = &"") -> bool:
 	if not _can_complete():
 		return false
 
 	_completion_in_progress = true
 	var lost_item_count := _inventory.take_all_inventory_items().size()
-	_outcome = ExplorationOutcome.failure(lost_item_count)
+	_outcome = ExplorationOutcome.failure(lost_item_count, cause)
 	_finish(State.FAILURE)
 	return true
 

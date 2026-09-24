@@ -75,11 +75,16 @@ func _ready() -> void:
 	_inventory.item_add_rejected.connect(_on_pickup_rejected)
 	_hazard.warning_started.connect(func(_duration: float): %ChoiceStatus.text = "먼지와 진동이 커집니다. Q로 안정화하거나 신속히 통과·후퇴하세요.")
 	_hazard.body_caught.connect(_on_body_caught)
+	%GolemContactThreat.body_caught.connect(_on_golem_caught)
+	%GolemContactThreat.status_changed.connect(_update_contact_status)
+	_inventory_panel.opening.connect(%ContactStatus.hide)
+	%ExplorationMapPanel.opening.connect(%ContactStatus.hide)
 	_run.run_ended.connect(_on_run_ended)
 
 
 func _physics_process(_delta: float) -> void:
 	if _started and not _finished:
+		_update_contact_status()
 		_map_state.observe_position(_player.position)
 		$OverviewCamera.position.y = minf(-100.0, _player.position.y + 80.0)
 		%ReturnRouteStatus.refresh(
@@ -123,6 +128,7 @@ func start_exploration() -> bool:
 
 
 func _set_simulation_enabled(enabled: bool) -> void:
+	%GolemContactThreat.set_active(enabled)
 	%ReturnRouteStatus.set_active(enabled)
 	%RetreatDoor.set_exploration_active(enabled)
 	if not enabled:
@@ -143,6 +149,19 @@ func _set_simulation_enabled(enabled: bool) -> void:
 func _on_body_caught(body: Node2D) -> void:
 	if _started and not _finished and body == _player:
 		_run.complete_failure()
+
+
+func _on_golem_caught(body: Node2D) -> void:
+	if _started and not _finished and body == _player:
+		_run.complete_failure(&"golem_capture")
+
+
+func _update_contact_status() -> void:
+	var threat: GolemContactThreat = %GolemContactThreat
+	%ContactStatus.visible = threat.is_warning() and not _inventory_panel.visible and not %ExplorationMapPanel.visible
+	%ChoiceStatus.visible = not %ContactStatus.visible
+	if threat.is_warning():
+		%ContactStatus.text = "골렘 접촉! %.1f초 뒤 행동 불능\n이동으로 이탈 · G 길게: 선택한 짐 버리기 · Q: 방전 (충전 필요)" % threat.get_remaining_time()
 
 
 func _on_pickup_rejected(_item: ItemDefinition, reason: StringName) -> void:

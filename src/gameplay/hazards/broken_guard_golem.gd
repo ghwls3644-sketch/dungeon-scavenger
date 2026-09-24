@@ -253,6 +253,10 @@ func has_visual_contact() -> bool:
 	return is_instance_valid(_tracked_target)
 
 
+func is_visually_tracking(body: PlayerController) -> bool:
+	return use_sight_occlusion and _tracked_target == body and _can_see(body)
+
+
 func _can_see(body: Node2D) -> bool:
 	if not is_instance_valid(body) or body.is_queued_for_deletion() or not body is PlayerController:
 		return false

@@ -1,4 +1,7 @@
-[gd_scene load_steps=34 format=3]
+[gd_scene load_steps=37 format=3]
+
+[ext_resource type="Script" path="res://src/gameplay/hazards/golem_contact_threat.gd" id="30_contact"]
+[ext_resource type="Resource" path="res://src/data/prototype_golem_contact.tres" id="31_contact_rule"]
 
 [ext_resource type="Script" path="res://src/app/prototype_exploration.gd" id="1_space"]
 [ext_resource type="PackedScene" path="res://src/ui/return_route_status.tscn" id="29_return"]
@@ -48,6 +51,15 @@
 [sub_resource type="RectangleShape2D" id="BypassShape"]
 size = Vector2(200, 100)
 
+[sub_resource type="StyleBoxFlat" id="ContactStyle"]
+bg_color = Color(0.28, 0.04, 0.03, 1)
+border_width_left = 4
+border_color = Color(1, 0.6, 0.2, 1)
+content_margin_left = 12.0
+content_margin_top = 1.0
+content_margin_right = 12.0
+content_margin_bottom = 1.0
+
 [sub_resource type="StyleBoxFlat" id="PanelStyle"]
 bg_color = Color(0.075, 0.09, 0.12, 1)
 border_width_left = 1
@@ -92,6 +104,13 @@ z_index = 5
 script = ExtResource("25_lure")
 player_path = NodePath("../Player")
 rule = ExtResource("26_lure_rule")
+
+[node name="GolemContactThreat" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("30_contact")
+golem_path = NodePath("../BrokenGuardGolem")
+player_path = NodePath("../Player")
+rule = ExtResource("31_contact_rule")
 
 [node name="OverviewCamera" type="Camera2D" parent="."]
 position = Vector2(160, -100)
@@ -285,6 +304,18 @@ offset_top = 148.0
 offset_right = 710.0
 offset_bottom = 196.0
 theme_override_styles/normal = SubResource("PanelStyle")
+autowrap_mode = 3
+mouse_filter = 2
+
+[node name="ContactStatus" type="Label" parent="Overlay"]
+unique_name_in_owner = true
+visible = false
+offset_left = 16.0
+offset_top = 62.0
+offset_right = 710.0
+offset_bottom = 112.0
+theme_override_styles/normal = SubResource("ContactStyle")
+theme_override_colors/font_color = Color(1, 0.92, 0.8, 1)
 autowrap_mode = 3
 mouse_filter = 2
 

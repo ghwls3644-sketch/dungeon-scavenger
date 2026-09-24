@@ -9,6 +9,7 @@ enum Result {
 var _result: Result = Result.FAILURE
 var _recovery_result: RecoveryResult
 var _lost_item_count := 0
+var _failure_cause: StringName = &""
 
 
 static func safe_return(recovered_items: Array[ItemDefinition]) -> ExplorationOutcome:
@@ -27,10 +28,11 @@ static func safe_return_inventory_items(
 	return outcome
 
 
-static func failure(lost_item_count: int) -> ExplorationOutcome:
+static func failure(lost_item_count: int, cause: StringName = &"") -> ExplorationOutcome:
 	var outcome := ExplorationOutcome.new()
 	outcome._result = Result.FAILURE
 	outcome._lost_item_count = maxi(lost_item_count, 0)
+	outcome._failure_cause = cause
 	return outcome
 
 
@@ -52,3 +54,7 @@ func get_recovery_result() -> RecoveryResult:
 
 func get_lost_item_count() -> int:
 	return _lost_item_count
+
+
+func get_failure_cause() -> StringName:
+	return _failure_cause

@@ -8,7 +8,7 @@ canonical_for:
   - development_environment
   - engine_and_language
   - development_commands
-last_reviewed: 2026-09-22
+last_reviewed: 2026-09-24
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -1082,3 +1082,28 @@ $progressTestDir = Join-Path $env:TEMP ('dungeon-progress-restart-' + [guid]::Ne
 - 문서 검사: 활성 Markdown 링크·앵커, 동결 원본 SHA-256 6개와 아카이브 사본 3개 일치, `git diff --check` 통과.
 - 화면 원본: `C:/Users/user/AppData/Local/Temp/dungeon-g3-52490ec93bfb4fdaa5a9a7785d4a9ccd/`
 - 정합성 검사: 아직 아님 — 다음 정기 검사는 G5 완료 후. G1 사람 평가와 Q-004/Q-005는 유지한다.
+
+## DEV-0317 골렘 접촉 위험과 생존 피드백 검사
+
+현재 출정에 별도 접촉 판정을 연결했다. 시험 데이터는 중심 거리 34 px·연속 경고 1초다. 실제 가시 추적 때만 누적하고 첫 틱은 시간을 쓰지 않는다. 거리/시야 이탈·방전은 취소, 재접촉은 전체 경고, 메뉴는 정지, 종료 후에는 재활성화되지 않는다. 골렘의 기존 탐지·속도·비상 방전과 G1 비교 장면은 유지한다. `golem_capture` 원인은 이번 결과 화면에만 전달하며 저장 스키마에 추가하지 않는다.
+
+```powershell
+& $env:GODOT_BIN --headless --path . --fixed-fps 60 --quit-after 18000 res://tests/smoke/golem_contact_smoke.tscn
+& $env:GODOT_BIN --headless --path . --fixed-fps 60 --quit-after 18000 res://tests/smoke/g3_exploration_flow_smoke.tscn
+& ./tests/run_g2_checks.ps1 -GodotBin $env:GODOT_BIN -Repetitions 1 -TimeoutSeconds 60
+```
+
+각 성공 표시는 `golem_contact_passed`·`g3_exploration_flow_passed`이며 종료 코드 0과 엔진 오류·경고 없음도 함께 확인한다. 첫 검사는 의심 중 포착 금지·경고 선행·연속 접촉·취소/재접촉·방전/부족·메뉴 정지, 데이터 유효성·실행 복사본·출정 전후·적 삭제·중복 실패를 확인한다. 넓은 검사 전용 반경으로 문/벽의 시야 차단을 거리 조건에서 분리한다. 실제 물품 두 개를 회수한 뒤 같은 추적 배치와 기본 속도로 짐 유지 시 포착·버리기 시 탈출을 비교한다. 이 검사 배치는 제품 콘텐츠가 아니다.
+
+타이틀 이어하기→출정→포착 실패→결과→거점 저장→새 출정도 검사한다. 기존 거점 보유분을 먼저 정산·저장한 자료를 사용하고, 이번 미확인·보호 물품 두 개는 손실되되 과거 보유금·보관품은 저장·복원 후 그대로인지 확인한다. 새 출정에서 접촉 경고와 가방·충전이 초기화되며 이후 안전 귀환에 포착 원인이 남지 않는다.
+
+그래픽 확인은 접촉 명령의 `--headless`를 빼고 `-- --contact-render-directory=<새 임시 폴더>`를 붙인다. 접촉 경고·Q 방전·짐 버리기 후 계속 이동하는 탈출·포착 실패 결과의 4장을 저장한다. 두 번째 명령은 `-- --g3-render-directory=<새 임시 폴더> --g3-report-path=<새 임시 JSON 경로>`로 수정한 통합 경로 화면 4장과 측정값을 저장한다. 경고 UI는 평상시 안내와 자리를 공유하고 적재 HUD 및 캐릭터를 가리지 않는다.
+
+2026-09-24 최종 검증: Godot 4.7.1 **57/57 실행**, 스모크 장면 34개와 출정·정산·저장·별도 프로세스 복원 분기 통과. 엔진 오류·경고 및 예외 적용 없음. 별도 그래픽 검사 두 개와 1152×648 화면 8장을 확인했다. 통합 경로는 두 개 모두 생환·2개 회수·예상 가치 90~130이며 속도/소음·충전/도구 결과가 headless와 일치한다. 구현·검증 완료, 검증 결과 검토 후 사용자가 로컬 커밋을 승인했다.
+
+- 전체 검사 원본: [dev0317_automated_results.json](dev0317_automated_results.json), 임시 경로 `C:/Users/user/AppData/Local/Temp/dungeon-g2-20260924-091500-7e6e77bb5e464c28b30f7fc1a3cef33d/results.json`
+- 검사 소스 SHA-256: `36adfb1a4176151190da6cebd1c680cf07a4d0c28d37d6aa8f4a9ebba37d0d49` — 검사 전후 같은 바이트. 문서 및 다른 환경의 줄바꿈까지 보증하는 해시가 아니다.
+- 그래픽 경로 측정: [dev0317_route_results.json](dev0317_route_results.json)
+- 화면 원본: `C:/Users/user/AppData/Local/Temp/dungeon-dev0317-d62d861e461440628aeb029c687f4198/`
+- 문서 검사: 활성 Markdown 링크·앵커, 동결 원본 SHA-256 6개·아카이브 사본 3개, `git diff --check` 통과.
+- 정합성 검사: 아직 아님 — 다음 정기 검사는 G5 완료 후. 다음 번호는 `DEV-0318`이며 남은 생존 규칙과 시제품 범위를 착수 때 정리한다. G3 전체 완료는 선언하지 않으며 사람 평가·Q-004/Q-005·최종 수치는 기존 후속 상태를 유지한다.

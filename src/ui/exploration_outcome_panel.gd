@@ -55,5 +55,7 @@ func _render() -> void:
 
 	_title.text = "탐험 실패"
 	_summary.text = "현재 탐험의 회수품 %d개를 잃었습니다. 획득 확정이나 정산에는 포함되지 않습니다." % _outcome.get_lost_item_count()
+	if _outcome.get_failure_cause() == &"golem_capture":
+		_summary.text = "골렘과의 접촉에서 벗어나지 못해 행동 불능이 되었습니다.\n" + _summary.text
 	_recovery_result_panel.bind_result(null)
 	_recovery_result_panel.hide()

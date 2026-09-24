@@ -8,7 +8,7 @@ canonical_for:
   - source_tree_layout
   - module_responsibilities
   - module_dependency_rules
-last_reviewed: 2026-09-22
+last_reviewed: 2026-09-24
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -253,3 +253,8 @@ res://
 
 - `DEV-0316`의 `tests/smoke/g3_exploration_flow_smoke.*`는 현재 출정 장면의 기본 데이터와 실제 입력을 사용해 무료 우회·제한 자원 경로를 검사한다. 기존 가치 비교 검사의 출정·입력·이동 도우미만 재사용하며 적 정지·순간 이동·직접 물품 주입·충전 보충을 하지 않는다. 출정 장면·게임 규칙·저장에는 새 의존성을 만들지 않는다.
 - `docs/project/g3_exploration_review.md`는 기술 근거·남은 범위·수동 재현 절차를 소유한다. JSON 두 파일은 전체 반복 실행과 그래픽 경로 측정의 원본 기록이며 기능 설정이나 사람 평가 결과가 아니다. 기존 실행기는 새 스모크 장면을 자동 수집하므로 변경하지 않았다.
+
+- `DEV-0317`의 `src/data/golem_contact_rule.gd`와 `prototype_golem_contact.tres`는 접촉 거리·경고 시간의 유효성 및 시험 값을 소유한다. `GolemContactThreat`는 준비 시 복사한 데이터로 현재 출정의 연속 접촉 시간을 관리하고 읽기 상태·포착 신호만 제공한다. 물리 우선순위 2에서 몸의 이동 뒤 거리·추적 상태·현재 시야를 함께 확인한다. 시야·목표·추적 행동은 `BrokenGuardGolem.is_visually_tracking()`의 읽기 전용 계약을 사용하며 새 길찾기나 적 상태를 만들지 않는다.
+- `PrototypeExploration`이 시작/종료에 접촉 판정을 활성/비활성화하고 포착 신호를 `ExplorationRun.complete_failure()`에 연결한다. 경고 UI는 접촉 상태만 표시하며 가방·지도에서는 숨긴다. 접촉 누적은 장면 일시정지에 따른다. `ExplorationOutcome`의 선택적 원인 식별자와 결과 UI 문구는 현재 결과 전달용이며 진행 저장 스키마에는 추가하지 않는다. 기존 원인 없는 실패 호출과 G1 장면의 무해한 골렘 접촉은 유지한다.
+- `tests/smoke/golem_contact_smoke.*`는 경고 선행·취소/재접촉·문/벽·방전/부족·메뉴·탐험 수명과 결과/거점 저장을 검사한다. 거리보다 시야 차단이 판정을 막는지 분리하는 검사만 넓은 접촉 반경과 정지한 적을 사용한다. 짐 유지/버리기 비교는 실제 회수와 입력·기본 속도, 동일한 추적 시작 배치로 검사한다. 실패 순환의 미확인·보호 물품과 기존 보유분은 검사 전용 자료다.
+- 기존 `g3_exploration_flow_smoke`는 현재 위험을 켠 기본 장면의 실제 입력 경로를 서쪽 접근/귀환으로 바꿨고 `hub_departure_smoke`는 실제 Q 방전과 비용을 추가 검사한다. 과거 `g3_*_results.json`은 DEV-0316 기록으로 보존하고 `dev0317_*_results.json`에 이번 전체 실행·통합 경로 기록을 따로 남긴다.
