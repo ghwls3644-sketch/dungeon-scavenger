@@ -275,3 +275,13 @@ res://
 - `tests/smoke/player_survival_smoke.*`는 데이터·수명·실제 이동/소음/메뉴/버리기·함정 재진입·Q·종료 경합·화면·앱 실패/저장/새 출정을 검사한다. 기존 함정 검사는 현재 출정에서 첫 피해 생존·다음 주기 실패로 갱신했다.
 
 DEV-0318 절은 당시 검토 이력이다. 현재 상태·이동·HUD의 적용 범위는 [생존 시험 적용 기록](../design/survival_rules.md#dev-0319-시험-적용-범위)을 따른다. `InteractionController`의 즉시 E와 조사·회수 시간의 후속 분리는 유지한다.
+
+### DEV-0320의 조사·회수 시간
+
+- `src/data/interaction_timing_rule.gd`·`prototype_interaction_timing.tres`는 조사 0.8초·회수 0.4초의 유효 범위와 시험 데이터를 소유한다. `SurvivalRule`·`PlayerSurvival`은 부상 진행 효율 0.5와 현재 출정 활성 여부를 읽기 전용으로 제공한다. 작업 제어가 건강·부상 시간을 변경하지 않는다.
+- `Interactable`은 즉시/조사/회수의 행동 종류, 시작/완료 차단 사유와 동기 재진입 방지를 제공한다. `PickupInteractable`이 가방 공간과 실제 지급/원본 제거를, `InspectablePickupInteractable`이 조사→회수 단계를, `MapClueInteractable`이 완료된 단서 기록을 소유한다. UI는 조사·감정·물품 수를 변경하지 않는다.
+- `InteractionController`는 선택적으로 연결한 시간 데이터의 복사본·대상·행동 종류·남은 작업량을 소유한다. E 시작/취소, 매 틱 생존 효율 적용, 메뉴/이탈/대상 변화/종료 취소, 완료 직전 재검증과 제어기 재진입 방지를 담당한다. `InteractionDetector`가 현재 위치의 물리 범위를 조회해 겹침 통지의 한 틱 지연을 보완한다.
+- `PrototypeExploration`은 현재 출정에서 시간 기능을 구성하고 시작/종료·가방/지도 취소를 연결한다. 기존 `InteractionPrompt`는 공개된 진행 문구만 표시하며 부상 HUD는 공개 효율을 읽는다. 문·입구·Q·G와 기존 저장 모듈의 책임은 유지한다.
+- G1 장면은 시간 기능을 구성하지 않아 즉시 상호작용을 유지한다. `tests/helpers/interaction_test_input.gd`는 현재 출정 검사의 입력 버퍼를 처리하고 실제 작업 완료/취소를 기다린다. `interaction_timing_smoke`는 실제 입력·시간/효율 변화·정보 경계·취소·가득 찬 가방·단계 변경·중복 완료·즉시 조작·수명·화면을 검사한다.
+
+DEV-0318~DEV-0319의 즉시 E·후속 상호작용 문구는 당시 이력이다. 현재 적용 범위는 [DEV-0320 시험 기록](../design/survival_rules.md#dev-0320-조사회수-시간-시험-적용)을 따른다.

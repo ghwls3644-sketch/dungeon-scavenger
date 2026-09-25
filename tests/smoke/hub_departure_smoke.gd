@@ -71,6 +71,7 @@ func _ready() -> void:
 	await _walk(player, Vector2(-500, -200))
 	await _walk(player, Vector2(-275, -200))
 	_press_key(KEY_E)
+	_expect(await InteractionTestInput.wait_for_work(player), "Timed action did not finish.")
 	await _frames(4)
 	_expect(inventory.get_used_slots() == 1, "Started exploration could not collect its first item.")
 	await _check_inventory_pause(world, player)
@@ -81,12 +82,15 @@ func _ready() -> void:
 	else:
 		await _walk(player, Vector2(80, -200))
 		_press_key(KEY_E)
+		_expect(await InteractionTestInput.wait_for_work(player), "Timed action did not finish.")
 		await _frames(3)
 		for point in [Vector2(630, -200), Vector2(630, 220)]:
 			await _walk(player, point)
 		_press_key(KEY_E)
+		_expect(await InteractionTestInput.wait_for_work(player), "Timed action did not finish.")
 		await _frames(3)
 		_press_key(KEY_E)
+		_expect(await InteractionTestInput.wait_for_work(player), "Timed action did not finish.")
 		await _frames(3)
 		_expect(inventory.get_used_slots() == slots, "Prepared capacity did not govern actual pickup acceptance.")
 		# The current expedition now requires evading the nearby pursuing golem.
@@ -161,6 +165,7 @@ func _check_settlement_and_redeparture(entry: GameEntry, hub: HubPanel, slots: i
 	for point in [Vector2(-500, -200), Vector2(-275, -200)]:
 		await _walk(player, point)
 	_press_key(KEY_E)
+	_expect(await InteractionTestInput.wait_for_work(player), "Timed action did not finish.")
 	await _frames(3)
 	_expect(inventory.get_used_slots() == 1, "Repeated expedition did not restore prototype pickups.")
 	for point in [Vector2(-500, -200), Vector2(-500, 200), Vector2(-170, 200)]:

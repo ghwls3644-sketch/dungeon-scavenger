@@ -1153,3 +1153,27 @@ git diff --name-only
 - 최종 화면/실행 로그: `C:/Users/user/AppData/Local/Temp/dungeon-dev0319-final-a19f1c6c72604ec18a786eec7442a6a8/`
 - 문서 검사: 활성 Markdown 상대 링크·앵커, 동결 원본 SHA-256 6개·아카이브 사본 3개, `git diff --check` 통과.
 - 다음은 DEV-0320 — 부상의 조사·회수 시간. **정합성 검사: 아직 아님** — 다음 정기 검사는 G5 완료 후. G3 전체 완료·사람 평가·최종 밸런스는 후속이다.
+
+## DEV-0320 부상의 조사·회수 시간 검사
+
+[시간 검사](../../tests/smoke/interaction_timing_smoke.gd)는 현재 출정의 실제 E 입력으로 물품 조사→별도 회수, 공략도 읽기, 정상/부상 시간과 도중 효율 변화를 확인한다. 시험 값은 조사 0.8초·회수 0.4초·부상 효율 0.5다. 데이터 유효성·복사본, 완료 전 정보/물품 미지급과 미확인 상태 보존, E 취소·키 반복 무시, 범위 이탈·대상 교체/삭제/비활성화·외부 조사 단계 변경·가방 공간 변화·메뉴·종료 취소를 검사한다. 취소 뒤 재시작은 0부터이고 완료 신호의 제어기/대상 재호출은 중복 지급하지 않는다.
+
+기능 검사의 일부 위치와 골렘 정지는 시간·취소 조건을 분리한 배치다. 기본 통합 탐험 경로의 적·이동·자원·작업 시간은 그대로 유지했다. 기존 현재 출정 검사 9개 파일에는 [완료 대기 도우미](../../tests/helpers/interaction_test_input.gd)를 사용하고 즉시 회수 가정을 제거했다. 버퍼에 남은 입력을 먼저 처리하며, 공략도 안내 검사는 추가된 시간 표시까지 확인한다. G1 비교 장면과 문·귀환·Q·G의 기존 처리는 유지했다.
+
+```powershell
+& $env:GODOT_BIN --headless --path . --fixed-fps 60 --quit-after 18000 res://tests/smoke/interaction_timing_smoke.tscn
+& $env:GODOT_BIN --headless --path . --fixed-fps 60 --quit-after 18000 res://tests/smoke/g3_exploration_flow_smoke.tscn
+& ./tests/run_g2_checks.ps1 -GodotBin $env:GODOT_BIN -Repetitions 1 -TimeoutSeconds 60
+```
+
+성공 표시는 `interaction_timing_passed`·`g3_exploration_flow_passed`, 종료 코드 0과 엔진 오류·경고 없음이다. 첫 명령에서 `--headless`를 빼고 `-- --timing-render-directory=<새 임시 폴더> --timing-report-path=<새 임시 JSON 경로>`를 붙이면 화면 6장과 물리 프레임 측정을 저장한다. 정상/부상의 조사·회수 진행, 1600×900 조사, 취소 후 안내를 확인했다. 진행률·남은 시간·취소 문구와 상단 건강/효율이 잘리지 않고 기존 위험·적재·귀환 안내를 가리지 않는다.
+
+2026-09-25 최종 검증은 Godot 4.7.1 전체 **59/59 실행**, 스모크 장면 36개 포함이다. 엔진 오류·경고·예외 적용 없음, 검사 전후 소스 동일. 그래픽 검사는 1152×648·1600×900 화면 6장을 확인했다. 측정은 정상 조사/회수 48/25 프레임, 부상 조사/회수 97/48 프레임이며 60 fps의 프레임 경계 오차를 허용한다. 부상 발생/해제 도중에는 현재 속도만 반영하고 건강·진행량을 임의 복원하지 않는다. 기본 통합 경로 두 개의 생환·회수/속도/소음/자원 결과와 기존 저장·재출정 검사를 통과했다.
+
+- 전체 검사 원본: [dev0320_automated_results.json](dev0320_automated_results.json)
+- 전체 임시 경로: `C:/Users/user/AppData/Local/Temp/dungeon-g2-20260925-134715-58e20df9fa9b473bac8abec6163f7f8b/results.json`
+- 검사 소스 SHA-256: `c5ef5a9071e2f05a74ad10cc715d85d071c4cc6f3d1d40c463eaa5c0305ae59c` — 실행 소스 바이트 기준이며 문서·다른 환경 줄바꿈까지 보증하지 않는다.
+- 그래픽 시간 측정: [dev0320_timing_results.json](dev0320_timing_results.json)
+- 화면·로그 원본: `C:/Users/user/AppData/Local/Temp/dungeon-dev0320-289e392795a84e2984eca392ffcdfef2/`
+- 문서 검사: 활성 Markdown 링크·앵커, 동결 원본 SHA-256 6개·아카이브 사본 3개와 `git diff --check` 통과.
+- 구현·검증 완료, 사용자 로컬 커밋 승인. 다음은 **DEV-0321 — 퇴로 변화와 대체 길**이다. **정합성 검사: 아직 아님** — 다음 정기 검사는 G5 완료 후. 사람 평가·최종 수치는 후속이며 G3 전체 완료를 선언하지 않는다.

@@ -41,7 +41,7 @@ related:
 - 사용자 표시 명칭은 [`../reference/glossary.md`](../reference/glossary.md)를 따른다.
 - 미결정 수치와 규칙은 [`../project/open_questions.md`](../project/open_questions.md)에 연결한다.
 - `confirmed` 문서는 구현 기준으로 사용할 수 있다. [`harness_engineering.md`](harness_engineering.md)는 상세 규칙 이관·검증 전까지 `draft`이므로 단독 구현 기준으로 사용하지 않는다.
-- [`survival_rules.md`](survival_rules.md)는 기존 요구·DEV-0318의 제안·DEV-0319의 제한된 시험 적용을 구분하는 `draft` 문서다. 상태·이동·HUD에 적용한 시험 값과 아직 미구현인 상호작용 효과·퇴로를 구별한다. 최종 피해·회복·퇴로 규칙의 확정 문서나 단독 구현 기준이 아니다. 실제 미정 항목은 `Q-019`~`Q-021`, 후속 작업 순서는 개발 인계가 소유한다.
+- [`survival_rules.md`](survival_rules.md)는 기존 요구·DEV-0318의 제안·DEV-0319~DEV-0320의 제한된 시험 적용을 구분하는 `draft` 문서다. 상태·이동·조사/회수 시간·HUD에 적용한 시험 값과 아직 미구현인 퇴로 변화·비상 탈출을 구별한다. 최종 피해·회복·퇴로 규칙의 확정 문서나 단독 구현 기준이 아니다. 실제 미정 항목은 `Q-019`~`Q-021`, 후속 작업 순서는 개발 인계가 소유한다.
 
 ## 현재 상태
 

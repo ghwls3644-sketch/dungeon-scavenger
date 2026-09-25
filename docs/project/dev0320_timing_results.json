@@ -1,0 +1,15 @@
+{
+	"measurements": [
+		{
+			"injured": false,
+			"inspection_frames": 48,
+			"recovery_frames": 25
+		},
+		{
+			"injured": true,
+			"inspection_frames": 97,
+			"recovery_frames": 48
+		}
+	],
+	"passed": true
+}

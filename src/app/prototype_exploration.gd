@@ -12,11 +12,13 @@ const WALLS: Array[Rect2] = [
 ]
 
 const MAP_DEFINITION := preload("res://src/data/prototype_exploration_map.tres")
+const INTERACTION_TIMING := preload("res://src/data/prototype_interaction_timing.tres")
 
 var _map_state := ExplorationMapState.new()
 var _loadout: ExpeditionLoadout
 var _started := false
 var _finished := false
+var _timing_configured := false
 
 @onready var _player: PlayerController = %Player
 @onready var _inventory: PlayerInventory = $Player/Inventory
@@ -26,9 +28,14 @@ var _finished := false
 @onready var _golem: BrokenGuardGolem = %BrokenGuardGolem
 @onready var _inventory_panel: InventoryPanel = %InventoryPanel
 @onready var _survival: PlayerSurvival = %PlayerSurvival
+@onready var _interaction: InteractionController = $Player/InteractionController
 
 
 func _ready() -> void:
+	_timing_configured = _interaction.configure_timing(INTERACTION_TIMING, _survival)
+	_interaction.work_canceled.connect(func(reason: String): %ChoiceStatus.text = reason)
+	_inventory_panel.opening.connect(_interaction.cancel_work)
+	%ExplorationMapPanel.opening.connect(_interaction.cancel_work)
 	_golem.obstacle_contacted.connect(%RetreatDoor.note_obstacle_contact)
 	%RetreatDoor.status_changed.connect($Player/InteractionDetector.refresh_current_interactable)
 	%RetreatDoor.held.connect(func(): %ChoiceStatus.text = "문을 잠시 고정했습니다. 해제 안내를 확인하고 거리를 벌리세요.")
@@ -117,7 +124,7 @@ func get_start_loadout() -> ExpeditionLoadout:
 
 
 func start_exploration() -> bool:
-	if _loadout == null or _started or _finished:
+	if _loadout == null or _started or _finished or not _timing_configured:
 		return false
 	if not _survival.start_exploration():
 		return false
@@ -135,6 +142,7 @@ func start_exploration() -> bool:
 
 
 func _set_simulation_enabled(enabled: bool) -> void:
+	_interaction.set_active(enabled)
 	%GolemContactThreat.set_active(enabled)
 	%ReturnRouteStatus.set_active(enabled)
 	%RetreatDoor.set_exploration_active(enabled)
@@ -170,7 +178,7 @@ func _on_golem_caught(body: Node2D) -> void:
 
 func _update_survival_status() -> void:
 	var remaining := _survival.get_injury_remaining()
-	var condition := "부상 %.1f초 · 부상 이동 효율 %d%%" % [remaining, roundi(_survival.get_movement_multiplier() * 100.0)] if remaining > 0.0 else "부상 없음"
+	var condition := "부상 %.1f초 · 이동 %d%% · 조사/회수 %d%%" % [remaining, roundi(_survival.get_movement_multiplier() * 100.0), roundi(_survival.get_interaction_multiplier() * 100.0)] if remaining > 0.0 else "부상 없음"
 	if remaining <= 0.0 and _survival.get_health() < _survival.get_max_health():
 		condition += " · 건강 잔량은 회복되지 않습니다"
 	%SurvivalStatus.text = "건강 %d/%d · %s" % [_survival.get_health(), _survival.get_max_health(), condition]

@@ -24,6 +24,23 @@ func refresh_current_interactable() -> void:
 	_update_current_interactable(true)
 
 
+func is_in_reach(target: Interactable) -> bool:
+	if not is_instance_valid(target) or not target.is_interaction_available():
+		return false
+	# Query at the current transform; overlap signals can lag behind this tick's move.
+	var collision := $CollisionShape2D as CollisionShape2D
+	var query := PhysicsShapeQueryParameters2D.new()
+	query.shape = collision.shape
+	query.transform = collision.global_transform
+	query.collision_mask = collision_mask
+	query.collide_with_areas = true
+	query.collide_with_bodies = false
+	for hit in get_world_2d().direct_space_state.intersect_shape(query):
+		if hit.collider == target:
+			return true
+	return false
+
+
 func _on_area_entered(area: Area2D) -> void:
 	var interactable := area as Interactable
 	if interactable == null or interactable in _candidates:

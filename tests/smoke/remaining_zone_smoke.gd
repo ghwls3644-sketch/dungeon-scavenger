@@ -32,6 +32,7 @@ func _ready() -> void:
 	_expect(not gate.is_open() and harness.get_current_charge() == 3, "Distant action opened a gate.")
 	await _walk(player, Vector2(-570, 140))
 	_press_key(KEY_E)
+	_expect(await InteractionTestInput.wait_for_work(player), "Timed action did not finish.")
 	await _frames(2)
 	_expect(state.has_clue(CLUE.stable_id), "Clue setup did not acquire the hint.")
 	_expect(state.get_known_bounds() == MAP.bounds and state.get_discovered_region_count() == 0 and not gate.is_open(), "Clue revealed or opened a region.")

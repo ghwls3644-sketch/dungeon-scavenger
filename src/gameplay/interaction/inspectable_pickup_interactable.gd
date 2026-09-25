@@ -10,6 +10,14 @@ signal inspection_completed(summary: String, risk_hint: String)
 var _inspected := false
 
 
+func get_interaction_action() -> Action:
+	return Action.INSPECT if not _inspected else Action.RECOVER
+
+
+func get_interaction_block_reason(interactor: Node) -> String:
+	return "" if not _inspected else super.get_interaction_block_reason(interactor)
+
+
 func get_interaction_prompt() -> String:
 	if not _inspected:
 		return inspection_prompt

@@ -62,6 +62,10 @@ func get_health() -> int:
 	return _health
 
 
+func is_exploration_active() -> bool:
+	return _state == State.ACTIVE
+
+
 func get_max_health() -> int:
 	return _rule.max_health if _rule != null else 0
 
@@ -72,6 +76,10 @@ func get_injury_remaining() -> float:
 
 func get_movement_multiplier() -> float:
 	return _rule.injury_movement_multiplier if _injury_remaining > 0.0 else 1.0
+
+
+func get_interaction_multiplier() -> float:
+	return _rule.injury_interaction_multiplier if _injury_remaining > 0.0 else 1.0
 
 
 func _can_receive_input() -> bool:

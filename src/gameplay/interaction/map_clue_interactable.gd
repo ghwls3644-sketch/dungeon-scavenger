@@ -9,6 +9,10 @@ var _map_state: ExplorationMapState
 var _clue: MapClueDefinition
 
 
+func get_interaction_action() -> Action:
+	return Action.INSPECT
+
+
 func _ready() -> void:
 	set_interaction_enabled(false)
 

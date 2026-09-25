@@ -49,6 +49,7 @@ func _ready() -> void:
 	_expect(state.is_visited(&"prototype_north") and not state.is_visited(&"prototype_south"), "Actual movement did not update only the visited region.")
 	_expect(state.get_current_region_id() == &"prototype_north", "Current map region did not follow the player.")
 	_press_key(KEY_E)
+	_expect(await InteractionTestInput.wait_for_work(player), "Timed action did not finish.")
 	await _frames(3)
 	_press_key(KEY_TAB)
 	await _frames(3)

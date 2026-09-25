@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="InteractionTimingRule" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/data/interaction_timing_rule.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+inspection_duration = 0.8
+recovery_duration = 0.4
