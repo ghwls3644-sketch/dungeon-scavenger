@@ -8,7 +8,7 @@ canonical_for:
   - development_environment
   - engine_and_language
   - development_commands
-last_reviewed: 2026-09-24
+last_reviewed: 2026-09-25
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -1128,3 +1128,28 @@ git diff --name-only
 검증 시점 소스 SHA-256은 `36adfb1a4176151190da6cebd1c680cf07a4d0c28d37d6aa8f4a9ebba37d0d49`로 기존 보고서와 같다. 바이트 기준 해시이므로 다른 환경의 줄바꿈까지 보증하지 않는다. 문서 대조에서는 건강 잔량과 부상 시간, 함정 주기별 중복 통지, 기존 골렘/붕괴 실패, 즉시 E 처리와 향후 작업 시간, 실제 통로와 마지막 관찰 기록, 실패 손실과 저장 소유권을 확인했다. 검토안을 구현 완료나 확정 설계로 표기하지 않았고 새 질문의 근거·후속 검토 시점을 적었다.
 
 활성 Markdown 상대 링크·앵커, 새 문서의 Front Matter/상태·책임·진입 링크, 동결 원본 SHA-256 6개·아카이브 사본 3개 및 `git diff --check`를 확인했다. 다음은 `DEV-0319 — 건강·부상 상태와 HUD`다. 문서 작성·검증 완료, 사용자 로컬 커밋 승인. **정합성 검사: 아직 아님** — 다음 정기 검사는 G5 완료 후이며 G3 전체 완료·사람 평가·최종 수치를 새로 승인하지 않는다.
+
+## DEV-0319 건강·부상 상태와 HUD 검사
+
+건강 2·함정 피해 1·부상 6초·이동 0.9는 현재 출정의 시험 데이터다. [생존 검사](../../tests/smoke/player_survival_smoke.gd)는 유효/잘못된 값·실행 복사본, 출정 전/종료 뒤 입력 차단, 반복 부상의 시간 갱신, 만료 뒤 건강 미회복을 확인한다. 정상/부담/과적의 실제 직선·대각선 속도/거리와 기존 걸음 소음, 실제 가방 선택·이동 중 버리기·메뉴 정지를 검사한다. 이동 측정에 한해 골렘을 정지해 영향을 분리한다.
+
+함정 재진입 검사는 기본 작동 시간 0.45초 안에 실제 이동으로 나갔다 들어와도 피해가 한 번인지 확인한다. 이 검사는 플레이어를 함정 근처에 배치하고 함정을 활성화해 경계를 분리하며, 기존 `malfunctioning_trap_smoke`는 원래 입구에서 실제 이동·Q·발견을 거치는 경로도 그대로 검사한다. 첫 피해는 건강 1·탐험 계속, Q 정지 뒤 다음 피해는 건강 0·실패다. 방전·버리기는 치료하지 않고, 종료 경합은 먼저 수락된 결과를 유지한다.
+
+앱 검사는 임시 저장을 이어하기→출정→실제 함정의 두 번 피해→결과→거점 정산/저장→새 출정으로 진행한다. 첫 피해는 현재 회수품을 유지하고 두 번째 피해는 미확인·보호 물품 2개를 잃는다. 이전 보유금·보관품은 저장·복원 후 같고 저장 키 집합도 같다. 새 출정에서 건강 2·부상 없음·빈 가방·충전 3을 확인하고 붕괴가 기존 경고 뒤 건강 잔량과 무관하게 실패시키는 것도 확인한다. 골렘의 경고·포착/취소와 G1·기본 통합 경로는 전체 회귀 검사에서 확인한다.
+
+```powershell
+& $env:GODOT_BIN --headless --path . --fixed-fps 60 --quit-after 18000 res://tests/smoke/player_survival_smoke.tscn
+& $env:GODOT_BIN --headless --path . --fixed-fps 60 --quit-after 18000 res://tests/smoke/malfunctioning_trap_smoke.tscn
+& ./tests/run_g2_checks.ps1 -GodotBin $env:GODOT_BIN -Repetitions 1 -TimeoutSeconds 60
+```
+
+성공 표시는 `player_survival_passed`·`malfunctioning_trap_passed`와 종료 코드 0, 엔진 오류·경고 없음이다. 첫 명령에서 `--headless`를 빼고 끝에 `-- --survival-render-directory=<새 임시 폴더>`를 붙이면 화면 7장을 저장한다. 부상/짐 버리기/만료/넓은 화면, 실제 함정 Q 대응, 부상과 골렘 접촉 경고, 건강 소진 실패 결과를 확인한다. 건강 줄을 맨 위로 옮겨 기존 북쪽 경로 설명과 캐릭터를 가리지 않게 했고 접촉·적재·버리기 표시도 분리했다.
+
+2026-09-25 최종 검증: Godot 4.7.1 **58/58 실행**, 스모크 장면 35개 포함. 엔진 오류·경고 및 예외 적용 없음, 검사 전후 소스 동일. 별도 그래픽 검사와 1152×648·1600×900 화면 7장 통과. 자동 검사는 시험 규칙의 동작 근거이며 사람 평가·최종 수치의 근거로 대신하지 않는다. 구현·검증 완료, 사용자 로컬 커밋 승인.
+
+- 전체 검사 원본: [dev0319_automated_results.json](dev0319_automated_results.json)
+- 검사 임시 경로: `C:/Users/user/AppData/Local/Temp/dungeon-g2-20260925-121940-e865c97e5e884e678c7d97dc2f1be8da/results.json`
+- 검사 소스 SHA-256: `cf8b1fb1c8932a17959ab2759b4e3466e3a36e798b92a27cd8fb8e43f38f6345` — 실행 소스의 바이트 기준이며 문서·다른 환경의 줄바꿈까지 보증하지 않는다.
+- 최종 화면/실행 로그: `C:/Users/user/AppData/Local/Temp/dungeon-dev0319-final-a19f1c6c72604ec18a786eec7442a6a8/`
+- 문서 검사: 활성 Markdown 상대 링크·앵커, 동결 원본 SHA-256 6개·아카이브 사본 3개, `git diff --check` 통과.
+- 다음은 DEV-0320 — 부상의 조사·회수 시간. **정합성 검사: 아직 아님** — 다음 정기 검사는 G5 완료 후. G3 전체 완료·사람 평가·최종 밸런스는 후속이다.

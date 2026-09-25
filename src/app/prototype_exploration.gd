@@ -25,13 +25,14 @@ var _finished := false
 @onready var _hazard: UnstableDebrisHazard = %RiskHazard
 @onready var _golem: BrokenGuardGolem = %BrokenGuardGolem
 @onready var _inventory_panel: InventoryPanel = %InventoryPanel
+@onready var _survival: PlayerSurvival = %PlayerSurvival
 
 
 func _ready() -> void:
 	_golem.obstacle_contacted.connect(%RetreatDoor.note_obstacle_contact)
 	%RetreatDoor.status_changed.connect($Player/InteractionDetector.refresh_current_interactable)
 	%RetreatDoor.held.connect(func(): %ChoiceStatus.text = "문을 잠시 고정했습니다. 해제 안내를 확인하고 거리를 벌리세요.")
-	%MalfunctioningTrap.body_caught.connect(_on_body_caught)
+	%MalfunctioningTrap.body_caught.connect(_on_trap_hit)
 	%MalfunctioningTrap.stabilized.connect(func(): %ChoiceStatus.text = "함정을 잠시 멈췄습니다. 불빛이 다시 점멸하면 물러나세요.")
 	_golem.sight_lost.connect(func(_position: Vector2): %ChoiceStatus.text = "골렘의 시야를 벗어났습니다. 마지막으로 본 위치를 수색하며 소음에는 반응할 수 있습니다.")
 	%NoiseLureController.status_changed.connect(_update_tool_status)
@@ -80,11 +81,15 @@ func _ready() -> void:
 	_inventory_panel.opening.connect(%ContactStatus.hide)
 	%ExplorationMapPanel.opening.connect(%ContactStatus.hide)
 	_run.run_ended.connect(_on_run_ended)
+	_survival.incapacitated.connect(func(cause: StringName): _run.complete_failure(cause))
+	_survival.state_changed.connect(_update_survival_status)
+	_survival.state_changed.connect(_update_load_status)
 
 
 func _physics_process(_delta: float) -> void:
 	if _started and not _finished:
 		_update_contact_status()
+		_update_survival_status()
 		_map_state.observe_position(_player.position)
 		$OverviewCamera.position.y = minf(-100.0, _player.position.y + 80.0)
 		%ReturnRouteStatus.refresh(
@@ -113,6 +118,8 @@ func get_start_loadout() -> ExpeditionLoadout:
 
 func start_exploration() -> bool:
 	if _loadout == null or _started or _finished:
+		return false
+	if not _survival.start_exploration():
 		return false
 	_started = true
 	_map_state.observe_position(_player.position)
@@ -148,12 +155,26 @@ func _set_simulation_enabled(enabled: bool) -> void:
 
 func _on_body_caught(body: Node2D) -> void:
 	if _started and not _finished and body == _player:
-		_run.complete_failure()
+		_survival.incapacitate()
+
+
+func _on_trap_hit(body: Node2D) -> void:
+	if _started and not _finished and body == _player:
+		_survival.apply_trap_damage()
 
 
 func _on_golem_caught(body: Node2D) -> void:
 	if _started and not _finished and body == _player:
-		_run.complete_failure(&"golem_capture")
+		_survival.incapacitate(&"golem_capture")
+
+
+func _update_survival_status() -> void:
+	var remaining := _survival.get_injury_remaining()
+	var condition := "부상 %.1f초 · 부상 이동 효율 %d%%" % [remaining, roundi(_survival.get_movement_multiplier() * 100.0)] if remaining > 0.0 else "부상 없음"
+	if remaining <= 0.0 and _survival.get_health() < _survival.get_max_health():
+		condition += " · 건강 잔량은 회복되지 않습니다"
+	%SurvivalStatus.text = "건강 %d/%d · %s" % [_survival.get_health(), _survival.get_max_health(), condition]
+	%SurvivalStatus.modulate = Color("#ffd086") if remaining > 0.0 else Color.WHITE
 
 
 func _update_contact_status() -> void:
@@ -183,6 +204,7 @@ func _on_run_ended(outcome: ExplorationOutcome) -> void:
 	if not _started or _finished:
 		return
 	_finished = true
+	_survival.end_exploration()
 	%ExplorationMapPanel.set_input_enabled(false)
 	_inventory_panel.close_inventory()
 	_inventory_panel.process_mode = Node.PROCESS_MODE_DISABLED

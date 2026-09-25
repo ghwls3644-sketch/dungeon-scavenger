@@ -8,7 +8,7 @@ canonical_for:
   - source_tree_layout
   - module_responsibilities
   - module_dependency_rules
-last_reviewed: 2026-09-24
+last_reviewed: 2026-09-25
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -264,3 +264,14 @@ res://
 이번 작업은 실행 모듈을 추가하지 않는다. [생존 규칙 검토안](../design/survival_rules.md)은 `draft`이며 다음 책임 분리를 제안한다. 위험 소유자는 경고·접촉/작동 판정·주기별 중복 방지, 향후 생존 상태 소유자는 건강 잔량·일시적 부상·일회성 행동 불능, 플레이어/상호작용 계층은 공개된 행동 효율의 적용을 담당한다. 실패·회수품 제거·정산 전달은 기존 `ExplorationRun`과 앱 흐름에 둔다. HUD가 피해·회복·실패를 결정하거나 거점 저장이 탐험 도중의 생존 상태를 소유하게 하지 않는다.
 
 현재 `PlayerController`는 적재 계수만 적용하고 `InteractionController`는 E 입력을 즉시 처리한다. 건강·부상/이동/HUD와 조사·회수 시간을 별도 작업으로 나누는 이유는 새 시간·취소·중복 회수 계약을 기존 조작 전체에 섞지 않기 위해서다. 퇴로 변화의 실제 통로 판정과 마지막 관찰 정보의 UI 책임도 분리한다. 다음 작업 순서·범위와 완료 검사는 [개발 인계](development_handoff.md#dev-0318--생존-규칙과-시제품-범위-정리)를 따른다. 이 절은 아직 존재하지 않는 클래스·저장 필드의 구현 완료를 뜻하지 않는다.
+
+### DEV-0319의 건강·부상 상태와 HUD
+
+- `src/data/survival_rule.gd`와 `prototype_survival.tres`는 유효 범위와 건강 2·함정 피해 1·부상 6초·이동 0.9의 시험 데이터를 소유한다. 실행 시 복사하므로 원본 자원의 변경이 진행 중 출정에 섞이지 않는다.
+- `src/gameplay/player/player_survival.gd`는 출정 수명·건강 잔량·부상 시간·이동 계수와 한 번의 행동 불능 신호를 소유한다. 피해를 받는 위치·경고·같은 함정 주기의 중복 판정이나 물품 손실·저장을 소유하지 않는다.
+- `PlayerController`는 현재 출정에서 선택적으로 연결한 생존 계수와 적재 계수를 곱해 실제 이동에 적용한다. 생존 계수를 연결하지 않은 기존 비교 장면은 이전 이동을 유지한다. 이동 소음 소유권과 무게 단계는 바꾸지 않는다.
+- `PrototypeExploration`은 함정 입력을 일반 피해로, 골렘 포착·붕괴를 행동 불능으로 연결하고 기존 `ExplorationRun`에 실패를 전달한다. 종료 뒤 생존 상태를 잠그고 HUD는 공개 조회만 사용한다. 함정 분석은 현재 출정에서 건강 피해 안내를 선택하며 기존 장면의 안내는 유지한다.
+- `ExplorationOutcomePanel`은 `trap_damage` 원인으로 건강 소진을 설명한다. 원인과 생존 상태를 거점 저장 필드로 추가하지 않는다. 재출정에서는 새 구성 요소가 새 상태를 만든다.
+- `tests/smoke/player_survival_smoke.*`는 데이터·수명·실제 이동/소음/메뉴/버리기·함정 재진입·Q·종료 경합·화면·앱 실패/저장/새 출정을 검사한다. 기존 함정 검사는 현재 출정에서 첫 피해 생존·다음 주기 실패로 갱신했다.
+
+DEV-0318 절은 당시 검토 이력이다. 현재 상태·이동·HUD의 적용 범위는 [생존 시험 적용 기록](../design/survival_rules.md#dev-0319-시험-적용-범위)을 따른다. `InteractionController`의 즉시 E와 조사·회수 시간의 후속 분리는 유지한다.

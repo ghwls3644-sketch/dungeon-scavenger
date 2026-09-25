@@ -8,6 +8,7 @@ signal body_caught(body: Node2D)
 enum Phase { DORMANT, QUIET, WARNING, ACTIVE, STABILIZED }
 
 @export var cycle_rule: TrapCycleRule
+@export var survival_damage := false
 
 var _rule: TrapCycleRule
 var _phase := Phase.DORMANT
@@ -61,7 +62,8 @@ func get_stabilization_charge_cost() -> int:
 func get_basic_analysis() -> String:
 	if not _active:
 		return ""
-	return "%s\n불빛이 꺼진 동안 통과하거나 옆으로 돌아가세요. Q로 잠시 멈출 수 있습니다. 작동 범위에 들어가면 탐험에 실패합니다." % get_status_text()
+	var consequence := "작동 범위에 들어가면 건강 감소·일시 부상을 입고, 건강이 소진되면 탐험에 실패합니다." if survival_damage else "작동 범위에 들어가면 탐험에 실패합니다."
+	return "%s\n불빛이 꺼진 동안 통과하거나 옆으로 돌아가세요. Q로 잠시 멈출 수 있습니다. %s" % [get_status_text(), consequence]
 
 
 func can_stabilize() -> bool:

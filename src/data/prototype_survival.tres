@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SurvivalRule" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/data/survival_rule.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+max_health = 2
+trap_damage = 1
+injury_duration = 6.0
+injury_movement_multiplier = 0.9

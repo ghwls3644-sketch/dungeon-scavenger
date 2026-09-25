@@ -1,4 +1,7 @@
-[gd_scene load_steps=37 format=3]
+[gd_scene load_steps=39 format=3]
+
+[ext_resource type="Script" path="res://src/gameplay/player/player_survival.gd" id="32_survival"]
+[ext_resource type="Resource" path="res://src/data/prototype_survival.tres" id="33_survival_rule"]
 
 [ext_resource type="Script" path="res://src/gameplay/hazards/golem_contact_threat.gd" id="30_contact"]
 [ext_resource type="Resource" path="res://src/data/prototype_golem_contact.tres" id="31_contact_rule"]
@@ -125,12 +128,19 @@ region_definition = ExtResource("19_region")
 [node name="MalfunctioningTrap" parent="." instance=ExtResource("27_trap")]
 unique_name_in_owner = true
 position = Vector2(210, -520)
+survival_damage = true
+
+[node name="PlayerSurvival" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("32_survival")
+rule = ExtResource("33_survival_rule")
 
 [node name="Player" parent="." instance=ExtResource("2_player")]
 unique_name_in_owner = true
 position = Vector2(-650, 0)
 collision_mask = 8
 load_movement_rule = ExtResource("21_load_movement")
+survival_path = NodePath("../PlayerSurvival")
 
 [node name="ExplorationRun" type="Node" parent="."]
 unique_name_in_owner = true
@@ -248,12 +258,19 @@ text = "우회로 · E 문 개폐"
 
 [node name="Overlay" type="CanvasLayer" parent="."]
 
-[node name="Instructions" type="Label" parent="Overlay"]
+[node name="AreaTitle" type="Label" parent="Overlay"]
 offset_left = 16.0
 offset_top = 12.0
+offset_right = 110.0
+offset_bottom = 41.0
+text = "시험 구역"
+
+[node name="Instructions" type="Label" parent="Overlay"]
+offset_left = 16.0
+offset_top = 42.0
 offset_right = 700.0
 offset_bottom = 62.0
-text = "시험 구역\nWASD 이동 · E 조사/회수/귀환 · Q 안정화/방전 · Tab 가방 · M 지도"
+text = "WASD 이동 · E 조사/회수/귀환 · Q 안정화/방전 · Tab 가방 · M 지도"
 
 [node name="ChoiceStatus" type="Label" parent="Overlay"]
 unique_name_in_owner = true
@@ -263,6 +280,14 @@ offset_right = 710.0
 offset_bottom = 112.0
 autowrap_mode = 3
 text = "거점에서 출정 준비를 확인해 주세요."
+
+[node name="SurvivalStatus" type="Label" parent="Overlay"]
+unique_name_in_owner = true
+offset_left = 115.0
+offset_top = 12.0
+offset_right = 710.0
+offset_bottom = 41.0
+text = ""
 
 [node name="LoadStatus" type="Label" parent="Overlay"]
 unique_name_in_owner = true

@@ -7,7 +7,7 @@ source_version: story-v1.5+gdd-v2.1
 canonical_for:
   - unresolved_questions
   - provisional_rules
-last_reviewed: 2026-09-24
+last_reviewed: 2026-09-25
 owner: project-maintainer
 related:
   - ../GDD.md
@@ -60,8 +60,8 @@ related:
 | `Q-016` | 잔재에 환청·환시 연출을 넣을 것인가? | `deferred` | [`../story/05_items_and_discoveries.md`](../story/05_items_and_discoveries.md), [`../story/07_tone_and_writing_guide.md`](../story/07_tone_and_writing_guide.md), [`../design/narrative_delivery.md`](../design/narrative_delivery.md) | 텍스트 설명 중심 | 연출 예산 확정 후 |
 | `Q-017` | UI와 정산에서 감정 비용을 `감정료`와 `감정 수수료` 중 무엇으로 표시할 것인가? | `deferred` | [`../GDD.md`](../GDD.md), [`../design/economy_rules.md`](../design/economy_rules.md), [`../reference/glossary.md`](../reference/glossary.md) | 두 표기를 같은 비용 개념으로 추적하되 독립 공식 용어 등록은 보류 | 정산 UI 문구 확정 전 |
 | `Q-018` | 출입 자격을 물리적 `허가증` 아이템으로 확정할 것인가, `출입 허가`나 표식으로 표현할 것인가? | `deferred` | [`../story/03_player_and_society.md`](../story/03_player_and_society.md), [`../reference/glossary.md`](../reference/glossary.md) | `DEC-014`의 출입 자격만 유지하고 독립 아이템명은 확정하지 않음 | 허가·출정 UI와 아이템 목록 확정 전 |
-| `Q-019` | 건강 잔량·위험별 피해와 행동 불능, 출정 간 회복을 어떻게 단순화할 것인가? | `provisional` | [GDD 6-2](../GDD.md#6-2-플레이어-상태), [`../design/survival_rules.md`](../design/survival_rules.md), [`../design/economy_rules.md`](../design/economy_rules.md) | 기존 위험의 실패 처리를 유지. 건강·일반 피해 제안은 검토안이며 적용된 규칙·값으로 해석하지 않음 | DEV-0319에서 시험 적용 범위·데이터를 기록할 때, 최종 회복·비용은 G4 안전망과 사람 평가 때 |
-| `Q-020` | 부상의 발생·중첩·해제와 이동/상호작용 효율을 어떻게 연결할 것인가? | `provisional` | [GDD 6-2·12-3](../GDD.md#6-2-플레이어-상태), [`../design/survival_rules.md`](../design/survival_rules.md), [`../design/item_rules.md`](../design/item_rules.md) | 일시적인 불이익이라는 요구만 유지. 지속 시간·계수·작업 시간은 미정, 부상 해제와 건강 회복을 구분하는 방향 검토 | DEV-0319 상태·이동·HUD, 후속 조사/회수 시간 작업의 착수 및 사람 평가 |
+| `Q-019` | 건강 잔량·위험별 피해와 행동 불능, 출정 간 회복을 어떻게 단순화할 것인가? | `provisional` | [GDD 6-2](../GDD.md#6-2-플레이어-상태), [`../design/survival_rules.md`](../design/survival_rules.md), [`../design/economy_rules.md`](../design/economy_rules.md) | DEV-0319 시험 값은 건강 2·함정 피해 1·새 출정 초기화. 골렘/붕괴는 기존 행동 불능 유지. 최종 피해·회복·비용의 확정은 아님 | 생존 통합 검토, 최종 회복·비용은 G4 안전망과 사람 평가 때 |
+| `Q-020` | 부상의 발생·중첩·해제와 이동/상호작용 효율을 어떻게 연결할 것인가? | `provisional` | [GDD 6-2·12-3](../GDD.md#6-2-플레이어-상태), [`../design/survival_rules.md`](../design/survival_rules.md), [`../design/item_rules.md`](../design/item_rules.md) | DEV-0319는 피해 뒤 부상 6초·이동 0.9, 재발 시 시간 갱신, 해제 시 건강 잔량 유지로 시험. 상호작용 시간·최종 값은 미정 | DEV-0320 조사·회수 시간 착수와 생존 통합 검토·사람 평가 |
 | `Q-021` | 실제 퇴로 상실의 판정과 제한 시간, 비상 탈출의 성공·실패·비용·회수품 처리는 무엇인가? | `provisional` | [GDD 4-3·9-1](../GDD.md#4-3-성공과-실패), [`../design/survival_rules.md`](../design/survival_rules.md), [`../design/repeat_exploration.md`](../design/repeat_exploration.md), [`../design/economy_rules.md`](../design/economy_rules.md) | 현재 입구 귀환·마지막 관찰 지도 기록 유지. 비상 탈출 실패는 기존 손실 원칙을 따르되 성공 처리·자원·시간은 정하지 않음 | 퇴로 변화 시제품 착수 전 실제 차단·대체 길 범위 설정, 비상 탈출 구현 전 성공/실패 처리 결정 |
 
 `Q-009`~`Q-011`은 GDD 19장에서 의도적으로 확정하지 않는 배경 여지로 분류한 항목이다. 현재 제품 구조를 막지 않으며 위 검토 조건이 생기기 전에는 결정을 요구하지 않는다.
@@ -115,9 +115,9 @@ related:
 
 2026-09-24 `DEV-0318`에서 `Q-019`~`Q-021`을 추가했다. 새로운 세계관 질문을 만든 것이 아니라 GDD 4-3·6-2·9-1·12-3에 요구된 건강·부상·퇴로 상실의 상세 처리 공백을 추적한다. 기존 `Q-014`는 허가 약관과 사회적 사고 책임의 범위다. 이를 근거로 피해 수치·치료비·보험·구조자의 정체를 결정하지 않는다.
 
-[생존 규칙 검토안](../design/survival_rules.md)은 건강 잔량과 일시적 부상을 분리하고, 기존 함정을 첫 일반 피해 비교 후보로 사용하는 방향을 제안한다. 건강 2·일반 피해 1 예시는 동작 비교를 위한 가안이다. 현재 구현은 여전히 붕괴·함정·골렘 포착의 실패 처리이며 이번 문서 작성으로 바뀌지 않는다. 제안의 채택 범위·시험 값은 후속 구현 작업에서 GDD·confirmed Design과 함께 검토하고 이관 변경 기록에 먼저 남긴다. 질문이나 문서의 등록을 새 규칙 승인으로 기록하지 않는다.
+[생존 규칙 검토안](../design/survival_rules.md)은 건강 잔량과 일시적 부상을 분리한다. DEV-0318 문서 작업 자체는 기존 실행 규칙을 바꾸지 않았다. 2026-09-25 DEV-0319에서 GDD·confirmed Design과 대조하고 `MIG-CHG-028`에 먼저 기록한 뒤 건강 2·함정 피해 1·부상 6초·이동 0.9를 현재 출정에 시험 적용했다. 첫 함정 피해는 살아남고 다음 피해는 실패하며 골렘 포착·붕괴는 잔량과 무관한 행동 불능이다. 새 출정 초기화는 임시 실행 정책이고 건강/회복/비용의 최종 결정이 아니다. 질문·문서 등록이나 자동 검사 통과를 최종 규칙 승인으로 기록하지 않는다.
 
-검토안의 비상 탈출 성공에 대한 회수품 처리는 미정이다. 현재 기준이 정한 것은 제한 시간 만료 또는 비상 탈출 실패의 손실이며, 성공을 무료 귀환이나 전량 손실로 임의 해석하지 않는다. 마지막으로 관찰한 막힌 길을 실제 퇴로 상실로 간주하지 않는다. 부상 시간·이동 계수·상호작용 시간과 비상 탈출 시간/비용은 최종 값뿐 아니라 구현용 시험 값도 후속 착수에서 따로 기록한다.
+검토안의 비상 탈출 성공에 대한 회수품 처리는 미정이다. 현재 기준이 정한 것은 제한 시간 만료 또는 비상 탈출 실패의 손실이며, 성공을 무료 귀환이나 전량 손실로 임의 해석하지 않는다. 마지막으로 관찰한 막힌 길을 실제 퇴로 상실로 간주하지 않는다. 부상 시간·이동 계수의 시험 값은 위와 같고, 상호작용 시간과 비상 탈출 시간/비용은 구현용 시험 값도 후속 착수에서 따로 기록한다.
 
 G1 사람 평가·`Q-004`·`Q-005`와 기존 안전망 비용 미정 상태는 유지한다. 새로운 건강·부상·퇴로 시제품의 자동 검사를 통과하더라도 해당 사람 평가와 최종 밸런스가 해결된 것으로 처리하지 않는다.
 
