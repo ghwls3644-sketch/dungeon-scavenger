@@ -8,7 +8,7 @@ canonical_for:
   - source_tree_layout
   - module_responsibilities
   - module_dependency_rules
-last_reviewed: 2026-09-25
+last_reviewed: 2026-09-26
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -285,3 +285,11 @@ DEV-0318 절은 당시 검토 이력이다. 현재 상태·이동·HUD의 적용
 - G1 장면은 시간 기능을 구성하지 않아 즉시 상호작용을 유지한다. `tests/helpers/interaction_test_input.gd`는 현재 출정 검사의 입력 버퍼를 처리하고 실제 작업 완료/취소를 기다린다. `interaction_timing_smoke`는 실제 입력·시간/효율 변화·정보 경계·취소·가득 찬 가방·단계 변경·중복 완료·즉시 조작·수명·화면을 검사한다.
 
 DEV-0318~DEV-0319의 즉시 E·후속 상호작용 문구는 당시 이력이다. 현재 적용 범위는 [DEV-0320 시험 기록](../design/survival_rules.md#dev-0320-조사회수-시간-시험-적용)을 따른다.
+
+### DEV-0321의 퇴로 변화와 대체 길
+
+- `PassageChangeRule`·`prototype_passage_change.tres`는 유효한 경고 시간 3초와 실행 복사본을 제공한다. 지형·입구·지도 기록·피해·저장 규칙을 소유하지 않는다.
+- `ChangingPassage`는 한 번의 활성화, 실제 위치에 따른 경고 시작, 시간·몸 겹침 보류·물리 벽 활성화를 소유한다. 닫힘 신호로 실패나 지도 갱신을 직접 호출하지 않는다. 플레이어·골렘의 현재 충돌 모양을 검사해 차단 위치에서 밀어내거나 가두지 않는다.
+- `retreat_route_test_space`는 `PrototypeExploration`을 상속한 별도 플레이 공간이다. 기존 출정 수명·지도·문·위험·물품을 재사용하며 종료를 사건 정지에 연결한다. 안내 변화만 기존 메시지 영역에 표시해 평상시 회수·위험 안내를 덮어쓰지 않는다. 결과와 새 출정 버튼은 이 시험 공간에서만 제공한다.
+- `MapPassageSurvey`·`ExplorationMapState`·`ReturnRouteStatus`는 기존 근거리 관찰·마지막 기록·입구 방향 책임을 유지한다. 차단 사건은 실제 물리 상태만 바꾸며 UI가 전체 경로 도달성이나 실패를 결정하지 않는다.
+- `retreat_route_smoke`는 실제 이동의 경고 중 복귀·차단 후 우회와 재관찰, 메뉴·출정 수명·회수품/기존 위험을 검사한다. 몸 겹침 검사는 별도 소규모 배치로 플레이어/골렘 충돌 계층을 각각 확인한다. 기본 출정 장면·기존 G3 경로 소스·저장은 변경하지 않았다.

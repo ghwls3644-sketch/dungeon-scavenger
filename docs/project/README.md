@@ -8,7 +8,7 @@ canonical_for:
   - project_document_navigation
   - document_metadata_rules
   - document_status_rules
-last_reviewed: 2026-09-25
+last_reviewed: 2026-09-26
 owner: documentation-maintainer
 related:
   - ../README.md
@@ -36,7 +36,7 @@ related:
 이 디렉터리는 문서 이관과 개발 과정의 결정, 미결정 사항, 변경 이력을 관리한다.
 
 현재 G3의 연결 검사와 남은 범위는 [탐험 확장 통합 검토](g3_exploration_review.md), 다음 작업은 [개발 인계](development_handoff.md)에서 확인한다.
-[생존 규칙 검토안](../design/survival_rules.md)은 `draft`이며 DEV-0319~DEV-0320의 건강·부상 상태/이동/조사·회수/HUD 시험 적용과 후속 제안을 구분한다. 건강·부상·퇴로 상실의 최종 미정 사항은 [Q-019~Q-021](open_questions.md#생존-규칙-검토-경계), 현재 완료 결과와 다음 퇴로 변화 작업은 [DEV-0320 인계](development_handoff.md#dev-0320--부상의-조사회수-시간)를 따른다.
+[생존 규칙 검토안](../design/survival_rules.md)은 `draft`이며 DEV-0319~DEV-0321의 건강·부상 상태/이동/조사·회수/HUD와 별도 공간의 퇴로 변화 시험 적용과 후속 제안을 구분한다. 건강·부상·퇴로 상실의 최종 미정 사항은 [Q-019~Q-021](open_questions.md#생존-규칙-검토-경계), 현재 결과와 남은 두 작업(DEV-0322 비상 탈출, DEV-0323 G3 보완 통합 검토)은 [DEV-0321 인계](development_handoff.md#dev-0321--퇴로-변화와-대체-길)를 따른다.
 
 ## 공통 Front Matter
 

@@ -1,0 +1,18 @@
+{
+	"passed": true,
+	"routes": [
+		{
+			"remaining_warning": 0.78333333333334,
+			"route": "return_during_warning",
+			"safe_return": true
+		},
+		{
+			"charge_remaining": 2,
+			"frames": 1472,
+			"recovered_items": 1,
+			"route": "blocked_upper_detour",
+			"safe_return": true,
+			"used_discharge": true
+		}
+	]
+}

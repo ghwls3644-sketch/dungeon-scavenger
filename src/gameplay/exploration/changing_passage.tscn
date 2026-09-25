@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://src/gameplay/exploration/changing_passage.gd" id="1_passage"]
+[ext_resource type="Resource" path="res://src/data/prototype_passage_change.tres" id="2_rule"]
+
+[sub_resource type="RectangleShape2D" id="BarrierShape"]
+size = Vector2(28, 376)
+
+[node name="ChangingPassage" type="Node2D"]
+script = ExtResource("1_passage")
+rule = ExtResource("2_rule")
+
+[node name="Barrier" type="StaticBody2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Barrier"]
+shape = SubResource("BarrierShape")
+disabled = true

@@ -8,7 +8,7 @@ canonical_for:
   - development_environment
   - engine_and_language
   - development_commands
-last_reviewed: 2026-09-25
+last_reviewed: 2026-09-26
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -1177,3 +1177,29 @@ git diff --name-only
 - 화면·로그 원본: `C:/Users/user/AppData/Local/Temp/dungeon-dev0320-289e392795a84e2984eca392ffcdfef2/`
 - 문서 검사: 활성 Markdown 링크·앵커, 동결 원본 SHA-256 6개·아카이브 사본 3개와 `git diff --check` 통과.
 - 구현·검증 완료, 사용자 로컬 커밋 승인. 다음은 **DEV-0321 — 퇴로 변화와 대체 길**이다. **정합성 검사: 아직 아님** — 다음 정기 검사는 G5 완료 후. 사람 평가·최종 수치는 후속이며 G3 전체 완료를 선언하지 않는다.
+
+## DEV-0321 퇴로 변화와 대체 길 검사
+
+[직접 플레이 장면](../../tests/fixtures/retreat_route_test_space.tscn)은 기존 기본 출정을 상속해 위쪽 연결의 변화만 추가한 별도 공간이다. 직접 열면 가방 3칸·충전 3으로 출정하고 귀환/실패 결과 뒤 새 시험 출정을 할 수 있다. 기본 거점 출정은 바꾸지 않았다. [자동 검사](../../tests/smoke/retreat_route_smoke.gd)는 같은 공간의 실제 WASD·E·Q·Tab·M 입력으로 경고 중 복귀와 차단 후 우회·원래 입구 귀환을 비교한다.
+
+```powershell
+& $env:GODOT_BIN --path . res://tests/fixtures/retreat_route_test_space.tscn
+& $env:GODOT_BIN --headless --path . --fixed-fps 60 --quit-after 12000 res://tests/smoke/retreat_route_smoke.tscn
+& ./tests/run_g2_checks.ps1 -GodotBin $env:GODOT_BIN -Repetitions 1 -TimeoutSeconds 60
+```
+
+성공 표시는 `retreat_route_passed`와 종료 코드 0, 엔진 오류·경고 없음이다. 두 번째 명령에서 `--headless`를 빼고 `-- --retreat-render-directory=<새 임시 폴더> --retreat-report-path=<새 임시 JSON 경로>`를 붙이면 화면 6장과 경로 측정을 저장한다. 열린 통로·3초 경고·관찰 전 지도·차단 재관찰·넓은 화면·귀환 결과를 확인한다.
+
+2026-09-25 최종 자동 검사 **60/60 실행**, 스모크 장면 37개 포함. 직접 플레이 장면 시작도 별도 실행에서 오류 없이 통과했다. 그래픽 검사의 1152×648·1600×900 실제 화면 6장을 확인했고 결과 화면은 불투명 패널로 배경 글자와 구분했다. 2026-09-26 문서 검증을 마쳤다. 경고 중 귀환은 약 0.8초를 남겼고, 차단 후 우회는 측정 1472 물리 프레임에 물품 1개·예상 가치 10~20·건강 2/2·충전 2로 생환했다. 프레임 수는 자동 입력·대기 길이이며 사람의 플레이 시간이나 최종 난이도 근거가 아니다.
+
+- 데이터 검사: 0·음수·비유한 경고 시간 거절, 실행 복사본 보존, 중복 시작/종료 후 재시작 거절.
+- 차단 경계: 플레이어/골렘 충돌 계층의 몸이 통로 안에 있으면 보류, 몸이 빠진 뒤 물리 차단. 이 구성 요소 비교만 별도 배치를 사용한다.
+- 경로 검사: 실제 이동·회수·문 닫기/열기·Q 방전·붕괴 통과·입구 E 귀환. 골렘·위험·이동 수치를 바꾸거나 순간 이동해 우회하지 않았다. 물품과 건강·자원 결과를 확인했다.
+- 정보/수명: 멀리서 차단된 길의 옛 열림 기록과 재관찰 갱신, 메뉴 정지/재개, 실패·귀환 후 사건 정지, 새 출정의 열린 통로·미관찰 지도. 막힌 통로 하나나 닫힌 문만으로 탐험을 실패시키지 않는다.
+- 전체 결과: [dev0321_automated_results.json](dev0321_automated_results.json)
+- 그래픽 경로 측정: [dev0321_route_results.json](dev0321_route_results.json)
+- 전체 임시 경로: `C:/Users/user/AppData/Local/Temp/dungeon-g2-20260925-145746-7fc1edf132c74577a58c63ec1cf57447/results.json`
+- 검사 소스 SHA-256: `479469116b739d55ccfcedadacbd9a3b3f8d738ace3f448acf881a79431a6292` — 실행 소스 바이트 기준이며 문서·다른 환경 줄바꿈까지 보증하지 않는다.
+- 화면·로그: `C:/Users/user/AppData/Local/Temp/dungeon-dev0321-final-d349fdf3c7f84ac68813c84bd898c2e4/`
+- 활성 Markdown 링크·앵커, 동결 원본 SHA-256 6개·아카이브 사본 3개, `git diff --check` 통과.
+- 구현·검증 완료, 사용자 로컬 커밋 승인. 다음 **DEV-0322 — 비상 탈출**, 이후 **DEV-0323 — G3 보완 통합 검토** 통과 후 G4 전환 계획. **정합성 검사: 아직 아님** — 다음 정기 검사는 G5 완료 후이며 사람 평가·최종 수치는 후속이다.

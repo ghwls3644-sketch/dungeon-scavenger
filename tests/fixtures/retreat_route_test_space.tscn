@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="PackedScene" path="res://src/app/prototype_exploration.tscn" id="1_world"]
+[ext_resource type="Script" path="res://tests/fixtures/retreat_route_test_space.gd" id="2_fixture"]
+[ext_resource type="PackedScene" path="res://src/gameplay/exploration/changing_passage.tscn" id="3_passage"]
+[ext_resource type="PackedScene" path="res://src/ui/exploration_outcome_panel.tscn" id="4_result"]
+
+[sub_resource type="StyleBoxFlat" id="ResultStyle"]
+bg_color = Color(0.055, 0.075, 0.1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.3, 0.42, 0.46, 1)
+
+[node name="RetreatRouteTestSpace" instance=ExtResource("1_world")]
+script = ExtResource("2_fixture")
+
+[node name="ChangingPassage" parent="." instance=ExtResource("3_passage")]
+position = Vector2(-370, -168)
+
+[node name="ResultOverlay" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Dimmer" type="ColorRect" parent="ResultOverlay"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.65)
+
+[node name="Outcome" parent="ResultOverlay" instance=ExtResource("4_result")]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -340.0
+offset_top = -280.0
+offset_right = 340.0
+offset_bottom = 220.0
+theme_override_styles/panel = SubResource("ResultStyle")
+
+[node name="Retry" type="Button" parent="ResultOverlay"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = 238.0
+offset_right = 140.0
+offset_bottom = 282.0
+text = "새 시험 출정"
