@@ -10,20 +10,23 @@ var _result: Result = Result.FAILURE
 var _recovery_result: RecoveryResult
 var _lost_item_count := 0
 var _failure_cause: StringName = &""
+var _return_method: StringName = &""
 
 
 static func safe_return(recovered_items: Array[ItemDefinition]) -> ExplorationOutcome:
 	var outcome := ExplorationOutcome.new()
 	outcome._result = Result.SAFE_RETURN
+	outcome._return_method = &"entrance"
 	outcome._recovery_result = RecoveryResult.from_recovered_items(recovered_items)
 	return outcome
 
 
 static func safe_return_inventory_items(
-	recovered_items: Array[InventoryItem]
+	recovered_items: Array[InventoryItem], return_method: StringName = &"entrance"
 ) -> ExplorationOutcome:
 	var outcome := ExplorationOutcome.new()
 	outcome._result = Result.SAFE_RETURN
+	outcome._return_method = return_method
 	outcome._recovery_result = RecoveryResult.from_recovered_inventory_items(recovered_items)
 	return outcome
 
@@ -58,3 +61,7 @@ func get_lost_item_count() -> int:
 
 func get_failure_cause() -> StringName:
 	return _failure_cause
+
+
+func get_return_method() -> StringName:
+	return _return_method

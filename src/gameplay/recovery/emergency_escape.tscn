@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://src/gameplay/recovery/emergency_escape.gd" id="1_escape"]
+[ext_resource type="Resource" path="res://src/data/prototype_emergency_escape.tres" id="2_rule"]
+
+[sub_resource type="CircleShape2D" id="InteractionShape"]
+radius = 24.0
+
+[node name="EmergencyEscape" type="Area2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_escape")
+rule = ExtResource("2_rule")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("InteractionShape")
+
+[node name="Marker" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-22, -22, 22, -22, 22, 22, -22, 22)
+color = Color(0.3, 0.7, 0.75, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_left = -140.0
+offset_top = 30.0
+offset_right = 140.0
+offset_bottom = 60.0
+horizontal_alignment = 1
+text = "비상 탈출 지점"

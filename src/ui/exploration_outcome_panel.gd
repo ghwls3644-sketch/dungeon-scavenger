@@ -49,6 +49,9 @@ func _render() -> void:
 	if _outcome.is_safe_return():
 		_title.text = "생환"
 		_summary.text = "입구로 안전 귀환했습니다. 들고 나온 물품을 정산 대상으로 넘깁니다."
+		if _outcome.get_return_method() == &"emergency_escape":
+			_title.text = "비상 탈출 성공"
+			_summary.text = "비상 탈출로 회수품을 확보했습니다. 들고 나온 물품을 정산 대상으로 넘깁니다."
 		_recovery_result_panel.bind_result(_outcome.get_recovery_result())
 		_recovery_result_panel.show()
 		return
@@ -59,5 +62,7 @@ func _render() -> void:
 		_summary.text = "골렘과의 접촉에서 벗어나지 못해 행동 불능이 되었습니다.\n" + _summary.text
 	elif _outcome.get_failure_cause() == &"trap_damage":
 		_summary.text = "함정 피해로 건강이 소진되어 행동 불능이 되었습니다.\n" + _summary.text
+	elif _outcome.get_failure_cause() == &"escape_timeout":
+		_summary.text = "퇴로가 끊긴 뒤 제한 시간 안에 탈출하지 못했습니다.\n" + _summary.text
 	_recovery_result_panel.bind_result(null)
 	_recovery_result_panel.hide()

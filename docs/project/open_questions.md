@@ -7,7 +7,7 @@ source_version: story-v1.5+gdd-v2.1
 canonical_for:
   - unresolved_questions
   - provisional_rules
-last_reviewed: 2026-09-26
+last_reviewed: 2026-09-28
 owner: project-maintainer
 related:
   - ../GDD.md
@@ -62,7 +62,7 @@ related:
 | `Q-018` | 출입 자격을 물리적 `허가증` 아이템으로 확정할 것인가, `출입 허가`나 표식으로 표현할 것인가? | `deferred` | [`../story/03_player_and_society.md`](../story/03_player_and_society.md), [`../reference/glossary.md`](../reference/glossary.md) | `DEC-014`의 출입 자격만 유지하고 독립 아이템명은 확정하지 않음 | 허가·출정 UI와 아이템 목록 확정 전 |
 | `Q-019` | 건강 잔량·위험별 피해와 행동 불능, 출정 간 회복을 어떻게 단순화할 것인가? | `provisional` | [GDD 6-2](../GDD.md#6-2-플레이어-상태), [`../design/survival_rules.md`](../design/survival_rules.md), [`../design/economy_rules.md`](../design/economy_rules.md) | DEV-0319 시험 값은 건강 2·함정 피해 1·새 출정 초기화. 골렘/붕괴는 기존 행동 불능 유지. 최종 피해·회복·비용의 확정은 아님 | 생존 통합 검토, 최종 회복·비용은 G4 안전망과 사람 평가 때 |
 | `Q-020` | 부상의 발생·중첩·해제와 이동/상호작용 효율을 어떻게 연결할 것인가? | `provisional` | [GDD 6-2·12-3](../GDD.md#6-2-플레이어-상태), [`../design/survival_rules.md`](../design/survival_rules.md), [`../design/item_rules.md`](../design/item_rules.md) | DEV-0319의 부상 6초·이동 0.9에 DEV-0320의 조사 0.8초·회수 0.4초·부상 진행 효율 0.5를 시험 적용. 재발 시 부상 시간 갱신, 해제 시 건강 잔량 유지. 최종 값은 미정 | 생존 통합 검토·사람 평가와 최종 시간/효율 확정 때 |
-| `Q-021` | 실제 퇴로 상실의 판정과 제한 시간, 비상 탈출의 성공·실패·비용·회수품 처리는 무엇인가? | `provisional` | [GDD 4-3·9-1](../GDD.md#4-3-성공과-실패), [`../design/survival_rules.md`](../design/survival_rules.md), [`../design/repeat_exploration.md`](../design/repeat_exploration.md), [`../design/economy_rules.md`](../design/economy_rules.md) | 현재 입구 귀환·마지막 관찰 지도 기록 유지. 비상 탈출 실패는 기존 손실 원칙을 따르되 성공 처리·자원·시간은 정하지 않음 | DEV-0321 별도 공간에서 한 통로 차단·실제 우회 시험 적용. 전체 퇴로 상실 판정과 비상 탈출 성공/실패 처리는 DEV-0322 착수 때 결정 |
+| `Q-021` | 실제 퇴로 상실의 판정과 제한 시간, 비상 탈출의 성공·실패·비용·회수품 처리는 무엇인가? | `provisional` | [GDD 4-3·9-1](../GDD.md#4-3-성공과-실패), [`../design/survival_rules.md`](../design/survival_rules.md), [`../design/repeat_exploration.md`](../design/repeat_exploration.md), [`../design/economy_rules.md`](../design/economy_rules.md) | DEV-0322 별도 공간에서 두 연결의 실제 차단·20초 제한·4초 준비, 사용자 선택 충전 1·회수품 유지 시험 적용. 실패 손실·지도 기록·기존 거점 보존 유지 | 최종 시간/비용·지형별 판정·기본 출정 적용과 사람 평가 후속. DEV-0323에서 연결과 G4 인계 범위 대조 |
 
 `Q-009`~`Q-011`은 GDD 19장에서 의도적으로 확정하지 않는 배경 여지로 분류한 항목이다. 현재 제품 구조를 막지 않으며 위 검토 조건이 생기기 전에는 결정을 요구하지 않는다.
 
@@ -128,3 +128,5 @@ G1 사람 평가·`Q-004`·`Q-005`와 기존 안전망 비용 미정 상태는 �
 DEV-0320은 E 시작/재입력 취소, 대상·단계·가방 변화·메뉴·종료 취소와 완료 재검증을 시험 적용했다. 부상 발생·해제는 현재 진행 속도에 반영하고 취소한 작업량은 재시작에 넘기지 않는다. 문·입구·Q·G와 저장 스키마는 유지한다. 이 검증으로 Q-020의 최종 밸런스나 사람 평가를 해결한 것으로 처리하지 않는다.
 
 2026-09-26 DEV-0321에서 Q-021의 일부만 별도 공간에 시험 적용했다. 위쪽 통로 하나의 진입 후 3초 경고·실제 차단·몸 겹침 보류, 오른쪽/아래쪽 우회·원래 입구 귀환과 재관찰을 확인했다. 이는 전체 퇴로 상실 판정이나 비상 탈출의 성공·비용·회수품 처리를 확정하지 않는다. 후속 DEV-0322에서 이 항목을 먼저 정한다. [시험 적용 범위](../design/survival_rules.md#dev-0321-퇴로-변화-시험-적용)를 따른다.
+
+2026-09-28 DEV-0322에서 사용자가 성공 정책으로 **하네스 충전 1 소모·회수품 유지**를 선택했다. 별도 고정 지형의 실제 퇴로 검사·20초 제한·E 4초 준비·취소·성공/실패·정산 전달을 구현하고 검증했다. [시험 적용](../design/survival_rules.md#dev-0322-비상-탈출-시험-적용)은 Q-021 전체 확정이나 일반 지형의 길 찾기·기본 출정 사건 적용을 뜻하지 않는다. 최종 수치와 사람 평가는 `provisional`로 남긴다.

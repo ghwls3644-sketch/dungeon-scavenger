@@ -31,12 +31,20 @@ func bind_inventory(inventory: PlayerInventory) -> bool:
 
 
 func complete_safe_return() -> bool:
+	return _complete_return(&"entrance")
+
+
+func complete_emergency_return() -> bool:
+	return _complete_return(&"emergency_escape")
+
+
+func _complete_return(return_method: StringName) -> bool:
 	if not _can_complete():
 		return false
 
 	_completion_in_progress = true
 	var recovered_items := _inventory.take_all_inventory_items()
-	_outcome = ExplorationOutcome.safe_return_inventory_items(recovered_items)
+	_outcome = ExplorationOutcome.safe_return_inventory_items(recovered_items, return_method)
 	_finish(State.SAFE_RETURN)
 	return true
 

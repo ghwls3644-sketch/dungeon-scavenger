@@ -1,0 +1,36 @@
+{
+	"cases": [
+		{
+			"case": "one_route_or_entrance_side",
+			"deadline_started": false,
+			"normal_return": true
+		},
+		{
+			"case": "canceled_then_success",
+			"charge_after": 2,
+			"charge_before": 3,
+			"deadline_remaining": 13.0000000000001,
+			"hub_money": 10,
+			"outcomes": 1,
+			"recovered_items": 3,
+			"stored_items": 2
+		},
+		{
+			"case": "damage_target_charge_restore_end",
+			"charge_after": 0,
+			"failure_cause": "golem_capture"
+		},
+		{
+			"case": "zero_charge_timeout",
+			"hub_money_preserved": 10,
+			"lost_items": 1,
+			"stored_items_preserved": 2
+		},
+		{
+			"case": "deadline_completion_same_tick",
+			"charge_spent": 0,
+			"result": "escape_timeout"
+		}
+	],
+	"passed": true
+}

@@ -8,7 +8,7 @@ canonical_for:
   - source_tree_layout
   - module_responsibilities
   - module_dependency_rules
-last_reviewed: 2026-09-26
+last_reviewed: 2026-09-28
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -293,3 +293,10 @@ DEV-0318~DEV-0319의 즉시 E·후속 상호작용 문구는 당시 이력이다
 - `retreat_route_test_space`는 `PrototypeExploration`을 상속한 별도 플레이 공간이다. 기존 출정 수명·지도·문·위험·물품을 재사용하며 종료를 사건 정지에 연결한다. 안내 변화만 기존 메시지 영역에 표시해 평상시 회수·위험 안내를 덮어쓰지 않는다. 결과와 새 출정 버튼은 이 시험 공간에서만 제공한다.
 - `MapPassageSurvey`·`ExplorationMapState`·`ReturnRouteStatus`는 기존 근거리 관찰·마지막 기록·입구 방향 책임을 유지한다. 차단 사건은 실제 물리 상태만 바꾸며 UI가 전체 경로 도달성이나 실패를 결정하지 않는다.
 - `retreat_route_smoke`는 실제 이동의 경고 중 복귀·차단 후 우회와 재관찰, 메뉴·출정 수명·회수품/기존 위험을 검사한다. 몸 겹침 검사는 별도 소규모 배치로 플레이어/골렘 충돌 계층을 각각 확인한다. 기본 출정 장면·기존 G3 경로 소스·저장은 변경하지 않았다.
+
+### DEV-0322의 비상 탈출과 결과 전달
+
+- `EmergencyEscapeRule`과 `prototype_emergency_escape.tres`는 제한 시간·준비 시간·충전 비용의 유효성과 시험 값을 소유한다. `EmergencyEscape`는 준비 시 복사한 값으로 현재 출정의 제한/준비·취소·완료를 관리하며 물리 우선순위 3에서 이동·위험·통로 사건 뒤 검사한다. 메뉴는 제한 시간을 정지하고 준비를 취소한다.
+- `FixedReturnRouteProbe`는 고정 시험 지형의 입구 쪽 영역과 두 실제 연결의 플레이어 폭을 가진 충돌 쿼리를 소유한다. 한 연결이 열려 있거나 입구 쪽이면 퇴로가 남은 것으로 본다. 지도 기록을 읽거나 쓰지 않으며 범용 경로 탐색·시드·영구 상태를 소유하지 않는다.
+- `HarnessController.commit_charge_action()`은 비용을 먼저 예약하고 결과 콜백이 거절되면 복구한다. 콜백과 자원 알림 중 중복 소비를 차단한다. `ExplorationRun.complete_emergency_return()`은 기존 안전 귀환과 동일한 물품 복사·일회성 결과를 사용한다. `ExplorationOutcome`의 귀환 방식과 실패 이유는 결과 표시용이며 저장 스키마를 늘리지 않는다. 정산·거점 자산은 기존 Meta 계층이 소유한다.
+- `tests/fixtures/emergency_escape_test_space.*`는 기존 퇴로 장면을 상속한 별도 플레이 공간이다. 경고·제한/비용 안내와 탈출 지점·결과·새 방문을 연결하고 기본 거점 출정에는 자동 사건을 넣지 않는다. `tests/smoke/emergency_escape_smoke.*`는 실제 이동·회수·E/메뉴와 경계 배치를 구분한다. 보호 품목은 카탈로그 복사본으로만 만들며 실제 물품 데이터는 바꾸지 않는다.

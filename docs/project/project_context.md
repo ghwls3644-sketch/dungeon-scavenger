@@ -8,7 +8,7 @@ canonical_for:
   - development_environment
   - engine_and_language
   - development_commands
-last_reviewed: 2026-09-26
+last_reviewed: 2026-09-28
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -1203,3 +1203,29 @@ git diff --name-only
 - 화면·로그: `C:/Users/user/AppData/Local/Temp/dungeon-dev0321-final-d349fdf3c7f84ac68813c84bd898c2e4/`
 - 활성 Markdown 링크·앵커, 동결 원본 SHA-256 6개·아카이브 사본 3개, `git diff --check` 통과.
 - 구현·검증 완료, 사용자 로컬 커밋 승인. 다음 **DEV-0322 — 비상 탈출**, 이후 **DEV-0323 — G3 보완 통합 검토** 통과 후 G4 전환 계획. **정합성 검사: 아직 아님** — 다음 정기 검사는 G5 완료 후이며 사람 평가·최종 수치는 후속이다.
+
+## DEV-0322 비상 탈출 검사
+
+[직접 플레이 장면](../../tests/fixtures/emergency_escape_test_space.tscn)은 기존 퇴로 공간을 상속하고 위·아래 연결의 차단과 탈출 지점을 추가한 별도 공간이다. 직접 열면 가방 3칸·충전 3으로 출정한다. 위쪽 길로 안쪽에 진입하면 두 연결이 3초 경고 후 차단되며, 퇴로 상실 후 20초 안에 청록색 탈출 지점에서 E로 4초 준비를 마친다. 성공 시 충전 1을 써 회수품을 유지하며 결과 뒤 새 시험 출정을 할 수 있다. 기본 거점 출정의 자동 사건으로 적용한 것은 아니다.
+
+```powershell
+& $env:GODOT_BIN --path . res://tests/fixtures/emergency_escape_test_space.tscn
+& $env:GODOT_BIN --headless --path . --fixed-fps 60 --quit-after 12000 res://tests/smoke/emergency_escape_smoke.tscn
+& ./tests/run_g2_checks.ps1 -GodotBin $env:GODOT_BIN -Repetitions 1 -TimeoutSeconds 60
+```
+
+두 번째 명령의 성공 표시는 `emergency_escape_passed`, 종료 코드 0과 엔진 오류·경고 없음이다. `--headless`를 빼고 `-- --escape-render-directory=<새 임시 폴더> --escape-report-path=<새 임시 JSON 경로>`를 붙이면 경고·퇴로 상실·준비·넓은 화면·성공·시간 초과 화면 6장과 결과를 저장한다. 탈출 안내에는 불투명 배경과 두 줄 높이를 주어 배경 글자와의 겹침·화면 경계 잘림을 방지했다.
+
+2026-09-28 최종 Godot 4.7.1 전체 **61/61 실행**, 스모크 장면 38개 포함. 검사 전후 실행 소스 동일, 엔진 오류·경고·예외 적용 없음. 직접 플레이 장면 시작과 그래픽 검사도 종료 코드 0이며 1152×648·1600×900 실제 화면 6장을 확인했다. 첫 전체 실행은 새 스크립트 UID 생성으로 소스 동일성 검사를 통과하지 못해 최종 근거에서 제외했고, 화면 보완과 UID 생성이 끝난 소스로 전체 검사를 확정했다.
+
+- 실제 경로: WASD·E 입력으로 한 길 차단·두 길 차단·입구 쪽 후퇴·회수와 탈출을 비교했다. 한 길이 남거나 다시 열 수 있는 내부 문만 닫히면 제한 시간이 시작되지 않는다. 지도에는 미관찰 차단을 자동 기록하지 않는다.
+- 취소·시간: E 재입력·이동·메뉴·피해·대상 비활성/범위 변경·다른 충전 사용을 확인했다. 메뉴는 제한 시간을 정지하고 준비를 취소하며 다시 시작하면 4초다. 실제 연결 복구는 제한을 지우고 재차단은 20초로 시작한다. 같은 틱에 만료와 완료가 걸리면 실패 우선이다.
+- 성공: 실제 가벼운 폐품 회수와 별도 경계 자료인 미확인/보호 물품을 합쳐 3개 상태를 보존했다. 충전 3→2, 결과 1회, 정산 보유금 10·보관 2개를 확인했다. 시간 초과에서는 이번 물품 1개만 잃고 기존 돈·보관품과 거점 저장 데이터 변환을 유지했다. 새 방문은 충전 3·빈 가방·제한 없음이다.
+- 경계 자료: 보호 여부는 기존 카탈로그의 검사 전용 복사본에만 적용한다. 피해·다른 자원 소비·대상 이동·실제 연결 복구·기존 실패 경합은 각 조건을 직접 발생시켜 분리 검사하고, 같은 틱 판정은 한 큰 물리 틱으로 검증한다. 실제 위험 접근·함정/골렘/붕괴와 파일 저장·이어하기는 전체 회귀 검사에서 별도로 확인한다. 이 경계 배치를 사람 플레이나 최종 난이도 근거로 해석하지 않는다.
+- 전체 원본: [dev0322_automated_results.json](dev0322_automated_results.json)
+- 탈출 결과: [dev0322_escape_results.json](dev0322_escape_results.json)
+- 전체 임시 경로: `C:/Users/user/AppData/Local/Temp/dungeon-g2-20260928-072545-bf67034c2c6d4aea9b412e8f188ded93/results.json`
+- 검사 소스 SHA-256: `7892143ca6a25a9199b46d8fa25f45b62558b31b42a51be78d819f898f3e990b` — 실행 소스 바이트 기준이며 문서·다른 환경 줄바꿈까지 보증하지 않는다.
+- 화면·로그: `C:/Users/user/AppData/Local/Temp/dungeon-dev0322-final-a6b0654e9e524e5db0a0cece15326bc9/`
+- 활성 Markdown 상대 링크·앵커, 동결 원본 SHA-256 6개·아카이브 사본 3개와 `git diff --check` 통과.
+- **구현·검증 완료, 사용자 로컬 커밋 승인.** 다음이자 마지막 **DEV-0323 — G3 보완 통합 검토** 통과 후 G4 전환 계획. **정합성 검사: 아직 아님** — 다음 정기 검사는 G5 완료 후이며 사람 평가·최종 수치는 후속이다.

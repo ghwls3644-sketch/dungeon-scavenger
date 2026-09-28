@@ -171,6 +171,22 @@ func publish_status() -> void:
 	_publish_status()
 
 
+func commit_charge_action(charge_cost: int, action: Callable) -> bool:
+	if _action_in_progress or not can_process() or get_tree().paused or not action.is_valid():
+		return false
+	if not _reserve_charge(charge_cost):
+		return false
+	# The result callback commits before charge signals; nested actions cannot
+	# spend the reservation or publish a second result during either notification.
+	var succeeded: bool = action.call()
+	if not succeeded:
+		_current_charge += charge_cost
+	charge_changed.emit(_current_charge, _charge_capacity)
+	_publish_status()
+	_action_in_progress = false
+	return succeeded
+
+
 func _reserve_charge(charge_cost: int) -> bool:
 	if charge_cost <= 0:
 		return _reject_action(REJECT_INVALID_COST)

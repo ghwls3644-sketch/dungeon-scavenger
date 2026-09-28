@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="PackedScene" path="res://tests/fixtures/retreat_route_test_space.tscn" id="1_world"]
+[ext_resource type="Script" path="res://tests/fixtures/emergency_escape_test_space.gd" id="2_fixture"]
+[ext_resource type="PackedScene" path="res://src/gameplay/exploration/changing_passage.tscn" id="3_passage"]
+[ext_resource type="Script" path="res://src/gameplay/exploration/fixed_return_route_probe.gd" id="4_probe"]
+[ext_resource type="PackedScene" path="res://src/gameplay/recovery/emergency_escape.tscn" id="5_escape"]
+
+[sub_resource type="StyleBoxFlat" id="EscapePromptStyle"]
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.04, 0.06, 0.08, 1)
+
+[node name="EmergencyEscapeTestSpace" instance=ExtResource("1_world")]
+script = ExtResource("2_fixture")
+
+[node name="InteractionPrompt" parent="Overlay"]
+offset_top = -80.0
+theme_override_styles/normal = SubResource("EscapePromptStyle")
+
+[node name="LowerPassage" parent="." instance=ExtResource("3_passage")]
+position = Vector2(-370, 188)
+trigger_bounds = Rect2(40, -518, 180, 260)
+
+[node name="ReturnRouteProbe" type="Node2D" parent="."]
+script = ExtResource("4_probe")
+observer_path = NodePath("../Player")
+entrance_side = Rect2(-776, -356, 378, 712)
+connections = Array[PackedVector2Array]([PackedVector2Array(-460, -200, -330, -200), PackedVector2Array(-460, 200, -330, 200)])
+
+[node name="EmergencyEscape" parent="." instance=ExtResource("5_escape")]
+position = Vector2(40, -260)
+player_path = NodePath("../Player")
+run_path = NodePath("../ExplorationRun")
+survival_path = NodePath("../PlayerSurvival")
+route_probe_path = NodePath("../ReturnRouteProbe")
