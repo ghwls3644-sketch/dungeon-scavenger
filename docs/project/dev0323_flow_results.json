@@ -1,0 +1,45 @@
+{
+	"cases": [
+		{
+			"case": "trap_injury_recovery_return",
+			"charge": 1,
+			"health": 1,
+			"hub_money": 80,
+			"recovered_items": 2
+		},
+		{
+			"case": "emergency_return_save_retry",
+			"charge": 2,
+			"hub_money": 90,
+			"outcomes": 1,
+			"stored_unknown": 1
+		},
+		{
+			"case": "escape_timeout",
+			"charge": 3,
+			"hub_money": 90,
+			"outcomes": 1,
+			"stored_unknown": 1
+		},
+		{
+			"case": "fresh_default_departure",
+			"charge_at_start": 3,
+			"health": 2,
+			"hub_money": 90,
+			"trial_events_active": false
+		}
+	],
+	"final_hub": {
+		"bag_slots": 3.0,
+		"money": "90",
+		"next_expedition_id": "5",
+		"stored_items": [
+			{
+				"id": "test_g1_unknown",
+				"identified": false,
+				"risk_hint": "희미한 진동이 느껴집니다."
+			}
+		]
+	},
+	"passed": true
+}

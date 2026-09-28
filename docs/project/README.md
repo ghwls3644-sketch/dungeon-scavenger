@@ -35,8 +35,8 @@ related:
 
 이 디렉터리는 문서 이관과 개발 과정의 결정, 미결정 사항, 변경 이력을 관리한다.
 
-현재 G3의 연결 검사와 남은 범위는 [탐험 확장 통합 검토](g3_exploration_review.md), 다음 작업은 [개발 인계](development_handoff.md)에서 확인한다.
-[생존 규칙 검토안](../design/survival_rules.md)은 `draft`이며 DEV-0319~DEV-0322의 건강·부상/조사·회수/HUD와 별도 공간의 퇴로 변화·비상 탈출 시험 적용을 구분한다. 최종 미정 사항은 [Q-019~Q-021](open_questions.md#생존-규칙-검토-경계), 현재 결과와 마지막 DEV-0323 G3 보완 통합 검토는 [DEV-0322 인계](development_handoff.md#dev-0322--비상-탈출)를 따른다.
+DEV-0323으로 G3 시제품 기술 검토를 마쳤다. 연결 검사와 적용 범위는 [탐험 확장 통합 검토](g3_exploration_review.md), 다음 DEV-0401 거점 감정 작업은 [G4 인계](development_handoff.md#dev-0401--거점-감정과-미확인-물품-처리-다음-작업)에서 확인한다.
+[생존 규칙 검토안](../design/survival_rules.md)은 `draft`이며 DEV-0319~DEV-0322의 건강·부상/조사·회수/HUD와 별도 공간의 퇴로 변화·비상 탈출 시험 적용을 구분한다. 최종 미정 사항은 [Q-019~Q-021](open_questions.md#생존-규칙-검토-경계), 현재 완료 결과는 [DEV-0323 인계](development_handoff.md#dev-0323--g3-보완-통합-검토)를 따른다. 사람 평가와 최종 수치를 기술 검사로 확정하지 않는다.
 
 ## 공통 Front Matter
 

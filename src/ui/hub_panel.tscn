@@ -75,7 +75,7 @@ autowrap_mode = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 theme_override_colors/font_color = Color(0.72, 0.68, 0.6, 1)
-text = "시험용 조건입니다. 무게에 따른 이동 감속은 아직 없습니다."
+text = "짐이 무거워지면 이동이 느려지고 발소리가 커집니다."
 autowrap_mode = 2
 
 [node name="DepartureButton" type="Button" parent="Center/Card/Content/Preparation"]

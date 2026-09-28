@@ -255,7 +255,7 @@ func _on_departure_requested() -> void:
 	_departing = true
 	var loadout := _hub_state.create_departure_loadout()
 	_hub.render_preparation(loadout, true)
-	_exploration = EXPLORATION_SCENE.instantiate()
+	_exploration = _create_exploration()
 	add_child(_exploration)
 	if not _exploration.prepare_departure(loadout):
 		_cancel_departure()
@@ -267,6 +267,10 @@ func _on_departure_requested() -> void:
 	_exploration.exploration_ended.connect(_on_exploration_ended.bind(_expedition_id))
 	if not GameState.request_transition(GameState.State.EXPLORATION):
 		_cancel_departure()
+
+
+func _create_exploration() -> PrototypeExploration:
+	return EXPLORATION_SCENE.instantiate() as PrototypeExploration
 
 
 func _cancel_departure() -> void:

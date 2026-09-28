@@ -1229,3 +1229,33 @@ git diff --name-only
 - 화면·로그: `C:/Users/user/AppData/Local/Temp/dungeon-dev0322-final-a6b0654e9e524e5db0a0cece15326bc9/`
 - 활성 Markdown 상대 링크·앵커, 동결 원본 SHA-256 6개·아카이브 사본 3개와 `git diff --check` 통과.
 - **구현·검증 완료, 사용자 로컬 커밋 승인.** 다음이자 마지막 **DEV-0323 — G3 보완 통합 검토** 통과 후 G4 전환 계획. **정합성 검사: 아직 아님** — 다음 정기 검사는 G5 완료 후이며 사람 평가·최종 수치는 후속이다.
+
+## DEV-0323 G3 보완 통합 검토 검사
+
+[통합 스모크](../../tests/smoke/g3_survival_flow_smoke.gd)는 [검사 전용 앱](../../tests/fixtures/g3_review_entry.gd)에서 실제 앱의 출정·결과·정산·저장 흐름을 사용한다. 이전 거점 자료(돈 40·가방 3칸·미확인 보관품 1개)를 독립 임시 파일로 준비하고, 현재 회수품은 실제 이동과 E 입력으로 얻는다. 기본 출정에서 함정 피해·부상 중 회수·원래 입구 귀환을, 기존 비상 탈출 공간에서는 실제 두 연결 차단·탈출 성공/제한 시간 초과를 진행한다. 제품 코드에는 출정 생성 메서드만 분리했으며 기본 거점 출정의 자동 사건은 추가하지 않았다.
+
+```powershell
+$reviewDirectory = Join-Path $env:TEMP ('dungeon-g3-review-' + [guid]::NewGuid().ToString('N'))
+& $env:GODOT_BIN --headless --path . --fixed-fps 60 --quit-after 20000 res://tests/smoke/g3_survival_flow_smoke.tscn -- "--review-progress-directory=$reviewDirectory"
+& $env:GODOT_BIN --headless --path . --fixed-fps 60 --quit-after 20000 res://tests/smoke/g3_survival_flow_smoke.tscn -- --review-continue "--review-progress-directory=$reviewDirectory"
+& ./tests/run_g2_checks.ps1 -GodotBin $env:GODOT_BIN -Repetitions 2 -TimeoutSeconds 60
+```
+
+쓰기 검사는 새 폴더만 받으며 `flow-results.json`을 남긴다. 다음 명령은 같은 폴더의 실제 저장 파일을 **새 프로세스**에서 이어하고 `continue-results.json`을 남긴다. 성공 표시는 각각 `g3_survival_flow_passed write`·`g3_survival_flow_passed continue`, 종료 코드 0이다. 첫 실행에서 `--headless`를 빼고 `--` 뒤에 `"--review-render-directory=$reviewDirectory"`를 추가하면 실제 화면 6장을 저장한다. 검사 폴더의 임시 저장 경로에 빈 디렉터리를 잠깐 만들어 실제 쓰기 실패를 발생시키고 같은 경로만 제거한 뒤 재시도한다. 사용자 진행 파일은 읽거나 덮어쓰지 않는다.
+
+2026-09-28 Godot 4.7.1 최종 **124/124 실행**, **2회 반복**, 스모크 장면 **39개**를 포함한다. 공통 버전/프로젝트 import 2개와 반복마다 61개씩이며, 기존 실행기에 새 통합 장면과 파일 이어하기를 넣었다. 실행 소스는 검사 전후 동일하고 엔진 오류·경고·진단 예외 적용은 없다. 결과 JSON의 `scope` 문자열은 재사용한 G2 실행기의 역사적 이름이며 검증 범위는 실제 `checks` 목록을 따른다. 거점 안내 정정 전의 첫 124개 통과 결과는 최종 소스 근거로 사용하지 않았다.
+
+- 정상 귀환: 실제 함정 피해 뒤 건강 1, 부상 중 가방 취소/정지와 회수 시간 감소율 확인, 회수 2개·충전 1, 보유금 40→80.
+- 비상 탈출: 실제 회수 1개 보존·충전 3→2·결과 1회. 결과 확인 전후 저장 파일 동일. 저장 실패 때 결과와 돈 80/기존 파일 유지, 재시도·중복 클릭 후 돈 90·미확인 보관품 1개 유지.
+- 시간 초과: 이번 회수품 1개만 손실·충전 3·결과 1회, 돈 90·기존 보관품 유지. 이어서 기본 출정은 건강 2·부상 0·충전 3·빈 가방·관찰 0·시험 통로 사건 없음.
+- 새 프로세스 이어하기: 돈 90·가방 3칸·미확인 상태/위험 안내 유지, 새 출정/빈 귀환까지 통과. 쓰기 경로의 다음 출정 ID 5, 이어하기 후 6. 저장 키는 기존 4개를 유지.
+- 그래픽: 종료 코드 0·표준 오류 없음. 1152×648·1600×900 화면 6장에서 건강·진행, 탈출 성공, 시간 초과 손실, 저장 재시도, 돈/보관품과 정정된 적재 안내를 확인했다. 시험 지형 라벨과 진행 안내 일부 겹침은 후속 화면 다듬기로 명시했으며 사람 가독성/난이도 평가는 미실시다.
+- 전체 원본: [dev0323_automated_results.json](dev0323_automated_results.json)
+- 그래픽 통합 결과: [dev0323_flow_results.json](dev0323_flow_results.json)
+- 새 프로세스 결과: [dev0323_continue_results.json](dev0323_continue_results.json) — 전체 검사 1회차의 독립 프로세스 기록이다.
+- 전체 임시 경로: `C:/Users/user/AppData/Local/Temp/dungeon-g2-20260928-093843-52dbbfdd02a7467ba3a9e0801f349d69/results.json`
+- 검사 기준 HEAD: `8278e7d`와 이번 작업 트리. 소스 SHA-256: `26118e5bfa12704bec012df4412ce651a176f50b45b768015fcb3ba97a4446df` — `src`·`tests`·`project.godot` 바이트 기준이며 문서나 다른 환경의 줄바꿈까지 보증하지 않는다.
+- 화면·로그: `C:/Users/user/AppData/Local/Temp/dungeon-dev0323-final-92db1e60eb424decb7547c4811f2f30d/`
+- 활성 Markdown 상대 링크·앵커, 동결 원본 SHA-256 6개·아카이브 사본 3개와 `git diff --check` 통과.
+
+**DEV-0323 검토 완료·사용자 로컬 커밋 승인, 시제품 기술 범위에서 G3 완료.** 다음은 **DEV-0401 — 거점 감정과 미확인 물품 처리**다. 기본 출정과 별도 퇴로 공간의 적용 범위·최종 수치·사람 평가 후속은 [G3 판정](g3_exploration_review.md#dev-0323-g3-보완-통합-검토)을 따른다. **정합성 검사: 아직 아님** — 다음 정기 검사는 G5 완료 후다.

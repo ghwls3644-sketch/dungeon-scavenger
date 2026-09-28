@@ -134,11 +134,15 @@ function Start-G2Checks {
         Run-Case 'project-import' @('--editor', '--quit') 'Godot Engine v4\.7\.1\.stable\.'
         for ($round = 1; $round -le $Repetitions; $round++) {
             $prefix = "round-$round"
+            $survivalSession = Join-Path $runDirectory "$prefix-survival-session"
             foreach ($scene in (Get-ChildItem -LiteralPath (Join-Path $repository 'tests/smoke') -Filter '*.tscn' | Sort-Object Name)) {
                 $marker = $scene.BaseName -replace '_smoke$', '_passed'
                 if ($marker -eq 'game_state_flow_passed') { $marker = 'state_flow_passed' }
-                Run-Scene "$prefix-$($scene.BaseName)" $scene.BaseName "\[SmokeTest\] $marker(?:\s|$)"
+                $sceneArguments = @()
+                if ($scene.BaseName -eq 'g3_survival_flow_smoke') { $sceneArguments = @("--review-progress-directory=$survivalSession") }
+                Run-Scene "$prefix-$($scene.BaseName)" $scene.BaseName "\[SmokeTest\] $marker(?:\s|$)" $sceneArguments
             }
+            Run-Scene "$prefix-survival-continue" 'g3_survival_flow_smoke' '\[SmokeTest\] g3_survival_flow_passed continue' @('--review-continue', "--review-progress-directory=$survivalSession")
             Run-Scene "$prefix-continue" 'title_screen_smoke' '\[SmokeTest\] title_screen_passed' @('--title-case=continue')
             Run-Scene "$prefix-quit" 'title_screen_smoke' '\[GameEntry\] quit_requested' @('--title-case=quit')
             foreach ($case in @('three', 'failure')) {
