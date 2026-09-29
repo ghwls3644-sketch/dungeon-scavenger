@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://src/ui/hub_panel.gd" id="1_script"]
 [ext_resource type="PackedScene" path="res://src/ui/hub_appraisal_panel.tscn" id="2_appraisal"]
+[ext_resource type="PackedScene" path="res://src/ui/hub_sale_panel.tscn" id="3_sale"]
 
 [sub_resource type="StyleBoxFlat" id="CardStyle"]
 bg_color = Color(0.12, 0.105, 0.085, 1)
@@ -129,11 +130,26 @@ theme_override_font_sizes/font_size = 16
 text = "거점 진행과 준비 상태는 자동 저장됩니다.\n탐험 중 회수품은 정산해야 저장됩니다."
 autowrap_mode = 2
 
-[node name="AppraisalButton" type="Button" parent="Center/Card/Content/Holdings"]
+[node name="Services" type="HBoxContainer" parent="Center/Card/Content/Holdings"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="AppraisalButton" type="Button" parent="Center/Card/Content/Holdings/Services"]
 unique_name_in_owner = true
 layout_mode = 2
 custom_minimum_size = Vector2(0, 44)
+size_flags_horizontal = 3
 text = "보관품 감정"
 
+[node name="SaleButton" type="Button" parent="Center/Card/Content/Holdings/Services"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 44)
+size_flags_horizontal = 3
+text = "보관품 판매"
+
 [node name="AppraisalPanel" parent="." instance=ExtResource("2_appraisal")]
+visible = false
+
+[node name="SalePanel" parent="." instance=ExtResource("3_sale")]
 visible = false

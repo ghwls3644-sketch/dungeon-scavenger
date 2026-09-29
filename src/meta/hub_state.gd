@@ -92,6 +92,55 @@ func cancel_expedition(expedition_id: int) -> bool:
 	return true
 
 
+func get_sale_offers(rule: EconomyRule) -> Array[Dictionary]:
+	var offers: Array[Dictionary] = []
+	for item in _stored_items:
+		var status := SaleQuote.get_item_status(item, rule)
+		var price := rule.get_price(item.get_definition().stable_id) if status == SaleQuote.Status.AVAILABLE else -1
+		offers.append({"item": item.copy(), "status": status, "price": price})
+	return offers
+
+
+func quote_sale(indices: PackedInt32Array, rule: EconomyRule) -> SaleQuote:
+	var source := to_save_data()
+	if source.is_empty() or indices.is_empty() or rule == null or not rule.is_valid():
+		return null
+	var selected := indices.duplicate()
+	selected.sort()
+	var previous := -1
+	var income := 0
+	var prices: Array[int] = []
+	for index in selected:
+		if index < 0 or index >= _stored_items.size() or index == previous:
+			return null
+		var item := _stored_items[index]
+		if SaleQuote.get_item_status(item, rule) != SaleQuote.Status.AVAILABLE:
+			return null
+		var price := rule.get_price(item.get_definition().stable_id)
+		if price > 9223372036854775807 - income:
+			return null
+		income += price
+		prices.append(price)
+		previous = index
+	if income > 9223372036854775807 - _money:
+		return null
+	return SaleQuote.new(source, selected, prices, income, _money + income)
+
+
+func apply_sale(quote: SaleQuote, rule: EconomyRule) -> bool:
+	if quote == null:
+		return false
+	var checked := quote_sale(quote.get_indices(), rule)
+	if checked == null or not quote.matches(to_save_data(), checked.get_prices()):
+		return false
+	var selected := checked.get_indices()
+	selected.reverse()
+	for index in selected:
+		_stored_items.remove_at(index)
+	_money += checked.get_income()
+	return true
+
+
 func copy() -> HubState:
 	var result := HubState.new()
 	result._loadout = _loadout.copy()

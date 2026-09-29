@@ -23,11 +23,15 @@ var _awaiting_new_game_confirmation := false
 var _appraisal_open := false
 var _appraising := false
 var _appraisal_quote: AppraisalQuote
+var _sale_open := false
+var _selling := false
+var _sale_quote: SaleQuote
 
 @onready var _title: TitleScreen = $Interface/TitleScreen
 @onready var _hub: HubPanel = $Interface/HubPanel
 @onready var _results: ExpeditionResultsScreen = $Interface/Results
 @onready var _appraisal: HubAppraisalPanel = $Interface/HubPanel/AppraisalPanel
+@onready var _sale: HubSalePanel = $Interface/HubPanel/SalePanel
 
 
 func _ready() -> void:
@@ -54,6 +58,11 @@ func _ready() -> void:
 	_appraisal.confirmation_requested.connect(_on_appraisal_confirmed)
 	_appraisal.selection_requested.connect(_on_appraisal_selection_requested)
 	_appraisal.close_requested.connect(_on_appraisal_closed)
+	_hub.sale_requested.connect(_on_sale_requested)
+	_sale.review_requested.connect(_on_sale_review_requested)
+	_sale.confirmation_requested.connect(_on_sale_confirmed)
+	_sale.selection_requested.connect(_on_sale_selection_requested)
+	_sale.close_requested.connect(_on_sale_closed)
 	_results.settlement_requested.connect(_on_settlement_requested)
 	_results.quit_requested.connect(_on_quit_requested)
 	GameState.state_changed.connect(_on_state_changed)
@@ -205,6 +214,9 @@ func _on_state_changed(_previous_state: int, current_state: int) -> void:
 	_appraisal_open = false
 	_appraisal_quote = null
 	_appraisal.hide()
+	_sale_open = false
+	_sale_quote = null
+	_sale.hide()
 	_hub.get_node("Center").show()
 	_hub.visible = current_state == GameState.State.HUB
 	_results.visible = current_state == GameState.State.RESULTS
@@ -248,7 +260,7 @@ func get_hub_stored_items() -> Array[InventoryItem]:
 
 
 func _on_bag_slots_selected(slots: int) -> void:
-	if GameState.get_current_state() != GameState.State.HUB or _departing or _appraisal_open or _appraising:
+	if GameState.get_current_state() != GameState.State.HUB or _departing or _appraisal_open or _appraising or _sale_open or _selling:
 		return
 	var candidate := _hub_state.copy()
 	if not candidate.select_bag_slots(slots):
@@ -261,7 +273,7 @@ func _on_bag_slots_selected(slots: int) -> void:
 
 
 func _on_departure_requested() -> void:
-	if _departing or _appraisal_open or _appraising or GameState.get_current_state() != GameState.State.HUB or get_tree().paused:
+	if _departing or _appraisal_open or _appraising or _sale_open or _selling or GameState.get_current_state() != GameState.State.HUB or get_tree().paused:
 		return
 	if _exploration != null or _pending_outcome != null:
 		return
@@ -327,7 +339,7 @@ func _on_settlement_requested() -> void:
 
 
 func _on_quit_requested() -> void:
-	if _appraising:
+	if _appraising or _selling:
 		return
 	GameLog.info(&"GameEntry", &"quit_requested")
 	get_tree().quit()
@@ -335,7 +347,7 @@ func _on_quit_requested() -> void:
 
 func _can_appraise() -> bool:
 	return GameState.get_current_state() == GameState.State.HUB and not GameState.is_transition_in_progress() \
-		and not _departing and not _settling and not _appraising and not get_tree().paused
+		and not _departing and not _settling and not _appraising and not _sale_open and not _selling and not get_tree().paused
 
 
 func _on_appraisal_requested() -> void:
@@ -395,3 +407,67 @@ func _on_appraisal_closed() -> void:
 	_appraisal.hide()
 	_hub.get_node("Center").show()
 	_hub.get_node("%AppraisalButton").grab_focus()
+
+
+func _can_sell() -> bool:
+	return GameState.get_current_state() == GameState.State.HUB and not GameState.is_transition_in_progress() \
+		and not _departing and not _settling and not _appraising and not _appraisal_open and not _selling and not get_tree().paused
+
+
+func _on_sale_requested() -> void:
+	if not _can_sell() or _sale_open:
+		return
+	_sale_open = true
+	_sale_quote = null
+	_hub.get_node("Center").hide()
+	_sale.present(_hub_state.get_money(), _hub_state.get_sale_offers(PROTOTYPE_ECONOMY))
+
+
+func _on_sale_review_requested(indices: PackedInt32Array) -> void:
+	if not _can_sell() or not _sale_open or _sale_quote != null:
+		return
+	_sale_quote = _hub_state.quote_sale(indices, PROTOTYPE_ECONOMY)
+	_sale.set_review(_sale_quote)
+	if _sale_quote == null:
+		_sale.set_status("판매 대상과 보유금 한도를 확인해 주세요. 물품과 돈은 그대로 유지됩니다.")
+
+
+func _on_sale_selection_requested() -> void:
+	if not _can_sell() or not _sale_open:
+		return
+	_sale_quote = null
+	_sale.set_review(null)
+	_sale.get_node("%SaleItems").grab_focus()
+
+
+func _on_sale_confirmed() -> void:
+	if not _can_sell() or not _sale_open or _sale_quote == null:
+		return
+	_selling = true
+	var candidate := _hub_state.copy()
+	if not candidate.apply_sale(_sale_quote, PROTOTYPE_ECONOMY):
+		_selling = false
+		_sale.set_status("판매 대상이나 가격이 바뀌었습니다. 선택으로 돌아가 다시 확인해 주세요.")
+		return
+	if not _save_hub(candidate):
+		_selling = false
+		_sale.set_status("저장 실패 · 물품과 보유금은 그대로 유지됩니다.\n다시 판매를 확정하거나 선택으로 돌아가 취소할 수 있습니다.")
+		return
+	var count := _sale_quote.get_count()
+	var income := _sale_quote.get_income()
+	_hub_state = candidate
+	_sale_quote = null
+	_selling = false
+	_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items())
+	_sale.present(_hub_state.get_money(), _hub_state.get_sale_offers(PROTOTYPE_ECONOMY))
+	_sale.set_status("%d개 판매 완료 · 수입 +%d · 보유금 %d\n판매한 물품을 보관함에서 제거하고 결과를 저장했습니다." % [count, income, _hub_state.get_money()])
+
+
+func _on_sale_closed() -> void:
+	if not _can_sell() or not _sale_open:
+		return
+	_sale_open = false
+	_sale_quote = null
+	_sale.hide()
+	_hub.get_node("Center").show()
+	_hub.get_node("%SaleButton").grab_focus()

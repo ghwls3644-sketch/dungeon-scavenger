@@ -98,7 +98,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 
-static func format_item(item: InventoryItem) -> String:
+static func format_item(item: InventoryItem, processing_text := "") -> String:
 	var definition := item.get_definition()
 	var details := "미확인 물품 · 감정 대기 · 가치 미확인"
 	if item.is_identified():
@@ -106,7 +106,10 @@ static func format_item(item: InventoryItem) -> String:
 			ItemDefinition.CATEGORY_SCRAP: "폐품", ItemDefinition.CATEGORY_RESIDUE: "잔재",
 			ItemDefinition.CATEGORY_UNIQUE_ARTIFACT: "고유 유물", ItemDefinition.CATEGORY_CORE_RECORD: "핵심 기록물",
 		}
-		details = "%s · %s\n%s" % [categories.get(definition.category, "미분류"), ItemValueText.format_inventory_item_value(item), "판매·폐기 보호 · 보관" if definition.is_protected() else "판매 가능한 분류 · 현재 거점 보관"]
+		var processing := "판매·폐기 보호 · 보관" if definition.is_protected() else "판매 가능한 분류 · 현재 거점 보관"
+		if not processing_text.is_empty():
+			processing = processing_text
+		details = "%s · %s\n%s" % [categories.get(definition.category, "미분류"), ItemValueText.format_inventory_item_value(item), processing]
 	if not item.get_risk_hint().is_empty():
 		details += " · " + item.get_risk_hint()
 	return "%s · 무게 %.1f\n%s" % [definition.display_name, definition.weight, details]

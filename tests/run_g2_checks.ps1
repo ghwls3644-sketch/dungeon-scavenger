@@ -136,16 +136,19 @@ function Start-G2Checks {
             $prefix = "round-$round"
             $survivalSession = Join-Path $runDirectory "$prefix-survival-session"
             $appraisalSession = Join-Path $runDirectory "$prefix-appraisal-session"
+            $saleSession = Join-Path $runDirectory "$prefix-sale-session"
             foreach ($scene in (Get-ChildItem -LiteralPath (Join-Path $repository 'tests/smoke') -Filter '*.tscn' | Sort-Object Name)) {
                 $marker = $scene.BaseName -replace '_smoke$', '_passed'
                 if ($marker -eq 'game_state_flow_passed') { $marker = 'state_flow_passed' }
                 $sceneArguments = @()
                 if ($scene.BaseName -eq 'g3_survival_flow_smoke') { $sceneArguments = @("--review-progress-directory=$survivalSession") }
                 if ($scene.BaseName -eq 'hub_appraisal_smoke') { $sceneArguments = @("--appraisal-directory=$appraisalSession") }
+                if ($scene.BaseName -eq 'hub_sale_smoke') { $sceneArguments = @("--sale-directory=$saleSession") }
                 Run-Scene "$prefix-$($scene.BaseName)" $scene.BaseName "\[SmokeTest\] $marker(?:\s|$)" $sceneArguments
             }
             Run-Scene "$prefix-survival-continue" 'g3_survival_flow_smoke' '\[SmokeTest\] g3_survival_flow_passed continue' @('--review-continue', "--review-progress-directory=$survivalSession")
             Run-Scene "$prefix-appraisal-continue" 'hub_appraisal_smoke' '\[SmokeTest\] hub_appraisal_passed continue' @('--appraisal-continue', "--appraisal-directory=$appraisalSession")
+            Run-Scene "$prefix-sale-continue" 'hub_sale_smoke' '\[SmokeTest\] hub_sale_passed continue' @('--sale-continue', "--sale-directory=$saleSession")
             Run-Scene "$prefix-continue" 'title_screen_smoke' '\[SmokeTest\] title_screen_passed' @('--title-case=continue')
             Run-Scene "$prefix-quit" 'title_screen_smoke' '\[GameEntry\] quit_requested' @('--title-case=quit')
             foreach ($case in @('three', 'failure')) {

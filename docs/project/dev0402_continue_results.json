@@ -1,0 +1,10 @@
+{
+	"case": "continue",
+	"final_hub": {
+		"bag_slots": 3.0,
+		"money": "820",
+		"next_expedition_id": "4",
+		"stored_items": []
+	},
+	"passed": true
+}

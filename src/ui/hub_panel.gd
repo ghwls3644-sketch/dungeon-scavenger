@@ -5,6 +5,7 @@ signal bag_slots_selected(slots: int)
 signal departure_requested
 signal quit_requested
 signal appraisal_requested
+signal sale_requested
 
 @onready var _bags: OptionButton = %BagChoice
 @onready var _details: Label = %PreparationDetails
@@ -18,6 +19,7 @@ func _ready() -> void:
 	_departure.pressed.connect(func(): departure_requested.emit())
 	_quit.pressed.connect(func(): quit_requested.emit())
 	%AppraisalButton.pressed.connect(func(): appraisal_requested.emit())
+	%SaleButton.pressed.connect(func(): sale_requested.emit())
 
 
 func configure_bag_choices(slots: Array[int]) -> void:
@@ -32,6 +34,7 @@ func render_preparation(loadout: ExpeditionLoadout, busy: bool) -> void:
 	_departure.disabled = busy
 	_quit.disabled = busy
 	%AppraisalButton.disabled = busy
+	%SaleButton.disabled = busy
 	_details.text = "적재 여유 %d칸 · 시작 무게 0\n부담 %.1f / 과적 %.1f\n하네스 충전 %d/%d\n분석 · 안정화 · 비상 방전" % [
 		loadout.slot_capacity, loadout.burden_weight, loadout.overload_weight,
 		loadout.starting_charge, loadout.charge_capacity,
