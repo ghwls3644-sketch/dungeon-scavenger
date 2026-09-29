@@ -8,7 +8,7 @@ canonical_for:
   - development_environment
   - engine_and_language
   - development_commands
-last_reviewed: 2026-09-28
+last_reviewed: 2026-09-29
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -1259,3 +1259,31 @@ $reviewDirectory = Join-Path $env:TEMP ('dungeon-g3-review-' + [guid]::NewGuid()
 - 활성 Markdown 상대 링크·앵커, 동결 원본 SHA-256 6개·아카이브 사본 3개와 `git diff --check` 통과.
 
 **DEV-0323 검토 완료·사용자 로컬 커밋 승인, 시제품 기술 범위에서 G3 완료.** 다음은 **DEV-0401 — 거점 감정과 미확인 물품 처리**다. 기본 출정과 별도 퇴로 공간의 적용 범위·최종 수치·사람 평가 후속은 [G3 판정](g3_exploration_review.md#dev-0323-g3-보완-통합-검토)을 따른다. **정합성 검사: 아직 아님** — 다음 정기 검사는 G5 완료 후다.
+
+## DEV-0401 거점 감정과 미확인 물품 처리 검사
+
+[감정 스모크](../../tests/smoke/hub_appraisal_smoke.gd)는 실제 `main.tscn`의 거점·출정·정산·저장을 사용한다. 초기 돈 10·같은 종류의 미확인 3개·가방 3칸은 임시 저장 자료다. 실제 출정에서는 기존 두 일반 회수품과 미확인 물품을 이동·E 조사/회수·Q 대응·입구 귀환으로 얻는다. 보호·고유 유물·핵심 기록물·가격 변경 경계는 제품 카탈로그를 바꾸지 않는 검사 전용 복사본을 사용한다.
+
+```powershell
+$appraisalDirectory = Join-Path $env:TEMP ('dungeon-appraisal-' + [guid]::NewGuid().ToString('N'))
+& $env:GODOT_BIN --headless --path . --fixed-fps 60 --quit-after 20000 res://tests/smoke/hub_appraisal_smoke.tscn -- "--appraisal-directory=$appraisalDirectory"
+& $env:GODOT_BIN --headless --path . --fixed-fps 60 --quit-after 20000 res://tests/smoke/hub_appraisal_smoke.tscn -- --appraisal-continue "--appraisal-directory=$appraisalDirectory"
+& ./tests/run_g2_checks.ps1 -GodotBin $env:GODOT_BIN -Repetitions 1 -TimeoutSeconds 60
+```
+
+성공 표시는 `hub_appraisal_passed write`와 `hub_appraisal_passed continue`, 종료 코드 0이다. 첫 실행은 새 폴더만 사용하고 두 번째는 같은 파일을 새 프로세스에서 이어한다. 화면 검사는 첫 명령의 `--headless`를 빼고 `--` 뒤에 `--appraisal-render`를 추가한다. `insufficient`·`quote`·`retry`·`identified` 화면을 각각 1152×648·1600×900으로 저장한다. 저장 실패는 이 검사 폴더의 `progress.json.tmp`에 빈 디렉터리를 만들고 재시도 전에 그 디렉터리만 제거해 재현한다. 기본 사용자 진행 파일을 읽거나 덮어쓰지 않는다.
+
+2026-09-29 최종 소스의 Godot 4.7.1 전체 **65/65 실행**, 스모크 장면 **40개**와 새 프로세스 이어하기를 포함한 1회 검사가 통과했다. 실행 전후 소스 해시가 같고 엔진 오류·경고·진단 예외 적용은 없다. 그래픽 실행도 종료 코드 0이며 두 해상도 화면 **8장**에서 목록 줄바꿈·선택 강조·비용·부족 금액·실패 재시도·완료 안내를 확인했다. 목록은 스크롤하여 나머지 보관품을 읽는다. 초기 검사에서 찾은 줄바꿈/키 안내 문제와 검사 자료 공유 문제는 보완 후 재검증했으며 이전 실행을 최종 근거로 합산하지 않는다.
+
+- 감정 계산: 빈/잘못된/중복 위치, 이미 감정한 대상, 탐험 중 요청을 거절한다. 복사본 분리·같은 종류 중 정확한 개체·오래된 거점/가격 견적·잔액 부족·0 비용·정확한 잔액·정수 최댓값/초과를 확인했다.
+- 보호/정보: 감정 전 숨은 분류·가치·보호 비공개, 감정 후 실제 분류·기존 예상 가치 공개, 비금전 물품의 등록·정보 보상, 보호 분류의 기존 판매 차단과 저장 후 보호 유지를 확인했다.
+- 실제 UI: Ctrl+클릭 복수 선택·Space 선택 전환·전체 선택, Esc/거점으로 취소·재열기 초기화, 감정 중 출정/가방 변경 차단, 이미 감정한 물품과 대상 없음의 재결제 차단을 확인했다.
+- 저장/순환: 3개 비용 15·돈 10의 전체 거절 → 두 번째 물품 1개 비용 5 확인 → 취소 → 다시 확인 → 파일 쓰기 실패에서 돈 10/모든 미확인/기존 파일 보존 → 재시도·중복 요청 뒤 돈 5/선택한 1개만 감정 → 실제 탐험 정산으로 돈 45/보관 4개 → 남은 3개 비용 15로 감정하여 돈 30/감정 완료 4개 보관. 재출정·빈 귀환과 새 프로세스 이어하기 뒤에도 같은 돈·물품·위험 안내가 유지된다.
+- 기존 저장 스키마 1·거점 4필드·물품 3필드를 유지하며 설정 파일은 변하지 않았다. 새 실행에서도 감정 비용이나 기존 정산액을 다시 반영하지 않는다.
+- 원본: [전체 자동 검사](dev0401_automated_results.json), [그래픽 실행의 감정/저장 결과](dev0401_appraisal_results.json), [새 프로세스 이어하기](dev0401_continue_results.json).
+- 전체 결과 경로: `C:/Users/user/AppData/Local/Temp/dungeon-g2-20260929-095911-a674601ca7e146089a4731eaa41ef2b7/results.json`
+- 화면 경로: `C:/Users/user/AppData/Local/Temp/dungeon-dev0401-verified-8b77fe5173834f06a3dc7b48ebae89a1/`
+- 검사 기준 HEAD: `43414c6`와 이번 작업 트리. `src`·`tests`·`project.godot` 소스 SHA-256: `e854fe8147b83a5a5bd2aba51c425e4a0d0ffdcd4e565809f4e6a99803d6e5cb`.
+- 활성 Markdown 상대 링크·앵커, 동결 원본 SHA-256 6개·아카이브 사본 3개와 `git diff --check` 통과.
+
+**DEV-0401 구현·검증 완료, 사용자 로컬 커밋 승인.** 개당 비용 5·즉시 처리는 시제품이며 최종 가격·시간·일괄 보정·Q-017 비용 명칭은 확정하지 않는다. 자동 판매·보관품 판매 서비스·등록·연구·수리·성장·휴대용 감정은 후속이다. 다음 **DEV-0402**의 이름·범위는 다음 착수 때 정한다. **정합성 검사: 아직 아님** — 다음 정기 검사는 G5 완료 후다.

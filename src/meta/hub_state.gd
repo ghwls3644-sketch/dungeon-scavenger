@@ -54,6 +54,37 @@ func begin_expedition() -> int:
 	return _active_expedition_id
 
 
+func quote_appraisal(indices: PackedInt32Array, rule: EconomyRule) -> AppraisalQuote:
+	var source := to_save_data()
+	if source.is_empty() or rule == null or indices.is_empty():
+		return null
+	var selected := indices.duplicate()
+	selected.sort()
+	var previous := -1
+	for index in selected:
+		if index < 0 or index >= _stored_items.size() or index == previous:
+			return null
+		if not _stored_items[index].is_valid() or _stored_items[index].is_identified():
+			return null
+		previous = index
+	var cost := rule.get_appraisal_cost(selected.size())
+	if cost < 0:
+		return null
+	return AppraisalQuote.new(source, selected, cost, _money)
+
+
+func apply_appraisal(quote: AppraisalQuote, rule: EconomyRule) -> bool:
+	if quote == null:
+		return false
+	var checked := quote_appraisal(quote.get_indices(), rule)
+	if checked == null or not checked.can_afford() or not quote.matches(to_save_data(), checked.get_cost()):
+		return false
+	for index in checked.get_indices():
+		_stored_items[index].identify()
+	_money -= checked.get_cost()
+	return true
+
+
 func cancel_expedition(expedition_id: int) -> bool:
 	if expedition_id <= 0 or expedition_id != _active_expedition_id or _pending_settlement != null:
 		return false

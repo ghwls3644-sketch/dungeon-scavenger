@@ -30,8 +30,8 @@ static func from_outcome(outcome: ExplorationOutcome, rule: EconomyRule) -> Sett
 			return null
 		result._sales.append({"item_id": definition.stable_id, "name": definition.display_name, "amount": price})
 		result._total_income += price
-	# No paid services, wear, tax or departure expenses exist in DEV-0203.
-	# Costs stay empty until their owning systems supply actual charges.
+	# Hub appraisal is charged/saved separately when explicitly confirmed.
+	# Do not charge it again in an expedition settlement; other costs remain future work.
 	return result
 
 

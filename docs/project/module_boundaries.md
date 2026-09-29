@@ -8,7 +8,7 @@ canonical_for:
   - source_tree_layout
   - module_responsibilities
   - module_dependency_rules
-last_reviewed: 2026-09-28
+last_reviewed: 2026-09-29
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -300,6 +300,14 @@ DEV-0318~DEV-0319의 즉시 E·후속 상호작용 문구는 당시 이력이다
 - `FixedReturnRouteProbe`는 고정 시험 지형의 입구 쪽 영역과 두 실제 연결의 플레이어 폭을 가진 충돌 쿼리를 소유한다. 한 연결이 열려 있거나 입구 쪽이면 퇴로가 남은 것으로 본다. 지도 기록을 읽거나 쓰지 않으며 범용 경로 탐색·시드·영구 상태를 소유하지 않는다.
 - `HarnessController.commit_charge_action()`은 비용을 먼저 예약하고 결과 콜백이 거절되면 복구한다. 콜백과 자원 알림 중 중복 소비를 차단한다. `ExplorationRun.complete_emergency_return()`은 기존 안전 귀환과 동일한 물품 복사·일회성 결과를 사용한다. `ExplorationOutcome`의 귀환 방식과 실패 이유는 결과 표시용이며 저장 스키마를 늘리지 않는다. 정산·거점 자산은 기존 Meta 계층이 소유한다.
 - `tests/fixtures/emergency_escape_test_space.*`는 기존 퇴로 장면을 상속한 별도 플레이 공간이다. 경고·제한/비용 안내와 탈출 지점·결과·새 방문을 연결하고 기본 거점 출정에는 자동 사건을 넣지 않는다. `tests/smoke/emergency_escape_smoke.*`는 실제 이동·회수·E/메뉴와 경계 배치를 구분한다. 보호 품목은 카탈로그 복사본으로만 만들며 실제 물품 데이터는 바꾸지 않는다.
+
+### DEV-0401의 거점 감정 경계
+
+- `src/data/economy_rule.gd`의 `appraisal_fee_per_item`과 비용 계산이 시험 비용·유효성·정수 범위를 소유한다. `prototype_economy.tres`의 개당 5는 최종 가격이 아니다.
+- `src/meta/appraisal_quote.gd`는 저장 위치 목록·확인 당시 거점 상태·총 비용·잔액을 보관하는 일시적 견적이다. `HubState`가 대상과 중복·이미 감정됨·잔액·상태/가격 변경을 검사하고 선택 물품의 감정 상태와 돈만 바꾼다. 영구 물품 ID나 저장 필드는 추가하지 않는다.
+- `GameEntry`는 거점에서만 감정 화면을 열고 복사한 후보를 `ProgressStore`에 저장한 뒤 교체한다. 저장 실패 시 원본 상태를 유지한다. 감정 확인 중 출정·가방 선택·재진입을 막고 견적은 화면 종료/상태 전환 시 버린다.
+- `src/ui/hub_appraisal_panel.*`은 물품 선택·비용 확인·확정/취소 의도와 공개 정보 표시를 소유한다. `HubPanel`은 같은 표시 함수를 사용한다. UI가 돈·감정 상태를 직접 변경하거나 숨은 분류로 대상을 골라 주지 않는다.
+- `tests/smoke/hub_appraisal_smoke.*`는 별도 카탈로그의 보호/비금전 분류와 실제 앱의 물품 회수·감정·저장 실패/재시도·새 프로세스 이어하기를 검사한다. 검사 시작의 돈 10·미확인 3개는 임시 자료이며 현재 출정의 추가 물품은 실제 이동/조사/회수로 얻는다. `tests/run_g2_checks.ps1`은 이 장면과 같은 파일의 독립 실행 이어하기를 포함한다.
 
 ### DEV-0323의 실제 앱 통합 검사 경계
 

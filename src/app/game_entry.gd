@@ -20,10 +20,14 @@ var _settings_notice := ""
 var _progress_store := ProgressStore.new()
 var _continue_overridden := false
 var _awaiting_new_game_confirmation := false
+var _appraisal_open := false
+var _appraising := false
+var _appraisal_quote: AppraisalQuote
 
 @onready var _title: TitleScreen = $Interface/TitleScreen
 @onready var _hub: HubPanel = $Interface/HubPanel
 @onready var _results: ExpeditionResultsScreen = $Interface/Results
+@onready var _appraisal: HubAppraisalPanel = $Interface/HubPanel/AppraisalPanel
 
 
 func _ready() -> void:
@@ -45,6 +49,11 @@ func _ready() -> void:
 	_hub.bag_slots_selected.connect(_on_bag_slots_selected)
 	_hub.departure_requested.connect(_on_departure_requested)
 	_hub.quit_requested.connect(_on_quit_requested)
+	_hub.appraisal_requested.connect(_on_appraisal_requested)
+	_appraisal.review_requested.connect(_on_appraisal_review_requested)
+	_appraisal.confirmation_requested.connect(_on_appraisal_confirmed)
+	_appraisal.selection_requested.connect(_on_appraisal_selection_requested)
+	_appraisal.close_requested.connect(_on_appraisal_closed)
 	_results.settlement_requested.connect(_on_settlement_requested)
 	_results.quit_requested.connect(_on_quit_requested)
 	GameState.state_changed.connect(_on_state_changed)
@@ -193,6 +202,10 @@ func _restore_title(message: String) -> void:
 
 func _on_state_changed(_previous_state: int, current_state: int) -> void:
 	_starting = false
+	_appraisal_open = false
+	_appraisal_quote = null
+	_appraisal.hide()
+	_hub.get_node("Center").show()
 	_hub.visible = current_state == GameState.State.HUB
 	_results.visible = current_state == GameState.State.RESULTS
 	if current_state == GameState.State.TITLE:
@@ -235,7 +248,7 @@ func get_hub_stored_items() -> Array[InventoryItem]:
 
 
 func _on_bag_slots_selected(slots: int) -> void:
-	if GameState.get_current_state() != GameState.State.HUB or _departing:
+	if GameState.get_current_state() != GameState.State.HUB or _departing or _appraisal_open or _appraising:
 		return
 	var candidate := _hub_state.copy()
 	if not candidate.select_bag_slots(slots):
@@ -248,7 +261,7 @@ func _on_bag_slots_selected(slots: int) -> void:
 
 
 func _on_departure_requested() -> void:
-	if _departing or GameState.get_current_state() != GameState.State.HUB or get_tree().paused:
+	if _departing or _appraisal_open or _appraising or GameState.get_current_state() != GameState.State.HUB or get_tree().paused:
 		return
 	if _exploration != null or _pending_outcome != null:
 		return
@@ -314,5 +327,71 @@ func _on_settlement_requested() -> void:
 
 
 func _on_quit_requested() -> void:
+	if _appraising:
+		return
 	GameLog.info(&"GameEntry", &"quit_requested")
 	get_tree().quit()
+
+
+func _can_appraise() -> bool:
+	return GameState.get_current_state() == GameState.State.HUB and not GameState.is_transition_in_progress() \
+		and not _departing and not _settling and not _appraising and not get_tree().paused
+
+
+func _on_appraisal_requested() -> void:
+	if not _can_appraise() or _appraisal_open:
+		return
+	_appraisal_open = true
+	_appraisal_quote = null
+	_hub.get_node("Center").hide()
+	_appraisal.present(_hub_state.get_money(), _hub_state.get_stored_items(), PROTOTYPE_ECONOMY.appraisal_fee_per_item)
+
+
+func _on_appraisal_review_requested(indices: PackedInt32Array) -> void:
+	if not _can_appraise() or not _appraisal_open or _appraisal_quote != null:
+		return
+	_appraisal_quote = _hub_state.quote_appraisal(indices, PROTOTYPE_ECONOMY)
+	_appraisal.set_review(_appraisal_quote)
+	if _appraisal_quote == null:
+		_appraisal.set_status("감정할 미확인 물품을 선택해 주세요.")
+
+
+func _on_appraisal_selection_requested() -> void:
+	if not _can_appraise() or not _appraisal_open:
+		return
+	_appraisal_quote = null
+	_appraisal.set_review(null)
+	_appraisal.get_node("%AppraisalItems").grab_focus()
+
+
+func _on_appraisal_confirmed() -> void:
+	if not _can_appraise() or not _appraisal_open or _appraisal_quote == null:
+		return
+	_appraising = true
+	var candidate := _hub_state.copy()
+	if not candidate.apply_appraisal(_appraisal_quote, PROTOTYPE_ECONOMY):
+		_appraising = false
+		_appraisal.set_status("감정 대상 또는 보유금을 확인해 주세요. 비용은 지불되지 않았습니다.")
+		return
+	if not _save_hub(candidate):
+		_appraising = false
+		_appraisal.set_status("저장 실패 · 비용 %d와 감정 상태는 반영되지 않았습니다.\n다시 확정해 저장하거나 선택으로 돌아가 취소할 수 있습니다." % _appraisal_quote.get_cost())
+		return
+	var count := _appraisal_quote.get_count()
+	var cost := _appraisal_quote.get_cost()
+	_hub_state = candidate
+	_appraisal_quote = null
+	_appraising = false
+	_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items())
+	_appraisal.present(_hub_state.get_money(), _hub_state.get_stored_items(), PROTOTYPE_ECONOMY.appraisal_fee_per_item)
+	_appraisal.set_status("%d개 감정 완료 · 비용 %d 지불 · 보유금 %d\n결과를 저장했습니다. 감정한 물품은 거점에 보관됩니다." % [count, cost, _hub_state.get_money()])
+
+
+func _on_appraisal_closed() -> void:
+	if not _can_appraise() or not _appraisal_open:
+		return
+	_appraisal_open = false
+	_appraisal_quote = null
+	_appraisal.hide()
+	_hub.get_node("Center").show()
+	_hub.get_node("%AppraisalButton").grab_focus()
