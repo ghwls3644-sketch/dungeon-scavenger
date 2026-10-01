@@ -49,6 +49,10 @@ func set_status(message: String) -> void:
 	_status.text = message
 
 
+func render_equipment(durability: int, maximum: int) -> void:
+	%EquipmentStatus.text = "기본 하네스 내구 %d/%d\n현재는 내구 0에서도 출정할 수 있습니다." % [durability, maximum]
+
+
 func render_holdings(money: int, items: Array[InventoryItem]) -> void:
 	%Money.text = "보유금 %d" % money
 	%StoredCount.text = "거점 보관 %d개" % items.size()

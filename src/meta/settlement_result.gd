@@ -7,14 +7,26 @@ var _total_income := 0
 var _total_cost := 0
 var _failure := false
 var _lost_count := 0
+var _equipment_damage: Dictionary = {}
 
 
-static func from_outcome(outcome: ExplorationOutcome, rule: EconomyRule) -> SettlementResult:
+static func from_outcome(
+	outcome: ExplorationOutcome, rule: EconomyRule,
+	wear_rule: EquipmentWearRule = null, durability: int = 0
+) -> SettlementResult:
 	if outcome == null or rule == null or not rule.is_valid():
 		return null
 	var result := SettlementResult.new()
 	result._failure = outcome.is_failure()
 	result._lost_count = outcome.get_lost_item_count()
+	if wear_rule != null:
+		if not wear_rule.is_valid() or durability < 0 or durability > wear_rule.max_durability:
+			return null
+		var damage := mini(durability, wear_rule.get_damage(result._failure))
+		result._equipment_damage = {
+			"before": durability, "after": durability - damage,
+			"damage": damage, "maximum": wear_rule.max_durability,
+		}
 	if result._failure:
 		return result
 	var recovery := outcome.get_recovery_result()
@@ -31,7 +43,7 @@ static func from_outcome(outcome: ExplorationOutcome, rule: EconomyRule) -> Sett
 		result._sales.append({"item_id": definition.stable_id, "name": definition.display_name, "amount": price})
 		result._total_income += price
 	# Hub appraisal is charged/saved separately when explicitly confirmed.
-	# Do not charge it again in an expedition settlement; other costs remain future work.
+	# Wear is not a repair payment. Do not charge an unconfirmed service here.
 	return result
 
 
@@ -64,3 +76,7 @@ func is_failure() -> bool:
 
 func get_lost_count() -> int:
 	return _lost_count
+
+
+func get_equipment_damage() -> Dictionary:
+	return _equipment_damage.duplicate()

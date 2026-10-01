@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="EquipmentWearRule" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/data/equipment_wear_rule.gd" id="1_rule"]
+
+[resource]
+script = ExtResource("1_rule")
+max_durability = 3
+return_damage = 1
+failure_damage = 2

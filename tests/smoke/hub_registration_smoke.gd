@@ -26,6 +26,7 @@ func _ready() -> void:
 		initial.money = "10"
 		initial.bag_slots = 3
 		initial.erase("registered_items")
+		initial.erase("harness_durability")
 		_write_json(_path, _envelope(1, initial))
 		_expect(settings.save_settings(GameSettings.new()) == OK, "Cannot prepare settings.")
 	var settings_before := FileAccess.get_file_as_bytes(_directory.path_join("settings.cfg"))
@@ -137,16 +138,17 @@ func _check_migration() -> void:
 	var store := ProgressStore.new(path)
 	var legacy := HubState.new().to_save_data()
 	legacy.erase("registered_items")
+	legacy.erase("harness_durability")
 	legacy.money = "9223372036854775807"
 	legacy.stored_items = [{"id": "test_g1_unknown", "identified": false, "risk_hint": "진동"}]
 	_write_json(path, _envelope(1, legacy))
 	var original := FileAccess.get_file_as_bytes(path)
 	var upgraded := store.load_data()
-	_expect(upgraded.size() == 5 and upgraded.registered_items.is_empty() and HubState.from_save_data(upgraded, CATALOG) != null and FileAccess.get_file_as_bytes(path) == original, "Legacy load was lossy or rewrote the file.")
+	_expect(upgraded.size() == 6 and upgraded.registered_items.is_empty() and upgraded.harness_durability == 3 and HubState.from_save_data(upgraded, CATALOG) != null and FileAccess.get_file_as_bytes(path) == original, "Legacy load was lossy or rewrote the file.")
 	_expect(DirAccess.make_dir_absolute(path + ".tmp") == OK, "Cannot prepare migration write failure.")
 	_expect(store.save_data(upgraded) != OK and FileAccess.get_file_as_bytes(path) == original, "Failed migration destroyed legacy file.")
 	_expect(DirAccess.remove_absolute(path + ".tmp") == OK, "Cannot remove isolated failure directory.")
-	_expect(store.save_data(upgraded) == OK and store.load_data() == upgraded and JSON.parse_string(FileAccess.get_file_as_string(path)).schema_version == 2, "Successful save did not upgrade losslessly.")
+	_expect(store.save_data(upgraded) == OK and store.load_data() == upgraded and JSON.parse_string(FileAccess.get_file_as_string(path)).schema_version == ProgressStore.SCHEMA_VERSION, "Successful save did not upgrade losslessly.")
 	for invalid in [_envelope(1, upgraded), _envelope(2, legacy), _envelope(99, upgraded)]:
 		_write_json(path, invalid)
 		var before := FileAccess.get_file_as_bytes(path)
@@ -300,7 +302,7 @@ func _failure_after_registration() -> void:
 func _expect_registration_state(stored: int, registered: int) -> void:
 	var saved := _store.load_data()
 	_expect(_entry.get_hub_money() == 10 and _entry.get_hub_stored_items().size() == stored and _entry.get_hub_registered_items().size() == registered, "Live original counts or money changed.")
-	_expect(saved.size() == 5 and saved.money == "10" and saved.stored_items.size() == stored and saved.registered_items.size() == registered, "Saved registration differs from memory.")
+	_expect(saved.size() == 6 and saved.money == "10" and saved.stored_items.size() == stored and saved.registered_items.size() == registered, "Saved registration differs from memory.")
 
 
 func _click_registry_row(list: ItemList, index: int) -> void:

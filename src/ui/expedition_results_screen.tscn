@@ -31,7 +31,7 @@ offset_left = 728.0
 offset_top = 32.0
 offset_right = 1120.0
 offset_bottom = 610.0
-theme_override_constants/separation = 12
+theme_override_constants/separation = 8
 
 [node name="Title" type="Label" parent="NextStep"]
 layout_mode = 2
@@ -48,9 +48,14 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 18
 autowrap_mode = 2
 
+[node name="EquipmentDamage" type="Label" parent="NextStep"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+autowrap_mode = 2
+
 [node name="Items" type="RichTextLabel" parent="NextStep"]
 layout_mode = 2
-custom_minimum_size = Vector2(0, 148)
+custom_minimum_size = Vector2(0, 100)
 size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 18
 selection_enabled = true
@@ -59,7 +64,7 @@ focus_mode = 2
 [node name="Notice" type="Label" parent="NextStep"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
-text = "시험 가격으로 판매합니다. 이번 시험에서는 비용을 차감하지 않습니다.\n정산 확인 후 자동 저장합니다.\n종료하면 이번 정산은 반영되지 않습니다."
+text = "정산을 확인하면 회수품과 내구를 저장합니다.\n종료하면 이번 정산은 반영되지 않습니다."
 autowrap_mode = 2
 
 [node name="SettleButton" type="Button" parent="NextStep"]

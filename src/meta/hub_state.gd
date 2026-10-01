@@ -3,9 +3,11 @@ extends RefCounted
 
 # Existing G1 comparison values, not final equipment or balance.
 const PROTOTYPE_BAG_SLOTS := [2, 3]
+const EQUIPMENT_WEAR := preload("res://src/data/prototype_equipment_wear.tres")
 
 var _loadout := ExpeditionLoadout.new()
 var _money := 0
+var _harness_durability: int = EQUIPMENT_WEAR.max_durability
 var _stored_items: Array[InventoryItem] = []
 var _unique_pickups := UniquePickupState.new()
 var _next_expedition_id := 1
@@ -38,6 +40,20 @@ func create_departure_loadout() -> ExpeditionLoadout:
 
 func get_money() -> int:
 	return _money
+
+
+func get_harness_durability() -> int:
+	return _harness_durability
+
+
+func get_harness_max_durability() -> int:
+	return EQUIPMENT_WEAR.max_durability
+
+
+static func is_valid_harness_durability(value: Variant) -> bool:
+	return EQUIPMENT_WEAR.is_valid() and typeof(value) in [TYPE_INT, TYPE_FLOAT] \
+		and is_finite(float(value)) and value == floor(float(value)) \
+		and value >= 0 and value <= EQUIPMENT_WEAR.max_durability
 
 
 func get_stored_items() -> Array[InventoryItem]:
@@ -146,6 +162,7 @@ func copy() -> HubState:
 	var result := HubState.new()
 	result._loadout = _loadout.copy()
 	result._money = _money
+	result._harness_durability = _harness_durability
 	result._stored_items = get_stored_items()
 	result._unique_pickups = _unique_pickups.copy()
 	result._next_expedition_id = _next_expedition_id
@@ -171,11 +188,13 @@ func to_save_data() -> Dictionary:
 		"next_expedition_id": str(_next_expedition_id),
 		"stored_items": items,
 		"registered_items": _unique_pickups.to_save_data(),
+		"harness_durability": _harness_durability,
 	}
 
 
 static func from_save_data(data: Dictionary, catalog: ItemCatalog) -> HubState:
-	if catalog == null or not catalog.is_valid() or data.size() != 5:
+	if catalog == null or not catalog.is_valid() or data.size() != 6 \
+			or not is_valid_harness_durability(data.get("harness_durability")):
 		return null
 	var unique := UniquePickupState.from_save_data(data.get("registered_items"), catalog)
 	if unique == null:
@@ -191,6 +210,7 @@ static func from_save_data(data: Dictionary, catalog: ItemCatalog) -> HubState:
 	var restored := HubState.new()
 	restored._unique_pickups = unique
 	restored._money = money
+	restored._harness_durability = int(data.harness_durability)
 	restored._next_expedition_id = next_id
 	restored.select_bag_slots(int(slots))
 	for raw_item in items:
@@ -261,7 +281,7 @@ static func _read_nonnegative_integer(value: Variant) -> int:
 func prepare_settlement(expedition_id: int, outcome: ExplorationOutcome, rule: EconomyRule) -> bool:
 	if expedition_id <= 0 or expedition_id != _active_expedition_id or _pending_settlement != null:
 		return false
-	_pending_settlement = SettlementResult.from_outcome(outcome, rule)
+	_pending_settlement = SettlementResult.from_outcome(outcome, rule, EQUIPMENT_WEAR, _harness_durability)
 	return _pending_settlement != null
 
 
@@ -278,6 +298,7 @@ func apply_settlement(expedition_id: int) -> bool:
 	var retained := _pending_settlement.get_retained_items()
 	_money += income
 	_stored_items.append_array(retained)
+	_harness_durability = _pending_settlement.get_equipment_damage().after
 	_pending_settlement = null
 	_active_expedition_id = 0
 	return true

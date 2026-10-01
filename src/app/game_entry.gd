@@ -245,6 +245,7 @@ func _on_state_changed(_previous_state: int, current_state: int) -> void:
 			_settling = false
 		_hub.render_preparation(_hub_state.create_departure_loadout(), _departing)
 		_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items())
+		_hub.render_equipment(_hub_state.get_harness_durability(), _hub_state.get_harness_max_durability())
 		_hub.present()
 		_hub.set_status("진행이 저장되어 있습니다.")
 	if current_state == GameState.State.EXPLORATION and _exploration != null:
@@ -266,6 +267,10 @@ func get_pending_outcome() -> ExplorationOutcome:
 
 func get_hub_money() -> int:
 	return _hub_state.get_money()
+
+
+func get_hub_harness_durability() -> int:
+	return _hub_state.get_harness_durability()
 
 
 func get_hub_stored_items() -> Array[InventoryItem]:

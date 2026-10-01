@@ -1,7 +1,7 @@
 class_name ProgressStore
 extends RefCounted
 
-const SCHEMA_VERSION := 2
+const SCHEMA_VERSION := 3
 const CONTENT_VERSION := "g2_prototype_1"
 const MAX_FILE_BYTES := 16 * 1024 * 1024
 
@@ -42,7 +42,8 @@ func load_data() -> Dictionary:
 	if typeof(version) not in [TYPE_INT, TYPE_FLOAT]:
 		_last_error = ERR_INVALID_DATA
 		return {}
-	if (version != 1 and version != SCHEMA_VERSION) or data.get("content_version") != CONTENT_VERSION:
+	# JSON numbers are floats; Array.has() does not coerce int/float variants.
+	if (version != 1 and version != 2 and version != SCHEMA_VERSION) or data.get("content_version") != CONTENT_VERSION:
 		_last_error = ERR_UNAVAILABLE
 		return {}
 	if data.size() != 4 or data.get("resume_state") != "hub" or typeof(data.get("hub")) != TYPE_DICTIONARY:
@@ -54,14 +55,22 @@ func load_data() -> Dictionary:
 			_last_error = ERR_INVALID_DATA
 			return {}
 		hub["registered_items"] = []
-	elif hub.size() != 5 or not hub.has("registered_items"):
+	if version == 1 or version == 2:
+		if hub.size() != 5 or not hub.has("registered_items") or hub.has("harness_durability"):
+			_last_error = ERR_INVALID_DATA
+			return {}
+		# Old records never tracked wear; reading must not charge retroactive damage.
+		hub["harness_durability"] = HubState.new().get_harness_max_durability()
+	if hub.size() != 6 or not hub.has("registered_items") \
+			or not HubState.is_valid_harness_durability(hub.get("harness_durability")):
 		_last_error = ERR_INVALID_DATA
 		return {}
+	hub["harness_durability"] = int(hub.harness_durability)
 	return hub
 
 
 func save_data(hub: Dictionary, replace_existing: bool = false) -> Error:
-	if hub.is_empty():
+	if hub.size() != 6 or not HubState.is_valid_harness_durability(hub.get("harness_durability")):
 		return ERR_INVALID_DATA
 	if has_file() and not replace_existing:
 		load_data()

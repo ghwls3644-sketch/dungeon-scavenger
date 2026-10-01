@@ -118,6 +118,7 @@ func _check_research_domain() -> void:
 	_expect(CATALOG.find_item(&"test_g4_record").display_name == "시험용 원본 기록" and CATALOG.find_item(&"test_g4_artifact").display_name == "시험용 원본 유물", "Rename fixture changed shared product definitions.")
 	var legacy := HubState.new().to_save_data()
 	legacy.erase("registered_items")
+	legacy.erase("harness_durability")
 	var legacy_path := _directory.path_join("legacy-research.json")
 	_write_json(legacy_path, _envelope(1, legacy))
 	var legacy_bytes := FileAccess.get_file_as_bytes(legacy_path)

@@ -139,6 +139,7 @@ function Start-G2Checks {
             $saleSession = Join-Path $runDirectory "$prefix-sale-session"
             $registrationSession = Join-Path $runDirectory "$prefix-registration-session"
             $researchSession = Join-Path $runDirectory "$prefix-research-session"
+            $wearSession = Join-Path $runDirectory "$prefix-wear-session"
             foreach ($scene in (Get-ChildItem -LiteralPath (Join-Path $repository 'tests/smoke') -Filter '*.tscn' | Sort-Object Name)) {
                 $marker = $scene.BaseName -replace '_smoke$', '_passed'
                 if ($marker -eq 'game_state_flow_passed') { $marker = 'state_flow_passed' }
@@ -148,6 +149,7 @@ function Start-G2Checks {
                 if ($scene.BaseName -eq 'hub_sale_smoke') { $sceneArguments = @("--sale-directory=$saleSession") }
                 if ($scene.BaseName -eq 'hub_registration_smoke') { $sceneArguments = @("--registration-directory=$registrationSession") }
                 if ($scene.BaseName -eq 'hub_research_smoke') { $sceneArguments = @("--research-directory=$researchSession") }
+                if ($scene.BaseName -eq 'equipment_wear_smoke') { $sceneArguments = @("--wear-directory=$wearSession") }
                 Run-Scene "$prefix-$($scene.BaseName)" $scene.BaseName "\[SmokeTest\] $marker(?:\s|$)" $sceneArguments
             }
             Run-Scene "$prefix-survival-continue" 'g3_survival_flow_smoke' '\[SmokeTest\] g3_survival_flow_passed continue' @('--review-continue', "--review-progress-directory=$survivalSession")
@@ -155,6 +157,10 @@ function Start-G2Checks {
             Run-Scene "$prefix-sale-continue" 'hub_sale_smoke' '\[SmokeTest\] hub_sale_passed continue' @('--sale-continue', "--sale-directory=$saleSession")
             Run-Scene "$prefix-registration-continue" 'hub_registration_smoke' '\[SmokeTest\] hub_registration_passed continue' @('--registration-continue', "--registration-directory=$registrationSession")
             Run-Scene "$prefix-research-continue" 'hub_research_smoke' '\[SmokeTest\] hub_research_passed continue' @('--research-continue', "--research-directory=$researchSession")
+            Run-Scene "$prefix-wear-continue" 'equipment_wear_smoke' '\[SmokeTest\] equipment_wear_passed continue' @('--wear-case=continue', "--wear-directory=$wearSession")
+            foreach ($case in @('legacy1', 'legacy2', 'invalid')) {
+                Run-Scene "$prefix-wear-$case" 'equipment_wear_smoke' "\[SmokeTest\] equipment_wear_passed $case" @("--wear-case=$case")
+            }
             Run-Scene "$prefix-continue" 'title_screen_smoke' '\[SmokeTest\] title_screen_passed' @('--title-case=continue')
             Run-Scene "$prefix-quit" 'title_screen_smoke' '\[GameEntry\] quit_requested' @('--title-case=quit')
             foreach ($case in @('three', 'failure')) {

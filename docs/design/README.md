@@ -39,7 +39,7 @@ related:
 ## 경계 규칙
 
 - Story의 원인과 개연성을 Design 수치로 덮어쓰지 않는다.
-- [`repair_rules.md`](repair_rules.md)는 DEV-0405의 수리 검토안이며 단독 구현 기준이 아니다. 사용자가 선택한 거래 방식은 DEC-111·confirmed Economy Rules, 아직 적용하지 않은 손상/수리/안전망 후보는 Q-022·Q-023과 구분한다.
+- [`repair_rules.md`](repair_rules.md)는 DEV-0405의 수리 검토안이며 단독 구현 기준이 아니다. 사용자가 선택한 거래 방식은 DEC-111·confirmed Economy Rules, DEV-0406의 제한된 손상 시험 적용과 아직 미적용인 수리/안전망 후보는 Q-022·Q-023과 구분한다.
 - 사용자 표시 명칭은 [`../reference/glossary.md`](../reference/glossary.md)를 따른다.
 - 미결정 수치와 규칙은 [`../project/open_questions.md`](../project/open_questions.md)에 연결한다.
 - `confirmed` 문서는 구현 기준으로 사용할 수 있다. [`harness_engineering.md`](harness_engineering.md)는 상세 규칙 이관·검증 전까지 `draft`이므로 단독 구현 기준으로 사용하지 않는다.

@@ -15,6 +15,7 @@ func _ready() -> void:
 
 func present_result(outcome: ExplorationOutcome, settlement: SettlementResult) -> void:
 	$NextStep/Notice.text = _default_notice
+	$NextStep/EquipmentDamage.hide()
 	$OutcomePanel.bind_outcome(outcome)
 	_settle.disabled = settlement == null
 	$NextStep/Title.text = "실패 결과" if outcome != null and outcome.is_failure() else "귀환 정산"
@@ -28,6 +29,12 @@ func present_result(outcome: ExplorationOutcome, settlement: SettlementResult) -
 	$NextStep/Totals.text = "판매액 %d · 비용 %d\n이번에 보관할 물품 %d개" % [
 		settlement.get_total_income(), settlement.get_total_cost(), settlement.get_retained_items().size(),
 	]
+	var wear := settlement.get_equipment_damage()
+	if not wear.is_empty():
+		$NextStep/EquipmentDamage.text = "기본 하네스 내구 %d/%d → %d/%d\n이번 손상 %d · 정산 저장 시 반영\n수리비는 차감하지 않았습니다." % [
+			wear.before, wear.maximum, wear.after, wear.maximum, wear.damage,
+		]
+		$NextStep/EquipmentDamage.show()
 	var lines := PackedStringArray()
 	for sale in settlement.get_sales():
 		lines.append("%s · 판매액 %d" % [sale.name, sale.amount])
