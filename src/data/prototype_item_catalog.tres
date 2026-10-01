@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ItemCatalog" load_steps=7 format=3]
+[gd_resource type="Resource" script_class="ItemCatalog" load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://src/data/item_catalog.gd" id="1_catalog"]
 [ext_resource type="Script" path="res://src/data/item_definition.gd" id="2_item"]
@@ -7,6 +7,9 @@
 [ext_resource type="Resource" path="res://src/data/prototype_known.tres" id="Item_known"]
 [ext_resource type="Resource" path="res://src/data/prototype_unknown.tres" id="Item_unknown"]
 
+[ext_resource type="Resource" path="res://src/data/prototype_artifact.tres" id="Item_artifact"]
+[ext_resource type="Resource" path="res://src/data/prototype_record.tres" id="Item_record"]
+
 [resource]
 script = ExtResource("1_catalog")
-items = Array[ExtResource("2_item")]([ ExtResource("Item_light"), ExtResource("Item_heavy"), ExtResource("Item_known"), ExtResource("Item_unknown") ])
+items = Array[ExtResource("2_item")]([ ExtResource("Item_light"), ExtResource("Item_heavy"), ExtResource("Item_known"), ExtResource("Item_unknown"), ExtResource("Item_artifact"), ExtResource("Item_record") ])

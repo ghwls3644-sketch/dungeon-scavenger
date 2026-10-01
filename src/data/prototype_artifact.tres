@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/data/item_definition.gd" id="1_item"]
+
+[resource]
+script = ExtResource("1_item")
+stable_id = &"test_g4_artifact"
+display_name = "시험용 원본 유물"
+category = &"unique_artifact"
+weight = 0.5
+slot_size = 1
+registration_text = "회수한 고유 유물을 수집 목록에 등록했습니다. 원본은 이 목록에 보관되며 판매하지 않습니다."

@@ -110,6 +110,17 @@ func get_map_state() -> ExplorationMapState:
 	return _map_state
 
 
+func exclude_secured_originals(ids: Array[StringName]) -> void:
+	# Called before entering the tree, so excluded pickups never become interactive.
+	if is_inside_tree():
+		return
+	for child in find_children("*", "", true, false):
+		if is_instance_valid(child) and child is PickupInteractable and child.item_definition != null \
+				and child.item_definition.is_original() and child.item_definition.stable_id in ids:
+			child.get_parent().remove_child(child)
+			child.free()
+
+
 func prepare_departure(loadout: ExpeditionLoadout) -> bool:
 	if not is_node_ready() or _loadout != null or loadout == null or not loadout.is_valid():
 		return false

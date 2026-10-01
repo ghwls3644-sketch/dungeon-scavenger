@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://src/ui/hub_panel.gd" id="1_script"]
 [ext_resource type="PackedScene" path="res://src/ui/hub_appraisal_panel.tscn" id="2_appraisal"]
 [ext_resource type="PackedScene" path="res://src/ui/hub_sale_panel.tscn" id="3_sale"]
+
+[ext_resource type="PackedScene" path="res://src/ui/hub_registration_panel.tscn" id="4_registration"]
 
 [sub_resource type="StyleBoxFlat" id="CardStyle"]
 bg_color = Color(0.12, 0.105, 0.085, 1)
@@ -148,8 +150,17 @@ custom_minimum_size = Vector2(0, 44)
 size_flags_horizontal = 3
 text = "보관품 판매"
 
+[node name="RegistrationButton" type="Button" parent="Center/Card/Content/Holdings"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 44)
+text = "원본 등록 · 목록"
+
 [node name="AppraisalPanel" parent="." instance=ExtResource("2_appraisal")]
 visible = false
 
 [node name="SalePanel" parent="." instance=ExtResource("3_sale")]
+visible = false
+
+[node name="RegistrationPanel" parent="." instance=ExtResource("4_registration")]
 visible = false

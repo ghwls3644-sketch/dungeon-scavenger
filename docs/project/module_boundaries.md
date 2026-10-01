@@ -8,7 +8,7 @@ canonical_for:
   - source_tree_layout
   - module_responsibilities
   - module_dependency_rules
-last_reviewed: 2026-09-29
+last_reviewed: 2026-10-01
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -324,3 +324,12 @@ DEV-0318~DEV-0319의 즉시 E·후속 상호작용 문구는 당시 이력이다
 - `GameEntry`는 판매 확인을 현재 거점 화면에 한정하고 후보의 파일 저장이 성공한 뒤 교체한다. 실패 시 원본을 보존하며 견적으로 재시도하거나 취소한다. 감정·판매·출정·가방 변경은 동시에 실행하지 않는다.
 - `src/ui/hub_sale_panel.*`은 개별/복수 선택·수입 확인·확정/취소 의도와 판매 불가 이유를 표시한다. 물품 공개 정보는 기존 감정 표시 함수를 사용하고 처리 안내만 바꾼다. 자동/전체 판매 기능을 제공하지 않는다.
 - `tests/smoke/hub_sale_smoke.*`는 실제 앱의 판매·감정·회수·실패·저장과 새 프로세스 이어하기를 검사한다. 초기 보관품은 임시 저장 자료이고 추가 물품은 실제 이동·조사·회수로 얻는다. 분류/가격/정수 경계 자료는 별도 복사본에만 적용한다. `tests/run_g2_checks.ps1`은 판매 장면과 독립 실행 이어하기를 함께 검사한다.
+
+### DEV-0403의 원본 등록·재열람과 저장 전환 경계
+
+- `ItemDefinition.is_original()`은 고유 유물/핵심 기록물 분류를 판정하고 `registration_text`는 등록 후 다시 읽는 설명 데이터다. 실행 중 등록 상태를 정의 리소스에 넣지 않는다. `prototype_artifact`·`prototype_record`의 시험 이름·ID·무게 0.5·1칸·보관 안내는 정식 서사/밸런스가 아니다.
+- `src/meta/unique_pickup_state.gd`는 등록 원본의 안정적 ID 중복 차단·상태 복사·엄격한 복원을 소유한다. `registration_quote.gd`는 확인한 보관 위치와 거점 자료를 보관한다. `HubState`는 감정/원본/설명 준비 상태와 현재 자료 일치를 확인하여 해당 개체를 일반 보관함에서 등록 목록으로 옮긴다. 화폐·설정은 바꾸지 않는다.
+- `HubState.get_excluded_original_ids()`는 등록 목록과 거점 보관함의 원본 ID를 전달한다. `GameEntry`는 출정 생성 직후 트리에 추가하기 전에 `PrototypeExploration.exclude_secured_originals()`를 호출한다. 실패해 미확보인 원본은 제외하지 않는다. 고정 시제품 배치의 제외 경계이며 G5의 시드/후보 풀 구현이 아니다.
+- `ProgressStore`의 쓰기 스키마는 2다. 버전 1의 거점 4필드는 읽을 때 빈 `registered_items`를 보완하며 파일을 고치지 않는다. 버전 2의 거점 5필드와 등록 항목의 실제 ID·분류·감정 상태·중복은 각각 파일 경계/Meta에서 검사한다. `content_version`은 기존 값, 설정 스키마는 1을 유지한다.
+- `GameEntry`는 등록 화면 상태와 다른 서비스의 상호 배제, 후보 저장 성공 후 교체·실패 재시도를 소유한다. `src/ui/hub_registration_panel.*`은 선택·확인·취소 의도와 읽기 전용 재열람을 맡는다. UI는 등록·돈·스폰 상태를 직접 바꾸지 않는다.
+- `tests/smoke/hub_registration_smoke.*`는 실제 앱과 실제 회수품으로 실패 후 재등장·등록·보관/등록 원본 제외·등록 후 실패·새 실행 이어하기를 검사한다. 초기 돈 10·가방 3칸과 구형 파일만 검사 자료로 준비한다. 미확인/일반품/중복 ID·이름 변경·손상 저장은 별도 자료다. 기존 감정·판매·G3 검사에서는 저장 필드 기대값을 5개로 바꾸고 G3가 자동 등록하지 않음을 확인한다.

@@ -1,4 +1,7 @@
-[gd_scene load_steps=39 format=3]
+[gd_scene load_steps=41 format=3]
+
+[ext_resource type="Resource" path="res://src/data/prototype_artifact.tres" id="Item_artifact"]
+[ext_resource type="Resource" path="res://src/data/prototype_record.tres" id="Item_record"]
 
 [ext_resource type="Script" path="res://src/gameplay/player/player_survival.gd" id="32_survival"]
 [ext_resource type="Resource" path="res://src/data/prototype_survival.tres" id="33_survival_rule"]
@@ -384,3 +387,29 @@ show_category_icons = true
 
 [node name="ExplorationMapPanel" parent="Overlay" instance=ExtResource("14_map")]
 unique_name_in_owner = true
+
+[node name="ArtifactPickup" parent="." instance=ExtResource("5_pickup")]
+position = Vector2(-680, 270)
+item_definition = ExtResource("Item_artifact")
+interaction_prompt = "원본 회수하기"
+
+[node name="Label" type="Label" parent="ArtifactPickup"]
+offset_left = -85.0
+offset_top = 24.0
+offset_right = 125.0
+offset_bottom = 55.0
+theme_override_font_sizes/font_size = 20
+text = "고유 유물 · 등록 대상"
+
+[node name="RecordPickup" parent="." instance=ExtResource("5_pickup")]
+position = Vector2(-450, 270)
+item_definition = ExtResource("Item_record")
+interaction_prompt = "원본 회수하기"
+
+[node name="Label" type="Label" parent="RecordPickup"]
+offset_left = -85.0
+offset_top = 24.0
+offset_right = 125.0
+offset_bottom = 55.0
+theme_override_font_sizes/font_size = 20
+text = "핵심 기록물 · 등록 대상"

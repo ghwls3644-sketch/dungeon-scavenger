@@ -1,0 +1,125 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://src/ui/hub_registration_panel.gd" id="1"]
+
+[sub_resource type="StyleBoxFlat" id="Card"]
+bg_color = Color(0.12, 0.105, 0.085, 1)
+content_margin_left = 28.0
+content_margin_right = 28.0
+content_margin_top = 20.0
+content_margin_bottom = 20.0
+
+[node name="RegistrationPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_font_sizes/font_size = 18
+script = ExtResource("1")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.06, 0.05, 0.04, 1)
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Card" type="PanelContainer" parent="Center"]
+custom_minimum_size = Vector2(1040, 580)
+layout_mode = 2
+theme_override_styles/panel = SubResource("Card")
+
+[node name="Content" type="VBoxContainer" parent="Center/Card"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="Center/Card/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "거점 · 원본 등록과 목록"
+
+[node name="Notice" type="Label" parent="Center/Card/Content"]
+layout_mode = 2
+text = "고유 유물·핵심 기록물은 등록하여 보관합니다. 미확인 물품은 먼저 감정하세요."
+
+[node name="Lists" type="HBoxContainer" parent="Center/Card/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="Pending" type="VBoxContainer" parent="Center/Card/Content/Lists"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PendingCount" type="Label" parent="Center/Card/Content/Lists/Pending"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RegistrationItems" type="ItemList" parent="Center/Card/Content/Lists/Pending"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 250)
+size_flags_vertical = 3
+icon_mode = 0
+max_text_lines = 4
+fixed_icon_size = Vector2i(24, 24)
+theme_override_font_sizes/font_size = 16
+
+[node name="Archive" type="VBoxContainer" parent="Center/Card/Content/Lists"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RegisteredCount" type="Label" parent="Center/Card/Content/Lists/Archive"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RegisteredItems" type="ItemList" parent="Center/Card/Content/Lists/Archive"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 250)
+size_flags_vertical = 3
+icon_mode = 0
+max_text_lines = 4
+fixed_icon_size = Vector2i(24, 24)
+theme_override_font_sizes/font_size = 16
+
+[node name="RegistrationDetails" type="RichTextLabel" parent="Center/Card/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 100)
+selection_enabled = true
+focus_mode = 2
+
+[node name="Actions" type="HBoxContainer" parent="Center/Card/Content"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ReviewRegistration" type="Button" parent="Center/Card/Content/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 46)
+text = "등록 내용 확인"
+
+[node name="ConfirmRegistration" type="Button" parent="Center/Card/Content/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 46)
+text = "원본 등록 확정"
+
+[node name="CancelRegistration" type="Button" parent="Center/Card/Content/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 46)
+text = "선택으로 돌아가기"
+
+[node name="CloseRegistration" type="Button" parent="Center/Card/Content/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 46)
+text = "거점으로"

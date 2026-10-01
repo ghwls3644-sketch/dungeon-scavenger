@@ -26,12 +26,16 @@ var _appraisal_quote: AppraisalQuote
 var _sale_open := false
 var _selling := false
 var _sale_quote: SaleQuote
+var _registration_open := false
+var _registering := false
+var _registration_quote: RegistrationQuote
 
 @onready var _title: TitleScreen = $Interface/TitleScreen
 @onready var _hub: HubPanel = $Interface/HubPanel
 @onready var _results: ExpeditionResultsScreen = $Interface/Results
 @onready var _appraisal: HubAppraisalPanel = $Interface/HubPanel/AppraisalPanel
 @onready var _sale: HubSalePanel = $Interface/HubPanel/SalePanel
+@onready var _registration: HubRegistrationPanel = $Interface/HubPanel/RegistrationPanel
 
 
 func _ready() -> void:
@@ -63,6 +67,11 @@ func _ready() -> void:
 	_sale.confirmation_requested.connect(_on_sale_confirmed)
 	_sale.selection_requested.connect(_on_sale_selection_requested)
 	_sale.close_requested.connect(_on_sale_closed)
+	_hub.registration_requested.connect(_on_registration_requested)
+	_registration.review_requested.connect(_on_registration_review_requested)
+	_registration.confirmation_requested.connect(_on_registration_confirmed)
+	_registration.selection_requested.connect(_on_registration_selection_requested)
+	_registration.close_requested.connect(_on_registration_closed)
 	_results.settlement_requested.connect(_on_settlement_requested)
 	_results.quit_requested.connect(_on_quit_requested)
 	GameState.state_changed.connect(_on_state_changed)
@@ -217,6 +226,9 @@ func _on_state_changed(_previous_state: int, current_state: int) -> void:
 	_sale_open = false
 	_sale_quote = null
 	_sale.hide()
+	_registration_open = false
+	_registration_quote = null
+	_registration.hide()
 	_hub.get_node("Center").show()
 	_hub.visible = current_state == GameState.State.HUB
 	_results.visible = current_state == GameState.State.RESULTS
@@ -259,8 +271,12 @@ func get_hub_stored_items() -> Array[InventoryItem]:
 	return _hub_state.get_stored_items()
 
 
+func get_hub_registered_items() -> Array[InventoryItem]:
+	return _hub_state.get_registered_items()
+
+
 func _on_bag_slots_selected(slots: int) -> void:
-	if GameState.get_current_state() != GameState.State.HUB or _departing or _appraisal_open or _appraising or _sale_open or _selling:
+	if GameState.get_current_state() != GameState.State.HUB or _departing or _appraisal_open or _appraising or _sale_open or _selling or _registration_open or _registering:
 		return
 	var candidate := _hub_state.copy()
 	if not candidate.select_bag_slots(slots):
@@ -273,7 +289,7 @@ func _on_bag_slots_selected(slots: int) -> void:
 
 
 func _on_departure_requested() -> void:
-	if _departing or _appraisal_open or _appraising or _sale_open or _selling or GameState.get_current_state() != GameState.State.HUB or get_tree().paused:
+	if _departing or _appraisal_open or _appraising or _sale_open or _selling or _registration_open or _registering or GameState.get_current_state() != GameState.State.HUB or get_tree().paused:
 		return
 	if _exploration != null or _pending_outcome != null:
 		return
@@ -281,6 +297,7 @@ func _on_departure_requested() -> void:
 	var loadout := _hub_state.create_departure_loadout()
 	_hub.render_preparation(loadout, true)
 	_exploration = _create_exploration()
+	_exploration.exclude_secured_originals(_hub_state.get_excluded_original_ids())
 	add_child(_exploration)
 	if not _exploration.prepare_departure(loadout):
 		_cancel_departure()
@@ -339,7 +356,7 @@ func _on_settlement_requested() -> void:
 
 
 func _on_quit_requested() -> void:
-	if _appraising or _selling:
+	if _appraising or _selling or _registering:
 		return
 	GameLog.info(&"GameEntry", &"quit_requested")
 	get_tree().quit()
@@ -347,7 +364,7 @@ func _on_quit_requested() -> void:
 
 func _can_appraise() -> bool:
 	return GameState.get_current_state() == GameState.State.HUB and not GameState.is_transition_in_progress() \
-		and not _departing and not _settling and not _appraising and not _sale_open and not _selling and not get_tree().paused
+		and not _departing and not _settling and not _appraising and not _sale_open and not _selling and not _registration_open and not _registering and not get_tree().paused
 
 
 func _on_appraisal_requested() -> void:
@@ -411,7 +428,7 @@ func _on_appraisal_closed() -> void:
 
 func _can_sell() -> bool:
 	return GameState.get_current_state() == GameState.State.HUB and not GameState.is_transition_in_progress() \
-		and not _departing and not _settling and not _appraising and not _appraisal_open and not _selling and not get_tree().paused
+		and not _departing and not _settling and not _appraising and not _appraisal_open and not _selling and not _registration_open and not _registering and not get_tree().paused
 
 
 func _on_sale_requested() -> void:
@@ -471,3 +488,74 @@ func _on_sale_closed() -> void:
 	_sale.hide()
 	_hub.get_node("Center").show()
 	_hub.get_node("%SaleButton").grab_focus()
+
+
+func _can_register() -> bool:
+	return GameState.get_current_state() == GameState.State.HUB and not GameState.is_transition_in_progress() \
+		and not _departing and not _settling and not _appraising and not _appraisal_open \
+		and not _selling and not _sale_open and not _registering and not get_tree().paused
+
+
+func _present_registration() -> void:
+	var items := _hub_state.get_stored_items()
+	var reasons := PackedStringArray()
+	for index in items.size():
+		reasons.append(_hub_state.get_registration_reason(index))
+	_registration.present(items, reasons, _hub_state.get_registered_items())
+
+
+func _on_registration_requested() -> void:
+	if not _can_register() or _registration_open:
+		return
+	_registration_open = true
+	_registration_quote = null
+	_hub.get_node("Center").hide()
+	_present_registration()
+
+
+func _on_registration_review_requested(index: int) -> void:
+	if not _can_register() or not _registration_open or _registration_quote != null:
+		return
+	_registration_quote = _hub_state.quote_registration(index)
+	_registration.set_review(_registration_quote)
+	if _registration_quote == null:
+		_registration.set_status("등록할 수 있는 원본을 선택해 주세요.")
+
+
+func _on_registration_selection_requested() -> void:
+	if not _can_register() or not _registration_open:
+		return
+	_registration_quote = null
+	_registration.set_review(null)
+	_registration.get_node("%RegistrationItems").grab_focus()
+
+
+func _on_registration_confirmed() -> void:
+	if not _can_register() or not _registration_open or _registration_quote == null:
+		return
+	_registering = true
+	var candidate := _hub_state.copy()
+	if not candidate.apply_registration(_registration_quote):
+		_registering = false
+		_registration.set_status("보관 상태가 바뀌었습니다. 선택으로 돌아가 다시 확인하세요.")
+		return
+	if not _save_hub(candidate):
+		_registering = false
+		_registration.set_status("저장 실패 · 원본과 등록 목록을 그대로 유지합니다.\n다시 확정하거나 선택으로 돌아가 취소할 수 있습니다.")
+		return
+	_hub_state = candidate
+	_registration_quote = null
+	_registering = false
+	_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items())
+	_present_registration()
+	_registration.set_status("원본 등록과 저장을 마쳤습니다. 등록 목록에서 설명을 다시 읽을 수 있습니다.")
+
+
+func _on_registration_closed() -> void:
+	if not _can_register() or not _registration_open:
+		return
+	_registration_open = false
+	_registration_quote = null
+	_registration.hide()
+	_hub.get_node("Center").show()
+	_hub.get_node("%RegistrationButton").grab_focus()

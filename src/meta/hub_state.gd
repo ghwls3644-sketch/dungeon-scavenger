@@ -7,6 +7,7 @@ const PROTOTYPE_BAG_SLOTS := [2, 3]
 var _loadout := ExpeditionLoadout.new()
 var _money := 0
 var _stored_items: Array[InventoryItem] = []
+var _unique_pickups := UniquePickupState.new()
 var _next_expedition_id := 1
 var _active_expedition_id := 0
 var _pending_settlement: SettlementResult
@@ -146,6 +147,7 @@ func copy() -> HubState:
 	result._loadout = _loadout.copy()
 	result._money = _money
 	result._stored_items = get_stored_items()
+	result._unique_pickups = _unique_pickups.copy()
 	result._next_expedition_id = _next_expedition_id
 	result._active_expedition_id = _active_expedition_id
 	result._pending_settlement = _pending_settlement
@@ -168,11 +170,15 @@ func to_save_data() -> Dictionary:
 		"bag_slots": _loadout.slot_capacity,
 		"next_expedition_id": str(_next_expedition_id),
 		"stored_items": items,
+		"registered_items": _unique_pickups.to_save_data(),
 	}
 
 
 static func from_save_data(data: Dictionary, catalog: ItemCatalog) -> HubState:
-	if catalog == null or not catalog.is_valid() or data.size() != 4:
+	if catalog == null or not catalog.is_valid() or data.size() != 5:
+		return null
+	var unique := UniquePickupState.from_save_data(data.get("registered_items"), catalog)
+	if unique == null:
 		return null
 	var money := _read_nonnegative_integer(data.get("money"))
 	var next_id := _read_nonnegative_integer(data.get("next_expedition_id"))
@@ -183,6 +189,7 @@ static func from_save_data(data: Dictionary, catalog: ItemCatalog) -> HubState:
 			or int(slots) not in PROTOTYPE_BAG_SLOTS or typeof(items) != TYPE_ARRAY:
 		return null
 	var restored := HubState.new()
+	restored._unique_pickups = unique
 	restored._money = money
 	restored._next_expedition_id = next_id
 	restored.select_bag_slots(int(slots))
@@ -197,6 +204,51 @@ static func from_save_data(data: Dictionary, catalog: ItemCatalog) -> HubState:
 			return null
 		restored._stored_items.append(InventoryItem.from_definition(definition, raw_item.identified, raw_item.risk_hint))
 	return restored
+
+
+func get_registered_items() -> Array[InventoryItem]:
+	return _unique_pickups.get_items()
+
+
+func get_excluded_original_ids() -> Array[StringName]:
+	var ids: Array[StringName] = []
+	for item in _unique_pickups.get_items() + _stored_items:
+		var definition := item.get_definition()
+		if definition.is_original() and definition.stable_id not in ids:
+			ids.append(definition.stable_id)
+	return ids
+
+
+func get_registration_reason(index: int) -> String:
+	if index < 0 or index >= _stored_items.size():
+		return "물품을 선택하세요."
+	var item := _stored_items[index]
+	if not item.is_identified():
+		return "미확인 · 감정 필요"
+	var definition := item.get_definition()
+	if not definition.is_original():
+		return "원본 등록 대상이 아닙니다."
+	if _unique_pickups.contains(definition.stable_id):
+		return "이미 등록한 원본입니다."
+	if definition.registration_text.strip_edges().is_empty():
+		return "등록 안내가 준비되지 않았습니다."
+	return ""
+
+
+func quote_registration(index: int) -> RegistrationQuote:
+	var source := to_save_data()
+	if source.is_empty() or not get_registration_reason(index).is_empty():
+		return null
+	return RegistrationQuote.new(source, index)
+
+
+func apply_registration(quote: RegistrationQuote) -> bool:
+	if quote == null or not quote.matches(to_save_data()) or quote_registration(quote.get_index()) == null:
+		return false
+	if not _unique_pickups.register(_stored_items[quote.get_index()]):
+		return false
+	_stored_items.remove_at(quote.get_index())
+	return true
 
 
 static func _read_nonnegative_integer(value: Variant) -> int:

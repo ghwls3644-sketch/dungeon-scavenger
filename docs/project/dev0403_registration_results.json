@@ -1,0 +1,22 @@
+{
+	"case": "write",
+	"final_hub": {
+		"bag_slots": 3.0,
+		"money": "10",
+		"next_expedition_id": "5",
+		"registered_items": [
+			{
+				"id": "test_g4_artifact",
+				"identified": true,
+				"risk_hint": ""
+			},
+			{
+				"id": "test_g4_record",
+				"identified": true,
+				"risk_hint": ""
+			}
+		],
+		"stored_items": []
+	},
+	"passed": true
+}

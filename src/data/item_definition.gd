@@ -19,6 +19,11 @@ const CATEGORY_IDS := [
 @export var value_min: int = 0
 @export var value_max: int = 0
 @export var sale_protected := false
+@export_multiline var registration_text := ""
+
+
+func is_original() -> bool:
+	return category in [CATEGORY_UNIQUE_ARTIFACT, CATEGORY_CORE_RECORD]
 
 
 func has_monetary_value() -> bool:

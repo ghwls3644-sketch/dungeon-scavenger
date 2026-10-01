@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/data/item_definition.gd" id="1_item"]
+
+[resource]
+script = ExtResource("1_item")
+stable_id = &"test_g4_record"
+display_name = "시험용 원본 기록"
+category = &"core_record"
+weight = 0.5
+slot_size = 1
+registration_text = "회수한 핵심 기록물을 연구자 보관 목록에 등록했습니다. 이 설명은 목록에서 언제든 다시 확인할 수 있습니다."

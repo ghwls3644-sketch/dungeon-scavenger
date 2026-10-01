@@ -1,7 +1,7 @@
 class_name ProgressStore
 extends RefCounted
 
-const SCHEMA_VERSION := 1
+const SCHEMA_VERSION := 2
 const CONTENT_VERSION := "g2_prototype_1"
 const MAX_FILE_BYTES := 16 * 1024 * 1024
 
@@ -42,13 +42,22 @@ func load_data() -> Dictionary:
 	if typeof(version) not in [TYPE_INT, TYPE_FLOAT]:
 		_last_error = ERR_INVALID_DATA
 		return {}
-	if version != SCHEMA_VERSION or data.get("content_version") != CONTENT_VERSION:
+	if (version != 1 and version != SCHEMA_VERSION) or data.get("content_version") != CONTENT_VERSION:
 		_last_error = ERR_UNAVAILABLE
 		return {}
 	if data.size() != 4 or data.get("resume_state") != "hub" or typeof(data.get("hub")) != TYPE_DICTIONARY:
 		_last_error = ERR_INVALID_DATA
 		return {}
-	return data.hub
+	var hub: Dictionary = data.hub.duplicate(true)
+	if version == 1:
+		if hub.size() != 4 or hub.has("registered_items"):
+			_last_error = ERR_INVALID_DATA
+			return {}
+		hub["registered_items"] = []
+	elif hub.size() != 5 or not hub.has("registered_items"):
+		_last_error = ERR_INVALID_DATA
+		return {}
+	return hub
 
 
 func save_data(hub: Dictionary, replace_existing: bool = false) -> Error:
