@@ -1,0 +1,57 @@
+{
+  "ticket": "DEV-0405",
+  "name": "장비 내구·수리와 재출정 안전망 규칙 정리",
+  "validation_date": "2026-10-01",
+  "validation_timezone": "Asia/Seoul",
+  "passed": true,
+  "scope": "Documentation review and explicit repair-choice decision; no game implementation",
+  "base_commit": "2499aec5565a1a0269fc5a587794db5583460810",
+  "source_tree_sha256": "acbcfba384bb88dbf88a8888b1f64aa37b638e7dd654a5db04d3e6ed07ca301d",
+  "source_matches_dev0404_validated_result": true,
+  "new_game_checks_run": 0,
+  "new_screenshots": 0,
+  "links_and_frozen_sources": {
+    "passed": true,
+    "markdown_files": 47,
+    "relative_links_checked": 1329,
+    "frozen_sources": 6,
+    "archive_copies": 3,
+    "failures": []
+  },
+  "question_ids_unique": true,
+  "decision_ids_unique": true,
+  "new_questions": [
+    "Q-022",
+    "Q-023"
+  ],
+  "user_selected_decision": "DEC-111: 거점에서 비용을 확인하고 선택 수리",
+  "repair_review_status": "draft",
+  "economy_rules_status": "confirmed",
+  "unapproved_candidates": [
+    "damage amounts",
+    "repair price",
+    "partial repair",
+    "minimum recovery eligibility and amount",
+    "departure restriction"
+  ],
+  "documentation_only": true,
+  "diff_check": "passed",
+  "changed_and_new_files": [
+    "docs/GDD.md",
+    "docs/README.md",
+    "docs/design/README.md",
+    "docs/design/economy_rules.md",
+    "docs/design/repair_rules.md",
+    "docs/project/README.md",
+    "docs/project/decisions.md",
+    "docs/project/dev0405_document_results.json",
+    "docs/project/development_handoff.md",
+    "docs/project/migration_changes.md",
+    "docs/project/migration_manifest.md",
+    "docs/project/module_boundaries.md",
+    "docs/project/open_questions.md",
+    "docs/project/project_context.md"
+  ],
+  "next_ticket": "DEV-0406 — 장비 손상 상태와 저장",
+  "consistency_checkpoint": "G5 완료 후"
+}

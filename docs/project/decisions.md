@@ -37,7 +37,7 @@ related:
 
 ## 기록 규칙
 
-- `active`는 동결 원본 또는 통합 GDD에서 현재 방향으로 채택된 결정을 뜻한다.
+- `active`는 동결 원본·통합 GDD 또는 명시적 사용자 선택에서 현재 방향으로 채택된 결정을 뜻한다. 사용자 선택은 아래에 결정일·승인 범위를 따로 기록한다.
 - 기존 결정을 바꿀 때는 삭제하지 않고 `superseded`로 표시한 뒤 새 결정 ID를 연결한다.
 - 원본과 GDD에 결정일·승인자가 기록되어 있지 않으면 임의로 추정하지 않고 `미기록`으로 둔다.
 - 이 문서는 결정과 출처, 영향 범위를 추적한다. 상세 정설과 작동 규칙은 연결된 Story·Design·Reference 문서가 소유한다.
@@ -88,6 +88,13 @@ related:
 | `DEC-108` | 추적자는 고장 난 경비 골렘으로 시작 | `active` | [`../design/repeat_exploration.md`](../design/repeat_exploration.md) | G1·G3 |
 | `DEC-109` | 탐험 중 자유 저장을 제공하지 않음 | `active` | [`../design/item_rules.md`](../design/item_rules.md), [`../GDD.md`](../GDD.md) | G2 |
 | `DEC-110` | 첫 출시 목표는 하나의 완결된 폐던전 | `active` | [`../GDD.md`](../GDD.md), [`../story/06_narrative_progression.md`](../story/06_narrative_progression.md) | G5·G7 |
+| `DEC-111` | 수리는 거점에서 비용을 확인하고 사용자가 선택·확정한다. | `active` | [`../design/economy_rules.md`](../design/economy_rules.md#수리-거래-시점), [`../design/repair_rules.md`](../design/repair_rules.md), [`../GDD.md`](../GDD.md) | G4 |
+
+### DEV-0405 수리 방식 선택
+
+결정일 **2026-10-01**, 승인자 **사용자**. DEV-0405 진행 중 수리 방식 질문에 “거점에서 비용을 확인하고 선택 수리 (권장)”라고 답변했다. `MIG-CHG-037`에 먼저 기록하고 DEC-111을 추가했다. 기존 결정을 대체하지 않으며, GDD와 Economy Rules의 미정 거래 시점을 구체화한다.
+
+승인 범위는 거점에서 비용을 확인하고 수리를 선택·확정하는 방식이다. 손상량·내구 상한·수리 단가·부분 수리·돈 부족 때 무료 복구 자격/양은 이 답변으로 확정하지 않았다. 이 항목들은 [Q-022·Q-023](open_questions.md#수리-규칙-검토-경계)과 `draft` [수리 검토안](../design/repair_rules.md)에 남긴다.
 
 ### DEV-0001 G0 재검토
 
