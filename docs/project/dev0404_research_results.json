@@ -1,0 +1,34 @@
+{
+	"case": "write",
+	"final_hub": {
+		"bag_slots": 3.0,
+		"money": "10",
+		"next_expedition_id": "5",
+		"registered_items": [
+			{
+				"id": "test_g4_record",
+				"identified": true,
+				"risk_hint": ""
+			},
+			{
+				"id": "test_g4_artifact",
+				"identified": true,
+				"risk_hint": ""
+			}
+		],
+		"stored_items": []
+	},
+	"passed": true,
+	"research": [
+		{
+			"text": "등록한 시험용 원본 기록은 연구자 보관 목록에 남아 있습니다. 다음 탐험을 마친 뒤에도 이곳에서 다시 확인할 수 있습니다.",
+			"title": "등록 기록 열람",
+			"unlocked": true
+		},
+		{
+			"text": "시험용 원본 기록과 시험용 원본 유물을 모두 등록했습니다. 두 자료는 각자의 보관 목록에 남으며, 함께 확인할 수 있는 설명이 열렸습니다.",
+			"title": "두 원본 함께 열람",
+			"unlocked": true
+		}
+	]
+}

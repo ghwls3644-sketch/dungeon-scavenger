@@ -8,18 +8,22 @@ signal close_requested
 
 var _items: Array[InventoryItem] = []
 var _registered: Array[InventoryItem] = []
+var _research: Array[Dictionary] = []
 var _reasons: PackedStringArray
 var _reviewing := false
 
 @onready var _list: ItemList = %RegistrationItems
 @onready var _archive: ItemList = %RegisteredItems
+@onready var _research_list: ItemList = %ResearchEntries
 
 
 func _ready() -> void:
 	_list.item_selected.connect(_selected)
 	_archive.item_selected.connect(_read_registered)
+	_research_list.item_selected.connect(_read_research)
 	_list.resized.connect(_fit_rows)
 	_archive.resized.connect(_fit_rows)
+	_research_list.resized.connect(_fit_rows)
 	_fit_rows.call_deferred()
 	%ReviewRegistration.pressed.connect(func():
 		var selected := _list.get_selected_items()
@@ -31,16 +35,23 @@ func _ready() -> void:
 
 
 func _fit_rows() -> void:
-	for list in [_list, _archive]:
+	for list in [_list, _archive, _research_list]:
 		list.fixed_column_width = maxi(1, int(list.size.x) - 32)
 
 
-func present(items: Array[InventoryItem], reasons: PackedStringArray, registered: Array[InventoryItem]) -> void:
+func present(items: Array[InventoryItem], reasons: PackedStringArray, registered: Array[InventoryItem], research: Array[Dictionary] = []) -> void:
 	_items = items
 	_reasons = reasons
 	_registered = registered
+	_research = research.duplicate(true)
 	_list.clear()
 	_archive.clear()
+	_research_list.clear()
+	var unlocked := 0
+	for entry in _research:
+		unlocked += int(entry.unlocked)
+		_research_list.add_item(("열림 · " if entry.unlocked else "잠김 · ") + entry.title)
+	%ResearchCount.text = "연구 해설 %d/%d · 선택하여 읽기" % [unlocked, _research.size()]
 	for index in items.size():
 		var reason := "등록 가능 · 판매 불가" if reasons[index].is_empty() else reasons[index]
 		var text := HubAppraisalPanel.format_item(items[index], reason)
@@ -52,13 +63,13 @@ func present(items: Array[InventoryItem], reasons: PackedStringArray, registered
 	%RegisteredCount.text = "등록 목록 %d개 · 선택하여 다시 읽기" % registered.size()
 	show()
 	set_review(null)
-	set_status("보관품을 선택하여 등록하거나, 등록 목록에서 설명을 다시 읽으세요.")
+	set_status("보관품을 선택하여 등록하거나, 등록 목록과 연구 해설에서 설명을 다시 읽으세요.")
 	_list.grab_focus()
 
 
 func set_review(quote: RegistrationQuote) -> void:
 	_reviewing = quote != null
-	for list in [_list, _archive]:
+	for list in [_list, _archive, _research_list]:
 		list.mouse_filter = Control.MOUSE_FILTER_IGNORE if _reviewing else Control.MOUSE_FILTER_STOP
 		list.focus_mode = Control.FOCUS_NONE if _reviewing else Control.FOCUS_ALL
 	%ReviewRegistration.visible = not _reviewing
@@ -80,6 +91,7 @@ func _selected(index: int) -> void:
 	if _reviewing:
 		return
 	_archive.deselect_all()
+	_research_list.deselect_all()
 	%ReviewRegistration.disabled = not _reasons[index].is_empty()
 	var reason := _reasons[index]
 	if reason.is_empty():
@@ -91,11 +103,22 @@ func _read_registered(index: int) -> void:
 	if _reviewing:
 		return
 	_list.deselect_all()
+	_research_list.deselect_all()
 	%ReviewRegistration.disabled = true
 	var item := _registered[index]
 	var definition := item.get_definition()
 	var category := "핵심 기록물 · 연구자 보관" if definition.category == ItemDefinition.CATEGORY_CORE_RECORD else "고유 유물 · 수집 등록"
 	set_status("%s · %s\n%s" % [definition.display_name, category, definition.registration_text])
+
+
+func _read_research(index: int) -> void:
+	if _reviewing or index < 0 or index >= _research.size():
+		return
+	_list.deselect_all()
+	_archive.deselect_all()
+	%ReviewRegistration.disabled = true
+	var entry := _research[index]
+	set_status("%s\n%s" % [entry.title, entry.text])
 
 
 func _unhandled_key_input(event: InputEvent) -> void:

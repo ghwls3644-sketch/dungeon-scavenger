@@ -5,6 +5,7 @@ const DEV_SCENE := preload("res://src/app/dev_main.tscn")
 const EXPLORATION_SCENE := preload("res://src/app/prototype_exploration.tscn")
 const PROTOTYPE_ECONOMY := preload("res://src/data/prototype_economy.tres")
 const ITEM_CATALOG := preload("res://src/data/prototype_item_catalog.tres")
+const RESEARCH_CATALOG := preload("res://src/data/prototype_research_catalog.tres")
 
 var _has_saved_game := Callable()
 var _restore_saved_game := Callable()
@@ -501,7 +502,8 @@ func _present_registration() -> void:
 	var reasons := PackedStringArray()
 	for index in items.size():
 		reasons.append(_hub_state.get_registration_reason(index))
-	_registration.present(items, reasons, _hub_state.get_registered_items())
+	var registered := _hub_state.get_registered_items()
+	_registration.present(items, reasons, registered, ResearchProgress.get_entries(registered, RESEARCH_CATALOG, ITEM_CATALOG))
 
 
 func _on_registration_requested() -> void:

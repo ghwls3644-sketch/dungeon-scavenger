@@ -42,7 +42,7 @@ theme_override_constants/separation = 12
 [node name="Title" type="Label" parent="Center/Card/Content"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "거점 · 원본 등록과 목록"
+text = "거점 · 원본 등록과 연구 해설"
 
 [node name="Notice" type="Label" parent="Center/Card/Content"]
 layout_mode = 2
@@ -87,6 +87,22 @@ size_flags_vertical = 3
 icon_mode = 0
 max_text_lines = 4
 fixed_icon_size = Vector2i(24, 24)
+theme_override_font_sizes/font_size = 16
+
+[node name="Research" type="VBoxContainer" parent="Center/Card/Content/Lists"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ResearchCount" type="Label" parent="Center/Card/Content/Lists/Research"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ResearchEntries" type="ItemList" parent="Center/Card/Content/Lists/Research"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 250)
+size_flags_vertical = 3
+max_text_lines = 4
 theme_override_font_sizes/font_size = 16
 
 [node name="RegistrationDetails" type="RichTextLabel" parent="Center/Card/Content"]
