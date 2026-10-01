@@ -1,0 +1,54 @@
+{
+	"case": "support",
+	"events": [
+		{
+			"after": 1,
+			"balance": 4,
+			"before": 0,
+			"kind": "repair",
+			"paid": 0,
+			"save_retry": true
+		},
+		{
+			"after": 0,
+			"balance": 4,
+			"before": 1,
+			"kind": "failure"
+		},
+		{
+			"after": 1,
+			"balance": 4,
+			"before": 0,
+			"kind": "repair",
+			"paid": 0,
+			"save_retry": false
+		}
+	],
+	"failures": [],
+	"final_hub": {
+		"bag_slots": 3.0,
+		"harness_durability": 1,
+		"money": "4",
+		"next_expedition_id": "2",
+		"registered_items": [
+			{
+				"id": "test_g4_record",
+				"identified": true,
+				"risk_hint": ""
+			},
+			{
+				"id": "test_g4_artifact",
+				"identified": true,
+				"risk_hint": ""
+			}
+		],
+		"stored_items": [
+			{
+				"id": "test_g1_unknown",
+				"identified": false,
+				"risk_hint": "진동"
+			}
+		]
+	},
+	"passed": true
+}

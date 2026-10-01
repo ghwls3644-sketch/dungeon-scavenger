@@ -40,8 +40,8 @@ text = "귀환 정산"
 
 [node name="NetIncome" type="Label" parent="NextStep"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 34
-text = "순이익 +0"
+theme_override_font_sizes/font_size = 30
+text = "귀환 순이익 +0"
 
 [node name="Totals" type="Label" parent="NextStep"]
 layout_mode = 2

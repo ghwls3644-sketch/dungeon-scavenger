@@ -5,10 +5,12 @@ extends Resource
 @export var base_prices: Dictionary[StringName, int] = {}
 # Prototype per-item fee. Final pricing/batch discounts remain undecided.
 @export var appraisal_fee_per_item: int = 0
+@export var repair_cost_per_durability: int = 0
+@export var minimum_departure_durability: int = 1
 
 
 func is_valid() -> bool:
-	if appraisal_fee_per_item < 0:
+	if appraisal_fee_per_item < 0 or repair_cost_per_durability < 0 or minimum_departure_durability <= 0:
 		return false
 	for item_id in base_prices:
 		if not StableId.is_valid(item_id) or base_prices[item_id] < 0:
@@ -26,6 +28,14 @@ func get_appraisal_cost(count: int) -> int:
 
 func has_price(item_id: StringName) -> bool:
 	return base_prices.has(item_id)
+
+
+func get_repair_cost(amount: int) -> int:
+	if amount < 0 or not is_valid():
+		return -1
+	if repair_cost_per_durability > 0 and amount > 9223372036854775807 / repair_cost_per_durability:
+		return -1
+	return amount * repair_cost_per_durability
 
 
 func get_price(item_id: StringName) -> int:

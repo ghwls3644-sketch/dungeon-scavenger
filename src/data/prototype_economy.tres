@@ -5,6 +5,8 @@
 [resource]
 script = ExtResource("1_rule")
 appraisal_fee_per_item = 5
+repair_cost_per_durability = 5
+minimum_departure_durability = 1
 base_prices = Dictionary[StringName, int]({
 &"test_g1_light": 10,
 &"test_g1_heavy": 30,

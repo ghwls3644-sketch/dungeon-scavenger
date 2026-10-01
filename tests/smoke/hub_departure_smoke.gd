@@ -175,6 +175,7 @@ func _check_settlement_and_redeparture(entry: GameEntry, hub: HubPanel, slots: i
 	_click(results.get_node("NextStep/SettleButton"))
 	await _frames(5)
 	_expect(GameState.get_current_state() == GameState.State.HUB and entry.get_hub_money() == money and entry.get_hub_stored_items().size() == stored_count, "Failure took prior money or stored items.")
+	money -= HubRepairTestInput.prepare_departure(entry)
 	_click(hub.get_node("%DepartureButton"))
 	await _frames(6)
 	world = entry.get_node("PrototypeExploration")

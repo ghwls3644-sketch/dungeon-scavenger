@@ -202,6 +202,7 @@ func _check_hub(durability: int) -> void:
 
 
 func _depart_wear(emergency := false) -> PrototypeExploration:
+	_expect(HubRepairTestInput.prepare_departure(_entry) == 0, "Empty wear loop charged money.")
 	var durability := _entry.get_hub_harness_durability()
 	var bytes := FileAccess.get_file_as_bytes(_path)
 	_entry.review_scene = ESCAPE if emergency else null
@@ -218,6 +219,7 @@ func _normal_return(before: int, retry: bool) -> void:
 	_tap(KEY_E)
 	await _frames(5)
 	_expect(_entry.get_pending_outcome().get_return_method() == &"entrance", "Actual empty entrance return failed.")
+	before = maxi(1, before) # DEV-0407 support restores the departure minimum.
 	await _settle_wear(before, maxi(0, before - 1), retry, "return" if retry else "")
 
 

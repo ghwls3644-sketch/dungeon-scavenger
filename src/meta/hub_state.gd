@@ -63,6 +63,52 @@ func get_stored_items() -> Array[InventoryItem]:
 	return copies
 
 
+func can_depart(rule: EconomyRule) -> bool:
+	return rule != null and rule.is_valid() and rule.minimum_departure_durability <= get_harness_max_durability() \
+		and _harness_durability >= rule.minimum_departure_durability
+
+
+func quote_repair(amount: int, rule: EconomyRule, supported: bool = false) -> RepairQuote:
+	var source := to_save_data()
+	if source.is_empty() or rule == null or not rule.is_valid() \
+			or rule.minimum_departure_durability > get_harness_max_durability() \
+			or amount <= 0 or amount > get_harness_max_durability() - _harness_durability:
+		return null
+	var cost := rule.get_repair_cost(amount)
+	if cost < 0:
+		return null
+	if supported:
+		if amount != rule.minimum_departure_durability - _harness_durability or _money >= cost:
+			return null
+		cost = 0
+	return RepairQuote.new(source, amount, cost, rule, get_harness_max_durability(), supported)
+
+
+func get_repair_offers(rule: EconomyRule) -> Array[RepairQuote]:
+	var offers: Array[RepairQuote] = []
+	if rule == null:
+		return offers
+	var support := quote_repair(rule.minimum_departure_durability - _harness_durability, rule, true)
+	if support != null:
+		offers.append(support)
+	for amount in range(1, get_harness_max_durability() - _harness_durability + 1):
+		var quote := quote_repair(amount, rule)
+		if quote != null:
+			offers.append(quote)
+	return offers
+
+
+func apply_repair(quote: RepairQuote, rule: EconomyRule) -> bool:
+	if quote == null:
+		return false
+	var checked := quote_repair(quote.get_amount(), rule, quote.is_supported())
+	if checked == null or not checked.can_afford() or not quote.matches(to_save_data(), checked):
+		return false
+	_money -= checked.get_cost()
+	_harness_durability += checked.get_amount()
+	return true
+
+
 func begin_expedition() -> int:
 	if _active_expedition_id != 0 or _next_expedition_id >= 9223372036854775807:
 		return 0

@@ -7,6 +7,7 @@ signal quit_requested
 signal appraisal_requested
 signal sale_requested
 signal registration_requested
+signal repair_requested
 
 @onready var _bags: OptionButton = %BagChoice
 @onready var _details: Label = %PreparationDetails
@@ -22,6 +23,7 @@ func _ready() -> void:
 	%AppraisalButton.pressed.connect(func(): appraisal_requested.emit())
 	%SaleButton.pressed.connect(func(): sale_requested.emit())
 	%RegistrationButton.pressed.connect(func(): registration_requested.emit())
+	%RepairButton.pressed.connect(func(): repair_requested.emit())
 
 
 func configure_bag_choices(slots: Array[int]) -> void:
@@ -38,6 +40,7 @@ func render_preparation(loadout: ExpeditionLoadout, busy: bool) -> void:
 	%AppraisalButton.disabled = busy
 	%SaleButton.disabled = busy
 	%RegistrationButton.disabled = busy
+	%RepairButton.disabled = busy
 	_details.text = "적재 여유 %d칸 · 시작 무게 0\n부담 %.1f / 과적 %.1f\n하네스 충전 %d/%d\n분석 · 안정화 · 비상 방전" % [
 		loadout.slot_capacity, loadout.burden_weight, loadout.overload_weight,
 		loadout.starting_charge, loadout.charge_capacity,
@@ -49,8 +52,11 @@ func set_status(message: String) -> void:
 	_status.text = message
 
 
-func render_equipment(durability: int, maximum: int) -> void:
-	%EquipmentStatus.text = "기본 하네스 내구 %d/%d\n현재는 내구 0에서도 출정할 수 있습니다." % [durability, maximum]
+func render_equipment(durability: int, maximum: int, minimum: int) -> void:
+	var ready := durability >= minimum
+	%EquipmentStatus.text = "기본 하네스 내구 %d/%d\n%s" % [durability, maximum,
+		"출정 가능 · 필요 내구 %d" % minimum if ready else "수리가 필요합니다. 비용 부족 시 최소 복구 지원을 확인하세요."]
+	_departure.text = "출정" if ready else "수리하고 출정 준비"
 
 
 func render_holdings(money: int, items: Array[InventoryItem]) -> void:

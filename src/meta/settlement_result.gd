@@ -8,6 +8,7 @@ var _total_cost := 0
 var _failure := false
 var _lost_count := 0
 var _equipment_damage: Dictionary = {}
+var _full_repair_estimate := -1
 
 
 static func from_outcome(
@@ -27,6 +28,7 @@ static func from_outcome(
 			"before": durability, "after": durability - damage,
 			"damage": damage, "maximum": wear_rule.max_durability,
 		}
+		result._full_repair_estimate = rule.get_repair_cost(wear_rule.max_durability - (durability - damage))
 	if result._failure:
 		return result
 	var recovery := outcome.get_recovery_result()
@@ -80,3 +82,7 @@ func get_lost_count() -> int:
 
 func get_equipment_damage() -> Dictionary:
 	return _equipment_damage.duplicate()
+
+
+func get_full_repair_estimate() -> int:
+	return _full_repair_estimate

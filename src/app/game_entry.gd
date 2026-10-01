@@ -30,6 +30,9 @@ var _sale_quote: SaleQuote
 var _registration_open := false
 var _registering := false
 var _registration_quote: RegistrationQuote
+var _repair_open := false
+var _repairing := false
+var _repair_quote: RepairQuote
 
 @onready var _title: TitleScreen = $Interface/TitleScreen
 @onready var _hub: HubPanel = $Interface/HubPanel
@@ -37,6 +40,7 @@ var _registration_quote: RegistrationQuote
 @onready var _appraisal: HubAppraisalPanel = $Interface/HubPanel/AppraisalPanel
 @onready var _sale: HubSalePanel = $Interface/HubPanel/SalePanel
 @onready var _registration: HubRegistrationPanel = $Interface/HubPanel/RegistrationPanel
+@onready var _repair: HubRepairPanel = $Interface/HubPanel/RepairPanel
 
 
 func _ready() -> void:
@@ -73,6 +77,11 @@ func _ready() -> void:
 	_registration.confirmation_requested.connect(_on_registration_confirmed)
 	_registration.selection_requested.connect(_on_registration_selection_requested)
 	_registration.close_requested.connect(_on_registration_closed)
+	_hub.repair_requested.connect(_on_repair_requested)
+	_repair.review_requested.connect(_on_repair_review_requested)
+	_repair.confirmation_requested.connect(_on_repair_confirmed)
+	_repair.selection_requested.connect(_on_repair_selection_requested)
+	_repair.close_requested.connect(_on_repair_closed)
 	_results.settlement_requested.connect(_on_settlement_requested)
 	_results.quit_requested.connect(_on_quit_requested)
 	GameState.state_changed.connect(_on_state_changed)
@@ -230,6 +239,9 @@ func _on_state_changed(_previous_state: int, current_state: int) -> void:
 	_registration_open = false
 	_registration_quote = null
 	_registration.hide()
+	_repair_open = false
+	_repair_quote = null
+	_repair.hide()
 	_hub.get_node("Center").show()
 	_hub.visible = current_state == GameState.State.HUB
 	_results.visible = current_state == GameState.State.RESULTS
@@ -245,7 +257,7 @@ func _on_state_changed(_previous_state: int, current_state: int) -> void:
 			_settling = false
 		_hub.render_preparation(_hub_state.create_departure_loadout(), _departing)
 		_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items())
-		_hub.render_equipment(_hub_state.get_harness_durability(), _hub_state.get_harness_max_durability())
+		_render_equipment()
 		_hub.present()
 		_hub.set_status("진행이 저장되어 있습니다.")
 	if current_state == GameState.State.EXPLORATION and _exploration != null:
@@ -282,6 +294,8 @@ func get_hub_registered_items() -> Array[InventoryItem]:
 
 
 func _on_bag_slots_selected(slots: int) -> void:
+	if _repair_open or _repairing:
+		return
 	if GameState.get_current_state() != GameState.State.HUB or _departing or _appraisal_open or _appraising or _sale_open or _selling or _registration_open or _registering:
 		return
 	var candidate := _hub_state.copy()
@@ -295,9 +309,14 @@ func _on_bag_slots_selected(slots: int) -> void:
 
 
 func _on_departure_requested() -> void:
+	if _repair_open or _repairing:
+		return
 	if _departing or _appraisal_open or _appraising or _sale_open or _selling or _registration_open or _registering or GameState.get_current_state() != GameState.State.HUB or get_tree().paused:
 		return
 	if _exploration != null or _pending_outcome != null:
+		return
+	if not _hub_state.can_depart(PROTOTYPE_ECONOMY):
+		_on_repair_requested()
 		return
 	_departing = true
 	var loadout := _hub_state.create_departure_loadout()
@@ -362,13 +381,15 @@ func _on_settlement_requested() -> void:
 
 
 func _on_quit_requested() -> void:
-	if _appraising or _selling or _registering:
+	if _appraising or _selling or _registering or _repairing:
 		return
 	GameLog.info(&"GameEntry", &"quit_requested")
 	get_tree().quit()
 
 
 func _can_appraise() -> bool:
+	if _repair_open or _repairing:
+		return false
 	return GameState.get_current_state() == GameState.State.HUB and not GameState.is_transition_in_progress() \
 		and not _departing and not _settling and not _appraising and not _sale_open and not _selling and not _registration_open and not _registering and not get_tree().paused
 
@@ -433,6 +454,8 @@ func _on_appraisal_closed() -> void:
 
 
 func _can_sell() -> bool:
+	if _repair_open or _repairing:
+		return false
 	return GameState.get_current_state() == GameState.State.HUB and not GameState.is_transition_in_progress() \
 		and not _departing and not _settling and not _appraising and not _appraisal_open and not _selling and not _registration_open and not _registering and not get_tree().paused
 
@@ -497,6 +520,8 @@ func _on_sale_closed() -> void:
 
 
 func _can_register() -> bool:
+	if _repair_open or _repairing:
+		return false
 	return GameState.get_current_state() == GameState.State.HUB and not GameState.is_transition_in_progress() \
 		and not _departing and not _settling and not _appraising and not _appraisal_open \
 		and not _selling and not _sale_open and not _registering and not get_tree().paused
@@ -566,3 +591,80 @@ func _on_registration_closed() -> void:
 	_registration.hide()
 	_hub.get_node("Center").show()
 	_hub.get_node("%RegistrationButton").grab_focus()
+
+
+func _render_equipment() -> void:
+	_hub.render_equipment(_hub_state.get_harness_durability(), _hub_state.get_harness_max_durability(), PROTOTYPE_ECONOMY.minimum_departure_durability)
+
+
+func _can_repair() -> bool:
+	return GameState.get_current_state() == GameState.State.HUB and not GameState.is_transition_in_progress() \
+		and not get_tree().paused and not _departing and not _settling and not _repairing \
+		and not _appraisal_open and not _appraising and not _sale_open and not _selling \
+		and not _registration_open and not _registering
+
+
+func _present_repair() -> void:
+	_repair.present(_hub_state.get_harness_durability(), _hub_state.get_harness_max_durability(),
+		_hub_state.get_money(), PROTOTYPE_ECONOMY.minimum_departure_durability, _hub_state.get_repair_offers(PROTOTYPE_ECONOMY))
+
+
+func _on_repair_requested() -> void:
+	if not _can_repair() or _repair_open:
+		return
+	_repair_open = true
+	_repair_quote = null
+	_hub.get_node("Center").hide()
+	_present_repair()
+
+
+func _on_repair_review_requested(amount: int, supported: bool) -> void:
+	if not _can_repair() or not _repair_open or _repair_quote != null:
+		return
+	_repair_quote = _hub_state.quote_repair(amount, PROTOTYPE_ECONOMY, supported)
+	_repair.set_review(_repair_quote)
+	if _repair_quote == null:
+		_repair.set_status("복구량과 지원 조건을 확인해 주세요. 비용은 지불하지 않았습니다.")
+
+
+func _on_repair_selection_requested() -> void:
+	if not _can_repair() or not _repair_open:
+		return
+	_repair_quote = null
+	_repair.set_review(null)
+	_repair.get_node("%RepairChoice").grab_focus()
+
+
+func _on_repair_confirmed() -> void:
+	if not _can_repair() or not _repair_open or _repair_quote == null:
+		return
+	_repairing = true
+	var candidate := _hub_state.copy()
+	if not candidate.apply_repair(_repair_quote, PROTOTYPE_ECONOMY):
+		_repairing = false
+		_repair.set_status("수리 조건이나 보유금을 확인해 주세요. 내구와 돈은 그대로입니다.")
+		return
+	if not _save_hub(candidate):
+		_repairing = false
+		_repair.set_status("저장 실패 · 내구와 보유금은 그대로 유지합니다.\n다시 확정하거나 선택으로 돌아가 취소할 수 있습니다.")
+		return
+	var cost := _repair_quote.get_cost()
+	var supported := _repair_quote.is_supported()
+	_hub_state = candidate
+	_repair_quote = null
+	_repairing = false
+	_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items())
+	_render_equipment()
+	_present_repair()
+	_repair.set_status("%s 완료 · 이번 지불액 %d · 보유금 %d\n복구 결과를 저장했습니다." % [
+		"최소 복구 지원" if supported else "수리", cost, _hub_state.get_money()])
+
+
+func _on_repair_closed() -> void:
+	if not _can_repair() or not _repair_open:
+		return
+	_repair_open = false
+	_repair_quote = null
+	_repair.hide()
+	_hub.get_node("Center").show()
+	_hub.get_node("%RepairButton").grab_focus()

@@ -1,5 +1,7 @@
 extends "res://tests/smoke/hub_appraisal_smoke.gd"
 
+var _expected_registry_money := 10
+
 var _registration: HubRegistrationPanel
 var _pending_list: ItemList
 var _registered_list: ItemList
@@ -11,6 +13,7 @@ func _ready() -> void:
 		if argument.begins_with("--registration-directory="):
 			_directory = argument.trim_prefix("--registration-directory=")
 	_read_case = "--registration-continue" in OS.get_cmdline_user_args()
+	_expected_registry_money = 0 if _read_case else 10
 	_render = "--registration-render" in OS.get_cmdline_user_args()
 	if _directory.is_empty():
 		_directory = OS.get_environment("TEMP").path_join("dungeon-registration-%d-%d" % [OS.get_process_id(), Time.get_ticks_usec()])
@@ -167,6 +170,7 @@ func _check_empty_registry() -> void:
 
 
 func _depart_registry() -> PrototypeExploration:
+	_expected_registry_money -= HubRepairTestInput.prepare_departure(_entry)
 	_click(_hub.get_node("%DepartureButton"))
 	await _frames(5)
 	var world := _entry.get_node("PrototypeExploration") as PrototypeExploration
@@ -301,8 +305,8 @@ func _failure_after_registration() -> void:
 
 func _expect_registration_state(stored: int, registered: int) -> void:
 	var saved := _store.load_data()
-	_expect(_entry.get_hub_money() == 10 and _entry.get_hub_stored_items().size() == stored and _entry.get_hub_registered_items().size() == registered, "Live original counts or money changed.")
-	_expect(saved.size() == 6 and saved.money == "10" and saved.stored_items.size() == stored and saved.registered_items.size() == registered, "Saved registration differs from memory.")
+	_expect(_entry.get_hub_money() == _expected_registry_money and _entry.get_hub_stored_items().size() == stored and _entry.get_hub_registered_items().size() == registered, "Live original counts or money changed.")
+	_expect(saved.size() == 6 and saved.money == str(_expected_registry_money) and saved.stored_items.size() == stored and saved.registered_items.size() == registered, "Saved registration differs from memory.")
 
 
 func _click_registry_row(list: ItemList, index: int) -> void:

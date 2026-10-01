@@ -44,10 +44,10 @@ func _ready() -> void:
 	_click(_entry.get_node("Interface/TitleScreen/%ContinueButton"))
 	await _frames(5)
 	_expect(GameState.get_current_state() == GameState.State.HUB and FileAccess.get_file_as_bytes(_path) == before_continue, "Continue failed or rewrote saved progress.")
-	_check_holdings(90 if _read_case else 40)
+	_check_holdings(85 if _read_case else 40)
 	if _read_case:
 		await _check_fresh_departure()
-		_cases.append({"case": "fresh_process_continue", "money": 90, "stored_unknown": 1, "fresh_departure": true})
+		_cases.append({"case": "fresh_process_continue", "money": 80, "stored_unknown": 1, "fresh_departure": true})
 	else:
 		await _check_injured_recovery()
 		await _check_emergency_result(false)
@@ -212,15 +212,17 @@ func _check_holdings(expected_money: int) -> void:
 
 
 func _check_fresh_departure() -> void:
+	_expect(HubRepairTestInput.prepare_departure(_entry) == 5, "Survival loop repair cost changed.")
+	var expected_money := 80 if _read_case else 85
 	var world := await _depart()
 	_expect(world.get_node_or_null("EmergencyEscape") == null and world.get_node_or_null("ChangingPassage") == null, "Default departure silently enabled trial events.")
 	_expect(world.get_node("PlayerSurvival").get_injury_remaining() == 0 and world.get_node("Player/HarnessController").get_current_charge() == 3 and world.get_map_state().get_observed_passage_count() == 0, "New departure retained injury, charge or map.")
 	await _walk(world.get_node("Player"), Vector2(-680, 0))
 	_tap(KEY_E)
 	await _frames(5)
-	await _settle(90)
+	await _settle(expected_money)
 	await _capture("g3-review-saved-hub.png")
-	_cases.append({"case": "fresh_default_departure", "health": 2, "charge_at_start": 3, "trial_events_active": false, "hub_money": 90})
+	_cases.append({"case": "fresh_default_departure", "health": 2, "charge_at_start": 3, "trial_events_active": false, "hub_money": expected_money})
 
 
 func _click(button: Button) -> void:

@@ -25,7 +25,7 @@ func present_result(outcome: ExplorationOutcome, settlement: SettlementResult) -
 		$NextStep/Items.text = "정산 자료를 준비하지 못했습니다."
 		$NextStep/QuitButton.grab_focus()
 		return
-	$NextStep/NetIncome.text = "순이익 +%d" % settlement.get_net_income()
+	$NextStep/NetIncome.text = "귀환 순이익 %+d" % settlement.get_net_income()
 	$NextStep/Totals.text = "판매액 %d · 비용 %d\n이번에 보관할 물품 %d개" % [
 		settlement.get_total_income(), settlement.get_total_cost(), settlement.get_retained_items().size(),
 	]
@@ -35,6 +35,9 @@ func present_result(outcome: ExplorationOutcome, settlement: SettlementResult) -
 			wear.before, wear.maximum, wear.after, wear.maximum, wear.damage,
 		]
 		$NextStep/EquipmentDamage.show()
+		var estimate := settlement.get_full_repair_estimate()
+		if estimate >= 0:
+			$NextStep/EquipmentDamage.text += "\n완전 수리 예상 %d · 거점에서 선택" % estimate
 	var lines := PackedStringArray()
 	for sale in settlement.get_sales():
 		lines.append("%s · 판매액 %d" % [sale.name, sale.amount])

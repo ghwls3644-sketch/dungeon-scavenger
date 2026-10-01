@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://src/ui/hub_panel.gd" id="1_script"]
 [ext_resource type="PackedScene" path="res://src/ui/hub_appraisal_panel.tscn" id="2_appraisal"]
 [ext_resource type="PackedScene" path="res://src/ui/hub_sale_panel.tscn" id="3_sale"]
 
 [ext_resource type="PackedScene" path="res://src/ui/hub_registration_panel.tscn" id="4_registration"]
+[ext_resource type="PackedScene" path="res://src/ui/hub_repair_panel.tscn" id="5_repair"]
 
 [sub_resource type="StyleBoxFlat" id="CardStyle"]
 bg_color = Color(0.12, 0.105, 0.085, 1)
@@ -156,11 +157,22 @@ custom_minimum_size = Vector2(0, 44)
 size_flags_horizontal = 3
 text = "보관품 판매"
 
-[node name="RegistrationButton" type="Button" parent="Center/Card/Content/Holdings"]
+[node name="LowerServices" type="HBoxContainer" parent="Center/Card/Content/Holdings"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="RegistrationButton" type="Button" parent="Center/Card/Content/Holdings/LowerServices"]
 unique_name_in_owner = true
 layout_mode = 2
 custom_minimum_size = Vector2(0, 44)
 text = "원본 등록 · 목록"
+
+[node name="RepairButton" type="Button" parent="Center/Card/Content/Holdings/LowerServices"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 44)
+size_flags_horizontal = 3
+text = "하네스 수리"
 
 [node name="AppraisalPanel" parent="." instance=ExtResource("2_appraisal")]
 visible = false
@@ -169,4 +181,7 @@ visible = false
 visible = false
 
 [node name="RegistrationPanel" parent="." instance=ExtResource("4_registration")]
+visible = false
+
+[node name="RepairPanel" parent="." instance=ExtResource("5_repair")]
 visible = false

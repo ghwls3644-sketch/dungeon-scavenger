@@ -216,13 +216,14 @@ func _check_restart() -> void:
 	_click(_title.get_node("%ContinueButton"))
 	await _frames(5)
 	_expect(GameState.get_current_state() == GameState.State.HUB, "Continue did not restore to Hub.")
-	_expect(_entry.get_hub_money() == 40 and _entry.get_hub_stored_items().size() == 1 and _entry.get_departure_preview().slot_capacity == 3, "Restart changed money, items or preparation.")
+	_expect(_entry.get_hub_money() == 35 and _entry.get_hub_stored_items().size() == 1 and _entry.get_departure_preview().slot_capacity == 3, "Restart changed money, items or preparation.")
 	if _entry.get_hub_stored_items().is_empty():
 		return
 	var item := _entry.get_hub_stored_items()[0]
 	_expect(item.get_definition().stable_id == &"test_g1_unknown" and not item.is_identified() and item.get_risk_hint() == "희미한 진동이 느껴집니다.", "Restart changed unknown item identity or public knowledge.")
 	_expect(FileAccess.get_file_as_bytes(_path) == previous, "Continue rewrote the record.")
 	var hub: HubPanel = _entry.get_node("Interface/HubPanel")
+	_expect(HubRepairTestInput.prepare_departure(_entry) == 5, "Restart minimum repair cost changed.")
 	_click(hub.get_node("%DepartureButton"))
 	await _frames(5)
 	var world: PrototypeExploration = _entry.get_node("PrototypeExploration")
@@ -232,7 +233,7 @@ func _check_restart() -> void:
 	await _frames(5)
 	_click(_entry.get_node("Interface/Results/NextStep/SettleButton"))
 	await _frames(5)
-	_expect(_entry.get_hub_money() == 40 and _entry.get_hub_stored_items().size() == 1 and _store.load_data().next_expedition_id == "5", "Post-restart failure changed existing holdings or reset progression.")
+	_expect(_entry.get_hub_money() == 30 and _entry.get_hub_stored_items().size() == 1 and _store.load_data().next_expedition_id == "5", "Post-restart failure changed existing holdings or reset progression.")
 
 
 func _check_existing_record() -> void:

@@ -9,6 +9,7 @@ func _ready() -> void:
 		if argument.begins_with("--research-directory="):
 			_directory = argument.trim_prefix("--research-directory=")
 	_read_case = "--research-continue" in OS.get_cmdline_user_args()
+	_expected_registry_money = 0 if _read_case else 10
 	_render = "--research-render" in OS.get_cmdline_user_args()
 	if _directory.is_empty():
 		_directory = OS.get_environment("TEMP").path_join("dungeon-research-%d-%d" % [OS.get_process_id(), Time.get_ticks_usec()])
@@ -181,7 +182,7 @@ func _read_research(unlocked: int, capture := "") -> void:
 	_hub.bag_slots_selected.emit(2)
 	_registration.confirmation_requested.emit()
 	_expect(GameState.get_current_state() == GameState.State.HUB and _entry.get_departure_preview().slot_capacity == 3, "Research modal allowed conflicting action.")
-	_expect(FileAccess.get_file_as_bytes(_path) == before and _entry.get_hub_money() == 10, "Research read changed progress or money.")
+	_expect(FileAccess.get_file_as_bytes(_path) == before and _entry.get_hub_money() == _expected_registry_money, "Research read changed progress or money.")
 	if not capture.is_empty():
 		if unlocked == 1:
 			await _click_registry_row(research, 0)

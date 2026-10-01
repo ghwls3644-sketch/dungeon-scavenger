@@ -255,6 +255,7 @@ func _check_app_failure() -> void:
 	_expect(entry.get_hub_money() == prior_money and entry.get_hub_stored_items().size() == prior_stored, "Capture settlement changed previous holdings.")
 	var restored := HubState.from_save_data(store.load_data(), CATALOG)
 	_expect(restored != null and restored.get_money() == prior_money and restored.get_stored_items().size() == prior_stored, "Saved failure changed prior holdings.")
+	_expect(HubRepairTestInput.prepare_departure(entry) == 5, "Capture redeparture repair cost changed.")
 	_click(entry.get_node("Interface/HubPanel/%DepartureButton").get_global_rect().get_center())
 	await _frames(5)
 	var fresh: PrototypeExploration = entry.get_node("PrototypeExploration")

@@ -140,6 +140,8 @@ function Start-G2Checks {
             $registrationSession = Join-Path $runDirectory "$prefix-registration-session"
             $researchSession = Join-Path $runDirectory "$prefix-research-session"
             $wearSession = Join-Path $runDirectory "$prefix-wear-session"
+            $repairSession = Join-Path $runDirectory "$prefix-repair-session"
+            $supportSession = Join-Path $runDirectory "$prefix-support-session"
             foreach ($scene in (Get-ChildItem -LiteralPath (Join-Path $repository 'tests/smoke') -Filter '*.tscn' | Sort-Object Name)) {
                 $marker = $scene.BaseName -replace '_smoke$', '_passed'
                 if ($marker -eq 'game_state_flow_passed') { $marker = 'state_flow_passed' }
@@ -150,6 +152,7 @@ function Start-G2Checks {
                 if ($scene.BaseName -eq 'hub_registration_smoke') { $sceneArguments = @("--registration-directory=$registrationSession") }
                 if ($scene.BaseName -eq 'hub_research_smoke') { $sceneArguments = @("--research-directory=$researchSession") }
                 if ($scene.BaseName -eq 'equipment_wear_smoke') { $sceneArguments = @("--wear-directory=$wearSession") }
+                if ($scene.BaseName -eq 'hub_repair_smoke') { $sceneArguments = @("--repair-directory=$repairSession") }
                 Run-Scene "$prefix-$($scene.BaseName)" $scene.BaseName "\[SmokeTest\] $marker(?:\s|$)" $sceneArguments
             }
             Run-Scene "$prefix-survival-continue" 'g3_survival_flow_smoke' '\[SmokeTest\] g3_survival_flow_passed continue' @('--review-continue', "--review-progress-directory=$survivalSession")
@@ -158,6 +161,9 @@ function Start-G2Checks {
             Run-Scene "$prefix-registration-continue" 'hub_registration_smoke' '\[SmokeTest\] hub_registration_passed continue' @('--registration-continue', "--registration-directory=$registrationSession")
             Run-Scene "$prefix-research-continue" 'hub_research_smoke' '\[SmokeTest\] hub_research_passed continue' @('--research-continue', "--research-directory=$researchSession")
             Run-Scene "$prefix-wear-continue" 'equipment_wear_smoke' '\[SmokeTest\] equipment_wear_passed continue' @('--wear-case=continue', "--wear-directory=$wearSession")
+            Run-Scene "$prefix-repair-continue" 'hub_repair_smoke' '\[SmokeTest\] hub_repair_passed continue' @('--repair-case=continue', "--repair-directory=$repairSession")
+            Run-Scene "$prefix-repair-support" 'hub_repair_smoke' '\[SmokeTest\] hub_repair_passed support' @('--repair-case=support', "--repair-directory=$supportSession")
+            Run-Scene "$prefix-repair-support-continue" 'hub_repair_smoke' '\[SmokeTest\] hub_repair_passed continue-support' @('--repair-case=continue-support', "--repair-directory=$supportSession")
             foreach ($case in @('legacy1', 'legacy2', 'invalid')) {
                 Run-Scene "$prefix-wear-$case" 'equipment_wear_smoke' "\[SmokeTest\] equipment_wear_passed $case" @("--wear-case=$case")
             }
@@ -189,7 +195,7 @@ function Start-G2Checks {
                 throw "Settings/progress files changed across their independent read paths in $prefix."
             }
             $saved = Get-Content -LiteralPath $progressPath -Raw | ConvertFrom-Json
-            if ($saved.hub.money -cne '40' -or $saved.hub.bag_slots -ne 3 -or $saved.hub.next_expedition_id -cne '5' -or @($saved.hub.stored_items).Count -ne 1) {
+            if ($saved.hub.money -cne '30' -or $saved.hub.bag_slots -ne 3 -or $saved.hub.next_expedition_id -cne '5' -or @($saved.hub.stored_items).Count -ne 1) {
                 throw "Unexpected final progress in $prefix."
             }
             $flows.Add([ordered]@{
