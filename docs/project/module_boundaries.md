@@ -8,7 +8,7 @@ canonical_for:
   - source_tree_layout
   - module_responsibilities
   - module_dependency_rules
-last_reviewed: 2026-10-01
+last_reviewed: 2026-10-04
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -64,7 +64,7 @@ res://
 | `res://src/data/` | 아이템·방·루트·위험·경제·텍스트의 정의와 콘텐츠 값 | 실행 중 상태 변경, 화면 흐름, 저장 시점 결정 |
 | `res://tests/` | 단위·통합·스모크 검사와 테스트 전용 자료 | 출시 게임 기능과 실제 콘텐츠 |
 
-`src/harness/`는 GDD에 확정된 하네스 행동과 충전을 구현한다. [`harness_engineering.md`](../design/harness_engineering.md)가 `draft`인 동안 비어 있는 모듈·성장·최종 수치를 추정해 구현하지 않는다.
+`src/harness/`는 GDD에 확정된 하네스 행동과 충전을 구현한다. [`harness_engineering.md`](../design/harness_engineering.md)는 DEV-0408에서 요구와 미적용 비교안을 정리했으며 `draft`를 유지한다. 미정인 장착·해금·성장 수치를 확정된 규칙으로 추정해 구현하지 않는다. GDD·기존 결정과 함께 읽고 해당 구현 작업의 시험 범위를 먼저 기록한다.
 
 ## 의존 방향
 
@@ -361,3 +361,11 @@ DEV-0318~DEV-0319의 즉시 E·후속 상호작용 문구는 당시 이력이다
 - `GameEntry`는 출정 전에 `can_depart`를 검사하고 내구 부족 시 수리 서비스를 연다. `begin_expedition` 자체는 기존 출정 ID 생명주기만 담당한다. UI나 `HubState`가 파일을 쓰지 않으며 유료/무료 복구 모두 후보 저장 성공 후 상태를 교체한다. 다른 거점 서비스와 출정/가방 변경은 수리 화면과 동시에 실행하지 않는다.
 - `HubRepairPanel`은 견적 선택·확인·취소·오류/완료 표시만 담당한다. 결과 화면의 완전 수리 예상액은 `SettlementResult`가 복사한 미지불 견적이며 실제 귀환 순이익에 넣지 않는다. 수리 완료의 실제 지불액과 분리한다. 저장 영수증·새 스키마·건강/충전 비용은 추가하지 않았다.
 - `hub_repair_smoke.*`는 도메인 경계와 실제 앱 결제·복구·손상·재출정/새 실행·화면을 검사한다. `HubRepairTestInput`은 기존 반복 탐험 검사가 필요한 최소 수리를 서비스로 명시적으로 확정하도록 돕는다. 기존 위험/거점/저장 검사는 실제 결제액을 기대 보유금에 반영한다.
+
+### DEV-0408의 하네스 준비·성장 후속 구현 경계
+
+이번 작업은 문서 정리이며 실행 모듈·클래스·저장 키를 추가하지 않았다. 다음 장착 구현은 기존 경계를 따라 `meta`가 거점 선택/해금 조건·후보, `data`가 명시적인 행동 대응·한도/조건, `core`의 출정 구성이 검증된 복사본, `harness`가 실제 사용 권한/공유 충전, `app`이 저장 후 상태 교체와 출정 전달, `ui`가 설명/선택/확인, `infrastructure`가 저장 입출력을 맡도록 분리한다. 구체적인 파일/필드는 해당 구현 작업에서 정한다.
+
+`DoorHoldTarget`이 `StabilizableHazard`를 상속한다고 설계상 문 고정을 안정화 모듈에 자동 귀속하지 않는다. 함정/잔해·잔여 구역 입구·문 고정·골렘과 각 행동의 대응을 데이터/공개 인터페이스로 명시하고 실제 실행 경로에서 확인한다. `commit_charge_action`을 사용하는 별도 비상 탈출, 별도 횟수의 `NoiseLureController`는 첫 장착 비교의 적용 여부를 명시해 기존 기능의 우발적 차단을 막는다. 입력/UI만 숨겨 사용 권한을 구현하지 않는다.
+
+영구 해금·거점 장착·런 구성과 충전·영구 내구는 책임을 구분한다. 장착 변경이 하네스 재생성·무료 수리·런 충전 초기화로 이어지지 않게 한다. 현재 `ProgressStore` 스키마 3·6필드는 유지하며 후속 확장은 구형 기본 구성·검증·읽기 보존/정상 저장 전환을 함께 설계한다. [검토안](../design/harness_engineering.md)과 Q-024·Q-025는 단독 구현 권한이 아니다.

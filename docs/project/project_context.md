@@ -8,7 +8,7 @@ canonical_for:
   - development_environment
   - engine_and_language
   - development_commands
-last_reviewed: 2026-10-01
+last_reviewed: 2026-10-04
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -1422,3 +1422,16 @@ $researchDirectory = Join-Path $env:TEMP ('dungeon-research-' + [guid]::NewGuid(
 - 활성 Markdown 링크·앵커, 동결 원본 SHA-256 6개·아카이브 사본 3개·`git diff --check` 통과. `repair_rules.md`는 `draft`, Q-022·Q-023은 `provisional`, 경제 규칙은 `confirmed`를 유지한다.
 
 **DEV-0407 구현·검증 완료, 사용자 로컬 커밋 승인.** 다음 DEV-0408의 이름·범위는 G4 잔여 준비·성장·비용 통합을 대조해 다음 착수 때 정한다. 시험 단가·최소 복구는 최종 밸런스 승인이 아니며 사람 평가는 후속이다. **정합성 검사: 아직 아님** — 다음 정기 검사는 G5 완료 후다.
+
+## DEV-0408 하네스 준비·성장 규칙 정리 검사
+
+2026-10-04 문서 작업을 검증했다. 기준 HEAD는 DEV-0407 `a2a93a6`이며 착수 fetch 뒤 뒤처짐 0·로컬 7커밋 앞섬·깨끗한 작업 트리를 확인했다. 기존 장착/성장 공백을 정리한 작업으로 게임 코드·장면·데이터·저장 형식을 수정하지 않았다.
+
+- GDD 4-2·7-1~7-6·10-2·10-5·20-3의 기존 요구와 DEC-104·105·107·111, confirmed Item/Economy/Repeat Exploration을 대조했다. Story/Reference의 공식 하네스 의미·감정 제한과 충돌하지 않으며 새로운 세계관·공식 명칭은 추가하지 않았다. 동결 개발 제안서의 G4는 준비·성장·경제 완료 범위의 역사적 대조에만 사용했다.
+- 현재 `ExpeditionLoadout`/`HubState`는 장착/해금이 없고, `HarnessController`가 세 행동과 공유 충전을 처리한다. `MalfunctioningTrap`/`DoorHoldTarget`/`RemainingZoneEntrance`의 공통 안정화 경로, 별도 `NoiseLureController` 횟수 2, `EmergencyEscape`의 별도 충전 결제, 등록 원본으로 해설만 여는 연구와 스키마 3·6필드를 확인했다.
+- 장착 세 행동 중 두 개의 미적용 비교안, 무료 기본 정보·기본 탐색과 정밀 분석/물품 감정의 경계, 모듈 행동 대응·거점/런/내구 분리, 후보 저장·실제 행동/충전·새 실행/구형 전환 검증 계약을 정리했다. Q-024·Q-025 ID 중복 없음과 `provisional`, Harness Engineering의 `draft` 유지를 확인했다. GDD·confirmed 경제/아이템 규칙의 상태를 변경하지 않았다.
+- 활성 Markdown 상대 링크/앵커, 동결 원본 SHA-256 6개·아카이브 사본 3개와 `git diff --check`를 검사했다. `docs/README.md`와 `migration_manifest.md`의 정합성 검사 표는 HEAD와 같으며 다음 시점은 G5 완료 후다.
+- `src`·`tests`·`project.godot`의 SHA-256은 `556d6766746bfff50f72ed7e891013e01c435c3c877da69b982839bf34096686`으로 [DEV-0407 전체 검사](dev0407_automated_results.json)·[화면 검사](dev0407_render_results.json)와 일치한다. 80/80 실행·화면 20장은 그 작업의 기존 근거이며 이번 작업에서 재실행한 횟수가 아니다. 소스 해시는 해당 실행 바이트 기준이다.
+- 상세 결과: [DEV-0408 문서 검사](dev0408_document_results.json). 재현은 활성 Markdown 링크 대상/앵커 확인, 이관 대장의 6개 원본 해시와 3개 아카이브 비교, `tests/run_g2_checks.ps1`의 `Get-G2SourceHash`와 기존 보고서 비교, `git diff --check` 순서로 수행한다.
+
+**DEV-0408 문서 작성·검증 완료, 사용자 로컬 커밋 승인.** 다음은 **DEV-0409 — 거점 하네스 장착 선택**이다. 실행 시험 조건은 해당 착수 때 기록하며 이번 문서 승인으로 제안 전체를 제품 규칙으로 승격하지 않는다. **정합성 검사: 아직 아님** — 다음 정기 검사는 G5 완료 후다.

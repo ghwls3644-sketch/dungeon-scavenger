@@ -7,7 +7,7 @@ source_version: gdd-v2.1+management-proposal-v0.2.1
 canonical_for:
   - document_navigation
   - canonical_source_routing
-last_reviewed: 2026-10-01
+last_reviewed: 2026-10-04
 owner: documentation-maintainer
 related:
   - GDD.md
@@ -54,6 +54,7 @@ related:
 - G1 통합 플레이 방법과 검토 기록: [`project/g1_playtest_review.md`](project/g1_playtest_review.md)
 - G2 전체 흐름 검사·완료 결과: [`project/g2_flow_review.md`](project/g2_flow_review.md)
 - G3 탐험 통합 검사·남은 범위: [`project/g3_exploration_review.md`](project/g3_exploration_review.md)
+- 하네스 준비·성장의 요구와 비교안 (`draft`): [`design/harness_engineering.md`](design/harness_engineering.md)
 - 장비 내구·수리·안전망의 설계 검토안 (`draft`): [`design/repair_rules.md`](design/repair_rules.md)
 - 건강·부상·퇴로의 설계 검토안 (`draft`): [`design/survival_rules.md`](design/survival_rules.md)
 
@@ -107,7 +108,7 @@ GitHub 로그인 상태, Codex 대화 기록, 앱별 로컬 설정은 저장소�
 
 ## 현재 단계
 
-**DEV-0407 — 거점 선택 수리와 최소 복구 구현·검증 완료, 사용자 로컬 커밋 승인.** 거점에서 부분/완전 수리의 복구량·견적·잔액을 확인하고 선택 결제한다. 내구 1당 비용 5·출정 최소 내구 1을 시험 적용했다. 내구 0·보유금 5 미만이면 내구 1까지만 무료 복구하며 내구 0의 출정 버튼은 수리 화면으로 안내한다. 유료/무료 복구 모두 후보 저장 성공 때 한 번 반영하고, 실제 결제와 귀환 결과의 완전 수리 예상액을 구분한다. [완료 인계](project/development_handoff.md#dev-0407--거점-선택-수리와-최소-복구)·[검사 기록](project/project_context.md#dev-0407-거점-선택-수리와-최소-복구-검사)에 전체 80/80 실행·두 해상도 화면 20장과 문서·보존 검사를 남겼다. 다음 번호는 **DEV-0408**이며 G4의 남은 준비·성장·비용 통합을 대조해 다음 착수 때 이름과 범위를 정한다. 이번 작업은 사용자 로컬 커밋 승인 상태이며 push하지 않았다. 커밋 전에는 로컬 6커밋 앞섬·뒤처짐 0이었다. 최종 수치·지원 조건은 Q-022·Q-023으로 남기며 G4 전체 완료를 선언하지 않는다. **정합성 검사: 아직 아님** — 다음 정기 검사는 G5 완료 후다. 아래는 단계별 이력이다.
+**DEV-0408 — 하네스 준비·성장 규칙 정리 작성·검증 완료, 사용자 로컬 커밋 승인.** 하네스 설계 골격에 GDD의 제한된 모듈 장착·공유 충전·영구 성장 요구를 옮기고 현재 구현과 미적용 제안을 구분했다. 무료 기본 정보·장착/해금·런 충전/영구 내구·휴대 도구의 경계와 저장/행동 검증 계약을 정리했다. 기존 세 행동 중 두 개를 고르는 안은 Q-024·Q-025의 미적용 비교안이며 실행 규칙이나 최종 수치 승인이 아니다. [완료 인계](project/development_handoff.md#dev-0408--하네스-준비성장-규칙-정리)·[검사 기록](project/project_context.md#dev-0408-하네스-준비성장-규칙-정리-검사)을 따른다. 다음은 **DEV-0409 — 거점 하네스 장착 선택**이다. 이번 문서 작업은 사용자 로컬 커밋 승인 상태이며 push하지 않았다. 커밋 전에는 로컬 7커밋 앞섬·뒤처짐 0이었다. 영구 성장·도구 준비·비용 통합과 G4 전체 완료는 후속 범위다. **정합성 검사: 아직 아님** — 다음 정기 검사는 G5 완료 후다. 아래는 단계별 이력이다.
 
 검토 관문 G-M3, G-M4와 G-M5를 통과했다. `M5 — 중복 제거와 정합성 검토`의 `DOC-0501`~`DOC-0506`에서 공식 용어, Story·Design 책임, 화자 표현·NPC 지식, 핵심 설정·Entity·Timeline과 활성 문서 링크·누락을 모두 검사했다. G-M5 완료 조건 7개는 2026-07-28 정합성 검사에서 모두 충족함을 확인했다.
 

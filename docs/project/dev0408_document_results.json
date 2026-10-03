@@ -1,0 +1,67 @@
+{
+  "ticket": "DEV-0408",
+  "name": "하네스 준비·성장 규칙 정리",
+  "passed": true,
+  "validation_date": "2026-10-04",
+  "validation_timezone": "Asia/Seoul",
+  "base_commit": "a2a93a6b4271ef81bcae3f6bd43c00590db861ee",
+  "source_tree_sha256": "556d6766746bfff50f72ed7e891013e01c435c3c877da69b982839bf34096686",
+  "source_hash_matches_dev0407": true,
+  "runtime_files_changed": false,
+  "runtime_checks_executed": 0,
+  "graphical_checks_executed": 0,
+  "prior_evidence": {
+    "ticket": "DEV-0407",
+    "automated_checks": 80,
+    "graphical_checks": 2,
+    "screenshots": 20,
+    "reexecuted": false
+  },
+  "links_and_frozen_sources": {
+    "passed": true,
+    "markdown_files": 47,
+    "relative_links_checked": 1392,
+    "frozen_sources": 6,
+    "archive_copies": 3,
+    "failures": []
+  },
+  "question_ids_unique": true,
+  "new_questions": [
+    "Q-024",
+    "Q-025"
+  ],
+  "new_question_status": "provisional",
+  "harness_review_status": "draft",
+  "canonical_product_story_reference_and_decisions_unchanged": true,
+  "reviewed_scope": [
+    "GDD requirements versus current code",
+    "ownership versus equipment versus run state",
+    "free information versus appraisal",
+    "explicit target/action mapping including remaining-zone entrance",
+    "separate noise lure and emergency escape",
+    "repair and minimum recovery preservation",
+    "candidate save and legacy migration contract",
+    "unequipped action rejection and actual extraction",
+    "loadout comparison versus permanent growth"
+  ],
+  "diff_check": "passed",
+  "changed_and_new_files": [
+    "docs/README.md",
+    "docs/design/README.md",
+    "docs/design/harness_engineering.md",
+    "docs/project/README.md",
+    "docs/project/dev0408_document_results.json",
+    "docs/project/development_handoff.md",
+    "docs/project/migration_changes.md",
+    "docs/project/migration_manifest.md",
+    "docs/project/module_boundaries.md",
+    "docs/project/open_questions.md",
+    "docs/project/project_context.md"
+  ],
+  "next_ticket": "DEV-0409 — 거점 하네스 장착 선택",
+  "consistency_checkpoint": "G5 완료 후",
+  "checkpoint_tables_unchanged": true,
+  "commit_status": "user_approved_local_commit",
+  "ahead": 7,
+  "behind": 0
+}

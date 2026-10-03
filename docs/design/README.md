@@ -6,7 +6,7 @@ status: confirmed
 source_version: management-proposal-v0.2.1
 canonical_for:
   - design_document_navigation
-last_reviewed: 2026-10-01
+last_reviewed: 2026-10-04
 owner: game-design
 related:
   - ../GDD.md
@@ -32,7 +32,7 @@ related:
 | [`repeat_exploration.md`](repeat_exploration.md) | 방문 사이에 무엇이 유지되고 무엇이 변하는가? |
 | [`item_rules.md`](item_rules.md) | 아이템이 데이터와 시스템에서 어떻게 작동하는가? |
 | [`economy_rules.md`](economy_rules.md) | 가격·비용·손실·수익은 어떻게 계산되는가? |
-| [`harness_engineering.md`](harness_engineering.md) | 하네스는 어떤 자원과 모듈 규칙으로 위험에 대응하는가? |
+| [`harness_engineering.md`](harness_engineering.md) (`draft`) | 하네스 준비·공유 자원·영구 성장의 기존 요구와 미적용 장착 비교안은 무엇인가? |
 | [`survival_rules.md`](survival_rules.md) (`draft`) | 건강·부상과 퇴로 상실의 기존 요구는 무엇이며 어떤 시제품 규칙을 검토해야 하는가? |
 | [`repair_rules.md`](repair_rules.md) (`draft`) | 장비 내구·선택 수리·재출정 안전망의 기존 요구와 구현 전 제안은 무엇인가? |
 
@@ -42,7 +42,7 @@ related:
 - [`repair_rules.md`](repair_rules.md)는 DEV-0405의 수리 검토안이며 단독 구현 기준이 아니다. 사용자가 선택한 거래 방식은 DEC-111·confirmed Economy Rules, DEV-0406의 손상 및 DEV-0407의 선택 수리/최소 복구 시험 적용과 최종 미정은 Q-022·Q-023으로 구분한다.
 - 사용자 표시 명칭은 [`../reference/glossary.md`](../reference/glossary.md)를 따른다.
 - 미결정 수치와 규칙은 [`../project/open_questions.md`](../project/open_questions.md)에 연결한다.
-- `confirmed` 문서는 구현 기준으로 사용할 수 있다. [`harness_engineering.md`](harness_engineering.md)는 상세 규칙 이관·검증 전까지 `draft`이므로 단독 구현 기준으로 사용하지 않는다.
+- `confirmed` 문서는 구현 기준으로 사용할 수 있다. [`harness_engineering.md`](harness_engineering.md)는 DEV-0408에서 GDD 요구·현재 구현·장착/성장 비교안을 구분한 `draft`다. Q-024·Q-025의 장착 한도·초기 구성·해금 조건·가격/효과는 미정이며 단독 구현 기준으로 사용하지 않는다.
 - [`survival_rules.md`](survival_rules.md)는 기존 요구·DEV-0318의 제안·DEV-0319~DEV-0322의 제한된 시험 적용을 구분하는 `draft` 문서다. 상태·이동·조사/회수 시간·HUD, 별도 공간의 통로 변화·비상 탈출 시험 값과 최종 미정 규칙을 구별한다. 최종 피해·회복·퇴로 규칙의 확정 문서나 단독 구현 기준이 아니다. 실제 미정 항목은 `Q-019`~`Q-021`, 후속 작업 순서는 개발 인계가 소유한다.
 
 ## 현재 상태
