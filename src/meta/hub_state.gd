@@ -37,6 +37,25 @@ func get_available_bag_slots() -> Array[int]:
 	return [2, 3]
 
 
+func quote_harness_upgrade(id: String, rule: HarnessUpgradeRule) -> HarnessUpgradeQuote:
+	var source := to_save_data()
+	if source.is_empty() or rule == null or not rule.is_valid() \
+			or id not in HarnessUpgradeRule.ALL or id in _loadout.harness_upgrades:
+		return null
+	return HarnessUpgradeQuote.new(source, id, rule)
+
+
+func apply_harness_upgrade(quote: HarnessUpgradeQuote, rule: HarnessUpgradeRule) -> bool:
+	if quote == null:
+		return false
+	var checked := quote_harness_upgrade(quote.get_id(), rule)
+	if checked == null or not checked.can_afford() or not quote.matches(to_save_data(), checked):
+		return false
+	_money -= checked.get_cost()
+	_loadout.harness_upgrades.append(checked.get_id())
+	return true
+
+
 func select_bag_slots(slots: int) -> bool:
 	if slots not in PROTOTYPE_BAG_SLOTS:
 		return false
@@ -246,11 +265,13 @@ func to_save_data() -> Dictionary:
 		"registered_items": _unique_pickups.to_save_data(),
 		"harness_durability": _harness_durability,
 		"harness_modules": _loadout.harness_modules.duplicate(),
+		"harness_upgrades": _loadout.harness_upgrades.duplicate(),
 	}
 
 
 static func from_save_data(data: Dictionary, catalog: ItemCatalog) -> HubState:
-	if catalog == null or not catalog.is_valid() or data.size() != 7 \
+	if catalog == null or not catalog.is_valid() or data.size() != 8 \
+			or not HarnessUpgradeRule.is_valid_owned(data.get("harness_upgrades")) \
 			or not is_valid_harness_durability(data.get("harness_durability")) \
 			or not HarnessModules.is_valid(data.get("harness_modules")):
 		return null
@@ -270,6 +291,7 @@ static func from_save_data(data: Dictionary, catalog: ItemCatalog) -> HubState:
 	restored._money = money
 	restored._harness_durability = int(data.harness_durability)
 	restored._loadout.harness_modules.assign(data.harness_modules)
+	restored._loadout.harness_upgrades.assign(data.harness_upgrades)
 	restored._next_expedition_id = next_id
 	restored.select_bag_slots(int(slots))
 	for raw_item in items:
@@ -355,6 +377,9 @@ func apply_settlement(expedition_id: int) -> bool:
 	if income > 9223372036854775807 - _money:
 		return false
 	var retained := _pending_settlement.get_retained_items()
+	for id in _pending_settlement.get_harness_upgrades():
+		if id not in _loadout.harness_upgrades:
+			_loadout.harness_upgrades.append(id)
 	_money += income
 	_stored_items.append_array(retained)
 	_harness_durability = _pending_settlement.get_equipment_damage().after

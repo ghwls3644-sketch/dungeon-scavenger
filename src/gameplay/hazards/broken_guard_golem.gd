@@ -31,6 +31,7 @@ enum State {
 @export_flags_2d_physics var sight_blocker_mask := 9
 
 var _state: State = State.PATROL
+var _analysis_revision := 0
 var _patrol_origin := Vector2.ZERO
 var _patrol_destination := Vector2.ZERO
 var _last_known_position := Vector2.ZERO
@@ -91,6 +92,18 @@ func get_status_text() -> String:
 	return _status.text
 
 
+func get_analysis_revision() -> int:
+	return _analysis_revision
+
+
+func get_analysis_remaining() -> float:
+	match _state:
+		State.SUSPICIOUS: return _suspicion_timer.time_left
+		State.SEARCH: return _search_timer.time_left
+		State.DISABLED: return _discharge_timer.time_left
+	return -1.0
+
+
 func get_last_known_position() -> Vector2:
 	return _last_known_position
 
@@ -133,8 +146,8 @@ func can_emergency_discharge() -> bool:
 	return _state != State.DISABLED and is_finite(discharge_duration) and discharge_duration > 0.0
 
 
-func emergency_discharge() -> bool:
-	if not can_emergency_discharge():
+func emergency_discharge(bonus: float = 0.0) -> bool:
+	if not can_emergency_discharge() or not is_finite(bonus) or bonus < 0.0 or not is_finite(discharge_duration + bonus):
 		return false
 
 	if is_instance_valid(_tracked_target):
@@ -144,7 +157,7 @@ func emergency_discharge() -> bool:
 	_suspicion_timer.stop()
 	_search_timer.stop()
 	velocity = Vector2.ZERO
-	_discharge_timer.start(discharge_duration)
+	_discharge_timer.start(discharge_duration + bonus)
 	_set_state(State.DISABLED)
 	return true
 
@@ -345,6 +358,7 @@ func _set_state(next_state: State) -> void:
 
 	var previous_state := _state
 	_state = next_state
+	_analysis_revision += 1
 	_render_state()
 	state_changed.emit(previous_state, _state)
 

@@ -22,6 +22,14 @@ func get_precise_analysis() -> String:
 	return ""
 
 
+func get_analysis_revision() -> int:
+	return 0
+
+
+func get_analysis_remaining() -> float:
+	return -1.0
+
+
 func get_stabilization_charge_cost() -> int:
 	return stabilization_charge_cost
 

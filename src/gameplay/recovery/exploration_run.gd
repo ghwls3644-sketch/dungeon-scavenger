@@ -15,6 +15,7 @@ var _state: State = State.ACTIVE
 var _inventory: PlayerInventory
 var _outcome: ExplorationOutcome
 var _completion_in_progress := false
+var _harness_discoveries: Array[String] = []
 
 
 func _ready() -> void:
@@ -34,6 +35,18 @@ func complete_safe_return() -> bool:
 	return _complete_return(&"entrance")
 
 
+func record_harness_discovery(id: String) -> bool:
+	if not is_active() or not can_process() or get_tree().paused \
+			or id not in HarnessUpgradeRule.ALL or id in _harness_discoveries:
+		return false
+	_harness_discoveries.append(id)
+	return true
+
+
+func get_harness_discoveries() -> Array[String]:
+	return _harness_discoveries.duplicate()
+
+
 func complete_emergency_return() -> bool:
 	return _complete_return(&"emergency_escape")
 
@@ -44,7 +57,7 @@ func _complete_return(return_method: StringName) -> bool:
 
 	_completion_in_progress = true
 	var recovered_items := _inventory.take_all_inventory_items()
-	_outcome = ExplorationOutcome.safe_return_inventory_items(recovered_items, return_method)
+	_outcome = ExplorationOutcome.safe_return_inventory_items(recovered_items, return_method, _harness_discoveries)
 	_finish(State.SAFE_RETURN)
 	return true
 

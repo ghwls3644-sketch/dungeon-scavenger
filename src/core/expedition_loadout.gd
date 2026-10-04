@@ -8,6 +8,7 @@ var charge_capacity := 0
 var starting_charge := 0
 # Standalone historical fixtures use all actions. HubState supplies two explicitly.
 var harness_modules: Array[String] = HarnessModules.ALL.duplicate()
+var harness_upgrades: Array[String] = []
 
 
 func is_valid() -> bool:
@@ -16,6 +17,7 @@ func is_valid() -> bool:
 		and burden_weight > 0.0 and overload_weight > burden_weight
 		and charge_capacity >= 0 and starting_charge >= 0 and starting_charge <= charge_capacity
 		and harness_modules.size() in [2, 3] and HarnessModules.is_valid(harness_modules, harness_modules.size())
+		and HarnessUpgradeRule.is_valid_owned(harness_upgrades)
 	)
 
 
@@ -27,4 +29,5 @@ func copy() -> ExpeditionLoadout:
 	result.charge_capacity = charge_capacity
 	result.starting_charge = starting_charge
 	result.harness_modules = harness_modules.duplicate()
+	result.harness_upgrades = harness_upgrades.duplicate()
 	return result

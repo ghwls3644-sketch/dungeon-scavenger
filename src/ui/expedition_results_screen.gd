@@ -39,12 +39,14 @@ func present_result(outcome: ExplorationOutcome, settlement: SettlementResult) -
 		if estimate >= 0:
 			$NextStep/EquipmentDamage.text += "\n완전 수리 예상 %d · 거점에서 선택" % estimate
 	var lines := PackedStringArray()
+	for id in settlement.get_harness_upgrades():
+		lines.append("%s · 무료 발견\n정산 저장 후 영구 보유" % HarnessUpgradeRule.label(id))
 	for sale in settlement.get_sales():
 		lines.append("%s · 판매액 %d" % [sale.name, sale.amount])
 	for item in settlement.get_retained_items():
 		lines.append("%s · %s" % [item.get_definition().display_name, get_storage_reason(item)])
 	if settlement.is_failure():
-		lines.append("이번 회수품 %d개 손실\n기존 돈과 보관품은 유지됩니다." % settlement.get_lost_count())
+		lines.append("이번 회수품 %d개 손실 · 새 개선 발견 미확보\n기존 돈·보관품·보유 개선은 유지됩니다." % settlement.get_lost_count())
 	elif lines.is_empty():
 		lines.append("이번에 회수한 물품이 없습니다.")
 	$NextStep/Items.text = "\n".join(lines)

@@ -9,6 +9,7 @@ var _failure := false
 var _lost_count := 0
 var _equipment_damage: Dictionary = {}
 var _full_repair_estimate := -1
+var _harness_upgrades: Array[String] = []
 
 
 static func from_outcome(
@@ -31,6 +32,9 @@ static func from_outcome(
 		result._full_repair_estimate = rule.get_repair_cost(wear_rule.max_durability - (durability - damage))
 	if result._failure:
 		return result
+	result._harness_upgrades = outcome.get_harness_upgrades()
+	if not HarnessUpgradeRule.is_valid_owned(result._harness_upgrades):
+		return null
 	var recovery := outcome.get_recovery_result()
 	if recovery == null:
 		return null
@@ -86,3 +90,7 @@ func get_equipment_damage() -> Dictionary:
 
 func get_full_repair_estimate() -> int:
 	return _full_repair_estimate
+
+
+func get_harness_upgrades() -> Array[String]:
+	return _harness_upgrades.duplicate()

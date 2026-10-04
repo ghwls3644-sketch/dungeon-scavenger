@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="HarnessUpgradeRule" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/data/harness_upgrade_rule.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+observation_cost = 60
+emergency_cost = 60
+golem_bonus = 1.0
+door_bonus = 2.0

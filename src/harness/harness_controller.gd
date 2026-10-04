@@ -25,13 +25,24 @@ var _analyzed_target: Node2D
 var _precise_information := ""
 var _modules: Array[String] = HarnessModules.ALL.duplicate()
 var _modules_configured := false
+var _observation_improved := false
+var _golem_bonus := 0.0
+var _door_bonus := 0.0
+var _analysis_revision := -1
+var _displayed_precise := ""
 
 
-func configure_modules(modules: Array[String]) -> bool:
+func configure_modules(modules: Array[String], upgrades: Array[String] = [], rule: HarnessUpgradeRule = null) -> bool:
 	if _modules_configured or _action_in_progress or modules.size() not in [2, 3] \
-			or not HarnessModules.is_valid(modules, modules.size()):
+			or not HarnessModules.is_valid(modules, modules.size()) \
+			or not HarnessUpgradeRule.is_valid_owned(upgrades) \
+			or (not upgrades.is_empty() and (rule == null or not rule.is_valid())):
 		return false
 	_modules = modules.duplicate()
+	_observation_improved = HarnessUpgradeRule.OBSERVATION in upgrades and HarnessModules.ANALYSIS in modules
+	if HarnessUpgradeRule.EMERGENCY in upgrades and HarnessModules.EMERGENCY in modules:
+		_golem_bonus = rule.golem_bonus
+		_door_bonus = rule.door_bonus
 	_modules_configured = true
 	_publish_status()
 	return true
@@ -39,6 +50,15 @@ func configure_modules(modules: Array[String]) -> bool:
 
 func has_module(id: String) -> bool:
 	return id in _modules
+
+
+func _process(_delta: float) -> void:
+	if not is_instance_valid(_detector) or not _observation_improved:
+		return
+	var precise := get_precise_analysis()
+	if precise != _displayed_precise:
+		_displayed_precise = precise
+		_publish_status()
 
 
 func get_action_module() -> String:
@@ -109,8 +129,14 @@ func get_precise_analysis() -> String:
 	if not is_instance_valid(_analyzed_target) or target != _analyzed_target:
 		return ""
 	# A purchased reading describes the current state, never a later state for free.
-	if _read_precise_information(target) != _precise_information:
+	if _read_precise_information(target) != _precise_information or _read_revision(target) != _analysis_revision:
 		return ""
+	if _observation_improved:
+		var remaining := -1.0
+		if target is StabilizableHazard or target is BrokenGuardGolem:
+			remaining = target.get_analysis_remaining()
+		if is_finite(remaining) and remaining >= 0.0:
+			return "%s\n현재 상태 남은 시간 약 %.1f초" % [_precise_information, floorf(remaining * 10.0) / 10.0]
 	return _precise_information
 
 
@@ -145,13 +171,21 @@ func analyze_current_target() -> bool:
 	if not get_precise_analysis().is_empty():
 		return _reject_action(REJECT_ALREADY_ANALYZED)
 	var information := _read_precise_information(target)
+	var revision := _read_revision(target)
+	var analysis_cost := get_analysis_charge_cost()
 	if information.is_empty():
 		return _reject_action(REJECT_TARGET_UNAVAILABLE)
-	if not _reserve_charge(get_analysis_charge_cost()):
+	if not _reserve_charge(analysis_cost):
 		return false
+	if not is_instance_valid(target) or target != _detector.get_current_harness_target() or revision != _read_revision(target) \
+			or information != _read_precise_information(target):
+		_current_charge += analysis_cost
+		_action_in_progress = false
+		return _reject_action(REJECT_TARGET_UNAVAILABLE)
 
 	_analyzed_target = target
 	_precise_information = information
+	_analysis_revision = revision
 	charge_changed.emit(_current_charge, _charge_capacity)
 	analysis_completed.emit(target, information)
 	_action_in_progress = false
@@ -180,10 +214,12 @@ func use_current_harness_action() -> bool:
 		return false
 
 	var succeeded := false
-	if target is StabilizableHazard:
+	if target is DoorHoldTarget:
+		succeeded = target.stabilize_with_bonus(_door_bonus)
+	elif target is StabilizableHazard:
 		succeeded = target.stabilize()
 	elif target is BrokenGuardGolem:
-		succeeded = target.emergency_discharge()
+		succeeded = target.emergency_discharge(_golem_bonus)
 	if not succeeded:
 		_current_charge += charge_cost
 		_action_in_progress = false
@@ -239,10 +275,18 @@ func _read_precise_information(target: Node2D) -> String:
 	return ""
 
 
+func _read_revision(target: Node2D) -> int:
+	if target is StabilizableHazard or target is BrokenGuardGolem:
+		return target.get_analysis_revision()
+	return -1
+
+
 func _on_current_target_changed(target: Node2D) -> void:
-	if target != _analyzed_target or _read_precise_information(target) != _precise_information:
+	if target != _analyzed_target or _read_precise_information(target) != _precise_information \
+			or _read_revision(target) != _analysis_revision:
 		_analyzed_target = null
 		_precise_information = ""
+		_analysis_revision = -1
 	_publish_status()
 
 

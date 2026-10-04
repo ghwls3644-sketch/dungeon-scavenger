@@ -26,3 +26,7 @@ func can_stabilize() -> bool:
 
 func stabilize() -> bool:
 	return _door.hold_closed()
+
+
+func stabilize_with_bonus(bonus: float) -> bool:
+	return _door.hold_closed(bonus)

@@ -17,6 +17,7 @@ enum State {
 @export var warning_duration := 2.0
 
 var _state: State = State.IDLE
+var _analysis_revision := 0
 var _bodies_in_hazard: Array[Node2D] = []
 
 @onready var _debris: Polygon2D = %Debris
@@ -38,6 +39,14 @@ func get_state() -> State:
 
 func get_status_text() -> String:
 	return _status.text
+
+
+func get_analysis_revision() -> int:
+	return _analysis_revision
+
+
+func get_analysis_remaining() -> float:
+	return _warning_timer.time_left if _state == State.WARNING else -1.0
 
 
 func get_basic_analysis() -> String:
@@ -108,6 +117,7 @@ func _set_state(next_state: State) -> void:
 
 	var previous_state := _state
 	_state = next_state
+	_analysis_revision += 1
 	_render_state()
 	state_changed.emit(previous_state, _state)
 

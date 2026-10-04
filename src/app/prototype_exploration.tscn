@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3]
+[gd_scene load_steps=42 format=3]
 
 [ext_resource type="Resource" path="res://src/data/prototype_artifact.tres" id="Item_artifact"]
 [ext_resource type="Resource" path="res://src/data/prototype_record.tres" id="Item_record"]
@@ -53,6 +53,8 @@
 
 [ext_resource type="Script" path="res://src/gameplay/tools/noise_lure_controller.gd" id="25_lure"]
 [ext_resource type="Resource" path="res://src/data/prototype_noise_lure.tres" id="26_lure_rule"]
+
+[ext_resource type="PackedScene" path="res://src/gameplay/interaction/harness_upgrade_discovery.tscn" id="34_upgrade"]
 
 [sub_resource type="RectangleShape2D" id="BypassShape"]
 size = Vector2(200, 100)
@@ -413,3 +415,6 @@ offset_right = 125.0
 offset_bottom = 55.0
 theme_override_font_sizes/font_size = 20
 text = "핵심 기록물 · 등록 대상"
+
+[node name="HarnessUpgradeDiscovery" parent="." instance=ExtResource("34_upgrade")]
+position = Vector2(20, -540)

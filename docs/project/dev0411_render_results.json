@@ -1,0 +1,83 @@
+{
+  "passed": true,
+  "source_tree_sha256": "df6f1670fad74d1cf6418842280de987d0ea3760a74a4a3dd4cadd7cd0dad310",
+  "directory": "C:\\Users\\user\\AppData\\Local\\Temp\\dev0411-render-61104fff28814886b7d78ed003934ed0",
+  "checks": [
+    {
+      "case": "write",
+      "passed": true,
+      "exit_code": 0,
+      "diagnostics": []
+    },
+    {
+      "case": "continue",
+      "passed": true,
+      "exit_code": 0,
+      "diagnostics": []
+    },
+    {
+      "case": "purchase",
+      "passed": true,
+      "exit_code": 0,
+      "diagnostics": []
+    }
+  ],
+  "screenshots": [
+    "continued-1152.png",
+    "continued-1600.png",
+    "discovery-failure-1152.png",
+    "discovery-failure-1600.png",
+    "discovery-return-1152.png",
+    "discovery-return-1600.png",
+    "effect-debris-false-1152.png",
+    "effect-debris-false-1600.png",
+    "effect-debris-true-1152.png",
+    "effect-debris-true-1600.png",
+    "effect-golem-false-1152.png",
+    "effect-golem-false-1600.png",
+    "effect-golem-true-1152.png",
+    "effect-golem-true-1600.png",
+    "equipped-1-1152.png",
+    "equipped-1-1600.png",
+    "equipped-2-1152.png",
+    "equipped-2-1600.png",
+    "found-pending-1152.png",
+    "found-pending-1600.png",
+    "hub-1-1152.png",
+    "hub-1-1600.png",
+    "hub-2-1152.png",
+    "hub-2-1600.png",
+    "purchase-choice-0-1152.png",
+    "purchase-choice-0-1600.png",
+    "purchase-complete-0-1152.png",
+    "purchase-complete-0-1600.png",
+    "purchase-save-failure-1152.png",
+    "purchase-save-failure-1600.png",
+    "purchase/equipped-2-1152.png",
+    "purchase/equipped-2-1600.png",
+    "purchase/hub-2-1152.png",
+    "purchase/hub-2-1600.png",
+    "purchase/purchase-choice-0-1152.png",
+    "purchase/purchase-choice-0-1600.png",
+    "purchase/purchase-choice-1-1152.png",
+    "purchase/purchase-choice-1-1600.png",
+    "purchase/purchase-complete-0-1152.png",
+    "purchase/purchase-complete-0-1600.png",
+    "purchase/purchase-complete-1-1152.png",
+    "purchase/purchase-complete-1-1600.png",
+    "purchase/purchase-save-failure-1152.png",
+    "purchase/purchase-save-failure-1600.png"
+  ],
+  "screenshots_reviewed": 44,
+  "resolutions": [
+    [
+      1152,
+      648
+    ],
+    [
+      1600,
+      900
+    ]
+  ],
+  "review_method": "Contact sheets of all 44 frames and full-size continue screens; purchase, pending discovery, failure/return, analysis timing and ownership text visible without clipping."
+}

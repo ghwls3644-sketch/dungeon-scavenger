@@ -11,6 +11,7 @@ var _recovery_result: RecoveryResult
 var _lost_item_count := 0
 var _failure_cause: StringName = &""
 var _return_method: StringName = &""
+var _harness_upgrades: Array[String] = []
 
 
 static func safe_return(recovered_items: Array[ItemDefinition]) -> ExplorationOutcome:
@@ -22,9 +23,12 @@ static func safe_return(recovered_items: Array[ItemDefinition]) -> ExplorationOu
 
 
 static func safe_return_inventory_items(
-	recovered_items: Array[InventoryItem], return_method: StringName = &"entrance"
+	recovered_items: Array[InventoryItem], return_method: StringName = &"entrance", upgrades: Array[String] = []
 ) -> ExplorationOutcome:
+	if not HarnessUpgradeRule.is_valid_owned(upgrades):
+		return null
 	var outcome := ExplorationOutcome.new()
+	outcome._harness_upgrades = upgrades.duplicate()
 	outcome._result = Result.SAFE_RETURN
 	outcome._return_method = return_method
 	outcome._recovery_result = RecoveryResult.from_recovered_inventory_items(recovered_items)
@@ -65,3 +69,7 @@ func get_failure_cause() -> StringName:
 
 func get_return_method() -> StringName:
 	return _return_method
+
+
+func get_harness_upgrades() -> Array[String]:
+	return _harness_upgrades.duplicate() if is_safe_return() else []

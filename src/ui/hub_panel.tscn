@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://src/ui/hub_panel.gd" id="1_script"]
 [ext_resource type="PackedScene" path="res://src/ui/hub_appraisal_panel.tscn" id="2_appraisal"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" path="res://src/ui/hub_repair_panel.tscn" id="5_repair"]
 
 [ext_resource type="PackedScene" path="res://src/ui/hub_harness_panel.tscn" id="6_harness"]
+
+[ext_resource type="PackedScene" path="res://src/ui/hub_upgrade_panel.tscn" id="7_upgrade"]
 
 [sub_resource type="StyleBoxFlat" id="CardStyle"]
 bg_color = Color(0.12, 0.105, 0.085, 1)
@@ -84,6 +86,12 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 44)
 size_flags_horizontal = 3
 text = "하네스 장착"
+
+[node name="UpgradeButton" type="Button" parent="Center/Card/Content/Preparation/Choices"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 44)
+text = "영구 개선"
 
 [node name="PreparationDetails" type="Label" parent="Center/Card/Content/Preparation"]
 unique_name_in_owner = true
@@ -201,4 +209,7 @@ visible = false
 visible = false
 
 [node name="HarnessPanel" parent="." instance=ExtResource("6_harness")]
+visible = false
+
+[node name="UpgradePanel" parent="." instance=ExtResource("7_upgrade")]
 visible = false

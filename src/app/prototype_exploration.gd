@@ -12,6 +12,7 @@ const WALLS: Array[Rect2] = [
 ]
 
 const MAP_DEFINITION := preload("res://src/data/prototype_exploration_map.tres")
+const HARNESS_UPGRADES := preload("res://src/data/prototype_harness_upgrades.tres")
 const INTERACTION_TIMING := preload("res://src/data/prototype_interaction_timing.tres")
 
 var _map_state := ExplorationMapState.new()
@@ -126,7 +127,10 @@ func exclude_secured_originals(ids: Array[StringName]) -> void:
 func prepare_departure(loadout: ExpeditionLoadout) -> bool:
 	if not is_node_ready() or _loadout != null or loadout == null or not loadout.is_valid():
 		return false
-	if not _harness.configure_modules(loadout.harness_modules):
+	if not _harness.configure_modules(loadout.harness_modules, loadout.harness_upgrades, HARNESS_UPGRADES):
+		return false
+	var discovery := get_node_or_null("HarnessUpgradeDiscovery") as HarnessUpgradeDiscovery
+	if discovery != null and not discovery.configure(_run, _player, loadout.harness_upgrades):
 		return false
 	_loadout = loadout.copy()
 	_inventory.configure_capacity(_loadout.slot_capacity, _loadout.burden_weight, _loadout.overload_weight)
@@ -174,6 +178,9 @@ func _set_simulation_enabled(enabled: bool) -> void:
 	_player.process_mode = mode
 	_hazard.process_mode = mode
 	_golem.process_mode = mode
+	var discovery := get_node_or_null("HarnessUpgradeDiscovery")
+	if discovery != null:
+		discovery.process_mode = mode
 
 
 func _on_body_caught(body: Node2D) -> void:

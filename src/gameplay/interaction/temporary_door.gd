@@ -68,10 +68,10 @@ func can_hold() -> bool:
 	return _active and can_process() and not is_open and not is_held()
 
 
-func hold_closed() -> bool:
-	if not can_hold():
+func hold_closed(bonus: float = 0.0) -> bool:
+	if not can_hold() or not is_finite(bonus) or bonus < 0.0 or not is_finite(_rule.hold_duration + bonus):
 		return false
-	_hold_remaining = _rule.hold_duration
+	_hold_remaining = _rule.hold_duration + bonus
 	_push_elapsed = 0.0
 	_close_blocked = false
 	_render()

@@ -40,6 +40,7 @@ func _ready() -> void:
 		if _case in ["legacy1", "legacy2"]:
 			initial.erase("harness_durability")
 			initial.erase("harness_modules")
+			initial.erase("harness_upgrades")
 			if _case == "legacy1":
 				initial.erase("registered_items")
 			_write_json(_path, _envelope(1 if _case == "legacy1" else 2, initial))
@@ -161,6 +162,7 @@ func _check_migration() -> void:
 		var legacy := _initial_data()
 		legacy.erase("harness_durability")
 		legacy.erase("harness_modules")
+		legacy.erase("harness_upgrades")
 		if version == 1:
 			legacy.erase("registered_items")
 		_write_json(path, _envelope(version, legacy))

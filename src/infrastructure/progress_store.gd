@@ -1,7 +1,7 @@
 class_name ProgressStore
 extends RefCounted
 
-const SCHEMA_VERSION := 4
+const SCHEMA_VERSION := 5
 const CONTENT_VERSION := "g2_prototype_1"
 const MAX_FILE_BYTES := 16 * 1024 * 1024
 
@@ -49,7 +49,7 @@ func load_data() -> Dictionary:
 		_last_error = ERR_INVALID_DATA
 		return {}
 	# JSON numbers are floats; Array.has() does not coerce int/float variants.
-	if (version != 1 and version != 2 and version != 3 and version != SCHEMA_VERSION) or data.get("content_version") != CONTENT_VERSION:
+	if (version != 1 and version != 2 and version != 3 and version != 4 and version != SCHEMA_VERSION) or data.get("content_version") != CONTENT_VERSION:
 		_last_error = ERR_UNAVAILABLE
 		return {}
 	if data.size() != 4 or data.get("resume_state") != "hub" or typeof(data.get("hub")) != TYPE_DICTIONARY:
@@ -73,7 +73,13 @@ func load_data() -> Dictionary:
 			return {}
 		hub["harness_modules"] = HarnessModules.DEFAULT.duplicate()
 		_legacy_modules = true
-	if hub.size() != 7 or not hub.has("registered_items") or not HarnessModules.is_valid(hub.get("harness_modules")) \
+	if version <= 4:
+		if hub.size() != 7 or hub.has("harness_upgrades"):
+			_last_error = ERR_INVALID_DATA
+			return {}
+		hub["harness_upgrades"] = []
+	if hub.size() != 8 or not HarnessUpgradeRule.is_valid_owned(hub.get("harness_upgrades")) \
+			or not hub.has("registered_items") or not HarnessModules.is_valid(hub.get("harness_modules")) \
 			or not HubState.is_valid_harness_durability(hub.get("harness_durability")):
 		_last_error = ERR_INVALID_DATA
 		return {}
@@ -82,7 +88,8 @@ func load_data() -> Dictionary:
 
 
 func save_data(hub: Dictionary, replace_existing: bool = false) -> Error:
-	if hub.size() != 7 or not HubState.is_valid_harness_durability(hub.get("harness_durability")) \
+	if hub.size() != 8 or not HarnessUpgradeRule.is_valid_owned(hub.get("harness_upgrades")) \
+			or not HubState.is_valid_harness_durability(hub.get("harness_durability")) \
 			or not HarnessModules.is_valid(hub.get("harness_modules")):
 		return ERR_INVALID_DATA
 	if has_file() and not replace_existing:

@@ -5,6 +5,7 @@ const DEV_SCENE := preload("res://src/app/dev_main.tscn")
 const EXPLORATION_SCENE := preload("res://src/app/prototype_exploration.tscn")
 const PROTOTYPE_ECONOMY := preload("res://src/data/prototype_economy.tres")
 const ITEM_CATALOG := preload("res://src/data/prototype_item_catalog.tres")
+const HARNESS_UPGRADES := preload("res://src/data/prototype_harness_upgrades.tres")
 const RESEARCH_CATALOG := preload("res://src/data/prototype_research_catalog.tres")
 
 var _has_saved_game := Callable()
@@ -38,6 +39,9 @@ var _equipping := false
 var _harness_source: Dictionary = {}
 var _harness_selection: Array = []
 var _progress_notice := ""
+var _upgrade_open := false
+var _upgrading := false
+var _upgrade_quote: HarnessUpgradeQuote
 
 @onready var _title: TitleScreen = $Interface/TitleScreen
 @onready var _hub: HubPanel = $Interface/HubPanel
@@ -46,6 +50,7 @@ var _progress_notice := ""
 @onready var _sale: HubSalePanel = $Interface/HubPanel/SalePanel
 @onready var _registration: HubRegistrationPanel = $Interface/HubPanel/RegistrationPanel
 @onready var _harness_panel: HubHarnessPanel = $Interface/HubPanel/HarnessPanel
+@onready var _upgrade: HubUpgradePanel = $Interface/HubPanel/UpgradePanel
 @onready var _repair: HubRepairPanel = $Interface/HubPanel/RepairPanel
 
 
@@ -93,6 +98,11 @@ func _ready() -> void:
 	_harness_panel.confirmation_requested.connect(_on_harness_confirmed)
 	_harness_panel.selection_requested.connect(_on_harness_selection_requested)
 	_harness_panel.close_requested.connect(_on_harness_closed)
+	_hub.upgrade_requested.connect(_on_upgrade_requested)
+	_upgrade.review_requested.connect(_on_upgrade_review_requested)
+	_upgrade.confirmation_requested.connect(_on_upgrade_confirmed)
+	_upgrade.selection_requested.connect(_on_upgrade_selection_requested)
+	_upgrade.close_requested.connect(_on_upgrade_closed)
 	_results.settlement_requested.connect(_on_settlement_requested)
 	_results.quit_requested.connect(_on_quit_requested)
 	GameState.state_changed.connect(_on_state_changed)
@@ -243,6 +253,9 @@ func _restore_title(message: String) -> void:
 
 func _on_state_changed(_previous_state: int, current_state: int) -> void:
 	_starting = false
+	_upgrade_open = false
+	_upgrade_quote = null
+	_upgrade.hide()
 	_harness_open = false
 	_harness_source.clear()
 	_harness_selection.clear()
@@ -311,7 +324,7 @@ func get_hub_registered_items() -> Array[InventoryItem]:
 
 
 func _on_bag_slots_selected(slots: int) -> void:
-	if _repair_open or _repairing or _harness_open or _equipping:
+	if _repair_open or _repairing or _harness_open or _equipping or _upgrade_open or _upgrading:
 		return
 	if GameState.get_current_state() != GameState.State.HUB or _departing or _appraisal_open or _appraising or _sale_open or _selling or _registration_open or _registering:
 		return
@@ -326,7 +339,7 @@ func _on_bag_slots_selected(slots: int) -> void:
 
 
 func _on_departure_requested() -> void:
-	if _repair_open or _repairing or _harness_open or _equipping:
+	if _repair_open or _repairing or _harness_open or _equipping or _upgrade_open or _upgrading:
 		return
 	if _departing or _appraisal_open or _appraising or _sale_open or _selling or _registration_open or _registering or GameState.get_current_state() != GameState.State.HUB or get_tree().paused:
 		return
@@ -398,14 +411,14 @@ func _on_settlement_requested() -> void:
 
 
 func _on_quit_requested() -> void:
-	if _appraising or _selling or _registering or _repairing or _equipping:
+	if _appraising or _selling or _registering or _repairing or _equipping or _upgrading:
 		return
 	GameLog.info(&"GameEntry", &"quit_requested")
 	get_tree().quit()
 
 
 func _can_appraise() -> bool:
-	if _repair_open or _repairing or _harness_open or _equipping:
+	if _repair_open or _repairing or _harness_open or _equipping or _upgrade_open or _upgrading:
 		return false
 	return GameState.get_current_state() == GameState.State.HUB and not GameState.is_transition_in_progress() \
 		and not _departing and not _settling and not _appraising and not _sale_open and not _selling and not _registration_open and not _registering and not get_tree().paused
@@ -471,7 +484,7 @@ func _on_appraisal_closed() -> void:
 
 
 func _can_sell() -> bool:
-	if _repair_open or _repairing or _harness_open or _equipping:
+	if _repair_open or _repairing or _harness_open or _equipping or _upgrade_open or _upgrading:
 		return false
 	return GameState.get_current_state() == GameState.State.HUB and not GameState.is_transition_in_progress() \
 		and not _departing and not _settling and not _appraising and not _appraisal_open and not _selling and not _registration_open and not _registering and not get_tree().paused
@@ -537,7 +550,7 @@ func _on_sale_closed() -> void:
 
 
 func _can_register() -> bool:
-	if _repair_open or _repairing or _harness_open or _equipping:
+	if _repair_open or _repairing or _harness_open or _equipping or _upgrade_open or _upgrading:
 		return false
 	return GameState.get_current_state() == GameState.State.HUB and not GameState.is_transition_in_progress() \
 		and not _departing and not _settling and not _appraising and not _appraisal_open \
@@ -615,7 +628,7 @@ func _render_equipment() -> void:
 
 
 func _can_repair() -> bool:
-	if _harness_open or _equipping:
+	if _harness_open or _equipping or _upgrade_open or _upgrading:
 		return false
 	return GameState.get_current_state() == GameState.State.HUB and not GameState.is_transition_in_progress() \
 		and not get_tree().paused and not _departing and not _settling and not _repairing \
@@ -690,6 +703,8 @@ func _on_repair_closed() -> void:
 
 
 func _can_equip() -> bool:
+	if _upgrade_open or _upgrading:
+		return false
 	return GameState.get_current_state() == GameState.State.HUB and not GameState.is_transition_in_progress() \
 		and not get_tree().paused and not _departing and not _settling and not _equipping \
 		and not _appraisal_open and not _appraising and not _sale_open and not _selling \
@@ -757,3 +772,76 @@ func _on_harness_closed() -> void:
 	_harness_panel.hide()
 	_hub.get_node("Center").show()
 	_hub.get_node("%HarnessButton").grab_focus()
+
+
+func _can_upgrade() -> bool:
+	return GameState.get_current_state() == GameState.State.HUB and not GameState.is_transition_in_progress() \
+		and not get_tree().paused and not _departing and not _settling and not _upgrading \
+		and not _appraisal_open and not _appraising and not _sale_open and not _selling \
+		and not _registration_open and not _registering and not _repair_open and not _repairing \
+		and not _harness_open and not _equipping
+
+
+func _present_upgrade() -> void:
+	_upgrade.present(_hub_state.get_money(), _hub_state.create_departure_loadout(), HARNESS_UPGRADES)
+
+
+func _on_upgrade_requested() -> void:
+	if not _can_upgrade() or _upgrade_open:
+		return
+	_upgrade_open = true
+	_upgrade_quote = null
+	_hub.get_node("Center").hide()
+	_present_upgrade()
+
+
+func _on_upgrade_review_requested(id: String) -> void:
+	if not _can_upgrade() or not _upgrade_open or _upgrade_quote != null:
+		return
+	_upgrade_quote = _hub_state.quote_harness_upgrade(id, HARNESS_UPGRADES)
+	_upgrade.set_review(_upgrade_quote)
+	if _upgrade_quote == null:
+		_upgrade.set_status("보유 상태와 개선 종류를 확인해 주세요. 비용은 지불하지 않았습니다.")
+
+
+func _on_upgrade_selection_requested() -> void:
+	if not _can_upgrade() or not _upgrade_open:
+		return
+	_upgrade_quote = null
+	_present_upgrade()
+
+
+func _on_upgrade_confirmed() -> void:
+	if not _can_upgrade() or not _upgrade_open or _upgrade_quote == null:
+		return
+	_upgrading = true
+	var candidate := _hub_state.copy()
+	if not candidate.apply_harness_upgrade(_upgrade_quote, HARNESS_UPGRADES):
+		_upgrading = false
+		_upgrade_quote = null
+		_present_upgrade()
+		_upgrade.set_status("가격·보유 상태·잔액이 달라졌습니다. 새 구매 내용을 확인하세요. 돈과 보유 개선은 그대로입니다.")
+		return
+	if not _save_hub(candidate):
+		_upgrading = false
+		_upgrade.set_status("저장 실패 · 돈과 보유 개선은 그대로입니다.\n다시 확정하거나 선택으로 돌아가 취소할 수 있습니다.")
+		return
+	var cost := _upgrade_quote.get_cost()
+	var id := _upgrade_quote.get_id()
+	_hub_state = candidate
+	_upgrade_quote = null
+	_upgrading = false
+	_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items())
+	_hub.render_preparation(_hub_state.create_departure_loadout(), false)
+	_present_upgrade()
+	_upgrade.set_status("%s 보유 · 이번 지불액 %d · 보유금 %d\n관련 기능을 장착하면 다음 출정부터 적용됩니다." % [HarnessUpgradeRule.label(id), cost, _hub_state.get_money()])
+
+
+func _on_upgrade_closed() -> void:
+	if not _can_upgrade() or not _upgrade_open:
+		return
+	_upgrade_open = false
+	_upgrade_quote = null
+	_upgrade.hide()
+	_hub.get_node("Center").show()
+	_hub.get_node("%UpgradeButton").grab_focus()

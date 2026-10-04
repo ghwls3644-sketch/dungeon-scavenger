@@ -28,6 +28,7 @@ func _ready() -> void:
 		if _case.begins_with("legacy"):
 			var version := _case.trim_prefix("legacy").to_int()
 			initial.erase("harness_modules")
+			initial.erase("harness_upgrades")
 			if version < 3:
 				initial.erase("harness_durability")
 			if version == 1:
@@ -59,7 +60,7 @@ func _ready() -> void:
 		_expect("이전 기록" in _hub.get_node("%HubStatus").text and _entry.get_departure_preview().harness_modules == HarnessModules.DEFAULT, "Legacy default/notice missing.")
 		await _capture_wear("legacy", _hub.get_node("Center/Card"))
 		await _choose_pair(1, true)
-		_expect(JSON.parse_string(FileAccess.get_file_as_string(_path)).schema_version == 4, "Successful equipment save did not migrate.")
+		_expect(JSON.parse_string(FileAccess.get_file_as_string(_path)).schema_version == ProgressStore.SCHEMA_VERSION, "Successful equipment save did not migrate.")
 	elif _case == "support":
 		_expect(HubRepairTestInput.prepare_departure(_entry) == 0, "Minimum support charged zero balance.")
 		_expect(_entry.get_departure_preview().harness_modules == HarnessModules.PAIRS[1], "Support replaced equipment.")
@@ -146,6 +147,7 @@ func _check_module_migration() -> void:
 	for version in [1, 2, 3]:
 		var old := _repair_data(20, 1)
 		old.erase("harness_modules")
+		old.erase("harness_upgrades")
 		if version < 3:
 			old.erase("harness_durability")
 		if version == 1:

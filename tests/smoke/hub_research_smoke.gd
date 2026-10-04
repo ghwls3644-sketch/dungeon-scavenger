@@ -121,6 +121,7 @@ func _check_research_domain() -> void:
 	legacy.erase("registered_items")
 	legacy.erase("harness_durability")
 	legacy.erase("harness_modules")
+	legacy.erase("harness_upgrades")
 	var legacy_path := _directory.path_join("legacy-research.json")
 	_write_json(legacy_path, _envelope(1, legacy))
 	var legacy_bytes := FileAccess.get_file_as_bytes(legacy_path)

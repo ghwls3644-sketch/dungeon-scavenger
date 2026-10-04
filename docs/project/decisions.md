@@ -89,6 +89,11 @@ related:
 | `DEC-109` | 탐험 중 자유 저장을 제공하지 않음 | `active` | [`../design/item_rules.md`](../design/item_rules.md), [`../GDD.md`](../GDD.md) | G2 |
 | `DEC-110` | 첫 출시 목표는 하나의 완결된 폐던전 | `active` | [`../GDD.md`](../GDD.md), [`../story/06_narrative_progression.md`](../story/06_narrative_progression.md) | G5·G7 |
 | `DEC-111` | 수리는 거점에서 비용을 확인하고 사용자가 선택·확정한다. | `active` | [`../design/economy_rules.md`](../design/economy_rules.md#수리-거래-시점), [`../design/repair_rules.md`](../design/repair_rules.md), [`../GDD.md`](../GDD.md) | G4 |
+| `DEC-112` | 하네스 영구 개선은 거점 직접 구매와 탐험 중 무료 발견을 함께 제공한다. 원본 등록을 구매 선행 조건으로 삼지 않는다. | `active` | [경제 규칙](../design/economy_rules.md#하네스-영구-개선의-획득), [하네스 검토안](../design/harness_engineering.md), [GDD](../GDD.md#10-5-성장-구조) | G4·G5 |
+
+### DEV-0411 영구 개선 획득 방식 선택
+
+결정일 **2026-10-04**, 승인자 **사용자**. 직접 구매(1), 원본 등록 후 유료 구매(2), 탐험 발견으로 무료 획득(3)의 선택 질문에 “2번은 너무 번거로울 것 같고, 1번 3번을 섞어 쓸 수 있으면 좋을 것 같은데”라고 답했다. `MIG-CHG-043`에 먼저 기록했다. 승인 범위는 직접 구매와 무료 발견의 혼합 방식이다. 개별 개선의 가격·효과·발견 위치/빈도·정산 시점·중복 처리의 최종 수치/정책까지 승인한 것은 아니다. DEV-0411의 구체적인 시제품 조건과 Q-025의 잔여 평가는 하네스 문서와 개발 인계를 따른다.
 
 ### DEV-0405 수리 방식 선택
 
