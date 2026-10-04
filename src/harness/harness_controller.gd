@@ -13,6 +13,7 @@ const REJECT_INVALID_COST: StringName = &"invalid_cost"
 const REJECT_INSUFFICIENT_CHARGE: StringName = &"insufficient_charge"
 const REJECT_TARGET_UNAVAILABLE: StringName = &"target_unavailable"
 const REJECT_ALREADY_ANALYZED: StringName = &"already_analyzed"
+const REJECT_MODULE_MISSING: StringName = &"module_missing"
 
 @export var detector_path: NodePath
 
@@ -22,6 +23,31 @@ var _current_charge := 0
 var _action_in_progress := false
 var _analyzed_target: Node2D
 var _precise_information := ""
+var _modules: Array[String] = HarnessModules.ALL.duplicate()
+var _modules_configured := false
+
+
+func configure_modules(modules: Array[String]) -> bool:
+	if _modules_configured or _action_in_progress or modules.size() not in [2, 3] \
+			or not HarnessModules.is_valid(modules, modules.size()):
+		return false
+	_modules = modules.duplicate()
+	_modules_configured = true
+	_publish_status()
+	return true
+
+
+func has_module(id: String) -> bool:
+	return id in _modules
+
+
+func get_action_module() -> String:
+	var target := _detector.get_current_harness_target()
+	if target is StabilizableHazard:
+		return target.get_harness_module()
+	if target is BrokenGuardGolem:
+		return HarnessModules.EMERGENCY
+	return ""
 
 
 func _ready() -> void:
@@ -59,6 +85,9 @@ func get_current_charge() -> int:
 
 func get_current_prompt() -> String:
 	var target := _detector.get_current_harness_target()
+	var required := get_action_module()
+	if not required.is_empty() and not has_module(required):
+		return "%s 미장착 · 거점에서 변경" % HarnessModules.label(required)
 	if target is StabilizableHazard and target.can_stabilize():
 		return "%s · 충전 %d" % [target.get_harness_prompt(), target.get_stabilization_charge_cost()]
 	if target is BrokenGuardGolem and target.can_emergency_discharge():
@@ -97,7 +126,7 @@ func get_analysis_charge_cost() -> int:
 func can_analyze_current_target() -> bool:
 	var cost := get_analysis_charge_cost()
 	return (
-		not _action_in_progress and not get_tree().paused
+		not _action_in_progress and can_process() and not get_tree().paused and has_module(HarnessModules.ANALYSIS)
 		and cost > 0 and cost <= _current_charge
 		and get_precise_analysis().is_empty()
 		and not _read_precise_information(_detector.get_current_harness_target()).is_empty()
@@ -105,8 +134,10 @@ func can_analyze_current_target() -> bool:
 
 
 func analyze_current_target() -> bool:
-	if _action_in_progress or get_tree().paused:
+	if _action_in_progress or not can_process() or get_tree().paused:
 		return false
+	if not has_module(HarnessModules.ANALYSIS):
+		return _reject_action(REJECT_MODULE_MISSING)
 	_detector.refresh_current_hazard()
 	var target := _detector.get_current_harness_target()
 	if target == null:
@@ -129,7 +160,7 @@ func analyze_current_target() -> bool:
 
 
 func use_current_harness_action() -> bool:
-	if _action_in_progress or get_tree().paused:
+	if _action_in_progress or not can_process() or get_tree().paused:
 		return false
 	_detector.refresh_current_hazard()
 	var target := _detector.get_current_harness_target()
@@ -137,6 +168,8 @@ func use_current_harness_action() -> bool:
 		return _reject_action(REJECT_NO_TARGET)
 
 	var charge_cost := 0
+	if not has_module(get_action_module()):
+		return _reject_action(REJECT_MODULE_MISSING)
 	if target is StabilizableHazard and target.can_stabilize():
 		charge_cost = target.get_stabilization_charge_cost()
 	elif target is BrokenGuardGolem and target.can_emergency_discharge():

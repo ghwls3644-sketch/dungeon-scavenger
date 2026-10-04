@@ -6,6 +6,10 @@ extends Area2D
 @export var analysis_charge_cost := 1
 
 
+func get_harness_module() -> String:
+	return HarnessModules.STABILIZATION
+
+
 func get_analysis_charge_cost() -> int:
 	return analysis_charge_cost
 

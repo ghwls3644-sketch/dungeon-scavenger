@@ -261,7 +261,7 @@ func _check_repair_state(money: int, durability: int) -> void:
 	var expected := _repair_data(money, durability)
 	for key in ["bag_slots", "stored_items", "registered_items"]:
 		_expect(saved[key] == expected[key], "Repair changed retained progress: %s" % key)
-	_expect(saved.size() == 6 and ResearchProgress.get_entries(_entry.get_hub_registered_items(), RESEARCH, CATALOG)[1].unlocked, "Repair changed schema/research progress.")
+	_expect(saved.size() == 7 and ResearchProgress.get_entries(_entry.get_hub_registered_items(), RESEARCH, CATALOG)[1].unlocked, "Repair changed schema/research progress.")
 
 
 func _expect(condition: bool, message: String) -> void:

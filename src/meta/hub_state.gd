@@ -21,6 +21,16 @@ func _init() -> void:
 	_loadout.overload_weight = 4.0
 	_loadout.charge_capacity = 3
 	_loadout.starting_charge = 3
+	_loadout.harness_modules = HarnessModules.DEFAULT.duplicate()
+
+
+func select_harness_modules(modules: Array, expected_source: Dictionary) -> bool:
+	var source := to_save_data()
+	if source.is_empty() or source != expected_source or not HarnessModules.is_valid(modules) \
+			or modules == _loadout.harness_modules:
+		return false
+	_loadout.harness_modules.assign(modules)
+	return true
 
 
 func get_available_bag_slots() -> Array[int]:
@@ -235,12 +245,14 @@ func to_save_data() -> Dictionary:
 		"stored_items": items,
 		"registered_items": _unique_pickups.to_save_data(),
 		"harness_durability": _harness_durability,
+		"harness_modules": _loadout.harness_modules.duplicate(),
 	}
 
 
 static func from_save_data(data: Dictionary, catalog: ItemCatalog) -> HubState:
-	if catalog == null or not catalog.is_valid() or data.size() != 6 \
-			or not is_valid_harness_durability(data.get("harness_durability")):
+	if catalog == null or not catalog.is_valid() or data.size() != 7 \
+			or not is_valid_harness_durability(data.get("harness_durability")) \
+			or not HarnessModules.is_valid(data.get("harness_modules")):
 		return null
 	var unique := UniquePickupState.from_save_data(data.get("registered_items"), catalog)
 	if unique == null:
@@ -257,6 +269,7 @@ static func from_save_data(data: Dictionary, catalog: ItemCatalog) -> HubState:
 	restored._unique_pickups = unique
 	restored._money = money
 	restored._harness_durability = int(data.harness_durability)
+	restored._loadout.harness_modules.assign(data.harness_modules)
 	restored._next_expedition_id = next_id
 	restored.select_bag_slots(int(slots))
 	for raw_item in items:

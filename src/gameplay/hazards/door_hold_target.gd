@@ -1,6 +1,10 @@
 class_name DoorHoldTarget
 extends StabilizableHazard
 
+
+func get_harness_module() -> String:
+	return HarnessModules.EMERGENCY
+
 @onready var _door: TemporaryDoor = get_parent()
 
 

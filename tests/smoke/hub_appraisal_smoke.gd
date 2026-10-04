@@ -251,7 +251,7 @@ func _check_final_holdings() -> void:
 	_expect(_entry.get_hub_money() == 30 and _entry.get_hub_stored_items().size() == 4, "Final money/storage incorrect.")
 	for item in _entry.get_hub_stored_items():
 		_expect(item.is_identified() and item.get_definition().stable_id == &"test_g1_unknown", "Saved appraisal state lost.")
-	_expect(_store.load_data().money == "30" and _store.load_data().size() == 6, "Saved money or existing schema changed.")
+	_expect(_store.load_data().money == "30" and _store.load_data().size() == 7, "Saved money or existing schema changed.")
 	for raw_item in _store.load_data().stored_items:
 		_expect(raw_item.identified, "File did not preserve identification.")
 

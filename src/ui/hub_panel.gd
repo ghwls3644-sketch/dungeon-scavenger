@@ -7,6 +7,7 @@ signal quit_requested
 signal appraisal_requested
 signal sale_requested
 signal registration_requested
+signal harness_requested
 signal repair_requested
 
 @onready var _bags: OptionButton = %BagChoice
@@ -23,6 +24,7 @@ func _ready() -> void:
 	%AppraisalButton.pressed.connect(func(): appraisal_requested.emit())
 	%SaleButton.pressed.connect(func(): sale_requested.emit())
 	%RegistrationButton.pressed.connect(func(): registration_requested.emit())
+	%HarnessButton.pressed.connect(func(): harness_requested.emit())
 	%RepairButton.pressed.connect(func(): repair_requested.emit())
 
 
@@ -41,9 +43,10 @@ func render_preparation(loadout: ExpeditionLoadout, busy: bool) -> void:
 	%SaleButton.disabled = busy
 	%RegistrationButton.disabled = busy
 	%RepairButton.disabled = busy
-	_details.text = "적재 여유 %d칸 · 시작 무게 0\n부담 %.1f / 과적 %.1f\n하네스 충전 %d/%d\n분석 · 안정화 · 비상 방전" % [
+	%HarnessButton.disabled = busy
+	_details.text = "적재 여유 %d칸 · 시작 무게 0\n부담 %.1f / 과적 %.1f\n하네스 충전 %d/%d\n장착: %s" % [
 		loadout.slot_capacity, loadout.burden_weight, loadout.overload_weight,
-		loadout.starting_charge, loadout.charge_capacity,
+		loadout.starting_charge, loadout.charge_capacity, HarnessModules.describe(loadout.harness_modules),
 	]
 	_status.text = "출정 준비 중…" if busy else ""
 

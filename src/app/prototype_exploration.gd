@@ -81,7 +81,9 @@ func _ready() -> void:
 	_harness.charge_changed.connect(func(_current: int, _capacity: int): _update_load_status())
 	_inventory.item_added.connect(func(item: ItemDefinition): %ChoiceStatus.text = "%s 회수" % item.display_name)
 	_inventory.item_add_rejected.connect(_on_pickup_rejected)
-	_hazard.warning_started.connect(func(_duration: float): %ChoiceStatus.text = "먼지와 진동이 커집니다. Q로 안정화하거나 신속히 통과·후퇴하세요.")
+	_hazard.warning_started.connect(func(_duration: float): %ChoiceStatus.text = (
+		"먼지와 진동이 커집니다. Q로 안정화하거나 신속히 통과·후퇴하세요." if _harness.has_module(HarnessModules.STABILIZATION)
+		else "먼지와 진동이 커집니다. 안정화 미장착 · 신속히 통과하거나 후퇴하세요."))
 	_hazard.body_caught.connect(_on_body_caught)
 	%GolemContactThreat.body_caught.connect(_on_golem_caught)
 	%GolemContactThreat.status_changed.connect(_update_contact_status)
@@ -123,6 +125,8 @@ func exclude_secured_originals(ids: Array[StringName]) -> void:
 
 func prepare_departure(loadout: ExpeditionLoadout) -> bool:
 	if not is_node_ready() or _loadout != null or loadout == null or not loadout.is_valid():
+		return false
+	if not _harness.configure_modules(loadout.harness_modules):
 		return false
 	_loadout = loadout.copy()
 	_inventory.configure_capacity(_loadout.slot_capacity, _loadout.burden_weight, _loadout.overload_weight)

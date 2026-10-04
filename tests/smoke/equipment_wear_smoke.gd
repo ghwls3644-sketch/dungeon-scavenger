@@ -39,12 +39,13 @@ func _ready() -> void:
 		var initial := _initial_data()
 		if _case in ["legacy1", "legacy2"]:
 			initial.erase("harness_durability")
+			initial.erase("harness_modules")
 			if _case == "legacy1":
 				initial.erase("registered_items")
 			_write_json(_path, _envelope(1 if _case == "legacy1" else 2, initial))
 		elif _case == "invalid":
 			initial.harness_durability = -1
-			_write_json(_path, _envelope(3, initial))
+			_write_json(_path, _envelope(ProgressStore.SCHEMA_VERSION, initial))
 		else:
 			_expect(_store.save_data(initial) == OK, "Cannot seed wear fixture.")
 		_expect(settings.save_settings(GameSettings.new()) == OK, "Cannot seed settings.")
@@ -79,7 +80,7 @@ func _ready() -> void:
 			_expect(_entry.get_departure_preview().slot_capacity == 3 and FileAccess.get_file_as_bytes(_path) == original, "Failed migration changed bag/save.")
 			_expect(DirAccess.remove_absolute(_path + ".tmp") == OK, "Cannot unblock migration write.")
 			_hub.bag_slots_selected.emit(2)
-			_expect(JSON.parse_string(FileAccess.get_file_as_string(_path)).schema_version == 3 and _store.load_data().harness_durability == 3, "Next successful save failed migration.")
+			_expect(JSON.parse_string(FileAccess.get_file_as_string(_path)).schema_version == ProgressStore.SCHEMA_VERSION and _store.load_data().harness_durability == 3, "Next successful save failed migration.")
 			_hub.bag_slots_selected.emit(3)
 			await _normal_return(3, false)
 		else:
@@ -159,13 +160,14 @@ func _check_migration() -> void:
 	for version in [1, 2]:
 		var legacy := _initial_data()
 		legacy.erase("harness_durability")
+		legacy.erase("harness_modules")
 		if version == 1:
 			legacy.erase("registered_items")
 		_write_json(path, _envelope(version, legacy))
 		var bytes := FileAccess.get_file_as_bytes(path)
 		var upgraded := store.load_data()
 		_expect(upgraded.harness_durability == 3 and upgraded.registered_items.size() == (0 if version == 1 else 2) and FileAccess.get_file_as_bytes(path) == bytes, "Legacy load was lossy or rewrote file.")
-		_expect(store.save_data(upgraded) == OK and store.load_data() == upgraded and JSON.parse_string(FileAccess.get_file_as_string(path)).schema_version == 3, "Legacy upgrade failed.")
+		_expect(store.save_data(upgraded) == OK and store.load_data() == upgraded and JSON.parse_string(FileAccess.get_file_as_string(path)).schema_version == ProgressStore.SCHEMA_VERSION, "Legacy upgrade failed.")
 	for value in [-1, 4, 0.5, "2", true, null, INF, NAN]:
 		var bad := _initial_data()
 		bad.harness_durability = value
@@ -173,13 +175,13 @@ func _check_migration() -> void:
 	for value in [-1, 4, 0.5, "2", true, null]:
 		var bad := _initial_data()
 		bad.harness_durability = value
-		_check_bad_file(store, path, _envelope(3, bad))
+		_check_bad_file(store, path, _envelope(ProgressStore.SCHEMA_VERSION, bad))
 	var missing := _initial_data()
 	missing.erase("harness_durability")
-	_check_bad_file(store, path, _envelope(3, missing))
+	_check_bad_file(store, path, _envelope(ProgressStore.SCHEMA_VERSION, missing))
 	var extra := _initial_data()
 	extra.extra = 1
-	_check_bad_file(store, path, _envelope(3, extra))
+	_check_bad_file(store, path, _envelope(ProgressStore.SCHEMA_VERSION, extra))
 	for version in [1, 2, 99]:
 		_check_bad_file(store, path, _envelope(version, _initial_data()))
 

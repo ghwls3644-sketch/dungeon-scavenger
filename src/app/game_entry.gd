@@ -33,6 +33,11 @@ var _registration_quote: RegistrationQuote
 var _repair_open := false
 var _repairing := false
 var _repair_quote: RepairQuote
+var _harness_open := false
+var _equipping := false
+var _harness_source: Dictionary = {}
+var _harness_selection: Array = []
+var _progress_notice := ""
 
 @onready var _title: TitleScreen = $Interface/TitleScreen
 @onready var _hub: HubPanel = $Interface/HubPanel
@@ -40,6 +45,7 @@ var _repair_quote: RepairQuote
 @onready var _appraisal: HubAppraisalPanel = $Interface/HubPanel/AppraisalPanel
 @onready var _sale: HubSalePanel = $Interface/HubPanel/SalePanel
 @onready var _registration: HubRegistrationPanel = $Interface/HubPanel/RegistrationPanel
+@onready var _harness_panel: HubHarnessPanel = $Interface/HubPanel/HarnessPanel
 @onready var _repair: HubRepairPanel = $Interface/HubPanel/RepairPanel
 
 
@@ -82,6 +88,11 @@ func _ready() -> void:
 	_repair.confirmation_requested.connect(_on_repair_confirmed)
 	_repair.selection_requested.connect(_on_repair_selection_requested)
 	_repair.close_requested.connect(_on_repair_closed)
+	_hub.harness_requested.connect(_on_harness_requested)
+	_harness_panel.review_requested.connect(_on_harness_review_requested)
+	_harness_panel.confirmation_requested.connect(_on_harness_confirmed)
+	_harness_panel.selection_requested.connect(_on_harness_selection_requested)
+	_harness_panel.close_requested.connect(_on_harness_closed)
 	_results.settlement_requested.connect(_on_settlement_requested)
 	_results.quit_requested.connect(_on_quit_requested)
 	GameState.state_changed.connect(_on_state_changed)
@@ -107,6 +118,7 @@ func _restore_progress() -> bool:
 	if restored == null:
 		return false
 	_hub_state = restored
+	_progress_notice = "이전 기록: 안정화·비상 방전 장착.\n하네스 장착에서 세 기능 중 둘을 고르세요." if _progress_store.has_legacy_modules() else ""
 	return true
 
 
@@ -199,6 +211,7 @@ func _start_new_game(replace_existing: bool) -> void:
 		_restore_title("새 게임을 저장하지 못했습니다. 기존 기록을 유지합니다. 다시 시도해 주세요.")
 		return
 	_hub_state = fresh
+	_progress_notice = ""
 	_enter_hub()
 
 
@@ -230,6 +243,10 @@ func _restore_title(message: String) -> void:
 
 func _on_state_changed(_previous_state: int, current_state: int) -> void:
 	_starting = false
+	_harness_open = false
+	_harness_source.clear()
+	_harness_selection.clear()
+	_harness_panel.hide()
 	_appraisal_open = false
 	_appraisal_quote = null
 	_appraisal.hide()
@@ -259,7 +276,7 @@ func _on_state_changed(_previous_state: int, current_state: int) -> void:
 		_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items())
 		_render_equipment()
 		_hub.present()
-		_hub.set_status("진행이 저장되어 있습니다.")
+		_hub.set_status(_progress_notice if not _progress_notice.is_empty() else "진행이 저장되어 있습니다.")
 	if current_state == GameState.State.EXPLORATION and _exploration != null:
 		_exploration.start_exploration()
 		_departing = false
@@ -294,7 +311,7 @@ func get_hub_registered_items() -> Array[InventoryItem]:
 
 
 func _on_bag_slots_selected(slots: int) -> void:
-	if _repair_open or _repairing:
+	if _repair_open or _repairing or _harness_open or _equipping:
 		return
 	if GameState.get_current_state() != GameState.State.HUB or _departing or _appraisal_open or _appraising or _sale_open or _selling or _registration_open or _registering:
 		return
@@ -309,7 +326,7 @@ func _on_bag_slots_selected(slots: int) -> void:
 
 
 func _on_departure_requested() -> void:
-	if _repair_open or _repairing:
+	if _repair_open or _repairing or _harness_open or _equipping:
 		return
 	if _departing or _appraisal_open or _appraising or _sale_open or _selling or _registration_open or _registering or GameState.get_current_state() != GameState.State.HUB or get_tree().paused:
 		return
@@ -381,14 +398,14 @@ func _on_settlement_requested() -> void:
 
 
 func _on_quit_requested() -> void:
-	if _appraising or _selling or _registering or _repairing:
+	if _appraising or _selling or _registering or _repairing or _equipping:
 		return
 	GameLog.info(&"GameEntry", &"quit_requested")
 	get_tree().quit()
 
 
 func _can_appraise() -> bool:
-	if _repair_open or _repairing:
+	if _repair_open or _repairing or _harness_open or _equipping:
 		return false
 	return GameState.get_current_state() == GameState.State.HUB and not GameState.is_transition_in_progress() \
 		and not _departing and not _settling and not _appraising and not _sale_open and not _selling and not _registration_open and not _registering and not get_tree().paused
@@ -454,7 +471,7 @@ func _on_appraisal_closed() -> void:
 
 
 func _can_sell() -> bool:
-	if _repair_open or _repairing:
+	if _repair_open or _repairing or _harness_open or _equipping:
 		return false
 	return GameState.get_current_state() == GameState.State.HUB and not GameState.is_transition_in_progress() \
 		and not _departing and not _settling and not _appraising and not _appraisal_open and not _selling and not _registration_open and not _registering and not get_tree().paused
@@ -520,7 +537,7 @@ func _on_sale_closed() -> void:
 
 
 func _can_register() -> bool:
-	if _repair_open or _repairing:
+	if _repair_open or _repairing or _harness_open or _equipping:
 		return false
 	return GameState.get_current_state() == GameState.State.HUB and not GameState.is_transition_in_progress() \
 		and not _departing and not _settling and not _appraising and not _appraisal_open \
@@ -598,6 +615,8 @@ func _render_equipment() -> void:
 
 
 func _can_repair() -> bool:
+	if _harness_open or _equipping:
+		return false
 	return GameState.get_current_state() == GameState.State.HUB and not GameState.is_transition_in_progress() \
 		and not get_tree().paused and not _departing and not _settling and not _repairing \
 		and not _appraisal_open and not _appraising and not _sale_open and not _selling \
@@ -668,3 +687,73 @@ func _on_repair_closed() -> void:
 	_repair.hide()
 	_hub.get_node("Center").show()
 	_hub.get_node("%RepairButton").grab_focus()
+
+
+func _can_equip() -> bool:
+	return GameState.get_current_state() == GameState.State.HUB and not GameState.is_transition_in_progress() \
+		and not get_tree().paused and not _departing and not _settling and not _equipping \
+		and not _appraisal_open and not _appraising and not _sale_open and not _selling \
+		and not _registration_open and not _registering and not _repair_open and not _repairing
+
+
+func _on_harness_requested() -> void:
+	if not _can_equip() or _harness_open:
+		return
+	_harness_open = true
+	_harness_source = _hub_state.to_save_data()
+	_harness_selection.clear()
+	_hub.get_node("Center").hide()
+	_harness_panel.present(_hub_state.create_departure_loadout().harness_modules)
+
+
+func _on_harness_review_requested(modules: Array) -> void:
+	if not _can_equip() or not _harness_open or not _harness_selection.is_empty():
+		return
+	if not _hub_state.copy().select_harness_modules(modules, _harness_source):
+		_harness_panel.set_status("현재 구성과 다른 두 기능을 선택하세요.")
+		return
+	_harness_selection = modules.duplicate()
+	_harness_panel.set_review(_harness_selection)
+
+
+func _on_harness_selection_requested() -> void:
+	if not _can_equip() or not _harness_open:
+		return
+	_harness_source = _hub_state.to_save_data()
+	_harness_selection.clear()
+	_harness_panel.present(_hub_state.create_departure_loadout().harness_modules)
+
+
+func _on_harness_confirmed() -> void:
+	if not _can_equip() or not _harness_open or _harness_selection.is_empty():
+		return
+	_equipping = true
+	var candidate := _hub_state.copy()
+	if not candidate.select_harness_modules(_harness_selection, _harness_source):
+		_equipping = false
+		_harness_panel.set_status("준비 상태가 바뀌었습니다. 선택으로 돌아가 다시 확인하세요.")
+		return
+	if not _save_hub(candidate):
+		_equipping = false
+		_harness_panel.set_status("저장 실패 · 기존 장착과 보유 상태를 유지합니다.\n다시 확정하거나 선택으로 돌아가 취소할 수 있습니다.")
+		return
+	_hub_state = candidate
+	_equipping = false
+	_progress_notice = ""
+	_harness_source = _hub_state.to_save_data()
+	_harness_selection.clear()
+	_hub.render_preparation(_hub_state.create_departure_loadout(), false)
+	_render_equipment()
+	_harness_panel.present(_hub_state.create_departure_loadout().harness_modules)
+	_harness_panel.set_status("장착 구성을 저장했습니다. 다음 출정부터 적용합니다. 지불액 0.")
+
+
+func _on_harness_closed() -> void:
+	if not _can_equip() or not _harness_open:
+		return
+	_harness_open = false
+	_harness_source.clear()
+	_harness_selection.clear()
+	_harness_panel.hide()
+	_hub.get_node("Center").show()
+	_hub.get_node("%HarnessButton").grab_focus()

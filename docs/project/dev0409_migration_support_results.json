@@ -1,0 +1,147 @@
+{
+  "passed": true,
+  "source_tree_sha256": "2a31dcc5bf89a2f5b41ef8618b0148805b88abdb27c87ed10cf22cd0a0eea780",
+  "cases": [
+    {
+      "source": "C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-harness-13920-699099\\harness-legacy1.json",
+      "result": {
+        "actions": [],
+        "case": "legacy1",
+        "failures": [],
+        "final_hub": {
+          "bag_slots": 3.0,
+          "harness_durability": 3,
+          "harness_modules": [
+            "precise_analysis",
+            "stabilization"
+          ],
+          "money": "0",
+          "next_expedition_id": "1",
+          "registered_items": [],
+          "stored_items": [
+            {
+              "id": "test_g1_unknown",
+              "identified": false,
+              "risk_hint": "진동"
+            }
+          ]
+        },
+        "passed": true
+      }
+    },
+    {
+      "source": "C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-harness-5240-676967\\harness-legacy2.json",
+      "result": {
+        "actions": [],
+        "case": "legacy2",
+        "failures": [],
+        "final_hub": {
+          "bag_slots": 3.0,
+          "harness_durability": 3,
+          "harness_modules": [
+            "precise_analysis",
+            "stabilization"
+          ],
+          "money": "0",
+          "next_expedition_id": "1",
+          "registered_items": [
+            {
+              "id": "test_g4_record",
+              "identified": true,
+              "risk_hint": ""
+            },
+            {
+              "id": "test_g4_artifact",
+              "identified": true,
+              "risk_hint": ""
+            }
+          ],
+          "stored_items": [
+            {
+              "id": "test_g1_unknown",
+              "identified": false,
+              "risk_hint": "진동"
+            }
+          ]
+        },
+        "passed": true
+      }
+    },
+    {
+      "source": "C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-harness-14540-673177\\harness-legacy3.json",
+      "result": {
+        "actions": [],
+        "case": "legacy3",
+        "failures": [],
+        "final_hub": {
+          "bag_slots": 3.0,
+          "harness_durability": 3,
+          "harness_modules": [
+            "precise_analysis",
+            "stabilization"
+          ],
+          "money": "0",
+          "next_expedition_id": "1",
+          "registered_items": [
+            {
+              "id": "test_g4_record",
+              "identified": true,
+              "risk_hint": ""
+            },
+            {
+              "id": "test_g4_artifact",
+              "identified": true,
+              "risk_hint": ""
+            }
+          ],
+          "stored_items": [
+            {
+              "id": "test_g1_unknown",
+              "identified": false,
+              "risk_hint": "진동"
+            }
+          ]
+        },
+        "passed": true
+      }
+    },
+    {
+      "source": "C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-harness-4144-673953\\harness-support.json",
+      "result": {
+        "actions": [],
+        "case": "support",
+        "failures": [],
+        "final_hub": {
+          "bag_slots": 3.0,
+          "harness_durability": 0,
+          "harness_modules": [
+            "precise_analysis",
+            "stabilization"
+          ],
+          "money": "40",
+          "next_expedition_id": "2",
+          "registered_items": [
+            {
+              "id": "test_g4_record",
+              "identified": true,
+              "risk_hint": ""
+            },
+            {
+              "id": "test_g4_artifact",
+              "identified": true,
+              "risk_hint": ""
+            }
+          ],
+          "stored_items": [
+            {
+              "id": "test_g1_unknown",
+              "identified": false,
+              "risk_hint": "진동"
+            }
+          ]
+        },
+        "passed": true
+      }
+    }
+  ]
+}

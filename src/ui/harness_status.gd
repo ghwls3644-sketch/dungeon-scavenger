@@ -64,7 +64,7 @@ func _render(prompt: String, should_show_prompt: bool, current_charge: int, char
 	_prompt_visible = should_show_prompt
 	_status.text = "하네스 충전 %d/%d" % [current_charge, charge_capacity]
 	if should_show_prompt:
-		_status.text += "\n[Q] %s" % prompt
+		_status.text += "\n%s" % ("[Q] " + prompt if _source.has_module(_source.get_action_module()) else prompt)
 
 	_analysis.visible = not basic.is_empty()
 	_analyze_button.visible = _analysis.visible and _source.get_analysis_charge_cost() > 0
@@ -79,6 +79,8 @@ func _render(prompt: String, should_show_prompt: bool, current_charge: int, char
 	if not precise.is_empty():
 		_analysis.text += "\n정밀 분석\n%s" % precise
 		_analyze_button.text = "현재 상태 분석 완료"
+	elif not _source.has_module(HarnessModules.ANALYSIS):
+		_analyze_button.text = "정밀 분석 미장착 · 기본 정보는 무료"
 	elif cost > current_charge:
 		_analyze_button.text += " · 충전 부족"
 
@@ -95,6 +97,8 @@ func _on_charge_changed(_current_charge: int, _capacity: int) -> void:
 
 func _on_action_rejected(reason: StringName) -> void:
 	match reason:
+		HarnessController.REJECT_MODULE_MISSING:
+			_feedback.text = "필요한 기능을 장착하지 않았습니다. 충전은 사용하지 않았습니다."
 		HarnessController.REJECT_INSUFFICIENT_CHARGE:
 			_feedback.text = "충전이 부족합니다."
 		HarnessController.REJECT_ALREADY_ANALYZED:

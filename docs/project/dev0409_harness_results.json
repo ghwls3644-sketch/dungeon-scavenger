@@ -1,0 +1,201 @@
+{
+	"actions": [
+		{
+			"acted": true,
+			"allowed": true,
+			"charge": 2,
+			"pair": [
+				"stabilization",
+				"emergency_discharge"
+			],
+			"required": "stabilization",
+			"target": "RiskHazard"
+		},
+		{
+			"acted": true,
+			"allowed": true,
+			"charge": 2,
+			"pair": [
+				"stabilization",
+				"emergency_discharge"
+			],
+			"required": "emergency_discharge",
+			"target": "BrokenGuardGolem"
+		},
+		{
+			"acted": true,
+			"allowed": true,
+			"charge": 2,
+			"pair": [
+				"stabilization",
+				"emergency_discharge"
+			],
+			"required": "emergency_discharge",
+			"target": "RetreatDoor"
+		},
+		{
+			"acted": true,
+			"allowed": true,
+			"charge": 2,
+			"pair": [
+				"stabilization",
+				"emergency_discharge"
+			],
+			"required": "stabilization",
+			"target": "RemainingZoneEntrance"
+		},
+		{
+			"acted": true,
+			"allowed": true,
+			"charge": 2,
+			"pair": [
+				"stabilization",
+				"emergency_discharge"
+			],
+			"required": "stabilization",
+			"target": "MalfunctioningTrap"
+		},
+		{
+			"acted": true,
+			"allowed": true,
+			"charge": 1,
+			"pair": [
+				"precise_analysis",
+				"stabilization"
+			],
+			"required": "stabilization",
+			"target": "RiskHazard"
+		},
+		{
+			"acted": false,
+			"allowed": false,
+			"charge": 2,
+			"pair": [
+				"precise_analysis",
+				"stabilization"
+			],
+			"required": "emergency_discharge",
+			"target": "BrokenGuardGolem"
+		},
+		{
+			"acted": false,
+			"allowed": false,
+			"charge": 3,
+			"pair": [
+				"precise_analysis",
+				"stabilization"
+			],
+			"required": "emergency_discharge",
+			"target": "RetreatDoor"
+		},
+		{
+			"acted": true,
+			"allowed": true,
+			"charge": 2,
+			"pair": [
+				"precise_analysis",
+				"stabilization"
+			],
+			"required": "stabilization",
+			"target": "RemainingZoneEntrance"
+		},
+		{
+			"acted": true,
+			"allowed": true,
+			"charge": 2,
+			"pair": [
+				"precise_analysis",
+				"stabilization"
+			],
+			"required": "stabilization",
+			"target": "MalfunctioningTrap"
+		},
+		{
+			"acted": false,
+			"allowed": false,
+			"charge": 2,
+			"pair": [
+				"precise_analysis",
+				"emergency_discharge"
+			],
+			"required": "stabilization",
+			"target": "RiskHazard"
+		},
+		{
+			"acted": true,
+			"allowed": true,
+			"charge": 1,
+			"pair": [
+				"precise_analysis",
+				"emergency_discharge"
+			],
+			"required": "emergency_discharge",
+			"target": "BrokenGuardGolem"
+		},
+		{
+			"acted": true,
+			"allowed": true,
+			"charge": 2,
+			"pair": [
+				"precise_analysis",
+				"emergency_discharge"
+			],
+			"required": "emergency_discharge",
+			"target": "RetreatDoor"
+		},
+		{
+			"acted": false,
+			"allowed": false,
+			"charge": 3,
+			"pair": [
+				"precise_analysis",
+				"emergency_discharge"
+			],
+			"required": "stabilization",
+			"target": "RemainingZoneEntrance"
+		},
+		{
+			"acted": false,
+			"allowed": false,
+			"charge": 3,
+			"pair": [
+				"precise_analysis",
+				"emergency_discharge"
+			],
+			"required": "stabilization",
+			"target": "MalfunctioningTrap"
+		}
+	],
+	"case": "write",
+	"failures": [],
+	"final_hub": {
+		"bag_slots": 3.0,
+		"harness_durability": 0,
+		"harness_modules": [
+			"precise_analysis",
+			"stabilization"
+		],
+		"money": "110",
+		"next_expedition_id": "6",
+		"registered_items": [
+			{
+				"id": "test_g4_record",
+				"identified": true,
+				"risk_hint": ""
+			},
+			{
+				"id": "test_g4_artifact",
+				"identified": true,
+				"risk_hint": ""
+			}
+		],
+		"stored_items": [
+			{
+				"id": "test_g1_unknown",
+				"identified": false,
+				"risk_hint": "진동"
+			}
+		]
+	},
+	"passed": true
+}

@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "source_tree_sha256": "2a31dcc5bf89a2f5b41ef8618b0148805b88abdb27c87ed10cf22cd0a0eea780",
+  "directory": "C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-dev0409-render-580b6daf00ef42c9a7285826310f0810",
+  "checks": [
+    {
+      "case": "write",
+      "passed": true,
+      "exit_code": 0,
+      "diagnostics": []
+    },
+    {
+      "case": "continue",
+      "passed": true,
+      "exit_code": 0,
+      "diagnostics": []
+    }
+  ],
+  "screenshots": [
+    "continued-1152.png",
+    "continued-1600.png",
+    "equipped-0-1152.png",
+    "equipped-0-1600.png",
+    "equipped-1-1152.png",
+    "equipped-1-1600.png",
+    "equipped-2-1152.png",
+    "equipped-2-1600.png",
+    "hub-0-1152.png",
+    "hub-0-1600.png",
+    "hub-1-1152.png",
+    "hub-1-1600.png",
+    "hub-2-1152.png",
+    "hub-2-1600.png",
+    "missing-stabilization-1152.png",
+    "missing-stabilization-1600.png",
+    "review-1152.png",
+    "review-1600.png",
+    "save-failure-1152.png",
+    "save-failure-1600.png"
+  ]
+}

@@ -140,6 +140,7 @@ function Start-G2Checks {
             $registrationSession = Join-Path $runDirectory "$prefix-registration-session"
             $researchSession = Join-Path $runDirectory "$prefix-research-session"
             $wearSession = Join-Path $runDirectory "$prefix-wear-session"
+            $harnessSession = Join-Path $runDirectory "$prefix-harness-session"
             $repairSession = Join-Path $runDirectory "$prefix-repair-session"
             $supportSession = Join-Path $runDirectory "$prefix-support-session"
             foreach ($scene in (Get-ChildItem -LiteralPath (Join-Path $repository 'tests/smoke') -Filter '*.tscn' | Sort-Object Name)) {
@@ -152,6 +153,7 @@ function Start-G2Checks {
                 if ($scene.BaseName -eq 'hub_registration_smoke') { $sceneArguments = @("--registration-directory=$registrationSession") }
                 if ($scene.BaseName -eq 'hub_research_smoke') { $sceneArguments = @("--research-directory=$researchSession") }
                 if ($scene.BaseName -eq 'equipment_wear_smoke') { $sceneArguments = @("--wear-directory=$wearSession") }
+                if ($scene.BaseName -eq 'hub_harness_smoke') { $sceneArguments = @("--harness-directory=$harnessSession") }
                 if ($scene.BaseName -eq 'hub_repair_smoke') { $sceneArguments = @("--repair-directory=$repairSession") }
                 Run-Scene "$prefix-$($scene.BaseName)" $scene.BaseName "\[SmokeTest\] $marker(?:\s|$)" $sceneArguments
             }
@@ -160,6 +162,10 @@ function Start-G2Checks {
             Run-Scene "$prefix-sale-continue" 'hub_sale_smoke' '\[SmokeTest\] hub_sale_passed continue' @('--sale-continue', "--sale-directory=$saleSession")
             Run-Scene "$prefix-registration-continue" 'hub_registration_smoke' '\[SmokeTest\] hub_registration_passed continue' @('--registration-continue', "--registration-directory=$registrationSession")
             Run-Scene "$prefix-research-continue" 'hub_research_smoke' '\[SmokeTest\] hub_research_passed continue' @('--research-continue', "--research-directory=$researchSession")
+            Run-Scene "$prefix-harness-continue" 'hub_harness_smoke' '\[SmokeTest\] hub_harness_passed continue' @('--harness-case=continue', "--harness-directory=$harnessSession")
+            foreach ($case in @('legacy1', 'legacy2', 'legacy3', 'support')) {
+                Run-Scene "$prefix-harness-$case" 'hub_harness_smoke' "\[SmokeTest\] hub_harness_passed $case" @("--harness-case=$case")
+            }
             Run-Scene "$prefix-wear-continue" 'equipment_wear_smoke' '\[SmokeTest\] equipment_wear_passed continue' @('--wear-case=continue', "--wear-directory=$wearSession")
             Run-Scene "$prefix-repair-continue" 'hub_repair_smoke' '\[SmokeTest\] hub_repair_passed continue' @('--repair-case=continue', "--repair-directory=$repairSession")
             Run-Scene "$prefix-repair-support" 'hub_repair_smoke' '\[SmokeTest\] hub_repair_passed support' @('--repair-case=support', "--repair-directory=$supportSession")
