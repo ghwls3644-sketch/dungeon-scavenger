@@ -49,6 +49,10 @@ func present_result(outcome: ExplorationOutcome, settlement: SettlementResult) -
 		lines.append("이번 회수품 %d개 손실 · 새 개선 발견 미확보\n기존 돈·보관품·보유 개선은 유지됩니다." % settlement.get_lost_count())
 	elif lines.is_empty():
 		lines.append("이번에 회수한 물품이 없습니다.")
+	var tools := outcome.get_lure_summary()
+	if not tools.is_empty():
+		lines.append("유인물 무료 %d개 / 추가 %d개 사용\n%s · 정산 저장 시 반영\n구매비는 거점에서 이미 지불" % [tools.free_used, tools.paid_used,
+			"미사용 추가분 %d개 반환" % tools.returned if outcome.is_safe_return() else "휴대 추가분 %d개 소실" % tools.lost])
 	$NextStep/Items.text = "\n".join(lines)
 	_settle.text = "거점으로 돌아가기" if settlement.is_failure() else "정산하고 거점으로"
 	_settle.grab_focus()

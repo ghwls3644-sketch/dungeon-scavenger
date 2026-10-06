@@ -1490,3 +1490,28 @@ $researchDirectory = Join-Path $env:TEMP ('dungeon-research-' + [guid]::NewGuid(
 - 재현: 활성 Markdown 링크/앵커 → 이관 대장의 원본 6개/사본 3개 → Q/DEC ID와 상태·승인 범위·검토안/인계의 수량 관계 및 코드 소유자 대조 → 소스 해시와 DEV-0411 보고서 대조 → HEAD 대비 검사 시점 표·Story/Reference·변경 범위 → `git diff --check`. 유료 수량/저장/무게의 게임 검사는 DEV-0413에서 수행한다.
 
 **DEV-0412 문서 작성·검증 완료, 사용자 로컬 커밋 승인.** 다음은 **DEV-0413 — 거점 소음 유인물 준비**다. 이번 작업은 사용자 로컬 커밋 승인 상태이며 커밋 전에는 로컬 11커밋 앞섬·뒤처짐 0이었다. push하지 않았다. **정합성 검사: 아직 아님** — 다음 정기 검사는 G5 완료 후다.
+
+## DEV-0413 거점 소음 유인물 준비 검사
+
+- 기준: DEV-0412 `2a1e744` 뒤 미커밋 변경의 실행 소스 SHA-256 `304c47fe2d3be7bedfc1f0f334e580371717c826fb80fec69866fbc4ffa816fb`. 원본 실행 바이트 기준이며 운영체제 줄바꿈 정규화 뒤의 Git blob 해시와 구분한다.
+- [전체 자동 검사 원본](dev0413_automated_results.json): Godot 4.7.1 headless, 49개 스모크 장면과 기존 새 프로세스/구형/분기 검사 포함 **92/92** 통과. 실제 앱 준비→구매/수량 축소→돈 0 최소 복구→F 소비→입구 귀환/위험 실패→정산/재출정과 0개 무료 출정을 실행했다. 기존 비상 탈출·감정/판매/등록/연구/수리/하네스/발견·보호/빠른 버리기·역사적 무료 2개 시험도 유지한다.
+- 새 도메인 검사는 잔액 0/4/5/9/10/int64최대 × 재고 0/1/2 × 총량 0~4 **90조합**, 무료 먼저 사용/정상·비상·실패 **45조합**, 잘못된 타입/분수/한도·단가 곱셈 초과·오래된 견적/가격·구형 1~5 읽기 보존과 정상 저장 전환을 확인한다. 임의 상태로 준비한 경계이며 이 수치를 모두 실제 플레이한 것으로 세지 않는다.
+- 적재 경계는 2.5/4.0 바로 아래·동일·위를 검사했다. 별도 준비한 실제 월드에서 무게 2.0 회수품+무료 도구 0.5로 부담 단계에 놓고, F 한 번으로 2.25·정상 단계가 되며 이동 속도 증가/소음 반경 감소·회수품 슬롯 보존을 확인했다. 포커스 상실/비행 중 비활성/재활성은 소비를 취소하지 않았다. 실제 앱 메뉴 중 투척 정지·연타 거절도 검사했다.
+- [출정 경계 검사 원본](dev0413_boundary_results.json): 예약·시작 표식·정산 저장의 **각 직전/직후 6곳**에서 테스트 저장소가 신호 파일을 만들고, 감독 프로세스가 그 자식 Godot만 강제 종료했다. 이어하기 **10회**에서 예약 반환/시작 후 미반환/정산 후 중복 반환 방지·ID 보존·복구 쓰기 두 번 실패 후 재시도를 검사했다. 파일 읽기는 바이트를 유지한다. 직접 구성한 거점 재고로 시작하되 출정/반환은 실제 앱 이벤트와 E 귀환을 쓴다. 시작 저장 실패+복구 저장 실패는 별도 스모크에서 다른 서비스 잠금과 재시도 후 출정/정산을 검사한다.
+- [화면 검사 원본](dev0413_render_results.json): Compatibility 그래픽 실행 2회, 1152×648/1600×900 화면 **32장**. 준비 선택/가격·잔액·구매 실패 재시도·무게/수량·귀환/복구 안내·키보드 선택/Enter/Esc/마우스를 검사하고 화면을 직접 확인했다. 플레이어의 난도/경제 체감 평가는 별도다.
+- 기존 회귀의 `출정 시 파일 불변` 가정은 예약/시작 기록 검증과 영구 보유/내구 불변 검증으로 바꿨다. 탐험 중 회수/결과 미리 보기가 저장하지 않는 검사는 시작 기록 이후 바이트를 기준으로 유지했다. 신규 숫자 필드를 구형 보완/JSON 재읽기에서 같은 정수로 정규화했다. 초기 검사 실패는 해당 원인을 보완한 뒤 전체를 다시 실행한 결과로 대체했다. 이전 작업 보고서는 변경하지 않았다.
+- [문서 검사 원본](dev0413_document_results.json): 활성 링크/앵커, 동결 6개 SHA-256·아카이브 사본 3개, 두 정합성 시점 표·범위·미결정 상태와 `git diff --check`를 검사한다. 이번 최종 실행 자료는 기존 DEV-0411/0412 자료와 구분한다.
+
+재현 명령:
+
+```powershell
+./tests/run_g2_checks.ps1 -GodotBin C:/tmp/godot-4.7.1/Godot_v4.7.1-stable_win64_console.exe -Repetitions 1 -TimeoutSeconds 90
+./tests/run_lure_boundaries.ps1 -GodotBin C:/tmp/godot-4.7.1/Godot_v4.7.1-stable_win64_console.exe
+# 독립된 새 출력 디렉터리로 실제 화면 검사
+& C:/tmp/godot-4.7.1/Godot_v4.7.1-stable_win64_console.exe --path . res://tests/smoke/lure_preparation_smoke.tscn -- --lure-render --lure-directory=C:/tmp/dev0413-new-render
+& C:/tmp/godot-4.7.1/Godot_v4.7.1-stable_win64_console.exe --path . res://tests/smoke/lure_departure_smoke.tscn -- --lure-render --lure-directory=C:/tmp/dev0413-new-recovery
+```
+
+실행 원본 위치: `C:\Users\user\AppData\Local\Temp\dungeon-g2-20261006-022526-58319f3fb59a42efadce590dda7ac044`, `C:\Users\user\AppData\Local\Temp\dungeon-lure-boundaries-c6bbf670199f45bab6fb1f8606a8d320`, `C:\Users\user\AppData\Local\Temp\dev0413-render-d47e39911e2541f9a0b8012534f79c59`. 소스와 JSON 요약은 저장소에서 재현할 수 있고 임시 스크린샷/엔진 로그의 영구 보관을 약속하지 않는다.
+
+**DEV-0413 구현·검증 완료, 사용자 로컬 커밋 승인.** 다음 **DEV-0414 — 출정별 비용 표시 규칙 정리**. 커밋 전에는 로컬 12커밋 앞섬·뒤처짐 0이었다. 사용자 로컬 커밋 승인, push하지 않았다. **정합성 검사: 아직 아님 — G5 완료 후.**

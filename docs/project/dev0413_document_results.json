@@ -1,0 +1,47 @@
+{
+  "passed": true,
+  "markdown_files": 48,
+  "relative_links_checked": 1502,
+  "frozen_sources": 6,
+  "archive_copies": 3,
+  "failures": [],
+  "ticket": "DEV-0413",
+  "ticket_name": "거점 소음 유인물 준비",
+  "checked_date": "2026-10-06",
+  "source_tree_sha256": "304c47fe2d3be7bedfc1f0f334e580371717c826fb80fec69866fbc4ffa816fb",
+  "source_hash_matches_final_runtime": true,
+  "checkpoint_tables_unchanged": true,
+  "next_checkpoint": "G5 완료 후",
+  "base_commit": "2a1e744ebf443e1d9f80992f5823cd0ec6c8f04c",
+  "ahead_behind": [
+    12,
+    0
+  ],
+  "git_diff_check": true,
+  "additional_reservation_save_retry": {
+    "failures": [],
+    "final_hub": {
+      "bag_slots": 2.0,
+      "harness_durability": 2,
+      "harness_modules": [
+        "stabilization",
+        "emergency_discharge"
+      ],
+      "harness_upgrades": [],
+      "money": "0",
+      "next_expedition_id": "2",
+      "paid_lures": 2,
+      "pending_departure": {},
+      "registered_items": [],
+      "selected_lures": 4,
+      "stored_items": []
+    },
+    "mode": "reservation-retry",
+    "passed": true
+  },
+  "additional_retry_evidence": "C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-lure-boundary-19252-790896\\boundary-reservation-retry.json",
+  "scope_review": "one ticket; new files are supply rules/quote/UI, departure journal, tests and DEV-0413 evidence; historical reports and frozen sources preserved",
+  "commit_status": "user_approved_local_commit",
+  "pushed": false,
+  "approval_text": "커밋해"
+}

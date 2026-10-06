@@ -41,6 +41,9 @@ func _ready() -> void:
 			initial.erase("harness_durability")
 			initial.erase("harness_modules")
 			initial.erase("harness_upgrades")
+			initial.erase("paid_lures")
+			initial.erase("selected_lures")
+			initial.erase("pending_departure")
 			if _case == "legacy1":
 				initial.erase("registered_items")
 			_write_json(_path, _envelope(1 if _case == "legacy1" else 2, initial))
@@ -163,6 +166,9 @@ func _check_migration() -> void:
 		legacy.erase("harness_durability")
 		legacy.erase("harness_modules")
 		legacy.erase("harness_upgrades")
+		legacy.erase("paid_lures")
+		legacy.erase("selected_lures")
+		legacy.erase("pending_departure")
 		if version == 1:
 			legacy.erase("registered_items")
 		_write_json(path, _envelope(version, legacy))
@@ -208,12 +214,17 @@ func _check_hub(durability: int) -> void:
 func _depart_wear(emergency := false) -> PrototypeExploration:
 	_expect(HubRepairTestInput.prepare_departure(_entry) == 0, "Empty wear loop charged money.")
 	var durability := _entry.get_hub_harness_durability()
-	var bytes := FileAccess.get_file_as_bytes(_path)
+	var before := _store.load_data()
 	_entry.review_scene = ESCAPE if emergency else null
 	_click(_hub.get_node("%DepartureButton"))
 	await _frames(5)
 	var world: PrototypeExploration = _entry.get_node("EmergencyEscapeTestSpace" if emergency else "PrototypeExploration")
-	_expect(GameState.get_current_state() == GameState.State.EXPLORATION and _entry.get_hub_harness_durability() == durability and FileAccess.get_file_as_bytes(_path) == bytes, "Departure changed durability/file.")
+	var saved := _store.load_data()
+	_expect(saved.pending_departure.phase == "started" and saved.next_expedition_id.to_int() == before.next_expedition_id.to_int() + 1, "Departure journal missing.")
+	for key in ["next_expedition_id", "pending_departure"]:
+		saved.erase(key)
+		before.erase(key)
+	_expect(GameState.get_current_state() == GameState.State.EXPLORATION and _entry.get_hub_harness_durability() == durability and saved == before, "Departure changed durability/holdings.")
 	_expect(world.get_node("Player/HarnessController").get_current_charge() == 3 and world.get_node("PlayerSurvival").get_health() == 2 and world.get_node("Player/Inventory").slot_capacity == 3, "Durability changed charge, health or bag.")
 	return world
 

@@ -139,6 +139,9 @@ func _check_growth_migration() -> void:
 		var data := _repair_data(60, 1)
 		data.harness_modules = HarnessModules.PAIRS[1].duplicate()
 		data.erase("harness_upgrades")
+		data.erase("paid_lures")
+		data.erase("selected_lures")
+		data.erase("pending_departure")
 		if version < 4:
 			data.erase("harness_modules")
 		if version < 3:
@@ -148,9 +151,9 @@ func _check_growth_migration() -> void:
 		_write_json(path, _envelope(version, data))
 		var original := FileAccess.get_file_as_bytes(path)
 		var loaded := store.load_data()
-		_expect(loaded.size() == 8 and loaded.harness_upgrades.is_empty() and FileAccess.get_file_as_bytes(path) == original, "Legacy growth read changed file or granted upgrades.")
+		_expect(loaded.size() == 11 and loaded.harness_upgrades.is_empty() and FileAccess.get_file_as_bytes(path) == original, "Legacy growth read changed file or granted upgrades.")
 		_expect(loaded.harness_modules == (HarnessModules.PAIRS[1] if version == 4 else HarnessModules.DEFAULT), "Legacy growth migration replaced equipment.")
-		_expect(store.save_data(loaded) == OK and store.load_data() == loaded and JSON.parse_string(FileAccess.get_file_as_string(path)).schema_version == 5, "Growth migration write failed.")
+		_expect(store.save_data(loaded) == OK and store.load_data() == loaded and JSON.parse_string(FileAccess.get_file_as_string(path)).schema_version == ProgressStore.SCHEMA_VERSION, "Growth migration write failed.")
 	for invalid in [null, {}, ["unknown"], [HarnessUpgradeRule.EMERGENCY, HarnessUpgradeRule.EMERGENCY]]:
 		var bad := _repair_data(60, 3)
 		bad.harness_upgrades = invalid

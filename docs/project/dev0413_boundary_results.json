@@ -1,0 +1,207 @@
+{
+  "passed": true,
+  "source_tree_sha256": "304c47fe2d3be7bedfc1f0f334e580371717c826fb80fec69866fbc4ffa816fb",
+  "checks": [
+    {
+      "name": "save-1-before-resume",
+      "arguments": [
+        "res://tests/smoke/lure_departure_smoke.tscn",
+        "--",
+        "--boundary-mode=resume",
+        "--lure-directory=C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-lure-boundaries-c6bbf670199f45bab6fb1f8606a8d320\\save-1-before",
+        "--expected-stock=2",
+        "--expected-next=1"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] lure_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1021,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "save-1-before-resume.console.log"
+    },
+    {
+      "name": "save-1-after-resume-retry",
+      "arguments": [
+        "res://tests/smoke/lure_departure_smoke.tscn",
+        "--",
+        "--boundary-mode=resume-retry",
+        "--lure-directory=C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-lure-boundaries-c6bbf670199f45bab6fb1f8606a8d320\\save-1-after",
+        "--expected-stock=2",
+        "--expected-next=2"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] lure_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1110,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "save-1-after-resume-retry.console.log"
+    },
+    {
+      "name": "save-1-after-resume",
+      "arguments": [
+        "res://tests/smoke/lure_departure_smoke.tscn",
+        "--",
+        "--boundary-mode=resume",
+        "--lure-directory=C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-lure-boundaries-c6bbf670199f45bab6fb1f8606a8d320\\save-1-after",
+        "--expected-stock=2",
+        "--expected-next=2"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] lure_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1014,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "save-1-after-resume.console.log"
+    },
+    {
+      "name": "save-2-before-resume-retry",
+      "arguments": [
+        "res://tests/smoke/lure_departure_smoke.tscn",
+        "--",
+        "--boundary-mode=resume-retry",
+        "--lure-directory=C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-lure-boundaries-c6bbf670199f45bab6fb1f8606a8d320\\save-2-before",
+        "--expected-stock=2",
+        "--expected-next=2"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] lure_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1109,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "save-2-before-resume-retry.console.log"
+    },
+    {
+      "name": "save-2-before-resume",
+      "arguments": [
+        "res://tests/smoke/lure_departure_smoke.tscn",
+        "--",
+        "--boundary-mode=resume",
+        "--lure-directory=C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-lure-boundaries-c6bbf670199f45bab6fb1f8606a8d320\\save-2-before",
+        "--expected-stock=2",
+        "--expected-next=2"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] lure_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1014,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "save-2-before-resume.console.log"
+    },
+    {
+      "name": "save-2-after-resume-retry",
+      "arguments": [
+        "res://tests/smoke/lure_departure_smoke.tscn",
+        "--",
+        "--boundary-mode=resume-retry",
+        "--lure-directory=C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-lure-boundaries-c6bbf670199f45bab6fb1f8606a8d320\\save-2-after",
+        "--expected-stock=0",
+        "--expected-next=2"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] lure_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1108,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "save-2-after-resume-retry.console.log"
+    },
+    {
+      "name": "save-2-after-resume",
+      "arguments": [
+        "res://tests/smoke/lure_departure_smoke.tscn",
+        "--",
+        "--boundary-mode=resume",
+        "--lure-directory=C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-lure-boundaries-c6bbf670199f45bab6fb1f8606a8d320\\save-2-after",
+        "--expected-stock=0",
+        "--expected-next=2"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] lure_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1015,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "save-2-after-resume.console.log"
+    },
+    {
+      "name": "save-3-before-resume-retry",
+      "arguments": [
+        "res://tests/smoke/lure_departure_smoke.tscn",
+        "--",
+        "--boundary-mode=resume-retry",
+        "--lure-directory=C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-lure-boundaries-c6bbf670199f45bab6fb1f8606a8d320\\save-3-before",
+        "--expected-stock=0",
+        "--expected-next=2"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] lure_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1202,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "save-3-before-resume-retry.console.log"
+    },
+    {
+      "name": "save-3-before-resume",
+      "arguments": [
+        "res://tests/smoke/lure_departure_smoke.tscn",
+        "--",
+        "--boundary-mode=resume",
+        "--lure-directory=C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-lure-boundaries-c6bbf670199f45bab6fb1f8606a8d320\\save-3-before",
+        "--expected-stock=0",
+        "--expected-next=2"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] lure_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1017,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "save-3-before-resume.console.log"
+    },
+    {
+      "name": "save-3-after-resume",
+      "arguments": [
+        "res://tests/smoke/lure_departure_smoke.tscn",
+        "--",
+        "--boundary-mode=resume",
+        "--lure-directory=C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-lure-boundaries-c6bbf670199f45bab6fb1f8606a8d320\\save-3-after",
+        "--expected-stock=2",
+        "--expected-next=2"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] lure_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1115,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "save-3-after-resume.console.log"
+    }
+  ],
+  "interrupted_boundaries": 6
+}

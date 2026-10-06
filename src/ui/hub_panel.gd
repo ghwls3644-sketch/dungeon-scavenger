@@ -10,6 +10,7 @@ signal registration_requested
 signal upgrade_requested
 signal harness_requested
 signal repair_requested
+signal lures_requested
 
 @onready var _bags: OptionButton = %BagChoice
 @onready var _details: Label = %PreparationDetails
@@ -19,6 +20,7 @@ signal repair_requested
 
 
 func _ready() -> void:
+	%LureButton.pressed.connect(func(): lures_requested.emit())
 	_bags.item_selected.connect(func(index: int): bag_slots_selected.emit(_bags.get_item_id(index)))
 	_departure.pressed.connect(func(): departure_requested.emit())
 	_quit.pressed.connect(func(): quit_requested.emit())
@@ -47,8 +49,9 @@ func render_preparation(loadout: ExpeditionLoadout, busy: bool) -> void:
 	%RepairButton.disabled = busy
 	%UpgradeButton.disabled = busy
 	%HarnessButton.disabled = busy
-	_details.text = "적재 여유 %d칸 · 시작 무게 0\n부담 %.1f / 과적 %.1f\n하네스 충전 %d/%d\n장착: %s" % [
-		loadout.slot_capacity, loadout.burden_weight, loadout.overload_weight,
+	%LureButton.disabled = busy
+	_details.text = "적재 여유 %d칸 · 시작 무게 %.2f · 유인물 %d개\n부담 %.1f / 과적 %.1f\n하네스 충전 %d/%d\n장착: %s" % [
+		loadout.slot_capacity, loadout.lure_count * loadout.lure_weight, loadout.lure_count, loadout.burden_weight, loadout.overload_weight,
 		loadout.starting_charge, loadout.charge_capacity, HarnessModules.describe(loadout.harness_modules),
 	]
 	if not loadout.harness_upgrades.is_empty():

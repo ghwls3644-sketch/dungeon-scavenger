@@ -13,6 +13,10 @@ var _unique_pickups := UniquePickupState.new()
 var _next_expedition_id := 1
 var _active_expedition_id := 0
 var _pending_settlement: SettlementResult
+var _paid_lures := 0
+var _selected_lures := 2
+var _pending_departure: Dictionary = {}
+var _return_paid_lures := 0
 
 
 func _init() -> void:
@@ -57,14 +61,17 @@ func apply_harness_upgrade(quote: HarnessUpgradeQuote, rule: HarnessUpgradeRule)
 
 
 func select_bag_slots(slots: int) -> bool:
-	if slots not in PROTOTYPE_BAG_SLOTS:
+	if has_pending_departure() or slots not in PROTOTYPE_BAG_SLOTS:
 		return false
 	_loadout.slot_capacity = slots
 	return true
 
 
 func create_departure_loadout() -> ExpeditionLoadout:
-	return _loadout.copy()
+	var result := _loadout.copy()
+	result.lure_count = _selected_lures
+	result.lure_weight = LurePreparation.RULE.unit_weight
+	return result
 
 
 func get_money() -> int:
@@ -139,7 +146,7 @@ func apply_repair(quote: RepairQuote, rule: EconomyRule) -> bool:
 
 
 func begin_expedition() -> int:
-	if _active_expedition_id != 0 or _next_expedition_id >= 9223372036854775807:
+	if has_pending_departure() or _active_expedition_id != 0 or _next_expedition_id >= 9223372036854775807:
 		return 0
 	_active_expedition_id = _next_expedition_id
 	_next_expedition_id += 1
@@ -178,7 +185,7 @@ func apply_appraisal(quote: AppraisalQuote, rule: EconomyRule) -> bool:
 
 
 func cancel_expedition(expedition_id: int) -> bool:
-	if expedition_id <= 0 or expedition_id != _active_expedition_id or _pending_settlement != null:
+	if has_pending_departure() or expedition_id <= 0 or expedition_id != _active_expedition_id or _pending_settlement != null:
 		return false
 	_active_expedition_id = 0
 	return true
@@ -214,7 +221,7 @@ func quote_sale(indices: PackedInt32Array, rule: EconomyRule) -> SaleQuote:
 		income += price
 		prices.append(price)
 		previous = index
-	if income > 9223372036854775807 - _money:
+	if income > 9223372036854775807 - _money or _paid_lures + _return_paid_lures > LurePreparation.RULE.stock_limit:
 		return null
 	return SaleQuote.new(source, selected, prices, income, _money + income)
 
@@ -243,11 +250,22 @@ func copy() -> HubState:
 	result._next_expedition_id = _next_expedition_id
 	result._active_expedition_id = _active_expedition_id
 	result._pending_settlement = _pending_settlement
+	result._paid_lures = _paid_lures
+	result._selected_lures = _selected_lures
+	result._pending_departure = _pending_departure.duplicate(true)
+	result._return_paid_lures = _return_paid_lures
 	return result
 
 
 func to_save_data() -> Dictionary:
-	if _active_expedition_id != 0 or _pending_settlement != null:
+	if _active_expedition_id != 0 or _pending_settlement != null or has_pending_departure():
+		return {}
+	return to_progress_data()
+
+
+# Only the durable hub snapshot and departure journal; never serialize live loot.
+func to_progress_data() -> Dictionary:
+	if _pending_settlement != null or (_active_expedition_id != 0 and not has_pending_departure()):
 		return {}
 	var items: Array[Dictionary] = []
 	for item in _stored_items:
@@ -266,11 +284,14 @@ func to_save_data() -> Dictionary:
 		"harness_durability": _harness_durability,
 		"harness_modules": _loadout.harness_modules.duplicate(),
 		"harness_upgrades": _loadout.harness_upgrades.duplicate(),
+		"paid_lures": _paid_lures,
+		"selected_lures": _selected_lures,
+		"pending_departure": _pending_departure.duplicate(true),
 	}
 
 
 static func from_save_data(data: Dictionary, catalog: ItemCatalog) -> HubState:
-	if catalog == null or not catalog.is_valid() or data.size() != 8 \
+	if catalog == null or not catalog.is_valid() or data.size() != 11 or not LurePreparation.valid_save(data) \
 			or not HarnessUpgradeRule.is_valid_owned(data.get("harness_upgrades")) \
 			or not is_valid_harness_durability(data.get("harness_durability")) \
 			or not HarnessModules.is_valid(data.get("harness_modules")):
@@ -294,6 +315,11 @@ static func from_save_data(data: Dictionary, catalog: ItemCatalog) -> HubState:
 	restored._loadout.harness_upgrades.assign(data.harness_upgrades)
 	restored._next_expedition_id = next_id
 	restored.select_bag_slots(int(slots))
+	restored._paid_lures = int(data.paid_lures)
+	restored._selected_lures = int(data.selected_lures)
+	restored._pending_departure = data.pending_departure.duplicate(true)
+	if restored.has_pending_departure():
+		restored._active_expedition_id = restored._pending_departure.id.to_int()
 	for raw_item in items:
 		if typeof(raw_item) != TYPE_DICTIONARY or raw_item.size() != 3 \
 				or typeof(raw_item.get("id")) != TYPE_STRING \
@@ -353,15 +379,19 @@ func apply_registration(quote: RegistrationQuote) -> bool:
 
 
 static func _read_nonnegative_integer(value: Variant) -> int:
-	if typeof(value) != TYPE_STRING or not value.is_valid_int():
-		return -1
-	var number: int = value.to_int()
-	return number if number >= 0 and str(number) == value else -1
+	return LurePreparation.read_nonnegative_integer(value)
 
 
 func prepare_settlement(expedition_id: int, outcome: ExplorationOutcome, rule: EconomyRule) -> bool:
 	if expedition_id <= 0 or expedition_id != _active_expedition_id or _pending_settlement != null:
 		return false
+	if has_pending_departure():
+		var tools := outcome.get_lure_usage() if outcome != null else {}
+		if _pending_departure.phase != "started" or tools.size() != 2 \
+				or tools.get("capacity") != _selected_lures \
+				or not LurePreparation.is_count(tools.get("used"), _selected_lures):
+			return false
+		_return_paid_lures = maxi(int(_pending_departure.paid) - maxi(int(tools.used) - int(_pending_departure.free), 0), 0) if outcome.is_safe_return() else 0
 	_pending_settlement = SettlementResult.from_outcome(outcome, rule, EQUIPMENT_WEAR, _harness_durability)
 	return _pending_settlement != null
 
@@ -374,15 +404,79 @@ func apply_settlement(expedition_id: int) -> bool:
 	if expedition_id <= 0 or expedition_id != _active_expedition_id or _pending_settlement == null:
 		return false
 	var income := _pending_settlement.get_net_income()
-	if income > 9223372036854775807 - _money:
+	if income > 9223372036854775807 - _money or _paid_lures + _return_paid_lures > LurePreparation.RULE.stock_limit:
 		return false
 	var retained := _pending_settlement.get_retained_items()
 	for id in _pending_settlement.get_harness_upgrades():
 		if id not in _loadout.harness_upgrades:
 			_loadout.harness_upgrades.append(id)
+	_paid_lures += _return_paid_lures
+	_return_paid_lures = 0
+	_pending_departure.clear()
 	_money += income
 	_stored_items.append_array(retained)
 	_harness_durability = _pending_settlement.get_equipment_damage().after
 	_pending_settlement = null
+	_active_expedition_id = 0
+	return true
+
+
+func get_paid_lures() -> int:
+	return _paid_lures
+
+
+func quote_lures(count: Variant, rule: LureSupplyRule = LurePreparation.RULE) -> LurePreparationQuote:
+	var source := to_save_data()
+	if source.is_empty() or rule == null or not rule.is_valid() or not LurePreparation.is_count(count, rule.maximum_count):
+		return null
+	return LurePreparationQuote.new(source, int(count), rule)
+
+
+func apply_lures(quote: LurePreparationQuote, rule: LureSupplyRule = LurePreparation.RULE) -> bool:
+	if quote == null:
+		return false
+	var checked := quote_lures(quote.get_count(), rule)
+	if checked == null or not checked.can_afford() or not quote.matches(to_save_data(), checked):
+		return false
+	_money -= checked.get_cost()
+	_paid_lures += checked.get_bought_count()
+	_selected_lures = checked.get_count()
+	return true
+
+
+func has_prepared_lures() -> bool:
+	return _paid_lures >= maxi(_selected_lures - LurePreparation.RULE.free_count, 0)
+
+
+func has_pending_departure() -> bool:
+	return not _pending_departure.is_empty()
+
+
+func reserve_departure() -> int:
+	if not has_prepared_lures():
+		return 0
+	var id := begin_expedition()
+	if id == 0:
+		return 0
+	var paid := maxi(_selected_lures - LurePreparation.RULE.free_count, 0)
+	_paid_lures -= paid
+	_pending_departure = {"id": str(id), "phase": "reserved", "free": mini(_selected_lures, LurePreparation.RULE.free_count), "paid": paid}
+	return id
+
+
+func mark_departure_started(id: int) -> bool:
+	if not has_pending_departure() or _pending_departure.phase != "reserved" or _pending_departure.id != str(id):
+		return false
+	_pending_departure.phase = "started"
+	return true
+
+
+# Call on a copy, then save successfully before enabling any hub actions.
+func recover_departure() -> bool:
+	if not has_pending_departure() or _pending_settlement != null:
+		return false
+	if _pending_departure.phase == "reserved":
+		_paid_lures += int(_pending_departure.paid)
+	_pending_departure.clear()
 	_active_expedition_id = 0
 	return true

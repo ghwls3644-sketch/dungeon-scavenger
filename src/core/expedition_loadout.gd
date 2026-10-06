@@ -9,6 +9,9 @@ var starting_charge := 0
 # Standalone historical fixtures use all actions. HubState supplies two explicitly.
 var harness_modules: Array[String] = HarnessModules.ALL.duplicate()
 var harness_upgrades: Array[String] = []
+# Historical standalone fixtures retain two weightless tools; HubState is explicit.
+var lure_count := 2
+var lure_weight := 0.0
 
 
 func is_valid() -> bool:
@@ -18,6 +21,7 @@ func is_valid() -> bool:
 		and charge_capacity >= 0 and starting_charge >= 0 and starting_charge <= charge_capacity
 		and harness_modules.size() in [2, 3] and HarnessModules.is_valid(harness_modules, harness_modules.size())
 		and HarnessUpgradeRule.is_valid_owned(harness_upgrades)
+		and lure_count >= 0 and is_finite(lure_weight) and lure_weight >= 0.0
 	)
 
 
@@ -30,4 +34,6 @@ func copy() -> ExpeditionLoadout:
 	result.starting_charge = starting_charge
 	result.harness_modules = harness_modules.duplicate()
 	result.harness_upgrades = harness_upgrades.duplicate()
+	result.lure_count = lure_count
+	result.lure_weight = lure_weight
 	return result

@@ -1,6 +1,8 @@
 class_name NoiseLureController
 extends Node2D
 
+const SUPPLY := preload("res://src/data/prototype_lure_supply.tres")
+
 signal status_changed
 signal lure_landed(position: Vector2, radius: float)
 signal throw_rejected(reason: String)
@@ -12,6 +14,7 @@ signal throw_rejected(reason: String)
 var _active := false
 var _initialized := false
 var _remaining := 0
+var _capacity := -1
 var _pressed := false
 var _pending := false
 var _requested_position := Vector2.ZERO
@@ -54,7 +57,7 @@ func get_remaining_uses() -> int:
 
 
 func get_capacity() -> int:
-	return rule.starting_uses if rule != null and rule.is_valid() else 0
+	return _capacity if _capacity >= 0 else (rule.starting_uses if rule != null and rule.is_valid() else 0)
 
 
 func is_in_flight() -> bool:
@@ -167,3 +170,13 @@ func _draw() -> void:
 		var radius := lerpf(12.0, 32.0, 1.0 - _marker_remaining / rule.marker_duration)
 		draw_arc(to_local(_landing_position), radius, 0, TAU, 32, gold, 2.0)
 		draw_circle(to_local(_landing_position), 5.0, gold)
+
+
+func configure_supply(count: int) -> bool:
+	if rule == null or not rule.is_valid() or _initialized or _active or not LureSupplyRule.is_count(count, SUPPLY.maximum_count):
+		return false
+	_capacity = count
+	_remaining = count
+	_initialized = true
+	status_changed.emit()
+	return true

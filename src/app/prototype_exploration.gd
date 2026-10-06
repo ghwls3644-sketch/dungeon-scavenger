@@ -20,6 +20,7 @@ var _loadout: ExpeditionLoadout
 var _started := false
 var _finished := false
 var _timing_configured := false
+var _start_initialized := false
 
 @onready var _player: PlayerController = %Player
 @onready var _inventory: PlayerInventory = $Player/Inventory
@@ -132,7 +133,10 @@ func prepare_departure(loadout: ExpeditionLoadout) -> bool:
 	var discovery := get_node_or_null("HarnessUpgradeDiscovery") as HarnessUpgradeDiscovery
 	if discovery != null and not discovery.configure(_run, _player, loadout.harness_upgrades):
 		return false
+	if not %NoiseLureController.configure_supply(loadout.lure_count):
+		return false
 	_loadout = loadout.copy()
+	_inventory.set_external_weight(_loadout.lure_count * _loadout.lure_weight)
 	_inventory.configure_capacity(_loadout.slot_capacity, _loadout.burden_weight, _loadout.overload_weight)
 	_harness.configure_charge(_loadout.charge_capacity, _loadout.starting_charge)
 	return true
@@ -142,10 +146,19 @@ func get_start_loadout() -> ExpeditionLoadout:
 	return _loadout.copy() if _loadout != null else null
 
 
-func start_exploration() -> bool:
+func initialize_exploration() -> bool:
+	if _start_initialized:
+		return true
 	if _loadout == null or _started or _finished or not _timing_configured:
 		return false
 	if not _survival.start_exploration():
+		return false
+	_start_initialized = true
+	return true
+
+
+func start_exploration() -> bool:
+	if _started or _finished or not initialize_exploration():
 		return false
 	_started = true
 	_map_state.observe_position(_player.position)
@@ -221,7 +234,7 @@ func _on_pickup_rejected(_item: ItemDefinition, reason: StringName) -> void:
 
 
 func _update_load_status() -> void:
-	%LoadStatus.text = "가방 %d/%d칸 · 무게 %.1f · %s · 이동 %d%% · 소음 %s · 충전 %d/%d" % [
+	%LoadStatus.text = "가방 %d/%d칸 · 무게 %.2f · %s · 이동 %d%% · 소음 %s · 충전 %d/%d" % [
 		_inventory.get_used_slots(), _inventory.slot_capacity, _inventory.get_total_weight(),
 		["정상", "부담", "과적"][_inventory.get_weight_stage()],
 		roundi(_player.get_movement_speed_multiplier() * 100.0),
@@ -234,6 +247,8 @@ func _on_run_ended(outcome: ExplorationOutcome) -> void:
 	if not _started or _finished:
 		return
 	_finished = true
+	var tool: NoiseLureController = %NoiseLureController
+	outcome.record_lure_usage(tool.get_capacity(), tool.get_capacity() - tool.get_remaining_uses())
 	_survival.end_exploration()
 	%ExplorationMapPanel.set_input_enabled(false)
 	_inventory_panel.close_inventory()
@@ -285,6 +300,8 @@ func _on_movement_noise_heard(escalated: bool) -> void:
 
 func _update_tool_status() -> void:
 	var tool: NoiseLureController = %NoiseLureController
+	if _loadout != null:
+		_inventory.set_external_weight(tool.get_remaining_uses() * _loadout.lure_weight)
 	%ToolStatus.text = "소음 유인물 %d/%d · F 투척\n마우스로 목표 위치 지정\n%s" % [
 		tool.get_remaining_uses(), tool.get_capacity(),
 		"투척 중" if tool.is_in_flight() else "플레이어를 못 본 골렘을 유인합니다.",

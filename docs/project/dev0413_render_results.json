@@ -1,0 +1,162 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "scene": "lure_preparation_smoke",
+      "passed": true,
+      "exit_code": 0,
+      "timeout": false
+    },
+    {
+      "scene": "lure_departure_smoke",
+      "passed": true,
+      "exit_code": 0,
+      "timeout": false
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "all-used-1152.png",
+      "sha256": "08c34ba1e9e9a4f27d8b23a1012fbb586d02c93d046512614586b64fcbc7016b"
+    },
+    {
+      "name": "all-used-1600.png",
+      "sha256": "b7df39575868e1d2355ef84bbdbe3cd9e7bb8092124672f749def4dd97730522"
+    },
+    {
+      "name": "hub-stock-0-1152.png",
+      "sha256": "585ac78013112a05ace783ec12a30e030d281c354df690a8cd41c6ea6ed16c85"
+    },
+    {
+      "name": "hub-stock-0-1600.png",
+      "sha256": "9df9442723d8e3b833482e64dde6ffd0cefa925dc282410ec53a96e712615c26"
+    },
+    {
+      "name": "hub-stock-1-1152.png",
+      "sha256": "4b0ddba212286b860507513cf3cc44f7e4f1bc187b29560360398abd72d18d8d"
+    },
+    {
+      "name": "hub-stock-1-1600.png",
+      "sha256": "bf7024306d195449bd67ccb85822d6c6d21f1c7758f1f65297c57917b0f44ea1"
+    },
+    {
+      "name": "insufficient-1152.png",
+      "sha256": "242ba396cc65a587cf012c1afd54130c796e2ca4b8591b80a04400f66da3cce7"
+    },
+    {
+      "name": "insufficient-1600.png",
+      "sha256": "e015b2f56259b0eae39d820ac20f1515b4a1509bee3b3e4a1e924c692769f5bc"
+    },
+    {
+      "name": "lure-results-0-1152.png",
+      "sha256": "3be3820b7b58aea9751c8458cd8b25ec7476ab32a8f080c61c12d7bcb812d7db"
+    },
+    {
+      "name": "lure-results-0-1600.png",
+      "sha256": "7bfec8fa9ff498c242c05e437130c09bdd977302c7bea89e6b324a74a23f00f2"
+    },
+    {
+      "name": "lure-results-1-1152.png",
+      "sha256": "b5f55445fcac04276a4233cacde71df9b76cc9060f13ac01d31029308cda2e69"
+    },
+    {
+      "name": "lure-results-1-1600.png",
+      "sha256": "77c5ba131beeada431ccfbe06b807a95394ef632f90e1da06c6974ebfb6c95c0"
+    },
+    {
+      "name": "prepared-0-1152.png",
+      "sha256": "cccb0c83168222f2966e67cc20fe3331a8572dafbb2623046e719aee2bee84cf"
+    },
+    {
+      "name": "prepared-0-1600.png",
+      "sha256": "c866dedb394c03ed07e576bee41f8be6a4e0f4cd2a1e5f9dfff4feab2107a0e5"
+    },
+    {
+      "name": "prepared-2-1152.png",
+      "sha256": "84face943358f95521c5471b0127c3da36ba7d4b31a54ed6974b325423dd4f43"
+    },
+    {
+      "name": "prepared-2-1600.png",
+      "sha256": "30a09d97ca487beb7fac2d8038e53ca01c7db341a83e82af51df6868f626e9ce"
+    },
+    {
+      "name": "prepared-3-1152.png",
+      "sha256": "fec17810648248efb5232055f27a72270904a678892e53a5d6597b5f88def5ac"
+    },
+    {
+      "name": "prepared-3-1600.png",
+      "sha256": "464cff9c32c464a80c3477072a43f164ac5d6fa6d4954ee561379f97ac0b6ee7"
+    },
+    {
+      "name": "prepared-4-1152.png",
+      "sha256": "332dcba15376e9dfbca70103b97c5671108adc6ec9afdb1eadb6f1295e0aea83"
+    },
+    {
+      "name": "prepared-4-1600.png",
+      "sha256": "2b8cb89d6d0586202e7b52f83b346ef4263041af625bd4b45999fa08830bc440"
+    },
+    {
+      "name": "purchase-retry-1152.png",
+      "sha256": "89be30ff38c68c17d64cd13e12c7d12560df1fe6a2a244a2f2a11577103a0969"
+    },
+    {
+      "name": "purchase-retry-1600.png",
+      "sha256": "e96f8f284e3976328ec5a9a95c60e02dfa69b7794c4982e6881dbf0dc9b8007c"
+    },
+    {
+      "name": "quote-0-1152.png",
+      "sha256": "29dd1c9c10fa918398221533276fa8d9b0e42a460407dc2000ca1550010608b9"
+    },
+    {
+      "name": "quote-0-1600.png",
+      "sha256": "58434b1ed54268d002e690d3905dd73439cd031e4da5bc85a92f5ffbe777c8a4"
+    },
+    {
+      "name": "quote-2-1152.png",
+      "sha256": "65bbbe47b8767ed6bf6f2fe565e2c67eab46090c791c410c6723133c638698ef"
+    },
+    {
+      "name": "quote-2-1600.png",
+      "sha256": "612c835a5a05ca06de2828cf9dd4f0a27604675c5085c731da3f7581a86adb6a"
+    },
+    {
+      "name": "quote-3-1152.png",
+      "sha256": "6b9c6056217e752f329f53c5f1df2ac4fbb35edf139ea51634dcc4a0c418a634"
+    },
+    {
+      "name": "quote-3-1600.png",
+      "sha256": "54fb684e2c692fa2ee1e6c562452df0e53aafb4cb4b2d156bada0499ffbac7f7"
+    },
+    {
+      "name": "quote-4-1152.png",
+      "sha256": "ad3f7b195626f8725538618f152c4541a208e17635960e9bd7f7c6f795a8e639"
+    },
+    {
+      "name": "quote-4-1600.png",
+      "sha256": "1f88fee7108d19ced7cc4e6902b44a9adffd67f4b3f11c6b318b375dfcd53e94"
+    },
+    {
+      "name": "recovery-retry-1152.png",
+      "sha256": "60826e8f27af74795871c496630bf39a068fb5714cedf34ad53d6316ac026d73"
+    },
+    {
+      "name": "recovery-retry-1600.png",
+      "sha256": "41cd3ce7b0622a6c74583dac841fbc47e24e03afd448950c92b0bc5745277b3e"
+    }
+  ],
+  "reviewed_source_tree_sha256": "304c47fe2d3be7bedfc1f0f334e580371717c826fb80fec69866fbc4ffa816fb",
+  "visual_review": {
+    "images_reviewed": 32,
+    "resolutions": [
+      [
+        1152,
+        648
+      ],
+      [
+        1600,
+        900
+      ]
+    ],
+    "result": "pass; no clipping in preparation, results or recovery controls"
+  }
+}

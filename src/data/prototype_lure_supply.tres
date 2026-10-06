@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LureSupplyRule" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/data/lure_supply_rule.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+free_count = 2
+maximum_count = 4
+stock_limit = 2
+unit_price = 5
+unit_weight = 0.25

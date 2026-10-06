@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://src/ui/hub_panel.gd" id="1_script"]
 [ext_resource type="PackedScene" path="res://src/ui/hub_appraisal_panel.tscn" id="2_appraisal"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" path="res://src/ui/hub_harness_panel.tscn" id="6_harness"]
 
 [ext_resource type="PackedScene" path="res://src/ui/hub_upgrade_panel.tscn" id="7_upgrade"]
+
+[ext_resource type="PackedScene" path="res://src/ui/hub_lure_panel.tscn" id="8_lure"]
 
 [sub_resource type="StyleBoxFlat" id="CardStyle"]
 bg_color = Color(0.12, 0.105, 0.085, 1)
@@ -53,12 +55,12 @@ theme_override_styles/panel = SubResource("CardStyle")
 
 [node name="Content" type="HBoxContainer" parent="Center/Card"]
 layout_mode = 2
-theme_override_constants/separation = 14
+theme_override_constants/separation = 8
 
 [node name="Preparation" type="VBoxContainer" parent="Center/Card/Content"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
-theme_override_constants/separation = 14
+theme_override_constants/separation = 8
 
 [node name="Title" type="Label" parent="Center/Card/Content/Preparation"]
 layout_mode = 2
@@ -92,6 +94,12 @@ unique_name_in_owner = true
 layout_mode = 2
 custom_minimum_size = Vector2(0, 44)
 text = "영구 개선"
+
+[node name="LureButton" type="Button" parent="Center/Card/Content/Preparation"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 38)
+text = "소음 유인물 준비"
 
 [node name="PreparationDetails" type="Label" parent="Center/Card/Content/Preparation"]
 unique_name_in_owner = true
@@ -212,4 +220,8 @@ visible = false
 visible = false
 
 [node name="UpgradePanel" parent="." instance=ExtResource("7_upgrade")]
+visible = false
+
+
+[node name="LurePanel" parent="." instance=ExtResource("8_lure")]
 visible = false

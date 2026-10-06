@@ -120,3 +120,11 @@ func _reject_transition(target_state: int, reason: StringName) -> bool:
 
 func _is_valid_state(state: int) -> bool:
 	return state >= State.BOOT and state <= State.RESULTS
+
+
+# App-only rollback before simulation/input activation, after a saved reservation.
+func return_from_failed_departure() -> bool:
+	if _current_state != State.EXPLORATION or _transition_in_progress:
+		return false
+	_complete_transition(State.HUB)
+	return true

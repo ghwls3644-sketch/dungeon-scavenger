@@ -25,6 +25,7 @@ const REJECT_NO_SELECTION: StringName = &"no_selection"
 
 var _items: Array[InventoryItem] = []
 var _selected_index := -1
+var _external_weight := 0.0
 # Explicit player selection, independent of automatic list highlighting.
 var _quick_drop_item: InventoryItem
 
@@ -161,7 +162,7 @@ func get_used_slots() -> int:
 
 
 func get_total_weight() -> float:
-	var total_weight := 0.0
+	var total_weight := _external_weight
 	for item in _items:
 		total_weight += item.get_definition().weight
 	return total_weight
@@ -180,3 +181,12 @@ func _is_valid_inventory_item(item: InventoryItem) -> bool:
 	if item == null or not item.is_valid():
 		return false
 	return item.get_definition().slot_size > 0
+
+
+func set_external_weight(weight: float) -> bool:
+	if not is_finite(weight) or weight < 0.0:
+		return false
+	if _external_weight != weight:
+		_external_weight = weight
+		inventory_changed.emit()
+	return true

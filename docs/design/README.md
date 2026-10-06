@@ -40,7 +40,7 @@ related:
 ## 경계 규칙
 
 - Story의 원인과 개연성을 Design 수치로 덮어쓰지 않는다.
-- [`tool_preparation.md`](tool_preparation.md)는 DEV-0412의 문서 검토안이다. 기본 2개 무료+선택 추가 구매는 사용자 결정 DEC-113이며, 가격·한도·무게·보관/반환·저장 계약은 아직 적용하지 않은 제안이다. Q-026으로 추적하고 코드 적용 완료나 단독 구현 권한으로 읽지 않는다.
+- [`tool_preparation.md`](tool_preparation.md)는 DEV-0412 검토안과 DEV-0413 시험 적용을 구분한다. 기본 2개 무료+선택 추가 구매는 사용자 결정 DEC-113이며, 총 0~4개·추가 단가 5·무게 0.25와 보관/반환·저장 복구를 시험 구현했다. 최종 수치/체감은 Q-026으로 추적하며 `draft`를 단독 구현 권한이나 최종 경제 승인으로 읽지 않는다.
 - [`repair_rules.md`](repair_rules.md)는 DEV-0405의 수리 검토안이며 단독 구현 기준이 아니다. 사용자가 선택한 거래 방식은 DEC-111·confirmed Economy Rules, DEV-0406의 손상 및 DEV-0407의 선택 수리/최소 복구 시험 적용과 최종 미정은 Q-022·Q-023으로 구분한다.
 - 사용자 표시 명칭은 [`../reference/glossary.md`](../reference/glossary.md)를 따른다.
 - 미결정 수치와 규칙은 [`../project/open_questions.md`](../project/open_questions.md)에 연결한다.

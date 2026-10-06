@@ -29,6 +29,9 @@ func _ready() -> void:
 			var version := _case.trim_prefix("legacy").to_int()
 			initial.erase("harness_modules")
 			initial.erase("harness_upgrades")
+			initial.erase("paid_lures")
+			initial.erase("selected_lures")
+			initial.erase("pending_departure")
 			if version < 3:
 				initial.erase("harness_durability")
 			if version == 1:
@@ -148,6 +151,9 @@ func _check_module_migration() -> void:
 		var old := _repair_data(20, 1)
 		old.erase("harness_modules")
 		old.erase("harness_upgrades")
+		old.erase("paid_lures")
+		old.erase("selected_lures")
+		old.erase("pending_departure")
 		if version < 3:
 			old.erase("harness_durability")
 		if version == 1:

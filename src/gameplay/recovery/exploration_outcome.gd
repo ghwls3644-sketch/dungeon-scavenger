@@ -1,11 +1,14 @@
 class_name ExplorationOutcome
 extends RefCounted
 
+const SUPPLY := preload("res://src/data/prototype_lure_supply.tres")
+
 enum Result {
 	SAFE_RETURN,
 	FAILURE,
 }
 
+var _lure_usage: Dictionary = {}
 var _result: Result = Result.FAILURE
 var _recovery_result: RecoveryResult
 var _lost_item_count := 0
@@ -73,3 +76,24 @@ func get_return_method() -> StringName:
 
 func get_harness_upgrades() -> Array[String]:
 	return _harness_upgrades.duplicate() if is_safe_return() else []
+
+
+func record_lure_usage(capacity: int, used: int) -> bool:
+	if not _lure_usage.is_empty() or not LureSupplyRule.is_count(capacity, SUPPLY.maximum_count) or not LureSupplyRule.is_count(used, capacity):
+		return false
+	_lure_usage = {"capacity": capacity, "used": used}
+	return true
+
+
+func get_lure_usage() -> Dictionary:
+	return _lure_usage.duplicate()
+
+
+func get_lure_summary() -> Dictionary:
+	if _lure_usage.is_empty():
+		return {}
+	var free := mini(int(_lure_usage.capacity), SUPPLY.free_count)
+	var paid := int(_lure_usage.capacity) - free
+	var used_paid := mini(paid, maxi(int(_lure_usage.used) - free, 0))
+	return {"free_used": int(_lure_usage.used) - used_paid, "paid_used": used_paid,
+		"returned": paid - used_paid if is_safe_return() else 0, "lost": paid if is_failure() else 0}
