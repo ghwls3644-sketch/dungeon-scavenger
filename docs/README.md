@@ -7,7 +7,7 @@ source_version: gdd-v2.1+management-proposal-v0.2.1
 canonical_for:
   - document_navigation
   - canonical_source_routing
-last_reviewed: 2026-10-04
+last_reviewed: 2026-10-06
 owner: documentation-maintainer
 related:
   - GDD.md
@@ -54,6 +54,7 @@ related:
 - G1 통합 플레이 방법과 검토 기록: [`project/g1_playtest_review.md`](project/g1_playtest_review.md)
 - G2 전체 흐름 검사·완료 결과: [`project/g2_flow_review.md`](project/g2_flow_review.md)
 - G3 탐험 통합 검사·남은 범위: [`project/g3_exploration_review.md`](project/g3_exploration_review.md)
+- 휴대 도구 준비 규칙 검토안 (`draft`): [`design/tool_preparation.md`](design/tool_preparation.md)
 - 하네스 준비·성장의 요구와 비교안 (`draft`): [`design/harness_engineering.md`](design/harness_engineering.md)
 - 장비 내구·수리·안전망의 설계 검토안 (`draft`): [`design/repair_rules.md`](design/repair_rules.md)
 - 건강·부상·퇴로의 설계 검토안 (`draft`): [`design/survival_rules.md`](design/survival_rules.md)
@@ -108,7 +109,7 @@ GitHub 로그인 상태, Codex 대화 기록, 앱별 로컬 설정은 저장소�
 
 ## 현재 단계
 
-**DEV-0411 — 하네스 영구 개선 구매·발견 획득 구현·검증 완료, 사용자 로컬 커밋 승인.** 사용자 선택에 따라 거점 직접 구매와 탐험 중 무료 발견을 함께 제공한다(DEC-112). 관찰 정보 개선과 비상 대응 개선은 각 1단계·시험가 60이며 관련 기능 장착 시 적용한다. 선택 잔여 구역의 비상 대응 개선은 안전 귀환 정산 저장 후 무료로 보유하고, 실패한 새 발견은 다시 시도할 수 있다. 이미 보유한 개선은 재등장하지 않는다. 스키마 5·구형 1~4 전환, 결제/보유 동시 저장과 실패 보존을 검사했다. **90/90 실행·그래픽 3회·두 해상도 화면 44장**, 활성 링크·동결 해시·공백 검사를 통과했다. [완료 인계](project/development_handoff.md#dev-0411--하네스-영구-개선-구매발견-획득)·[검사 기록](project/project_context.md#dev-0411-하네스-영구-개선-구매발견-획득-검사)을 따른다. 다음은 **DEV-0412 — 휴대 도구 준비 규칙 정리**다. 커밋 전에는 로컬 10커밋 앞섬·뒤처짐 0이었다. 이번 작업은 사용자 로컬 커밋 승인 상태이며 push하지 않았다. 가격/효과·발견 배치는 시험 조건이고 사람 평가·비용 통합·G4 전체 완료는 후속이다. **정합성 검사: 아직 아님** — 다음 정기 검사는 G5 완료 후다. 아래는 단계별 이력이다.
+**DEV-0412 — 휴대 도구 준비 규칙 정리 문서 작성·검증 완료, 사용자 로컬 커밋 승인.** 사용자가 선택한 소음 유인물 기본 2개 무료+필요 시 추가 구매를 DEC-113·GDD·경제 규칙에 반영했다. 총 휴대 0~4개·추가분 개당 5·개당 무게 0.25, 부족분만 구매·생환 시 미사용 추가분 반환·실패/시작 후 종료 시 휴대한 추가분 소실은 미적용 비교안이다. 준비 결제와 출정 배정/시작·복구·정산을 구분해 재실행 중복 지급을 막는 계약을 기록했다. 코드·저장 스키마 5는 그대로이며 새 게임/화면 실행은 0회다. 링크·보존 해시·현재 소스 해시·공백 검사를 통과했다. [완료 인계](project/development_handoff.md#dev-0412--휴대-도구-준비-규칙-정리)·[검사 기록](project/project_context.md#dev-0412-휴대-도구-준비-규칙-정리-검사)을 따른다. 다음은 **DEV-0413 — 거점 소음 유인물 준비**다. 커밋 전에는 로컬 11커밋 앞섬·뒤처짐 0이었다. 이번 작업은 사용자 로컬 커밋 승인 상태이며 push하지 않았다. 최종 수치·비용 통합·사람 평가·G4 전체 완료는 후속이다. **정합성 검사: 아직 아님** — 다음 정기 검사는 G5 완료 후다. 아래는 단계별 이력이다.
 
 검토 관문 G-M3, G-M4와 G-M5를 통과했다. `M5 — 중복 제거와 정합성 검토`의 `DOC-0501`~`DOC-0506`에서 공식 용어, Story·Design 책임, 화자 표현·NPC 지식, 핵심 설정·Entity·Timeline과 활성 문서 링크·누락을 모두 검사했다. G-M5 완료 조건 7개는 2026-07-28 정합성 검사에서 모두 충족함을 확인했다.
 

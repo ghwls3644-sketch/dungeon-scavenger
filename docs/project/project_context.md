@@ -8,7 +8,7 @@ canonical_for:
   - development_environment
   - engine_and_language
   - development_commands
-last_reviewed: 2026-10-04
+last_reviewed: 2026-10-06
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -1479,3 +1479,14 @@ $researchDirectory = Join-Path $env:TEMP ('dungeon-research-' + [guid]::NewGuid(
 - 활성 Markdown 링크/앵커·동결 원본 SHA-256 6개/사본 3개·`git diff --check` 통과. 두 정합성 시점 표는 HEAD와 같고 Story/Reference·동결 파일은 변경하지 않았다. 사용자 승인인 혼합 획득 방향과 미확정 시험 가격/효과/발견 배치를 구분했다.
 
 **DEV-0411 구현·검증 완료, 사용자 로컬 커밋 승인.** 다음은 **DEV-0412 — 휴대 도구 준비 규칙 정리**다. 이번 작업은 사용자 로컬 커밋 승인 상태이며 커밋 전에는 로컬 10커밋 앞섬·뒤처짐 0이었다. push하지 않았다. **정합성 검사: 아직 아님** — 다음 정기 검사는 G5 완료 후다.
+
+## DEV-0412 휴대 도구 준비 규칙 정리 검사
+
+- 2026-10-06 DEV-0411 `210858e` 뒤 착수 fetch와 깨끗한 작업 트리·뒤처짐 0/로컬 11커밋 앞섬을 확인했다. 기본 2개 무료+추가 구매의 사용자 선택만 DEC-113·GDD·confirmed 경제 규칙에 반영했다.
+- [도구 검토안](../design/tool_preparation.md)은 `draft`, Q-026은 `provisional`이다. 총수량 0~4·추가 단가 5·개당 무게 0.25, 부족분 구매/생환 반환·실패/종료 손실·출정 예약 저장은 미적용 제안으로 표시했다. Story·Reference·기존 결정과 동결 원본은 유지한다.
+- 실제 코드에서 최초 활성화 2개·유효 투척 시작 1개 소비·메뉴/포커스/비행 취소, 별도 수량·현재 도구 무게 0, 준비 수량/가격/재고 저장의 부재, 출정 번호는 런에서 증가하지만 시작 저장이 없는 점을 확인했다. 새 프로세스·구형 전환과 재지급 방지 계약은 후속 검증 요구이며 실행 결과가 아니다.
+- 활성 Markdown 링크/앵커·동결 원본 6개 SHA-256/아카이브 사본 3개·질문/결정 ID 중복·두 정합성 시점 표 보존·변경 범위·공백 검사 결과는 [문서 검사 원본](dev0412_document_results.json)에 기록한다. 검사 시점은 G5 완료 후다.
+- `src`·`tests`·`project.godot`은 수정하지 않았다. `tests/run_g2_checks.ps1`의 `Get-G2SourceHash`로 측정한 `df6f1670fad74d1cf6418842280de987d0ea3760a74a4a3dd4cadd7cd0dad310`은 [DEV-0411 전체](dev0411_automated_results.json)·[화면](dev0411_render_results.json) 보고서와 같다. 이전 90/90 실행·화면 44장은 기존 근거이며 **이번 신규 게임/그래픽 실행은 0회**다. 해시는 실제 작업 트리의 실행 바이트 기준이다.
+- 재현: 활성 Markdown 링크/앵커 → 이관 대장의 원본 6개/사본 3개 → Q/DEC ID와 상태·승인 범위·검토안/인계의 수량 관계 및 코드 소유자 대조 → 소스 해시와 DEV-0411 보고서 대조 → HEAD 대비 검사 시점 표·Story/Reference·변경 범위 → `git diff --check`. 유료 수량/저장/무게의 게임 검사는 DEV-0413에서 수행한다.
+
+**DEV-0412 문서 작성·검증 완료, 사용자 로컬 커밋 승인.** 다음은 **DEV-0413 — 거점 소음 유인물 준비**다. 이번 작업은 사용자 로컬 커밋 승인 상태이며 커밋 전에는 로컬 11커밋 앞섬·뒤처짐 0이었다. push하지 않았다. **정합성 검사: 아직 아님** — 다음 정기 검사는 G5 완료 후다.

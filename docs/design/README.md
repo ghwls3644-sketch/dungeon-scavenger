@@ -6,7 +6,7 @@ status: confirmed
 source_version: management-proposal-v0.2.1
 canonical_for:
   - design_document_navigation
-last_reviewed: 2026-10-04
+last_reviewed: 2026-10-06
 owner: game-design
 related:
   - ../GDD.md
@@ -35,10 +35,12 @@ related:
 | [`harness_engineering.md`](harness_engineering.md) (`draft`) | 하네스 준비·공유 자원의 기존 요구, 장착 및 구매/발견 성장의 시험 적용과 후속 조건은 무엇인가? |
 | [`survival_rules.md`](survival_rules.md) (`draft`) | 건강·부상과 퇴로 상실의 기존 요구는 무엇이며 어떤 시제품 규칙을 검토해야 하는가? |
 | [`repair_rules.md`](repair_rules.md) (`draft`) | 장비 내구·선택 수리·재출정 안전망의 기존 요구와 구현 전 제안은 무엇인가? |
+| [`tool_preparation.md`](tool_preparation.md) (`draft`) | 소음 유인물의 기본 무료분·추가 구매, 수량·적재·귀환/실패·저장 계약은 어떻게 나눌 것인가? |
 
 ## 경계 규칙
 
 - Story의 원인과 개연성을 Design 수치로 덮어쓰지 않는다.
+- [`tool_preparation.md`](tool_preparation.md)는 DEV-0412의 문서 검토안이다. 기본 2개 무료+선택 추가 구매는 사용자 결정 DEC-113이며, 가격·한도·무게·보관/반환·저장 계약은 아직 적용하지 않은 제안이다. Q-026으로 추적하고 코드 적용 완료나 단독 구현 권한으로 읽지 않는다.
 - [`repair_rules.md`](repair_rules.md)는 DEV-0405의 수리 검토안이며 단독 구현 기준이 아니다. 사용자가 선택한 거래 방식은 DEC-111·confirmed Economy Rules, DEV-0406의 손상 및 DEV-0407의 선택 수리/최소 복구 시험 적용과 최종 미정은 Q-022·Q-023으로 구분한다.
 - 사용자 표시 명칭은 [`../reference/glossary.md`](../reference/glossary.md)를 따른다.
 - 미결정 수치와 규칙은 [`../project/open_questions.md`](../project/open_questions.md)에 연결한다.

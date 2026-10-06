@@ -90,6 +90,11 @@ related:
 | `DEC-110` | 첫 출시 목표는 하나의 완결된 폐던전 | `active` | [`../GDD.md`](../GDD.md), [`../story/06_narrative_progression.md`](../story/06_narrative_progression.md) | G5·G7 |
 | `DEC-111` | 수리는 거점에서 비용을 확인하고 사용자가 선택·확정한다. | `active` | [`../design/economy_rules.md`](../design/economy_rules.md#수리-거래-시점), [`../design/repair_rules.md`](../design/repair_rules.md), [`../GDD.md`](../GDD.md) | G4 |
 | `DEC-112` | 하네스 영구 개선은 거점 직접 구매와 탐험 중 무료 발견을 함께 제공한다. 원본 등록을 구매 선행 조건으로 삼지 않는다. | `active` | [경제 규칙](../design/economy_rules.md#하네스-영구-개선의-획득), [하네스 검토안](../design/harness_engineering.md), [GDD](../GDD.md#10-5-성장-구조) | G4·G5 |
+| `DEC-113` | 소음 유인물은 매 출정 기본 2개를 무료로 제공하고, 필요하면 추가 구매한다. | `active` | [경제 규칙](../design/economy_rules.md#휴대-도구의-기본분과-추가-구매), [휴대 도구 검토안](../design/tool_preparation.md), [GDD](../GDD.md#10-2-거점-기능) | G4 |
+
+### DEV-0412 휴대 도구 준비 방식 선택
+
+결정일 **2026-10-06**, 승인자 **사용자**. 소음 유인물의 준비 방식 질문에 “기본 2개 무료 + 필요하면 추가 구매 (권장)”를 선택했다. `MIG-CHG-044`에 먼저 기록했다. 승인 범위는 첫 대상인 소음 유인물의 기본 2개 무료 제공과 선택적인 추가 구매다. 무료분을 줄여서 유료로 다시 사게 만들지 않는다. 총 휴대 한도·가격·무게·미사용 추가분 반환·실패/종료 손실·저장 복구 방식은 [DEV-0412 검토안](../design/tool_preparation.md)의 미적용 제안이며 이번 답변으로 최종 확정하지 않는다. 새로운 보급 주체나 다른 도구의 지급 수량은 정하지 않았다.
 
 ### DEV-0411 영구 개선 획득 방식 선택
 
