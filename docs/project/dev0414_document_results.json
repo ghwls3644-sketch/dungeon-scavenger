@@ -1,0 +1,126 @@
+{
+  "ticket": "DEV-0414",
+  "name": "출정별 비용 표시 규칙 정리",
+  "passed": true,
+  "validation_date": "2026-10-06",
+  "validation_timezone": "Asia/Seoul",
+  "base_commit": "7419244657daccd3e8832b003d091b28f1b85e41",
+  "source_tree_sha256": "304c47fe2d3be7bedfc1f0f334e580371717c826fb80fec69866fbc4ffa816fb",
+  "source_hash_method": "Fresh Get-G2SourceHash measurement matched DEV-0413; no runtime source changes",
+  "runtime_checks_executed": 0,
+  "graphical_checks_executed": 0,
+  "prior_evidence": {
+    "ticket": "DEV-0413",
+    "automated_checks": 92,
+    "screenshots": 32,
+    "reexecuted": false
+  },
+  "links_and_frozen_sources": {
+    "passed": true,
+    "markdown_files": 49,
+    "relative_links_checked": 1543,
+    "frozen_sources": 6,
+    "archive_copies": 3,
+    "failures": []
+  },
+  "checkpoint_tables_unchanged": true,
+  "question_ids_unique": true,
+  "decision_ids_unique": true,
+  "review_status": "draft",
+  "proposals_implemented": false,
+  "numeric_examples": [
+    {
+      "example": 1,
+      "profit": 25,
+      "cash_change": 20,
+      "identity_holds": true
+    },
+    {
+      "example": 2,
+      "profit": 25,
+      "cash_change": 30,
+      "identity_holds": true
+    },
+    {
+      "example": 3,
+      "profit": 0,
+      "cash_change": -10,
+      "identity_holds": true
+    },
+    {
+      "example": 4,
+      "profit": 25,
+      "cash_change": 23,
+      "identity_holds": true
+    },
+    {
+      "example": 5,
+      "profit": -10,
+      "cash_change": -10,
+      "identity_holds": true
+    },
+    {
+      "example": 6,
+      "profit": -5,
+      "cash_change": 0,
+      "identity_holds": true
+    },
+    {
+      "example": 7,
+      "profit": 20,
+      "cash_change": -45,
+      "identity_holds": true
+    },
+    {
+      "example": 8,
+      "profit": 105,
+      "cash_change": 105,
+      "identity_holds": true
+    },
+    {
+      "example": 9,
+      "profit": 30,
+      "cash_change": 30,
+      "identity_holds": true
+    },
+    {
+      "example": 10,
+      "profit": 0,
+      "cash_change": 0,
+      "identity_holds": true
+    }
+  ],
+  "mixed_prices_and_failure_reviewed": true,
+  "scope_only_ticket_documents": true,
+  "changed_and_new_files": [
+    "docs/GDD.md",
+    "docs/README.md",
+    "docs/design/README.md",
+    "docs/design/economy_rules.md",
+    "docs/design/expedition_cost_reporting.md",
+    "docs/design/tool_preparation.md",
+    "docs/project/README.md",
+    "docs/project/decisions.md",
+    "docs/project/dev0414_document_results.json",
+    "docs/project/development_handoff.md",
+    "docs/project/migration_changes.md",
+    "docs/project/migration_manifest.md",
+    "docs/project/module_boundaries.md",
+    "docs/project/open_questions.md",
+    "docs/project/project_context.md"
+  ],
+  "git_diff_check": true,
+  "failures": [],
+  "selection_status": "user_selected_consumption_cost_basis",
+  "approved_decision": "DEC-114",
+  "direction_approval_date": "2026-10-06",
+  "approved_direction": "Consumption-cost profit headline with actual cash change displayed separately",
+  "detailed_trial_rules_finalized": false,
+  "commit_status": "user_approved_local_commit",
+  "commit_approval_date": "2026-10-06",
+  "next_ticket": "DEV-0415 — 출정별 비용 표시 연결",
+  "consistency_checkpoint": "G5 완료 후",
+  "ahead": 13,
+  "behind": 0,
+  "pushed": false
+}

@@ -36,8 +36,11 @@ related:
 | [`survival_rules.md`](survival_rules.md) (`draft`) | 건강·부상과 퇴로 상실의 기존 요구는 무엇이며 어떤 시제품 규칙을 검토해야 하는가? |
 | [`repair_rules.md`](repair_rules.md) (`draft`) | 장비 내구·선택 수리·재출정 안전망의 기존 요구와 구현 전 제안은 무엇인가? |
 | [`tool_preparation.md`](tool_preparation.md) (`draft`) | 소음 유인물의 기본 무료분·추가 구매, 수량·적재·귀환/실패·저장 계약은 어떻게 나눌 것인가? |
+| [`expedition_cost_reporting.md`](expedition_cost_reporting.md) (`draft`) | 준비·탐험의 손익과 실제 현금 변화, 재고 취득 원가·투자·견적은 어떻게 구분할 것인가? |
 
 ## 경계 규칙
+
+- [출정별 비용 표시 검토안](expedition_cost_reporting.md)은 DEV-0414의 `draft`다. 사용자가 채택한 소모 비용 기준 손익·현금 변화 별도 표시는 DEC-114이며, 집계 기간·구형 원가 누락·거래/표시/저장 경계와 후속 검증은 Q-027에서 추적한다. 현재 실행 적용이나 G4 완료로 읽지 않는다.
 
 - Story의 원인과 개연성을 Design 수치로 덮어쓰지 않는다.
 - [`tool_preparation.md`](tool_preparation.md)는 DEV-0412 검토안과 DEV-0413 시험 적용을 구분한다. 기본 2개 무료+선택 추가 구매는 사용자 결정 DEC-113이며, 총 0~4개·추가 단가 5·무게 0.25와 보관/반환·저장 복구를 시험 구현했다. 최종 수치/체감은 Q-026으로 추적하며 `draft`를 단독 구현 권한이나 최종 경제 승인으로 읽지 않는다.
