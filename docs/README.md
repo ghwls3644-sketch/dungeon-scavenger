@@ -7,7 +7,7 @@ source_version: gdd-v2.1+management-proposal-v0.2.1
 canonical_for:
   - document_navigation
   - canonical_source_routing
-last_reviewed: 2026-10-08
+last_reviewed: 2026-10-09
 owner: documentation-maintainer
 related:
   - GDD.md
@@ -54,6 +54,7 @@ related:
 - G1 통합 플레이 방법과 검토 기록: [`project/g1_playtest_review.md`](project/g1_playtest_review.md)
 - G2 전체 흐름 검사·완료 결과: [`project/g2_flow_review.md`](project/g2_flow_review.md)
 - G3 탐험 통합 검사·남은 범위: [`project/g3_exploration_review.md`](project/g3_exploration_review.md)
+- G4 거점·경제·성장 검토와 보완 범위: [`project/g4_meta_review.md`](project/g4_meta_review.md)
 - 휴대 도구 준비 규칙 검토안 (`draft`): [`design/tool_preparation.md`](design/tool_preparation.md)
 - 출정별 비용 표시 규칙 검토안 (`draft`): [`design/expedition_cost_reporting.md`](design/expedition_cost_reporting.md)
 - 하네스 준비·성장의 요구와 비교안 (`draft`): [`design/harness_engineering.md`](design/harness_engineering.md)
@@ -110,7 +111,9 @@ GitHub 로그인 상태, Codex 대화 기록, 앱별 로컬 설정은 저장소�
 
 ## 현재 단계
 
-**DEV-0415 — 출정별 비용 표시 연결 구현·검증 완료, 사용자 로컬 커밋 승인.** 거점의 현재 준비/마지막 결과와 귀환·실패 화면에 소모 원가 손익·실제 현금 변화·수입/서비스 지불·도구 원가·투자/미지불 견적을 연결했다. 스키마 7은 거래·재고 취득 원가·최근 결과와 다음 구간을 함께 저장하며 구형 1~6 원가는 추정하지 않는다. 전체 95/95 실행, 저장 전후 20경계의 강제 종료/새 실행, 두 해상도 화면 60장과 문서 링크·동결 원본·공백 검사를 통과했다. 다음은 **DEV-0416 — G4 완료 조건 검토**다. 커밋 전에는 로컬 14커밋 앞섬·뒤처짐 0이었다. 사용자가 검토된 결과의 로컬 커밋을 승인했으며 push하지 않았다. 사람 이해도·최종 밸런스·G4 전체 완료는 별도 검토다. **정합성 검사: 아직 아님 — G5 완료 후.**
+**DEV-0416 — G4 완료 조건 검토 완료, 사용자 로컬 커밋 승인.** 감정·판매·등록/연구·수리·장착/영구 개선·도구 준비·비용 표시의 연결을 대조하고 현재 코드로 전체 **95/95 실행**을 통과했다. **G4 전체 완료는 보류**한다. 현재 고정 목적지 안내에 없는 목표·최소 길드/의뢰 범위와 사람의 정산 이해도·성장 선택·재기 체감이 남아 있다. 다음은 **DEV-0417 — 거점 목표·의뢰 최소 범위 정리**다. 코드와 기존 규칙은 유지하며 G5는 시작하지 않았다. 기준 DEV-0415 `27c0684`, 커밋 전에는 로컬 15커밋 앞섬·뒤처짐 0이었다. 2026-10-09 사용자가 검토된 결과의 로컬 커밋을 승인했으며 push하지 않았다. **정합성 검사: 아직 아님 — G5 완료 후.**
+
+상세 근거와 후속 범위는 [G4 검토 기록](project/g4_meta_review.md)을 따른다.
 
 검토 관문 G-M3, G-M4와 G-M5를 통과했다. `M5 — 중복 제거와 정합성 검토`의 `DOC-0501`~`DOC-0506`에서 공식 용어, Story·Design 책임, 화자 표현·NPC 지식, 핵심 설정·Entity·Timeline과 활성 문서 링크·누락을 모두 검사했다. G-M5 완료 조건 7개는 2026-07-28 정합성 검사에서 모두 충족함을 확인했다.
 

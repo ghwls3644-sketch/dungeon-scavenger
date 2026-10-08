@@ -8,7 +8,7 @@ canonical_for:
   - development_environment
   - engine_and_language
   - development_commands
-last_reviewed: 2026-10-08
+last_reviewed: 2026-10-09
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -1552,3 +1552,26 @@ $researchDirectory = Join-Path $env:TEMP ('dungeon-research-' + [guid]::NewGuid(
 ```
 
 원시 로그/이미지 위치는 각 JSON의 `evidence_directory`에 남겼다. 실행 파일·개인 진행 기록·이미지 전체는 저장소에 추가하지 않았다. 이전 DEV 자료와 동결 원본을 변경하지 않았다. **DEV-0415 구현·검증 완료, 사용자 로컬 커밋 승인.** 다음 **DEV-0416 — G4 완료 조건 검토**. 커밋 전에는 로컬 14커밋 앞섬·뒤처짐 0이었다. 사용자가 검토된 결과의 로컬 커밋을 승인했으며 push하지 않았다. **정합성 검사: 아직 아님 — G5 완료 후.**
+
+## DEV-0416 G4 완료 조건 검토 검사
+
+2026-10-09 한국 시각, DEV-0415 `27c068434937e0ec6545fc85152fa7c269c3c72c`의 실행 소스를 변경하지 않고 검토했다. 착수 fetch 뒤 로컬 15커밋 앞섬·뒤처짐 0·깨끗한 작업 트리를 확인했다. `MIG-CHG-048` 뒤 [G4 검토 기록](g4_meta_review.md)에 기능/조건 대조·자동 근거의 한계·목표/의뢰 공백과 사람 평가 잔여를 기록했다.
+
+| 검사 | 결과와 범위 |
+|---|---|
+| 이번 전체 회귀 | [자동 기록](dev0416_automated_results.json): Godot 4.7.1, 1회 반복 **95/95 프로세스·52개 스모크 장면**, 오류/무시 진단 없음. 기존 기능·새 프로세스 이어하기·구형 저장 분기와 비용 계산/실제 두 출정/후보 저장 실패·재시도 포함 |
+| 소스 동일성 | `Get-G2SourceHash` 결과 `28a056c1731106c8585c37040424a0c8746a1bacc3aa0d4c433637094b323d5b`. DEV-0415 최종 기록·이번 실행·현재 트리 일치. src·tests·project.godot 실행 바이트 기준 |
+| 이전 검사 자료 | DEV-0415의 별도 강제 종료 20경계와 두 해상도 화면 60장을 같은 코드의 기존 근거로 유지. 이번 그래픽/외부 강제 종료 실행은 0회. 실제 앱 검사와 준비된 상태/효과 경계·같은 프로세스 앱 재생성을 구분 |
+| 문서·범위 | [문서 기록](dev0416_document_results.json): 활성 Markdown 상대 링크/앵커, 원본 6개 SHA-256·아카이브 사본 3개, 두 정기 검사 표, 소스/이전 결과/GDD/Design/Story/Reference 보존, 단일 작업 범위와 `git diff --check` |
+
+재현 명령(저장소 루트):
+
+```powershell
+./tests/run_g2_checks.ps1 -GodotBin C:/tmp/godot-4.7.1/Godot_v4.7.1-stable_win64_console.exe -Repetitions 1 -TimeoutSeconds 90
+. ./tests/run_g2_checks.ps1
+Get-G2SourceHash (Get-Location).Path
+```
+
+이번 원시 실행 로그는 `C:\Users\user\AppData\Local\Temp\dungeon-g2-20261008-215752-415038815f3049dfbee774fa3be4ed5b`에 있다. JSON의 시각은 UTC이며 한국 시각으로 2026-10-09다. 임시 로그의 영구 보관을 약속하지 않으며 저장소의 검사 코드와 JSON 요약으로 재현한다. 공용 실행기의 원래 scope는 G2이지만 이번 사본에는 DEV-0416 검토 범위와 원래 scope를 함께 기록했다. 이전 결과 파일은 덮어쓰지 않았다.
+
+**DEV-0416 검토·검증 완료, 사용자 로컬 커밋 승인. G4 전체 완료 보류.** 다음 **DEV-0417 — 거점 목표·의뢰 최소 범위 정리**. 코드나 제품 규칙을 바꾸지 않았고 G5는 시작하지 않았다. 커밋 전에는 로컬 15커밋 앞섬·뒤처짐 0이었다. 2026-10-09 사용자가 검토된 결과의 로컬 커밋을 승인했으며 push하지 않았다. **정합성 검사: 아직 아님 — G5 완료 후.**
