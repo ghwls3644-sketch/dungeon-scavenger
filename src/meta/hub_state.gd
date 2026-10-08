@@ -17,6 +17,7 @@ var _paid_lures := 0
 var _selected_lures := 2
 var _pending_departure: Dictionary = {}
 var _return_paid_lures := 0
+var _costs := ExpeditionCosts.new_book(0)
 
 
 func _init() -> void:
@@ -55,6 +56,10 @@ func apply_harness_upgrade(quote: HarnessUpgradeQuote, rule: HarnessUpgradeRule)
 	var checked := quote_harness_upgrade(quote.get_id(), rule)
 	if checked == null or not checked.can_afford() or not quote.matches(to_save_data(), checked):
 		return false
+	var costs := ExpeditionCosts.trade(_costs, "upgrade_paid", checked.get_cost())
+	if costs.is_empty():
+		return false
+	_costs = costs
 	_money -= checked.get_cost()
 	_loadout.harness_upgrades.append(checked.get_id())
 	return true
@@ -140,6 +145,10 @@ func apply_repair(quote: RepairQuote, rule: EconomyRule) -> bool:
 	var checked := quote_repair(quote.get_amount(), rule, quote.is_supported())
 	if checked == null or not checked.can_afford() or not quote.matches(to_save_data(), checked):
 		return false
+	var costs := ExpeditionCosts.trade(_costs, "repair_paid", checked.get_cost())
+	if costs.is_empty():
+		return false
+	_costs = costs
 	_money -= checked.get_cost()
 	_harness_durability += checked.get_amount()
 	return true
@@ -178,6 +187,10 @@ func apply_appraisal(quote: AppraisalQuote, rule: EconomyRule) -> bool:
 	var checked := quote_appraisal(quote.get_indices(), rule)
 	if checked == null or not checked.can_afford() or not quote.matches(to_save_data(), checked.get_cost()):
 		return false
+	var costs := ExpeditionCosts.trade(_costs, "appraisal_paid", checked.get_cost())
+	if costs.is_empty():
+		return false
+	_costs = costs
 	for index in checked.get_indices():
 		_stored_items[index].identify()
 	_money -= checked.get_cost()
@@ -232,6 +245,10 @@ func apply_sale(quote: SaleQuote, rule: EconomyRule) -> bool:
 	var checked := quote_sale(quote.get_indices(), rule)
 	if checked == null or not quote.matches(to_save_data(), checked.get_prices()):
 		return false
+	var costs := ExpeditionCosts.trade(_costs, "storage_income", checked.get_income())
+	if costs.is_empty():
+		return false
+	_costs = costs
 	var selected := checked.get_indices()
 	selected.reverse()
 	for index in selected:
@@ -254,6 +271,7 @@ func copy() -> HubState:
 	result._selected_lures = _selected_lures
 	result._pending_departure = _pending_departure.duplicate(true)
 	result._return_paid_lures = _return_paid_lures
+	result._costs = _costs.duplicate(true)
 	return result
 
 
@@ -287,11 +305,13 @@ func to_progress_data() -> Dictionary:
 		"paid_lures": _paid_lures,
 		"selected_lures": _selected_lures,
 		"pending_departure": _pending_departure.duplicate(true),
+		"costs": _costs.duplicate(true),
 	}
 
 
 static func from_save_data(data: Dictionary, catalog: ItemCatalog) -> HubState:
-	if catalog == null or not catalog.is_valid() or data.size() != 11 or not LurePreparation.valid_save(data) \
+	if catalog == null or not catalog.is_valid() or data.size() != 12 or not LurePreparation.valid_save(data) \
+			or not ExpeditionCosts.valid_save(data.get("costs"), data) \
 			or not HarnessUpgradeRule.is_valid_owned(data.get("harness_upgrades")) \
 			or not is_valid_harness_durability(data.get("harness_durability")) \
 			or not HarnessModules.is_valid(data.get("harness_modules")):
@@ -318,6 +338,7 @@ static func from_save_data(data: Dictionary, catalog: ItemCatalog) -> HubState:
 	restored._paid_lures = int(data.paid_lures)
 	restored._selected_lures = int(data.selected_lures)
 	restored._pending_departure = data.pending_departure.duplicate(true)
+	restored._costs = data.costs.duplicate(true)
 	if restored.has_pending_departure():
 		restored._active_expedition_id = restored._pending_departure.id.to_int()
 	for raw_item in items:
@@ -385,15 +406,27 @@ static func _read_nonnegative_integer(value: Variant) -> int:
 func prepare_settlement(expedition_id: int, outcome: ExplorationOutcome, rule: EconomyRule) -> bool:
 	if expedition_id <= 0 or expedition_id != _active_expedition_id or _pending_settlement != null:
 		return false
+	var returned := 0
+	var free_used := 0
+	var paid_used := 0
 	if has_pending_departure():
 		var tools := outcome.get_lure_usage() if outcome != null else {}
 		if _pending_departure.phase != "started" or tools.size() != 2 \
 				or tools.get("capacity") != _selected_lures \
 				or not LurePreparation.is_count(tools.get("used"), _selected_lures):
 			return false
-		_return_paid_lures = maxi(int(_pending_departure.paid) - maxi(int(tools.used) - int(_pending_departure.free), 0), 0) if outcome.is_safe_return() else 0
-	_pending_settlement = SettlementResult.from_outcome(outcome, rule, EQUIPMENT_WEAR, _harness_durability)
-	return _pending_settlement != null
+		free_used = mini(int(tools.used), int(_pending_departure.free))
+		paid_used = int(tools.used) - free_used
+		returned = int(_pending_departure.paid) - paid_used if outcome.is_safe_return() else 0
+	var settlement := SettlementResult.from_outcome(outcome, rule, EQUIPMENT_WEAR, _harness_durability)
+	if settlement == null:
+		return false
+	var report := ExpeditionCosts.make_report(_costs, expedition_id, "failure" if outcome.is_failure() else "safe", settlement.get_net_income(), free_used, paid_used)
+	if not settlement.set_cost_report(report):
+		return false
+	_return_paid_lures = returned
+	_pending_settlement = settlement
+	return true
 
 
 func get_pending_settlement() -> SettlementResult:
@@ -406,6 +439,9 @@ func apply_settlement(expedition_id: int) -> bool:
 	var income := _pending_settlement.get_net_income()
 	if income > 9223372036854775807 - _money or _paid_lures + _return_paid_lures > LurePreparation.RULE.stock_limit:
 		return false
+	var costs := ExpeditionCosts.finish(_pending_settlement.get_cost_report())
+	if costs.is_empty() or costs.stock.size() != _paid_lures + _return_paid_lures:
+		return false
 	var retained := _pending_settlement.get_retained_items()
 	for id in _pending_settlement.get_harness_upgrades():
 		if id not in _loadout.harness_upgrades:
@@ -413,6 +449,7 @@ func apply_settlement(expedition_id: int) -> bool:
 	_paid_lures += _return_paid_lures
 	_return_paid_lures = 0
 	_pending_departure.clear()
+	_costs = costs
 	_money += income
 	_stored_items.append_array(retained)
 	_harness_durability = _pending_settlement.get_equipment_damage().after
@@ -438,6 +475,10 @@ func apply_lures(quote: LurePreparationQuote, rule: LureSupplyRule = LurePrepara
 	var checked := quote_lures(quote.get_count(), rule)
 	if checked == null or not checked.can_afford() or not quote.matches(to_save_data(), checked):
 		return false
+	var costs := ExpeditionCosts.purchase(_costs, checked.get_bought_count(), rule.unit_price)
+	if costs.is_empty():
+		return false
+	_costs = costs
 	_money -= checked.get_cost()
 	_paid_lures += checked.get_bought_count()
 	_selected_lures = checked.get_count()
@@ -455,10 +496,14 @@ func has_pending_departure() -> bool:
 func reserve_departure() -> int:
 	if not has_prepared_lures():
 		return 0
+	var paid := maxi(_selected_lures - LurePreparation.RULE.free_count, 0)
+	var costs := ExpeditionCosts.reserve(_costs, paid)
+	if costs.is_empty():
+		return 0
 	var id := begin_expedition()
 	if id == 0:
 		return 0
-	var paid := maxi(_selected_lures - LurePreparation.RULE.free_count, 0)
+	_costs = costs
 	_paid_lures -= paid
 	_pending_departure = {"id": str(id), "phase": "reserved", "free": mini(_selected_lures, LurePreparation.RULE.free_count), "paid": paid}
 	return id
@@ -476,7 +521,22 @@ func recover_departure() -> bool:
 	if not has_pending_departure() or _pending_settlement != null:
 		return false
 	if _pending_departure.phase == "reserved":
+		_costs = ExpeditionCosts.cancel_reservation(_costs)
 		_paid_lures += int(_pending_departure.paid)
+	else:
+		var report := ExpeditionCosts.make_report(_costs, int(_pending_departure.id), "interrupted", 0, -1, -1)
+		var costs := ExpeditionCosts.finish(report)
+		if costs.is_empty():
+			return false
+		_costs = costs
 	_pending_departure.clear()
 	_active_expedition_id = 0
 	return true
+
+
+func get_preparation_costs() -> Dictionary:
+	return ExpeditionCosts.preparation_summary(_costs)
+
+
+func get_last_costs() -> Dictionary:
+	return ExpeditionCosts.report_summary(_costs.last) if not _costs.last.is_empty() else {}

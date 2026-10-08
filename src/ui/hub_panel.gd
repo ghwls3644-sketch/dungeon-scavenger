@@ -20,6 +20,8 @@ signal lures_requested
 
 
 func _ready() -> void:
+	%CostTabs.set_tab_title(0, "보관품")
+	%CostTabs.set_tab_title(1, "수입·비용")
 	%LureButton.pressed.connect(func(): lures_requested.emit())
 	_bags.item_selected.connect(func(index: int): bag_slots_selected.emit(_bags.get_item_id(index)))
 	_departure.pressed.connect(func(): departure_requested.emit())
@@ -73,13 +75,14 @@ func render_equipment(durability: int, maximum: int, minimum: int) -> void:
 	_departure.text = "출정" if ready else "수리하고 출정 준비"
 
 
-func render_holdings(money: int, items: Array[InventoryItem]) -> void:
+func render_holdings(money: int, items: Array[InventoryItem], preparation_costs: Dictionary = {}, last_costs: Dictionary = {}) -> void:
 	%Money.text = "보유금 %d" % money
 	%StoredCount.text = "거점 보관 %d개" % items.size()
 	var lines := PackedStringArray()
 	for item in items:
 		lines.append(HubAppraisalPanel.format_item(item))
 	%StoredItems.text = "\n\n".join(lines) if not lines.is_empty() else "보관 중인 물품이 없습니다."
+	%CostDetails.text = CostReportText.preparation(preparation_costs, last_costs)
 
 
 func present() -> void:

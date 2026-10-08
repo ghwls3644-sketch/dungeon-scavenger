@@ -69,6 +69,7 @@ func _ready() -> void:
 func _sale_fixture() -> Dictionary:
 	var data := HubState.new().to_save_data()
 	data.money = "10"
+	data.costs = ExpeditionCosts.new_book(data.money.to_int())
 	data.bag_slots = 3
 	data.stored_items = [
 		{"id": "test_g1_unknown", "identified": false, "risk_hint": "표면의 진동"},
@@ -117,6 +118,7 @@ func _check_sale_domain() -> void:
 	_expect(hub.apply_sale(hub.quote_sale(PackedInt32Array([1]), changed_rule), changed_rule) and hub.get_money() == 10 and hub.get_stored_items().size() == 3, "Explicit zero price failed.")
 	var boundary := initial.duplicate(true)
 	boundary.money = "9223372036854775607"
+	boundary.costs = ExpeditionCosts.new_book(boundary.money.to_int())
 	hub = HubState.from_save_data(boundary, CATALOG)
 	_expect(hub.apply_sale(hub.quote_sale(PackedInt32Array([1]), ECONOMY), ECONOMY) and hub.get_money() == 9223372036854775807, "Exact int64 balance lost precision.")
 	_expect(hub.quote_sale(PackedInt32Array([1]), ECONOMY) == null, "Balance overflow accepted.")
@@ -297,7 +299,7 @@ func _empty_return_after_sale() -> void:
 func _expect_sale_holdings(money: int, count: int) -> void:
 	_expect(_entry.get_hub_money() == money and _entry.get_hub_stored_items().size() == count, "Live sale holdings mismatch: expected %d/%d, got %d/%d." % [money, count, _entry.get_hub_money(), _entry.get_hub_stored_items().size()])
 	var saved := _store.load_data()
-	_expect(saved.money == str(money) and saved.stored_items.size() == count and saved.size() == 11, "Saved sale holdings/schema mismatch.")
+	_expect(saved.money == str(money) and saved.stored_items.size() == count and saved.size() == 12, "Saved sale holdings/schema mismatch.")
 
 
 func _choose_sale_row(index: int, control := false) -> void:

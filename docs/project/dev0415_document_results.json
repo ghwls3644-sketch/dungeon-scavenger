@@ -1,0 +1,89 @@
+{
+  "passed": true,
+  "markdown_files": 49,
+  "relative_links_checked": 1565,
+  "frozen_sources": 6,
+  "archive_copies": 3,
+  "failures": [],
+  "ticket": "DEV-0415",
+  "ticket_name": "출정별 비용 표시 연결",
+  "checked_date": "2026-10-08",
+  "source_tree_sha256": "28a056c1731106c8585c37040424a0c8746a1bacc3aa0d4c433637094b323d5b",
+  "source_hash_matches_final_runtime": true,
+  "checkpoint_tables_unchanged": true,
+  "next_checkpoint": "G5 완료 후",
+  "base_commit": "653ed9dea78eba30dc3981361e64a7f4a85d9c34",
+  "ahead_behind": [
+    14,
+    0
+  ],
+  "git_diff_check": true,
+  "numeric_examples": [
+    {
+      "cash": 20,
+      "profit": 25,
+      "stock": [
+        "5"
+      ]
+    },
+    {
+      "cash": 30,
+      "profit": 25,
+      "stock": []
+    },
+    {
+      "cash": -10,
+      "profit": 0,
+      "stock": [
+        "5",
+        "5"
+      ]
+    },
+    {
+      "cash": 23,
+      "profit": 25,
+      "stock": [
+        "7"
+      ]
+    },
+    {
+      "cash": -10,
+      "profit": -10,
+      "stock": []
+    },
+    {
+      "cash": 0,
+      "profit": -5,
+      "stock": []
+    },
+    {
+      "cash": -45,
+      "profit": 20,
+      "stock": [
+        "5"
+      ]
+    },
+    {
+      "cash": 105,
+      "profit": 105,
+      "stock": []
+    },
+    {
+      "cash": 30,
+      "profit": 30,
+      "stock": []
+    },
+    {
+      "cash": 0,
+      "profit": 0,
+      "stock": []
+    }
+  ],
+  "profit_cash_stock_identity_passed": true,
+  "numeric_evidence_directory": "C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-costs-20244-200967",
+  "scope_review": "One ticket; previous evidence, frozen sources, Story and Reference preserved; no unrelated changes.",
+  "commit_status": "user_approved_local_commit",
+  "pushed": false,
+  "approval_text": "커밋해",
+  "approval_date": "2026-10-08"
+}

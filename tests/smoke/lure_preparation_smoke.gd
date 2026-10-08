@@ -99,8 +99,13 @@ func _ready() -> void:
 func _lure_data(money: int, stock: int, count: int) -> Dictionary:
 	var data := HubState.new().to_save_data()
 	data.money = str(money)
+	data.costs = ExpeditionCosts.new_book(data.money.to_int())
 	data.paid_lures = stock
 	data.selected_lures = count
+	var prices: Array = []
+	for index in stock:
+		prices.append("5")
+	data.costs = ExpeditionCosts.new_book(money, prices)
 	return data
 
 
@@ -162,13 +167,14 @@ func _check_lure_storage() -> void:
 	var store := ProgressStore.new(path)
 	for version in range(1, 6):
 		var data := _repair_data(10, 1)
-		for key in ["paid_lures", "selected_lures", "pending_departure"]:
+		for key in ["paid_lures", "selected_lures", "pending_departure", "costs"]:
 			data.erase(key)
 		if version < 5:
 			data.erase("harness_upgrades")
 			data.erase("paid_lures")
 			data.erase("selected_lures")
 			data.erase("pending_departure")
+			data.erase("costs")
 		if version < 4:
 			data.erase("harness_modules")
 		if version < 3:
@@ -189,7 +195,7 @@ func _check_lure_storage() -> void:
 		{"pending_departure": {"id": "1", "phase": "reserved", "free": 1.5, "paid": 2}}]:
 		var bad := valid.duplicate(true)
 		bad.merge(mutation, true)
-		_write_json(path, _envelope(6, bad))
+		_write_json(path, _envelope(ProgressStore.SCHEMA_VERSION, bad))
 		var bytes := FileAccess.get_file_as_bytes(path)
 		_expect(store.load_data().is_empty() and HubState.from_save_data(bad, CATALOG) == null and store.save_data(_lure_data(0, 0, 2)) != OK and FileAccess.get_file_as_bytes(path) == bytes, "Invalid journal accepted/replaced.")
 

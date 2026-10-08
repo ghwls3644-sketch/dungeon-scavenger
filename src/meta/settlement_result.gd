@@ -10,6 +10,7 @@ var _lost_count := 0
 var _equipment_damage: Dictionary = {}
 var _full_repair_estimate := -1
 var _harness_upgrades: Array[String] = []
+var _cost_report: Dictionary = {}
 
 
 static func from_outcome(
@@ -73,7 +74,23 @@ func get_total_cost() -> int:
 
 
 func get_net_income() -> int:
+	# Cash applied by this settlement, never the reporting profit after preparation.
 	return _total_income - _total_cost
+
+
+func set_cost_report(report: Dictionary) -> bool:
+	if not _cost_report.is_empty() or ExpeditionCosts.report_summary(report).is_empty():
+		return false
+	_cost_report = report.duplicate(true)
+	return true
+
+
+func get_cost_report() -> Dictionary:
+	return _cost_report.duplicate(true)
+
+
+func get_cost_summary() -> Dictionary:
+	return ExpeditionCosts.report_summary(_cost_report) if not _cost_report.is_empty() else {}
 
 
 func is_failure() -> bool:

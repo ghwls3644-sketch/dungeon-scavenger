@@ -44,6 +44,7 @@ func _ready() -> void:
 			initial.erase("paid_lures")
 			initial.erase("selected_lures")
 			initial.erase("pending_departure")
+			initial.erase("costs")
 			if _case == "legacy1":
 				initial.erase("registered_items")
 			_write_json(_path, _envelope(1 if _case == "legacy1" else 2, initial))
@@ -152,9 +153,10 @@ func _check_domain() -> void:
 		_expect(not invalid.is_valid() and SettlementResult.from_outcome(ExplorationOutcome.failure(0), ECONOMY, invalid, 3) == null, "Invalid wear rule accepted.")
 	var max_money := _initial_data()
 	max_money.money = "9223372036854775807"
+	max_money.costs = ExpeditionCosts.new_book(max_money.money.to_int())
 	var full := HubState.from_save_data(max_money, CATALOG)
 	var id := full.begin_expedition()
-	_expect(full.prepare_settlement(id, ExplorationOutcome.safe_return([CATALOG.find_item(&"test_g1_light")]), ECONOMY), "Cannot preview maximum-money settlement.")
+	_expect(not full.prepare_settlement(id, ExplorationOutcome.safe_return([CATALOG.find_item(&"test_g1_light")]), ECONOMY), "Overflowed accounting preview was accepted.")
 	_expect(not full.apply_settlement(id) and full.get_harness_durability() == 3, "Failed income overflow applied partial damage.")
 
 
@@ -169,6 +171,7 @@ func _check_migration() -> void:
 		legacy.erase("paid_lures")
 		legacy.erase("selected_lures")
 		legacy.erase("pending_departure")
+		legacy.erase("costs")
 		if version == 1:
 			legacy.erase("registered_items")
 		_write_json(path, _envelope(version, legacy))

@@ -84,6 +84,7 @@ func _ready() -> void:
 func _fixture() -> Dictionary:
 	var data := HubState.new().to_save_data()
 	data.money = "10"
+	data.costs = ExpeditionCosts.new_book(data.money.to_int())
 	data.bag_slots = 3
 	data.stored_items = [
 		{"id": "test_g1_unknown", "identified": false, "risk_hint": "희미한 진동"},
@@ -251,7 +252,7 @@ func _check_final_holdings() -> void:
 	_expect(_entry.get_hub_money() == 30 and _entry.get_hub_stored_items().size() == 4, "Final money/storage incorrect.")
 	for item in _entry.get_hub_stored_items():
 		_expect(item.is_identified() and item.get_definition().stable_id == &"test_g1_unknown", "Saved appraisal state lost.")
-	_expect(_store.load_data().money == "30" and _store.load_data().size() == 11, "Saved money or existing schema changed.")
+	_expect(_store.load_data().money == "30" and _store.load_data().size() == 12, "Saved money or existing schema changed.")
 	for raw_item in _store.load_data().stored_items:
 		_expect(raw_item.identified, "File did not preserve identification.")
 

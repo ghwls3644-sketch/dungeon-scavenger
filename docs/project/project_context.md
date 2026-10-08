@@ -8,7 +8,7 @@ canonical_for:
   - development_environment
   - engine_and_language
   - development_commands
-last_reviewed: 2026-10-06
+last_reviewed: 2026-10-08
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -1526,3 +1526,29 @@ $researchDirectory = Join-Path $env:TEMP ('dungeon-research-' + [guid]::NewGuid(
 - [이번 문서 검사 원본](dev0414_document_results.json)은 활성 문서 49개·상대 링크/앵커, 동결 원본 6개·사본 3개와 숫자 예 10개의 손익/현금·재고 대조 결과를 기록한다. 두 정합성 시점 표·소스 해시·문서 상태/ID·범위·공백 검사도 통과했다. 이전 실행/문서 JSON은 유지한다. 원가가 없는 과거 재고를 0이나 현재 단가로 채우지 않는 계약, 사용 원가와 실패의 휴대 전체 소실을 중복 합산하지 않는 계약을 직접 대조했다.
 
 **DEV-0414 문서 작성·검증 완료, 사용자 로컬 커밋 승인.** 사용자 선택을 반영한 최종 문서 검사도 통과했다. 다음 DEV-0415 — 출정별 비용 표시 연결. 사용자가 검토된 결과의 로컬 커밋을 승인했으며 push하지 않았다. **정합성 검사: 아직 아님 — G5 완료 후.**
+
+## DEV-0415 출정별 비용 표시 연결 검사
+
+2026-10-08, DEV-0414 `653ed9d`에서 착수했다. fetch 후 로컬 14커밋 앞섬·뒤처짐 0·깨끗한 작업 트리 확인, `MIG-CHG-047` 선기록 뒤 제한된 [비용 시험](../design/expedition_cost_reporting.md#dev-0415-비용-표시-시험-적용)을 연결했다. 최종 실행 소스 SHA-256은 `28a056c1731106c8585c37040424a0c8746a1bacc3aa0d4c433637094b323d5b`다.
+
+| 검사 | 결과와 범위 |
+|---|---|
+| 전체 실행 | [자동 기록](dev0415_automated_results.json): Godot 4.7.1, 1회 95/95 프로세스·52개 스모크 장면. 기존 기능/구형 저장/실패 경로와 새 비용 검사 포함, 진단 없음. 반복 2회 또는 사람 플레이 평가로 부풀리지 않음 |
+| 계산/저장 | `expedition_costs_smoke`: 문서 숫자 예 10개, 단가 5/7 FIFO·두 출정·예약 복구·미정산 종료, 원가 미기록과 신규 재고 혼합, 무료 지원/발견, int64 합계/잔액 경계·구형 1~6·손상 필드/완료 보고/ID·재시도. 모르는 원가는 현재 가격이나 0으로 확정하지 않음 |
+| 거래 실패/재시도 | `cost_boundary_smoke`: 구매·감정·판매·수리·개선·예약·시작·정산·예약 복구·시작 후 종료 복구 10종의 후보 저장을 두 번 실패시킨 뒤 성공, 원본 바이트·돈/원가/거래/최근 결과를 비교 |
+| 프로세스 경계 | [경계 기록](dev0415_boundary_results.json): 위 10종 × 저장 전/후 20곳에서 해당 자식 프로세스만 강제 종료하고 독립된 새 실행 20회로 읽음. 5/7 혼합 재고·서비스 금액·시작/예약·최근 결과·다음 기간과 원본 바이트 보존 확인. 실제 앱이 아닌 준비된 도메인 후보 경계임 |
+| 실제 앱 | `cost_flow_smoke`: 마우스로 준비·비용 탭·출정·정산, 키보드 수량/확정/스크롤과 F 세 번 투척, 무거운 시험 회수품만 회수해 입구 귀환. 두 출정에서 +25/+20/120 → +25/+30/150 확인. 정산 저장 실패/재시도·중복 요청, 앱 재생성의 열린 준비/최근 결과 복구 포함. 이 재생성은 동일 프로세스의 테스트 전역 상태 초기화임 |
+| 화면 | [화면 기록](dev0415_render_results.json): 그래픽 실행 1회·1152×648/1600×900·60장 생성. 실제 경로와 준비된 음수·미기록·int64 양/음수·재시도 화면을 구분. 모든 캡처에서 패널 범위 검사, 대표 경계 이미지를 직접 열어 읽기/버튼/스크롤 확인. 최종 가격·사람 이해도 통과를 뜻하지 않음 |
+| 문서/보존 | [문서 기록](dev0415_document_results.json): 활성 Markdown 링크/앵커·동결 SHA-256 6개와 사본 3개·두 시점 표 보존·최종 실행 해시 일치·`git diff --check` |
+
+초기 집중 검사에서 테스트 재생성 시 전역 Boot 초기화 누락과 Variant 추론 경고, 전체 검사에서 이전 저장 필드 목록 1곳을 발견해 검사 장면을 바로잡았다. `hub_upgrade`에 기본 고정 프레임 인자를 빼고 실행한 예비 검사 1회는 시간 제한에 걸렸고, 정규 `--fixed-fps 60` 실행과 최종 전체 검사에서는 통과했다. 최초 제한 환경에서는 기존 원자적 파일 교체가 실패해 승인된 엔진 실행 환경에서 검증했다. 실패한 예비 실행을 최종 성공 횟수에 포함하지 않는다.
+
+재현 명령(저장소 루트, 기존 Godot 경로 사용):
+
+```powershell
+./tests/run_g2_checks.ps1 -GodotBin C:/tmp/godot-4.7.1/Godot_v4.7.1-stable_win64_console.exe -Repetitions 1 -TimeoutSeconds 90
+./tests/run_cost_boundaries.ps1 -GodotBin C:/tmp/godot-4.7.1/Godot_v4.7.1-stable_win64_console.exe
+& 'C:/tmp/godot-4.7.1/Godot_v4.7.1-stable_win64_console.exe' --path . --rendering-method gl_compatibility --fixed-fps 60 --quit-after 20000 res://tests/smoke/cost_flow_smoke.tscn -- --cost-render
+```
+
+원시 로그/이미지 위치는 각 JSON의 `evidence_directory`에 남겼다. 실행 파일·개인 진행 기록·이미지 전체는 저장소에 추가하지 않았다. 이전 DEV 자료와 동결 원본을 변경하지 않았다. **DEV-0415 구현·검증 완료, 사용자 로컬 커밋 승인.** 다음 **DEV-0416 — G4 완료 조건 검토**. 커밋 전에는 로컬 14커밋 앞섬·뒤처짐 0이었다. 사용자가 검토된 결과의 로컬 커밋을 승인했으며 push하지 않았다. **정합성 검사: 아직 아님 — G5 완료 후.**

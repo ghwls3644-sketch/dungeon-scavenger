@@ -306,7 +306,7 @@ func _on_state_changed(_previous_state: int, current_state: int) -> void:
 			_expedition_id = 0
 			_settling = false
 		_hub.render_preparation(_hub_state.create_departure_loadout(), _departing)
-		_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items())
+		_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items(), _hub_state.get_preparation_costs(), _hub_state.get_last_costs())
 		_render_equipment()
 		_hub.present()
 		_hub.set_status(_progress_notice if not _progress_notice.is_empty() else "진행이 저장되어 있습니다.")
@@ -511,7 +511,7 @@ func _on_appraisal_confirmed() -> void:
 	_hub_state = candidate
 	_appraisal_quote = null
 	_appraising = false
-	_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items())
+	_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items(), _hub_state.get_preparation_costs(), _hub_state.get_last_costs())
 	_appraisal.present(_hub_state.get_money(), _hub_state.get_stored_items(), PROTOTYPE_ECONOMY.appraisal_fee_per_item)
 	_appraisal.set_status("%d개 감정 완료 · 비용 %d 지불 · 보유금 %d\n결과를 저장했습니다. 감정한 물품은 거점에 보관됩니다." % [count, cost, _hub_state.get_money()])
 
@@ -579,7 +579,7 @@ func _on_sale_confirmed() -> void:
 	_hub_state = candidate
 	_sale_quote = null
 	_selling = false
-	_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items())
+	_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items(), _hub_state.get_preparation_costs(), _hub_state.get_last_costs())
 	_sale.present(_hub_state.get_money(), _hub_state.get_sale_offers(PROTOTYPE_ECONOMY))
 	_sale.set_status("%d개 판매 완료 · 수입 +%d · 보유금 %d\n판매한 물품을 보관함에서 제거하고 결과를 저장했습니다." % [count, income, _hub_state.get_money()])
 
@@ -655,7 +655,7 @@ func _on_registration_confirmed() -> void:
 	_hub_state = candidate
 	_registration_quote = null
 	_registering = false
-	_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items())
+	_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items(), _hub_state.get_preparation_costs(), _hub_state.get_last_costs())
 	_present_registration()
 	_registration.set_status("원본 등록과 저장을 마쳤습니다. 등록 목록에서 설명을 다시 읽을 수 있습니다.")
 
@@ -734,7 +734,7 @@ func _on_repair_confirmed() -> void:
 	_hub_state = candidate
 	_repair_quote = null
 	_repairing = false
-	_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items())
+	_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items(), _hub_state.get_preparation_costs(), _hub_state.get_last_costs())
 	_render_equipment()
 	_present_repair()
 	_repair.set_status("%s 완료 · 이번 지불액 %d · 보유금 %d\n복구 결과를 저장했습니다." % [
@@ -884,7 +884,7 @@ func _on_upgrade_confirmed() -> void:
 	_hub_state = candidate
 	_upgrade_quote = null
 	_upgrading = false
-	_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items())
+	_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items(), _hub_state.get_preparation_costs(), _hub_state.get_last_costs())
 	_hub.render_preparation(_hub_state.create_departure_loadout(), false)
 	_present_upgrade()
 	_upgrade.set_status("%s 보유 · 이번 지불액 %d · 보유금 %d\n관련 기능을 장착하면 다음 출정부터 적용됩니다." % [HarnessUpgradeRule.label(id), cost, _hub_state.get_money()])
@@ -965,7 +965,7 @@ func _on_lures_confirmed() -> void:
 	_hub_state = candidate
 	_lure_quote = null
 	_preparing_lures = false
-	_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items())
+	_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items(), _hub_state.get_preparation_costs(), _hub_state.get_last_costs())
 	_hub.render_preparation(_hub_state.create_departure_loadout(), false)
 	_lures.present(_hub_state)
 	_lures.set_status("준비 저장 완료 · 이번 지불액 %d · 거점 추가분 %d개\n출정할 때 선택한 수량을 가져갑니다." % [paid, _hub_state.get_paid_lures()])

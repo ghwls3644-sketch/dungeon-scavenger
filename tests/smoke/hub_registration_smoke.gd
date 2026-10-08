@@ -27,6 +27,7 @@ func _ready() -> void:
 		_expect(not _store.has_file(), "Write case requires a fresh directory.")
 		var initial := HubState.new().to_save_data()
 		initial.money = "10"
+		initial.costs = ExpeditionCosts.new_book(initial.money.to_int())
 		initial.bag_slots = 3
 		initial.erase("registered_items")
 		initial.erase("harness_durability")
@@ -35,6 +36,7 @@ func _ready() -> void:
 		initial.erase("paid_lures")
 		initial.erase("selected_lures")
 		initial.erase("pending_departure")
+		initial.erase("costs")
 		_write_json(_path, _envelope(1, initial))
 		_expect(settings.save_settings(GameSettings.new()) == OK, "Cannot prepare settings.")
 	var settings_before := FileAccess.get_file_as_bytes(_directory.path_join("settings.cfg"))
@@ -89,6 +91,7 @@ func _ready() -> void:
 func _check_registration_domain() -> void:
 	var data := HubState.new().to_save_data()
 	data.money = "10"
+	data.costs = ExpeditionCosts.new_book(data.money.to_int())
 	data.stored_items = [
 		{"id": "test_g4_artifact", "identified": true, "risk_hint": "원본 표면"},
 		{"id": "test_g4_record", "identified": false, "risk_hint": "접힌 종이"},
@@ -152,12 +155,13 @@ func _check_migration() -> void:
 	legacy.erase("paid_lures")
 	legacy.erase("selected_lures")
 	legacy.erase("pending_departure")
+	legacy.erase("costs")
 	legacy.money = "9223372036854775807"
 	legacy.stored_items = [{"id": "test_g1_unknown", "identified": false, "risk_hint": "진동"}]
 	_write_json(path, _envelope(1, legacy))
 	var original := FileAccess.get_file_as_bytes(path)
 	var upgraded := store.load_data()
-	_expect(upgraded.size() == 11 and upgraded.registered_items.is_empty() and upgraded.harness_durability == 3 and HubState.from_save_data(upgraded, CATALOG) != null and FileAccess.get_file_as_bytes(path) == original, "Legacy load was lossy or rewrote the file.")
+	_expect(upgraded.size() == 12 and upgraded.registered_items.is_empty() and upgraded.harness_durability == 3 and HubState.from_save_data(upgraded, CATALOG) != null and FileAccess.get_file_as_bytes(path) == original, "Legacy load was lossy or rewrote the file.")
 	_expect(DirAccess.make_dir_absolute(path + ".tmp") == OK, "Cannot prepare migration write failure.")
 	_expect(store.save_data(upgraded) != OK and FileAccess.get_file_as_bytes(path) == original, "Failed migration destroyed legacy file.")
 	_expect(DirAccess.remove_absolute(path + ".tmp") == OK, "Cannot remove isolated failure directory.")
@@ -316,7 +320,7 @@ func _failure_after_registration() -> void:
 func _expect_registration_state(stored: int, registered: int) -> void:
 	var saved := _store.load_data()
 	_expect(_entry.get_hub_money() == _expected_registry_money and _entry.get_hub_stored_items().size() == stored and _entry.get_hub_registered_items().size() == registered, "Live original counts or money changed.")
-	_expect(saved.size() == 11 and saved.money == str(_expected_registry_money) and saved.stored_items.size() == stored and saved.registered_items.size() == registered, "Saved registration differs from memory.")
+	_expect(saved.size() == 12 and saved.money == str(_expected_registry_money) and saved.stored_items.size() == stored and saved.registered_items.size() == registered, "Saved registration differs from memory.")
 
 
 func _click_registry_row(list: ItemList, index: int) -> void:

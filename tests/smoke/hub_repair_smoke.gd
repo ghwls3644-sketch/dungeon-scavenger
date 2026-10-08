@@ -64,6 +64,7 @@ func _ready() -> void:
 func _repair_data(money: int, durability: int) -> Dictionary:
 	var data := _initial_data()
 	data.money = str(money)
+	data.costs = ExpeditionCosts.new_book(data.money.to_int())
 	data.harness_durability = durability
 	data.stored_items = [{"id": "test_g1_unknown", "identified": false, "risk_hint": "진동"}]
 	return data
@@ -86,6 +87,7 @@ func _check_repair_domain() -> void:
 				var expected := data.duplicate(true)
 				if money >= amount * 5:
 					expected.money = str(money - amount * 5)
+					expected.costs.period.repair_paid = str(amount * 5)
 					expected.harness_durability = durability + amount
 				_expect(candidate.apply_repair(quote, ECONOMY) == (money >= amount * 5) and candidate.to_save_data() == expected, "Paid repair partially applied or changed other fields.")
 				_expect(not candidate.apply_repair(quote, ECONOMY), "Duplicate/unaffordable repair accepted.")
@@ -247,7 +249,7 @@ func _repair_expedition(failure: bool, money: int, before: int, after: int) -> v
 		await _frames(5)
 	_expect(GameState.get_current_state() == GameState.State.RESULTS and _entry.get_pending_outcome().is_failure() == failure, "Actual repair-loop outcome missing.")
 	var text: String = _results.get_node("NextStep/EquipmentDamage").text
-	_expect("%d/3 → %d/3" % [before, after] in text and "완전 수리 예상 %d" % ((3 - after) * 5) in text and "귀환 순이익 +0" in _results.get_node("NextStep/NetIncome").text, "Result combined estimate with actual cost or lost damage.")
+	_expect("%d/3 → %d/3" % [before, after] in text and "완전 수리 예상 %d" % ((3 - after) * 5) in text and "이번 준비·탐험 손익" in _results.get_node("NextStep/NetIncome").text, "Result combined estimate with actual cost or lost damage.")
 	await _capture_wear("failure-result" if failure else "return-result", _results.get_node("NextStep"))
 	_click(_results.get_node("NextStep/SettleButton"))
 	await _frames(5)
@@ -261,7 +263,7 @@ func _check_repair_state(money: int, durability: int) -> void:
 	var expected := _repair_data(money, durability)
 	for key in ["bag_slots", "stored_items", "registered_items"]:
 		_expect(saved[key] == expected[key], "Repair changed retained progress: %s" % key)
-	_expect(saved.size() == 11 and ResearchProgress.get_entries(_entry.get_hub_registered_items(), RESEARCH, CATALOG)[1].unlocked, "Repair changed schema/research progress.")
+	_expect(saved.size() == 12 and ResearchProgress.get_entries(_entry.get_hub_registered_items(), RESEARCH, CATALOG)[1].unlocked, "Repair changed schema/research progress.")
 
 
 func _expect(condition: bool, message: String) -> void:

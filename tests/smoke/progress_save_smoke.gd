@@ -72,6 +72,7 @@ func _check_data() -> void:
 	_expect(store.load_data().is_empty() and store.get_last_error() == ERR_FILE_NOT_FOUND, "Missing file was treated as a record.")
 	var data := HubState.new().to_save_data()
 	data.money = "9223372036854775807"
+	data.costs = ExpeditionCosts.new_book(data.money.to_int())
 	data.next_expedition_id = "9223372036854775807"
 	data.bag_slots = 3
 	data.stored_items = [{"id": "test_g1_unknown", "identified": false, "risk_hint": "진동\n표식"}]
@@ -142,6 +143,7 @@ func _prepare_fixture() -> void:
 		return
 	var data := HubState.new().to_save_data()
 	data.money = "40"
+	data.costs = ExpeditionCosts.new_book(data.money.to_int())
 	data.bag_slots = 3
 	if _case == "unknown_id":
 		data.stored_items = [{"id": "unknown", "identified": false, "risk_hint": ""}]

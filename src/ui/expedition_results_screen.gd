@@ -25,10 +25,9 @@ func present_result(outcome: ExplorationOutcome, settlement: SettlementResult) -
 		$NextStep/Items.text = "정산 자료를 준비하지 못했습니다."
 		$NextStep/QuitButton.grab_focus()
 		return
-	$NextStep/NetIncome.text = "귀환 순이익 %+d" % settlement.get_net_income()
-	$NextStep/Totals.text = "판매액 %d · 비용 %d\n이번에 보관할 물품 %d개" % [
-		settlement.get_total_income(), settlement.get_total_cost(), settlement.get_retained_items().size(),
-	]
+	var costs := settlement.get_cost_summary()
+	$NextStep/NetIncome.text = CostReportText.headline(costs) if not costs.is_empty() else "회수품 정산액 %+d" % settlement.get_net_income()
+	$NextStep/Totals.text = "현금 변화 %+d\n정산 후 보유금 %d · 저장 전" % [costs.cash_change, costs.money_after] if not costs.is_empty() else "판매액 %d · 비용 %d" % [settlement.get_total_income(), settlement.get_total_cost()]
 	var wear := settlement.get_equipment_damage()
 	if not wear.is_empty():
 		$NextStep/EquipmentDamage.text = "기본 하네스 내구 %d/%d → %d/%d\n이번 손상 %d · 정산 저장 시 반영\n수리비는 차감하지 않았습니다." % [
@@ -39,6 +38,9 @@ func present_result(outcome: ExplorationOutcome, settlement: SettlementResult) -
 		if estimate >= 0:
 			$NextStep/EquipmentDamage.text += "\n완전 수리 예상 %d · 거점에서 선택" % estimate
 	var lines := PackedStringArray()
+	if not costs.is_empty():
+		lines.append(CostReportText.details(costs))
+	lines.append("이번에 보관할 물품 %d개" % settlement.get_retained_items().size())
 	for id in settlement.get_harness_upgrades():
 		lines.append("%s · 무료 발견\n정산 저장 후 영구 보유" % HarnessUpgradeRule.label(id))
 	for sale in settlement.get_sales():
@@ -50,7 +52,7 @@ func present_result(outcome: ExplorationOutcome, settlement: SettlementResult) -
 	elif lines.is_empty():
 		lines.append("이번에 회수한 물품이 없습니다.")
 	var tools := outcome.get_lure_summary()
-	if not tools.is_empty():
+	if not tools.is_empty() and costs.is_empty():
 		lines.append("유인물 무료 %d개 / 추가 %d개 사용\n%s · 정산 저장 시 반영\n구매비는 거점에서 이미 지불" % [tools.free_used, tools.paid_used,
 			"미사용 추가분 %d개 반환" % tools.returned if outcome.is_safe_return() else "휴대 추가분 %d개 소실" % tools.lost])
 	$NextStep/Items.text = "\n".join(lines)

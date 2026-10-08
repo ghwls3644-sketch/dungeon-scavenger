@@ -8,7 +8,7 @@ canonical_for:
   - source_tree_layout
   - module_responsibilities
   - module_dependency_rules
-last_reviewed: 2026-10-06
+last_reviewed: 2026-10-08
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -418,3 +418,9 @@ DEV-0318~DEV-0319의 즉시 E·후속 상호작용 문구는 당시 이력이다
 ### DEV-0414의 비용 표시 후속 계약
 
 [비용 표시 검토안](../design/expedition_cost_reporting.md#후속-구현의-책임과-검사-계약)은 실행 전의 문서 제안이다. 거점 도메인은 실제 거래와 재고 원가·구간 합계를 함께 관리하고, 손익 보고와 정산에서 지갑에 적용할 금액을 분리해야 한다. 앱/저장은 구매·예약·시작·복구·정산의 후보 저장 성공 후 상태 교체를 유지한다. UI는 도메인의 공개 결과를 표시하며 지갑을 바꾸거나 현재 상점 가격으로 과거 원가를 재계산하지 않는다. 새 클래스·저장 키·버전은 이번 작업에서 만들지 않는다. 표시 기준은 사용자 선택 DEC-114를 따르며, Q-027의 세부 계약 검증과 구현은 DEV-0415에서 다룬다.
+
+### DEV-0415의 비용 집계와 저장 책임
+
+위 DEV-0413 스키마 6과 DEV-0414 실행 전 제안은 당시 계약이다. 현재 [ExpeditionCosts](../../src/meta/expedition_costs.gd)는 거래 합계·개별 취득 원가·손익/현금/최근 결과 계산과 검증을 맡으며 돈을 움직이지 않는다. [HubState](../../src/meta/hub_state.gd)가 기존 거래·예약·복구·정산 후보에 비용 기록을 함께 적용한다. `SettlementResult.get_net_income()`은 이번 정산의 지갑 반영액을 유지하고 별도 비용 보고를 제공한다.
+
+[ProgressStore](../../src/infrastructure/progress_store.gd)는 스키마 7·12필드와 구형 1~6 읽기 변환·손상 보존·원자적 교체를 맡는다. `GameEntry`는 기존 저장 성공 후 상태 교체를 유지한다. [CostReportText](../../src/ui/cost_report_text.gd)와 거점/결과 화면은 공개 요약을 표시하고 직접 지갑이나 과거 단가를 바꾸지 않는다. 원가 미기록이면 정확한 손익 숫자를 생성하지 않는다. 자세한 모양은 MIG-CHG-047, 범위는 [시험 계약](../design/expedition_cost_reporting.md#dev-0415-비용-표시-시험-적용), 재현 검사는 [DEV-0415 기록](project_context.md#dev-0415-출정별-비용-표시-연결-검사)에 있다.

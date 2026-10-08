@@ -21,6 +21,7 @@ func _ready() -> void:
 		_check_research_domain()
 		var initial := HubState.new().to_save_data()
 		initial.money = "10"
+		initial.costs = ExpeditionCosts.new_book(initial.money.to_int())
 		initial.bag_slots = 3
 		_expect(not _store.has_file() and _store.save_data(initial) == OK, "Research requires a fresh save.")
 		_expect(settings.save_settings(GameSettings.new()) == OK, "Cannot prepare settings.")
@@ -125,6 +126,7 @@ func _check_research_domain() -> void:
 	legacy.erase("paid_lures")
 	legacy.erase("selected_lures")
 	legacy.erase("pending_departure")
+	legacy.erase("costs")
 	var legacy_path := _directory.path_join("legacy-research.json")
 	_write_json(legacy_path, _envelope(1, legacy))
 	var legacy_bytes := FileAccess.get_file_as_bytes(legacy_path)
