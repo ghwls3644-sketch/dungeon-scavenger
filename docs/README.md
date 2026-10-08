@@ -55,6 +55,7 @@ related:
 - G2 전체 흐름 검사·완료 결과: [`project/g2_flow_review.md`](project/g2_flow_review.md)
 - G3 탐험 통합 검사·남은 범위: [`project/g3_exploration_review.md`](project/g3_exploration_review.md)
 - G4 거점·경제·성장 검토와 보완 범위: [`project/g4_meta_review.md`](project/g4_meta_review.md)
+- 거점 목표·의뢰 최소 범위 검토안 (`draft`): [`design/expedition_objectives.md`](design/expedition_objectives.md)
 - 휴대 도구 준비 규칙 검토안 (`draft`): [`design/tool_preparation.md`](design/tool_preparation.md)
 - 출정별 비용 표시 규칙 검토안 (`draft`): [`design/expedition_cost_reporting.md`](design/expedition_cost_reporting.md)
 - 하네스 준비·성장의 요구와 비교안 (`draft`): [`design/harness_engineering.md`](design/harness_engineering.md)
@@ -111,7 +112,7 @@ GitHub 로그인 상태, Codex 대화 기록, 앱별 로컬 설정은 저장소�
 
 ## 현재 단계
 
-**DEV-0416 — G4 완료 조건 검토 완료, 사용자 로컬 커밋 승인.** 감정·판매·등록/연구·수리·장착/영구 개선·도구 준비·비용 표시의 연결을 대조하고 현재 코드로 전체 **95/95 실행**을 통과했다. **G4 전체 완료는 보류**한다. 현재 고정 목적지 안내에 없는 목표·최소 길드/의뢰 범위와 사람의 정산 이해도·성장 선택·재기 체감이 남아 있다. 다음은 **DEV-0417 — 거점 목표·의뢰 최소 범위 정리**다. 코드와 기존 규칙은 유지하며 G5는 시작하지 않았다. 기준 DEV-0415 `27c0684`, 커밋 전에는 로컬 15커밋 앞섬·뒤처짐 0이었다. 2026-10-09 사용자가 검토된 결과의 로컬 커밋을 승인했으며 push하지 않았다. **정합성 검사: 아직 아님 — G5 완료 후.**
+**DEV-0417 — 거점 목표·의뢰 최소 범위 정리 문서 작성·검증 완료, 사용자 로컬 커밋 승인.** 사용자 선택인 자유 수색+선택 의뢰 하나·추가 보상, 미달성 시 정상 정산을 DEC-115·GDD·경제 규칙에 반영했다. 일반 폐품 2개 회수 실적·보상 10, 선택/진척·귀환/실패·정산 저장과 비용 표시는 미적용 제안이며 Q-028에서 추적한다. 실행 소스·저장 스키마 7은 그대로다. 문서 링크·원본 보존·수치 예·소스 동일성·공백 검사를 통과했다. 다음은 **DEV-0418 — 거점 선택 의뢰 연결**이다. 기준은 DEV-0416 `58b481e`이며 커밋 전에는 로컬 16커밋 앞섬·뒤처짐 0이었다. 2026-10-09 사용자가 검토된 결과의 로컬 커밋을 승인했으며 push하지 않았다. G4 전체 완료·최종 밸런스·사람 평가는 보류다. **정합성 검사: 아직 아님 — G5 완료 후.**
 
 상세 근거와 후속 범위는 [G4 검토 기록](project/g4_meta_review.md)을 따른다.
 

@@ -6,7 +6,7 @@ status: confirmed
 source_version: management-proposal-v0.2.1
 canonical_for:
   - design_document_navigation
-last_reviewed: 2026-10-08
+last_reviewed: 2026-10-09
 owner: game-design
 related:
   - ../GDD.md
@@ -37,8 +37,11 @@ related:
 | [`repair_rules.md`](repair_rules.md) (`draft`) | 장비 내구·선택 수리·재출정 안전망의 기존 요구와 구현 전 제안은 무엇인가? |
 | [`tool_preparation.md`](tool_preparation.md) (`draft`) | 소음 유인물의 기본 무료분·추가 구매, 수량·적재·귀환/실패·저장 계약은 어떻게 나눌 것인가? |
 | [`expedition_cost_reporting.md`](expedition_cost_reporting.md) (`draft`) | 준비·탐험의 손익과 실제 현금 변화, 재고 취득 원가·투자·견적은 어떻게 구분할 것인가? |
+| [`expedition_objectives.md`](expedition_objectives.md) (`draft`) | 자유 수색과 최소 목표/의뢰의 범위, 선택·진척·결과·보상/저장 계약은 무엇인가? |
 
 ## 경계 규칙
+
+- [목표·의뢰 검토안](expedition_objectives.md)은 DEV-0417의 미적용 비교안이며 `draft`다. DEC-115의 자유 수색+선택 의뢰 하나/추가 보상만 채택했으며 수량/보상·반복/저장 계약은 미적용 제안이다. Q-028과 현재 구현/후속 인계를 함께 확인한다.
 
 - [출정별 비용 표시 검토안](expedition_cost_reporting.md)은 `draft`다. DEC-114의 소모 원가 손익·현금 변화 별도 표시를 DEV-0415에서 [시험 연결](expedition_cost_reporting.md#dev-0415-비용-표시-시험-적용)했다. 집계·원가·저장/복구 기술 검사와 사람 이해도·최종 밸런스·G4 완료 판단을 구분하고 Q-027에서 추적한다.
 
