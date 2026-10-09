@@ -201,7 +201,7 @@ func _settle(expected_money: int) -> void:
 	_expect(restored != null and restored.get_money() == expected_money and restored.get_stored_items().size() == 1, "Saved hub differs from committed memory.")
 	var keys := _store.load_data().keys()
 	keys.sort()
-	_expect(keys == ["bag_slots", "costs", "harness_durability", "harness_modules", "harness_upgrades", "money", "next_expedition_id", "paid_lures", "pending_departure", "registered_items", "selected_lures", "stored_items"], "Unexpected fields in the hub save.")
+	_expect(keys == ["bag_slots", "costs", "harness_durability", "harness_modules", "harness_upgrades", "money", "next_expedition_id", "objective", "paid_lures", "pending_departure", "registered_items", "selected_lures", "stored_items"], "Unexpected fields in the hub save.")
 	_expect(restored.get_harness_durability() == _entry.get_hub_harness_durability(), "Survival settlement saved different equipment damage.")
 	_expect(_store.load_data().registered_items.is_empty(), "G3 exploration registered an original automatically.")
 

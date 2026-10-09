@@ -127,6 +127,7 @@ func _check_research_domain() -> void:
 	legacy.erase("selected_lures")
 	legacy.erase("pending_departure")
 	legacy.erase("costs")
+	legacy.erase("objective")
 	var legacy_path := _directory.path_join("legacy-research.json")
 	_write_json(legacy_path, _envelope(1, legacy))
 	var legacy_bytes := FileAccess.get_file_as_bytes(legacy_path)

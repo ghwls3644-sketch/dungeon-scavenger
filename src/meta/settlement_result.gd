@@ -11,6 +11,8 @@ var _equipment_damage: Dictionary = {}
 var _full_repair_estimate := -1
 var _harness_upgrades: Array[String] = []
 var _cost_report: Dictionary = {}
+var _objective_result: Dictionary = {}
+var _objective_income := 0
 
 
 static func from_outcome(
@@ -66,6 +68,10 @@ func get_retained_items() -> Array[InventoryItem]:
 
 
 func get_total_income() -> int:
+	return _total_income + _objective_income
+
+
+func get_sales_income() -> int:
 	return _total_income
 
 
@@ -75,11 +81,12 @@ func get_total_cost() -> int:
 
 func get_net_income() -> int:
 	# Cash applied by this settlement, never the reporting profit after preparation.
-	return _total_income - _total_cost
+	return get_total_income() - _total_cost
 
 
 func set_cost_report(report: Dictionary) -> bool:
-	if not _cost_report.is_empty() or ExpeditionCosts.report_summary(report).is_empty():
+	if not _cost_report.is_empty() or ExpeditionCosts.report_summary(report).is_empty() \
+			or report.objective != get_objective_result() or ExpeditionCosts.number(report.loot_income) != _total_income:
 		return false
 	_cost_report = report.duplicate(true)
 	return true
@@ -111,3 +118,17 @@ func get_full_repair_estimate() -> int:
 
 func get_harness_upgrades() -> Array[String]:
 	return _harness_upgrades.duplicate()
+
+
+func set_objective(value: Dictionary) -> bool:
+	var summary := ExpeditionObjective.summary(value, "failure" if _failure else "safe")
+	if not _objective_result.is_empty() or not _cost_report.is_empty() or summary.is_empty() \
+			or summary.reward > 9223372036854775807 - _total_income:
+		return false
+	_objective_result = value.duplicate(true)
+	_objective_income = summary.reward
+	return true
+
+
+func get_objective_result() -> Dictionary:
+	return _objective_result.duplicate(true) if not _objective_result.is_empty() else ExpeditionObjective.result({})

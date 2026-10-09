@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "markdown_files": 51,
+  "relative_links_checked": 1706,
+  "frozen_sources": 6,
+  "archive_copies": 3,
+  "failures": [],
+  "scope": "DEV-0418 optional objective documentation and preservation",
+  "source_tree_sha256": "947eea08391530d0863c7892f3bb4f77f1a10dc5862150043c7fa50de30ec543",
+  "source_hash_verified_with": "tests/run_g2_checks.ps1 Get-G2SourceHash",
+  "checkpoint_tables_preserved": {
+    "docs/README.md_checkpoint_preserved": true,
+    "docs/project/migration_manifest.md_checkpoint_preserved": true
+  },
+  "prior_reports_preserved": true,
+  "story_reference_preserved": true,
+  "draft_and_provisional_preserved": true,
+  "migration_entry_unique": true,
+  "single_ticket_scope": true,
+  "diff_check": true,
+  "baseline_commit": "1fd4dba26c39f6623507a7f7ef58f289a8e45a24",
+  "local_ahead": 17,
+  "local_behind": 0,
+  "ticket_commit_status": "user approved local commit on 2026-10-09",
+  "push_status": "not requested; not pushed"
+}

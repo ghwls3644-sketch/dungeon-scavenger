@@ -1588,3 +1588,31 @@ Get-G2SourceHash (Get-Location).Path
 검증 순서: 활성 링크/앵커 → 이관 대장의 원본/사본 → DEC-115·Q-028·검토안/GDD/경제/인계의 방향과 미적용 상태 → 수치/상태 사례 → 실행 소스 해시/이전 근거 → HEAD 대비 두 시점 표·변경 범위 → `git diff --check`. 후속 DEV-0418에서 실제 목표/보상/저장 기능과 기존 회귀를 실행한다.
 
 **DEV-0417 문서 작성·검증 완료, 사용자 로컬 커밋 승인.** 다음 **DEV-0418 — 거점 선택 의뢰 연결**. G4 전체 완료·최종 밸런스·사람 평가는 보류한다. 커밋 전에는 로컬 16커밋 앞섬·뒤처짐 0이었다. 2026-10-09 사용자가 검토된 결과의 로컬 커밋을 승인했으며 push하지 않았다. **정합성 검사: 아직 아님 — G5 완료 후.**
+
+## DEV-0418 거점 선택 의뢰 연결 검사
+
+2026-10-09, DEV-0417 `1fd4dba26c39f6623507a7f7ef58f289a8e45a24` 뒤 fetch와 로컬 17커밋 앞섬·뒤처짐 0·깨끗한 작업 트리를 확인했다. MIG-CHG-050 뒤 DEC-115·confirmed 규칙과 Q-028의 제한된 시험을 구현했다. 자유 수색·선택 의뢰 하나, 확인된 비보호 일반 폐품 2개 안전 귀환·보상 10·미달성 정상 정산·선택 초기화를 연결했다.
+
+| 검사 | 결과와 범위 |
+|---|---|
+| 전체 회귀 | [자동 기록](dev0418_automated_results.json): Godot 4.7.1, **98/98 프로세스·55개 스모크 장면**, 1회 반복. 오류/무시 진단 없음. 기존 감정/판매/등록/연구·수리·장착/성장·도구/비용·생존·설정·새 프로세스 이어하기와 구형 저장 분기 포함 |
+| 의뢰 계산·저장 | [도메인 기록](dev0418_objective_results.json): 자유/선택 × 0~3개 × 일반/비상 귀환/실패의 **24개 분기**, 문서 숫자 예 **6개** 통과. 같은 종류·미확인/보호/잔재/원본/거점 재고 제외·부분 성공의 보관/판매, 선택 사본/오래된 요청·예약/시작 복구·반복 ID, 원가 미기록·지갑/수입 int64 초과 검사. 구형 1~6은 기존 비용 검사, 7은 최근 보고·예약/시작/정산 보존을 검사하고 손상/미지원 기록은 보존 |
+| 저장 원자성 | [종료 기록](dev0418_boundary_results.json): 선택·해제·예약·시작·정산·예약 복구·시작 복구의 저장 직전/직후 **14경계**에서 테스트 자식 프로세스만 종료한 뒤 새 프로세스로 검증. 전체 회귀 안의 별도 의뢰 경계 스모크는 각 거래에서 두 번 저장 실패 후 재시도. 보상/돈/선택/최근 보고/도구/다음 기간 일치와 중복 거절 확인 |
+| 실제 앱·화면 | [화면 기록](dev0418_render_results.json): 마우스 탭/버튼과 키보드 선택, 실제 이동/E 회수·두 개 회수 뒤 가벼운 물품 버리기·귀환/실패·자유 수색의 **4출정**, 선택/정산 저장 실패·재시도·앱 재생성/최근 보고 유지. 1152×648·1600×900의 경계 검사와 PNG **42장**, 선택/자유/저장 실패·진척·달성/미달성·최근 실패 보고·스크롤 끝 대표 화면 직접 확인. 같은 프로세스의 앱 재생성과 위 강제 종료/새 프로세스 검사를 구분 |
+| 문서·보존 | [문서 기록](dev0418_document_results.json): 활성 링크/앵커, 동결 원본 SHA-256 6개·아카이브 사본 3개, 두 검사 시점 표·기존 증거/Story/Reference 보존, 문서 상태·단일 작업 범위, 소스 해시와 `git diff --check` |
+
+최종 실행 소스 SHA-256은 **`947eea08391530d0863c7892f3bb4f77f1a10dc5862150043c7fa50de30ec543`**다. 전체 회귀·종료 경계·화면 기록과 현재 src/tests/project.godot가 같은 소스다. 최초 검사 중 누락된 규칙 검증 메서드와 JSON 숫자 정규화를 보완했다. 기존 G3 검사 한 곳의 저장 필드 목록도 스키마 8에 맞춰 갱신했으며 최종 98/98을 통과했다. 초기 실패 실행을 통과 건수에 포함하지 않았다.
+
+재현 명령(저장소 루트, 화면 출력 폴더는 새 임시 폴더 사용):
+
+```powershell
+./tests/run_g2_checks.ps1 -GodotBin C:/tmp/godot-4.7.1/Godot_v4.7.1-stable_win64_console.exe -Repetitions 1 -TimeoutSeconds 90
+./tests/run_objective_boundaries.ps1 -GodotBin C:/tmp/godot-4.7.1/Godot_v4.7.1-stable_win64_console.exe
+& C:/tmp/godot-4.7.1/Godot_v4.7.1-stable_win64_console.exe --path . --rendering-method gl_compatibility --fixed-fps 60 --quit-after 20000 res://tests/smoke/objective_flow_smoke.tscn -- --objective-render --objective-directory=C:/tmp/dev0418-new-render
+. ./tests/run_g2_checks.ps1
+Get-G2SourceHash (Get-Location).Path
+```
+
+원시 실행 위치는 `C:\Users\user\AppData\Local\Temp\dungeon-g2-20261009-000024-aa6745cfb27041969c60f1b9b97f7f9c`, `C:\Users\user\AppData\Local\Temp\dungeon-objective-boundaries-a02eedefb93e4050998cbb83a751132e`, `C:\Users\user\AppData\Local\Temp\dev0418-final-render`다. 임시 이미지/로그의 영구 보관을 약속하지 않으며 저장소 검사 코드와 JSON으로 재현한다. 전체 실행기의 원래 scope는 G2이며 이번 JSON 사본은 원래 scope와 DEV-0418 범위를 함께 기록했다. 이전 검사 결과를 덮어쓰지 않았다.
+
+**DEV-0418 구현·검증 완료, 사용자 로컬 커밋 승인.** 2026-10-09 사용자가 검토된 결과의 로컬 커밋을 승인했으며 push하지 않았다. 다음 **DEV-0419 — G4 보완 완료 조건 검토**다. 최종 보상/반복 경제·메뉴 사용성·사람 판단·G4 전체 완료는 보류한다. **정합성 검사: 아직 아님 — G5 완료 후.**

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ExpeditionObjectiveRule" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/data/expedition_objective_rule.gd" id="1_rule"]
+
+[resource]
+script = ExtResource("1_rule")
+stable_id = &"prototype_scrap_recovery"
+display_name = "폐품 회수 의뢰"
+version = 1
+required_count = 2
+reward = 10

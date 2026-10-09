@@ -45,6 +45,7 @@ func _ready() -> void:
 			initial.erase("selected_lures")
 			initial.erase("pending_departure")
 			initial.erase("costs")
+			initial.erase("objective")
 			if _case == "legacy1":
 				initial.erase("registered_items")
 			_write_json(_path, _envelope(1 if _case == "legacy1" else 2, initial))
@@ -172,6 +173,7 @@ func _check_migration() -> void:
 		legacy.erase("selected_lures")
 		legacy.erase("pending_departure")
 		legacy.erase("costs")
+		legacy.erase("objective")
 		if version == 1:
 			legacy.erase("registered_items")
 		_write_json(path, _envelope(version, legacy))

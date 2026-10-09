@@ -1,0 +1,38 @@
+{
+  "examples": [
+    {
+      "cash_change": 40,
+      "profit": 40,
+      "settlement_credit": 40
+    },
+    {
+      "cash_change": 50,
+      "profit": 50,
+      "settlement_credit": 50
+    },
+    {
+      "cash_change": 40,
+      "profit": 45,
+      "settlement_credit": 50
+    },
+    {
+      "cash_change": 30,
+      "profit": 30,
+      "settlement_credit": 30
+    },
+    {
+      "cash_change": -10,
+      "profit": -10,
+      "settlement_credit": 0
+    },
+    {
+      "cash_change": -25,
+      "profit": 40,
+      "settlement_credit": 50
+    }
+  ],
+  "failures": [],
+  "outcome_cases": 24,
+  "passed": true,
+  "source_tree_sha256": "947eea08391530d0863c7892f3bb4f77f1a10dc5862150043c7fa50de30ec543"
+}

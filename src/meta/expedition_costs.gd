@@ -4,7 +4,7 @@ extends RefCounted
 # Reporting never moves money. HubState commits these records with each transaction.
 const LIMIT := 9223372036854775807
 const PERIOD_KEYS := ["opening_money", "opening_stock", "storage_income", "appraisal_paid", "repair_paid", "upgrade_paid", "bought_costs", "partial"]
-const REPORT_KEYS := ["period", "id", "outcome", "loot_income", "free_used", "paid_count", "paid_used"]
+const REPORT_KEYS := ["period", "id", "outcome", "loot_income", "free_used", "paid_count", "paid_used", "objective"]
 const PAYMENTS := ["appraisal_paid", "repair_paid", "upgrade_paid"]
 
 
@@ -79,10 +79,10 @@ static func _valid_period(value: Variant) -> bool:
 	return true
 
 
-static func _values(period: Dictionary, loot: int = 0, consumed: Array = []) -> Dictionary:
-	if not _valid_period(period) or loot < 0 or not _costs(consumed):
+static func _values(period: Dictionary, loot: int = 0, consumed: Array = [], reward: int = 0) -> Dictionary:
+	if not _valid_period(period) or loot < 0 or reward < 0 or not _costs(consumed):
 		return {}
-	var income := _sum([number(period.storage_income), loot])
+	var income := _sum([number(period.storage_income), loot, reward])
 	var services := _sum([number(period.appraisal_paid), number(period.repair_paid)])
 	var investment := number(period.upgrade_paid)
 	var purchase := total(period.bought_costs)
@@ -98,7 +98,7 @@ static func _values(period: Dictionary, loot: int = 0, consumed: Array = []) -> 
 		return {}
 	return {"income": income, "operating_cost": operating, "profit": income - operating,
 		"unknown_count": consumed.count(""), "cash_change": cash, "money_after": opening + cash,
-		"opening_money": opening, "storage_income": number(period.storage_income), "loot_income": loot,
+		"opening_money": opening, "storage_income": number(period.storage_income), "loot_income": loot, "objective_income": reward,
 		"appraisal_paid": number(period.appraisal_paid), "repair_paid": number(period.repair_paid),
 		"upgrade_paid": investment, "lure_bought": purchase, "partial": period.partial}
 
@@ -162,9 +162,10 @@ static func cancel_reservation(book: Dictionary) -> Dictionary:
 	return result
 
 
-static func make_report(book: Dictionary, id: int, outcome: String, loot: int, free_used: int, paid_used: int) -> Dictionary:
+static func make_report(book: Dictionary, id: int, outcome: String, loot: int, free_used: int, paid_used: int, objective: Dictionary = {}) -> Dictionary:
 	var result := {"period": book.period.duplicate(true), "id": str(id), "outcome": outcome,
-		"loot_income": str(loot), "free_used": free_used, "paid_count": book.carried.size(), "paid_used": paid_used}
+		"loot_income": str(loot), "free_used": free_used, "paid_count": book.carried.size(), "paid_used": paid_used,
+		"objective": objective.duplicate(true) if not objective.is_empty() else ExpeditionObjective.result({})}
 	return {} if report_summary(result).is_empty() else result
 
 
@@ -173,6 +174,9 @@ static func report_summary(report: Variant) -> Dictionary:
 			or number(report.id) <= 0 or number(report.id) >= LIMIT \
 			or report.outcome not in ["safe", "failure", "interrupted"] \
 			or not LurePreparation.is_count(report.paid_count, LurePreparation.RULE.stock_limit):
+		return {}
+	var objective := ExpeditionObjective.summary(report.objective, report.outcome)
+	if objective.is_empty():
 		return {}
 	var loot := number(report.loot_income)
 	var paid := int(report.paid_count)
@@ -197,10 +201,10 @@ static func report_summary(report: Variant) -> Dictionary:
 			returned = all_stock.slice(int(report.paid_used), paid)
 		else:
 			lost = all_stock.slice(int(report.paid_used), paid)
-	var result := _values(report.period, loot, used + lost)
+	var result := _values(report.period, loot, used + lost, objective.reward)
 	if result.is_empty():
 		return {}
-	result.merge({"id": report.id, "outcome": report.outcome, "free_used": int(report.free_used),
+	result.merge({"objective": objective, "id": report.id, "outcome": report.outcome, "free_used": int(report.free_used),
 		"paid_used": int(report.paid_used), "used_cost": total(used), "lost_cost": total(lost),
 		"used_unknown": used.count(""), "lost_unknown": lost.count(""),
 		"lost_count": lost.size(), "returned_count": returned.size(),

@@ -167,7 +167,7 @@ func _check_lure_storage() -> void:
 	var store := ProgressStore.new(path)
 	for version in range(1, 6):
 		var data := _repair_data(10, 1)
-		for key in ["paid_lures", "selected_lures", "pending_departure", "costs"]:
+		for key in ["paid_lures", "selected_lures", "pending_departure", "costs", "objective"]:
 			data.erase(key)
 		if version < 5:
 			data.erase("harness_upgrades")
@@ -175,6 +175,7 @@ func _check_lure_storage() -> void:
 			data.erase("selected_lures")
 			data.erase("pending_departure")
 			data.erase("costs")
+			data.erase("objective")
 		if version < 4:
 			data.erase("harness_modules")
 		if version < 3:

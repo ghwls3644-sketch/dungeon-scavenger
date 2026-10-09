@@ -1,0 +1,310 @@
+{
+  "passed": true,
+  "source_tree_sha256": "947eea08391530d0863c7892f3bb4f77f1a10dc5862150043c7fa50de30ec543",
+  "checks": [
+    {
+      "name": "select-before",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "res://tests/smoke/objective_boundary_smoke.tscn",
+        "--",
+        "--boundary-mode=verify",
+        "--action=select",
+        "--objective-directory=C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-objective-boundaries-a02eedefb93e4050998cbb83a751132e\\select-before"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] objective_boundary_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 360,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "select-before.console.log"
+    },
+    {
+      "name": "select-after",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "res://tests/smoke/objective_boundary_smoke.tscn",
+        "--",
+        "--boundary-mode=verify",
+        "--action=select",
+        "--objective-directory=C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-objective-boundaries-a02eedefb93e4050998cbb83a751132e\\select-after",
+        "--boundary-after"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] objective_boundary_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 359,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "select-after.console.log"
+    },
+    {
+      "name": "cancel-before",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "res://tests/smoke/objective_boundary_smoke.tscn",
+        "--",
+        "--boundary-mode=verify",
+        "--action=cancel",
+        "--objective-directory=C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-objective-boundaries-a02eedefb93e4050998cbb83a751132e\\cancel-before"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] objective_boundary_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 364,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "cancel-before.console.log"
+    },
+    {
+      "name": "cancel-after",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "res://tests/smoke/objective_boundary_smoke.tscn",
+        "--",
+        "--boundary-mode=verify",
+        "--action=cancel",
+        "--objective-directory=C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-objective-boundaries-a02eedefb93e4050998cbb83a751132e\\cancel-after",
+        "--boundary-after"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] objective_boundary_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 358,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "cancel-after.console.log"
+    },
+    {
+      "name": "reserve-before",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "res://tests/smoke/objective_boundary_smoke.tscn",
+        "--",
+        "--boundary-mode=verify",
+        "--action=reserve",
+        "--objective-directory=C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-objective-boundaries-a02eedefb93e4050998cbb83a751132e\\reserve-before"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] objective_boundary_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 361,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "reserve-before.console.log"
+    },
+    {
+      "name": "reserve-after",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "res://tests/smoke/objective_boundary_smoke.tscn",
+        "--",
+        "--boundary-mode=verify",
+        "--action=reserve",
+        "--objective-directory=C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-objective-boundaries-a02eedefb93e4050998cbb83a751132e\\reserve-after",
+        "--boundary-after"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] objective_boundary_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 364,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "reserve-after.console.log"
+    },
+    {
+      "name": "start-before",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "res://tests/smoke/objective_boundary_smoke.tscn",
+        "--",
+        "--boundary-mode=verify",
+        "--action=start",
+        "--objective-directory=C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-objective-boundaries-a02eedefb93e4050998cbb83a751132e\\start-before"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] objective_boundary_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 359,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "start-before.console.log"
+    },
+    {
+      "name": "start-after",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "res://tests/smoke/objective_boundary_smoke.tscn",
+        "--",
+        "--boundary-mode=verify",
+        "--action=start",
+        "--objective-directory=C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-objective-boundaries-a02eedefb93e4050998cbb83a751132e\\start-after",
+        "--boundary-after"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] objective_boundary_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 371,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "start-after.console.log"
+    },
+    {
+      "name": "settle-before",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "res://tests/smoke/objective_boundary_smoke.tscn",
+        "--",
+        "--boundary-mode=verify",
+        "--action=settle",
+        "--objective-directory=C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-objective-boundaries-a02eedefb93e4050998cbb83a751132e\\settle-before"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] objective_boundary_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 360,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "settle-before.console.log"
+    },
+    {
+      "name": "settle-after",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "res://tests/smoke/objective_boundary_smoke.tscn",
+        "--",
+        "--boundary-mode=verify",
+        "--action=settle",
+        "--objective-directory=C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-objective-boundaries-a02eedefb93e4050998cbb83a751132e\\settle-after",
+        "--boundary-after"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] objective_boundary_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 362,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "settle-after.console.log"
+    },
+    {
+      "name": "recover_reserved-before",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "res://tests/smoke/objective_boundary_smoke.tscn",
+        "--",
+        "--boundary-mode=verify",
+        "--action=recover_reserved",
+        "--objective-directory=C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-objective-boundaries-a02eedefb93e4050998cbb83a751132e\\recover_reserved-before"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] objective_boundary_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 364,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "recover_reserved-before.console.log"
+    },
+    {
+      "name": "recover_reserved-after",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "res://tests/smoke/objective_boundary_smoke.tscn",
+        "--",
+        "--boundary-mode=verify",
+        "--action=recover_reserved",
+        "--objective-directory=C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-objective-boundaries-a02eedefb93e4050998cbb83a751132e\\recover_reserved-after",
+        "--boundary-after"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] objective_boundary_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 359,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "recover_reserved-after.console.log"
+    },
+    {
+      "name": "recover_started-before",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "res://tests/smoke/objective_boundary_smoke.tscn",
+        "--",
+        "--boundary-mode=verify",
+        "--action=recover_started",
+        "--objective-directory=C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-objective-boundaries-a02eedefb93e4050998cbb83a751132e\\recover_started-before"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] objective_boundary_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 365,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "recover_started-before.console.log"
+    },
+    {
+      "name": "recover_started-after",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "res://tests/smoke/objective_boundary_smoke.tscn",
+        "--",
+        "--boundary-mode=verify",
+        "--action=recover_started",
+        "--objective-directory=C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-objective-boundaries-a02eedefb93e4050998cbb83a751132e\\recover_started-after",
+        "--boundary-after"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] objective_boundary_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 359,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "recover_started-after.console.log"
+    }
+  ],
+  "interrupted_boundaries": 14,
+  "scope": "DEV-0418 selection/cancellation/departure/settlement/recovery atomic boundaries",
+  "raw_log_directory": "C:\\Users\\user\\AppData\\Local\\Temp\\dungeon-objective-boundaries-a02eedefb93e4050998cbb83a751132e"
+}

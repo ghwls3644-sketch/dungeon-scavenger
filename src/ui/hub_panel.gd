@@ -11,6 +11,11 @@ signal upgrade_requested
 signal harness_requested
 signal repair_requested
 signal lures_requested
+signal objective_selected(offer: Dictionary, source: Dictionary)
+
+var _objective_source: Dictionary = {}
+var _objective_offer: Dictionary = {}
+var _objective_busy := false
 
 @onready var _bags: OptionButton = %BagChoice
 @onready var _details: Label = %PreparationDetails
@@ -22,6 +27,12 @@ signal lures_requested
 func _ready() -> void:
 	%CostTabs.set_tab_title(0, "보관품")
 	%CostTabs.set_tab_title(1, "수입·비용")
+	%CostTabs.set_tab_title(2, "목표·의뢰")
+	%ObjectiveChoice.add_item("자유 수색", 0)
+	%ObjectiveChoice.add_item("폐품 회수 의뢰", 1)
+	%ObjectiveChoice.item_selected.connect(func(_index: int): _render_objective_choice())
+	%ObjectiveConfirm.pressed.connect(func(): objective_selected.emit(
+		_objective_offer.duplicate(true) if %ObjectiveChoice.selected == 1 else {}, _objective_source.duplicate(true)))
 	%LureButton.pressed.connect(func(): lures_requested.emit())
 	_bags.item_selected.connect(func(index: int): bag_slots_selected.emit(_bags.get_item_id(index)))
 	_departure.pressed.connect(func(): departure_requested.emit())
@@ -52,6 +63,9 @@ func render_preparation(loadout: ExpeditionLoadout, busy: bool) -> void:
 	%UpgradeButton.disabled = busy
 	%HarnessButton.disabled = busy
 	%LureButton.disabled = busy
+	_objective_busy = busy
+	%ObjectiveChoice.disabled = busy
+	_render_objective_choice()
 	_details.text = "적재 여유 %d칸 · 시작 무게 %.2f · 유인물 %d개\n부담 %.1f / 과적 %.1f\n하네스 충전 %d/%d\n장착: %s" % [
 		loadout.slot_capacity, loadout.lure_count * loadout.lure_weight, loadout.lure_count, loadout.burden_weight, loadout.overload_weight,
 		loadout.starting_charge, loadout.charge_capacity, HarnessModules.describe(loadout.harness_modules),
@@ -88,3 +102,18 @@ func render_holdings(money: int, items: Array[InventoryItem], preparation_costs:
 func present() -> void:
 	show()
 	_departure.grab_focus()
+
+
+func render_objective(hub: HubState) -> void:
+	_objective_source = hub.to_save_data()
+	_objective_offer = ExpeditionObjective.RULE.offer()
+	%ObjectiveChoice.select(0 if hub.get_objective_offer().is_empty() else 1)
+	%ObjectiveCurrent.text = "현재 선택: " + ("자유 수색" if hub.get_objective_offer().is_empty() else "폐품 회수 의뢰")
+	_render_objective_choice()
+
+
+func _render_objective_choice() -> void:
+	var selected: Dictionary = _objective_offer if %ObjectiveChoice.selected == 1 else {}
+	%ObjectiveDescription.text = ObjectiveText.description(selected)
+	%ObjectiveConfirm.disabled = _objective_busy or _objective_source.is_empty() \
+		or selected == _objective_source.get("objective", {})

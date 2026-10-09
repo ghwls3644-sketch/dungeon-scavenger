@@ -160,6 +160,7 @@ func _check_storage() -> void:
 	for version in range(1, 7):
 		var data := _hub(100, ["5", "7"]).to_save_data()
 		data.erase("costs")
+		data.erase("objective")
 		if version <= 5:
 			for key in ["paid_lures", "selected_lures", "pending_departure"]:
 				data.erase(key)
@@ -187,6 +188,7 @@ func _check_storage() -> void:
 			hub.mark_departure_started(id)
 		var old := hub.to_progress_data()
 		old.erase("costs")
+		old.erase("objective")
 		_write(path, _envelope(old, 6))
 		var loaded := HubState.from_save_data(store.load_data(), CATALOG)
 		_expect(loaded.recover_departure(), "Legacy journal could not recover.")

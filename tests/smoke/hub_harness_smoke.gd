@@ -33,6 +33,7 @@ func _ready() -> void:
 			initial.erase("selected_lures")
 			initial.erase("pending_departure")
 			initial.erase("costs")
+			initial.erase("objective")
 			if version < 3:
 				initial.erase("harness_durability")
 			if version == 1:
@@ -156,6 +157,7 @@ func _check_module_migration() -> void:
 		old.erase("selected_lures")
 		old.erase("pending_departure")
 		old.erase("costs")
+		old.erase("objective")
 		if version < 3:
 			old.erase("harness_durability")
 		if version == 1:

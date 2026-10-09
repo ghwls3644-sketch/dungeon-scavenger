@@ -76,6 +76,7 @@ func _ready() -> void:
 	_title.quit_requested.connect(_on_quit_requested)
 	_hub.configure_bag_choices(_hub_state.get_available_bag_slots())
 	_hub.bag_slots_selected.connect(_on_bag_slots_selected)
+	_hub.objective_selected.connect(_on_objective_selected)
 	_hub.departure_requested.connect(_on_departure_requested)
 	_hub.quit_requested.connect(_on_quit_requested)
 	_hub.appraisal_requested.connect(_on_appraisal_requested)
@@ -306,7 +307,9 @@ func _on_state_changed(_previous_state: int, current_state: int) -> void:
 			_expedition_id = 0
 			_settling = false
 		_hub.render_preparation(_hub_state.create_departure_loadout(), _departing)
+		_hub.render_objective(_hub_state)
 		_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items(), _hub_state.get_preparation_costs(), _hub_state.get_last_costs())
+		_hub.render_objective(_hub_state)
 		_render_equipment()
 		_hub.present()
 		_hub.set_status(_progress_notice if not _progress_notice.is_empty() else "진행이 저장되어 있습니다.")
@@ -363,6 +366,7 @@ func _on_bag_slots_selected(slots: int) -> void:
 	if saved:
 		_hub_state = candidate
 	_hub.render_preparation(_hub_state.create_departure_loadout(), false)
+	_hub.render_objective(_hub_state)
 	_hub.set_status("준비 상태를 저장했습니다." if saved else "저장하지 못해 이전 준비 상태를 유지합니다. 다시 선택해 주세요.")
 
 
@@ -386,13 +390,14 @@ func _on_departure_requested() -> void:
 	_departing = true
 	var loadout := _hub_state.create_departure_loadout()
 	_hub.render_preparation(loadout, true)
+	_hub.render_objective(_hub_state)
 	_exploration = _create_exploration()
 	if _exploration == null:
 		_cancel_departure()
 		return
 	_exploration.exclude_secured_originals(_hub_state.get_excluded_original_ids())
 	add_child(_exploration)
-	if not _exploration.prepare_departure(loadout):
+	if not _exploration.prepare_departure(loadout, _hub_state.get_objective_offer()):
 		_cancel_departure()
 		return
 	var candidate := _hub_state.copy()
@@ -419,6 +424,7 @@ func _cancel_departure() -> void:
 	_expedition_id = 0
 	_departing = false
 	_hub.render_preparation(_hub_state.create_departure_loadout(), false)
+	_hub.render_objective(_hub_state)
 	_render_recovery_status()
 
 
@@ -512,6 +518,7 @@ func _on_appraisal_confirmed() -> void:
 	_appraisal_quote = null
 	_appraising = false
 	_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items(), _hub_state.get_preparation_costs(), _hub_state.get_last_costs())
+	_hub.render_objective(_hub_state)
 	_appraisal.present(_hub_state.get_money(), _hub_state.get_stored_items(), PROTOTYPE_ECONOMY.appraisal_fee_per_item)
 	_appraisal.set_status("%d개 감정 완료 · 비용 %d 지불 · 보유금 %d\n결과를 저장했습니다. 감정한 물품은 거점에 보관됩니다." % [count, cost, _hub_state.get_money()])
 
@@ -580,6 +587,7 @@ func _on_sale_confirmed() -> void:
 	_sale_quote = null
 	_selling = false
 	_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items(), _hub_state.get_preparation_costs(), _hub_state.get_last_costs())
+	_hub.render_objective(_hub_state)
 	_sale.present(_hub_state.get_money(), _hub_state.get_sale_offers(PROTOTYPE_ECONOMY))
 	_sale.set_status("%d개 판매 완료 · 수입 +%d · 보유금 %d\n판매한 물품을 보관함에서 제거하고 결과를 저장했습니다." % [count, income, _hub_state.get_money()])
 
@@ -656,6 +664,7 @@ func _on_registration_confirmed() -> void:
 	_registration_quote = null
 	_registering = false
 	_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items(), _hub_state.get_preparation_costs(), _hub_state.get_last_costs())
+	_hub.render_objective(_hub_state)
 	_present_registration()
 	_registration.set_status("원본 등록과 저장을 마쳤습니다. 등록 목록에서 설명을 다시 읽을 수 있습니다.")
 
@@ -735,6 +744,7 @@ func _on_repair_confirmed() -> void:
 	_repair_quote = null
 	_repairing = false
 	_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items(), _hub_state.get_preparation_costs(), _hub_state.get_last_costs())
+	_hub.render_objective(_hub_state)
 	_render_equipment()
 	_present_repair()
 	_repair.set_status("%s 완료 · 이번 지불액 %d · 보유금 %d\n복구 결과를 저장했습니다." % [
@@ -809,6 +819,7 @@ func _on_harness_confirmed() -> void:
 	_harness_source = _hub_state.to_save_data()
 	_harness_selection.clear()
 	_hub.render_preparation(_hub_state.create_departure_loadout(), false)
+	_hub.render_objective(_hub_state)
 	_render_equipment()
 	_harness_panel.present(_hub_state.create_departure_loadout().harness_modules)
 	_harness_panel.set_status("장착 구성을 저장했습니다. 다음 출정부터 적용합니다. 지불액 0.")
@@ -886,6 +897,7 @@ func _on_upgrade_confirmed() -> void:
 	_upgrading = false
 	_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items(), _hub_state.get_preparation_costs(), _hub_state.get_last_costs())
 	_hub.render_preparation(_hub_state.create_departure_loadout(), false)
+	_hub.render_objective(_hub_state)
 	_present_upgrade()
 	_upgrade.set_status("%s 보유 · 이번 지불액 %d · 보유금 %d\n관련 기능을 장착하면 다음 출정부터 적용됩니다." % [HarnessUpgradeRule.label(id), cost, _hub_state.get_money()])
 
@@ -911,6 +923,7 @@ func _retry_departure_recovery() -> void:
 
 func _render_recovery_status() -> void:
 	_hub.render_preparation(_hub_state.create_departure_loadout(), _recovery_required)
+	_hub.render_objective(_hub_state)
 	_render_equipment()
 	if _recovery_required:
 		_hub.get_node("%DepartureButton").disabled = false
@@ -967,6 +980,7 @@ func _on_lures_confirmed() -> void:
 	_preparing_lures = false
 	_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items(), _hub_state.get_preparation_costs(), _hub_state.get_last_costs())
 	_hub.render_preparation(_hub_state.create_departure_loadout(), false)
+	_hub.render_objective(_hub_state)
 	_lures.present(_hub_state)
 	_lures.set_status("준비 저장 완료 · 이번 지불액 %d · 거점 추가분 %d개\n출정할 때 선택한 수량을 가져갑니다." % [paid, _hub_state.get_paid_lures()])
 
@@ -979,3 +993,19 @@ func _on_lures_closed() -> void:
 	_lures.hide()
 	_hub.get_node("Center").show()
 	_hub.get_node("%LureButton").grab_focus()
+
+
+func _on_objective_selected(offer: Dictionary, source: Dictionary) -> void:
+	if not _can_prepare_lures() or _lures_open:
+		return
+	var candidate := _hub_state.copy()
+	if not candidate.select_objective(offer, source):
+		_hub.render_objective(_hub_state)
+		_hub.set_status("준비 상태가 달라졌습니다. 의뢰 조건을 다시 확인해 주세요.")
+		return
+	if not _save_hub(candidate):
+		_hub.set_status("저장 실패 · 이전 목표 선택을 유지했습니다. 다시 적용하거나 선택을 취소하세요.")
+		return
+	_hub_state = candidate
+	_hub.render_objective(_hub_state)
+	_hub.set_status("목표 선택을 저장했습니다. 의뢰 없이도 출정할 수 있습니다.")

@@ -424,3 +424,9 @@ DEV-0318~DEV-0319의 즉시 E·후속 상호작용 문구는 당시 이력이다
 위 DEV-0413 스키마 6과 DEV-0414 실행 전 제안은 당시 계약이다. 현재 [ExpeditionCosts](../../src/meta/expedition_costs.gd)는 거래 합계·개별 취득 원가·손익/현금/최근 결과 계산과 검증을 맡으며 돈을 움직이지 않는다. [HubState](../../src/meta/hub_state.gd)가 기존 거래·예약·복구·정산 후보에 비용 기록을 함께 적용한다. `SettlementResult.get_net_income()`은 이번 정산의 지갑 반영액을 유지하고 별도 비용 보고를 제공한다.
 
 [ProgressStore](../../src/infrastructure/progress_store.gd)는 스키마 7·12필드와 구형 1~6 읽기 변환·손상 보존·원자적 교체를 맡는다. `GameEntry`는 기존 저장 성공 후 상태 교체를 유지한다. [CostReportText](../../src/ui/cost_report_text.gd)와 거점/결과 화면은 공개 요약을 표시하고 직접 지갑이나 과거 단가를 바꾸지 않는다. 원가 미기록이면 정확한 손익 숫자를 생성하지 않는다. 자세한 모양은 MIG-CHG-047, 범위는 [시험 계약](../design/expedition_cost_reporting.md#dev-0415-비용-표시-시험-적용), 재현 검사는 [DEV-0415 기록](project_context.md#dev-0415-출정별-비용-표시-연결-검사)에 있다.
+
+## DEV-0418 선택 의뢰 책임
+
+[ExpeditionObjectiveRule](../../src/data/expedition_objective_rule.gd)와 [시험 정의](../../src/data/prototype_expedition_objective.tres)는 조건/보상 버전을 소유한다. [ExpeditionObjective](../../src/meta/expedition_objective.gd)는 확인된 비보호 일반 폐품의 자격, 조건/결과 검증과 구형 보완을 맡는다. [HubState](../../src/meta/hub_state.gd)는 선택 약속을 예약 ID에 묶고 정산/복구 후보에서 보상·선택 초기화를 처리한다. SettlementResult는 판매액과 추가 보상을 구분하고 ExpeditionCosts는 보상을 구간 수입에 한 번 더한다.
+
+ProgressStore는 스키마 8·13필드, 구형 1~7의 읽기 보완/원본 보존과 원자적 교체를 맡는다. GameEntry는 실제 저장 성공 뒤에만 거점 상태를 바꾸고 PrototypeExploration은 가방 변화와 귀환 결과를 제공한다. [ObjectiveText](../../src/ui/objective_text.gd)·거점/탐험/정산 화면은 공개 상태를 표시하고 직접 돈이나 자격을 결정하지 않는다. Core의 ExpeditionLoadout이나 Gameplay가 Meta에 의존하도록 바꾸지 않았다. [저장 계약](migration_changes.md#mig-chg-050-dev-0418-거점-선택-의뢰-연결)과 [검사 기록](project_context.md#dev-0418-거점-선택-의뢰-연결-검사)을 따른다.

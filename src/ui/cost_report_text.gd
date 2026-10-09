@@ -16,6 +16,7 @@ static func details(summary: Dictionary) -> String:
 	var lines := PackedStringArray([
 		"기록 시작 이후의 거래입니다." if summary.partial else "직전 정산 뒤 준비부터 이번 정산까지",
 		"수입 %d · 이번 회수품 %d / 거점 보관품 %d" % [summary.income, summary.loot_income, summary.storage_income],
+		ObjectiveText.result(summary.objective),
 		"감정 지불 %d · 수리 지불 %d" % [summary.appraisal_paid, summary.repair_paid],
 		"도구 사용 원가 %s" % _cost(summary.used_cost, summary.used_unknown),
 		"%s 원가 %s" % ["종료로 휴대분 소실" if summary.outcome == "interrupted" else "미사용 도구 소실", _cost(summary.lost_cost, summary.lost_unknown)],

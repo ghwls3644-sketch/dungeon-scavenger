@@ -1,0 +1,204 @@
+{
+  "passed": true,
+  "scope": "DEV-0418 actual app keyboard/mouse and two-resolution rendering",
+  "source_tree_sha256": "947eea08391530d0863c7892f3bb4f77f1a10dc5862150043c7fa50de30ec543",
+  "graphics_exit_code": 0,
+  "renderer": "OpenGL 3.3 compatibility / NVIDIA GeForce RTX 4060",
+  "resolutions": [
+    [
+      1152,
+      648
+    ],
+    [
+      1600,
+      900
+    ]
+  ],
+  "actual_flow": {
+    "actual_runs": 4,
+    "failures": [],
+    "passed": true
+  },
+  "capture_count": 42,
+  "captures": [
+    {
+      "file": "achieved-1152.png",
+      "sha256": "8ae20d713cbe96ef52e89abd5a0b4ae4c58f7dcb83b934898e459b2c45cb1529"
+    },
+    {
+      "file": "achieved-1600.png",
+      "sha256": "acfaa5e6db296cb1366e622b0a871be2cb11810de29553c20925d52032c0ab7e"
+    },
+    {
+      "file": "achieved-end-1152.png",
+      "sha256": "08cb110058d4c36179b439f9a8b390e17679477e7089c2c3458b849240dc92a8"
+    },
+    {
+      "file": "achieved-end-1600.png",
+      "sha256": "620082a0ae4374a8a33af015a3d2aa8682dc250f57b8eab6cb0ffd58571d8255"
+    },
+    {
+      "file": "failed-objective-1152.png",
+      "sha256": "255271c5c0266cd0e8951eea854adfe7d4114857c88116f8ead9118c1b4c64fe"
+    },
+    {
+      "file": "failed-objective-1600.png",
+      "sha256": "b7bb0f3579df4bfe46c887ee90f25b48926a875eda6c49e1a81662cbc9a56869"
+    },
+    {
+      "file": "failed-objective-end-1152.png",
+      "sha256": "3ae0614e5b0c4756b7096113819ec6c4fd270775c295a738563cea3eb7cc4bd4"
+    },
+    {
+      "file": "failed-objective-end-1600.png",
+      "sha256": "66bb4b68d083e20b9987ee6ec5cb18bbb013821d6cd2835e3e0fa9cd1a906296"
+    },
+    {
+      "file": "free-1152.png",
+      "sha256": "63fcbde7de4b1f56e9ae28b86474b3e6119da810d74d09c7f9211a3dd8301809"
+    },
+    {
+      "file": "free-1600.png",
+      "sha256": "fd2d6cbf3309ac6303d2bcc760ca6701ef61d6d38379b6320bc526b71004564e"
+    },
+    {
+      "file": "free-end-1152.png",
+      "sha256": "45a3a40e280df09a5d8355b7f975b2ac8fc1d64999492cb4474a573ed4021d81"
+    },
+    {
+      "file": "free-end-1600.png",
+      "sha256": "65a10325f12936dacd7a4939ae824535f4e3843ecb27be7f5a72d0c28ce30735"
+    },
+    {
+      "file": "hub-stock-1-1152.png",
+      "sha256": "40c516c0f024422f094276064d060533110a380218d46583fd67258e47a6ebb3"
+    },
+    {
+      "file": "hub-stock-1-1600.png",
+      "sha256": "ae976101d73e1c866b2c857c948bd649ff5ce6b30622feb466731a70c185dc51"
+    },
+    {
+      "file": "lure-results-1-1152.png",
+      "sha256": "8958d0a9ef0b47f8c21b4cda724249448141bb687d539a6cb3ecfb0cc125fbea"
+    },
+    {
+      "file": "lure-results-1-1600.png",
+      "sha256": "d480f5608b678907ef101c2b3e994be80fa6b4b69be788943efafcddbfee2153"
+    },
+    {
+      "file": "missed-1152.png",
+      "sha256": "63e11d04b3b29356e25728d7883c3440bc95160ac95386b8c84cbbb2d8132578"
+    },
+    {
+      "file": "missed-1600.png",
+      "sha256": "a7f11af1f7bd621fb08f328a22b38f6a5612a746435d88ce3ef8812c1e319588"
+    },
+    {
+      "file": "missed-end-1152.png",
+      "sha256": "20d67e02c1d32f4d4bbfaebbb2bfa151937cc9ed7c53238417851179dfbcc3fd"
+    },
+    {
+      "file": "missed-end-1600.png",
+      "sha256": "218c8b2b1ddc7e80a5285249cb925d1ec34043f03bf6a6838460a31fb5f28631"
+    },
+    {
+      "file": "prepared-2-1152.png",
+      "sha256": "0a18d77b31d1a81f8fef909e11a20e582b6cf8f34586ebde11fc63347e622765"
+    },
+    {
+      "file": "prepared-2-1600.png",
+      "sha256": "86843f8d03cc32b4d7cf81fa9e4371fc37d232fcc592d75f160108f634142a24"
+    },
+    {
+      "file": "prepared-4-1152.png",
+      "sha256": "632105748ab89346766e4037e453b39298c64f86ff741c6e10ce8258f43243ba"
+    },
+    {
+      "file": "prepared-4-1600.png",
+      "sha256": "e06de72a823be0dfa6437967eac37212f0c3048b196eab43eda81ee09c7c492f"
+    },
+    {
+      "file": "progress-achieved-1152.png",
+      "sha256": "1eb55a1761629db093b515a94cd66c2815e4c996d604c0f841311af290ace2ec"
+    },
+    {
+      "file": "progress-achieved-1600.png",
+      "sha256": "4d9d9d6f5325d5767818168eae5aeb71ec0921ffc4a3d7a13a1546bee9b6c599"
+    },
+    {
+      "file": "progress-missed-1152.png",
+      "sha256": "42e0c74c665b58c727cb6ede7fc75432ffd045b3ebaea72d9b5c4f3c7c569fff"
+    },
+    {
+      "file": "progress-missed-1600.png",
+      "sha256": "3881cb489c682a5b1126d7db3deb34ef7fcdf82958fb9eb57b9419203db2cabc"
+    },
+    {
+      "file": "quote-2-1152.png",
+      "sha256": "8ab2cd437f52b7229b3bbb22bb8f821ac42aa64e4a1e3e927ac7ed4ea28d08b2"
+    },
+    {
+      "file": "quote-2-1600.png",
+      "sha256": "8ee3fc52feacf094fd98f97fb0e977153f1cc88e53630e735c4eeb6b26a2deae"
+    },
+    {
+      "file": "quote-4-1152.png",
+      "sha256": "91fca555cf2ab43e054163e6061491a3c6dbbb1bfe154e4e16f57639c31ac1c0"
+    },
+    {
+      "file": "quote-4-1600.png",
+      "sha256": "07d8f75335fc1efe874b891c8ba906f12566e881467b574d79db2290a725e0ac"
+    },
+    {
+      "file": "restored-reward-1152.png",
+      "sha256": "50ba72bb5afce517f101338e39a04a0660d4d2ee9ee80f92bf5e9045b8c49893"
+    },
+    {
+      "file": "restored-reward-1600.png",
+      "sha256": "3f0b532b9cc356de1cae19cf6442a7f3d4ba17e4d3fd13966564b001717c58f7"
+    },
+    {
+      "file": "restored-reward-end-1152.png",
+      "sha256": "69db000aed7ed6c1b5b99274e56b200bb51e1320bd4a51e681ff80b820d2fa77"
+    },
+    {
+      "file": "restored-reward-end-1600.png",
+      "sha256": "7e5e37a061f26a0f39a16a938d91eaf93678ed2d6e44f3a7e956c1691f075706"
+    },
+    {
+      "file": "selected-1152.png",
+      "sha256": "655225a900f8c760fb50b1f67a1735d705761fcc400724bd2aa6f828661f452a"
+    },
+    {
+      "file": "selected-1600.png",
+      "sha256": "aaf512eed260e51e591aebc5f69e0f06061619d7c041a7f273c669df05bf283f"
+    },
+    {
+      "file": "selected-end-1152.png",
+      "sha256": "2f17e137c2d4f9a29148c6c7c30faa5f6de5fe19e4455381c60c2d647f704419"
+    },
+    {
+      "file": "selected-end-1600.png",
+      "sha256": "08c4d41a384112ed3975d7ac58f6b8d2a8c1d1888674782789d214ef91d572a1"
+    },
+    {
+      "file": "selection-retry-1152.png",
+      "sha256": "ddae6f3a6590ae3d5071aa6d5c005dc031630d12d92b8d1f648fb5497ff1ce1f"
+    },
+    {
+      "file": "selection-retry-1600.png",
+      "sha256": "525acf4544dc6fa7b1dccf3563089d09642b376e432b0e16ef47bef2e8d610f9"
+    }
+  ],
+  "visually_reviewed_samples": [
+    "selected-end-1152.png",
+    "free-1600.png",
+    "selection-retry-1600.png",
+    "achieved-end-1152.png",
+    "missed-1600.png",
+    "failed-objective-end-1152.png",
+    "progress-missed-1600.png"
+  ],
+  "review": "Selection/free/retry text, current bag progress, missed/achieved result, scrollbar bottom and failed saved report legible; control bounds checked at both resolutions. Human balance/usability evaluation remains open.",
+  "raw_directory": "C:\\Users\\user\\AppData\\Local\\Temp\\dev0418-final-render"
+}

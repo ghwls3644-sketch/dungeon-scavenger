@@ -17,6 +17,7 @@ const INTERACTION_TIMING := preload("res://src/data/prototype_interaction_timing
 
 var _map_state := ExplorationMapState.new()
 var _loadout: ExpeditionLoadout
+var _objective_offer: Dictionary = {}
 var _started := false
 var _finished := false
 var _timing_configured := false
@@ -125,8 +126,8 @@ func exclude_secured_originals(ids: Array[StringName]) -> void:
 			child.free()
 
 
-func prepare_departure(loadout: ExpeditionLoadout) -> bool:
-	if not is_node_ready() or _loadout != null or loadout == null or not loadout.is_valid():
+func prepare_departure(loadout: ExpeditionLoadout, objective: Dictionary = {}) -> bool:
+	if not is_node_ready() or _loadout != null or loadout == null or not loadout.is_valid() or not ExpeditionObjective.valid_offer(objective):
 		return false
 	if not _harness.configure_modules(loadout.harness_modules, loadout.harness_upgrades, HARNESS_UPGRADES):
 		return false
@@ -136,6 +137,7 @@ func prepare_departure(loadout: ExpeditionLoadout) -> bool:
 	if not %NoiseLureController.configure_supply(loadout.lure_count):
 		return false
 	_loadout = loadout.copy()
+	_objective_offer = objective.duplicate(true)
 	_inventory.set_external_weight(_loadout.lure_count * _loadout.lure_weight)
 	_inventory.configure_capacity(_loadout.slot_capacity, _loadout.burden_weight, _loadout.overload_weight)
 	_harness.configure_charge(_loadout.charge_capacity, _loadout.starting_charge)
@@ -234,6 +236,7 @@ func _on_pickup_rejected(_item: ItemDefinition, reason: StringName) -> void:
 
 
 func _update_load_status() -> void:
+	%ObjectiveStatus.text = ObjectiveText.progress(_objective_offer, ExpeditionObjective.eligible_count(_inventory.get_inventory_items()))
 	%LoadStatus.text = "가방 %d/%d칸 · 무게 %.2f · %s · 이동 %d%% · 소음 %s · 충전 %d/%d" % [
 		_inventory.get_used_slots(), _inventory.slot_capacity, _inventory.get_total_weight(),
 		["정상", "부담", "과적"][_inventory.get_weight_stage()],

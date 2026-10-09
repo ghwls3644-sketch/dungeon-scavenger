@@ -18,6 +18,7 @@ var _selected_lures := 2
 var _pending_departure: Dictionary = {}
 var _return_paid_lures := 0
 var _costs := ExpeditionCosts.new_book(0)
+var _objective: Dictionary = {}
 
 
 func _init() -> void:
@@ -272,6 +273,7 @@ func copy() -> HubState:
 	result._pending_departure = _pending_departure.duplicate(true)
 	result._return_paid_lures = _return_paid_lures
 	result._costs = _costs.duplicate(true)
+	result._objective = _objective.duplicate(true)
 	return result
 
 
@@ -306,11 +308,12 @@ func to_progress_data() -> Dictionary:
 		"selected_lures": _selected_lures,
 		"pending_departure": _pending_departure.duplicate(true),
 		"costs": _costs.duplicate(true),
+		"objective": _objective.duplicate(true),
 	}
 
 
 static func from_save_data(data: Dictionary, catalog: ItemCatalog) -> HubState:
-	if catalog == null or not catalog.is_valid() or data.size() != 12 or not LurePreparation.valid_save(data) \
+	if catalog == null or not catalog.is_valid() or data.size() != 13 or not ExpeditionObjective.valid_offer(data.get("objective")) or not LurePreparation.valid_save(data) \
 			or not ExpeditionCosts.valid_save(data.get("costs"), data) \
 			or not HarnessUpgradeRule.is_valid_owned(data.get("harness_upgrades")) \
 			or not is_valid_harness_durability(data.get("harness_durability")) \
@@ -339,6 +342,7 @@ static func from_save_data(data: Dictionary, catalog: ItemCatalog) -> HubState:
 	restored._selected_lures = int(data.selected_lures)
 	restored._pending_departure = data.pending_departure.duplicate(true)
 	restored._costs = data.costs.duplicate(true)
+	restored._objective = data.objective.duplicate(true)
 	if restored.has_pending_departure():
 		restored._active_expedition_id = restored._pending_departure.id.to_int()
 	for raw_item in items:
@@ -421,7 +425,10 @@ func prepare_settlement(expedition_id: int, outcome: ExplorationOutcome, rule: E
 	var settlement := SettlementResult.from_outcome(outcome, rule, EQUIPMENT_WEAR, _harness_durability)
 	if settlement == null:
 		return false
-	var report := ExpeditionCosts.make_report(_costs, expedition_id, "failure" if outcome.is_failure() else "safe", settlement.get_net_income(), free_used, paid_used)
+	var count := ExpeditionObjective.eligible_count(outcome.get_recovery_result().get_recovered_inventory_items()) if outcome.is_safe_return() else 0
+	if not settlement.set_objective(ExpeditionObjective.result(_objective, count)):
+		return false
+	var report := ExpeditionCosts.make_report(_costs, expedition_id, "failure" if outcome.is_failure() else "safe", settlement.get_sales_income(), free_used, paid_used, settlement.get_objective_result())
 	if not settlement.set_cost_report(report):
 		return false
 	_return_paid_lures = returned
@@ -450,6 +457,7 @@ func apply_settlement(expedition_id: int) -> bool:
 	_return_paid_lures = 0
 	_pending_departure.clear()
 	_costs = costs
+	_objective.clear()
 	_money += income
 	_stored_items.append_array(retained)
 	_harness_durability = _pending_settlement.get_equipment_damage().after
@@ -524,11 +532,12 @@ func recover_departure() -> bool:
 		_costs = ExpeditionCosts.cancel_reservation(_costs)
 		_paid_lures += int(_pending_departure.paid)
 	else:
-		var report := ExpeditionCosts.make_report(_costs, int(_pending_departure.id), "interrupted", 0, -1, -1)
+		var report := ExpeditionCosts.make_report(_costs, int(_pending_departure.id), "interrupted", 0, -1, -1, ExpeditionObjective.result(_objective))
 		var costs := ExpeditionCosts.finish(report)
 		if costs.is_empty():
 			return false
 		_costs = costs
+		_objective.clear()
 	_pending_departure.clear()
 	_active_expedition_id = 0
 	return true
@@ -540,3 +549,15 @@ func get_preparation_costs() -> Dictionary:
 
 func get_last_costs() -> Dictionary:
 	return ExpeditionCosts.report_summary(_costs.last) if not _costs.last.is_empty() else {}
+
+
+func get_objective_offer() -> Dictionary:
+	return _objective.duplicate(true)
+
+
+func select_objective(offer: Dictionary, expected_source: Dictionary) -> bool:
+	var source := to_save_data()
+	if source.is_empty() or source != expected_source or not ExpeditionObjective.valid_offer(offer) or offer == _objective:
+		return false
+	_objective = offer.duplicate(true)
+	return true
