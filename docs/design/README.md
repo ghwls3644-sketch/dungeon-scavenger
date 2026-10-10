@@ -9,6 +9,7 @@ canonical_for:
 last_reviewed: 2026-10-10
 owner: game-design
 related:
+  - portable_appraisal.md
   - recovery_tax.md
   - ../GDD.md
   - ../story/README.md
@@ -40,8 +41,11 @@ related:
 | [`expedition_cost_reporting.md`](expedition_cost_reporting.md) (`draft`) | 준비·탐험의 손익과 실제 현금 변화, 재고 취득 원가·투자·견적은 어떻게 구분할 것인가? |
 | [`expedition_objectives.md`](expedition_objectives.md) (`draft`) | 자유 수색과 최소 목표/의뢰의 범위, 선택·진척·결과·보상/저장 계약은 무엇인가? |
 | [회수세 검토안](recovery_tax.md) (draft) | 판매 과세·의뢰 보상 제외와 합산/절사·손익/현금·구형/저장의 최소 계약은 무엇인가? |
+| [휴대용 감정 검토안](portable_appraisal.md) (draft) | 현장 감정의 정보·제한/준비 방식 비교와 사용·원가·귀환/저장 계약은 무엇인가? |
 
 ## 경계 규칙
+
+- [휴대용 감정 검토안](portable_appraisal.md)은 DEV-0422의 미적용 draft다. DEC-117의 횟수 제한 확정 감정·유료 구매/휴대 선택·안전 귀환 미사용분 보관을 따른다. 가격·수량·무게·사용/저장 제안은 미적용이며 Q-030에서 구현 검증·최종 수치와 사람 평가를 추적한다.
 
 - [회수세 검토안](recovery_tax.md)은 DEV-0420 제안 이력과 DEV-0421의 10%·거래별 절사 시험 적용을 함께 관리하는 draft다. DEC-116의 판매 과세·의뢰 보상 전액 지급 방향을 따르며 최종 세율/분할 절사·사람 이해는 Q-029에 남긴다.
 

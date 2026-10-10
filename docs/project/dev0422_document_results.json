@@ -1,0 +1,5621 @@
+{
+  "scope": "DEV-0422 휴대용 감정 최소 규칙 정리",
+  "status": "document rules and handoff validated; user approved DEV-0422 local commit",
+  "base_commit": "0650530dab987533d3164882a8ed243e455b633f",
+  "passed": true,
+  "source_tree_sha256": "29d190874f93e8d3edbdeae7b55774acbe5d5b790a7a4816dadb425244c050ae",
+  "source_files_unchanged": 514,
+  "source_matches_DEV0421": true,
+  "godot_runs_this_ticket": 0,
+  "active_markdown_files": 52,
+  "relative_links_and_anchors_checked": 1870,
+  "related_paths_checked": 567,
+  "frozen_sources": [
+    {
+      "id": "SRC-001",
+      "path": "게임 기획 파일/통합 게임 기획서 v2.1.md",
+      "sha256": "45E92DFEDE482968B31C14EEF712012735AA9657DE18BD7C0922F94D40DD460A",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-002",
+      "path": "게임 기획 파일/스토리 정리 v1.5.md",
+      "sha256": "4191C100D5B3BFBEF291D3FD4D7588A3C5C31113A1827D33886CC8C90931292D",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-003",
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.1.md",
+      "sha256": "A52337ED1CC3DECEBF8BD6840662E12FAFDDCFA95C3E5E8D5E1129FFBBEF796F",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-004",
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.2.md",
+      "sha256": "0BAC7F52CF21EDDCD4B720C7B5B8FF76F98FB452904CEBCC3E03C1EB2B220C67",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-005",
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.2.1.md",
+      "sha256": "B4451E06D8FFAF5D1A233FA1A639E783BA17973977398C12527333A7707319F0",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-006",
+      "path": "게임 기획 파일/게임 개발 단계별 제안서 v0.1.md",
+      "sha256": "2EE29ACA36E74F5E0206AFF150ED610EBA8381E594B9091141E6F74CAA2B60C1",
+      "matches_record": true
+    }
+  ],
+  "archive_copies": [
+    {
+      "path": "docs/archive/story_v1.5_full.md",
+      "source_id": "SRC-002",
+      "bytes_match": true
+    },
+    {
+      "path": "docs/archive/story_document_management_proposal_v0.1.md",
+      "source_id": "SRC-003",
+      "bytes_match": true
+    },
+    {
+      "path": "docs/archive/story_document_management_proposal_v0.2.md",
+      "source_id": "SRC-004",
+      "bytes_match": true
+    }
+  ],
+  "checkpoint_sections_unchanged": {
+    "docs/README.md": true,
+    "docs/project/migration_manifest.md": true
+  },
+  "preserved_evidence": [
+    {
+      "path": "docs/archive/README.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/archive/story_document_management_proposal_v0.1.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/archive/story_document_management_proposal_v0.2.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/archive/story_v1.5_full.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0317_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0317_route_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0319_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0320_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0320_timing_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0321_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0321_route_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0322_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0322_escape_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0323_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0323_continue_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0323_flow_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0401_appraisal_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0401_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0401_continue_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0402_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0402_continue_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0402_sale_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0403_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0403_continue_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0403_registration_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0404_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0404_continue_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0404_research_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0405_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0406_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0406_continue_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0406_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0406_render_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0406_wear_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0407_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0407_continue_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0407_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0407_render_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0407_repair_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0407_support_continue_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0407_support_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0408_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0409_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0409_continue_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0409_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0409_harness_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0409_migration_support_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0409_render_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0410_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0411_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0411_continue_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0411_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0411_purchase_support_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0411_render_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0411_upgrade_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0412_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0413_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0413_boundary_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0413_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0413_render_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0414_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0415_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0415_boundary_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0415_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0415_render_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0416_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0416_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0417_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0418_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0418_boundary_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0418_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0418_objective_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0418_render_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0419_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0419_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0420_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0421_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0421_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/g1_playtest_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/g2_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/g3_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/g3_route_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/reference/README.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/reference/entity_index.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/reference/glossary.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/reference/speaker_lexicon.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/reference/timeline.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/story/00_core_pillars.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/story/01_world_history.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/story/02_dungeon_canon.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/story/03_player_and_society.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/story/04_characters_and_factions.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/story/05_items_and_discoveries.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/story/06_narrative_progression.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/story/07_tone_and_writing_guide.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/story/README.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "project.godot",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/app/dev_entry.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/app/dev_entry.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/app/dev_main.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/app/game_entry.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/app/game_entry.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/app/game_state.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/app/game_state.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/app/main.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/app/prototype_exploration.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/app/prototype_exploration.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/app/prototype_exploration.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/core/expedition_loadout.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/core/expedition_loadout.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/core/game_settings.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/core/game_settings.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/core/stable_id.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/core/stable_id.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/content_definition.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/content_definition.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/door_hold_rule.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/door_hold_rule.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/economy_rule.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/economy_rule.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/emergency_escape_rule.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/emergency_escape_rule.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/equipment_wear_rule.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/equipment_wear_rule.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/expedition_objective_rule.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/expedition_objective_rule.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/exploration_map_definition.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/exploration_map_definition.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/golem_contact_rule.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/golem_contact_rule.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/harness_modules.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/harness_modules.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/harness_upgrade_rule.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/harness_upgrade_rule.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/interaction_timing_rule.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/interaction_timing_rule.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/item_catalog.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/item_catalog.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/item_definition.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/item_definition.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/load_movement_rule.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/load_movement_rule.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/load_noise_rule.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/load_noise_rule.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/lure_supply_rule.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/lure_supply_rule.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/map_clue_definition.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/map_clue_definition.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/map_passage_definition.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/map_passage_definition.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/map_region_definition.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/map_region_definition.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/noise_lure_rule.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/noise_lure_rule.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/passage_change_rule.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/passage_change_rule.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/prototype_artifact.tres",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/prototype_door_hold.tres",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/prototype_economy.tres",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/prototype_emergency_escape.tres",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/prototype_equipment_wear.tres",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/prototype_expedition_objective.tres",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/prototype_exploration_map.tres",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/prototype_golem_contact.tres",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/prototype_harness_upgrades.tres",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/prototype_heavy.tres",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/prototype_interaction_timing.tres",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/prototype_item_catalog.tres",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/prototype_known.tres",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/prototype_light.tres",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/prototype_load_movement.tres",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/prototype_load_noise.tres",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/prototype_lure_supply.tres",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/prototype_map_clue.tres",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/prototype_noise_lure.tres",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/prototype_passage_change.tres",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/prototype_record.tres",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/prototype_remaining_region.tres",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/prototype_research_catalog.tres",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/prototype_survival.tres",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/prototype_trap_cycle.tres",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/prototype_unknown.tres",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/research_catalog.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/research_catalog.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/research_definition.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/research_definition.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/survival_rule.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/survival_rule.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/trap_cycle_rule.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/data/trap_cycle_rule.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/exploration/changing_passage.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/exploration/changing_passage.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/exploration/changing_passage.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/exploration/exploration_map_state.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/exploration/exploration_map_state.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/exploration/fixed_return_route_probe.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/exploration/fixed_return_route_probe.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/exploration/map_passage_survey.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/exploration/map_passage_survey.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/exploration/remaining_zone_entrance.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/exploration/remaining_zone_entrance.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/exploration/remaining_zone_entrance.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/hazards/broken_guard_golem.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/hazards/broken_guard_golem.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/hazards/broken_guard_golem.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/hazards/door_hold_target.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/hazards/door_hold_target.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/hazards/golem_contact_threat.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/hazards/golem_contact_threat.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/hazards/golem_hearing.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/hazards/golem_hearing.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/hazards/hazard_detector.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/hazards/hazard_detector.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/hazards/malfunctioning_trap.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/hazards/malfunctioning_trap.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/hazards/malfunctioning_trap.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/hazards/stabilizable_hazard.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/hazards/stabilizable_hazard.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/hazards/unstable_debris_hazard.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/hazards/unstable_debris_hazard.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/hazards/unstable_debris_hazard.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/interaction/door_interactable.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/interaction/door_interactable.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/interaction/door_interactable.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/interaction/harness_upgrade_discovery.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/interaction/harness_upgrade_discovery.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/interaction/harness_upgrade_discovery.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/interaction/inspectable_pickup_interactable.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/interaction/inspectable_pickup_interactable.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/interaction/inspectable_pickup_interactable.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/interaction/interactable.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/interaction/interactable.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/interaction/interaction_controller.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/interaction/interaction_controller.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/interaction/interaction_detector.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/interaction/interaction_detector.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/interaction/map_clue_interactable.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/interaction/map_clue_interactable.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/interaction/map_clue_interactable.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/interaction/pickup_interactable.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/interaction/pickup_interactable.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/interaction/pickup_interactable.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/interaction/temporary_door.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/interaction/temporary_door.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/interaction/temporary_door.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/inventory/inventory_item.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/inventory/inventory_item.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/inventory/player_inventory.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/inventory/player_inventory.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/inventory/quick_drop_controller.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/inventory/quick_drop_controller.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/player/movement_noise_emitter.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/player/movement_noise_emitter.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/player/player.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/player/player_controller.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/player/player_controller.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/player/player_survival.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/player/player_survival.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/recovery/emergency_escape.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/recovery/emergency_escape.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/recovery/emergency_escape.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/recovery/entrance_exit.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/recovery/entrance_exit.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/recovery/entrance_exit.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/recovery/exploration_outcome.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/recovery/exploration_outcome.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/recovery/exploration_run.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/recovery/exploration_run.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/recovery/recovery_result.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/recovery/recovery_result.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/tools/noise_lure_controller.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/gameplay/tools/noise_lure_controller.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/harness/.gitkeep",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/harness/harness_controller.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/harness/harness_controller.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/infrastructure/game_log.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/infrastructure/game_log.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/infrastructure/input_actions.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/infrastructure/input_actions.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/infrastructure/progress_store.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/infrastructure/progress_store.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/infrastructure/settings_runtime.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/infrastructure/settings_runtime.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/infrastructure/settings_store.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/infrastructure/settings_store.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/meta/.gitkeep",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/meta/appraisal_quote.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/meta/appraisal_quote.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/meta/expedition_costs.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/meta/expedition_costs.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/meta/expedition_objective.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/meta/expedition_objective.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/meta/harness_upgrade_quote.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/meta/harness_upgrade_quote.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/meta/hub_state.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/meta/hub_state.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/meta/item_value_comparison.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/meta/item_value_comparison.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/meta/lure_preparation.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/meta/lure_preparation.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/meta/lure_preparation_quote.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/meta/lure_preparation_quote.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/meta/recovery_tax.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/meta/recovery_tax.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/meta/registration_quote.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/meta/registration_quote.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/meta/repair_quote.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/meta/repair_quote.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/meta/research_progress.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/meta/research_progress.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/meta/sale_quote.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/meta/sale_quote.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/meta/settlement_result.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/meta/settlement_result.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/meta/unique_pickup_state.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/meta/unique_pickup_state.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/cost_report_text.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/cost_report_text.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/debug_state_panel.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/debug_state_panel.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/debug_state_panel.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/expedition_results_screen.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/expedition_results_screen.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/expedition_results_screen.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/exploration_map_canvas.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/exploration_map_canvas.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/exploration_map_panel.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/exploration_map_panel.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/exploration_map_panel.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/exploration_outcome_panel.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/exploration_outcome_panel.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/exploration_outcome_panel.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/harness_status.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/harness_status.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/harness_status.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/hub_appraisal_panel.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/hub_appraisal_panel.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/hub_appraisal_panel.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/hub_harness_panel.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/hub_harness_panel.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/hub_harness_panel.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/hub_lure_panel.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/hub_lure_panel.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/hub_lure_panel.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/hub_panel.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/hub_panel.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/hub_panel.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/hub_registration_panel.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/hub_registration_panel.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/hub_registration_panel.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/hub_repair_panel.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/hub_repair_panel.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/hub_repair_panel.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/hub_sale_panel.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/hub_sale_panel.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/hub_sale_panel.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/hub_upgrade_panel.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/hub_upgrade_panel.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/hub_upgrade_panel.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/icons/item_artifact.svg",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/icons/item_artifact.svg.import",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/icons/item_record.svg",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/icons/item_record.svg.import",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/icons/item_residue.svg",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/icons/item_residue.svg.import",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/icons/item_scrap.svg",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/icons/item_scrap.svg.import",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/icons/item_unknown.svg",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/icons/item_unknown.svg.import",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/interaction_prompt.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/interaction_prompt.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/interaction_prompt.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/inventory_panel.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/inventory_panel.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/inventory_panel.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/item_category_icon.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/item_category_icon.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/item_value_text.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/item_value_text.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/objective_text.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/objective_text.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/recovery_result_panel.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/recovery_result_panel.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/recovery_result_panel.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/return_route_status.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/return_route_status.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/return_route_status.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/title_screen.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/title_screen.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "src/ui/title_screen.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/broken_guard_golem_test_space.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/broken_guard_golem_test_space.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/broken_guard_golem_test_space.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/core_loop_playtest_space.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/core_loop_playtest_space.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/core_loop_playtest_space.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/emergency_escape_test_space.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/emergency_escape_test_space.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/emergency_escape_test_space.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/exploration_end_test_space.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/exploration_end_test_space.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/exploration_end_test_space.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/g1_integration_playtest_space.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/g1_integration_playtest_space.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/g1_integration_playtest_space.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/g3_review_entry.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/g3_review_entry.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/g3_review_entry.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/harness_actions_test_space.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/harness_actions_test_space.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/harness_actions_test_space.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/hazard_harness_test_space.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/hazard_harness_test_space.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/hazard_harness_test_space.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/inspection_unidentified_test_space.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/inspection_unidentified_test_space.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/inspection_unidentified_test_space.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/interaction_test_space.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/interaction_test_space.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/interaction_test_space.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/inventory_test_space.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/inventory_test_space.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/inventory_test_space.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/lure_boundary_store.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/lure_boundary_store.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/movement_test_space.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/movement_test_space.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/movement_test_space.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/recovery_result_test_space.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/recovery_result_test_space.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/recovery_result_test_space.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/retreat_route_test_space.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/retreat_route_test_space.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/fixtures/retreat_route_test_space.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/helpers/hub_repair_test_input.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/helpers/hub_repair_test_input.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/helpers/interaction_test_input.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/helpers/interaction_test_input.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/run_cost_boundaries.ps1",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/run_g2_checks.ps1",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/run_lure_boundaries.ps1",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/run_objective_boundaries.ps1",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/broken_guard_golem_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/broken_guard_golem_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/broken_guard_golem_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/core_loop_playtest_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/core_loop_playtest_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/core_loop_playtest_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/cost_boundary_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/cost_boundary_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/cost_boundary_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/cost_flow_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/cost_flow_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/cost_flow_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/door_hold_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/door_hold_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/door_hold_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/emergency_escape_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/emergency_escape_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/emergency_escape_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/equipment_wear_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/equipment_wear_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/equipment_wear_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/expedition_costs_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/expedition_costs_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/expedition_costs_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/expedition_objective_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/expedition_objective_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/expedition_objective_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/exploration_end_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/exploration_end_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/exploration_end_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/exploration_map_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/exploration_map_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/exploration_map_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/g1_integration_playtest_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/g1_integration_playtest_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/g1_integration_playtest_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/g3_exploration_flow_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/g3_exploration_flow_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/g3_exploration_flow_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/g3_survival_flow_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/g3_survival_flow_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/g3_survival_flow_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/game_state_flow_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/game_state_flow_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/game_state_flow_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/golem_contact_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/golem_contact_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/golem_contact_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/golem_sight_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/golem_sight_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/golem_sight_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/harness_actions_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/harness_actions_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/harness_actions_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/hazard_harness_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/hazard_harness_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/hazard_harness_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/hub_appraisal_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/hub_appraisal_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/hub_appraisal_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/hub_departure_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/hub_departure_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/hub_departure_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/hub_harness_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/hub_harness_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/hub_harness_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/hub_registration_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/hub_registration_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/hub_registration_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/hub_repair_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/hub_repair_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/hub_repair_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/hub_research_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/hub_research_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/hub_research_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/hub_sale_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/hub_sale_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/hub_sale_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/hub_upgrade_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/hub_upgrade_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/hub_upgrade_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/inspection_unidentified_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/inspection_unidentified_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/inspection_unidentified_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/interaction_system_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/interaction_system_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/interaction_system_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/interaction_timing_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/interaction_timing_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/interaction_timing_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/inventory_system_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/inventory_system_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/inventory_system_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/item_category_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/item_category_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/item_category_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/load_movement_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/load_movement_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/load_movement_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/lure_departure_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/lure_departure_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/lure_departure_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/lure_preparation_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/lure_preparation_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/lure_preparation_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/malfunctioning_trap_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/malfunctioning_trap_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/malfunctioning_trap_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/map_clue_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/map_clue_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/map_clue_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/map_marker_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/map_marker_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/map_marker_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/map_passage_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/map_passage_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/map_passage_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/movement_noise_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/movement_noise_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/movement_noise_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/noise_lure_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/noise_lure_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/noise_lure_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/objective_boundary_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/objective_boundary_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/objective_boundary_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/objective_flow_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/objective_flow_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/objective_flow_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/player_movement_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/player_movement_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/player_movement_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/player_survival_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/player_survival_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/player_survival_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/progress_save_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/progress_save_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/progress_save_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/quick_drop_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/quick_drop_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/quick_drop_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/recovery_result_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/recovery_result_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/recovery_result_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/recovery_tax_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/recovery_tax_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/recovery_tax_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/remaining_zone_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/remaining_zone_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/remaining_zone_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/retreat_route_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/retreat_route_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/retreat_route_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/return_route_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/return_route_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/return_route_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/settings_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/settings_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/settings_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/settlement_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/settlement_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/settlement_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/title_screen_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/title_screen_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/title_screen_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/value_comparison_smoke.gd",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/value_comparison_smoke.gd.uid",
+      "content_unchanged": true
+    },
+    {
+      "path": "tests/smoke/value_comparison_smoke.tscn",
+      "content_unchanged": true
+    },
+    {
+      "path": "게임 기획 파일/게임 개발 단계별 제안서 v0.1.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.1.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.2.1.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.2.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "게임 기획 파일/스토리 정리 v1.5.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "게임 기획 파일/통합 게임 기획서 v2.1.md",
+      "content_unchanged": true
+    }
+  ],
+  "changed_paths": [
+    "docs/GDD.md",
+    "docs/README.md",
+    "docs/design/README.md",
+    "docs/design/economy_rules.md",
+    "docs/design/expedition_cost_reporting.md",
+    "docs/design/expedition_objectives.md",
+    "docs/design/item_rules.md",
+    "docs/design/portable_appraisal.md",
+    "docs/design/recovery_tax.md",
+    "docs/design/tool_preparation.md",
+    "docs/project/README.md",
+    "docs/project/decisions.md",
+    "docs/project/dev0422_document_results.json",
+    "docs/project/development_handoff.md",
+    "docs/project/g4_meta_review.md",
+    "docs/project/migration_changes.md",
+    "docs/project/migration_manifest.md",
+    "docs/project/module_boundaries.md",
+    "docs/project/open_questions.md",
+    "docs/project/project_context.md"
+  ],
+  "math_scope": "Independent document examples for the selected direction with unapplied trial values; not runtime results.",
+  "examples": [
+    {
+      "id": "P01",
+      "inputs": {
+        "id": "P01",
+        "initial": [],
+        "buy": 2,
+        "carry": 2,
+        "used": 1,
+        "mode": "safe",
+        "sale": 40,
+        "reward": 10
+      },
+      "actual": [
+        10,
+        0,
+        36,
+        26,
+        126,
+        10,
+        46
+      ],
+      "expected_from_document": [
+        10,
+        0,
+        36,
+        26,
+        126,
+        10,
+        46
+      ],
+      "inventory_cash_identity": true,
+      "passed": true
+    },
+    {
+      "id": "P02",
+      "inputs": {
+        "id": "P02",
+        "initial": [
+          10
+        ],
+        "buy": 0,
+        "carry": 1,
+        "used": 1,
+        "mode": "safe",
+        "sale": 30
+      },
+      "actual": [
+        10,
+        0,
+        17,
+        27,
+        127,
+        0,
+        27
+      ],
+      "expected_from_document": [
+        10,
+        0,
+        17,
+        27,
+        127,
+        0,
+        27
+      ],
+      "inventory_cash_identity": true,
+      "passed": true
+    },
+    {
+      "id": "P03",
+      "inputs": {
+        "id": "P03",
+        "initial": [],
+        "buy": 2,
+        "carry": 2,
+        "used": 1,
+        "mode": "failure"
+      },
+      "actual": [
+        10,
+        10,
+        -20,
+        -20,
+        80,
+        0,
+        0
+      ],
+      "expected_from_document": [
+        10,
+        10,
+        -20,
+        -20,
+        80,
+        0,
+        0
+      ],
+      "inventory_cash_identity": true,
+      "passed": true
+    },
+    {
+      "id": "P04",
+      "inputs": {
+        "id": "P04",
+        "initial": [
+          8,
+          10
+        ],
+        "buy": 0,
+        "carry": 2,
+        "used": 1,
+        "mode": "failure"
+      },
+      "actual": [
+        8,
+        10,
+        -18,
+        0,
+        100,
+        0,
+        0
+      ],
+      "expected_from_document": [
+        8,
+        10,
+        -18,
+        0,
+        100,
+        0,
+        0
+      ],
+      "inventory_cash_identity": true,
+      "passed": true
+    },
+    {
+      "id": "P05",
+      "inputs": {
+        "id": "P05",
+        "initial": [],
+        "buy": 1,
+        "carry": 1,
+        "used": 0,
+        "mode": "safe"
+      },
+      "actual": [
+        0,
+        0,
+        0,
+        -10,
+        90,
+        10,
+        0
+      ],
+      "expected_from_document": [
+        0,
+        0,
+        0,
+        -10,
+        90,
+        10,
+        0
+      ],
+      "inventory_cash_identity": true,
+      "passed": true
+    },
+    {
+      "id": "P06",
+      "inputs": {
+        "id": "P06",
+        "initial": [],
+        "buy": 2,
+        "carry": 0,
+        "used": 0,
+        "mode": "safe"
+      },
+      "actual": [
+        0,
+        0,
+        0,
+        -20,
+        80,
+        20,
+        0
+      ],
+      "expected_from_document": [
+        0,
+        0,
+        0,
+        -20,
+        80,
+        20,
+        0
+      ],
+      "inventory_cash_identity": true,
+      "passed": true
+    },
+    {
+      "id": "P07",
+      "inputs": {
+        "id": "P07",
+        "initial": [
+          8,
+          10
+        ],
+        "buy": 0,
+        "carry": 1,
+        "used": 1,
+        "mode": "safe",
+        "sale": 40
+      },
+      "actual": [
+        8,
+        0,
+        28,
+        36,
+        136,
+        10,
+        36
+      ],
+      "expected_from_document": [
+        8,
+        0,
+        28,
+        36,
+        136,
+        10,
+        36
+      ],
+      "inventory_cash_identity": true,
+      "passed": true
+    },
+    {
+      "id": "P08",
+      "inputs": {
+        "id": "P08",
+        "initial": [],
+        "buy": 1,
+        "carry": 1,
+        "used": 1,
+        "mode": "safe",
+        "sale": 40,
+        "reward": 10,
+        "lure_buy": 10,
+        "lure_used": 5,
+        "lure_end": 5
+      },
+      "actual": [
+        10,
+        0,
+        31,
+        26,
+        126,
+        0,
+        46
+      ],
+      "expected_from_document": [
+        10,
+        0,
+        31,
+        26,
+        126,
+        0,
+        46
+      ],
+      "inventory_cash_identity": true,
+      "passed": true
+    },
+    {
+      "id": "P09",
+      "inputs": {
+        "id": "P09",
+        "initial": [],
+        "buy": 0,
+        "carry": 0,
+        "used": 0,
+        "mode": "safe"
+      },
+      "actual": [
+        0,
+        0,
+        0,
+        0,
+        100,
+        0,
+        0
+      ],
+      "expected_from_document": [
+        0,
+        0,
+        0,
+        0,
+        100,
+        0,
+        0
+      ],
+      "inventory_cash_identity": true,
+      "passed": true
+    },
+    {
+      "id": "P10",
+      "inputs": {
+        "id": "P10",
+        "initial": [],
+        "buy": 2,
+        "carry": 2,
+        "used": 0,
+        "mode": "interrupted"
+      },
+      "actual": [
+        0,
+        20,
+        -20,
+        -20,
+        80,
+        0,
+        0
+      ],
+      "expected_from_document": [
+        0,
+        20,
+        -20,
+        -20,
+        80,
+        0,
+        0
+      ],
+      "inventory_cash_identity": true,
+      "passed": true
+    }
+  ],
+  "preparation_boundaries": [
+    {
+      "stock": 0,
+      "count": 0,
+      "price": "0",
+      "money": "0",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 0,
+        "stored_after_buy": 0,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 0,
+      "price": "0",
+      "money": "9",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9,
+        "stored_after_buy": 0,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 0,
+      "price": "0",
+      "money": "10",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 10,
+        "stored_after_buy": 0,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 0,
+      "price": "0",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9223372036854775807,
+        "stored_after_buy": 0,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 0,
+      "price": "5",
+      "money": "0",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 0,
+        "stored_after_buy": 0,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 0,
+      "price": "5",
+      "money": "9",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9,
+        "stored_after_buy": 0,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 0,
+      "price": "5",
+      "money": "10",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 10,
+        "stored_after_buy": 0,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 0,
+      "price": "5",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9223372036854775807,
+        "stored_after_buy": 0,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 0,
+      "price": "10",
+      "money": "0",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 0,
+        "stored_after_buy": 0,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 0,
+      "price": "10",
+      "money": "9",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9,
+        "stored_after_buy": 0,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 0,
+      "price": "10",
+      "money": "10",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 10,
+        "stored_after_buy": 0,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 0,
+      "price": "10",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9223372036854775807,
+        "stored_after_buy": 0,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 0,
+      "price": "9223372036854775807",
+      "money": "0",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 0,
+        "stored_after_buy": 0,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 0,
+      "price": "9223372036854775807",
+      "money": "9",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9,
+        "stored_after_buy": 0,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 0,
+      "price": "9223372036854775807",
+      "money": "10",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 10,
+        "stored_after_buy": 0,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 0,
+      "price": "9223372036854775807",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9223372036854775807,
+        "stored_after_buy": 0,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 1,
+      "price": "0",
+      "money": "0",
+      "result": {
+        "buy": 1,
+        "cost": 0,
+        "money_after": 0,
+        "stored_after_buy": 1,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 1,
+      "price": "0",
+      "money": "9",
+      "result": {
+        "buy": 1,
+        "cost": 0,
+        "money_after": 9,
+        "stored_after_buy": 1,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 1,
+      "price": "0",
+      "money": "10",
+      "result": {
+        "buy": 1,
+        "cost": 0,
+        "money_after": 10,
+        "stored_after_buy": 1,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 1,
+      "price": "0",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 1,
+        "cost": 0,
+        "money_after": 9223372036854775807,
+        "stored_after_buy": 1,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 1,
+      "price": "5",
+      "money": "0",
+      "result": null,
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 1,
+      "price": "5",
+      "money": "9",
+      "result": {
+        "buy": 1,
+        "cost": 5,
+        "money_after": 4,
+        "stored_after_buy": 1,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 1,
+      "price": "5",
+      "money": "10",
+      "result": {
+        "buy": 1,
+        "cost": 5,
+        "money_after": 5,
+        "stored_after_buy": 1,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 1,
+      "price": "5",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 1,
+        "cost": 5,
+        "money_after": 9223372036854775802,
+        "stored_after_buy": 1,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 1,
+      "price": "10",
+      "money": "0",
+      "result": null,
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 1,
+      "price": "10",
+      "money": "9",
+      "result": null,
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 1,
+      "price": "10",
+      "money": "10",
+      "result": {
+        "buy": 1,
+        "cost": 10,
+        "money_after": 0,
+        "stored_after_buy": 1,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 1,
+      "price": "10",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 1,
+        "cost": 10,
+        "money_after": 9223372036854775797,
+        "stored_after_buy": 1,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 1,
+      "price": "9223372036854775807",
+      "money": "0",
+      "result": null,
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 1,
+      "price": "9223372036854775807",
+      "money": "9",
+      "result": null,
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 1,
+      "price": "9223372036854775807",
+      "money": "10",
+      "result": null,
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 1,
+      "price": "9223372036854775807",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 1,
+        "cost": 9223372036854775807,
+        "money_after": 0,
+        "stored_after_buy": 1,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 2,
+      "price": "0",
+      "money": "0",
+      "result": {
+        "buy": 2,
+        "cost": 0,
+        "money_after": 0,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 2,
+      "price": "0",
+      "money": "9",
+      "result": {
+        "buy": 2,
+        "cost": 0,
+        "money_after": 9,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 2,
+      "price": "0",
+      "money": "10",
+      "result": {
+        "buy": 2,
+        "cost": 0,
+        "money_after": 10,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 2,
+      "price": "0",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 2,
+        "cost": 0,
+        "money_after": 9223372036854775807,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 2,
+      "price": "5",
+      "money": "0",
+      "result": null,
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 2,
+      "price": "5",
+      "money": "9",
+      "result": null,
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 2,
+      "price": "5",
+      "money": "10",
+      "result": {
+        "buy": 2,
+        "cost": 10,
+        "money_after": 0,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 2,
+      "price": "5",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 2,
+        "cost": 10,
+        "money_after": 9223372036854775797,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 2,
+      "price": "10",
+      "money": "0",
+      "result": null,
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 2,
+      "price": "10",
+      "money": "9",
+      "result": null,
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 2,
+      "price": "10",
+      "money": "10",
+      "result": null,
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 2,
+      "price": "10",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 2,
+        "cost": 20,
+        "money_after": 9223372036854775787,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 2,
+      "price": "9223372036854775807",
+      "money": "0",
+      "result": null,
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 2,
+      "price": "9223372036854775807",
+      "money": "9",
+      "result": null,
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 2,
+      "price": "9223372036854775807",
+      "money": "10",
+      "result": null,
+      "passed": true
+    },
+    {
+      "stock": 0,
+      "count": 2,
+      "price": "9223372036854775807",
+      "money": "9223372036854775807",
+      "result": null,
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 0,
+      "price": "0",
+      "money": "0",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 0,
+        "stored_after_buy": 1,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 0,
+      "price": "0",
+      "money": "9",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9,
+        "stored_after_buy": 1,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 0,
+      "price": "0",
+      "money": "10",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 10,
+        "stored_after_buy": 1,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 0,
+      "price": "0",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9223372036854775807,
+        "stored_after_buy": 1,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 0,
+      "price": "5",
+      "money": "0",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 0,
+        "stored_after_buy": 1,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 0,
+      "price": "5",
+      "money": "9",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9,
+        "stored_after_buy": 1,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 0,
+      "price": "5",
+      "money": "10",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 10,
+        "stored_after_buy": 1,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 0,
+      "price": "5",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9223372036854775807,
+        "stored_after_buy": 1,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 0,
+      "price": "10",
+      "money": "0",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 0,
+        "stored_after_buy": 1,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 0,
+      "price": "10",
+      "money": "9",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9,
+        "stored_after_buy": 1,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 0,
+      "price": "10",
+      "money": "10",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 10,
+        "stored_after_buy": 1,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 0,
+      "price": "10",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9223372036854775807,
+        "stored_after_buy": 1,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 0,
+      "price": "9223372036854775807",
+      "money": "0",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 0,
+        "stored_after_buy": 1,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 0,
+      "price": "9223372036854775807",
+      "money": "9",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9,
+        "stored_after_buy": 1,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 0,
+      "price": "9223372036854775807",
+      "money": "10",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 10,
+        "stored_after_buy": 1,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 0,
+      "price": "9223372036854775807",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9223372036854775807,
+        "stored_after_buy": 1,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 1,
+      "price": "0",
+      "money": "0",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 0,
+        "stored_after_buy": 1,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 1,
+      "price": "0",
+      "money": "9",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9,
+        "stored_after_buy": 1,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 1,
+      "price": "0",
+      "money": "10",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 10,
+        "stored_after_buy": 1,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 1,
+      "price": "0",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9223372036854775807,
+        "stored_after_buy": 1,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 1,
+      "price": "5",
+      "money": "0",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 0,
+        "stored_after_buy": 1,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 1,
+      "price": "5",
+      "money": "9",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9,
+        "stored_after_buy": 1,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 1,
+      "price": "5",
+      "money": "10",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 10,
+        "stored_after_buy": 1,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 1,
+      "price": "5",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9223372036854775807,
+        "stored_after_buy": 1,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 1,
+      "price": "10",
+      "money": "0",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 0,
+        "stored_after_buy": 1,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 1,
+      "price": "10",
+      "money": "9",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9,
+        "stored_after_buy": 1,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 1,
+      "price": "10",
+      "money": "10",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 10,
+        "stored_after_buy": 1,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 1,
+      "price": "10",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9223372036854775807,
+        "stored_after_buy": 1,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 1,
+      "price": "9223372036854775807",
+      "money": "0",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 0,
+        "stored_after_buy": 1,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 1,
+      "price": "9223372036854775807",
+      "money": "9",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9,
+        "stored_after_buy": 1,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 1,
+      "price": "9223372036854775807",
+      "money": "10",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 10,
+        "stored_after_buy": 1,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 1,
+      "price": "9223372036854775807",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9223372036854775807,
+        "stored_after_buy": 1,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 2,
+      "price": "0",
+      "money": "0",
+      "result": {
+        "buy": 1,
+        "cost": 0,
+        "money_after": 0,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 2,
+      "price": "0",
+      "money": "9",
+      "result": {
+        "buy": 1,
+        "cost": 0,
+        "money_after": 9,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 2,
+      "price": "0",
+      "money": "10",
+      "result": {
+        "buy": 1,
+        "cost": 0,
+        "money_after": 10,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 2,
+      "price": "0",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 1,
+        "cost": 0,
+        "money_after": 9223372036854775807,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 2,
+      "price": "5",
+      "money": "0",
+      "result": null,
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 2,
+      "price": "5",
+      "money": "9",
+      "result": {
+        "buy": 1,
+        "cost": 5,
+        "money_after": 4,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 2,
+      "price": "5",
+      "money": "10",
+      "result": {
+        "buy": 1,
+        "cost": 5,
+        "money_after": 5,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 2,
+      "price": "5",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 1,
+        "cost": 5,
+        "money_after": 9223372036854775802,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 2,
+      "price": "10",
+      "money": "0",
+      "result": null,
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 2,
+      "price": "10",
+      "money": "9",
+      "result": null,
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 2,
+      "price": "10",
+      "money": "10",
+      "result": {
+        "buy": 1,
+        "cost": 10,
+        "money_after": 0,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 2,
+      "price": "10",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 1,
+        "cost": 10,
+        "money_after": 9223372036854775797,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 2,
+      "price": "9223372036854775807",
+      "money": "0",
+      "result": null,
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 2,
+      "price": "9223372036854775807",
+      "money": "9",
+      "result": null,
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 2,
+      "price": "9223372036854775807",
+      "money": "10",
+      "result": null,
+      "passed": true
+    },
+    {
+      "stock": 1,
+      "count": 2,
+      "price": "9223372036854775807",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 1,
+        "cost": 9223372036854775807,
+        "money_after": 0,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 0,
+      "price": "0",
+      "money": "0",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 0,
+        "stored_after_buy": 2,
+        "stored_after_departure": 2
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 0,
+      "price": "0",
+      "money": "9",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9,
+        "stored_after_buy": 2,
+        "stored_after_departure": 2
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 0,
+      "price": "0",
+      "money": "10",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 10,
+        "stored_after_buy": 2,
+        "stored_after_departure": 2
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 0,
+      "price": "0",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9223372036854775807,
+        "stored_after_buy": 2,
+        "stored_after_departure": 2
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 0,
+      "price": "5",
+      "money": "0",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 0,
+        "stored_after_buy": 2,
+        "stored_after_departure": 2
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 0,
+      "price": "5",
+      "money": "9",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9,
+        "stored_after_buy": 2,
+        "stored_after_departure": 2
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 0,
+      "price": "5",
+      "money": "10",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 10,
+        "stored_after_buy": 2,
+        "stored_after_departure": 2
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 0,
+      "price": "5",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9223372036854775807,
+        "stored_after_buy": 2,
+        "stored_after_departure": 2
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 0,
+      "price": "10",
+      "money": "0",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 0,
+        "stored_after_buy": 2,
+        "stored_after_departure": 2
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 0,
+      "price": "10",
+      "money": "9",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9,
+        "stored_after_buy": 2,
+        "stored_after_departure": 2
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 0,
+      "price": "10",
+      "money": "10",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 10,
+        "stored_after_buy": 2,
+        "stored_after_departure": 2
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 0,
+      "price": "10",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9223372036854775807,
+        "stored_after_buy": 2,
+        "stored_after_departure": 2
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 0,
+      "price": "9223372036854775807",
+      "money": "0",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 0,
+        "stored_after_buy": 2,
+        "stored_after_departure": 2
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 0,
+      "price": "9223372036854775807",
+      "money": "9",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9,
+        "stored_after_buy": 2,
+        "stored_after_departure": 2
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 0,
+      "price": "9223372036854775807",
+      "money": "10",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 10,
+        "stored_after_buy": 2,
+        "stored_after_departure": 2
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 0,
+      "price": "9223372036854775807",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9223372036854775807,
+        "stored_after_buy": 2,
+        "stored_after_departure": 2
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 1,
+      "price": "0",
+      "money": "0",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 0,
+        "stored_after_buy": 2,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 1,
+      "price": "0",
+      "money": "9",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9,
+        "stored_after_buy": 2,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 1,
+      "price": "0",
+      "money": "10",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 10,
+        "stored_after_buy": 2,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 1,
+      "price": "0",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9223372036854775807,
+        "stored_after_buy": 2,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 1,
+      "price": "5",
+      "money": "0",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 0,
+        "stored_after_buy": 2,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 1,
+      "price": "5",
+      "money": "9",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9,
+        "stored_after_buy": 2,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 1,
+      "price": "5",
+      "money": "10",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 10,
+        "stored_after_buy": 2,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 1,
+      "price": "5",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9223372036854775807,
+        "stored_after_buy": 2,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 1,
+      "price": "10",
+      "money": "0",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 0,
+        "stored_after_buy": 2,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 1,
+      "price": "10",
+      "money": "9",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9,
+        "stored_after_buy": 2,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 1,
+      "price": "10",
+      "money": "10",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 10,
+        "stored_after_buy": 2,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 1,
+      "price": "10",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9223372036854775807,
+        "stored_after_buy": 2,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 1,
+      "price": "9223372036854775807",
+      "money": "0",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 0,
+        "stored_after_buy": 2,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 1,
+      "price": "9223372036854775807",
+      "money": "9",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9,
+        "stored_after_buy": 2,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 1,
+      "price": "9223372036854775807",
+      "money": "10",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 10,
+        "stored_after_buy": 2,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 1,
+      "price": "9223372036854775807",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9223372036854775807,
+        "stored_after_buy": 2,
+        "stored_after_departure": 1
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 2,
+      "price": "0",
+      "money": "0",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 0,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 2,
+      "price": "0",
+      "money": "9",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 2,
+      "price": "0",
+      "money": "10",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 10,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 2,
+      "price": "0",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9223372036854775807,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 2,
+      "price": "5",
+      "money": "0",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 0,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 2,
+      "price": "5",
+      "money": "9",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 2,
+      "price": "5",
+      "money": "10",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 10,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 2,
+      "price": "5",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9223372036854775807,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 2,
+      "price": "10",
+      "money": "0",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 0,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 2,
+      "price": "10",
+      "money": "9",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 2,
+      "price": "10",
+      "money": "10",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 10,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 2,
+      "price": "10",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9223372036854775807,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 2,
+      "price": "9223372036854775807",
+      "money": "0",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 0,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 2,
+      "price": "9223372036854775807",
+      "money": "9",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 2,
+      "price": "9223372036854775807",
+      "money": "10",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 10,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    },
+    {
+      "stock": 2,
+      "count": 2,
+      "price": "9223372036854775807",
+      "money": "9223372036854775807",
+      "result": {
+        "buy": 0,
+        "cost": 0,
+        "money_after": 9223372036854775807,
+        "stored_after_buy": 2,
+        "stored_after_departure": 0
+      },
+      "passed": true
+    }
+  ],
+  "invalid_input_cases_rejected": 11,
+  "combined_tool_weight_cases": [
+    {
+      "lures": 0,
+      "appraisal": 0,
+      "used_lure": 0,
+      "used_appraisal": 0,
+      "before": 0.0,
+      "after": 0.0,
+      "passed": true
+    },
+    {
+      "lures": 0,
+      "appraisal": 1,
+      "used_lure": 0,
+      "used_appraisal": 0,
+      "before": 0.25,
+      "after": 0.25,
+      "passed": true
+    },
+    {
+      "lures": 0,
+      "appraisal": 1,
+      "used_lure": 0,
+      "used_appraisal": 1,
+      "before": 0.25,
+      "after": 0.0,
+      "passed": true
+    },
+    {
+      "lures": 0,
+      "appraisal": 2,
+      "used_lure": 0,
+      "used_appraisal": 0,
+      "before": 0.5,
+      "after": 0.5,
+      "passed": true
+    },
+    {
+      "lures": 0,
+      "appraisal": 2,
+      "used_lure": 0,
+      "used_appraisal": 1,
+      "before": 0.5,
+      "after": 0.25,
+      "passed": true
+    },
+    {
+      "lures": 0,
+      "appraisal": 2,
+      "used_lure": 0,
+      "used_appraisal": 2,
+      "before": 0.5,
+      "after": 0.0,
+      "passed": true
+    },
+    {
+      "lures": 1,
+      "appraisal": 0,
+      "used_lure": 0,
+      "used_appraisal": 0,
+      "before": 0.25,
+      "after": 0.25,
+      "passed": true
+    },
+    {
+      "lures": 1,
+      "appraisal": 0,
+      "used_lure": 1,
+      "used_appraisal": 0,
+      "before": 0.25,
+      "after": 0.0,
+      "passed": true
+    },
+    {
+      "lures": 1,
+      "appraisal": 1,
+      "used_lure": 0,
+      "used_appraisal": 0,
+      "before": 0.5,
+      "after": 0.5,
+      "passed": true
+    },
+    {
+      "lures": 1,
+      "appraisal": 1,
+      "used_lure": 0,
+      "used_appraisal": 1,
+      "before": 0.5,
+      "after": 0.25,
+      "passed": true
+    },
+    {
+      "lures": 1,
+      "appraisal": 1,
+      "used_lure": 1,
+      "used_appraisal": 0,
+      "before": 0.5,
+      "after": 0.25,
+      "passed": true
+    },
+    {
+      "lures": 1,
+      "appraisal": 1,
+      "used_lure": 1,
+      "used_appraisal": 1,
+      "before": 0.5,
+      "after": 0.0,
+      "passed": true
+    },
+    {
+      "lures": 1,
+      "appraisal": 2,
+      "used_lure": 0,
+      "used_appraisal": 0,
+      "before": 0.75,
+      "after": 0.75,
+      "passed": true
+    },
+    {
+      "lures": 1,
+      "appraisal": 2,
+      "used_lure": 0,
+      "used_appraisal": 1,
+      "before": 0.75,
+      "after": 0.5,
+      "passed": true
+    },
+    {
+      "lures": 1,
+      "appraisal": 2,
+      "used_lure": 0,
+      "used_appraisal": 2,
+      "before": 0.75,
+      "after": 0.25,
+      "passed": true
+    },
+    {
+      "lures": 1,
+      "appraisal": 2,
+      "used_lure": 1,
+      "used_appraisal": 0,
+      "before": 0.75,
+      "after": 0.5,
+      "passed": true
+    },
+    {
+      "lures": 1,
+      "appraisal": 2,
+      "used_lure": 1,
+      "used_appraisal": 1,
+      "before": 0.75,
+      "after": 0.25,
+      "passed": true
+    },
+    {
+      "lures": 1,
+      "appraisal": 2,
+      "used_lure": 1,
+      "used_appraisal": 2,
+      "before": 0.75,
+      "after": 0.0,
+      "passed": true
+    },
+    {
+      "lures": 2,
+      "appraisal": 0,
+      "used_lure": 0,
+      "used_appraisal": 0,
+      "before": 0.5,
+      "after": 0.5,
+      "passed": true
+    },
+    {
+      "lures": 2,
+      "appraisal": 0,
+      "used_lure": 1,
+      "used_appraisal": 0,
+      "before": 0.5,
+      "after": 0.25,
+      "passed": true
+    },
+    {
+      "lures": 2,
+      "appraisal": 0,
+      "used_lure": 2,
+      "used_appraisal": 0,
+      "before": 0.5,
+      "after": 0.0,
+      "passed": true
+    },
+    {
+      "lures": 2,
+      "appraisal": 1,
+      "used_lure": 0,
+      "used_appraisal": 0,
+      "before": 0.75,
+      "after": 0.75,
+      "passed": true
+    },
+    {
+      "lures": 2,
+      "appraisal": 1,
+      "used_lure": 0,
+      "used_appraisal": 1,
+      "before": 0.75,
+      "after": 0.5,
+      "passed": true
+    },
+    {
+      "lures": 2,
+      "appraisal": 1,
+      "used_lure": 1,
+      "used_appraisal": 0,
+      "before": 0.75,
+      "after": 0.5,
+      "passed": true
+    },
+    {
+      "lures": 2,
+      "appraisal": 1,
+      "used_lure": 1,
+      "used_appraisal": 1,
+      "before": 0.75,
+      "after": 0.25,
+      "passed": true
+    },
+    {
+      "lures": 2,
+      "appraisal": 1,
+      "used_lure": 2,
+      "used_appraisal": 0,
+      "before": 0.75,
+      "after": 0.25,
+      "passed": true
+    },
+    {
+      "lures": 2,
+      "appraisal": 1,
+      "used_lure": 2,
+      "used_appraisal": 1,
+      "before": 0.75,
+      "after": 0.0,
+      "passed": true
+    },
+    {
+      "lures": 2,
+      "appraisal": 2,
+      "used_lure": 0,
+      "used_appraisal": 0,
+      "before": 1.0,
+      "after": 1.0,
+      "passed": true
+    },
+    {
+      "lures": 2,
+      "appraisal": 2,
+      "used_lure": 0,
+      "used_appraisal": 1,
+      "before": 1.0,
+      "after": 0.75,
+      "passed": true
+    },
+    {
+      "lures": 2,
+      "appraisal": 2,
+      "used_lure": 0,
+      "used_appraisal": 2,
+      "before": 1.0,
+      "after": 0.5,
+      "passed": true
+    },
+    {
+      "lures": 2,
+      "appraisal": 2,
+      "used_lure": 1,
+      "used_appraisal": 0,
+      "before": 1.0,
+      "after": 0.75,
+      "passed": true
+    },
+    {
+      "lures": 2,
+      "appraisal": 2,
+      "used_lure": 1,
+      "used_appraisal": 1,
+      "before": 1.0,
+      "after": 0.5,
+      "passed": true
+    },
+    {
+      "lures": 2,
+      "appraisal": 2,
+      "used_lure": 1,
+      "used_appraisal": 2,
+      "before": 1.0,
+      "after": 0.25,
+      "passed": true
+    },
+    {
+      "lures": 2,
+      "appraisal": 2,
+      "used_lure": 2,
+      "used_appraisal": 0,
+      "before": 1.0,
+      "after": 0.5,
+      "passed": true
+    },
+    {
+      "lures": 2,
+      "appraisal": 2,
+      "used_lure": 2,
+      "used_appraisal": 1,
+      "before": 1.0,
+      "after": 0.25,
+      "passed": true
+    },
+    {
+      "lures": 2,
+      "appraisal": 2,
+      "used_lure": 2,
+      "used_appraisal": 2,
+      "before": 1.0,
+      "after": 0.0,
+      "passed": true
+    },
+    {
+      "lures": 3,
+      "appraisal": 0,
+      "used_lure": 0,
+      "used_appraisal": 0,
+      "before": 0.75,
+      "after": 0.75,
+      "passed": true
+    },
+    {
+      "lures": 3,
+      "appraisal": 0,
+      "used_lure": 1,
+      "used_appraisal": 0,
+      "before": 0.75,
+      "after": 0.5,
+      "passed": true
+    },
+    {
+      "lures": 3,
+      "appraisal": 0,
+      "used_lure": 2,
+      "used_appraisal": 0,
+      "before": 0.75,
+      "after": 0.25,
+      "passed": true
+    },
+    {
+      "lures": 3,
+      "appraisal": 0,
+      "used_lure": 3,
+      "used_appraisal": 0,
+      "before": 0.75,
+      "after": 0.0,
+      "passed": true
+    },
+    {
+      "lures": 3,
+      "appraisal": 1,
+      "used_lure": 0,
+      "used_appraisal": 0,
+      "before": 1.0,
+      "after": 1.0,
+      "passed": true
+    },
+    {
+      "lures": 3,
+      "appraisal": 1,
+      "used_lure": 0,
+      "used_appraisal": 1,
+      "before": 1.0,
+      "after": 0.75,
+      "passed": true
+    },
+    {
+      "lures": 3,
+      "appraisal": 1,
+      "used_lure": 1,
+      "used_appraisal": 0,
+      "before": 1.0,
+      "after": 0.75,
+      "passed": true
+    },
+    {
+      "lures": 3,
+      "appraisal": 1,
+      "used_lure": 1,
+      "used_appraisal": 1,
+      "before": 1.0,
+      "after": 0.5,
+      "passed": true
+    },
+    {
+      "lures": 3,
+      "appraisal": 1,
+      "used_lure": 2,
+      "used_appraisal": 0,
+      "before": 1.0,
+      "after": 0.5,
+      "passed": true
+    },
+    {
+      "lures": 3,
+      "appraisal": 1,
+      "used_lure": 2,
+      "used_appraisal": 1,
+      "before": 1.0,
+      "after": 0.25,
+      "passed": true
+    },
+    {
+      "lures": 3,
+      "appraisal": 1,
+      "used_lure": 3,
+      "used_appraisal": 0,
+      "before": 1.0,
+      "after": 0.25,
+      "passed": true
+    },
+    {
+      "lures": 3,
+      "appraisal": 1,
+      "used_lure": 3,
+      "used_appraisal": 1,
+      "before": 1.0,
+      "after": 0.0,
+      "passed": true
+    },
+    {
+      "lures": 3,
+      "appraisal": 2,
+      "used_lure": 0,
+      "used_appraisal": 0,
+      "before": 1.25,
+      "after": 1.25,
+      "passed": true
+    },
+    {
+      "lures": 3,
+      "appraisal": 2,
+      "used_lure": 0,
+      "used_appraisal": 1,
+      "before": 1.25,
+      "after": 1.0,
+      "passed": true
+    },
+    {
+      "lures": 3,
+      "appraisal": 2,
+      "used_lure": 0,
+      "used_appraisal": 2,
+      "before": 1.25,
+      "after": 0.75,
+      "passed": true
+    },
+    {
+      "lures": 3,
+      "appraisal": 2,
+      "used_lure": 1,
+      "used_appraisal": 0,
+      "before": 1.25,
+      "after": 1.0,
+      "passed": true
+    },
+    {
+      "lures": 3,
+      "appraisal": 2,
+      "used_lure": 1,
+      "used_appraisal": 1,
+      "before": 1.25,
+      "after": 0.75,
+      "passed": true
+    },
+    {
+      "lures": 3,
+      "appraisal": 2,
+      "used_lure": 1,
+      "used_appraisal": 2,
+      "before": 1.25,
+      "after": 0.5,
+      "passed": true
+    },
+    {
+      "lures": 3,
+      "appraisal": 2,
+      "used_lure": 2,
+      "used_appraisal": 0,
+      "before": 1.25,
+      "after": 0.75,
+      "passed": true
+    },
+    {
+      "lures": 3,
+      "appraisal": 2,
+      "used_lure": 2,
+      "used_appraisal": 1,
+      "before": 1.25,
+      "after": 0.5,
+      "passed": true
+    },
+    {
+      "lures": 3,
+      "appraisal": 2,
+      "used_lure": 2,
+      "used_appraisal": 2,
+      "before": 1.25,
+      "after": 0.25,
+      "passed": true
+    },
+    {
+      "lures": 3,
+      "appraisal": 2,
+      "used_lure": 3,
+      "used_appraisal": 0,
+      "before": 1.25,
+      "after": 0.5,
+      "passed": true
+    },
+    {
+      "lures": 3,
+      "appraisal": 2,
+      "used_lure": 3,
+      "used_appraisal": 1,
+      "before": 1.25,
+      "after": 0.25,
+      "passed": true
+    },
+    {
+      "lures": 3,
+      "appraisal": 2,
+      "used_lure": 3,
+      "used_appraisal": 2,
+      "before": 1.25,
+      "after": 0.0,
+      "passed": true
+    },
+    {
+      "lures": 4,
+      "appraisal": 0,
+      "used_lure": 0,
+      "used_appraisal": 0,
+      "before": 1.0,
+      "after": 1.0,
+      "passed": true
+    },
+    {
+      "lures": 4,
+      "appraisal": 0,
+      "used_lure": 1,
+      "used_appraisal": 0,
+      "before": 1.0,
+      "after": 0.75,
+      "passed": true
+    },
+    {
+      "lures": 4,
+      "appraisal": 0,
+      "used_lure": 2,
+      "used_appraisal": 0,
+      "before": 1.0,
+      "after": 0.5,
+      "passed": true
+    },
+    {
+      "lures": 4,
+      "appraisal": 0,
+      "used_lure": 3,
+      "used_appraisal": 0,
+      "before": 1.0,
+      "after": 0.25,
+      "passed": true
+    },
+    {
+      "lures": 4,
+      "appraisal": 0,
+      "used_lure": 4,
+      "used_appraisal": 0,
+      "before": 1.0,
+      "after": 0.0,
+      "passed": true
+    },
+    {
+      "lures": 4,
+      "appraisal": 1,
+      "used_lure": 0,
+      "used_appraisal": 0,
+      "before": 1.25,
+      "after": 1.25,
+      "passed": true
+    },
+    {
+      "lures": 4,
+      "appraisal": 1,
+      "used_lure": 0,
+      "used_appraisal": 1,
+      "before": 1.25,
+      "after": 1.0,
+      "passed": true
+    },
+    {
+      "lures": 4,
+      "appraisal": 1,
+      "used_lure": 1,
+      "used_appraisal": 0,
+      "before": 1.25,
+      "after": 1.0,
+      "passed": true
+    },
+    {
+      "lures": 4,
+      "appraisal": 1,
+      "used_lure": 1,
+      "used_appraisal": 1,
+      "before": 1.25,
+      "after": 0.75,
+      "passed": true
+    },
+    {
+      "lures": 4,
+      "appraisal": 1,
+      "used_lure": 2,
+      "used_appraisal": 0,
+      "before": 1.25,
+      "after": 0.75,
+      "passed": true
+    },
+    {
+      "lures": 4,
+      "appraisal": 1,
+      "used_lure": 2,
+      "used_appraisal": 1,
+      "before": 1.25,
+      "after": 0.5,
+      "passed": true
+    },
+    {
+      "lures": 4,
+      "appraisal": 1,
+      "used_lure": 3,
+      "used_appraisal": 0,
+      "before": 1.25,
+      "after": 0.5,
+      "passed": true
+    },
+    {
+      "lures": 4,
+      "appraisal": 1,
+      "used_lure": 3,
+      "used_appraisal": 1,
+      "before": 1.25,
+      "after": 0.25,
+      "passed": true
+    },
+    {
+      "lures": 4,
+      "appraisal": 1,
+      "used_lure": 4,
+      "used_appraisal": 0,
+      "before": 1.25,
+      "after": 0.25,
+      "passed": true
+    },
+    {
+      "lures": 4,
+      "appraisal": 1,
+      "used_lure": 4,
+      "used_appraisal": 1,
+      "before": 1.25,
+      "after": 0.0,
+      "passed": true
+    },
+    {
+      "lures": 4,
+      "appraisal": 2,
+      "used_lure": 0,
+      "used_appraisal": 0,
+      "before": 1.5,
+      "after": 1.5,
+      "passed": true
+    },
+    {
+      "lures": 4,
+      "appraisal": 2,
+      "used_lure": 0,
+      "used_appraisal": 1,
+      "before": 1.5,
+      "after": 1.25,
+      "passed": true
+    },
+    {
+      "lures": 4,
+      "appraisal": 2,
+      "used_lure": 0,
+      "used_appraisal": 2,
+      "before": 1.5,
+      "after": 1.0,
+      "passed": true
+    },
+    {
+      "lures": 4,
+      "appraisal": 2,
+      "used_lure": 1,
+      "used_appraisal": 0,
+      "before": 1.5,
+      "after": 1.25,
+      "passed": true
+    },
+    {
+      "lures": 4,
+      "appraisal": 2,
+      "used_lure": 1,
+      "used_appraisal": 1,
+      "before": 1.5,
+      "after": 1.0,
+      "passed": true
+    },
+    {
+      "lures": 4,
+      "appraisal": 2,
+      "used_lure": 1,
+      "used_appraisal": 2,
+      "before": 1.5,
+      "after": 0.75,
+      "passed": true
+    },
+    {
+      "lures": 4,
+      "appraisal": 2,
+      "used_lure": 2,
+      "used_appraisal": 0,
+      "before": 1.5,
+      "after": 1.0,
+      "passed": true
+    },
+    {
+      "lures": 4,
+      "appraisal": 2,
+      "used_lure": 2,
+      "used_appraisal": 1,
+      "before": 1.5,
+      "after": 0.75,
+      "passed": true
+    },
+    {
+      "lures": 4,
+      "appraisal": 2,
+      "used_lure": 2,
+      "used_appraisal": 2,
+      "before": 1.5,
+      "after": 0.5,
+      "passed": true
+    },
+    {
+      "lures": 4,
+      "appraisal": 2,
+      "used_lure": 3,
+      "used_appraisal": 0,
+      "before": 1.5,
+      "after": 0.75,
+      "passed": true
+    },
+    {
+      "lures": 4,
+      "appraisal": 2,
+      "used_lure": 3,
+      "used_appraisal": 1,
+      "before": 1.5,
+      "after": 0.5,
+      "passed": true
+    },
+    {
+      "lures": 4,
+      "appraisal": 2,
+      "used_lure": 3,
+      "used_appraisal": 2,
+      "before": 1.5,
+      "after": 0.25,
+      "passed": true
+    },
+    {
+      "lures": 4,
+      "appraisal": 2,
+      "used_lure": 4,
+      "used_appraisal": 0,
+      "before": 1.5,
+      "after": 0.5,
+      "passed": true
+    },
+    {
+      "lures": 4,
+      "appraisal": 2,
+      "used_lure": 4,
+      "used_appraisal": 1,
+      "before": 1.5,
+      "after": 0.25,
+      "passed": true
+    },
+    {
+      "lures": 4,
+      "appraisal": 2,
+      "used_lure": 4,
+      "used_appraisal": 2,
+      "before": 1.5,
+      "after": 0.0,
+      "passed": true
+    }
+  ],
+  "new_question": {
+    "id": "Q-030",
+    "status": "provisional"
+  },
+  "new_decisions": [
+    {
+      "id": "DEC-117",
+      "status": "active",
+      "approved_by": "user",
+      "date": "2026-10-10",
+      "scope": [
+        "limited-use confirmed appraisal without same-item reappraisal",
+        "paid purchase and carry quantity selection",
+        "unused tools preserved on safe return"
+      ],
+      "trial_values_and_implementation_not_approved_as_final": true
+    }
+  ],
+  "pending_user_choices": [],
+  "prior_decisions_and_questions_preserved": true,
+  "git_diff_check_passed": true,
+  "local_ahead": 3,
+  "remote_behind": 0,
+  "commit_status": "user approved reviewed DEV-0422 local commit on 2026-10-10; validation recorded before commit; no push",
+  "consistency_checkpoint": "정합성 검사: 아직 아님 — G5 완료 후",
+  "failures": []
+}
