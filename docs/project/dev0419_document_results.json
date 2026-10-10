@@ -1,0 +1,121 @@
+{
+  "ticket": "DEV-0419",
+  "ticket_name": "G4 보완 완료 조건 검토",
+  "checked_date_kst": "2026-10-10",
+  "passed": true,
+  "failures": [],
+  "markdown_files": 50,
+  "relative_links_checked": 1727,
+  "front_matter_related_checked": 526,
+  "frozen_sources": [
+    {
+      "id": "SRC-001",
+      "path": "게임 기획 파일/통합 게임 기획서 v2.1.md",
+      "sha256": "45E92DFEDE482968B31C14EEF712012735AA9657DE18BD7C0922F94D40DD460A",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-002",
+      "path": "게임 기획 파일/스토리 정리 v1.5.md",
+      "sha256": "4191C100D5B3BFBEF291D3FD4D7588A3C5C31113A1827D33886CC8C90931292D",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-003",
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.1.md",
+      "sha256": "A52337ED1CC3DECEBF8BD6840662E12FAFDDCFA95C3E5E8D5E1129FFBBEF796F",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-004",
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.2.md",
+      "sha256": "0BAC7F52CF21EDDCD4B720C7B5B8FF76F98FB452904CEBCC3E03C1EB2B220C67",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-005",
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.2.1.md",
+      "sha256": "B4451E06D8FFAF5D1A233FA1A639E783BA17973977398C12527333A7707319F0",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-006",
+      "path": "게임 기획 파일/게임 개발 단계별 제안서 v0.1.md",
+      "sha256": "2EE29ACA36E74F5E0206AFF150ED610EBA8381E594B9091141E6F74CAA2B60C1",
+      "matches_record": true
+    }
+  ],
+  "archive_copies": [
+    {
+      "path": "docs/archive/story_v1.5_full.md",
+      "source_id": "SRC-002",
+      "bytes_match": true
+    },
+    {
+      "path": "docs/archive/story_document_management_proposal_v0.1.md",
+      "source_id": "SRC-003",
+      "bytes_match": true
+    },
+    {
+      "path": "docs/archive/story_document_management_proposal_v0.2.md",
+      "source_id": "SRC-004",
+      "bytes_match": true
+    }
+  ],
+  "checkpoint_tables_preserved": {
+    "docs/README.md": true,
+    "docs/project/migration_manifest.md": true
+  },
+  "next_checkpoint": "G5 완료 후",
+  "base_commit": "93d2b5a05efe0fe807b49a6a4bfb79a4208a03d7",
+  "local_ahead": 0,
+  "local_behind": 0,
+  "source_tree_sha256": "e013691444f7c1e21f687b9c75daa2b4939bb1b8456c7ae9dae69ffcf3f38cb1",
+  "fresh_runtime_source_matches_current": true,
+  "previous_record_source_sha256": "947eea08391530d0863c7892f3bb4f77f1a10dc5862150043c7fa50de30ec543",
+  "previous_raw_source_hash_matches_current": false,
+  "tracked_source_files": 509,
+  "source_content_differences_from_head_after_line_ending_normalization": [],
+  "raw_line_ending_differences_from_git_blobs": 379,
+  "previous_environment_byte_identity_claimed": false,
+  "initial_run": {
+    "raw_report_path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-g2-20261010-033737-f3b22923facc417f9209bbf05db9ca4d\\results.json",
+    "passed": false,
+    "check_count": 98,
+    "individual_checks_passed": 98,
+    "failure": "Source files changed during the checks; result is not reproducible.",
+    "source_tree_sha256": "c0b84e825e14249fe04ecaa8b0f2807f6343a5e2191d20a93663b77ce3a05c44",
+    "cause": "Initial Godot import reserialized five tracked icon .svg.import files with LF line endings; Git content unchanged.",
+    "counted_as_full_pass": false
+  },
+  "raw_report_path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-g2-20261010-034436-ea375d2efd3e410295382868ffb8ef7a\\results.json",
+  "runtime_results_preserved_from_raw_report": true,
+  "fresh_runtime_checks_passed": 98,
+  "fresh_runtime_repetitions": 1,
+  "smoke_scene_count": 55,
+  "fresh_graphical_runs": 0,
+  "fresh_external_termination_runs": 0,
+  "prior_reports_preserved": true,
+  "product_domain_story_reference_and_decisions_preserved": true,
+  "question_statuses_preserved": true,
+  "g4_completion_conditions": 6,
+  "git_diff_check": true,
+  "changed_paths": [
+    "docs/README.md",
+    "docs/project/README.md",
+    "docs/project/dev0419_automated_results.json",
+    "docs/project/dev0419_document_results.json",
+    "docs/project/development_handoff.md",
+    "docs/project/g4_meta_review.md",
+    "docs/project/migration_changes.md",
+    "docs/project/migration_manifest.md",
+    "docs/project/open_questions.md",
+    "docs/project/project_context.md"
+  ],
+  "g4_completion": "held: recovery tax and portable appraisal functional gaps; human evaluation pending",
+  "next_ticket": "DEV-0420 — 회수세 최소 규칙 정리",
+  "commit_status": "user_approved_local_commit",
+  "approval_text": "커밋해",
+  "approval_date_kst": "2026-10-10",
+  "pushed": false
+}

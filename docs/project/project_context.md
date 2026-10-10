@@ -8,7 +8,7 @@ canonical_for:
   - development_environment
   - engine_and_language
   - development_commands
-last_reviewed: 2026-10-09
+last_reviewed: 2026-10-10
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -1616,3 +1616,31 @@ Get-G2SourceHash (Get-Location).Path
 원시 실행 위치는 `C:\Users\user\AppData\Local\Temp\dungeon-g2-20261009-000024-aa6745cfb27041969c60f1b9b97f7f9c`, `C:\Users\user\AppData\Local\Temp\dungeon-objective-boundaries-a02eedefb93e4050998cbb83a751132e`, `C:\Users\user\AppData\Local\Temp\dev0418-final-render`다. 임시 이미지/로그의 영구 보관을 약속하지 않으며 저장소 검사 코드와 JSON으로 재현한다. 전체 실행기의 원래 scope는 G2이며 이번 JSON 사본은 원래 scope와 DEV-0418 범위를 함께 기록했다. 이전 검사 결과를 덮어쓰지 않았다.
 
 **DEV-0418 구현·검증 완료, 사용자 로컬 커밋 승인.** 2026-10-09 사용자가 검토된 결과의 로컬 커밋을 승인했으며 push하지 않았다. 다음 **DEV-0419 — G4 보완 완료 조건 검토**다. 최종 보상/반복 경제·메뉴 사용성·사람 판단·G4 전체 완료는 보류한다. **정합성 검사: 아직 아님 — G5 완료 후.**
+
+## DEV-0419 G4 보완 완료 조건 검토 검사
+
+2026-10-10, 기준 DEV-0418 93d2b5a. 시작 fetch에서 앞섬/뒤처짐 0·깨끗한 main을 확인했고 MIG-CHG-051을 먼저 기록했다. [G4 검토](g4_meta_review.md#dev-0419-보완-완료-조건-검토)는 구현·현재 기준·여섯 조건·후속 범위를 대조하는 Project 작업이다.
+
+| 검사 | 결과와 범위 |
+|---|---|
+| 이번 전체 회귀 | [새 자동 기록](dev0419_automated_results.json): Godot 4.7.1, 1회 반복 98/98 프로세스·55개 스모크 장면. 오류/무시 진단 없음. 의뢰 계산·실제 4출정·실패/재시도와 기존 거래·저장·새 프로세스 이어하기 포함 |
+| 이번 실행 소스 | 실행 전후 Get-G2SourceHash: e013691444f7c1e21f687b9c75daa2b4939bb1b8456c7ae9dae69ffcf3f38cb1. 이번 작업은 src·tests·project.godot를 변경하지 않음 |
+| 이전 소스와 구분 | DEV-0418 기록 원시 해시 947eea08391530d0863c7892f3bb4f77f1a10dc5862150043c7fa50de30ec543와 다름. 현재 환경은 core.autocrlf=true이며 파일별 줄바꿈이 섞여 있다. 이전 환경의 파일별 바이트 목록은 없어 차이 원인을 줄바꿈만으로 단정하지 않음. 현재 HEAD의 모든 추적 실행 파일과 줄바꿈 정규화 내용 일치, 소스 미변경 및 이번 실행 전후 해시 일치를 따로 확인 |
+| 이전 외부 종료/화면 | DEV-0418 저장 직전/직후 14경계·두 해상도 42장 등 기존 JSON 근거 보존. 이번 별도 그래픽/외부 강제 종료 0회. 이전 PNG를 이 환경에서 새로 보거나 사람 평가한 것으로 세지 않음 |
+| 문서·보존 | [문서 검사](dev0419_document_results.json): 활성 링크/앵커·Front Matter 경로, 동결 원본 6개·사본 3개, 두 정기 검사 표, 기존 결과·GDD/Design/Story/Reference 보존·단일 작업 범위·git diff --check |
+
+재현 명령(저장소 루트, GodotBin은 설치 경로로 바꾼다):
+
+    ./tests/run_g2_checks.ps1 -GodotBin C:/Users/makist_code_04/AppData/Local/Temp/codex-godot-4.7.1/Godot_v4.7.1-stable_win64_console.exe -Repetitions 1 -TimeoutSeconds 90
+    . ./tests/run_g2_checks.ps1
+    Get-G2SourceHash (Get-Location).Path
+    git diff --exit-code HEAD -- src tests project.godot
+    git diff --check
+
+이번 원시 로그: C:\Users\makist_code_04\AppData\Local\Temp\dungeon-g2-20261010-034436-ea375d2efd3e410295382868ffb8ef7a. JSON 시각은 UTC이고 사용자 보고일은 한국 시각 2026-10-10이다. 임시 로그의 영구 보관을 약속하지 않는다. 새 사본은 원래 G2 scope와 DEV-0419 검토 범위를 함께 기록하고 checks·flows·시각·소스 해시·종료 결과는 원본 그대로 보존한다. 이전 결과를 덮어쓰지 않는다.
+
+문서 검사 절차: 코드 펜스를 제외한 활성 Markdown 링크·앵커와 Front Matter related 경로 확인 → 이관 대장의 SHA-256과 동결 원본/사본 대조 → HEAD 대비 두 검사 시점 표·이전 결과·규칙 보존 → 실행 파일의 HEAD 내용/새 실행 해시 및 새 결과의 원시 보고 일치 → 여섯 조건·다음 작업·상태 확인 → 공백 검사. 원시 해시 불일치를 숨기거나 기존 기록을 새 해시로 수정하지 않는다.
+
+첫 실행은 기능 검사 98건이 모두 통과했지만 Godot 초기 가져오기가 아이콘 .svg.import 5개의 줄바꿈을 바꿔 실행 전후 소스 해시 검사에서 실패했다. Git의 실제 내용 차이는 없음을 확인했고 초기화가 끝난 상태에서 전체 검사를 새로 실행했다. 첫 실행은 전체 통과 건수에 합산하지 않는다. 첫 원시 기록은 C:/Users/makist_code_04/AppData/Local/Temp/dungeon-g2-20261010-033737-f3b22923facc417f9209bbf05db9ca4d/results.json이며 문서 검사 JSON에도 실패 원인과 개수를 보존한다.
+
+**DEV-0419 — G4 보완 완료 조건 검토·검증 완료, 사용자 로컬 커밋 승인.** 선택 의뢰의 기술 공백 해소와 기존 여섯 완료 조건을 대조하고 최신 코드의 전체 자동 검사 98/98건을 통과했다. 회수세·휴대용 감정의 기능 보완과 사람 평가가 남아 G4 전체 완료는 보류한다. 다음은 **DEV-0420 — 회수세 최소 규칙 정리**다. 기준 DEV-0418 93d2b5a에서 원격과 동기화된 상태로 시작했으며 2026-10-10 사용자가 검토 결과의 로컬 커밋을 승인했으며 push하지 않았다. **정합성 검사: 아직 아님 — G5 완료 후.**
