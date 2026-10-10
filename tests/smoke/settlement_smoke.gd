@@ -5,6 +5,7 @@ var _failures := PackedStringArray()
 
 func _ready() -> void:
 	var rule := EconomyRule.new()
+	rule.recovery_tax_percent = 0
 	rule.base_prices = {&"scrap": 17, &"residue": 23, &"unknown": 999, &"unique": 800, &"record": 900, &"protected": 700}
 	var scrap := _item(&"scrap", ItemDefinition.CATEGORY_SCRAP)
 	var residue := _item(&"residue", ItemDefinition.CATEGORY_RESIDUE)
@@ -42,6 +43,8 @@ func _ready() -> void:
 	retained[0].get_definition().display_name = "changed"
 	retained.clear()
 	_expect(settlement.get_total_income() == 40 and settlement.get_sales()[0].amount == 17, "Preview data was mutable from outside.")
+	_expect(not hub.apply_settlement(first), "Changed price reused previous confirmation.")
+	rule.base_prices[&"scrap"] = 17
 	_expect(hub.apply_settlement(first) and not hub.apply_settlement(first), "Settlement was not applied exactly once.")
 	_expect(hub.get_money() == 40 and hub.get_stored_items().size() == 6, "Holdings did not receive the complete settlement.")
 	var stored := hub.get_stored_items()

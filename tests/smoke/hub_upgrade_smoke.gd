@@ -68,7 +68,7 @@ func _ready() -> void:
 	else:
 		await _recover_pair(HarnessModules.DEFAULT)
 		await _recover_pair(HarnessModules.DEFAULT)
-		_expect(_entry.get_hub_money() == 80, "Actual earnings missing before purchase.")
+		_expect(_entry.get_hub_money() == 72, "Actual earnings missing before purchase.")
 		await _purchase_growth(0, true)
 		await _choose_pair(1)
 		await _discover_growth(true)

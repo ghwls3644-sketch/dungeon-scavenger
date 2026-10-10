@@ -447,6 +447,12 @@ func _on_settlement_requested() -> void:
 		return
 	if _pending_outcome == null or get_tree().paused:
 		return
+	var pending := _hub_state.get_pending_settlement()
+	if pending == null or not pending.matches_current_rule():
+		var refreshed := _hub_state.prepare_settlement(_expedition_id, _pending_outcome, PROTOTYPE_ECONOMY, true)
+		_results.present_result(_pending_outcome, _hub_state.get_pending_settlement() if refreshed else null)
+		_results.set_status("판매 가격이나 회수세가 바뀌었습니다. 새 금액을 확인한 뒤 다시 정산해 주세요." if refreshed else "정산 금액을 확인할 수 없습니다. 물품과 보유금은 그대로입니다.")
+		return
 	_settling = true
 	_results.set_busy(true)
 	var candidate := _hub_state.copy()
@@ -575,21 +581,21 @@ func _on_sale_confirmed() -> void:
 	var candidate := _hub_state.copy()
 	if not candidate.apply_sale(_sale_quote, PROTOTYPE_ECONOMY):
 		_selling = false
-		_sale.set_status("판매 대상이나 가격이 바뀌었습니다. 선택으로 돌아가 다시 확인해 주세요.")
+		_sale.set_status("판매 대상이나 가격·회수세가 바뀌었습니다. 선택으로 돌아가 다시 확인해 주세요.")
 		return
 	if not _save_hub(candidate):
 		_selling = false
 		_sale.set_status("저장 실패 · 물품과 보유금은 그대로 유지됩니다.\n다시 판매를 확정하거나 선택으로 돌아가 취소할 수 있습니다.")
 		return
 	var count := _sale_quote.get_count()
-	var income := _sale_quote.get_income()
+	var income := _sale_quote.get_net_income()
 	_hub_state = candidate
 	_sale_quote = null
 	_selling = false
 	_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items(), _hub_state.get_preparation_costs(), _hub_state.get_last_costs())
 	_hub.render_objective(_hub_state)
 	_sale.present(_hub_state.get_money(), _hub_state.get_sale_offers(PROTOTYPE_ECONOMY))
-	_sale.set_status("%d개 판매 완료 · 수입 +%d · 보유금 %d\n판매한 물품을 보관함에서 제거하고 결과를 저장했습니다." % [count, income, _hub_state.get_money()])
+	_sale.set_status("%d개 판매 완료 · 실제 입금 +%d · 보유금 %d\n판매한 물품을 보관함에서 제거하고 결과를 저장했습니다." % [count, income, _hub_state.get_money()])
 
 
 func _on_sale_closed() -> void:

@@ -1,7 +1,7 @@
 class_name ProgressStore
 extends RefCounted
 
-const SCHEMA_VERSION := 8
+const SCHEMA_VERSION := 9
 const CONTENT_VERSION := "g2_prototype_1"
 const MAX_FILE_BYTES := 16 * 1024 * 1024
 
@@ -49,7 +49,7 @@ func load_data() -> Dictionary:
 		_last_error = ERR_INVALID_DATA
 		return {}
 	# JSON numbers are floats; Array.has() does not coerce int/float variants.
-	if (version != 1 and version != 2 and version != 3 and version != 4 and version != 5 and version != 6 and version != 7 and version != SCHEMA_VERSION) or data.get("content_version") != CONTENT_VERSION:
+	if (version != 1 and version != 2 and version != 3 and version != 4 and version != 5 and version != 6 and version != 7 and version != 8 and version != SCHEMA_VERSION) or data.get("content_version") != CONTENT_VERSION:
 		_last_error = ERR_UNAVAILABLE
 		return {}
 	if data.size() != 4 or data.get("resume_state") != "hub" or typeof(data.get("hub")) != TYPE_DICTIONARY:
@@ -90,8 +90,11 @@ func load_data() -> Dictionary:
 				or ExpeditionCosts.number(hub.get("money")) < 0:
 			_last_error = ERR_INVALID_DATA
 			return {}
-		hub["costs"] = ExpeditionCosts.legacy_book(hub)
+		hub["costs"] = ExpeditionCosts.legacy_book(hub, false)
 	if version <= 7 and not ExpeditionObjective.migrate_legacy(hub):
+		_last_error = ERR_INVALID_DATA
+		return {}
+	if version <= 8 and not RecoveryTax.migrate_legacy(hub):
 		_last_error = ERR_INVALID_DATA
 		return {}
 	if hub.size() != 13 or not ExpeditionObjective.valid_offer(hub.get("objective")) or not LurePreparation.valid_save(hub) or not ExpeditionCosts.valid_save(hub.get("costs"), hub) \
@@ -103,6 +106,14 @@ func load_data() -> Dictionary:
 	hub["harness_durability"] = int(hub.harness_durability)
 	hub["paid_lures"] = int(hub.paid_lures)
 	hub["selected_lures"] = int(hub.selected_lures)
+	for sale in hub.costs.period.tax_sales:
+		sale.rate = int(sale.rate)
+	if not hub.costs.last.is_empty():
+		hub.costs.last.loot_tax.rate = int(hub.costs.last.loot_tax.rate)
+		for key in ["free_used", "paid_count", "paid_used"]:
+			hub.costs.last[key] = int(hub.costs.last[key])
+		for sale in hub.costs.last.period.tax_sales:
+			sale.rate = int(sale.rate)
 	# Normalize validated JSON numbers so stale-source checks survive migration/reload.
 	if not hub.objective.is_empty():
 		hub.objective.version = int(hub.objective.version)

@@ -263,9 +263,9 @@ func _check_timeout_and_new_visit() -> void:
 	_expect(outcome != null and outcome.is_failure() and outcome.get_failure_cause() == &"escape_timeout" and outcome.get_lost_item_count() == 1, "Deadline failed to lose only current cargo.")
 	if outcome != null:
 		_settle(outcome)
-	_expect(_hub.get_money() == 10 and _hub.get_stored_items().size() == 2, "Failure damaged previous hub holdings.")
+	_expect(_hub.get_money() == 9 and _hub.get_stored_items().size() == 2, "Failure damaged previous hub holdings.")
 	var restored := HubState.from_save_data(_hub.to_save_data(), _test_catalog)
-	_expect(restored != null and restored.get_money() == 10 and restored.get_stored_items().size() == 2 and not restored.get_stored_items()[0].is_identified(), "Save boundary lost emergency return holdings.")
+	_expect(restored != null and restored.get_money() == 9 and restored.get_stored_items().size() == 2 and not restored.get_stored_items()[0].is_identified(), "Save boundary lost emergency return holdings.")
 	await _capture("escape-timeout.png")
 	_measurements.append({"case": "zero_charge_timeout", "lost_items": 1, "hub_money_preserved": _hub.get_money(), "stored_items_preserved": _hub.get_stored_items().size()})
 	world.queue_free()

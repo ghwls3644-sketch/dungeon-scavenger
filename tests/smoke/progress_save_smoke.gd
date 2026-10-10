@@ -206,9 +206,9 @@ func _check_transactions() -> void:
 	_click(results.get_node("NextStep/SettleButton"))
 	_click(results.get_node("NextStep/SettleButton"))
 	await _frames(5)
-	_expect(GameState.get_current_state() == GameState.State.HUB and _entry.get_hub_money() == 10 and _entry.get_hub_stored_items().size() == 1, "Retry lost or duplicated settlement.")
+	_expect(GameState.get_current_state() == GameState.State.HUB and _entry.get_hub_money() == 9 and _entry.get_hub_stored_items().size() == 1, "Retry lost or duplicated settlement.")
 	var restored := HubState.from_save_data(_store.load_data(), CATALOG)
-	_expect(restored != null and restored.get_money() == 10 and restored.get_stored_items().size() == 1, "Committed memory differs from saved progress.")
+	_expect(restored != null and restored.get_money() == 9 and restored.get_stored_items().size() == 1, "Committed memory differs from saved progress.")
 	_expect("200" not in hub.get_node("%StoredItems").text and "감정 대기" in hub.get_node("%StoredItems").text, "Stored unknown item leaked its value.")
 
 
@@ -219,7 +219,7 @@ func _check_restart() -> void:
 	_click(_title.get_node("%ContinueButton"))
 	await _frames(5)
 	_expect(GameState.get_current_state() == GameState.State.HUB, "Continue did not restore to Hub.")
-	_expect(_entry.get_hub_money() == 35 and _entry.get_hub_stored_items().size() == 1 and _entry.get_departure_preview().slot_capacity == 3, "Restart changed money, items or preparation.")
+	_expect(_entry.get_hub_money() == 31 and _entry.get_hub_stored_items().size() == 1 and _entry.get_departure_preview().slot_capacity == 3, "Restart changed money, items or preparation.")
 	if _entry.get_hub_stored_items().is_empty():
 		return
 	var item := _entry.get_hub_stored_items()[0]
@@ -236,7 +236,7 @@ func _check_restart() -> void:
 	await _frames(5)
 	_click(_entry.get_node("Interface/Results/NextStep/SettleButton"))
 	await _frames(5)
-	_expect(_entry.get_hub_money() == 30 and _entry.get_hub_stored_items().size() == 1 and _store.load_data().next_expedition_id == "5", "Post-restart failure changed existing holdings or reset progression.")
+	_expect(_entry.get_hub_money() == 26 and _entry.get_hub_stored_items().size() == 1 and _store.load_data().next_expedition_id == "5", "Post-restart failure changed existing holdings or reset progression.")
 
 
 func _check_existing_record() -> void:

@@ -85,7 +85,7 @@ func _verify(path: String, action: String, after: bool) -> void:
 	if after:
 		selected = action not in ["cancel", "settle", "recover_started"]
 	_expect(hub.get_objective_offer() == (ExpeditionObjective.RULE.offer() if selected else {}), "Restart selection mismatch: " + action)
-	var money := 150 if after and action == "settle" else 100
+	var money := 146 if after and action == "settle" else 100
 	_expect(hub.get_money() == money, "Restart reward lost/duplicated: " + action)
 	var phase := ""
 	if action in ["start", "recover_reserved"]: phase = "reserved"
@@ -101,7 +101,7 @@ func _verify(path: String, action: String, after: bool) -> void:
 	_expect(data.costs.stock + data.costs.carried == stock and data.costs.carried == (stock if not phase.is_empty() else []), "Restart stock lost/duplicated: " + action)
 	if after and action in ["settle", "recover_started"]:
 		var last := hub.get_last_costs()
-		_expect(last.get("profit") == (45 if action == "settle" else -12) and last.get("cash_change") == (50 if action == "settle" else 0), "Restart last report mismatch.")
+		_expect(last.get("profit") == (41 if action == "settle" else -12) and last.get("cash_change") == (46 if action == "settle" else 0), "Restart last report mismatch.")
 		_expect(last.objective.status == ("achieved" if action == "settle" else "interrupted") and last.objective_income == (10 if action == "settle" else 0), "Reward status not saved atomically.")
 		_expect(data.costs.period.opening_money == str(money) and data.costs.period.opening_stock == stock, "Next period not committed with report.")
 		_expect(not hub.apply_settlement(1) and not hub.recover_departure(), "Restart repeated settled transaction.")

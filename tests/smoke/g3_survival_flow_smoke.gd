@@ -45,10 +45,10 @@ func _ready() -> void:
 	_click(_entry.get_node("Interface/TitleScreen/%ContinueButton"))
 	await _frames(5)
 	_expect(GameState.get_current_state() == GameState.State.HUB and FileAccess.get_file_as_bytes(_path) == before_continue, "Continue failed or rewrote saved progress.")
-	_check_holdings(85 if _read_case else 40)
+	_check_holdings(80 if _read_case else 40)
 	if _read_case:
 		await _check_fresh_departure()
-		_cases.append({"case": "fresh_process_continue", "money": 80, "stored_unknown": 1, "fresh_departure": true})
+		_cases.append({"case": "fresh_process_continue", "money": 75, "stored_unknown": 1, "fresh_departure": true})
 	else:
 		await _check_injured_recovery()
 		await _check_emergency_result(false)
@@ -128,8 +128,8 @@ func _check_injured_recovery() -> void:
 	await _frames(5)
 	var outcome := _entry.get_pending_outcome()
 	_expect(outcome != null and outcome.is_safe_return() and outcome.get_return_method() == &"entrance" and outcome.get_recovery_result().get_item_count() == 2 and _health_on_end == 1 and _charge_on_end == 1, "Injured entrance return changed cargo/health/resources.")
-	await _settle(80)
-	_cases.append({"case": "trap_injury_recovery_return", "recovered_items": 2, "health": _health_on_end, "charge": _charge_on_end, "hub_money": 80})
+	await _settle(76)
+	_cases.append({"case": "trap_injury_recovery_return", "recovered_items": 2, "health": _health_on_end, "charge": _charge_on_end, "hub_money": 76})
 
 
 func _check_emergency_result(timeout: bool) -> void:
@@ -183,11 +183,11 @@ func _check_emergency_result(timeout: bool) -> void:
 		_expect(DirAccess.make_dir_absolute(_path + ".tmp") == OK, "Cannot create save-failure fixture.")
 		_click(_entry.get_node("Interface/Results/NextStep/SettleButton"))
 		await _frames(5)
-		_expect(GameState.get_current_state() == GameState.State.RESULTS and _entry.get_pending_outcome() == outcome and _entry.get_hub_money() == 80 and FileAccess.get_file_as_bytes(_path) == before, "Rejected emergency settlement changed holdings or discarded retry.")
+		_expect(GameState.get_current_state() == GameState.State.RESULTS and _entry.get_pending_outcome() == outcome and _entry.get_hub_money() == 76 and FileAccess.get_file_as_bytes(_path) == before, "Rejected emergency settlement changed holdings or discarded retry.")
 		await _capture("g3-review-save-retry.png")
 		_expect(DirAccess.remove_absolute(_path + ".tmp") == OK, "Cannot remove isolated save-failure fixture.")
-	await _settle(90)
-	_cases.append({"case": "escape_timeout" if timeout else "emergency_return_save_retry", "charge": _charge_on_end, "outcomes": _end_count, "hub_money": 90, "stored_unknown": 1})
+	await _settle(85)
+	_cases.append({"case": "escape_timeout" if timeout else "emergency_return_save_retry", "charge": _charge_on_end, "outcomes": _end_count, "hub_money": 85, "stored_unknown": 1})
 
 
 func _settle(expected_money: int) -> void:
@@ -215,7 +215,7 @@ func _check_holdings(expected_money: int) -> void:
 
 func _check_fresh_departure() -> void:
 	_expect(HubRepairTestInput.prepare_departure(_entry) == 5, "Survival loop repair cost changed.")
-	var expected_money := 80 if _read_case else 85
+	var expected_money := 75 if _read_case else 80
 	var world := await _depart()
 	_expect(world.get_node_or_null("EmergencyEscape") == null and world.get_node_or_null("ChangingPassage") == null, "Default departure silently enabled trial events.")
 	_expect(world.get_node("PlayerSurvival").get_injury_remaining() == 0 and world.get_node("Player/HarnessController").get_current_charge() == 3 and world.get_map_state().get_observed_passage_count() == 0, "New departure retained injury, charge or map.")

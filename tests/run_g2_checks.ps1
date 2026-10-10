@@ -207,7 +207,7 @@ function Start-G2Checks {
                 throw "Settings/progress files changed across their independent read paths in $prefix."
             }
             $saved = Get-Content -LiteralPath $progressPath -Raw | ConvertFrom-Json
-            if ($saved.hub.money -cne '30' -or $saved.hub.bag_slots -ne 3 -or $saved.hub.next_expedition_id -cne '5' -or @($saved.hub.stored_items).Count -ne 1) {
+            if ($saved.hub.money -cne '26' -or $saved.hub.bag_slots -ne 3 -or $saved.hub.next_expedition_id -cne '5' -or @($saved.hub.stored_items).Count -ne 1) {
                 throw "Unexpected final progress in $prefix."
             }
             $flows.Add([ordered]@{

@@ -91,7 +91,7 @@ func _verify(path: String, action: String, after: bool) -> void:
 	_expect(hub != null and bytes == FileAccess.get_file_as_bytes(path), "Restart read invalid/modified saved bytes.")
 	if hub == null:
 		return
-	var money: int = {"purchase": 90, "appraisal": 95, "sale": 180, "repair": 95, "upgrade": 40, "settle": 130}.get(action, 100) if after else 100
+	var money: int = {"purchase": 90, "appraisal": 95, "sale": 172, "repair": 95, "upgrade": 40, "settle": 127}.get(action, 100) if after else 100
 	_expect(hub.get_money() == money, "Restart wallet mismatch: " + action)
 	var costs: Dictionary = data.costs
 	var phase := ""
@@ -117,7 +117,7 @@ func _verify(path: String, action: String, after: bool) -> void:
 		_expect(costs.period.bought_costs == (["5", "5"] if after else []), "Restart purchase counter incorrect.")
 	if after and action in ["settle", "recover_started"]:
 		var last := hub.get_last_costs()
-		_expect(last.get("profit") == (25 if action == "settle" else -12) and last.get("cash_change") == (30 if action == "settle" else 0), "Restart last report mismatch.")
+		_expect(last.get("profit") == (22 if action == "settle" else -12) and last.get("cash_change") == (27 if action == "settle" else 0), "Restart last report mismatch.")
 		_expect(costs.period.opening_money == str(money) and costs.period.opening_stock == stock, "Next period not committed with report.")
 		if action == "recover_started":
 			_expect(last.get("paid_used") == -1 and last.get("lost_count") == 2, "Interrupted report guessed use count.")

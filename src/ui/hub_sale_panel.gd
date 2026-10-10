@@ -51,7 +51,7 @@ func set_review(quote: SaleQuote) -> void:
 	if quote == null:
 		_selection_changed()
 		return
-	%SaleStatus.text = "선택 %d개 · 판매 수입 +%d · 판매 후 보유금 %d\n확정하면 선택한 물품을 판매하고 결과를 저장합니다." % [quote.get_count(), quote.get_income(), quote.get_money_after()]
+	%SaleStatus.text = "선택 %d개 · 판매 총액 %d · 회수세 %d (%d%%)\n실제 입금 +%d · 판매 후 보유금 %d\n확정하면 선택한 물품을 판매하고 결과를 저장합니다." % [quote.get_count(), quote.get_income(), quote.get_tax(), quote.get_tax_receipt().rate, quote.get_net_income(), quote.get_money_after()]
 	%ConfirmSale.grab_focus()
 
 

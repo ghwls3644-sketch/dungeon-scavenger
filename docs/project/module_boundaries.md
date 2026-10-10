@@ -8,7 +8,7 @@ canonical_for:
   - source_tree_layout
   - module_responsibilities
   - module_dependency_rules
-last_reviewed: 2026-10-08
+last_reviewed: 2026-10-10
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -430,3 +430,9 @@ DEV-0318~DEV-0319의 즉시 E·후속 상호작용 문구는 당시 이력이다
 [ExpeditionObjectiveRule](../../src/data/expedition_objective_rule.gd)와 [시험 정의](../../src/data/prototype_expedition_objective.tres)는 조건/보상 버전을 소유한다. [ExpeditionObjective](../../src/meta/expedition_objective.gd)는 확인된 비보호 일반 폐품의 자격, 조건/결과 검증과 구형 보완을 맡는다. [HubState](../../src/meta/hub_state.gd)는 선택 약속을 예약 ID에 묶고 정산/복구 후보에서 보상·선택 초기화를 처리한다. SettlementResult는 판매액과 추가 보상을 구분하고 ExpeditionCosts는 보상을 구간 수입에 한 번 더한다.
 
 ProgressStore는 스키마 8·13필드, 구형 1~7의 읽기 보완/원본 보존과 원자적 교체를 맡는다. GameEntry는 실제 저장 성공 뒤에만 거점 상태를 바꾸고 PrototypeExploration은 가방 변화와 귀환 결과를 제공한다. [ObjectiveText](../../src/ui/objective_text.gd)·거점/탐험/정산 화면은 공개 상태를 표시하고 직접 돈이나 자격을 결정하지 않는다. Core의 ExpeditionLoadout이나 Gameplay가 Meta에 의존하도록 바꾸지 않았다. [저장 계약](migration_changes.md#mig-chg-050-dev-0418-거점-선택-의뢰-연결)과 [검사 기록](project_context.md#dev-0418-거점-선택-의뢰-연결-검사)을 따른다.
+
+## DEV-0421 회수세 책임
+
+[EconomyRule](../../src/data/economy_rule.gd)은 명시적 시험 요율과 유효성만 소유하며 Data에서 Meta에 의존하지 않는다. [RecoveryTax](../../src/meta/recovery_tax.gd)는 정확한 정수 세액·거래 근거/구형 모양 검증을 담당한다. SaleQuote와 SettlementResult는 판매 총액/요율/세금/입금을 복사하고 HubState는 현재 견적 재대조·후보 지갑/물품/비용 기록을 만든다. ExpeditionCosts는 거래별 실제 세금의 합·손익/현금/최근 보고를 검증하며 돈을 직접 움직이지 않는다.
+
+ProgressStore는 스키마 9·거점 13필드·구형 1~8의 순서 있는 읽기 전환·정수 정규화·16 MiB 한도·원자적 교체를 담당한다. GameEntry는 저장 성공 뒤 상태 교체와 오래된 가격/세율의 재확인을 조정한다. 판매 UI와 CostReportText는 공개 견적/요약만 표시한다. [저장 계약](migration_changes.md#mig-chg-053-dev-0421-회수세-정산보고-연결), [시험 적용](../design/recovery_tax.md#dev-0421-회수세-시험-적용), [검사 기록](project_context.md#dev-0421-회수세-정산보고-연결-검사)을 따른다. 이전 스키마 6~8 절은 해당 작업 당시 이력이다.

@@ -50,23 +50,24 @@ func _ready() -> void:
 	await _open_cost_app()
 	_expect(_store.load_data().objective == ExpeditionObjective.RULE.offer() and _entry.get_hub_money() == 90, "App reload lost selected conditions or repurchased supply.")
 	await _objective_route(false)
-	_expect(_results.get_node("NextStep/NetIncome").text.ends_with("+45") and "현금 변화 +40" in _results.get_node("NextStep/Totals").text, "Bonus included incorrectly in actual cost report.")
+	await _check_tax_reconfirmation()
+	_expect(_results.get_node("NextStep/NetIncome").text.ends_with("+41") and "현금 변화 +36" in _results.get_node("NextStep/Totals").text, "Bonus included incorrectly in actual cost report.")
 	await _settle_lures(1, true)
-	_expect(_entry.get_hub_money() == 140 and _store.load_data().objective.is_empty(), "Settlement retry duplicated reward or reselected.")
+	_expect(_entry.get_hub_money() == 136 and _store.load_data().objective.is_empty(), "Settlement retry duplicated reward or reselected.")
 	_entry.queue_free()
 	await _frames(3)
 	await _open_cost_app()
 	await _cost_tab("restored-reward", "의뢰 달성 2/2 · 추가 보상 10")
-	_expect(_entry.get_hub_money() == 140, "Reload credited reward twice.")
+	_expect(_entry.get_hub_money() == 136, "Reload credited reward twice.")
 	await _choose_lures(2)
 	await _choose_objective(true)
 	await _objective_route(true)
 	_expect("의뢰 미달성 1/2 · 보상 0" in _results.get_node("NextStep/Items").text, "Dropped item still satisfied objective.")
 	await _settle_lures(1)
-	_expect(_entry.get_hub_money() == 170, "Missed objective suppressed normal sale.")
+	_expect(_entry.get_hub_money() == 163, "Missed objective suppressed normal sale.")
 	await _choose_objective(true)
 	await _depart_return_lures(true, 1)
-	_expect(_store.load_data().costs.last.objective.count == 0 and _store.load_data().objective.is_empty() and _entry.get_hub_money() == 170, "Failure paid reward or retained selection.")
+	_expect(_store.load_data().costs.last.objective.count == 0 and _store.load_data().objective.is_empty() and _entry.get_hub_money() == 163, "Failure paid reward or retained selection.")
 	await _cost_tab("failed-objective", "의뢰 미달성 · 탐험 실패 · 보상 0")
 	# Free exploration remains available after failure and the usual minimum repair.
 	await _depart_return_lures(false, 1)
@@ -169,3 +170,16 @@ func _objective_route(drop_light: bool) -> void:
 	await _frames(5)
 	_expect(_entry.get_pending_outcome() != null, "Objective run did not return.")
 	await _cost_result_capture("missed" if drop_light else "achieved")
+
+
+func _check_tax_reconfirmation() -> void:
+	var rule := load("res://src/data/prototype_economy.tres") as EconomyRule
+	var before := FileAccess.get_file_as_bytes(_path)
+	var money := _entry.get_hub_money()
+	for percent in [20, 10]:
+		rule.recovery_tax_percent = percent
+		_click(_results.get_node("NextStep/SettleButton"))
+		await _frames(3)
+		_expect(GameState.get_current_state() == GameState.State.RESULTS and _entry.get_hub_money() == money and before == FileAccess.get_file_as_bytes(_path), "Changed tax preview committed without new confirmation.")
+		_expect("다시 정산" in _results.get_node("NextStep/Notice").text and "회수세 %d" % (8 if percent == 20 else 4) in _results.get_node("NextStep/Items").text, "Refreshed tax notice omitted changed amount.")
+		await _cost_result_capture("tax-reconfirm-%d" % percent)

@@ -26,14 +26,14 @@ func _items(count: int) -> Array[InventoryItem]:
 	return items
 
 
-func _finish_objective(hub: HubState, count: int, used := 0, failure := false, emergency := false) -> Dictionary:
+func _finish_objective(hub: HubState, count: int, used := 0, failure := false, emergency := false, rule: EconomyRule = ECONOMY) -> Dictionary:
 	var offer := hub.get_objective_offer()
 	var id := hub.reserve_departure()
 	_expect(id > 0 and hub.mark_departure_started(id), "Cannot start objective run.")
 	_expect(not hub.select_objective({}, hub.to_progress_data()), "Started run changed its offer.")
 	var outcome := ExplorationOutcome.failure(count) if failure else ExplorationOutcome.safe_return_inventory_items(_items(count), &"emergency" if emergency else &"entrance")
 	outcome.record_lure_usage(hub.create_departure_loadout().lure_count, used)
-	if not hub.prepare_settlement(id, outcome, ECONOMY):
+	if not hub.prepare_settlement(id, outcome, rule):
 		_expect(false, "Objective settlement rejected.")
 		return {}
 	var pending := hub.get_pending_settlement()
@@ -82,7 +82,7 @@ func _check_objective_domain() -> void:
 				if selected_offer: _select(hub)
 				var result := _finish_objective(hub, count, 0, outcome == "failure", outcome == "emergency")
 				var sales := (30 + (count - 1) * 10) if count > 0 and outcome != "failure" else 0
-				_expect(result.get("loot_income") == sales and result.get("profit") == sales + (10 if selected_offer and count >= 2 and outcome != "failure" else 0), "Outcome matrix lost normal proceeds or awarded incorrectly.")
+				_expect(result.get("loot_income") == sales and result.get("profit") == sales - RecoveryTax.amount(sales, 10) + (10 if selected_offer and count >= 2 and outcome != "failure" else 0), "Outcome matrix lost normal proceeds or awarded incorrectly.")
 				_cases += 1
 	# Older hub holdings do not satisfy a new objective.
 	var data := _hub().to_save_data()
@@ -91,7 +91,7 @@ func _check_objective_domain() -> void:
 	_select(hub)
 	_expect(hub.apply_sale(hub.quote_sale(PackedInt32Array([0]), ECONOMY), ECONOMY), "Cannot sell older stock.")
 	var result := _finish_objective(hub, 1)
-	_expect(result.objective_income == 0 and result.profit == 40, "Older stock counted for objective.")
+	_expect(result.objective_income == 0 and result.profit == 36, "Older stock counted for objective.")
 	hub = _hub(100, [""])
 	_select(hub)
 	_buy(hub, 3)
@@ -120,6 +120,7 @@ func _check_objective_domain() -> void:
 	data.money = str(ExpeditionCosts.LIMIT - 60)
 	data.costs.period.opening_money = "0"
 	data.costs.period.storage_income = str(ExpeditionCosts.LIMIT - 5)
+	data.costs.period.tax_legacy_income = str(ExpeditionCosts.LIMIT - 5)
 	data.costs.period.repair_paid = "55"
 	hub = HubState.from_save_data(data, CATALOG)
 	_select(hub)
@@ -136,9 +137,9 @@ func _check_objective_examples() -> void:
 			_expect(hub.apply_harness_upgrade(hub.quote_harness_upgrade(HarnessUpgradeRule.OBSERVATION, UPGRADES), UPGRADES), "Example upgrade failed.")
 		if index in [2, 4, 5]: _buy(hub, 4)
 		var result := _finish_objective(hub, 1 if index == 3 else 2, 3 if index in [2, 4, 5] else 0, index == 4)
-		var expected: Array = [[40, 40, 40], [50, 50, 50], [45, 40, 50], [30, 30, 30], [-10, -10, 0], [40, -25, 50]][index]
-		_expect(result.profit == expected[0] and result.cash_change == expected[1] and result.loot_income + result.objective_income == expected[2], "Documented objective example mismatch.")
-		_examples.append({"profit": result.profit, "cash_change": result.cash_change, "settlement_credit": result.loot_income + result.objective_income})
+		var expected: Array = [[36, 36, 36], [46, 46, 46], [41, 36, 46], [27, 27, 27], [-10, -10, 0], [36, -29, 46]][index]
+		_expect(result.profit == expected[0] and result.cash_change == expected[1] and result.settlement_credit == expected[2], "Documented objective example mismatch.")
+		_examples.append({"profit": result.profit, "cash_change": result.cash_change, "settlement_credit": result.settlement_credit})
 
 
 func _check_objective_storage() -> void:
@@ -147,12 +148,21 @@ func _check_objective_storage() -> void:
 	# Older migrations are exercised by the inherited cost suite; schema 7 must preserve its actual report.
 	for journal in ["none", "reserved", "started", "settled"]:
 		var hub := _hub()
-		if journal == "settled": _finish_objective(hub, 2)
+		if journal == "settled":
+			var legacy_rule := ECONOMY.duplicate() as EconomyRule
+			legacy_rule.recovery_tax_percent = 0
+			_finish_objective(hub, 2, 0, false, false, legacy_rule)
 		elif journal != "none":
 			var id := hub.reserve_departure()
 			if journal == "started": hub.mark_departure_started(id)
 		var old := hub.to_progress_data()
 		old.erase("objective")
+		old.costs.period.erase("tax_sales")
+		old.costs.period.erase("tax_legacy_income")
+		if not old.costs.last.is_empty():
+			old.costs.last.period.erase("tax_sales")
+			old.costs.last.period.erase("tax_legacy_income")
+			old.costs.last.erase("loot_tax")
 		if not old.costs.last.is_empty(): old.costs.last.erase("objective")
 		_write(path, _envelope(old, 7))
 		var bytes := FileAccess.get_file_as_bytes(path)
@@ -186,6 +196,6 @@ func _check_objective_storage() -> void:
 		_expect(store.load_data().is_empty() and HubState.from_save_data(bad, CATALOG) == null and store.save_data(valid) != OK and bytes == FileAccess.get_file_as_bytes(path), "Invalid/unsupported objective accepted or overwritten.")
 	_expect(store.save_data(hub.to_save_data(), true) == OK, "Cannot save completed objective.")
 	var resumed := HubState.from_save_data(store.load_data(), CATALOG)
-	_expect(resumed.get_money() == 150 and resumed.get_objective_offer().is_empty() and not resumed.apply_settlement(1), "Reload paid reward twice or reselected.")
+	_expect(resumed.get_money() == 146 and resumed.get_objective_offer().is_empty() and not resumed.apply_settlement(1), "Reload paid reward twice or reselected.")
 	_select(resumed)
 	_expect(resumed.reserve_departure() == 2, "Reselection reused old settlement id.")

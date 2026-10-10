@@ -17,12 +17,16 @@ static func details(summary: Dictionary) -> String:
 		"기록 시작 이후의 거래입니다." if summary.partial else "직전 정산 뒤 준비부터 이번 정산까지",
 		"수입 %d · 이번 회수품 %d / 거점 보관품 %d" % [summary.income, summary.loot_income, summary.storage_income],
 		ObjectiveText.result(summary.objective),
+		"회수세 %d · 이번 판매 %d / 거점 판매 %d" % [summary.recovery_tax, summary.loot_tax_paid, summary.storage_tax],
+		"이번 정산 입금 +%d · 의뢰 보상은 전액 지급" % summary.settlement_credit,
 		"감정 지불 %d · 수리 지불 %d" % [summary.appraisal_paid, summary.repair_paid],
 		"도구 사용 원가 %s" % _cost(summary.used_cost, summary.used_unknown),
 		"%s 원가 %s" % ["종료로 휴대분 소실" if summary.outcome == "interrupted" else "미사용 도구 소실", _cost(summary.lost_cost, summary.lost_unknown)],
 		"새 도구 구매 %d · 영구 개선 투자 %d" % [summary.lure_bought, summary.upgrade_paid],
-		"위 지출은 이미 지불했습니다. 다시 차감하지 않습니다.",
+		"거점 지출은 이미 반영됐습니다. 이번 회수세는 정산 입금에서 한 번 뺍니다.",
 	])
+	if summary.tax_legacy:
+		lines.append("회수세 도입 전 판매 %d · 과거 세금을 소급하지 않습니다." % summary.untaxed_income)
 	if summary.outcome == "interrupted":
 		lines.append("미정산 종료 · 휴대 추가분 %d개 소실\n사용 횟수는 기록되지 않았습니다." % summary.lost_count)
 	else:
@@ -40,6 +44,9 @@ static func preparation(summary: Dictionary, last: Dictionary) -> String:
 		summary.opening_money, summary.cash_change, summary.storage_income,
 		summary.appraisal_paid, summary.repair_paid, summary.lure_bought, summary.upgrade_paid, summary.stock.size(),
 	]
+	text += "\n거점 판매 회수세 %d · 입금에 이미 반영" % summary.storage_tax
+	if summary.tax_legacy:
+		text += "\n회수세 도입 전 판매 %d · 소급 없음" % summary.untaxed_income
 	if summary.stock.count("") > 0:
 		text += " · 원가 미기록 %d개" % summary.stock.count("")
 	text += "\n구매와 소모 비용은 다릅니다.\n수리 견적은 지불하기 전까지 제외합니다."

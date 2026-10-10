@@ -136,7 +136,7 @@ func _ready() -> void:
 
 
 func _check_settlement_and_redeparture(entry: GameEntry, hub: HubPanel, slots: int, failed: bool) -> void:
-	var money := 0 if failed else 40
+	var money := 0 if failed else 36
 	var stored_count := 1 if not failed and slots == 3 else 0
 	var results: ExpeditionResultsScreen = entry.get_node("Interface/Results")
 	_expect(entry.get_hub_money() == 0 and entry.get_hub_stored_items().is_empty(), "Result preview already changed hub holdings.")

@@ -232,7 +232,7 @@ func _recover_current_items() -> void:
 	await _frames(5)
 	_click(_entry.get_node("Interface/Results/NextStep/SettleButton"))
 	await _frames(5)
-	_expect(_entry.get_hub_money() == 45 and _entry.get_hub_stored_items().size() == 4, "Real recovery/settlement did not retain prior appraisal and new unknown.")
+	_expect(_entry.get_hub_money() == 41 and _entry.get_hub_stored_items().size() == 4, "Real recovery/settlement did not retain prior appraisal and new unknown.")
 
 
 func _empty_departure() -> void:
@@ -240,7 +240,7 @@ func _empty_departure() -> void:
 	await _frames(5)
 	var world: PrototypeExploration = _entry.get_node("PrototypeExploration")
 	_panel.confirmation_requested.emit()
-	_expect(world.get_node("Player/Inventory").get_used_slots() == 0 and _entry.get_hub_money() == 30, "Fresh expedition carried storage or applied hidden appraisal.")
+	_expect(world.get_node("Player/Inventory").get_used_slots() == 0 and _entry.get_hub_money() == 26, "Fresh expedition carried storage or applied hidden appraisal.")
 	await _walk(world.get_node("Player"), Vector2(-720, 0))
 	_press_key(KEY_E)
 	await _frames(5)
@@ -249,10 +249,10 @@ func _empty_departure() -> void:
 
 
 func _check_final_holdings() -> void:
-	_expect(_entry.get_hub_money() == 30 and _entry.get_hub_stored_items().size() == 4, "Final money/storage incorrect.")
+	_expect(_entry.get_hub_money() == 26 and _entry.get_hub_stored_items().size() == 4, "Final money/storage incorrect.")
 	for item in _entry.get_hub_stored_items():
 		_expect(item.is_identified() and item.get_definition().stable_id == &"test_g1_unknown", "Saved appraisal state lost.")
-	_expect(_store.load_data().money == "30" and _store.load_data().size() == 13, "Saved money or existing schema changed.")
+	_expect(_store.load_data().money == "26" and _store.load_data().size() == 13, "Saved money or existing schema changed.")
 	for raw_item in _store.load_data().stored_items:
 		_expect(raw_item.identified, "File did not preserve identification.")
 

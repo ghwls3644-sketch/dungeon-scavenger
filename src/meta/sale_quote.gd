@@ -8,14 +8,16 @@ var _indices: PackedInt32Array
 var _prices: Array[int]
 var _income: int
 var _money_after: int
+var _tax: Dictionary
 
 
-func _init(source: Dictionary, indices: PackedInt32Array, prices: Array[int], income: int, money_after: int) -> void:
+func _init(source: Dictionary, indices: PackedInt32Array, prices: Array[int], income: int, money_after: int, tax: Dictionary) -> void:
 	_source = source.duplicate(true)
 	_indices = indices.duplicate()
 	_prices = prices.duplicate()
 	_income = income
 	_money_after = money_after
+	_tax = tax.duplicate(true)
 
 
 static func get_item_status(item: InventoryItem, rule: EconomyRule) -> Status:
@@ -53,5 +55,17 @@ func get_money_after() -> int:
 	return _money_after
 
 
-func matches(source: Dictionary, prices: Array[int]) -> bool:
-	return not source.is_empty() and source == _source and prices == _prices
+func get_tax_receipt() -> Dictionary:
+	return _tax.duplicate(true)
+
+
+func get_tax() -> int:
+	return _tax.paid.to_int()
+
+
+func get_net_income() -> int:
+	return _income - get_tax()
+
+
+func matches(source: Dictionary, other: SaleQuote) -> bool:
+	return not source.is_empty() and source == _source and other != null and other.get_prices() == _prices and other.get_tax_receipt() == _tax and other.get_money_after() == _money_after

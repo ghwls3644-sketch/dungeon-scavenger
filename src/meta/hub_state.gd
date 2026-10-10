@@ -235,18 +235,20 @@ func quote_sale(indices: PackedInt32Array, rule: EconomyRule) -> SaleQuote:
 		income += price
 		prices.append(price)
 		previous = index
-	if income > 9223372036854775807 - _money or _paid_lures + _return_paid_lures > LurePreparation.RULE.stock_limit:
+	var tax := RecoveryTax.receipt(income, rule.recovery_tax_percent)
+	var net := income - int(tax.paid)
+	if net > 9223372036854775807 - _money or ExpeditionCosts.record_sale(_costs, tax).is_empty():
 		return null
-	return SaleQuote.new(source, selected, prices, income, _money + income)
+	return SaleQuote.new(source, selected, prices, income, _money + net, tax)
 
 
 func apply_sale(quote: SaleQuote, rule: EconomyRule) -> bool:
 	if quote == null:
 		return false
 	var checked := quote_sale(quote.get_indices(), rule)
-	if checked == null or not quote.matches(to_save_data(), checked.get_prices()):
+	if checked == null or not quote.matches(to_save_data(), checked):
 		return false
-	var costs := ExpeditionCosts.trade(_costs, "storage_income", checked.get_income())
+	var costs := ExpeditionCosts.record_sale(_costs, checked.get_tax_receipt())
 	if costs.is_empty():
 		return false
 	_costs = costs
@@ -254,7 +256,7 @@ func apply_sale(quote: SaleQuote, rule: EconomyRule) -> bool:
 	selected.reverse()
 	for index in selected:
 		_stored_items.remove_at(index)
-	_money += checked.get_income()
+	_money += checked.get_net_income()
 	return true
 
 
@@ -407,8 +409,8 @@ static func _read_nonnegative_integer(value: Variant) -> int:
 	return LurePreparation.read_nonnegative_integer(value)
 
 
-func prepare_settlement(expedition_id: int, outcome: ExplorationOutcome, rule: EconomyRule) -> bool:
-	if expedition_id <= 0 or expedition_id != _active_expedition_id or _pending_settlement != null:
+func prepare_settlement(expedition_id: int, outcome: ExplorationOutcome, rule: EconomyRule, refresh: bool = false) -> bool:
+	if expedition_id <= 0 or expedition_id != _active_expedition_id or (_pending_settlement != null and not refresh):
 		return false
 	var returned := 0
 	var free_used := 0
@@ -428,7 +430,7 @@ func prepare_settlement(expedition_id: int, outcome: ExplorationOutcome, rule: E
 	var count := ExpeditionObjective.eligible_count(outcome.get_recovery_result().get_recovered_inventory_items()) if outcome.is_safe_return() else 0
 	if not settlement.set_objective(ExpeditionObjective.result(_objective, count)):
 		return false
-	var report := ExpeditionCosts.make_report(_costs, expedition_id, "failure" if outcome.is_failure() else "safe", settlement.get_sales_income(), free_used, paid_used, settlement.get_objective_result())
+	var report := ExpeditionCosts.make_report(_costs, expedition_id, "failure" if outcome.is_failure() else "safe", settlement.get_sales_income(), free_used, paid_used, settlement.get_objective_result(), settlement.get_tax_receipt())
 	if not settlement.set_cost_report(report):
 		return false
 	_return_paid_lures = returned
@@ -443,11 +445,13 @@ func get_pending_settlement() -> SettlementResult:
 func apply_settlement(expedition_id: int) -> bool:
 	if expedition_id <= 0 or expedition_id != _active_expedition_id or _pending_settlement == null:
 		return false
+	if not _pending_settlement.matches_current_rule():
+		return false
 	var income := _pending_settlement.get_net_income()
 	if income > 9223372036854775807 - _money or _paid_lures + _return_paid_lures > LurePreparation.RULE.stock_limit:
 		return false
 	var costs := ExpeditionCosts.finish(_pending_settlement.get_cost_report())
-	if costs.is_empty() or costs.stock.size() != _paid_lures + _return_paid_lures:
+	if costs.is_empty() or costs.stock.size() != _paid_lures + _return_paid_lures or costs.period.opening_money != str(_money + income):
 		return false
 	var retained := _pending_settlement.get_retained_items()
 	for id in _pending_settlement.get_harness_upgrades():

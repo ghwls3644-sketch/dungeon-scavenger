@@ -13,6 +13,9 @@ var _harness_upgrades: Array[String] = []
 var _cost_report: Dictionary = {}
 var _objective_result: Dictionary = {}
 var _objective_income := 0
+var _tax: Dictionary = {}
+var _rule: EconomyRule
+var _prices: Dictionary = {}
 
 
 static func from_outcome(
@@ -22,6 +25,9 @@ static func from_outcome(
 	if outcome == null or rule == null or not rule.is_valid():
 		return null
 	var result := SettlementResult.new()
+	result._rule = rule
+	result._prices = rule.base_prices.duplicate()
+	result._tax = RecoveryTax.receipt(0, rule.recovery_tax_percent)
 	result._failure = outcome.is_failure()
 	result._lost_count = outcome.get_lost_item_count()
 	if wear_rule != null:
@@ -51,6 +57,8 @@ static func from_outcome(
 			return null
 		result._sales.append({"item_id": definition.stable_id, "name": definition.display_name, "amount": price})
 		result._total_income += price
+	result._tax = RecoveryTax.receipt(result._total_income, rule.recovery_tax_percent)
+	result._total_cost = result._tax.paid.to_int()
 	# Hub appraisal is charged/saved separately when explicitly confirmed.
 	# Wear is not a repair payment. Do not charge an unconfirmed service here.
 	return result
@@ -86,7 +94,7 @@ func get_net_income() -> int:
 
 func set_cost_report(report: Dictionary) -> bool:
 	if not _cost_report.is_empty() or ExpeditionCosts.report_summary(report).is_empty() \
-			or report.objective != get_objective_result() or ExpeditionCosts.number(report.loot_income) != _total_income:
+			or report.objective != get_objective_result() or ExpeditionCosts.number(report.loot_income) != _total_income or report.loot_tax != _tax:
 		return false
 	_cost_report = report.duplicate(true)
 	return true
@@ -132,3 +140,16 @@ func set_objective(value: Dictionary) -> bool:
 
 func get_objective_result() -> Dictionary:
 	return _objective_result.duplicate(true) if not _objective_result.is_empty() else ExpeditionObjective.result({})
+
+
+func get_tax_receipt() -> Dictionary:
+	return _tax.duplicate(true)
+
+
+func matches_current_rule() -> bool:
+	if _rule == null or not _rule.is_valid() or _tax.is_empty() or _tax.rate != _rule.recovery_tax_percent or _prices != _rule.base_prices:
+		return false
+	for sale in _sales:
+		if not _rule.has_price(sale.item_id) or _rule.get_price(sale.item_id) != sale.amount:
+			return false
+	return true

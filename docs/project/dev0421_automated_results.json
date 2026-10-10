@@ -1,0 +1,3600 @@
+{
+  "report_version": 1,
+  "scope": "DEV-0421 회수세 정산·보고 연결",
+  "started_at_utc": "2026-10-10T04:50:32.6780735Z",
+  "repository_commit": "aef0d2b85e4284665ec605ca8769013a3183b35e",
+  "source_tree_sha256": "29d190874f93e8d3edbdeae7b55774acbe5d5b790a7a4816dadb425244c050ae",
+  "requested_repetitions": 1,
+  "completed_repetitions": 1,
+  "certificate_exception_enabled": false,
+  "passed": true,
+  "failure": null,
+  "checks": [
+    {
+      "name": "engine-version",
+      "arguments": [
+        "--version"
+      ],
+      "expected_pattern": "^4\\.7\\.1\\.stable\\.",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 124,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "engine-version.console.log"
+    },
+    {
+      "name": "project-import",
+      "arguments": [
+        "--editor",
+        "--quit"
+      ],
+      "expected_pattern": "Godot Engine v4\\.7\\.1\\.stable\\.",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 7478,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "project-import.console.log"
+    },
+    {
+      "name": "round-1-broken_guard_golem_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/broken_guard_golem_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] broken_guard_golem_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 527,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-broken_guard_golem_smoke.console.log"
+    },
+    {
+      "name": "round-1-core_loop_playtest_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/core_loop_playtest_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] core_loop_playtest_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 994,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-core_loop_playtest_smoke.console.log"
+    },
+    {
+      "name": "round-1-cost_boundary_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/cost_boundary_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] cost_boundary_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1145,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-cost_boundary_smoke.console.log"
+    },
+    {
+      "name": "round-1-cost_flow_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/cost_flow_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] cost_flow_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 3418,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-cost_flow_smoke.console.log"
+    },
+    {
+      "name": "round-1-door_hold_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/door_hold_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] door_hold_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2109,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-door_hold_smoke.console.log"
+    },
+    {
+      "name": "round-1-emergency_escape_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/emergency_escape_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] emergency_escape_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 5490,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-emergency_escape_smoke.console.log"
+    },
+    {
+      "name": "round-1-equipment_wear_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/equipment_wear_smoke.tscn",
+        "--",
+        "--wear-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-g2-20261010-045032-b7d372853780437980552aeb205809a5\\round-1-wear-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] equipment_wear_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 4738,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-equipment_wear_smoke.console.log"
+    },
+    {
+      "name": "round-1-expedition_costs_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/expedition_costs_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] expedition_costs_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 913,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-expedition_costs_smoke.console.log"
+    },
+    {
+      "name": "round-1-expedition_objective_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/expedition_objective_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] expedition_objective_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 978,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-expedition_objective_smoke.console.log"
+    },
+    {
+      "name": "round-1-exploration_end_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/exploration_end_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] exploration_end_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 620,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-exploration_end_smoke.console.log"
+    },
+    {
+      "name": "round-1-exploration_map_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/exploration_map_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] exploration_map_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1479,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-exploration_map_smoke.console.log"
+    },
+    {
+      "name": "round-1-g1_integration_playtest_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/g1_integration_playtest_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] g1_integration_playtest_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 3025,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-g1_integration_playtest_smoke.console.log"
+    },
+    {
+      "name": "round-1-g3_exploration_flow_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/g3_exploration_flow_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] g3_exploration_flow_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 4107,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-g3_exploration_flow_smoke.console.log"
+    },
+    {
+      "name": "round-1-g3_survival_flow_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/g3_survival_flow_smoke.tscn",
+        "--",
+        "--review-progress-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-g2-20261010-045032-b7d372853780437980552aeb205809a5\\round-1-survival-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] g3_survival_flow_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 5440,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-g3_survival_flow_smoke.console.log"
+    },
+    {
+      "name": "round-1-game_state_flow_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/game_state_flow_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] state_flow_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 350,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-game_state_flow_smoke.console.log"
+    },
+    {
+      "name": "round-1-golem_contact_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/golem_contact_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] golem_contact_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 3234,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-golem_contact_smoke.console.log"
+    },
+    {
+      "name": "round-1-golem_sight_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/golem_sight_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] golem_sight_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1656,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-golem_sight_smoke.console.log"
+    },
+    {
+      "name": "round-1-harness_actions_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/harness_actions_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] harness_actions_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 761,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-harness_actions_smoke.console.log"
+    },
+    {
+      "name": "round-1-hazard_harness_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hazard_harness_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hazard_harness_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 631,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-hazard_harness_smoke.console.log"
+    },
+    {
+      "name": "round-1-hub_appraisal_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_appraisal_smoke.tscn",
+        "--",
+        "--appraisal-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-g2-20261010-045032-b7d372853780437980552aeb205809a5\\round-1-appraisal-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_appraisal_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 3414,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-hub_appraisal_smoke.console.log"
+    },
+    {
+      "name": "round-1-hub_departure_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_departure_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_departure_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 3405,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-hub_departure_smoke.console.log"
+    },
+    {
+      "name": "round-1-hub_harness_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_harness_smoke.tscn",
+        "--",
+        "--harness-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-g2-20261010-045032-b7d372853780437980552aeb205809a5\\round-1-harness-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_harness_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 5408,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-hub_harness_smoke.console.log"
+    },
+    {
+      "name": "round-1-hub_registration_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_registration_smoke.tscn",
+        "--",
+        "--registration-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-g2-20261010-045032-b7d372853780437980552aeb205809a5\\round-1-registration-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_registration_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 3461,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-hub_registration_smoke.console.log"
+    },
+    {
+      "name": "round-1-hub_repair_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_repair_smoke.tscn",
+        "--",
+        "--repair-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-g2-20261010-045032-b7d372853780437980552aeb205809a5\\round-1-repair-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_repair_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2769,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-hub_repair_smoke.console.log"
+    },
+    {
+      "name": "round-1-hub_research_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_research_smoke.tscn",
+        "--",
+        "--research-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-g2-20261010-045032-b7d372853780437980552aeb205809a5\\round-1-research-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_research_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2941,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-hub_research_smoke.console.log"
+    },
+    {
+      "name": "round-1-hub_sale_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_sale_smoke.tscn",
+        "--",
+        "--sale-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-g2-20261010-045032-b7d372853780437980552aeb205809a5\\round-1-sale-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_sale_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2990,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-hub_sale_smoke.console.log"
+    },
+    {
+      "name": "round-1-hub_upgrade_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_upgrade_smoke.tscn",
+        "--",
+        "--upgrade-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-g2-20261010-045032-b7d372853780437980552aeb205809a5\\round-1-upgrade-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_upgrade_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 5636,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-hub_upgrade_smoke.console.log"
+    },
+    {
+      "name": "round-1-inspection_unidentified_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/inspection_unidentified_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] inspection_unidentified_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 623,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-inspection_unidentified_smoke.console.log"
+    },
+    {
+      "name": "round-1-interaction_system_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/interaction_system_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] interaction_system_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 530,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-interaction_system_smoke.console.log"
+    },
+    {
+      "name": "round-1-interaction_timing_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/interaction_timing_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] interaction_timing_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2395,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-interaction_timing_smoke.console.log"
+    },
+    {
+      "name": "round-1-inventory_system_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/inventory_system_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] inventory_system_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 621,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-inventory_system_smoke.console.log"
+    },
+    {
+      "name": "round-1-item_category_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/item_category_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] item_category_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1173,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-item_category_smoke.console.log"
+    },
+    {
+      "name": "round-1-load_movement_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/load_movement_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] load_movement_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1371,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-load_movement_smoke.console.log"
+    },
+    {
+      "name": "round-1-lure_departure_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/lure_departure_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] lure_departure_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2203,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-lure_departure_smoke.console.log"
+    },
+    {
+      "name": "round-1-lure_preparation_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/lure_preparation_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] lure_preparation_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 3218,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-lure_preparation_smoke.console.log"
+    },
+    {
+      "name": "round-1-malfunctioning_trap_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/malfunctioning_trap_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] malfunctioning_trap_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2328,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-malfunctioning_trap_smoke.console.log"
+    },
+    {
+      "name": "round-1-map_clue_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/map_clue_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] map_clue_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1301,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-map_clue_smoke.console.log"
+    },
+    {
+      "name": "round-1-map_marker_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/map_marker_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] map_marker_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1107,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-map_marker_smoke.console.log"
+    },
+    {
+      "name": "round-1-map_passage_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/map_passage_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] map_passage_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1176,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-map_passage_smoke.console.log"
+    },
+    {
+      "name": "round-1-movement_noise_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/movement_noise_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] movement_noise_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1178,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-movement_noise_smoke.console.log"
+    },
+    {
+      "name": "round-1-noise_lure_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/noise_lure_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] noise_lure_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1521,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-noise_lure_smoke.console.log"
+    },
+    {
+      "name": "round-1-objective_boundary_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/objective_boundary_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] objective_boundary_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1163,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-objective_boundary_smoke.console.log"
+    },
+    {
+      "name": "round-1-objective_flow_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/objective_flow_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] objective_flow_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 4281,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-objective_flow_smoke.console.log"
+    },
+    {
+      "name": "round-1-player_movement_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/player_movement_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] player_movement_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 591,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-player_movement_smoke.console.log"
+    },
+    {
+      "name": "round-1-player_survival_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/player_survival_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] player_survival_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 3856,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-player_survival_smoke.console.log"
+    },
+    {
+      "name": "round-1-progress_save_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/progress_save_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] progress_save_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2114,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-progress_save_smoke.console.log"
+    },
+    {
+      "name": "round-1-quick_drop_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/quick_drop_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] quick_drop_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2028,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-quick_drop_smoke.console.log"
+    },
+    {
+      "name": "round-1-recovery_result_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/recovery_result_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] recovery_result_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 510,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-recovery_result_smoke.console.log"
+    },
+    {
+      "name": "round-1-recovery_tax_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/recovery_tax_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] recovery_tax_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1473,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-recovery_tax_smoke.console.log"
+    },
+    {
+      "name": "round-1-remaining_zone_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/remaining_zone_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] remaining_zone_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2133,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-remaining_zone_smoke.console.log"
+    },
+    {
+      "name": "round-1-retreat_route_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/retreat_route_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] retreat_route_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 3378,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-retreat_route_smoke.console.log"
+    },
+    {
+      "name": "round-1-return_route_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/return_route_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] return_route_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1775,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-return_route_smoke.console.log"
+    },
+    {
+      "name": "round-1-settings_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/settings_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] settings_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2253,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-settings_smoke.console.log"
+    },
+    {
+      "name": "round-1-settlement_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/settlement_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] settlement_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 891,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-settlement_smoke.console.log"
+    },
+    {
+      "name": "round-1-title_screen_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/title_screen_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] title_screen_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1896,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-title_screen_smoke.console.log"
+    },
+    {
+      "name": "round-1-value_comparison_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/value_comparison_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] value_comparison_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1577,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-value_comparison_smoke.console.log"
+    },
+    {
+      "name": "round-1-survival-continue",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/g3_survival_flow_smoke.tscn",
+        "--",
+        "--review-continue",
+        "--review-progress-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-g2-20261010-045032-b7d372853780437980552aeb205809a5\\round-1-survival-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] g3_survival_flow_passed continue",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2318,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-survival-continue.console.log"
+    },
+    {
+      "name": "round-1-appraisal-continue",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_appraisal_smoke.tscn",
+        "--",
+        "--appraisal-continue",
+        "--appraisal-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-g2-20261010-045032-b7d372853780437980552aeb205809a5\\round-1-appraisal-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_appraisal_passed continue",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2217,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-appraisal-continue.console.log"
+    },
+    {
+      "name": "round-1-sale-continue",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_sale_smoke.tscn",
+        "--",
+        "--sale-continue",
+        "--sale-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-g2-20261010-045032-b7d372853780437980552aeb205809a5\\round-1-sale-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_sale_passed continue",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2234,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-sale-continue.console.log"
+    },
+    {
+      "name": "round-1-registration-continue",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_registration_smoke.tscn",
+        "--",
+        "--registration-continue",
+        "--registration-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-g2-20261010-045032-b7d372853780437980552aeb205809a5\\round-1-registration-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_registration_passed continue",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2220,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-registration-continue.console.log"
+    },
+    {
+      "name": "round-1-research-continue",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_research_smoke.tscn",
+        "--",
+        "--research-continue",
+        "--research-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-g2-20261010-045032-b7d372853780437980552aeb205809a5\\round-1-research-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_research_passed continue",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2397,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-research-continue.console.log"
+    },
+    {
+      "name": "round-1-upgrade-continue",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_upgrade_smoke.tscn",
+        "--",
+        "--upgrade-case=continue",
+        "--upgrade-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-g2-20261010-045032-b7d372853780437980552aeb205809a5\\round-1-upgrade-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_upgrade_passed continue",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2594,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-upgrade-continue.console.log"
+    },
+    {
+      "name": "round-1-upgrade-purchase",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_upgrade_smoke.tscn",
+        "--",
+        "--upgrade-case=purchase"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_upgrade_passed purchase",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2798,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-upgrade-purchase.console.log"
+    },
+    {
+      "name": "round-1-upgrade-support",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_upgrade_smoke.tscn",
+        "--",
+        "--upgrade-case=support"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_upgrade_passed support",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 6236,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-upgrade-support.console.log"
+    },
+    {
+      "name": "round-1-harness-continue",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_harness_smoke.tscn",
+        "--",
+        "--harness-case=continue",
+        "--harness-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-g2-20261010-045032-b7d372853780437980552aeb205809a5\\round-1-harness-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_harness_passed continue",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 3603,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-harness-continue.console.log"
+    },
+    {
+      "name": "round-1-harness-legacy1",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_harness_smoke.tscn",
+        "--",
+        "--harness-case=legacy1"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_harness_passed legacy1",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2638,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-harness-legacy1.console.log"
+    },
+    {
+      "name": "round-1-harness-legacy2",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_harness_smoke.tscn",
+        "--",
+        "--harness-case=legacy2"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_harness_passed legacy2",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2512,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-harness-legacy2.console.log"
+    },
+    {
+      "name": "round-1-harness-legacy3",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_harness_smoke.tscn",
+        "--",
+        "--harness-case=legacy3"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_harness_passed legacy3",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2503,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-harness-legacy3.console.log"
+    },
+    {
+      "name": "round-1-harness-support",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_harness_smoke.tscn",
+        "--",
+        "--harness-case=support"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_harness_passed support",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2975,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-harness-support.console.log"
+    },
+    {
+      "name": "round-1-wear-continue",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/equipment_wear_smoke.tscn",
+        "--",
+        "--wear-case=continue",
+        "--wear-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-g2-20261010-045032-b7d372853780437980552aeb205809a5\\round-1-wear-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] equipment_wear_passed continue",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2329,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-wear-continue.console.log"
+    },
+    {
+      "name": "round-1-repair-continue",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_repair_smoke.tscn",
+        "--",
+        "--repair-case=continue",
+        "--repair-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-g2-20261010-045032-b7d372853780437980552aeb205809a5\\round-1-repair-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_repair_passed continue",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2677,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-repair-continue.console.log"
+    },
+    {
+      "name": "round-1-repair-support",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_repair_smoke.tscn",
+        "--",
+        "--repair-case=support",
+        "--repair-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-g2-20261010-045032-b7d372853780437980552aeb205809a5\\round-1-support-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_repair_passed support",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2924,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-repair-support.console.log"
+    },
+    {
+      "name": "round-1-repair-support-continue",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_repair_smoke.tscn",
+        "--",
+        "--repair-case=continue-support",
+        "--repair-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-g2-20261010-045032-b7d372853780437980552aeb205809a5\\round-1-support-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_repair_passed continue-support",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2690,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-repair-support-continue.console.log"
+    },
+    {
+      "name": "round-1-wear-legacy1",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/equipment_wear_smoke.tscn",
+        "--",
+        "--wear-case=legacy1"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] equipment_wear_passed legacy1",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2917,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-wear-legacy1.console.log"
+    },
+    {
+      "name": "round-1-wear-legacy2",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/equipment_wear_smoke.tscn",
+        "--",
+        "--wear-case=legacy2"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] equipment_wear_passed legacy2",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2676,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-wear-legacy2.console.log"
+    },
+    {
+      "name": "round-1-wear-invalid",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/equipment_wear_smoke.tscn",
+        "--",
+        "--wear-case=invalid"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] equipment_wear_passed invalid",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2052,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-wear-invalid.console.log"
+    },
+    {
+      "name": "round-1-continue",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/title_screen_smoke.tscn",
+        "--",
+        "--title-case=continue"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] title_screen_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2240,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-continue.console.log"
+    },
+    {
+      "name": "round-1-quit",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/title_screen_smoke.tscn",
+        "--",
+        "--title-case=quit"
+      ],
+      "expected_pattern": "\\[GameEntry\\] quit_requested",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1787,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-quit.console.log"
+    },
+    {
+      "name": "round-1-departure-three",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_departure_smoke.tscn",
+        "--",
+        "--departure-case=three"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 3333,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-departure-three.console.log"
+    },
+    {
+      "name": "round-1-departure-failure",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_departure_smoke.tscn",
+        "--",
+        "--departure-case=failure"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2972,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-departure-failure.console.log"
+    },
+    {
+      "name": "round-1-settings-invalid",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/settings_smoke.tscn",
+        "--",
+        "--settings-case=invalid"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] settings_passed invalid",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2083,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-settings-invalid.console.log"
+    },
+    {
+      "name": "round-1-settings-future",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/settings_smoke.tscn",
+        "--",
+        "--settings-case=future"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] settings_passed future",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2403,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-settings-future.console.log"
+    },
+    {
+      "name": "round-1-progress-replace",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/progress_save_smoke.tscn",
+        "--",
+        "--progress-case=replace"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] progress_save_passed replace",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2638,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-progress-replace.console.log"
+    },
+    {
+      "name": "round-1-progress-invalid",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/progress_save_smoke.tscn",
+        "--",
+        "--progress-case=invalid"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] progress_save_passed invalid",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2729,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-progress-invalid.console.log"
+    },
+    {
+      "name": "round-1-progress-future",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/progress_save_smoke.tscn",
+        "--",
+        "--progress-case=future"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] progress_save_passed future",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2133,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-progress-future.console.log"
+    },
+    {
+      "name": "round-1-progress-unknown_id",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/progress_save_smoke.tscn",
+        "--",
+        "--progress-case=unknown_id"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] progress_save_passed unknown_id",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2145,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-progress-unknown_id.console.log"
+    },
+    {
+      "name": "round-1-progress-disappeared",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/progress_save_smoke.tscn",
+        "--",
+        "--progress-case=disappeared"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] progress_save_passed disappeared",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2160,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-progress-disappeared.console.log"
+    },
+    {
+      "name": "round-1-startup",
+      "arguments": [
+        "--quit-after",
+        "20"
+      ],
+      "expected_pattern": "transition_completed from=Boot to=Title",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2358,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-startup.console.log"
+    },
+    {
+      "name": "round-1-dev-Boot",
+      "arguments": [
+        "--quit-after",
+        "20",
+        "--",
+        "--dev-state=Boot"
+      ],
+      "expected_pattern": "entry_ready state=Boot",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1960,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-dev-Boot.console.log"
+    },
+    {
+      "name": "round-1-dev-Title",
+      "arguments": [
+        "--quit-after",
+        "20",
+        "--",
+        "--dev-state=Title"
+      ],
+      "expected_pattern": "entry_ready state=Title",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2141,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-dev-Title.console.log"
+    },
+    {
+      "name": "round-1-dev-Hub",
+      "arguments": [
+        "--quit-after",
+        "20",
+        "--",
+        "--dev-state=Hub"
+      ],
+      "expected_pattern": "entry_ready state=Hub",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2028,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-dev-Hub.console.log"
+    },
+    {
+      "name": "round-1-dev-Exploration",
+      "arguments": [
+        "--quit-after",
+        "20",
+        "--",
+        "--dev-state=Exploration"
+      ],
+      "expected_pattern": "entry_ready state=Exploration",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2065,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-dev-Exploration.console.log"
+    },
+    {
+      "name": "round-1-dev-Results",
+      "arguments": [
+        "--quit-after",
+        "20",
+        "--",
+        "--dev-state=Results"
+      ],
+      "expected_pattern": "entry_ready state=Results",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2069,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-dev-Results.console.log"
+    },
+    {
+      "name": "round-1-flow-settings-write",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/settings_smoke.tscn",
+        "--",
+        "--settings-case=write",
+        "--settings-test-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-g2-20261010-045032-b7d372853780437980552aeb205809a5\\round-1-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] settings_passed write",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1951,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-flow-settings-write.console.log"
+    },
+    {
+      "name": "round-1-flow-expeditions",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_departure_smoke.tscn",
+        "--",
+        "--departure-case=three",
+        "--progress-test-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-g2-20261010-045032-b7d372853780437980552aeb205809a5\\round-1-session",
+        "--settings-test-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-g2-20261010-045032-b7d372853780437980552aeb205809a5\\round-1-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 4263,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-flow-expeditions.console.log"
+    },
+    {
+      "name": "round-1-flow-continue",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/progress_save_smoke.tscn",
+        "--",
+        "--progress-case=read",
+        "--existing-settings",
+        "--progress-test-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-g2-20261010-045032-b7d372853780437980552aeb205809a5\\round-1-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] progress_save_passed read",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2436,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-flow-continue.console.log"
+    },
+    {
+      "name": "round-1-flow-settings-read",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/settings_smoke.tscn",
+        "--",
+        "--settings-case=read",
+        "--shared-progress",
+        "--settings-test-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-g2-20261010-045032-b7d372853780437980552aeb205809a5\\round-1-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] settings_passed read",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2077,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-flow-settings-read.console.log"
+    }
+  ],
+  "flows": [
+    {
+      "repetition": 1,
+      "money": "26",
+      "bag_slots": 3,
+      "next_expedition_id": "5",
+      "stored_items": [
+        {
+          "id": "test_g1_unknown",
+          "identified": false,
+          "risk_hint": "희미한 진동이 느껴집니다."
+        }
+      ],
+      "settings_unchanged": true,
+      "progress_unchanged_by_options": true,
+      "settings_sha256": "85586497be4c14820643232206e40615f9fa122dc347351ed0076e80b22bd141",
+      "progress_sha256": "11e98276a2638e9eb8e1650e42a097691df2ffd8be2ef3f4fd0d770887ccc741"
+    }
+  ],
+  "finished_at_utc": "2026-10-10T04:54:31.0550044Z",
+  "check_count": 99,
+  "runner_scope": "DEV-0206 / G2 approved prototype loop",
+  "raw_report_directory": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-g2-20261010-045032-b7d372853780437980552aeb205809a5",
+  "source_identity": {
+    "current_source_sha256": "29d190874f93e8d3edbdeae7b55774acbe5d5b790a7a4816dadb425244c050ae",
+    "boundary_source_sha256": "c2f7a4ae9050d8a6d41c5f82812ddf7d26274d05bcda45ca015ab2f6b764b9e9",
+    "boundary_source_reconstructed_from_current_with_only_old_g3_test": true,
+    "source_file_count": 514
+  },
+  "tax_domain": {
+    "examples": [
+      {
+        "actual": [
+          4,
+          41,
+          36,
+          136,
+          46
+        ],
+        "expected": [
+          4,
+          41,
+          36,
+          136,
+          46
+        ],
+        "id": "T01"
+      },
+      {
+        "actual": [
+          4,
+          31,
+          26,
+          126,
+          36
+        ],
+        "expected": [
+          4,
+          31,
+          26,
+          126,
+          36
+        ],
+        "id": "T02"
+      },
+      {
+        "actual": [
+          0,
+          -10,
+          -10,
+          90,
+          0
+        ],
+        "expected": [
+          0,
+          -10,
+          -10,
+          90,
+          0
+        ],
+        "id": "T03"
+      },
+      {
+        "actual": [
+          0,
+          -5,
+          0,
+          100,
+          0
+        ],
+        "expected": [
+          0,
+          -5,
+          0,
+          100,
+          0
+        ],
+        "id": "T04"
+      },
+      {
+        "actual": [
+          11,
+          94,
+          94,
+          194,
+          27
+        ],
+        "expected": [
+          11,
+          94,
+          94,
+          194,
+          27
+        ],
+        "id": "T05"
+      },
+      {
+        "actual": [
+          8,
+          72,
+          72,
+          172,
+          0
+        ],
+        "expected": [
+          8,
+          72,
+          72,
+          172,
+          0
+        ],
+        "id": "T06"
+      },
+      {
+        "actual": [
+          4,
+          36,
+          -29,
+          71,
+          46
+        ],
+        "expected": [
+          4,
+          36,
+          -29,
+          71,
+          46
+        ],
+        "id": "T07"
+      },
+      {
+        "actual": [
+          0,
+          0,
+          0,
+          100,
+          0
+        ],
+        "expected": [
+          0,
+          0,
+          0,
+          100,
+          0
+        ],
+        "id": "T08"
+      },
+      {
+        "actual": [
+          2,
+          98,
+          98,
+          198,
+          0
+        ],
+        "expected": [
+          2,
+          98,
+          98,
+          198,
+          0
+        ],
+        "id": "T09"
+      }
+    ],
+    "failures": [],
+    "integer_boundaries": [
+      {
+        "gross": "0",
+        "paid": "0",
+        "rate": 0
+      },
+      {
+        "gross": "0",
+        "paid": "0",
+        "rate": 1
+      },
+      {
+        "gross": "0",
+        "paid": "0",
+        "rate": 10
+      },
+      {
+        "gross": "0",
+        "paid": "0",
+        "rate": 100
+      },
+      {
+        "gross": "1",
+        "paid": "0",
+        "rate": 0
+      },
+      {
+        "gross": "1",
+        "paid": "0",
+        "rate": 1
+      },
+      {
+        "gross": "1",
+        "paid": "0",
+        "rate": 10
+      },
+      {
+        "gross": "1",
+        "paid": "1",
+        "rate": 100
+      },
+      {
+        "gross": "7",
+        "paid": "0",
+        "rate": 0
+      },
+      {
+        "gross": "7",
+        "paid": "0",
+        "rate": 1
+      },
+      {
+        "gross": "7",
+        "paid": "0",
+        "rate": 10
+      },
+      {
+        "gross": "7",
+        "paid": "7",
+        "rate": 100
+      },
+      {
+        "gross": "14",
+        "paid": "0",
+        "rate": 0
+      },
+      {
+        "gross": "14",
+        "paid": "0",
+        "rate": 1
+      },
+      {
+        "gross": "14",
+        "paid": "1",
+        "rate": 10
+      },
+      {
+        "gross": "14",
+        "paid": "14",
+        "rate": 100
+      },
+      {
+        "gross": "40",
+        "paid": "0",
+        "rate": 0
+      },
+      {
+        "gross": "40",
+        "paid": "0",
+        "rate": 1
+      },
+      {
+        "gross": "40",
+        "paid": "4",
+        "rate": 10
+      },
+      {
+        "gross": "40",
+        "paid": "40",
+        "rate": 100
+      },
+      {
+        "gross": "80",
+        "paid": "0",
+        "rate": 0
+      },
+      {
+        "gross": "80",
+        "paid": "0",
+        "rate": 1
+      },
+      {
+        "gross": "80",
+        "paid": "8",
+        "rate": 10
+      },
+      {
+        "gross": "80",
+        "paid": "80",
+        "rate": 100
+      },
+      {
+        "gross": "9223372036854775807",
+        "paid": "0",
+        "rate": 0
+      },
+      {
+        "gross": "9223372036854775807",
+        "paid": "92233720368547758",
+        "rate": 1
+      },
+      {
+        "gross": "9223372036854775807",
+        "paid": "922337203685477580",
+        "rate": 10
+      },
+      {
+        "gross": "9223372036854775807",
+        "paid": "9223372036854775807",
+        "rate": 100
+      }
+    ],
+    "passed": true
+  },
+  "external_boundaries": [
+    {
+      "passed": true,
+      "source_tree_sha256": "c2f7a4ae9050d8a6d41c5f82812ddf7d26274d05bcda45ca015ab2f6b764b9e9",
+      "checks": [
+        {
+          "name": "purchase-before",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/cost_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=purchase",
+            "--cost-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-cost-boundaries-85384e1b3b5b4b93b336c0c49105632f\\purchase-before"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] cost_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 730,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "purchase-before.console.log"
+        },
+        {
+          "name": "purchase-after",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/cost_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=purchase",
+            "--cost-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-cost-boundaries-85384e1b3b5b4b93b336c0c49105632f\\purchase-after",
+            "--boundary-after"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] cost_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 776,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "purchase-after.console.log"
+        },
+        {
+          "name": "appraisal-before",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/cost_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=appraisal",
+            "--cost-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-cost-boundaries-85384e1b3b5b4b93b336c0c49105632f\\appraisal-before"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] cost_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 762,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "appraisal-before.console.log"
+        },
+        {
+          "name": "appraisal-after",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/cost_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=appraisal",
+            "--cost-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-cost-boundaries-85384e1b3b5b4b93b336c0c49105632f\\appraisal-after",
+            "--boundary-after"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] cost_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 623,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "appraisal-after.console.log"
+        },
+        {
+          "name": "sale-before",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/cost_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=sale",
+            "--cost-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-cost-boundaries-85384e1b3b5b4b93b336c0c49105632f\\sale-before"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] cost_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 668,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "sale-before.console.log"
+        },
+        {
+          "name": "sale-after",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/cost_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=sale",
+            "--cost-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-cost-boundaries-85384e1b3b5b4b93b336c0c49105632f\\sale-after",
+            "--boundary-after"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] cost_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 619,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "sale-after.console.log"
+        },
+        {
+          "name": "repair-before",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/cost_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=repair",
+            "--cost-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-cost-boundaries-85384e1b3b5b4b93b336c0c49105632f\\repair-before"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] cost_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 621,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "repair-before.console.log"
+        },
+        {
+          "name": "repair-after",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/cost_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=repair",
+            "--cost-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-cost-boundaries-85384e1b3b5b4b93b336c0c49105632f\\repair-after",
+            "--boundary-after"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] cost_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 627,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "repair-after.console.log"
+        },
+        {
+          "name": "upgrade-before",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/cost_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=upgrade",
+            "--cost-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-cost-boundaries-85384e1b3b5b4b93b336c0c49105632f\\upgrade-before"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] cost_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 817,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "upgrade-before.console.log"
+        },
+        {
+          "name": "upgrade-after",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/cost_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=upgrade",
+            "--cost-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-cost-boundaries-85384e1b3b5b4b93b336c0c49105632f\\upgrade-after",
+            "--boundary-after"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] cost_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 706,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "upgrade-after.console.log"
+        },
+        {
+          "name": "reserve-before",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/cost_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=reserve",
+            "--cost-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-cost-boundaries-85384e1b3b5b4b93b336c0c49105632f\\reserve-before"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] cost_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 638,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "reserve-before.console.log"
+        },
+        {
+          "name": "reserve-after",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/cost_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=reserve",
+            "--cost-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-cost-boundaries-85384e1b3b5b4b93b336c0c49105632f\\reserve-after",
+            "--boundary-after"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] cost_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 688,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "reserve-after.console.log"
+        },
+        {
+          "name": "start-before",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/cost_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=start",
+            "--cost-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-cost-boundaries-85384e1b3b5b4b93b336c0c49105632f\\start-before"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] cost_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 631,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "start-before.console.log"
+        },
+        {
+          "name": "start-after",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/cost_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=start",
+            "--cost-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-cost-boundaries-85384e1b3b5b4b93b336c0c49105632f\\start-after",
+            "--boundary-after"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] cost_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 630,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "start-after.console.log"
+        },
+        {
+          "name": "settle-before",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/cost_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=settle",
+            "--cost-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-cost-boundaries-85384e1b3b5b4b93b336c0c49105632f\\settle-before"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] cost_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 629,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "settle-before.console.log"
+        },
+        {
+          "name": "settle-after",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/cost_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=settle",
+            "--cost-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-cost-boundaries-85384e1b3b5b4b93b336c0c49105632f\\settle-after",
+            "--boundary-after"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] cost_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 641,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "settle-after.console.log"
+        },
+        {
+          "name": "recover_reserved-before",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/cost_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=recover_reserved",
+            "--cost-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-cost-boundaries-85384e1b3b5b4b93b336c0c49105632f\\recover_reserved-before"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] cost_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 618,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "recover_reserved-before.console.log"
+        },
+        {
+          "name": "recover_reserved-after",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/cost_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=recover_reserved",
+            "--cost-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-cost-boundaries-85384e1b3b5b4b93b336c0c49105632f\\recover_reserved-after",
+            "--boundary-after"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] cost_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 708,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "recover_reserved-after.console.log"
+        },
+        {
+          "name": "recover_started-before",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/cost_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=recover_started",
+            "--cost-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-cost-boundaries-85384e1b3b5b4b93b336c0c49105632f\\recover_started-before"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] cost_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 654,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "recover_started-before.console.log"
+        },
+        {
+          "name": "recover_started-after",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/cost_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=recover_started",
+            "--cost-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-cost-boundaries-85384e1b3b5b4b93b336c0c49105632f\\recover_started-after",
+            "--boundary-after"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] cost_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 624,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "recover_started-after.console.log"
+        }
+      ],
+      "interrupted_boundaries": 20,
+      "kind": "cost",
+      "raw_directory": "C:/Users/makist_code_04/AppData/Local/Temp/dungeon-cost-boundaries-85384e1b3b5b4b93b336c0c49105632f"
+    },
+    {
+      "passed": true,
+      "source_tree_sha256": "c2f7a4ae9050d8a6d41c5f82812ddf7d26274d05bcda45ca015ab2f6b764b9e9",
+      "checks": [
+        {
+          "name": "select-before",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/objective_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=select",
+            "--objective-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-objective-boundaries-74ec254396d049278666a9ffb91fd817\\select-before"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] objective_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 720,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "select-before.console.log"
+        },
+        {
+          "name": "select-after",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/objective_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=select",
+            "--objective-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-objective-boundaries-74ec254396d049278666a9ffb91fd817\\select-after",
+            "--boundary-after"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] objective_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 830,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "select-after.console.log"
+        },
+        {
+          "name": "cancel-before",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/objective_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=cancel",
+            "--objective-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-objective-boundaries-74ec254396d049278666a9ffb91fd817\\cancel-before"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] objective_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 847,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "cancel-before.console.log"
+        },
+        {
+          "name": "cancel-after",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/objective_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=cancel",
+            "--objective-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-objective-boundaries-74ec254396d049278666a9ffb91fd817\\cancel-after",
+            "--boundary-after"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] objective_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 817,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "cancel-after.console.log"
+        },
+        {
+          "name": "reserve-before",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/objective_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=reserve",
+            "--objective-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-objective-boundaries-74ec254396d049278666a9ffb91fd817\\reserve-before"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] objective_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 735,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "reserve-before.console.log"
+        },
+        {
+          "name": "reserve-after",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/objective_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=reserve",
+            "--objective-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-objective-boundaries-74ec254396d049278666a9ffb91fd817\\reserve-after",
+            "--boundary-after"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] objective_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 712,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "reserve-after.console.log"
+        },
+        {
+          "name": "start-before",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/objective_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=start",
+            "--objective-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-objective-boundaries-74ec254396d049278666a9ffb91fd817\\start-before"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] objective_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 728,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "start-before.console.log"
+        },
+        {
+          "name": "start-after",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/objective_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=start",
+            "--objective-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-objective-boundaries-74ec254396d049278666a9ffb91fd817\\start-after",
+            "--boundary-after"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] objective_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 722,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "start-after.console.log"
+        },
+        {
+          "name": "settle-before",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/objective_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=settle",
+            "--objective-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-objective-boundaries-74ec254396d049278666a9ffb91fd817\\settle-before"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] objective_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 742,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "settle-before.console.log"
+        },
+        {
+          "name": "settle-after",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/objective_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=settle",
+            "--objective-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-objective-boundaries-74ec254396d049278666a9ffb91fd817\\settle-after",
+            "--boundary-after"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] objective_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 729,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "settle-after.console.log"
+        },
+        {
+          "name": "recover_reserved-before",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/objective_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=recover_reserved",
+            "--objective-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-objective-boundaries-74ec254396d049278666a9ffb91fd817\\recover_reserved-before"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] objective_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 723,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "recover_reserved-before.console.log"
+        },
+        {
+          "name": "recover_reserved-after",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/objective_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=recover_reserved",
+            "--objective-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-objective-boundaries-74ec254396d049278666a9ffb91fd817\\recover_reserved-after",
+            "--boundary-after"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] objective_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 712,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "recover_reserved-after.console.log"
+        },
+        {
+          "name": "recover_started-before",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/objective_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=recover_started",
+            "--objective-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-objective-boundaries-74ec254396d049278666a9ffb91fd817\\recover_started-before"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] objective_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 770,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "recover_started-before.console.log"
+        },
+        {
+          "name": "recover_started-after",
+          "arguments": [
+            "--fixed-fps",
+            "60",
+            "res://tests/smoke/objective_boundary_smoke.tscn",
+            "--",
+            "--boundary-mode=verify",
+            "--action=recover_started",
+            "--objective-directory=C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\dungeon-objective-boundaries-74ec254396d049278666a9ffb91fd817\\recover_started-after",
+            "--boundary-after"
+          ],
+          "expected_pattern": "\\[SmokeTest\\] objective_boundary_passed",
+          "passed": true,
+          "exit_code": 0,
+          "timed_out": false,
+          "marker_found": true,
+          "duration_ms": 1198,
+          "diagnostics": [],
+          "ignored_diagnostics": [],
+          "console_log": "recover_started-after.console.log"
+        }
+      ],
+      "interrupted_boundaries": 14,
+      "kind": "objective",
+      "raw_directory": "C:/Users/makist_code_04/AppData/Local/Temp/dungeon-objective-boundaries-74ec254396d049278666a9ffb91fd817"
+    }
+  ],
+  "graphics": {
+    "passed": true,
+    "checks": [
+      {
+        "scene": "hub_sale_smoke",
+        "directory": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-sale",
+        "exit_code": 0,
+        "expected_marker": "hub_sale_passed",
+        "marker_found": true,
+        "diagnostics": [],
+        "screenshots": [
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-sale\\empty-1152.png",
+            "sha256": "716485ea7237571c2f136a31fe5ae1c05cdcb6bccbecc68684f6c6bdc8ab3d6a"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-sale\\empty-1600.png",
+            "sha256": "650246eb26fd0489fc7af682769bb8ed630ef13da2ecaf153aad79cdf780ff07"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-sale\\quote-1152.png",
+            "sha256": "ed3a476024609c0954071e0c32e7986084bc57c585e6a4ef02f45c82635b5c4f"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-sale\\quote-1600.png",
+            "sha256": "a7af57b4b42fa95a90a5eb1d4ab33d83cfb8e8dfa20086324351a7763f76aa97"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-sale\\retry-1152.png",
+            "sha256": "0d5180b81f74ad9e315e9e92ba9c04aab00f9ed3160f95f79dbc87ff3a424a84"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-sale\\retry-1600.png",
+            "sha256": "e24f6ebd1b0e983b346f0405f744ff067101c6cde223a3ed1f226c74507c588d"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-sale\\sold-1152.png",
+            "sha256": "0a17b708dbd92cb09602a83fc7d6256318a6084550780b100161c0f42ea53429"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-sale\\sold-1600.png",
+            "sha256": "8b7f2f56a47a7b2288cc04b60c2641c37f72c90b69067991544bf2fef82251ed"
+          }
+        ],
+        "seconds": 44.467,
+        "passed": true
+      },
+      {
+        "scene": "objective_flow_smoke",
+        "directory": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective",
+        "exit_code": 0,
+        "expected_marker": "objective_flow_passed",
+        "marker_found": true,
+        "diagnostics": [],
+        "screenshots": [
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\achieved-1152.png",
+            "sha256": "e86ff584eba70c7c316c9356b6b55f8bf15be09d030b8b1cce6a639fda26b9db"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\achieved-1600.png",
+            "sha256": "b03b38d1b925a6c1cac9135bb232a145f131df56d733a4404aa010436d89ec1a"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\achieved-end-1152.png",
+            "sha256": "4ae1da41fa5a5ea0b8046b096fb436f9f82dfa22cab284438850d83f3074fac0"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\achieved-end-1600.png",
+            "sha256": "8c873e222a56a686bbaedd88c66309c5baf5c193d554d98021605558d1d76a58"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\failed-objective-1152.png",
+            "sha256": "6bbfa4a16d2d60573b925fea5aa0af96cdcf8ec612bf98e5f627c2de2eccdd5b"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\failed-objective-1600.png",
+            "sha256": "df15cecb60badd9bfeefa73134e0f8801ad1b5fd493d29b2df60279ca79fced1"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\failed-objective-end-1152.png",
+            "sha256": "039ebaa676f8bd6e88169bdf9b516d9cebd4d42f8d2939c8cb76add55ed74cae"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\failed-objective-end-1600.png",
+            "sha256": "f9830f38649b38945f77d2d468b268398cf0e4a1ac5c2dd75324ee3faf73f73b"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\free-1152.png",
+            "sha256": "e45e02bc00a1c46c108b450d0c9a2569fcc0a93be2c9b17d5de519b76cbb81e8"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\free-1600.png",
+            "sha256": "0f1a09d3affd2c1e9df2cf633dd510bfcd1e8cb00a627273b3f80b33d06f6d5d"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\free-end-1152.png",
+            "sha256": "74ba4f531179018fea9e330436d38cc690adc1ade6f31a4dd30b19afdb909f33"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\free-end-1600.png",
+            "sha256": "462723449233d109c64d533fe4ffc8c46ba47591e50470bec9613a9505cf08ae"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\hub-stock-1-1152.png",
+            "sha256": "7514edf944352320ba48bc9e391bad6fd8eb9caf0714c5ad21c17b8115fa672f"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\hub-stock-1-1600.png",
+            "sha256": "506042f518373a6a06bbe5a97dc87dc9b5d5f96c82b10d18447dabde313f17d9"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\lure-results-1-1152.png",
+            "sha256": "b348e63e1a80d141aaefe4d061bd378c4fa0f29a090d19ca8bbc9189d6416a19"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\lure-results-1-1600.png",
+            "sha256": "5c180c491bb0d123d7b0d2d306f0e5eacf5ddffbcbe9755db045c5ef472ad277"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\missed-1152.png",
+            "sha256": "f923d1a5994191a1a7fea07f6510f88ee3f3af013d115fae72b95189c95c745d"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\missed-1600.png",
+            "sha256": "2b67cc02daf44e6bf6481de36e4e298b7447add12fcf13d041527a8b0171de95"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\missed-end-1152.png",
+            "sha256": "f431106ae2026c6b63c4d60164f71dc04ffd65f9fccaabe4747f2f1fdebe26e0"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\missed-end-1600.png",
+            "sha256": "0a86c1767f11015f940bf7186aa6fd35ee7c73892c8d4db3c49a965510c29c2e"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\prepared-2-1152.png",
+            "sha256": "2015daa1224b1354461b7da192b6341b671d8f7947ef974877c289780776a06b"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\prepared-2-1600.png",
+            "sha256": "36762b7f7f2001c4cf65e7ced6f70d9b590e1fe5264ed4be68774e5712a436ee"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\prepared-4-1152.png",
+            "sha256": "400352ad08da43e708e2848a3c684cb88eab5d9991e2162793f7f7f0578d9a64"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\prepared-4-1600.png",
+            "sha256": "939eaf7e3e1f4aaa5098c3037e2fcf134ea192939151ae58a8ee4eda0bf1b105"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\progress-achieved-1152.png",
+            "sha256": "192f939d7eeeef2bd3f266fb9e249fba214d10ccc91d4e5261716ef8c215cf88"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\progress-achieved-1600.png",
+            "sha256": "8519833a6fa02337f37316b91f90fad45488fee3b40053872fbd2bbd29c5376c"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\progress-missed-1152.png",
+            "sha256": "86232ec9dbb4043ac9e19e130db94077ae67f456034aad80accc18062f4222c9"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\progress-missed-1600.png",
+            "sha256": "815f8711c06bd0b5383626ea1589d32edf0d82022a0d4773fdf8c223c89606d8"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\quote-2-1152.png",
+            "sha256": "2609e1f5bc6fe2f2b0f9d94452c93191c930481f4fbf18b7e49b5bee8e1c3a17"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\quote-2-1600.png",
+            "sha256": "8062e10d99edeed9d68a77827188ee4fab5c4b84f5d15da3524737df084fa60a"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\quote-4-1152.png",
+            "sha256": "b5ed5599aacc50bd40641294d772297ecf72d89c2fd7bcb21e5a0cad68f0810a"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\quote-4-1600.png",
+            "sha256": "526a2d1f2d310a0fce6482544af7ab765004e7b8b6b2fb1f03faaab6e13af407"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\restored-reward-1152.png",
+            "sha256": "f03a58e837809f3929c12c8b278c49d5f19a119e1b4640b64b3906cd7f5775ba"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\restored-reward-1600.png",
+            "sha256": "80c3ffe276f6bd145f76a8400cb5ee04e221c3bf5babf5464034be0691db7840"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\restored-reward-end-1152.png",
+            "sha256": "4ff5a2c4ebac18d9a261e7e83d5055275d56fa0d1e6f03ebfcf9fa36f17aa0b9"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\restored-reward-end-1600.png",
+            "sha256": "f565c80771d4e55ca05a31c36697e5b3704512e0427cc90e97e2b147b3da3b01"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\selected-1152.png",
+            "sha256": "2099d81ac019038c2e7d0fc431ea717eb101b69303f052be74d840e07c2a1474"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\selected-1600.png",
+            "sha256": "2c828654854bf45a6e617f3aeb97f9db8c94584e39d81b0f33c319ca9ddebe1e"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\selected-end-1152.png",
+            "sha256": "15f4690b4eabd376d48032f71ac00be7182709e49eb61df9af0aab37bde9826f"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\selected-end-1600.png",
+            "sha256": "f2a2bfbce2428a092e65e5d053f888ef0905cf791315f3f08d079445a6d6da88"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\selection-retry-1152.png",
+            "sha256": "ca5cf0d102f577ccdeb54d379d6468556da1bb4d90467bdaa89ced41007af0ad"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\selection-retry-1600.png",
+            "sha256": "ab707463bd386df3bfb730db2f30b22e5872d3a617b7bebc9a4158641300bf8d"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\tax-reconfirm-10-1152.png",
+            "sha256": "919fb083c238a9f34b0f2bc3d0340f2ac9cd3ac1a2d1357c5fa2b3f1e81fb448"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\tax-reconfirm-10-1600.png",
+            "sha256": "1e11df8db428e8951ca0b290bf8bfb414a05c22cb40e2e6d8e146d5cbcfbee90"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\tax-reconfirm-10-end-1152.png",
+            "sha256": "8018ed309c9c0306846831f9b260abc506bcc64a26bfada8f048302eaf81f86c"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\tax-reconfirm-10-end-1600.png",
+            "sha256": "6df87caf8ec210ef5010d75fc8fa5bf5caf4b6c8f8bf9583b9f9126273505f66"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\tax-reconfirm-20-1152.png",
+            "sha256": "118dd853c68f011214d0cc23ec37d396b8a6f3f761b386a89931d5963c9f5a2f"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\tax-reconfirm-20-1600.png",
+            "sha256": "180901d1ff1c786cb2a09718a71a857bd8ec62d7b39d7e5f9bb2287f76e9e6af"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\tax-reconfirm-20-end-1152.png",
+            "sha256": "1fa508952dadb15aeed979aaf5653811623a713843d2d89bfe9d6fe008002326"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-objective\\tax-reconfirm-20-end-1600.png",
+            "sha256": "8f7080dc61c5d5babd8570e713fd5c0c233a608034882ceb2b6468fe77aa5afa"
+          }
+        ],
+        "seconds": 51.827,
+        "passed": true
+      },
+      {
+        "scene": "cost_flow_smoke",
+        "directory": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost",
+        "exit_code": 0,
+        "expected_marker": "cost_flow_passed",
+        "marker_found": true,
+        "diagnostics": [],
+        "screenshots": [
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\actual-17-1152.png",
+            "sha256": "9ca230046cef09eac5f5028a53c1eff58e15bfc8897d66ea4238fd4b5e4f9ece"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\actual-17-1600.png",
+            "sha256": "ab86bb119a45ccda2ee1ec94f4c16afd27df0c8169faad561c0b5fae4120a1cf"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\actual-17-end-1152.png",
+            "sha256": "cea7e0d172cd887e857fbd5539afba787bd72a1f8299ce5ca757ad37f0dbe1cd"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\actual-17-end-1600.png",
+            "sha256": "7102eede6ee0dbcd033281ee5c96fe67a5eb0b3dea4ec9860ca359a52dc7ee8b"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\actual-27-1152.png",
+            "sha256": "d475d4bf78bcf4a3dba4d88838286bd03d6b6a94f5d92f237d0e2a1eddce4c69"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\actual-27-1600.png",
+            "sha256": "61f5eac2f3c8c896904c13216265afdbfbf92bde8cfe63f84aba200bc749ad53"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\actual-27-end-1152.png",
+            "sha256": "94d7bf98589fe57fd42cbf2637e507191314cb3c3785fafa3f48c004252dd74d"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\actual-27-end-1600.png",
+            "sha256": "132168cfc33457ebcf4ba9193d9ad34b97d582e20e7fc42b1dd36ddc003e0c9e"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\hub-stock-0-1152.png",
+            "sha256": "453838618c07632b27cfeccac1353cbf7f52c2a91adde92edfcd045c956bafd6"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\hub-stock-0-1600.png",
+            "sha256": "39cb2a788a05db53d9841d3d47b77330720f44d41374a829f8ca2c4179e77847"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\hub-stock-1-1152.png",
+            "sha256": "a474c0937e63fd5059668b273c85130675ca50e430977022d7e317b8619f5d60"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\hub-stock-1-1600.png",
+            "sha256": "046da696d33ed3708a316a23fe5b556d21d750839adf4b877780171177d60000"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\long-money-1152.png",
+            "sha256": "b3f6a858662e79d4c8d0e14e50098f2a7e980f6201a500074fdc8c5641aba036"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\long-money-1600.png",
+            "sha256": "1a1130558cb4885042193e5e95020188a0b7143d12946a780d96d91b4b9c7055"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\long-money-end-1152.png",
+            "sha256": "2849408d8d257f14195b8cf4f6dcff539c38bc8346615d4cb6a80f9fa917bda6"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\long-money-end-1600.png",
+            "sha256": "6b3e1e6392b36887eafc1e3fcc72d38db8db8911ffd06872bdef637b3958675a"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\long-money-retry-1152.png",
+            "sha256": "fd6449dab8e63a6c2161c4c9385b4c31ab5622122502348daedcb208dc71f21c"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\long-money-retry-1600.png",
+            "sha256": "19fb467b680e3b8a8ebf0b3ff9103b955b5019949a349dfb32c2150a2497deca"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\long-money-retry-end-1152.png",
+            "sha256": "2ac0bf83a1b9bf100e76aff70eabe31cf39bd4b3cc77a5a27e7456bb0a813794"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\long-money-retry-end-1600.png",
+            "sha256": "6585b6db90b2c9fe8548a8b44a63c53d7d6efe8b8057c7bcf8495deab664aaec"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\long-negative-1152.png",
+            "sha256": "1a8c358268d412b7e7c07f5ce0122d2eab61c7946d196a2fdc0fd7bed9bc83c1"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\long-negative-1600.png",
+            "sha256": "4c4b8342c5693ac2ea9e8294dea88c103ebe3d0f23adb7ac4ba6bc537e2d7a91"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\long-negative-end-1152.png",
+            "sha256": "54c3df5a7cbd137e2aeb8d43673e4e6c392afe73564e1162b6bfb34d3cd5b9e4"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\long-negative-end-1600.png",
+            "sha256": "705294f8ed0dbaef5a3841d9913ed68d96fdbf460f73b6242fa005e868081a93"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\lure-results-0-1152.png",
+            "sha256": "638b94e6727dafd477451ab32522c0cd8869165aba7f14127c091cb862accf01"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\lure-results-0-1600.png",
+            "sha256": "e33cb5b388abdba2b2b0bce94d6035ffd01930af1a8443fddf367afae6c5f060"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\lure-results-1-1152.png",
+            "sha256": "0bc18d658ecb874d6637b5beb69b28dcd1542831837d65901ad7e9a50048a9b8"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\lure-results-1-1600.png",
+            "sha256": "a57132799783a66dd36a558f20bab4f590e70ee9b04d973f9f6499ab6bcee08e"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\negative-1152.png",
+            "sha256": "6ea972c650042309a95ec554cb5f5b4a309ce1d513176bacdb52eb31b716b348"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\negative-1600.png",
+            "sha256": "1398da37d9a12981d749246a1a1b6f812fce29367ebbdc85ad43614c9047f387"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\negative-end-1152.png",
+            "sha256": "acafa1bf42960a39578b1f9e2837ca4a5426527423eabd013eb134cda7b4f55b"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\negative-end-1600.png",
+            "sha256": "f5007805cba73fdbb9cb6638e0e0076c4593371cc4715f17c06cc5bb79840977"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\preparation-1152.png",
+            "sha256": "da4852188724fff6e4b5153c0b35dcfef23fd039a20a1d0849000ec536994293"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\preparation-1600.png",
+            "sha256": "ab11e6321158308763dc24caa669afcf3e0d9e4fdab8ca2adc0b57c147bc22ac"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\preparation-end-1152.png",
+            "sha256": "77cbc6b5dce35dc7bbf46cc71c5f9743906d4f5c95f3383a582bc0b920f737c0"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\preparation-end-1600.png",
+            "sha256": "f81230f8b5e6ff149a4eb80d2b70e4c9b4ea4545f5ce277492704187058189e3"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\prepared-3-1152.png",
+            "sha256": "554db28aa77ecd278a94555fbbf4056aaea12d8c273bfb28ac5968cd28de4249"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\prepared-3-1600.png",
+            "sha256": "1a84fa142bfc656dd14f055954366bcf1243b73847b38636e0c01c438e04973c"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\prepared-4-1152.png",
+            "sha256": "400352ad08da43e708e2848a3c684cb88eab5d9991e2162793f7f7f0578d9a64"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\prepared-4-1600.png",
+            "sha256": "939eaf7e3e1f4aaa5098c3037e2fcf134ea192939151ae58a8ee4eda0bf1b105"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\quote-3-1152.png",
+            "sha256": "d275c8b1c02d7c5416490393192e41e066a0e6e614c5e232a8cf3f54fc2f824c"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\quote-3-1600.png",
+            "sha256": "9632c2936ded60f54fbb597e714ee20c3e051505ce20b500ba2e3a8020b24f97"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\quote-4-1152.png",
+            "sha256": "b5ed5599aacc50bd40641294d772297ecf72d89c2fd7bcb21e5a0cad68f0810a"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\quote-4-1600.png",
+            "sha256": "526a2d1f2d310a0fce6482544af7ab765004e7b8b6b2fb1f03faaab6e13af407"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\restored-first-1152.png",
+            "sha256": "6dfb75fe897828cd05d529808c26791cdf185f6669edd6365a80de6cef2de002"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\restored-first-1600.png",
+            "sha256": "9248c9208e2bdb5bb3d54c8c57bc97971df779a5c94d7b7df593ec9e8d5dfc7d"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\restored-first-end-1152.png",
+            "sha256": "68fa67acd4f65b8c4dca009ac32ced8738ed2797567059809d89863d9e5e1e6c"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\restored-first-end-1600.png",
+            "sha256": "a8bab8606980d9773d839cd0263bd8502c0c779d9ea0b6c70b43738588c2656a"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\saved-first-1152.png",
+            "sha256": "6dfb75fe897828cd05d529808c26791cdf185f6669edd6365a80de6cef2de002"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\saved-first-1600.png",
+            "sha256": "9248c9208e2bdb5bb3d54c8c57bc97971df779a5c94d7b7df593ec9e8d5dfc7d"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\saved-first-end-1152.png",
+            "sha256": "68fa67acd4f65b8c4dca009ac32ced8738ed2797567059809d89863d9e5e1e6c"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\saved-first-end-1600.png",
+            "sha256": "a8bab8606980d9773d839cd0263bd8502c0c779d9ea0b6c70b43738588c2656a"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\saved-second-1152.png",
+            "sha256": "f9b8205b1368e4c0ca4beab11f5a42334947a4ca643f1d796417322f9180f3c4"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\saved-second-1600.png",
+            "sha256": "dee6634e0281f4097de5079f7fcbe249edd344a9ef273fbcd85c9bdd3c15f18b"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\saved-second-end-1152.png",
+            "sha256": "16a2e1f5e72f61f0291c5691e21fa980ad41067b117b886408506d7ee6115e22"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\saved-second-end-1600.png",
+            "sha256": "2c9b97c550bf50e7cb6d38ca9717708b7d355e2740610bd7694f3e6d3468355c"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\unknown-1152.png",
+            "sha256": "c85d62b761f3ee12601f9db9c5fd0e06a6d0a45101051d781c9fd63e50ccaf0a"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\unknown-1600.png",
+            "sha256": "6e7432520942a013479cf7d91740525031a9ee4da1faca325a8e41265928072b"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\unknown-end-1152.png",
+            "sha256": "489426b86cefe0405e83c88328326bb497874412be97fa0c307e8e16225783be"
+          },
+          {
+            "path": "C:\\Users\\makist_code_04\\AppData\\Local\\Temp\\codex-dev0421-ed537e15f79246e6b95e0fa6a2e00256\\graphics-cost\\unknown-end-1600.png",
+            "sha256": "7f3423c22f0f61f43be82e23fbbaf861815281b215048cb437165386f6ed2a96"
+          }
+        ],
+        "seconds": 40.572,
+        "passed": true
+      }
+    ],
+    "source_tree_sha256": "29d190874f93e8d3edbdeae7b55774acbe5d5b790a7a4816dadb425244c050ae",
+    "visually_reviewed_screenshots": [
+      "graphics-sale/quote-1152.png",
+      "graphics-sale/retry-1600.png",
+      "graphics-objective/achieved-1152.png",
+      "graphics-objective/tax-reconfirm-20-end-1600.png",
+      "graphics-cost/long-money-1152.png",
+      "graphics-cost/long-money-retry-1600.png",
+      "graphics-cost/long-negative-1152.png",
+      "graphics-cost/unknown-1600.png",
+      "graphics-objective/restored-reward-1152.png",
+      "graphics-cost/saved-second-end-1600.png"
+    ],
+    "visual_review": "Representative 10 screenshots: totals, tax, reward, wrapped large amounts, negative/unknown costs, save retry and rate reconfirmation; scrollable details and buttons remain readable. All 118 captures have automated layout/input checks; this is not human playtest evidence."
+  },
+  "limitations": [
+    "10% and per-transaction floor remain trial settings; split-sale rounding differs.",
+    "Boundary runs preceded only the g3_survival_flow_smoke expected-wallet update; original hash retained and reconstructed from final files. Runtime source is unchanged.",
+    "Earlier failed diagnostics are excluded; final complete suite passed.",
+    "Human understanding/balance and portable appraisal are not completed."
+  ]
+}

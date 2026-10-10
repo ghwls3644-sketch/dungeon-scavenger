@@ -289,7 +289,7 @@ func _recover_pair(pair: Array) -> void:
 	_click(_results.get_node("NextStep/SettleButton"))
 	await _frames(5)
 	_expect(_store.load_data().harness_modules == pair and _entry.get_hub_stored_items().size() == stored_before, "Return lost equipment or changed existing storage.")
-	_expect(_entry.get_hub_money() == money_before + 40, "Pair recovery was not settled at the existing prices.")
+	_expect(_entry.get_hub_money() == money_before + 36, "Pair recovery was not settled at the existing prices.")
 	_expect(ResearchProgress.get_entries(_entry.get_hub_registered_items(), RESEARCH, CATALOG)[1].unlocked, "Equipment loop lost research.")
 
 

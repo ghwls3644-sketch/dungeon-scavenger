@@ -42,21 +42,21 @@ func _ready() -> void:
 	_expect(GameState.get_current_state() == GameState.State.HUB and before == FileAccess.get_file_as_bytes(_path), "Continue failed or rewrote the existing save.")
 	if not _read_case:
 		await _check_sale_ui()
-		await _appraise_and_sell(415, 615)
+		await _appraise_and_sell(374, 554)
 		await _recover_for_sale()
-		await _appraise_and_sell(620, 820)
+		await _appraise_and_sell(558, 738)
 		await _check_failure_preserves_sale()
 	else:
-		_expect_sale_holdings(820, 0)
+		_expect_sale_holdings(738, 0)
 		await _empty_return_after_sale()
-	_expect_sale_holdings(815 if _read_case else 820, 0)
+	_expect_sale_holdings(733 if _read_case else 738, 0)
 	_click(_hub.get_node("%SaleButton"))
 	await _frames(3)
 	_expect(_sale_list.item_count == 0 and _sale_panel.get_node("%ReviewSale").disabled and "판매 가능한" in _sale_panel.get_node("%SaleStatus").text, "Empty storage offered a sale.")
 	await _capture_sale("empty")
 	_sale_panel.review_requested.emit(PackedInt32Array())
 	_sale_panel.confirmation_requested.emit()
-	_expect_sale_holdings(815 if _read_case else 820, 0)
+	_expect_sale_holdings(733 if _read_case else 738, 0)
 	_expect(settings_before == FileAccess.get_file_as_bytes(_directory.path_join("settings.cfg")), "Selling changed settings.")
 	var report := {"passed": _failures.is_empty(), "case": "continue" if _read_case else "write", "final_hub": _store.load_data()}
 	var file := FileAccess.open(_directory.path_join("sale-continue.json" if _read_case else "sale-write.json"), FileAccess.WRITE)
@@ -86,14 +86,14 @@ func _check_sale_domain() -> void:
 	for indices in [PackedInt32Array(), PackedInt32Array([-1]), PackedInt32Array([4]), PackedInt32Array([1, 1]), PackedInt32Array([0]), PackedInt32Array([0, 1])]:
 		_expect(hub.quote_sale(indices, ECONOMY) == null and hub.to_save_data() == initial, "Invalid/unknown selection partially sold storage.")
 	var quote := hub.quote_sale(PackedInt32Array([3, 1]), ECONOMY)
-	_expect(quote != null and quote.get_prices() == [200, 10] and quote.get_income() == 210 and quote.get_money_after() == 220, "Quote differs from economic prices or incorrectly reapplied appraisal fees.")
+	_expect(quote != null and quote.get_prices() == [200, 10] and quote.get_income() == 210 and quote.get_money_after() == 199, "Quote differs from economic prices or incorrectly reapplied appraisal fees.")
 	quote.get_indices()[0] = 0
 	quote.get_prices()[0] = 999
 	var candidate := hub.copy()
-	_expect(candidate.apply_sale(quote, ECONOMY) and candidate.get_money() == 220, "Noncontiguous sale failed.")
+	_expect(candidate.apply_sale(quote, ECONOMY) and candidate.get_money() == 199, "Noncontiguous sale failed.")
 	var retained := candidate.get_stored_items()
 	_expect(retained.size() == 2 and not retained[0].is_identified() and retained[1].get_risk_hint() == "두 번째 감정품", "Sale removed the wrong identical copy or reordered retained items.")
-	_expect(not candidate.apply_sale(quote, ECONOMY) and candidate.get_money() == 220 and hub.to_save_data() == initial, "Quote replay or candidate mutation changed money twice/source state.")
+	_expect(not candidate.apply_sale(quote, ECONOMY) and candidate.get_money() == 199 and hub.to_save_data() == initial, "Quote replay or candidate mutation changed money twice/source state.")
 	var offers := hub.get_sale_offers(ECONOMY)
 	offers[1].price = 999
 	offers[1].item.get_definition().value_min = 1
@@ -117,7 +117,7 @@ func _check_sale_domain() -> void:
 	changed_rule.base_prices[&"test_g1_unknown"] = 0
 	_expect(hub.apply_sale(hub.quote_sale(PackedInt32Array([1]), changed_rule), changed_rule) and hub.get_money() == 10 and hub.get_stored_items().size() == 3, "Explicit zero price failed.")
 	var boundary := initial.duplicate(true)
-	boundary.money = "9223372036854775607"
+	boundary.money = "9223372036854775627"
 	boundary.costs = ExpeditionCosts.new_book(boundary.money.to_int())
 	hub = HubState.from_save_data(boundary, CATALOG)
 	_expect(hub.apply_sale(hub.quote_sale(PackedInt32Array([1]), ECONOMY), ECONOMY) and hub.get_money() == 9223372036854775807, "Exact int64 balance lost precision.")
@@ -156,7 +156,7 @@ func _check_sale_ui() -> void:
 	await _choose_sale_row(1)
 	_click(_sale_panel.get_node("%ReviewSale"))
 	await _frames(3)
-	_expect("판매 수입 +200 · 판매 후 보유금 210" in _sale_panel.get_node("%SaleStatus").text, "Single sale quote wrong.")
+	_expect("실제 입금 +180 · 판매 후 보유금 190" in _sale_panel.get_node("%SaleStatus").text, "Single sale quote wrong.")
 	await _capture_sale("quote")
 	_press_key(KEY_ESCAPE)
 	await _frames(3)
@@ -183,18 +183,18 @@ func _check_sale_ui() -> void:
 	_click(_sale_panel.get_node("%ConfirmSale"))
 	_sale_panel.confirmation_requested.emit()
 	await _frames(3)
-	_expect_sale_holdings(210, 3)
+	_expect_sale_holdings(190, 3)
 	_expect(_entry.get_hub_stored_items()[1].get_risk_hint() == "두 번째 감정품", "Retry sold the other identical item.")
 	await _choose_sale_row(1)
 	await _choose_sale_row(2, true)
 	_expect(_sale_list.get_selected_items() == PackedInt32Array([1, 2]), "Scrolled Ctrl-click selected wrong items.")
 	_click(_sale_panel.get_node("%ReviewSale"))
 	await _frames(3)
-	_expect("선택 2개 · 판매 수입 +210 · 판매 후 보유금 420" in _sale_panel.get_node("%SaleStatus").text, "Batch quote incorrect.")
+	_expect("실제 입금 +189 · 판매 후 보유금 379" in _sale_panel.get_node("%SaleStatus").text, "Batch quote incorrect.")
 	_click(_sale_panel.get_node("%ConfirmSale"))
 	_sale_panel.confirmation_requested.emit()
 	await _frames(3)
-	_expect_sale_holdings(420, 1)
+	_expect_sale_holdings(379, 1)
 	_expect(not _entry.get_hub_stored_items()[0].is_identified(), "Batch removed the unselected unknown.")
 	await _capture_sale("sold")
 	_click(_sale_panel.get_node("%CloseSale"))
@@ -242,7 +242,7 @@ func _recover_for_sale() -> void:
 	var player: PlayerController = world.get_node("Player")
 	_sale_panel.confirmation_requested.emit()
 	_hub.sale_requested.emit()
-	_expect(not _sale_panel.visible and _entry.get_hub_money() == 615, "Exploration accepted hidden sale.")
+	_expect(not _sale_panel.visible and _entry.get_hub_money() == 554, "Exploration accepted hidden sale.")
 	for target in [Vector2(-500, -200), Vector2(-275, -200), Vector2(630, -200), Vector2(630, 220)]:
 		await _walk(player, target)
 		if target in [Vector2(-275, -200), Vector2(630, 220)]:
@@ -262,7 +262,7 @@ func _recover_for_sale() -> void:
 	await _frames(5)
 	_click(_entry.get_node("Interface/Results/NextStep/SettleButton"))
 	await _frames(5)
-	_expect_sale_holdings(625, 1)
+	_expect_sale_holdings(563, 1)
 	_expect(not _entry.get_hub_stored_items()[0].is_identified(), "New unknown was automatically sold or identified.")
 
 
@@ -280,7 +280,7 @@ func _check_failure_preserves_sale() -> void:
 	_expect(_entry.get_pending_outcome() != null and _entry.get_pending_outcome().is_failure(), "Expected collapse failure missing.")
 	_click(_entry.get_node("Interface/Results/NextStep/SettleButton"))
 	await _frames(5)
-	_expect_sale_holdings(815 if _read_case else 820, 0)
+	_expect_sale_holdings(733 if _read_case else 738, 0)
 
 
 func _empty_return_after_sale() -> void:
