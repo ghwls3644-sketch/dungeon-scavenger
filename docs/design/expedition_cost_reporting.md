@@ -6,9 +6,10 @@ status: draft
 source_version: gdd-v2.1+dev-0415-trial
 canonical_for:
   - expedition_cost_reporting_review
-last_reviewed: 2026-10-09
+last_reviewed: 2026-10-10
 owner: game-design
 related:
+  - recovery_tax.md
   - ../GDD.md
   - economy_rules.md
   - tool_preparation.md
@@ -182,3 +183,9 @@ DEV-0413 `7419244` 시점의 역사적 대조다. DEV-0415 적용 이후의 현�
 [선택 의뢰 시험](expedition_objectives.md#dev-0418-선택-의뢰-시험-적용)은 `회수품 판매 + 보관품 판매 + 의뢰 보상`을 구간 수입으로 사용한다. 의뢰 보상은 `objective_income`에 분리하며 실제 정산 지갑 반영은 `회수품 판매 + 의뢰 보상`뿐이다. 손익·현금 변화는 기존 서비스/도구 원가·구매·투자 계산을 유지한다. 숫자 예의 판매 40+보상 10·도구 구매 10/사용 원가 5는 손익 +45·현금 +40·지갑 정산 반영 +50이다.
 
 스키마 8은 마지막 보고의 `objective:{offer,count}`에서 보상을 검증/복원하고 선택 초기화·지갑·새 기간과 함께 저장한다. 구형 7의 기존 보고/거래 금액은 바꾸지 않고 의뢰 보상 없음만 보완한다. 구형 원가가 미기록이면 정확한 보상과 현금 표시를 제공해도 큰 손익의 계산 보류를 유지한다. 자세한 저장 모양은 [MIG-CHG-050](../project/migration_changes.md#mig-chg-050-dev-0418-거점-선택-의뢰-연결), 검사는 [DEV-0418 기록](../project/project_context.md#dev-0418-거점-선택-의뢰-연결-검사)을 따른다. Q-027·Q-028의 최종 정책/사람 평가는 열린 상태다.
+
+## DEV-0420 회수세 문서 인계
+
+[DEC-116](../project/decisions.md#dev-0420-회수세-과세-대상-선택)은 귀환 자동 판매와 거점 보관품의 판매 대금만 과세하고 의뢰 보상은 전액 지급하는 방향을 채택했다. [회수세 검토안](recovery_tax.md)은 세전 수입·실제 세금·이번 입금·손익/현금, 거래별 합산·버림과 구형 기간/보고·일회 저장의 미적용 제안을 소유한다. 10%는 비교 수치이며 최종 세율이 아니다.
+
+이 문서의 DEV-0415/0418 적용식·검사 결과는 회수세 미구현 시점의 근거로 보존한다. DEV-0420은 이를 실행 결과처럼 수정하지 않는다. 구현 후 기대 계산은 회수세 검토안의 수치 예를 따르고, Q-027·Q-028의 기존 잔여와 [Q-029](../project/open_questions.md#회수세-검토-경계)를 함께 유지한다.

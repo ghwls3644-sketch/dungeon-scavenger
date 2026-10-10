@@ -1,0 +1,629 @@
+{
+  "ticket": "DEV-0420",
+  "ticket_name": "회수세 최소 규칙 정리",
+  "checked_date_kst": "2026-10-10",
+  "passed": true,
+  "failures": [],
+  "markdown_files": 51,
+  "relative_links_checked": 1777,
+  "front_matter_related_checked": 547,
+  "frozen_sources": [
+    {
+      "id": "SRC-001",
+      "path": "게임 기획 파일/통합 게임 기획서 v2.1.md",
+      "sha256": "45E92DFEDE482968B31C14EEF712012735AA9657DE18BD7C0922F94D40DD460A",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-002",
+      "path": "게임 기획 파일/스토리 정리 v1.5.md",
+      "sha256": "4191C100D5B3BFBEF291D3FD4D7588A3C5C31113A1827D33886CC8C90931292D",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-003",
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.1.md",
+      "sha256": "A52337ED1CC3DECEBF8BD6840662E12FAFDDCFA95C3E5E8D5E1129FFBBEF796F",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-004",
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.2.md",
+      "sha256": "0BAC7F52CF21EDDCD4B720C7B5B8FF76F98FB452904CEBCC3E03C1EB2B220C67",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-005",
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.2.1.md",
+      "sha256": "B4451E06D8FFAF5D1A233FA1A639E783BA17973977398C12527333A7707319F0",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-006",
+      "path": "게임 기획 파일/게임 개발 단계별 제안서 v0.1.md",
+      "sha256": "2EE29ACA36E74F5E0206AFF150ED610EBA8381E594B9091141E6F74CAA2B60C1",
+      "matches_record": true
+    }
+  ],
+  "archive_copies": [
+    {
+      "path": "docs/archive/story_v1.5_full.md",
+      "source_id": "SRC-002",
+      "bytes_match": true
+    },
+    {
+      "path": "docs/archive/story_document_management_proposal_v0.1.md",
+      "source_id": "SRC-003",
+      "bytes_match": true
+    },
+    {
+      "path": "docs/archive/story_document_management_proposal_v0.2.md",
+      "source_id": "SRC-004",
+      "bytes_match": true
+    }
+  ],
+  "checkpoint_tables_preserved": {
+    "docs/README.md": true,
+    "docs/project/migration_manifest.md": true
+  },
+  "next_checkpoint": "G5 완료 후",
+  "base_commit": "215fdd0aa2865af10d8aa7ec0f02264dc08aa3e4",
+  "local_ahead": 1,
+  "local_behind": 0,
+  "changed_paths": [
+    "docs/GDD.md",
+    "docs/README.md",
+    "docs/design/README.md",
+    "docs/design/economy_rules.md",
+    "docs/design/expedition_cost_reporting.md",
+    "docs/design/expedition_objectives.md",
+    "docs/design/recovery_tax.md",
+    "docs/project/README.md",
+    "docs/project/decisions.md",
+    "docs/project/dev0420_document_results.json",
+    "docs/project/development_handoff.md",
+    "docs/project/g4_meta_review.md",
+    "docs/project/migration_changes.md",
+    "docs/project/migration_manifest.md",
+    "docs/project/open_questions.md",
+    "docs/project/project_context.md"
+  ],
+  "source_tree_sha256": "e013691444f7c1e21f687b9c75daa2b4939bb1b8456c7ae9dae69ffcf3f38cb1",
+  "source_matches_dev0419_runtime_record": true,
+  "tracked_source_files": 509,
+  "source_content_differences_from_head_after_line_ending_normalization": [],
+  "new_runtime_checks": 0,
+  "new_graphical_runs": 0,
+  "new_external_termination_runs": 0,
+  "human_evaluation": "not performed",
+  "existing_runtime_evidence": "DEV-0419: 98/98; unchanged source; not new DEV-0420 tax feature validation",
+  "schema_changed": false,
+  "prior_reports_preserved": true,
+  "story_reference_frozen_preserved": true,
+  "existing_question_states_preserved": true,
+  "new_question": "Q-029 provisional",
+  "prior_decisions_preserved": true,
+  "new_decision": "DEC-116 sales proceeds only; quest reward paid in full",
+  "user_product_choice": "판매 대금에만 부과 (권장): 세금 4, 의뢰 보상은 전액 지급",
+  "trial_not_approved_as_final": [
+    "10%",
+    "aggregate each sale transaction and floor once",
+    "no additional minimum tax",
+    "schema and reporting proposals"
+  ],
+  "arithmetic_examples": [
+    {
+      "id": "T01",
+      "inputs": {
+        "id": "T01",
+        "loot": 40,
+        "reward": 10,
+        "bought": 10,
+        "consumed": 5
+      },
+      "column_order": [
+        "tax",
+        "profit",
+        "cash_change",
+        "ending_money",
+        "settlement_deposit"
+      ],
+      "expected_from_document": [
+        4,
+        41,
+        36,
+        136,
+        46
+      ],
+      "actual": [
+        4,
+        41,
+        36,
+        136,
+        46
+      ],
+      "inventory_identity": true,
+      "passed": true
+    },
+    {
+      "id": "T02",
+      "inputs": {
+        "id": "T02",
+        "loot": 40,
+        "bought": 10,
+        "consumed": 5
+      },
+      "column_order": [
+        "tax",
+        "profit",
+        "cash_change",
+        "ending_money",
+        "settlement_deposit"
+      ],
+      "expected_from_document": [
+        4,
+        31,
+        26,
+        126,
+        36
+      ],
+      "actual": [
+        4,
+        31,
+        26,
+        126,
+        36
+      ],
+      "inventory_identity": true,
+      "passed": true
+    },
+    {
+      "id": "T03",
+      "inputs": {
+        "id": "T03",
+        "bought": 10,
+        "consumed": 10
+      },
+      "column_order": [
+        "tax",
+        "profit",
+        "cash_change",
+        "ending_money",
+        "settlement_deposit"
+      ],
+      "expected_from_document": [
+        0,
+        -10,
+        -10,
+        90,
+        0
+      ],
+      "actual": [
+        0,
+        -10,
+        -10,
+        90,
+        0
+      ],
+      "inventory_identity": true,
+      "passed": true
+    },
+    {
+      "id": "T04",
+      "inputs": {
+        "id": "T04",
+        "stock": 5,
+        "consumed": 5
+      },
+      "column_order": [
+        "tax",
+        "profit",
+        "cash_change",
+        "ending_money",
+        "settlement_deposit"
+      ],
+      "expected_from_document": [
+        0,
+        -5,
+        0,
+        100,
+        0
+      ],
+      "actual": [
+        0,
+        -5,
+        0,
+        100,
+        0
+      ],
+      "inventory_identity": true,
+      "passed": true
+    },
+    {
+      "id": "T05",
+      "inputs": {
+        "id": "T05",
+        "storage": [
+          80
+        ],
+        "appraisal": 5,
+        "loot": 30
+      },
+      "column_order": [
+        "tax",
+        "profit",
+        "cash_change",
+        "ending_money",
+        "settlement_deposit"
+      ],
+      "expected_from_document": [
+        11,
+        94,
+        94,
+        194,
+        27
+      ],
+      "actual": [
+        11,
+        94,
+        94,
+        194,
+        27
+      ],
+      "inventory_identity": true,
+      "passed": true
+    },
+    {
+      "id": "T06",
+      "inputs": {
+        "id": "T06",
+        "storage": [
+          80
+        ]
+      },
+      "column_order": [
+        "tax",
+        "profit",
+        "cash_change",
+        "ending_money",
+        "settlement_deposit"
+      ],
+      "expected_from_document": [
+        8,
+        72,
+        72,
+        172,
+        0
+      ],
+      "actual": [
+        8,
+        72,
+        72,
+        172,
+        0
+      ],
+      "inventory_identity": true,
+      "passed": true
+    },
+    {
+      "id": "T07",
+      "inputs": {
+        "id": "T07",
+        "repair": 5,
+        "upgrade": 60,
+        "bought": 10,
+        "consumed": 5,
+        "loot": 40,
+        "reward": 10
+      },
+      "column_order": [
+        "tax",
+        "profit",
+        "cash_change",
+        "ending_money",
+        "settlement_deposit"
+      ],
+      "expected_from_document": [
+        4,
+        36,
+        -29,
+        71,
+        46
+      ],
+      "actual": [
+        4,
+        36,
+        -29,
+        71,
+        46
+      ],
+      "inventory_identity": true,
+      "passed": true
+    },
+    {
+      "id": "T08",
+      "inputs": {
+        "id": "T08"
+      },
+      "column_order": [
+        "tax",
+        "profit",
+        "cash_change",
+        "ending_money",
+        "settlement_deposit"
+      ],
+      "expected_from_document": [
+        0,
+        0,
+        0,
+        100,
+        0
+      ],
+      "actual": [
+        0,
+        0,
+        0,
+        100,
+        0
+      ],
+      "inventory_identity": true,
+      "passed": true
+    },
+    {
+      "id": "T09",
+      "inputs": {
+        "id": "T09",
+        "legacy_storage": 80,
+        "storage": [
+          20
+        ]
+      },
+      "column_order": [
+        "tax",
+        "profit",
+        "cash_change",
+        "ending_money",
+        "settlement_deposit"
+      ],
+      "expected_from_document": [
+        2,
+        98,
+        98,
+        198,
+        0
+      ],
+      "actual": [
+        2,
+        98,
+        98,
+        198,
+        0
+      ],
+      "inventory_identity": true,
+      "passed": true
+    }
+  ],
+  "integer_boundaries": [
+    {
+      "gross": "0",
+      "rate": 0,
+      "tax": "0",
+      "passed": true
+    },
+    {
+      "gross": "0",
+      "rate": 1,
+      "tax": "0",
+      "passed": true
+    },
+    {
+      "gross": "0",
+      "rate": 10,
+      "tax": "0",
+      "passed": true
+    },
+    {
+      "gross": "0",
+      "rate": 100,
+      "tax": "0",
+      "passed": true
+    },
+    {
+      "gross": "1",
+      "rate": 0,
+      "tax": "0",
+      "passed": true
+    },
+    {
+      "gross": "1",
+      "rate": 1,
+      "tax": "0",
+      "passed": true
+    },
+    {
+      "gross": "1",
+      "rate": 10,
+      "tax": "0",
+      "passed": true
+    },
+    {
+      "gross": "1",
+      "rate": 100,
+      "tax": "1",
+      "passed": true
+    },
+    {
+      "gross": "7",
+      "rate": 0,
+      "tax": "0",
+      "passed": true
+    },
+    {
+      "gross": "7",
+      "rate": 1,
+      "tax": "0",
+      "passed": true
+    },
+    {
+      "gross": "7",
+      "rate": 10,
+      "tax": "0",
+      "passed": true
+    },
+    {
+      "gross": "7",
+      "rate": 100,
+      "tax": "7",
+      "passed": true
+    },
+    {
+      "gross": "14",
+      "rate": 0,
+      "tax": "0",
+      "passed": true
+    },
+    {
+      "gross": "14",
+      "rate": 1,
+      "tax": "0",
+      "passed": true
+    },
+    {
+      "gross": "14",
+      "rate": 10,
+      "tax": "1",
+      "passed": true
+    },
+    {
+      "gross": "14",
+      "rate": 100,
+      "tax": "14",
+      "passed": true
+    },
+    {
+      "gross": "40",
+      "rate": 0,
+      "tax": "0",
+      "passed": true
+    },
+    {
+      "gross": "40",
+      "rate": 1,
+      "tax": "0",
+      "passed": true
+    },
+    {
+      "gross": "40",
+      "rate": 10,
+      "tax": "4",
+      "passed": true
+    },
+    {
+      "gross": "40",
+      "rate": 100,
+      "tax": "40",
+      "passed": true
+    },
+    {
+      "gross": "80",
+      "rate": 0,
+      "tax": "0",
+      "passed": true
+    },
+    {
+      "gross": "80",
+      "rate": 1,
+      "tax": "0",
+      "passed": true
+    },
+    {
+      "gross": "80",
+      "rate": 10,
+      "tax": "8",
+      "passed": true
+    },
+    {
+      "gross": "80",
+      "rate": 100,
+      "tax": "80",
+      "passed": true
+    },
+    {
+      "gross": "9223372036854775807",
+      "rate": 0,
+      "tax": "0",
+      "passed": true
+    },
+    {
+      "gross": "9223372036854775807",
+      "rate": 1,
+      "tax": "92233720368547758",
+      "passed": true
+    },
+    {
+      "gross": "9223372036854775807",
+      "rate": 10,
+      "tax": "922337203685477580",
+      "passed": true
+    },
+    {
+      "gross": "9223372036854775807",
+      "rate": 100,
+      "tax": "9223372036854775807",
+      "passed": true
+    }
+  ],
+  "invalid_inputs": [
+    {
+      "gross": "-1",
+      "rate": "10",
+      "rejected": true
+    },
+    {
+      "gross": "9223372036854775808",
+      "rate": "10",
+      "rejected": true
+    },
+    {
+      "gross": "40",
+      "rate": "-1",
+      "rejected": true
+    },
+    {
+      "gross": "40",
+      "rate": "101",
+      "rejected": true
+    },
+    {
+      "gross": "40",
+      "rate": "10.5",
+      "rejected": true
+    },
+    {
+      "gross": "40",
+      "rate": "None",
+      "rejected": true
+    },
+    {
+      "gross": "True",
+      "rate": "10",
+      "rejected": true
+    }
+  ],
+  "rounding_comparison": {
+    "per_item_7_7": 0,
+    "transaction_14": 1,
+    "two_transactions_7_7": 0,
+    "cumulative_second": 1
+  },
+  "gross_overflow_rejected_even_when_net_fits": true,
+  "calculation_validation_only": true,
+  "g4_completion_conditions": 6,
+  "g4_completion": "held: recovery tax implementation, portable appraisal and human evaluation pending",
+  "next_ticket": "DEV-0421 — 회수세 정산·보고 연결",
+  "git_diff_check": true,
+  "commit_status": "user_approved_local_commit",
+  "approval_text": "커밋",
+  "approval_date_kst": "2026-10-10",
+  "pushed": false
+}

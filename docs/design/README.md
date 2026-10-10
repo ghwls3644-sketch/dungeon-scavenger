@@ -6,9 +6,10 @@ status: confirmed
 source_version: management-proposal-v0.2.1
 canonical_for:
   - design_document_navigation
-last_reviewed: 2026-10-09
+last_reviewed: 2026-10-10
 owner: game-design
 related:
+  - recovery_tax.md
   - ../GDD.md
   - ../story/README.md
   - ../reference/README.md
@@ -38,8 +39,11 @@ related:
 | [`tool_preparation.md`](tool_preparation.md) (`draft`) | 소음 유인물의 기본 무료분·추가 구매, 수량·적재·귀환/실패·저장 계약은 어떻게 나눌 것인가? |
 | [`expedition_cost_reporting.md`](expedition_cost_reporting.md) (`draft`) | 준비·탐험의 손익과 실제 현금 변화, 재고 취득 원가·투자·견적은 어떻게 구분할 것인가? |
 | [`expedition_objectives.md`](expedition_objectives.md) (`draft`) | 자유 수색과 최소 목표/의뢰의 범위, 선택·진척·결과·보상/저장 계약은 무엇인가? |
+| [회수세 검토안](recovery_tax.md) (draft) | 판매 과세·의뢰 보상 제외와 합산/절사·손익/현금·구형/저장의 최소 계약은 무엇인가? |
 
 ## 경계 규칙
+
+- [회수세 검토안](recovery_tax.md)은 DEV-0420의 draft다. DEC-116의 판매 과세·의뢰 보상 전액 지급만 사용자 방향이며 10%·거래별 절사와 저장 계약은 미적용 시험 제안이다. 최종 판단은 Q-029에 남긴다.
 
 - [목표·의뢰 검토안](expedition_objectives.md)은 DEV-0417 제안 이력과 [DEV-0418 시험 적용](expedition_objectives.md#dev-0418-선택-의뢰-시험-적용)을 구분한 `draft`다. DEC-115의 자유 수색+선택 의뢰 하나/추가 보상을 연결했고 폐품 2개·보상 10·선택 초기화·스키마 8은 제한된 시험 조건이다. 최종 수치·반복 경제·사람 체감은 Q-028의 후속이며 단독 구현 권한이나 최종 경제 승인으로 읽지 않는다.
 
