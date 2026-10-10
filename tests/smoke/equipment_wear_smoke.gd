@@ -312,6 +312,8 @@ func _click(button: Button) -> void:
 
 
 func _envelope(version: int, hub: Dictionary) -> Dictionary:
+	if version <= 9:
+		hub = LegacyProgressFixture.before_appraisal(hub)
 	return {"schema_version": version, "content_version": ProgressStore.CONTENT_VERSION, "resume_state": "hub", "hub": hub}
 
 

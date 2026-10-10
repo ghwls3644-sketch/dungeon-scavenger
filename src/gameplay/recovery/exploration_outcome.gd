@@ -9,6 +9,7 @@ enum Result {
 }
 
 var _lure_usage: Dictionary = {}
+var _appraisal_usage: Dictionary = {}
 var _result: Result = Result.FAILURE
 var _recovery_result: RecoveryResult
 var _lost_item_count := 0
@@ -97,3 +98,14 @@ func get_lure_summary() -> Dictionary:
 	var used_paid := mini(paid, maxi(int(_lure_usage.used) - free, 0))
 	return {"free_used": int(_lure_usage.used) - used_paid, "paid_used": used_paid,
 		"returned": paid - used_paid if is_safe_return() else 0, "lost": paid if is_failure() else 0}
+
+
+func record_appraisal_usage(capacity: int, used: int) -> bool:
+	if not _appraisal_usage.is_empty() or not LureSupplyRule.is_count(capacity, 100) or not LureSupplyRule.is_count(used, capacity):
+		return false
+	_appraisal_usage = {"capacity": capacity, "used": used}
+	return true
+
+
+func get_appraisal_usage() -> Dictionary:
+	return _appraisal_usage.duplicate()

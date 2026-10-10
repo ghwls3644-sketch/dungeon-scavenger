@@ -9,7 +9,7 @@ static func is_count(value: Variant, maximum: int) -> bool:
 	return LureSupplyRule.is_count(value, maximum)
 
 
-static func valid_save(data: Dictionary) -> bool:
+static func valid_save(data: Dictionary, legacy: bool = false) -> bool:
 	if not RULE.is_valid() or not is_count(data.get("paid_lures"), RULE.stock_limit) or not is_count(data.get("selected_lures"), RULE.maximum_count):
 		return false
 	var pending: Variant = data.get("pending_departure")
@@ -17,7 +17,7 @@ static func valid_save(data: Dictionary) -> bool:
 		return false
 	if pending.is_empty():
 		return true
-	if pending.size() != 4 or pending.get("phase") not in ["reserved", "started"] \
+	if pending.size() != (4 if legacy else 5) or (not legacy and not pending.has("appraisals")) or pending.get("phase") not in ["reserved", "started"] \
 			or not is_count(pending.get("free"), RULE.free_count) or not is_count(pending.get("paid"), RULE.stock_limit):
 		return false
 	var id := read_nonnegative_integer(pending.get("id"))

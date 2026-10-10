@@ -446,3 +446,11 @@ ProgressStore는 스키마 9·거점 13필드·구형 1~8의 순서 있는 읽�
 - UI는 현재 공개 정보·견적·대상 확인·결과를 표시하고 명령만 요청한다. 직접 물품을 감정하거나 잔량·돈을 바꾸지 않는다. 실제 대상/가방 변경·잔량·실행 시점을 재검증해 감정과 소비를 한 번 반영하며, 도구 간 원가·무게와 기존 영구 상태를 보존한다.
 
 단가/한도/무게·일시정지 중 즉시 사용·저장 세부는 미적용 시험 제안이다. DEC-117의 승인 방향과 confirmed 아이템/경제·반복 탐험을 함께 읽고 Q-030의 후속 검증을 기록한다.
+
+## DEV-0423 휴대용 감정 책임
+
+[AppraisalSupplyRule](../../src/data/appraisal_supply_rule.gd)·[시험 정의](../../src/data/prototype_appraisal_supply.tres)는 가격/수량/무게를, [AppraisalPreparation](../../src/meta/appraisal_preparation.gd)·[견적](../../src/meta/appraisal_preparation_quote.gd)·HubState는 구매/배정/반환 후보와 구형 모양을 맡는다. [PortableAppraisalController](../../src/gameplay/tools/portable_appraisal_controller.gd)는 현재 물품/선택/정의/실행 여부를 대조해 PlayerInventory 감정과 잔량 감소를 관찰자 알림 전에 함께 처리한다. Gameplay는 Meta에 의존하지 않는다.
+
+ExpeditionLoadout은 복사된 시작 수량/무게, ExplorationOutcome은 실제 사용 집계를 전달한다. PrototypeExploration은 두 도구 잔량 무게를 합산하고 도구 노드를 장면 준비 때 생성한다. InventoryPanel·[HubPortableAppraisalPanel](../../src/ui/hub_portable_appraisal_panel.gd)은 표시/확인 명령만 담당한다. ExpeditionCosts는 취득 원가/사용/반환/손실과 손익/현금을 검증한다. ProgressStore는 스키마10·15필드와 구형1~9 순차 보완·원자적 교체, GameEntry는 후보 저장 성공 후 상태 교체를 맡는다.
+
+[저장 계약](../design/portable_appraisal.md#저장-모양과-전환)과 [검사 기록](project_context.md#dev-0423-휴대용-감정-연결-검사)을 따른다. 이전 스키마/미적용 절은 각 작업의 이력이다.

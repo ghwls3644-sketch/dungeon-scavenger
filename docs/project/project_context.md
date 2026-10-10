@@ -1695,3 +1695,27 @@ Get-G2SourceHash (Get-Location).Path
 최종 검사는 활성 Markdown 52개·상대 링크/앵커 1,870개·related 567개, 계산 예 10개·준비 경계 144개·무효 입력 11개·합산 무게 90개와 원본/소스 보존·공백 검사 모두 통과했다. [DEV-0422 문서 검사 JSON](dev0422_document_results.json)에 결과를 기록했다. 가격/휴대 한도·거점/현장 서비스 역할·운반 판단에 대한 사람 평가는 Q-030에 남기고 다른 열린 질문을 해결 처리하지 않는다.
 
 **DEV-0422 — 휴대용 감정 최소 규칙 정리 문서 작성·검증 완료, 사용자 로컬 커밋 승인.** 사용자 선택인 횟수 제한 확정 감정·유료 구매/휴대 수량 선택·안전 귀환 미사용분 보관을 DEC-117·GDD·아이템/경제 규칙에 반영했다. 같은 물품은 재감정하지 않는다. 단가10·휴대/총 재고2·무게0.25·사용/실패/저장 세부는 미적용 시험 제안이며 Q-030에서 후속 검증·최종 수치와 사람 평가를 추적한다. 코드·시험 데이터·스키마 9는 유지한다. 다음은 **DEV-0423 — 휴대용 감정 준비·사용·정산 연결**이며 실제 구현과 사람 평가가 남아 G4 전체 완료는 보류한다. 기준 0650530, 커밋 전 승인된 로컬 3커밋 앞섬·뒤처짐 0. 2026-10-10 사용자가 검토된 DEV-0422 결과의 로컬 커밋을 승인했으며 push하지 않았다. **정합성 검사: 아직 아님 — G5 완료 후.**
+
+## DEV-0423 휴대용 감정 연결 검사
+
+MIG-CHG-055·DEC-117의 제한된 시험이다. Godot 4.7.1에서 [전체 검사](../../tests/run_g2_checks.ps1)는 새 감정 계산/구형/실제 흐름/현장 경계/저장 실패 검사와 별도 프로세스 이어하기를 포함한다. [감정 경계 장면](../../tests/smoke/portable_appraisal_boundary_smoke.gd)은 구매·선택·예약·시작·생환 정산·실패 정산·예약 복구·시작 후 복구의 저장 전후16경계를 외부에서 종료/재시작한다. [앱 종료 검사](../../tests/run_lure_boundaries.ps1)는 두 종류의 도구를 함께 배정한 실제 GameEntry에서 예약/시작/정산 저장 전후6경계의 종료와 복구를 검사한다.
+
+실제 화면 입력으로 구매20, 유인물1개 사용, 미확인 잔재 회수/확정1회, 폐품2개 포함 귀환·판매240·세금24·보상10·입금226·기말돈306·감정도구1개 원가10 반환을 확인한다. 손익216과 현금206은 서로 다르다. 구매/정산 저장 실패 뒤 재시도·중복 요청·선택 부족 시 재견적도 포함한다. 별도 준비 사례로 일반 폐품 감정의 의뢰 갱신, 보호 원본/잔량0, 무게2.75→2.5→2.25의 부담 해제/이동·소음, 일반/비상 귀환·실패 보존 경계를 검사한다. 준비 사례의 종료 API를 실제 퇴로 플레이로 보고하지 않는다.
+
+실제 그래픽 렌더러에서1152×648·1600×900의 견적/실패/미확인/감정 후/결과/최근 보고/재고 부족·긴 금액/잔액 부족·보호/잔량0을 캡처해 확인한다. 자동 동작과 화면 검사는 사람의 가격 적절성·운반 판단·거점/현장 서비스 역할 평가를 대신하지 않는다.
+
+최종 결과: **전체104/104 프로세스·60개 스모크 장면·별도 프로세스 이어하기, 외부 종료22/22경계, 그래픽2회·두 해상도24장**을 통과했다. P01~P10 실제 계산, 준비 경계54개·구형/손상 저장65개와 실제 현장/보호/의뢰/무게 검사를 포함한다. 활성 Markdown52개·링크/앵커1,899개·related567개, 동결 원본6개·사본3개·이전 결과/Story/Reference/결정·열린 질문 상태·두 검사 표·공백 검사도 통과했다. 전체 실행 뒤에는 GameEntry 끝의 빈 줄 하나만 제거했다. 실행 소스와 최종 작업 트리의 해시를 모두 기록했으며 실행 내용은 동일하다.
+
+재현 명령은 아래와 같다. 그래픽 검사는 `--headless` 없이 실행하고 시험 자료/캡처는 TEMP의 별도 디렉터리에 저장한다.
+
+```powershell
+./tests/run_g2_checks.ps1 -GodotBin $env:GODOT_BIN -Repetitions 1
+./tests/run_cost_boundaries.ps1 -GodotBin $env:GODOT_BIN -Scene 'res://tests/smoke/portable_appraisal_boundary_smoke.tscn' -Marker '\[SmokeTest\] portable_appraisal_boundary_passed' -Actions @('purchase','selection','reserve','start','settle','failure','recover_reserved','recover_started')
+./tests/run_lure_boundaries.ps1 -GodotBin $env:GODOT_BIN
+& $env:GODOT_BIN --path . --rendering-method gl_compatibility --fixed-fps 60 res://tests/smoke/portable_appraisal_flow_smoke.tscn -- --portable-render
+& $env:GODOT_BIN --path . --rendering-method gl_compatibility --fixed-fps 60 res://tests/smoke/portable_appraisal_field_smoke.tscn -- --portable-field-render
+```
+
+최종 프로세스 결과·소스 해시와 경계/화면 근거는 [자동 검사 JSON](dev0423_automated_results.json), 활성 링크·원본/사본·두 시점 표·이전 결과/Story/Reference 보존·변경 범위·공백 검사는 [문서 검사 JSON](dev0423_document_results.json)에 기록한다. 이전 DEV-0422 계산/문서 기록은 수정하지 않는다.
+
+**DEV-0423 — 휴대용 감정 준비·사용·정산 연결 구현·검증 완료, 사용자 로컬 커밋 승인.** 유료 수량 선택/부족분 구매, 가방의 확정 감정과 잔량·합산 무게·의뢰 갱신, 안전 귀환 반환/실패 소실·비용 보고·저장/이어하기를 연결했다. 시험값은 단가10·휴대/총 재고2·기본0·개당 무게0.25이며 최종 수치와 사람 평가는 Q-030에 남긴다. 스키마10·거점15필드로 구형1~9를 보존 전환한다. 기준 3dc19c7, 승인된 로컬 4커밋 앞섬·뒤처짐 0에서 시작했다. 2026-10-10 사용자가 검토된 DEV-0423 결과의 로컬 커밋을 승인했으며 push하지 않았다. 다음은 **DEV-0424 — G4 보완 완료 조건 검토**다. G4 전체 완료와 G5 착수는 보류한다. **정합성 검사: 아직 아님 — G5 완료 후.**

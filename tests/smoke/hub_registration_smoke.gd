@@ -134,6 +134,8 @@ func _check_registration_domain() -> void:
 
 
 func _envelope(version: int, hub: Dictionary) -> Dictionary:
+	if version <= 9:
+		hub = LegacyProgressFixture.before_appraisal(hub)
 	return {"schema_version": version, "content_version": ProgressStore.CONTENT_VERSION, "resume_state": "hub", "hub": hub}
 
 
@@ -163,7 +165,7 @@ func _check_migration() -> void:
 	_write_json(path, _envelope(1, legacy))
 	var original := FileAccess.get_file_as_bytes(path)
 	var upgraded := store.load_data()
-	_expect(upgraded.size() == 13 and upgraded.registered_items.is_empty() and upgraded.harness_durability == 3 and HubState.from_save_data(upgraded, CATALOG) != null and FileAccess.get_file_as_bytes(path) == original, "Legacy load was lossy or rewrote the file.")
+	_expect(upgraded.size() == 15 and upgraded.registered_items.is_empty() and upgraded.harness_durability == 3 and HubState.from_save_data(upgraded, CATALOG) != null and FileAccess.get_file_as_bytes(path) == original, "Legacy load was lossy or rewrote the file.")
 	_expect(DirAccess.make_dir_absolute(path + ".tmp") == OK, "Cannot prepare migration write failure.")
 	_expect(store.save_data(upgraded) != OK and FileAccess.get_file_as_bytes(path) == original, "Failed migration destroyed legacy file.")
 	_expect(DirAccess.remove_absolute(path + ".tmp") == OK, "Cannot remove isolated failure directory.")
@@ -322,7 +324,7 @@ func _failure_after_registration() -> void:
 func _expect_registration_state(stored: int, registered: int) -> void:
 	var saved := _store.load_data()
 	_expect(_entry.get_hub_money() == _expected_registry_money and _entry.get_hub_stored_items().size() == stored and _entry.get_hub_registered_items().size() == registered, "Live original counts or money changed.")
-	_expect(saved.size() == 13 and saved.money == str(_expected_registry_money) and saved.stored_items.size() == stored and saved.registered_items.size() == registered, "Saved registration differs from memory.")
+	_expect(saved.size() == 15 and saved.money == str(_expected_registry_money) and saved.stored_items.size() == stored and saved.registered_items.size() == registered, "Saved registration differs from memory.")
 
 
 func _click_registry_row(list: ItemList, index: int) -> void:

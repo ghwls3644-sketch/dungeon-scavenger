@@ -46,6 +46,11 @@ var _lures_open := false
 var _preparing_lures := false
 var _lure_quote: LurePreparationQuote
 var _recovery_required := false
+var _portable_open := false
+var _preparing_portable := false
+var _portable_quote: AppraisalPreparationQuote
+
+@onready var _portable: HubPortableAppraisalPanel = $Interface/HubPanel/PortablePanel
 
 @onready var _lures: HubLurePanel = $Interface/HubPanel/LurePanel
 @onready var _title: TitleScreen = $Interface/TitleScreen
@@ -114,6 +119,11 @@ func _ready() -> void:
 	_lures.confirmation_requested.connect(_on_lures_confirmed)
 	_lures.selection_requested.connect(_on_lures_selection_requested)
 	_lures.close_requested.connect(_on_lures_closed)
+	_hub.portable_requested.connect(_on_portable_requested)
+	_portable.review_requested.connect(_on_portable_review_requested)
+	_portable.confirmation_requested.connect(_on_portable_confirmed)
+	_portable.selection_requested.connect(_on_portable_selection_requested)
+	_portable.close_requested.connect(_on_portable_closed)
 	_results.settlement_requested.connect(_on_settlement_requested)
 	_results.quit_requested.connect(_on_quit_requested)
 	GameState.state_changed.connect(_on_state_changed)
@@ -271,6 +281,9 @@ func _restore_title(message: String) -> void:
 
 func _on_state_changed(_previous_state: int, current_state: int) -> void:
 	_starting = false
+	_portable_open = false
+	_portable_quote = null
+	_portable.hide()
 	_lures_open = false
 	_lure_quote = null
 	_lures.hide()
@@ -355,7 +368,7 @@ func get_hub_registered_items() -> Array[InventoryItem]:
 
 
 func _on_bag_slots_selected(slots: int) -> void:
-	if _lures_open or _preparing_lures or _recovery_required or _repair_open or _repairing or _harness_open or _equipping or _upgrade_open or _upgrading:
+	if _portable_open or _preparing_portable or _lures_open or _preparing_lures or _recovery_required or _repair_open or _repairing or _harness_open or _equipping or _upgrade_open or _upgrading:
 		return
 	if GameState.get_current_state() != GameState.State.HUB or _departing or _appraisal_open or _appraising or _sale_open or _selling or _registration_open or _registering:
 		return
@@ -374,7 +387,7 @@ func _on_departure_requested() -> void:
 	if _recovery_required:
 		_retry_departure_recovery()
 		return
-	if _lures_open or _preparing_lures or _recovery_required or _repair_open or _repairing or _harness_open or _equipping or _upgrade_open or _upgrading:
+	if _portable_open or _preparing_portable or _lures_open or _preparing_lures or _recovery_required or _repair_open or _repairing or _harness_open or _equipping or _upgrade_open or _upgrading:
 		return
 	if _departing or _appraisal_open or _appraising or _sale_open or _selling or _registration_open or _registering or GameState.get_current_state() != GameState.State.HUB or get_tree().paused:
 		return
@@ -382,6 +395,10 @@ func _on_departure_requested() -> void:
 		return
 	if not _hub_state.can_depart(PROTOTYPE_ECONOMY):
 		_on_repair_requested()
+		return
+	if not _hub_state.has_prepared_appraisals():
+		_on_portable_requested()
+		_portable.set_status("선택한 감정 도구가 부족합니다. 구매 비용을 다시 확인하거나 0개로 바꾸세요.")
 		return
 	if not _hub_state.has_prepared_lures():
 		_on_lures_requested()
@@ -473,7 +490,7 @@ func _on_quit_requested() -> void:
 
 
 func _can_appraise() -> bool:
-	if _lures_open or _preparing_lures or _recovery_required or _repair_open or _repairing or _harness_open or _equipping or _upgrade_open or _upgrading:
+	if _portable_open or _preparing_portable or _lures_open or _preparing_lures or _recovery_required or _repair_open or _repairing or _harness_open or _equipping or _upgrade_open or _upgrading:
 		return false
 	return GameState.get_current_state() == GameState.State.HUB and not GameState.is_transition_in_progress() \
 		and not _departing and not _settling and not _appraising and not _sale_open and not _selling and not _registration_open and not _registering and not get_tree().paused
@@ -540,9 +557,9 @@ func _on_appraisal_closed() -> void:
 
 
 func _can_sell() -> bool:
-	if _lures_open or _preparing_lures or _recovery_required:
+	if _portable_open or _preparing_portable or _lures_open or _preparing_lures or _recovery_required:
 		return false
-	if _lures_open or _preparing_lures or _recovery_required or _repair_open or _repairing or _harness_open or _equipping or _upgrade_open or _upgrading:
+	if _portable_open or _preparing_portable or _lures_open or _preparing_lures or _recovery_required or _repair_open or _repairing or _harness_open or _equipping or _upgrade_open or _upgrading:
 		return false
 	return GameState.get_current_state() == GameState.State.HUB and not GameState.is_transition_in_progress() \
 		and not _departing and not _settling and not _appraising and not _appraisal_open and not _selling and not _registration_open and not _registering and not get_tree().paused
@@ -609,9 +626,9 @@ func _on_sale_closed() -> void:
 
 
 func _can_register() -> bool:
-	if _lures_open or _preparing_lures or _recovery_required:
+	if _portable_open or _preparing_portable or _lures_open or _preparing_lures or _recovery_required:
 		return false
-	if _lures_open or _preparing_lures or _recovery_required or _repair_open or _repairing or _harness_open or _equipping or _upgrade_open or _upgrading:
+	if _portable_open or _preparing_portable or _lures_open or _preparing_lures or _recovery_required or _repair_open or _repairing or _harness_open or _equipping or _upgrade_open or _upgrading:
 		return false
 	return GameState.get_current_state() == GameState.State.HUB and not GameState.is_transition_in_progress() \
 		and not _departing and not _settling and not _appraising and not _appraisal_open \
@@ -690,7 +707,7 @@ func _render_equipment() -> void:
 
 
 func _can_repair() -> bool:
-	if _lures_open or _preparing_lures or _recovery_required:
+	if _portable_open or _preparing_portable or _lures_open or _preparing_lures or _recovery_required:
 		return false
 	if _harness_open or _equipping or _upgrade_open or _upgrading:
 		return false
@@ -768,7 +785,7 @@ func _on_repair_closed() -> void:
 
 
 func _can_equip() -> bool:
-	if _lures_open or _preparing_lures or _recovery_required:
+	if _portable_open or _preparing_portable or _lures_open or _preparing_lures or _recovery_required:
 		return false
 	if _upgrade_open or _upgrading:
 		return false
@@ -843,7 +860,7 @@ func _on_harness_closed() -> void:
 
 
 func _can_upgrade() -> bool:
-	if _lures_open or _preparing_lures or _recovery_required:
+	if _portable_open or _preparing_portable or _lures_open or _preparing_lures or _recovery_required:
 		return false
 	return GameState.get_current_state() == GameState.State.HUB and not GameState.is_transition_in_progress() \
 		and not get_tree().paused and not _departing and not _settling and not _upgrading \
@@ -942,7 +959,7 @@ func _render_recovery_status() -> void:
 
 func _can_prepare_lures() -> bool:
 	return GameState.get_current_state() == GameState.State.HUB and not GameState.is_transition_in_progress() \
-		and not get_tree().paused and not _departing and not _settling and not _preparing_lures and not _recovery_required \
+		and not get_tree().paused and not _departing and not _settling and not _preparing_lures and not _portable_open and not _preparing_portable and not _recovery_required \
 		and not _appraisal_open and not _appraising and not _sale_open and not _selling \
 		and not _registration_open and not _registering and not _repair_open and not _repairing \
 		and not _harness_open and not _equipping and not _upgrade_open and not _upgrading
@@ -1015,3 +1032,64 @@ func _on_objective_selected(offer: Dictionary, source: Dictionary) -> void:
 	_hub_state = candidate
 	_hub.render_objective(_hub_state)
 	_hub.set_status("목표 선택을 저장했습니다. 의뢰 없이도 출정할 수 있습니다.")
+
+
+func _can_prepare_portable() -> bool:
+	return GameState.get_current_state() == GameState.State.HUB and not GameState.is_transition_in_progress() \
+		and not get_tree().paused and not _departing and not _settling and not _preparing_portable and not _recovery_required \
+		and not _appraisal_open and not _appraising and not _sale_open and not _selling \
+		and not _registration_open and not _registering and not _repair_open and not _repairing \
+		and not _harness_open and not _equipping and not _upgrade_open and not _upgrading and not _lures_open and not _preparing_lures
+
+
+func _on_portable_requested() -> void:
+	if not _can_prepare_portable() or _portable_open:
+		return
+	_portable_open = true
+	_portable_quote = null
+	_hub.get_node("Center").hide()
+	_portable.present(_hub_state)
+
+
+func _on_portable_review_requested(count: int) -> void:
+	if not _can_prepare_portable() or not _portable_open or _portable_quote != null:
+		return
+	_portable_quote = _hub_state.quote_portable_appraisals(count)
+	_portable.set_review(_portable_quote)
+
+
+func _on_portable_selection_requested() -> void:
+	if not _can_prepare_portable() or not _portable_open:
+		return
+	_portable_quote = null
+	_portable.present(_hub_state)
+
+
+func _on_portable_confirmed() -> void:
+	if not _can_prepare_portable() or not _portable_open or _portable_quote == null:
+		return
+	_preparing_portable = true
+	var candidate := _hub_state.copy()
+	if not candidate.apply_portable_appraisals(_portable_quote) or not _save_hub(candidate):
+		_preparing_portable = false
+		_portable.set_status("저장 실패 또는 준비 상태 변경 · 돈과 수량은 그대로입니다.\n다시 확정하거나 선택으로 돌아가 취소하세요.")
+		return
+	var paid := _portable_quote.get_cost()
+	_hub_state = candidate
+	_portable_quote = null
+	_preparing_portable = false
+	_hub.render_holdings(_hub_state.get_money(), _hub_state.get_stored_items(), _hub_state.get_preparation_costs(), _hub_state.get_last_costs())
+	_hub.render_preparation(_hub_state.create_departure_loadout(), false)
+	_hub.render_objective(_hub_state)
+	_portable.present(_hub_state)
+	_portable.set_status("준비 저장 완료 · 이번 지불액 %d · 거점 감정 도구 %d개\n출정할 때 선택한 수량을 가져갑니다." % [paid, _hub_state.get_paid_appraisals()])
+
+
+func _on_portable_closed() -> void:
+	if not _can_prepare_portable() or not _portable_open:
+		return
+	_portable_open = false
+	_portable_quote = null
+	_portable.hide()
+	_hub.get_node("Center").show()
+	_hub.get_node("%PortableButton").grab_focus()

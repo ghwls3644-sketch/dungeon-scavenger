@@ -193,7 +193,7 @@ func _check_tax_legacy() -> void:
 			if phase in ["reserved", "started"]:
 				_expect(hub.recover_departure() and hub.get_money() == 100 and not hub.recover_departure(), "Legacy recovery charged or repeated tax.")
 			_expect(store.save_data(hub.to_save_data()) == OK, "Tax migration cannot save.")
-			_expect(HubState.from_save_data(store.load_data(), CATALOG).to_save_data() == hub.to_save_data() and JSON.parse_string(FileAccess.get_file_as_string(path)).schema_version == 9, "Tax migration not lossless schema 9.")
+			_expect(HubState.from_save_data(store.load_data(), CATALOG).to_save_data() == hub.to_save_data() and JSON.parse_string(FileAccess.get_file_as_string(path)).schema_version == ProgressStore.SCHEMA_VERSION, "Tax migration not lossless current schema.")
 
 
 func _check_tax_corruption() -> void:
@@ -226,5 +226,5 @@ func _check_tax_corruption() -> void:
 		_expect(HubState.from_save_data(bad, CATALOG) == null and store.load_data().is_empty() and store.save_data(valid) != OK and bytes == FileAccess.get_file_as_bytes(path), "Bad tax state accepted or repaired silently.")
 	_write(path, _envelope(valid, 8))
 	_expect(store.load_data().is_empty(), "Hybrid schema 8 with tax keys accepted as legacy.")
-	_write(path, _envelope(valid, 10))
+	_write(path, _envelope(valid, ProgressStore.SCHEMA_VERSION + 1))
 	_expect(store.load_data().is_empty() and store.get_last_error() == ERR_UNAVAILABLE, "Unknown tax schema accepted.")

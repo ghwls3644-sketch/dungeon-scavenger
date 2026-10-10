@@ -22,6 +22,7 @@ var _started := false
 var _finished := false
 var _timing_configured := false
 var _start_initialized := false
+var _portable: PortableAppraisalController
 
 @onready var _player: PlayerController = %Player
 @onready var _inventory: PlayerInventory = $Player/Inventory
@@ -35,6 +36,11 @@ var _start_initialized := false
 
 
 func _ready() -> void:
+	_portable = PortableAppraisalController.new()
+	_portable.name = "PortableAppraisalController"
+	add_child(_portable)
+	_portable.status_changed.connect(_update_tool_status)
+	_inventory_panel.bind_portable_appraisal(_portable)
 	_timing_configured = _interaction.configure_timing(INTERACTION_TIMING, _survival)
 	_interaction.work_canceled.connect(func(reason: String): %ChoiceStatus.text = reason)
 	_inventory_panel.opening.connect(_interaction.cancel_work)
@@ -136,9 +142,11 @@ func prepare_departure(loadout: ExpeditionLoadout, objective: Dictionary = {}) -
 		return false
 	if not %NoiseLureController.configure_supply(loadout.lure_count):
 		return false
+	if not _portable.configure(_inventory, loadout.appraisal_count, func(): return _started and not _finished and _inventory_panel.visible and get_tree().paused):
+		return false
 	_loadout = loadout.copy()
 	_objective_offer = objective.duplicate(true)
-	_inventory.set_external_weight(_loadout.lure_count * _loadout.lure_weight)
+	_update_tool_status()
 	_inventory.configure_capacity(_loadout.slot_capacity, _loadout.burden_weight, _loadout.overload_weight)
 	_harness.configure_charge(_loadout.charge_capacity, _loadout.starting_charge)
 	return true
@@ -183,6 +191,7 @@ func _set_simulation_enabled(enabled: bool) -> void:
 	if not enabled:
 		%MalfunctioningTrap.set_exploration_active(false)
 	%NoiseLureController.set_active(enabled)
+	_portable.set_active(enabled)
 	%MovementNoiseEmitter.set_active(enabled)
 	%GolemHearing.set_active(enabled)
 	%QuickDropController.set_active(enabled)
@@ -252,6 +261,7 @@ func _on_run_ended(outcome: ExplorationOutcome) -> void:
 	_finished = true
 	var tool: NoiseLureController = %NoiseLureController
 	outcome.record_lure_usage(tool.get_capacity(), tool.get_capacity() - tool.get_remaining_uses())
+	outcome.record_appraisal_usage(_portable.get_capacity(), _portable.get_capacity() - _portable.get_remaining_uses())
 	_survival.end_exploration()
 	%ExplorationMapPanel.set_input_enabled(false)
 	_inventory_panel.close_inventory()
@@ -304,10 +314,11 @@ func _on_movement_noise_heard(escalated: bool) -> void:
 func _update_tool_status() -> void:
 	var tool: NoiseLureController = %NoiseLureController
 	if _loadout != null:
-		_inventory.set_external_weight(tool.get_remaining_uses() * _loadout.lure_weight)
-	%ToolStatus.text = "소음 유인물 %d/%d · F 투척\n마우스로 목표 위치 지정\n%s" % [
+		_inventory.set_external_weight(tool.get_remaining_uses() * _loadout.lure_weight + _portable.get_remaining_uses() * _loadout.appraisal_weight)
+	%ToolStatus.text = "소음 유인물 %d/%d · F 투척\n마우스로 목표 위치 지정\n%s\n감정 도구 %d/%d · Tab 가방에서 사용" % [
 		tool.get_remaining_uses(), tool.get_capacity(),
 		"투척 중" if tool.is_in_flight() else "플레이어를 못 본 골렘을 유인합니다.",
+		_portable.get_remaining_uses(), _portable.get_capacity(),
 	]
 
 

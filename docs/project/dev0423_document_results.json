@@ -1,0 +1,582 @@
+{
+  "scope": "DEV-0423 휴대용 감정 준비·사용·정산 연결",
+  "status": "implementation validated; user approved reviewed DEV-0423 local commit",
+  "base_commit": "3dc19c7b0ec15693c5f0da97a41e1d6a2e693f3a",
+  "passed": true,
+  "source_tree_sha256": "cad35d5adc17974f408db2da220b83c9d1e103ccca83148a29103ac31fdb2899",
+  "executed_source_tree_sha256": "59b7046bf9c45258ed9080749142b3a8a03284f6a04ec985c7108e5e24916f19",
+  "post_execution_change": "one trailing blank line removed from game_entry.gd only; executable content unchanged",
+  "active_markdown_files": 52,
+  "relative_links_and_anchors_checked": 1899,
+  "related_paths_checked": 567,
+  "frozen_sources": [
+    {
+      "id": "SRC-001",
+      "path": "게임 기획 파일/통합 게임 기획서 v2.1.md",
+      "sha256": "45E92DFEDE482968B31C14EEF712012735AA9657DE18BD7C0922F94D40DD460A",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-002",
+      "path": "게임 기획 파일/스토리 정리 v1.5.md",
+      "sha256": "4191C100D5B3BFBEF291D3FD4D7588A3C5C31113A1827D33886CC8C90931292D",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-003",
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.1.md",
+      "sha256": "A52337ED1CC3DECEBF8BD6840662E12FAFDDCFA95C3E5E8D5E1129FFBBEF796F",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-004",
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.2.md",
+      "sha256": "0BAC7F52CF21EDDCD4B720C7B5B8FF76F98FB452904CEBCC3E03C1EB2B220C67",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-005",
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.2.1.md",
+      "sha256": "B4451E06D8FFAF5D1A233FA1A639E783BA17973977398C12527333A7707319F0",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-006",
+      "path": "게임 기획 파일/게임 개발 단계별 제안서 v0.1.md",
+      "sha256": "2EE29ACA36E74F5E0206AFF150ED610EBA8381E594B9091141E6F74CAA2B60C1",
+      "matches_record": true
+    }
+  ],
+  "archive_copies": [
+    {
+      "path": "docs/archive/story_v1.5_full.md",
+      "source_id": "SRC-002",
+      "bytes_match": true
+    },
+    {
+      "path": "docs/archive/story_document_management_proposal_v0.1.md",
+      "source_id": "SRC-003",
+      "bytes_match": true
+    },
+    {
+      "path": "docs/archive/story_document_management_proposal_v0.2.md",
+      "source_id": "SRC-004",
+      "bytes_match": true
+    }
+  ],
+  "checkpoints_unchanged": {
+    "docs/README.md": true,
+    "docs/project/migration_manifest.md": true
+  },
+  "preserved_content": [
+    {
+      "path": "AGENTS.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/archive/README.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/archive/story_document_management_proposal_v0.1.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/archive/story_document_management_proposal_v0.2.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/archive/story_v1.5_full.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/decisions.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0317_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0317_route_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0319_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0320_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0320_timing_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0321_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0321_route_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0322_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0322_escape_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0323_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0323_continue_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0323_flow_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0401_appraisal_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0401_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0401_continue_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0402_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0402_continue_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0402_sale_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0403_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0403_continue_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0403_registration_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0404_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0404_continue_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0404_research_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0405_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0406_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0406_continue_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0406_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0406_render_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0406_wear_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0407_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0407_continue_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0407_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0407_render_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0407_repair_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0407_support_continue_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0407_support_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0408_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0409_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0409_continue_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0409_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0409_harness_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0409_migration_support_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0409_render_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0410_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0411_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0411_continue_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0411_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0411_purchase_support_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0411_render_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0411_upgrade_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0412_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0413_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0413_boundary_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0413_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0413_render_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0414_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0415_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0415_boundary_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0415_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0415_render_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0416_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0416_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0417_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0418_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0418_boundary_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0418_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0418_objective_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0418_render_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0419_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0419_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0420_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0421_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0421_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/dev0422_document_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/g1_playtest_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/g2_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/g3_automated_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/project/g3_route_results.json",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/reference/README.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/reference/entity_index.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/reference/glossary.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/reference/speaker_lexicon.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/reference/timeline.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/story/00_core_pillars.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/story/01_world_history.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/story/02_dungeon_canon.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/story/03_player_and_society.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/story/04_characters_and_factions.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/story/05_items_and_discoveries.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/story/06_narrative_progression.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/story/07_tone_and_writing_guide.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "docs/story/README.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "project.godot",
+      "content_unchanged": true
+    },
+    {
+      "path": "게임 기획 파일/게임 개발 단계별 제안서 v0.1.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.1.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.2.1.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.2.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "게임 기획 파일/스토리 정리 v1.5.md",
+      "content_unchanged": true
+    },
+    {
+      "path": "게임 기획 파일/통합 게임 기획서 v2.1.md",
+      "content_unchanged": true
+    }
+  ],
+  "question_statuses_unchanged": true,
+  "changed_paths": [
+    "docs/GDD.md",
+    "docs/README.md",
+    "docs/design/README.md",
+    "docs/design/economy_rules.md",
+    "docs/design/expedition_cost_reporting.md",
+    "docs/design/expedition_objectives.md",
+    "docs/design/item_rules.md",
+    "docs/design/portable_appraisal.md",
+    "docs/design/recovery_tax.md",
+    "docs/design/tool_preparation.md",
+    "docs/project/README.md",
+    "docs/project/dev0423_automated_results.json",
+    "docs/project/dev0423_document_results.json",
+    "docs/project/development_handoff.md",
+    "docs/project/g4_meta_review.md",
+    "docs/project/migration_changes.md",
+    "docs/project/migration_manifest.md",
+    "docs/project/module_boundaries.md",
+    "docs/project/open_questions.md",
+    "docs/project/project_context.md",
+    "src/app/game_entry.gd",
+    "src/app/prototype_exploration.gd",
+    "src/core/expedition_loadout.gd",
+    "src/data/appraisal_supply_rule.gd",
+    "src/data/appraisal_supply_rule.gd.uid",
+    "src/data/prototype_appraisal_supply.tres",
+    "src/gameplay/inventory/player_inventory.gd",
+    "src/gameplay/recovery/exploration_outcome.gd",
+    "src/gameplay/tools/portable_appraisal_controller.gd",
+    "src/gameplay/tools/portable_appraisal_controller.gd.uid",
+    "src/infrastructure/progress_store.gd",
+    "src/meta/appraisal_preparation.gd",
+    "src/meta/appraisal_preparation.gd.uid",
+    "src/meta/appraisal_preparation_quote.gd",
+    "src/meta/appraisal_preparation_quote.gd.uid",
+    "src/meta/expedition_costs.gd",
+    "src/meta/hub_state.gd",
+    "src/meta/lure_preparation.gd",
+    "src/ui/cost_report_text.gd",
+    "src/ui/hub_panel.gd",
+    "src/ui/hub_panel.tscn",
+    "src/ui/hub_portable_appraisal_panel.gd",
+    "src/ui/hub_portable_appraisal_panel.gd.uid",
+    "src/ui/hub_portable_appraisal_panel.tscn",
+    "src/ui/inventory_panel.gd",
+    "src/ui/inventory_panel.tscn",
+    "tests/fixtures/legacy_progress_fixture.gd",
+    "tests/fixtures/legacy_progress_fixture.gd.uid",
+    "tests/run_cost_boundaries.ps1",
+    "tests/run_g2_checks.ps1",
+    "tests/smoke/equipment_wear_smoke.gd",
+    "tests/smoke/expedition_costs_smoke.gd",
+    "tests/smoke/g3_survival_flow_smoke.gd",
+    "tests/smoke/hub_appraisal_smoke.gd",
+    "tests/smoke/hub_registration_smoke.gd",
+    "tests/smoke/hub_repair_smoke.gd",
+    "tests/smoke/hub_sale_smoke.gd",
+    "tests/smoke/hub_upgrade_smoke.gd",
+    "tests/smoke/lure_departure_smoke.gd",
+    "tests/smoke/portable_appraisal_boundary_smoke.gd",
+    "tests/smoke/portable_appraisal_boundary_smoke.gd.uid",
+    "tests/smoke/portable_appraisal_boundary_smoke.tscn",
+    "tests/smoke/portable_appraisal_field_smoke.gd",
+    "tests/smoke/portable_appraisal_field_smoke.gd.uid",
+    "tests/smoke/portable_appraisal_field_smoke.tscn",
+    "tests/smoke/portable_appraisal_flow_smoke.gd",
+    "tests/smoke/portable_appraisal_flow_smoke.gd.uid",
+    "tests/smoke/portable_appraisal_flow_smoke.tscn",
+    "tests/smoke/portable_appraisal_smoke.gd",
+    "tests/smoke/portable_appraisal_smoke.gd.uid",
+    "tests/smoke/portable_appraisal_smoke.tscn",
+    "tests/smoke/recovery_tax_smoke.gd"
+  ],
+  "unrelated_changes": [],
+  "source_file_count": 540,
+  "git_diff_check_passed": true,
+  "human_playtest_completed": false,
+  "commit_status": "user approved reviewed DEV-0423 local commit; not pushed",
+  "local_ahead": 4,
+  "local_behind": 0,
+  "next_ticket": "DEV-0424 — G4 보완 완료 조건 검토",
+  "consistency_checkpoint": "정합성 검사: 아직 아님 — G5 완료 후",
+  "failures": []
+}

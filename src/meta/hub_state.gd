@@ -15,6 +15,9 @@ var _active_expedition_id := 0
 var _pending_settlement: SettlementResult
 var _paid_lures := 0
 var _selected_lures := 2
+var _paid_appraisals := 0
+var _selected_appraisals := 0
+var _return_appraisals := 0
 var _pending_departure: Dictionary = {}
 var _return_paid_lures := 0
 var _costs := ExpeditionCosts.new_book(0)
@@ -77,6 +80,8 @@ func create_departure_loadout() -> ExpeditionLoadout:
 	var result := _loadout.copy()
 	result.lure_count = _selected_lures
 	result.lure_weight = LurePreparation.RULE.unit_weight
+	result.appraisal_count = _selected_appraisals
+	result.appraisal_weight = AppraisalPreparation.RULE.unit_weight
 	return result
 
 
@@ -272,6 +277,9 @@ func copy() -> HubState:
 	result._pending_settlement = _pending_settlement
 	result._paid_lures = _paid_lures
 	result._selected_lures = _selected_lures
+	result._paid_appraisals = _paid_appraisals
+	result._selected_appraisals = _selected_appraisals
+	result._return_appraisals = _return_appraisals
 	result._pending_departure = _pending_departure.duplicate(true)
 	result._return_paid_lures = _return_paid_lures
 	result._costs = _costs.duplicate(true)
@@ -308,6 +316,8 @@ func to_progress_data() -> Dictionary:
 		"harness_upgrades": _loadout.harness_upgrades.duplicate(),
 		"paid_lures": _paid_lures,
 		"selected_lures": _selected_lures,
+		"paid_appraisals": _paid_appraisals,
+		"selected_appraisals": _selected_appraisals,
 		"pending_departure": _pending_departure.duplicate(true),
 		"costs": _costs.duplicate(true),
 		"objective": _objective.duplicate(true),
@@ -315,7 +325,7 @@ func to_progress_data() -> Dictionary:
 
 
 static func from_save_data(data: Dictionary, catalog: ItemCatalog) -> HubState:
-	if catalog == null or not catalog.is_valid() or data.size() != 13 or not ExpeditionObjective.valid_offer(data.get("objective")) or not LurePreparation.valid_save(data) \
+	if catalog == null or not catalog.is_valid() or data.size() != 15 or not AppraisalPreparation.valid_save(data) or not ExpeditionObjective.valid_offer(data.get("objective")) or not LurePreparation.valid_save(data) \
 			or not ExpeditionCosts.valid_save(data.get("costs"), data) \
 			or not HarnessUpgradeRule.is_valid_owned(data.get("harness_upgrades")) \
 			or not is_valid_harness_durability(data.get("harness_durability")) \
@@ -342,6 +352,8 @@ static func from_save_data(data: Dictionary, catalog: ItemCatalog) -> HubState:
 	restored.select_bag_slots(int(slots))
 	restored._paid_lures = int(data.paid_lures)
 	restored._selected_lures = int(data.selected_lures)
+	restored._paid_appraisals = int(data.paid_appraisals)
+	restored._selected_appraisals = int(data.selected_appraisals)
 	restored._pending_departure = data.pending_departure.duplicate(true)
 	restored._costs = data.costs.duplicate(true)
 	restored._objective = data.objective.duplicate(true)
@@ -415,12 +427,23 @@ func prepare_settlement(expedition_id: int, outcome: ExplorationOutcome, rule: E
 	var returned := 0
 	var free_used := 0
 	var paid_used := 0
+	var appraisal_used := 0
+	var returned_appraisals := 0
 	if has_pending_departure():
 		var tools := outcome.get_lure_usage() if outcome != null else {}
 		if _pending_departure.phase != "started" or tools.size() != 2 \
 				or tools.get("capacity") != _selected_lures \
 				or not LurePreparation.is_count(tools.get("used"), _selected_lures):
 			return false
+		var appraisals := outcome.get_appraisal_usage()
+		# Old standalone outcomes with no tools remain valid; a carried tool requires explicit usage.
+		if appraisals.is_empty() and _selected_appraisals == 0:
+			appraisals = {"capacity": 0, "used": 0}
+		if appraisals.size() != 2 or appraisals.get("capacity") != _selected_appraisals \
+				or not LurePreparation.is_count(appraisals.get("used"), _selected_appraisals):
+			return false
+		appraisal_used = int(appraisals.used)
+		returned_appraisals = _selected_appraisals - appraisal_used if outcome.is_safe_return() else 0
 		free_used = mini(int(tools.used), int(_pending_departure.free))
 		paid_used = int(tools.used) - free_used
 		returned = int(_pending_departure.paid) - paid_used if outcome.is_safe_return() else 0
@@ -430,10 +453,11 @@ func prepare_settlement(expedition_id: int, outcome: ExplorationOutcome, rule: E
 	var count := ExpeditionObjective.eligible_count(outcome.get_recovery_result().get_recovered_inventory_items()) if outcome.is_safe_return() else 0
 	if not settlement.set_objective(ExpeditionObjective.result(_objective, count)):
 		return false
-	var report := ExpeditionCosts.make_report(_costs, expedition_id, "failure" if outcome.is_failure() else "safe", settlement.get_sales_income(), free_used, paid_used, settlement.get_objective_result(), settlement.get_tax_receipt())
+	var report := ExpeditionCosts.make_report(_costs, expedition_id, "failure" if outcome.is_failure() else "safe", settlement.get_sales_income(), free_used, paid_used, settlement.get_objective_result(), settlement.get_tax_receipt(), appraisal_used)
 	if not settlement.set_cost_report(report):
 		return false
 	_return_paid_lures = returned
+	_return_appraisals = returned_appraisals
 	_pending_settlement = settlement
 	return true
 
@@ -448,10 +472,10 @@ func apply_settlement(expedition_id: int) -> bool:
 	if not _pending_settlement.matches_current_rule():
 		return false
 	var income := _pending_settlement.get_net_income()
-	if income > 9223372036854775807 - _money or _paid_lures + _return_paid_lures > LurePreparation.RULE.stock_limit:
+	if income > 9223372036854775807 - _money or _paid_lures + _return_paid_lures > LurePreparation.RULE.stock_limit or _paid_appraisals + _return_appraisals > AppraisalPreparation.RULE.maximum_count:
 		return false
 	var costs := ExpeditionCosts.finish(_pending_settlement.get_cost_report())
-	if costs.is_empty() or costs.stock.size() != _paid_lures + _return_paid_lures or costs.period.opening_money != str(_money + income):
+	if costs.is_empty() or costs.stock.size() != _paid_lures + _return_paid_lures or costs.appraisal_stock.size() != _paid_appraisals + _return_appraisals or costs.period.opening_money != str(_money + income):
 		return false
 	var retained := _pending_settlement.get_retained_items()
 	for id in _pending_settlement.get_harness_upgrades():
@@ -459,6 +483,8 @@ func apply_settlement(expedition_id: int) -> bool:
 			_loadout.harness_upgrades.append(id)
 	_paid_lures += _return_paid_lures
 	_return_paid_lures = 0
+	_paid_appraisals += _return_appraisals
+	_return_appraisals = 0
 	_pending_departure.clear()
 	_costs = costs
 	_objective.clear()
@@ -506,10 +532,10 @@ func has_pending_departure() -> bool:
 
 
 func reserve_departure() -> int:
-	if not has_prepared_lures():
+	if not has_prepared_lures() or not has_prepared_appraisals():
 		return 0
 	var paid := maxi(_selected_lures - LurePreparation.RULE.free_count, 0)
-	var costs := ExpeditionCosts.reserve(_costs, paid)
+	var costs := ExpeditionCosts.reserve(_costs, paid, _selected_appraisals)
 	if costs.is_empty():
 		return 0
 	var id := begin_expedition()
@@ -517,7 +543,8 @@ func reserve_departure() -> int:
 		return 0
 	_costs = costs
 	_paid_lures -= paid
-	_pending_departure = {"id": str(id), "phase": "reserved", "free": mini(_selected_lures, LurePreparation.RULE.free_count), "paid": paid}
+	_paid_appraisals -= _selected_appraisals
+	_pending_departure = {"id": str(id), "phase": "reserved", "free": mini(_selected_lures, LurePreparation.RULE.free_count), "paid": paid, "appraisals": _selected_appraisals}
 	return id
 
 
@@ -535,6 +562,7 @@ func recover_departure() -> bool:
 	if _pending_departure.phase == "reserved":
 		_costs = ExpeditionCosts.cancel_reservation(_costs)
 		_paid_lures += int(_pending_departure.paid)
+		_paid_appraisals += int(_pending_departure.appraisals)
 	else:
 		var report := ExpeditionCosts.make_report(_costs, int(_pending_departure.id), "interrupted", 0, -1, -1, ExpeditionObjective.result(_objective))
 		var costs := ExpeditionCosts.finish(report)
@@ -565,3 +593,34 @@ func select_objective(offer: Dictionary, expected_source: Dictionary) -> bool:
 		return false
 	_objective = offer.duplicate(true)
 	return true
+
+
+func get_paid_appraisals() -> int:
+	return _paid_appraisals
+
+
+func quote_portable_appraisals(count: Variant, rule: AppraisalSupplyRule = AppraisalPreparation.RULE) -> AppraisalPreparationQuote:
+	var source := to_save_data()
+	if source.is_empty() or rule == null or not rule.is_valid() or not LurePreparation.is_count(count, rule.maximum_count):
+		return null
+	return AppraisalPreparationQuote.new(source, int(count), rule)
+
+
+func apply_portable_appraisals(quote: AppraisalPreparationQuote, rule: AppraisalSupplyRule = AppraisalPreparation.RULE) -> bool:
+	if quote == null:
+		return false
+	var checked := quote_portable_appraisals(quote.get_count(), rule)
+	if checked == null or not checked.can_afford() or not quote.matches(to_save_data(), checked):
+		return false
+	var costs := ExpeditionCosts.purchase_appraisals(_costs, checked.get_bought_count(), rule.unit_price)
+	if costs.is_empty():
+		return false
+	_costs = costs
+	_money -= checked.get_cost()
+	_paid_appraisals += checked.get_bought_count()
+	_selected_appraisals = checked.get_count()
+	return true
+
+
+func has_prepared_appraisals() -> bool:
+	return _paid_appraisals >= _selected_appraisals

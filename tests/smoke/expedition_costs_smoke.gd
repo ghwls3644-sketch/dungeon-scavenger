@@ -248,6 +248,8 @@ func _check_storage() -> void:
 
 
 func _envelope(hub: Dictionary, version: int = ProgressStore.SCHEMA_VERSION) -> Dictionary:
+	if version <= 9:
+		hub = LegacyProgressFixture.before_appraisal(hub)
 	return {"schema_version": version, "content_version": ProgressStore.CONTENT_VERSION, "resume_state": "hub", "hub": hub}
 
 

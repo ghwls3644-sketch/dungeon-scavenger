@@ -11,6 +11,7 @@ signal upgrade_requested
 signal harness_requested
 signal repair_requested
 signal lures_requested
+signal portable_requested
 signal objective_selected(offer: Dictionary, source: Dictionary)
 
 var _objective_source: Dictionary = {}
@@ -33,6 +34,7 @@ func _ready() -> void:
 	%ObjectiveChoice.item_selected.connect(func(_index: int): _render_objective_choice())
 	%ObjectiveConfirm.pressed.connect(func(): objective_selected.emit(
 		_objective_offer.duplicate(true) if %ObjectiveChoice.selected == 1 else {}, _objective_source.duplicate(true)))
+	%PortableButton.pressed.connect(func(): portable_requested.emit())
 	%LureButton.pressed.connect(func(): lures_requested.emit())
 	_bags.item_selected.connect(func(index: int): bag_slots_selected.emit(_bags.get_item_id(index)))
 	_departure.pressed.connect(func(): departure_requested.emit())
@@ -63,11 +65,12 @@ func render_preparation(loadout: ExpeditionLoadout, busy: bool) -> void:
 	%UpgradeButton.disabled = busy
 	%HarnessButton.disabled = busy
 	%LureButton.disabled = busy
+	%PortableButton.disabled = busy
 	_objective_busy = busy
 	%ObjectiveChoice.disabled = busy
 	_render_objective_choice()
-	_details.text = "적재 여유 %d칸 · 시작 무게 %.2f · 유인물 %d개\n부담 %.1f / 과적 %.1f\n하네스 충전 %d/%d\n장착: %s" % [
-		loadout.slot_capacity, loadout.lure_count * loadout.lure_weight, loadout.lure_count, loadout.burden_weight, loadout.overload_weight,
+	_details.text = "적재 여유 %d칸 · 시작 무게 %.2f\n유인물 %d개 · 감정 도구 %d개\n부담 %.1f / 과적 %.1f\n하네스 충전 %d/%d\n장착: %s" % [
+		loadout.slot_capacity, loadout.lure_count * loadout.lure_weight + loadout.appraisal_count * loadout.appraisal_weight, loadout.lure_count, loadout.appraisal_count, loadout.burden_weight, loadout.overload_weight,
 		loadout.starting_charge, loadout.charge_capacity, HarnessModules.describe(loadout.harness_modules),
 	]
 	if not loadout.harness_upgrades.is_empty():

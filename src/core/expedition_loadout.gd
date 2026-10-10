@@ -12,6 +12,8 @@ var harness_upgrades: Array[String] = []
 # Historical standalone fixtures retain two weightless tools; HubState is explicit.
 var lure_count := 2
 var lure_weight := 0.0
+var appraisal_count := 0
+var appraisal_weight := 0.0
 
 
 func is_valid() -> bool:
@@ -22,6 +24,8 @@ func is_valid() -> bool:
 		and harness_modules.size() in [2, 3] and HarnessModules.is_valid(harness_modules, harness_modules.size())
 		and HarnessUpgradeRule.is_valid_owned(harness_upgrades)
 		and lure_count >= 0 and is_finite(lure_weight) and lure_weight >= 0.0
+		and appraisal_count >= 0 and appraisal_count <= 100 and is_finite(appraisal_weight) and appraisal_weight >= 0.0
+		and is_finite(lure_count * lure_weight + appraisal_count * appraisal_weight)
 	)
 
 
@@ -36,4 +40,6 @@ func copy() -> ExpeditionLoadout:
 	result.harness_upgrades = harness_upgrades.duplicate()
 	result.lure_count = lure_count
 	result.lure_weight = lure_weight
+	result.appraisal_count = appraisal_count
+	result.appraisal_weight = appraisal_weight
 	return result

@@ -190,3 +190,14 @@ func set_external_weight(weight: float) -> bool:
 		_external_weight = weight
 		inventory_changed.emit()
 	return true
+
+
+# The caller may defer notification to publish identification and tool consumption together.
+func identify_selected_item(expected: InventoryItem, notify: bool = true) -> bool:
+	if expected == null or not _is_valid_inventory_item(expected) or not is_finite(expected.get_definition().weight) \
+			or _selected_index < 0 or _selected_index >= _items.size() or _items[_selected_index] != expected \
+			or not expected.identify():
+		return false
+	if notify:
+		inventory_changed.emit()
+	return true

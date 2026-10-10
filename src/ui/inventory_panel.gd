@@ -10,6 +10,8 @@ signal opening
 
 var _inventory: PlayerInventory
 var _tree_was_paused := false
+var _portable: PortableAppraisalController
+var _portable_token := -1
 
 @onready var _summary: Label = %Summary
 @onready var _item_list: ItemList = %ItemList
@@ -44,6 +46,10 @@ func _ready() -> void:
 	_drop_button.pressed.connect(_on_drop_pressed)
 	_close_button.pressed.connect(close_inventory)
 	_drop_confirmation.confirmed.connect(_on_drop_confirmed)
+	%PortableAppraisalButton.pressed.connect(_on_portable_pressed)
+	%PortableConfirmation.confirmed.connect(_on_portable_confirmed)
+	%PortableConfirmation.canceled.connect(_cancel_portable)
+	%PortableConfirmation.close_requested.connect(_cancel_portable)
 	hide()
 	if not inventory_source_path.is_empty():
 		bind_inventory(get_node_or_null(inventory_source_path) as PlayerInventory)
@@ -97,6 +103,7 @@ func open_inventory() -> void:
 
 
 func close_inventory() -> void:
+	_cancel_portable()
 	if not visible:
 		return
 	_drop_confirmation.hide()
@@ -127,6 +134,7 @@ func get_selection_details_text() -> String:
 
 
 func _render() -> void:
+	_render_portable()
 	_item_list.clear()
 	_selection_details.text = "물품을 선택하면 상세 정보를 볼 수 있습니다."
 	if _inventory == null:
@@ -241,6 +249,7 @@ func _on_item_selected(index: int) -> void:
 
 
 func _on_drop_pressed() -> void:
+	_cancel_portable()
 	if _inventory == null:
 		return
 	var index := _inventory.get_selected_index()
@@ -274,3 +283,61 @@ func _on_item_add_rejected(_item: ItemDefinition, reason: StringName) -> void:
 			_status.text = "인벤토리 한도 설정을 확인하세요."
 		_:
 			_status.text = "회수할 수 없는 물품입니다."
+
+
+func bind_portable_appraisal(tool: PortableAppraisalController) -> void:
+	if _portable != null:
+		_portable.status_changed.disconnect(_render_portable)
+		_portable.confirmation_canceled.disconnect(_hide_portable_confirmation)
+		_portable.cancel_pending()
+	_portable = tool
+	if _portable != null:
+		_portable.status_changed.connect(_render_portable)
+		_portable.confirmation_canceled.connect(_hide_portable_confirmation)
+	_render_portable()
+
+
+func _render_portable() -> void:
+	%PortableAppraisalButton.visible = _portable != null
+	if _portable == null:
+		return
+	%PortableAppraisalButton.text = "휴대 감정 · %d개 남음" % _portable.get_remaining_uses()
+	%PortableAppraisalButton.disabled = not visible or not _portable.can_appraise_selected()
+
+
+func _on_portable_pressed() -> void:
+	if not visible or _portable == null:
+		return
+	_drop_confirmation.hide()
+	var quote := _portable.request_selected()
+	if quote.is_empty():
+		return
+	_portable_token = quote.token
+	%PortableConfirmation.dialog_text = "%s\n감정 도구 1개를 사용합니까? 사용 후 %d개 남습니다." % [quote.name, quote.remaining_after]
+	%PortableConfirmation.popup_centered()
+
+
+func _on_portable_confirmed() -> void:
+	if not visible or _portable == null or _portable_token < 0:
+		return
+	var token := _portable_token
+	if _portable.confirm(token):
+		_status.text = "감정 완료 · 같은 물품은 다시 감정하지 않습니다."
+	else:
+		_status.text = "대상이 달라졌습니다. 물품을 다시 선택하세요. 도구는 사용하지 않았습니다."
+	_render()
+
+
+func _hide_portable_confirmation() -> void:
+	_portable_token = -1
+	%PortableConfirmation.hide()
+
+
+func _cancel_portable() -> void:
+	if _portable != null:
+		_portable.cancel_pending()
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_APPLICATION_FOCUS_OUT:
+		_cancel_portable()

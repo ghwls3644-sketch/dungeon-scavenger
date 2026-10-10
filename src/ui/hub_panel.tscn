@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://src/ui/hub_panel.gd" id="1_script"]
 [ext_resource type="PackedScene" path="res://src/ui/hub_appraisal_panel.tscn" id="2_appraisal"]
@@ -12,6 +12,8 @@
 [ext_resource type="PackedScene" path="res://src/ui/hub_upgrade_panel.tscn" id="7_upgrade"]
 
 [ext_resource type="PackedScene" path="res://src/ui/hub_lure_panel.tscn" id="8_lure"]
+
+[ext_resource type="PackedScene" path="res://src/ui/hub_portable_appraisal_panel.tscn" id="9_portable"]
 
 [sub_resource type="StyleBoxFlat" id="CardStyle"]
 bg_color = Color(0.12, 0.105, 0.085, 1)
@@ -95,11 +97,23 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 44)
 text = "영구 개선"
 
-[node name="LureButton" type="Button" parent="Center/Card/Content/Preparation"]
+[node name="ToolChoices" type="HBoxContainer" parent="Center/Card/Content/Preparation"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="LureButton" type="Button" parent="Center/Card/Content/Preparation/ToolChoices"]
 unique_name_in_owner = true
 layout_mode = 2
 custom_minimum_size = Vector2(0, 38)
+size_flags_horizontal = 3
 text = "소음 유인물 준비"
+
+[node name="PortableButton" type="Button" parent="Center/Card/Content/Preparation/ToolChoices"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 38)
+size_flags_horizontal = 3
+text = "휴대용 감정 준비"
 
 [node name="PreparationDetails" type="Label" parent="Center/Card/Content/Preparation"]
 unique_name_in_owner = true
@@ -264,4 +278,7 @@ visible = false
 
 
 [node name="LurePanel" parent="." instance=ExtResource("8_lure")]
+visible = false
+
+[node name="PortablePanel" parent="." instance=ExtResource("9_portable")]
 visible = false

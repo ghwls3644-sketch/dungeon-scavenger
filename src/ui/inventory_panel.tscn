@@ -59,6 +59,11 @@ theme_override_constants/separation = 12
 unique_name_in_owner = true
 text = "선택 물품 버리기"
 
+[node name="PortableAppraisalButton" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
+unique_name_in_owner = true
+visible = false
+text = "휴대 감정"
+
 [node name="CloseButton" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
 unique_name_in_owner = true
 text = "닫기"
@@ -72,4 +77,10 @@ unique_name_in_owner = true
 title = "물품 버리기"
 dialog_text = "선택한 물품을 버리겠습니까?"
 ok_button_text = "버리기"
+cancel_button_text = "취소"
+
+[node name="PortableConfirmation" type="ConfirmationDialog" parent="."]
+unique_name_in_owner = true
+title = "휴대용 감정"
+ok_button_text = "1개 사용 · 감정"
 cancel_button_text = "취소"

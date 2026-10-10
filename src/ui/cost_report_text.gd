@@ -20,9 +20,10 @@ static func details(summary: Dictionary) -> String:
 		"회수세 %d · 이번 판매 %d / 거점 판매 %d" % [summary.recovery_tax, summary.loot_tax_paid, summary.storage_tax],
 		"이번 정산 입금 +%d · 의뢰 보상은 전액 지급" % summary.settlement_credit,
 		"감정 지불 %d · 수리 지불 %d" % [summary.appraisal_paid, summary.repair_paid],
-		"도구 사용 원가 %s" % _cost(summary.used_cost, summary.used_unknown),
-		"%s 원가 %s" % ["종료로 휴대분 소실" if summary.outcome == "interrupted" else "미사용 도구 소실", _cost(summary.lost_cost, summary.lost_unknown)],
-		"새 도구 구매 %d · 영구 개선 투자 %d" % [summary.lure_bought, summary.upgrade_paid],
+		"유인물 사용 원가 %s" % _cost(summary.used_cost, summary.used_unknown),
+		"%s 원가 %s" % ["종료로 휴대분 소실" if summary.outcome == "interrupted" else "미사용 유인물 소실", _cost(summary.lost_cost, summary.lost_unknown)],
+		"감정 도구 사용 원가 %d · 소실 원가 %d" % [summary.appraisal_used_cost, summary.appraisal_lost_cost],
+		"새 구매 유인물 %d / 감정 도구 %d · 영구 개선 투자 %d" % [summary.lure_bought, summary.appraisal_bought, summary.upgrade_paid],
 		"거점 지출은 이미 반영됐습니다. 이번 회수세는 정산 입금에서 한 번 뺍니다.",
 	])
 	if summary.tax_legacy:
@@ -31,6 +32,7 @@ static func details(summary: Dictionary) -> String:
 		lines.append("미정산 종료 · 휴대 추가분 %d개 소실\n사용 횟수는 기록되지 않았습니다." % summary.lost_count)
 	else:
 		lines.append("유인물 무료 %d개 / 추가 %d개 사용\n미사용 추가분 %d개 반환 · %d개 소실" % [summary.free_used, summary.paid_used, summary.returned_count, summary.lost_count])
+	lines.append("감정 도구 %s · 미사용 %d개 반환 · %d개 소실" % ["사용 횟수 미기록" if summary.appraisal_used < 0 else "%d개 사용" % summary.appraisal_used, summary.appraisal_returned_count, summary.appraisal_lost_count])
 	if summary.stock_after.count("") > 0:
 		lines.append("보존한 추가분 중 %d개는 원가 미기록입니다." % summary.stock_after.count(""))
 	return "\n".join(lines)
@@ -39,11 +41,12 @@ static func details(summary: Dictionary) -> String:
 static func preparation(summary: Dictionary, last: Dictionary) -> String:
 	if summary.is_empty():
 		return "비용 기록을 확인할 수 없습니다."
-	var text := "이번 준비\n%s\n시작 보유금 %d · 현금 변화 %+d\n거점 보관품 판매 %d\n감정 지불 %d · 수리 지불 %d\n새 도구 구매 %d · 영구 개선 투자 %d\n추가분 재고 %d개" % [
+	var text := "이번 준비\n%s\n시작 보유금 %d · 현금 변화 %+d\n거점 보관품 판매 %d\n감정 지불 %d · 수리 지불 %d\n새 유인물 구매 %d · 영구 개선 투자 %d\n유인물 추가분 재고 %d개" % [
 		"기록 시작 이후" if summary.partial else "직전 정산 이후",
 		summary.opening_money, summary.cash_change, summary.storage_income,
 		summary.appraisal_paid, summary.repair_paid, summary.lure_bought, summary.upgrade_paid, summary.stock.size(),
 	]
+	text += "\n감정 도구 새 구매 %d · 거점 재고 %d개" % [summary.appraisal_bought, summary.appraisal_stock.size()]
 	text += "\n거점 판매 회수세 %d · 입금에 이미 반영" % summary.storage_tax
 	if summary.tax_legacy:
 		text += "\n회수세 도입 전 판매 %d · 소급 없음" % summary.untaxed_income

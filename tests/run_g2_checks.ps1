@@ -143,6 +143,7 @@ function Start-G2Checks {
             $harnessSession = Join-Path $runDirectory "$prefix-harness-session"
             $upgradeSession = Join-Path $runDirectory "$prefix-upgrade-session"
             $repairSession = Join-Path $runDirectory "$prefix-repair-session"
+            $portableSession = Join-Path $runDirectory "$prefix-portable-session"
             $supportSession = Join-Path $runDirectory "$prefix-support-session"
             foreach ($scene in (Get-ChildItem -LiteralPath (Join-Path $repository 'tests/smoke') -Filter '*.tscn' | Sort-Object Name)) {
                 $marker = $scene.BaseName -replace '_smoke$', '_passed'
@@ -156,9 +157,11 @@ function Start-G2Checks {
                 if ($scene.BaseName -eq 'equipment_wear_smoke') { $sceneArguments = @("--wear-directory=$wearSession") }
                 if ($scene.BaseName -eq 'hub_harness_smoke') { $sceneArguments = @("--harness-directory=$harnessSession") }
                 if ($scene.BaseName -eq 'hub_upgrade_smoke') { $sceneArguments = @("--upgrade-directory=$upgradeSession") }
+                if ($scene.BaseName -eq 'portable_appraisal_flow_smoke') { $sceneArguments = @("--portable-directory=$portableSession") }
                 if ($scene.BaseName -eq 'hub_repair_smoke') { $sceneArguments = @("--repair-directory=$repairSession") }
                 Run-Scene "$prefix-$($scene.BaseName)" $scene.BaseName "\[SmokeTest\] $marker(?:\s|$)" $sceneArguments
             }
+            Run-Scene "$prefix-portable-continue" 'portable_appraisal_flow_smoke' '\[SmokeTest\] portable_appraisal_flow_passed continue' @('--portable-continue', "--portable-directory=$portableSession")
             Run-Scene "$prefix-survival-continue" 'g3_survival_flow_smoke' '\[SmokeTest\] g3_survival_flow_passed continue' @('--review-continue', "--review-progress-directory=$survivalSession")
             Run-Scene "$prefix-appraisal-continue" 'hub_appraisal_smoke' '\[SmokeTest\] hub_appraisal_passed continue' @('--appraisal-continue', "--appraisal-directory=$appraisalSession")
             Run-Scene "$prefix-sale-continue" 'hub_sale_smoke' '\[SmokeTest\] hub_sale_passed continue' @('--sale-continue', "--sale-directory=$saleSession")

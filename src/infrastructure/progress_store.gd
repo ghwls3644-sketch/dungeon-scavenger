@@ -1,7 +1,7 @@
 class_name ProgressStore
 extends RefCounted
 
-const SCHEMA_VERSION := 9
+const SCHEMA_VERSION := 10
 const CONTENT_VERSION := "g2_prototype_1"
 const MAX_FILE_BYTES := 16 * 1024 * 1024
 
@@ -49,7 +49,7 @@ func load_data() -> Dictionary:
 		_last_error = ERR_INVALID_DATA
 		return {}
 	# JSON numbers are floats; Array.has() does not coerce int/float variants.
-	if (version != 1 and version != 2 and version != 3 and version != 4 and version != 5 and version != 6 and version != 7 and version != 8 and version != SCHEMA_VERSION) or data.get("content_version") != CONTENT_VERSION:
+	if (version != 1 and version != 2 and version != 3 and version != 4 and version != 5 and version != 6 and version != 7 and version != 8 and version != 9 and version != SCHEMA_VERSION) or data.get("content_version") != CONTENT_VERSION:
 		_last_error = ERR_UNAVAILABLE
 		return {}
 	if data.size() != 4 or data.get("resume_state") != "hub" or typeof(data.get("hub")) != TYPE_DICTIONARY:
@@ -86,7 +86,7 @@ func load_data() -> Dictionary:
 		hub["selected_lures"] = 2
 		hub["pending_departure"] = {}
 	if version <= 6:
-		if hub.size() != 11 or hub.has("costs") or not LurePreparation.valid_save(hub) \
+		if hub.size() != 11 or hub.has("costs") or not LurePreparation.valid_save(hub, true) \
 				or ExpeditionCosts.number(hub.get("money")) < 0:
 			_last_error = ERR_INVALID_DATA
 			return {}
@@ -97,7 +97,10 @@ func load_data() -> Dictionary:
 	if version <= 8 and not RecoveryTax.migrate_legacy(hub):
 		_last_error = ERR_INVALID_DATA
 		return {}
-	if hub.size() != 13 or not ExpeditionObjective.valid_offer(hub.get("objective")) or not LurePreparation.valid_save(hub) or not ExpeditionCosts.valid_save(hub.get("costs"), hub) \
+	if version <= 9 and not AppraisalPreparation.migrate_legacy(hub):
+		_last_error = ERR_INVALID_DATA
+		return {}
+	if hub.size() != 15 or not AppraisalPreparation.valid_save(hub) or not ExpeditionObjective.valid_offer(hub.get("objective")) or not LurePreparation.valid_save(hub) or not ExpeditionCosts.valid_save(hub.get("costs"), hub) \
 			or not HarnessUpgradeRule.is_valid_owned(hub.get("harness_upgrades")) \
 			or not hub.has("registered_items") or not HarnessModules.is_valid(hub.get("harness_modules")) \
 			or not HubState.is_valid_harness_durability(hub.get("harness_durability")):
@@ -106,11 +109,13 @@ func load_data() -> Dictionary:
 	hub["harness_durability"] = int(hub.harness_durability)
 	hub["paid_lures"] = int(hub.paid_lures)
 	hub["selected_lures"] = int(hub.selected_lures)
+	hub["paid_appraisals"] = int(hub.paid_appraisals)
+	hub["selected_appraisals"] = int(hub.selected_appraisals)
 	for sale in hub.costs.period.tax_sales:
 		sale.rate = int(sale.rate)
 	if not hub.costs.last.is_empty():
 		hub.costs.last.loot_tax.rate = int(hub.costs.last.loot_tax.rate)
-		for key in ["free_used", "paid_count", "paid_used"]:
+		for key in ["free_used", "paid_count", "paid_used", "appraisal_count", "appraisal_used"]:
 			hub.costs.last[key] = int(hub.costs.last[key])
 		for sale in hub.costs.last.period.tax_sales:
 			sale.rate = int(sale.rate)
@@ -126,11 +131,12 @@ func load_data() -> Dictionary:
 	if not hub.pending_departure.is_empty():
 		hub.pending_departure.free = int(hub.pending_departure.free)
 		hub.pending_departure.paid = int(hub.pending_departure.paid)
+		hub.pending_departure.appraisals = int(hub.pending_departure.appraisals)
 	return hub
 
 
 func save_data(hub: Dictionary, replace_existing: bool = false) -> Error:
-	if hub.size() != 13 or not ExpeditionObjective.valid_offer(hub.get("objective")) or not LurePreparation.valid_save(hub) or not ExpeditionCosts.valid_save(hub.get("costs"), hub) \
+	if hub.size() != 15 or not AppraisalPreparation.valid_save(hub) or not ExpeditionObjective.valid_offer(hub.get("objective")) or not LurePreparation.valid_save(hub) or not ExpeditionCosts.valid_save(hub.get("costs"), hub) \
 			or not HarnessUpgradeRule.is_valid_owned(hub.get("harness_upgrades")) \
 			or not HubState.is_valid_harness_durability(hub.get("harness_durability")) \
 			or not HarnessModules.is_valid(hub.get("harness_modules")):
