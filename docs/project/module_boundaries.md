@@ -454,3 +454,7 @@ ProgressStore는 스키마 9·거점 13필드·구형 1~8의 순서 있는 읽�
 ExpeditionLoadout은 복사된 시작 수량/무게, ExplorationOutcome은 실제 사용 집계를 전달한다. PrototypeExploration은 두 도구 잔량 무게를 합산하고 도구 노드를 장면 준비 때 생성한다. InventoryPanel·[HubPortableAppraisalPanel](../../src/ui/hub_portable_appraisal_panel.gd)은 표시/확인 명령만 담당한다. ExpeditionCosts는 취득 원가/사용/반환/손실과 손익/현금을 검증한다. ProgressStore는 스키마10·15필드와 구형1~9 순차 보완·원자적 교체, GameEntry는 후보 저장 성공 후 상태 교체를 맡는다.
 
 [저장 계약](../design/portable_appraisal.md#저장-모양과-전환)과 [검사 기록](project_context.md#dev-0423-휴대용-감정-연결-검사)을 따른다. 이전 스키마/미적용 절은 각 작업의 이력이다.
+
+## DEV-0425 사람 검토 환경 책임
+
+[검토 래퍼](../../tests/fixtures/g4_review_entry.gd)는 테스트 영역에서만 초기 상태와 세션 경로를 준비하고 기존 GameEntry의 저장소 주입 API를 호출한다. 제품 코드를 상속해 거래/탐험 동작을 바꾸지 않는다. ProgressStore·HubState·SettingsStore의 기존 검증을 사용하며 개인 저장과 설정을 덮어쓰지 않는다. [전용 검사](../../tests/smoke/g4_review_session_smoke.gd)는 여섯 사례·재실행 보존·잘못된/손상 세션 거절과 실제 이어하기/출정의 저장 분리를 확인한다. 사람의 판단은 [관찰 문서](g4_playtest_review.md)가 소유한다.

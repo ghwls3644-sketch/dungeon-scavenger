@@ -54,6 +54,7 @@ related:
 - G1 통합 플레이 방법과 검토 기록: [`project/g1_playtest_review.md`](project/g1_playtest_review.md)
 - G2 전체 흐름 검사·완료 결과: [`project/g2_flow_review.md`](project/g2_flow_review.md)
 - G3 탐험 통합 검사·남은 범위: [`project/g3_exploration_review.md`](project/g3_exploration_review.md)
+- G4 사람 플레이 방법과 관찰 기록: [`project/g4_playtest_review.md`](project/g4_playtest_review.md)
 - G4 거점·경제·성장 검토와 보완 범위: [`project/g4_meta_review.md`](project/g4_meta_review.md)
 - 휴대용 감정 최소 규칙 검토안 (`draft`): [`design/portable_appraisal.md`](design/portable_appraisal.md)
 - 거점 목표·의뢰 최소 범위 검토안 (`draft`): [`design/expedition_objectives.md`](design/expedition_objectives.md)
@@ -113,9 +114,9 @@ GitHub 로그인 상태, Codex 대화 기록, 앱별 로컬 설정은 저장소�
 
 ## 현재 단계
 
-**DEV-0424 — G4 보완 완료 조건 검토·검증 완료, 사용자 로컬 커밋 승인.** DEV-0419에서 남긴 회수세·휴대용 감정의 기술 공백 해소와 여섯 완료 조건의 기능 근거를 확인했다. 현재 코드의 전체 **104/104 실행·60개 스모크 장면**을 통과했다. 정산 이해·노련함·성장 선택·실패 뒤 재기 등 사람 평가가 남아 **G4 전체 완료와 G5 착수는 보류**한다. 다음은 **DEV-0425 — G4 사람 플레이 검토**다. 기준 DEV-0423 `1b6e90d`, 착수 시 main과 origin/main의 앞섬/뒤처짐 0. 2026-10-11 사용자가 검토된 DEV-0424 결과의 로컬 커밋을 승인했으며 push하지 않았다. **정합성 검사: 아직 아님 — G5 완료 후.**
+**DEV-0425 — G4 사람 플레이 검토·보완 인계 완료, 사용자 로컬 커밋 승인.** 실제 두 탐험과 사용자 답변에서 정산 가독성, 비상 방전의 효과 전달, 유인 후 활용 여유의 보완 필요를 확인했다. 도구·의뢰는 기본값을 사용했고 가방 칸은 이번 보완에서 보류한다. 서비스·성장 비교·돈0 최소 복구 등 미평가를 유지해 **G4 전체 완료와 G5 착수는 보류**한다. 검토 환경 포함 자동 **105/105 실행·61개 스모크 장면**, 문서/원본 보존·공백 검사를 통과했다. 기준 `13db00e`, 승인된 로컬 1커밋 앞섬·뒤처짐 0. 2026-10-11 사용자가 검토된 결과의 로컬 커밋을 승인했으며 push하지 않았다. 다음은 **DEV-0426 — 정산 화면 가독성 개선**이다. **정합성 검사: 아직 아님 — G5 완료 후.**
 
-상세 근거와 후속 범위는 [G4 검토 기록](project/g4_meta_review.md)을 따른다.
+사람 평가 진행은 [DEV-0425 관찰 기록](project/g4_playtest_review.md), 이전 기술 판정은 [G4 검토 기록](project/g4_meta_review.md)을 따른다.
 
 검토 관문 G-M3, G-M4와 G-M5를 통과했다. `M5 — 중복 제거와 정합성 검토`의 `DOC-0501`~`DOC-0506`에서 공식 용어, Story·Design 책임, 화자 표현·NPC 지식, 핵심 설정·Entity·Timeline과 활성 문서 링크·누락을 모두 검사했다. G-M5 완료 조건 7개는 2026-07-28 정합성 검사에서 모두 충족함을 확인했다.
 
