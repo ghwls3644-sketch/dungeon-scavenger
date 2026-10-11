@@ -1,7 +1,67 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="PackedScene" path="res://src/ui/exploration_outcome_panel.tscn" id="4_outcome"]
-[ext_resource type="Script" path="res://src/ui/expedition_results_screen.gd" id="1_screen"]
+[ext_resource type="PackedScene" path="res://src/ui/exploration_outcome_panel.tscn" id="1_outcome"]
+[ext_resource type="Script" path="res://src/ui/expedition_results_screen.gd" id="2_script"]
+
+[sub_resource type="StyleBoxFlat" id="profit"]
+bg_color = Color(0.09, 0.18, 0.17, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.25, 0.49, 0.42, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_left = 10
+corner_radius_bottom_right = 10
+
+[sub_resource type="StyleBoxFlat" id="card"]
+bg_color = Color(0.085, 0.12, 0.15, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.17, 0.23, 0.27, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_left = 10
+corner_radius_bottom_right = 10
+
+[sub_resource type="StyleBoxFlat" id="button"]
+bg_color = Color(0.12, 0.18, 0.21, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.24, 0.34, 0.39, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_left = 10
+corner_radius_bottom_right = 10
+
+[sub_resource type="StyleBoxFlat" id="primary"]
+bg_color = Color(0.55, 0.82, 0.70, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.55, 0.82, 0.70, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_left = 10
+corner_radius_bottom_right = 10
+
+[sub_resource type="StyleBoxFlat" id="focus"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.93, 0.8, 0.47, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_left = 10
+corner_radius_bottom_right = 10
 
 [node name="ExpeditionResultsScreen" type="Control"]
 visible = false
@@ -11,69 +71,205 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_screen")
+script = ExtResource("2_script")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color(0.035, 0.047, 0.055, 1)
+color = Color(0.035, 0.055, 0.072, 1)
 
-[node name="OutcomePanel" parent="." instance=ExtResource("4_outcome")]
-offset_left = 16.0
-offset_top = 72.0
-offset_right = 696.0
-offset_bottom = 572.0
+[node name="NextStep" type="Control" parent="."]
+layout_mode = 0
 
-[node name="NextStep" type="VBoxContainer" parent="."]
-offset_left = 728.0
-offset_top = 32.0
-offset_right = 1120.0
-offset_bottom = 610.0
-theme_override_constants/separation = 8
+[node name="ProfitCard" type="Panel" parent="NextStep"]
+layout_mode = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("profit")
+
+[node name="CreditCard" type="Panel" parent="NextStep"]
+layout_mode = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("card")
+
+[node name="CashCard" type="Panel" parent="NextStep"]
+layout_mode = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("card")
 
 [node name="Title" type="Label" parent="NextStep"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 28
+layout_mode = 0
+theme_override_font_sizes/font_size = 30
 text = "귀환 정산"
+theme_override_colors/font_color = Color(0.92, 0.95, 0.95, 1)
+autowrap_mode = 2
+
+
+[node name="Outcome" type="Label" parent="NextStep"]
+layout_mode = 0
+theme_override_font_sizes/font_size = 19
+text = "생환"
+theme_override_colors/font_color = Color(0.67, 0.76, 0.79, 1)
+autowrap_mode = 2
+horizontal_alignment = 2
+
+
+[node name="ProfitTitle" type="Label" parent="NextStep"]
+layout_mode = 0
+theme_override_font_sizes/font_size = 20
+text = "이번 준비·탐험 손익"
+theme_override_colors/font_color = Color(0.92, 0.95, 0.95, 1)
+autowrap_mode = 2
+
 
 [node name="NetIncome" type="Label" parent="NextStep"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "이번 준비·탐험 손익\n+0"
+layout_mode = 0
+theme_override_font_sizes/font_size = 44
+text = "+0"
+theme_override_colors/font_color = Color(0.92, 0.95, 0.95, 1)
+clip_text = true
+
+
+[node name="ProfitNote" type="Label" parent="NextStep"]
+layout_mode = 0
+theme_override_font_sizes/font_size = 16
+text = ""
+theme_override_colors/font_color = Color(0.67, 0.76, 0.79, 1)
+clip_text = true
+
+
+[node name="CreditTitle" type="Label" parent="NextStep"]
+layout_mode = 0
+theme_override_font_sizes/font_size = 20
+text = "이번 정산 입금"
+theme_override_colors/font_color = Color(0.92, 0.95, 0.95, 1)
 autowrap_mode = 2
+
+
+[node name="Credit" type="Label" parent="NextStep"]
+layout_mode = 0
+theme_override_font_sizes/font_size = 34
+text = "+0"
+theme_override_colors/font_color = Color(0.92, 0.95, 0.95, 1)
+clip_text = true
+
+
+[node name="CreditNote" type="Label" parent="NextStep"]
+layout_mode = 0
+theme_override_font_sizes/font_size = 16
+text = "확정할 때 지갑에 들어올 돈"
+theme_override_colors/font_color = Color(0.67, 0.76, 0.79, 1)
+autowrap_mode = 2
+
 
 [node name="Totals" type="Label" parent="NextStep"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-autowrap_mode = 2
+layout_mode = 0
+theme_override_font_sizes/font_size = 23
+text = "현금 변화 +0\n정산 후 보유금 0"
+theme_override_colors/font_color = Color(0.92, 0.95, 0.95, 1)
+clip_text = true
+
+
+[node name="CashNote" type="Label" parent="NextStep"]
+layout_mode = 0
+theme_override_font_sizes/font_size = 16
+text = ""
+theme_override_colors/font_color = Color(0.67, 0.76, 0.79, 1)
+clip_text = true
+
 
 [node name="EquipmentDamage" type="Label" parent="NextStep"]
-layout_mode = 2
+layout_mode = 0
 theme_override_font_sizes/font_size = 18
+text = ""
+theme_override_colors/font_color = Color(0.67, 0.76, 0.79, 1)
 autowrap_mode = 2
+visible = false
 
-[node name="Items" type="RichTextLabel" parent="NextStep"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 100)
-size_flags_vertical = 3
+
+[node name="Notice" type="Label" parent="NextStep"]
+layout_mode = 0
+theme_override_font_sizes/font_size = 17
+text = "확정하면 회수품과 내구를 저장합니다.\n종료하면 이번 정산은 반영되지 않습니다."
+theme_override_colors/font_color = Color(0.67, 0.76, 0.79, 1)
+clip_text = true
+
+
+[node name="Overview" type="RichTextLabel" parent="NextStep"]
+layout_mode = 0
 theme_override_font_sizes/normal_font_size = 18
+theme_override_colors/default_color = Color(0.82, 0.88, 0.90, 1)
+theme_override_constants/line_separation = 2
 selection_enabled = true
 focus_mode = 2
 
-[node name="Notice" type="Label" parent="NextStep"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 16
-text = "정산을 확인하면 회수품과 내구를 저장합니다.\n종료하면 이번 정산은 반영되지 않습니다."
-autowrap_mode = 2
+
+[node name="Items" type="RichTextLabel" parent="NextStep"]
+layout_mode = 0
+visible = false
+theme_override_font_sizes/normal_font_size = 19
+theme_override_colors/default_color = Color(0.82, 0.88, 0.90, 1)
+theme_override_constants/line_separation = 5
+selection_enabled = true
+focus_mode = 2
+
+
+[node name="DetailButton" type="Button" parent="NextStep"]
+layout_mode = 0
+text = "비용·도구 상세 보기"
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("button")
+theme_override_styles/hover = SubResource("button")
+theme_override_styles/pressed = SubResource("button")
+theme_override_styles/focus = SubResource("focus")
+toggle_mode = true
+
+
+[node name="RecoveryButton" type="Button" parent="NextStep"]
+layout_mode = 0
+text = "회수품 보기"
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("button")
+theme_override_styles/hover = SubResource("button")
+theme_override_styles/pressed = SubResource("button")
+theme_override_styles/focus = SubResource("focus")
+
 
 [node name="SettleButton" type="Button" parent="NextStep"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 48)
+layout_mode = 0
 text = "정산하고 거점으로"
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("primary")
+theme_override_styles/hover = SubResource("primary")
+theme_override_styles/pressed = SubResource("primary")
+theme_override_styles/focus = SubResource("focus")
+theme_override_colors/font_color = Color(0.045, 0.09, 0.08, 1)
+theme_override_colors/font_focus_color = Color(0.045, 0.09, 0.08, 1)
+theme_override_colors/font_hover_color = Color(0.045, 0.09, 0.08, 1)
+theme_override_colors/font_pressed_color = Color(0.045, 0.09, 0.08, 1)
+
 
 [node name="QuitButton" type="Button" parent="NextStep"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 48)
+layout_mode = 0
 text = "종료"
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("button")
+theme_override_styles/hover = SubResource("button")
+theme_override_styles/pressed = SubResource("button")
+theme_override_styles/focus = SubResource("focus")
+
+
+[node name="OutcomePanel" parent="." instance=ExtResource("1_outcome")]
+visible = false
+layout_mode = 0
+
+[node name="CloseRecovery" type="Button" parent="."]
+visible = false
+layout_mode = 0
+text = "정산 요약으로 돌아가기"
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("button")
+theme_override_styles/hover = SubResource("button")
+theme_override_styles/pressed = SubResource("button")
+theme_override_styles/focus = SubResource("focus")

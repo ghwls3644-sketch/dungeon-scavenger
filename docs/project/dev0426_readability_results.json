@@ -1,0 +1,170 @@
+{
+  "captures": 31,
+  "cases": [
+    "paid_tools",
+    "failure",
+    "missed",
+    "empty",
+    "unknown",
+    "legacy",
+    "long_money",
+    "negative",
+    "protected",
+    "investment"
+  ],
+  "failures": [],
+  "passed": true,
+  "screens_checked": 20,
+  "ticket": "DEV-0426",
+  "resolutions": [
+    [
+      1152,
+      648
+    ],
+    [
+      1600,
+      900
+    ]
+  ],
+  "renderer": "Godot 4.7.1 OpenGL Compatibility / NVIDIA RTX 4060",
+  "raw_report_path": "C:/Users/user/OneDrive/문서/KHJ_web/chatGPT/Dungeon scavenger/.godot/dev0426-review/render-2/results-readability.json",
+  "final_graphical_runs": 1,
+  "human_evaluation_completed": false,
+  "initial_attempts": "Initial headless layout exposed label minimum-size overflow; fixed with deferred layout and bounded text fitting. First successful render exposed a clipped default overview and low-contrast focused confirm text; fixed and assertions strengthened. These earlier attempts are not counted as final captures.",
+  "manually_inspected": [
+    "paid_tools-summary-1152.png",
+    "unknown-summary-1152.png",
+    "protected-recovery-1152.png",
+    "investment-summary-1600.png",
+    "long_money-summary-1152.png",
+    "failure-detail-end-1152.png",
+    "save-retry.png"
+  ],
+  "captures_index": [
+    {
+      "file": "empty-summary-1152.png",
+      "sha256": "8920191c33536c04c10946b49d152327bd8fc05fb88a1488a68284c431d4e6ab"
+    },
+    {
+      "file": "empty-summary-1600.png",
+      "sha256": "9cd962096831088aa29c744741b8bbdf8c66a4f5f4050c79b71f1e2d7ce29906"
+    },
+    {
+      "file": "failure-detail-end-1152.png",
+      "sha256": "1b8a7c5083937dfd2fe162ae0b9c6bba3bc67fc4a0cf256c63f67b70cff6c298"
+    },
+    {
+      "file": "failure-detail-end-1600.png",
+      "sha256": "ab2577d5445c6951a8462e9455dab3beaa76aeffa68d64fce6b380661ab71298"
+    },
+    {
+      "file": "failure-recovery-1152.png",
+      "sha256": "4f852c709f549359902e24ad8c6b2467964d728dadd7c2aff137494c783a1cf3"
+    },
+    {
+      "file": "failure-recovery-1600.png",
+      "sha256": "8d42c15a9479f8db436c407cd1cb8b34d8112d1f7748309c0480624286073008"
+    },
+    {
+      "file": "failure-summary-1152.png",
+      "sha256": "404d19a36783e364413c2333ee8c4941ee4b6667599c70bcf515f3d83716ac62"
+    },
+    {
+      "file": "failure-summary-1600.png",
+      "sha256": "9f187af6762d3a3c9b24a106344c50f338c645eef6a3469b01a0476875586b49"
+    },
+    {
+      "file": "investment-summary-1152.png",
+      "sha256": "cc3034b357452b23fb0e59428c084c77987dc3ddb46e6bd7838a79b367499d2e"
+    },
+    {
+      "file": "investment-summary-1600.png",
+      "sha256": "2398ad0030b3e4ef68d2db2232d00370d94eca64d02bca6cc7de283839b47774"
+    },
+    {
+      "file": "legacy-summary-1152.png",
+      "sha256": "83a319c670229f38d7e8df9147a616b1db6a4d4759c50e381ea27edb912e3759"
+    },
+    {
+      "file": "legacy-summary-1600.png",
+      "sha256": "8595abd0248de908b7271956bb82740691e6e5b6847407e09f0527deeadbdcd6"
+    },
+    {
+      "file": "long_money-summary-1152.png",
+      "sha256": "3c90fe8bd06621c9868314277849240a91626d44e001f1bdac39b7ac57e24218"
+    },
+    {
+      "file": "long_money-summary-1600.png",
+      "sha256": "f3a8841fbc187a67647e25a3b8a3ba367200f7a72987c0a3928ea6e76e0a082d"
+    },
+    {
+      "file": "missed-summary-1152.png",
+      "sha256": "1ecebd281a14d26a6a1ed09b408cf0cbfef1819822eaea51e7d113a6664d7deb"
+    },
+    {
+      "file": "missed-summary-1600.png",
+      "sha256": "6c23348a9a30d67f8af8ff876ff6ab3e45cb8c625a4b694410b1beb23efc2baf"
+    },
+    {
+      "file": "negative-summary-1152.png",
+      "sha256": "d4e35b2fef1c3e8e7be11a853c888a8df912103a7915f2eb9cbcfb4f58613466"
+    },
+    {
+      "file": "negative-summary-1600.png",
+      "sha256": "912556c396490e59af738104b3b8e138f394361e57917da13f9b85e6e8905610"
+    },
+    {
+      "file": "paid_tools-detail-end-1152.png",
+      "sha256": "5c28abb93273cd556df40865eedb2ced4a682e57d5a1b96e69c99b371675f2da"
+    },
+    {
+      "file": "paid_tools-detail-end-1600.png",
+      "sha256": "20f115b403eb8fa50a05139505e289b0a5568d4d49c15fbba0c4962527a74dfe"
+    },
+    {
+      "file": "paid_tools-summary-1152.png",
+      "sha256": "3743e54d237ef277a035c6b03a100d4f6df4c1e5cfe1bff1851df2ef1d0c5f94"
+    },
+    {
+      "file": "paid_tools-summary-1600.png",
+      "sha256": "21e37d1df1bcc35061279b1d14dc77f04c111b8e957b72a3964f70d5cbcf972c"
+    },
+    {
+      "file": "protected-recovery-1152.png",
+      "sha256": "7ef3aee374cb4e1fe0e10eeda23eff7e97314c1acf090dc6ef8fcfbb6e19ddb3"
+    },
+    {
+      "file": "protected-recovery-1600.png",
+      "sha256": "ffe6b09df8afcfa44f650de48a9e5ff31f53c4fe204e692494b6345277b2c2b6"
+    },
+    {
+      "file": "protected-summary-1152.png",
+      "sha256": "fa5eff26621ff9e6c0ab54aa719a5e320bc88003e75be3743737959e902c30c2"
+    },
+    {
+      "file": "protected-summary-1600.png",
+      "sha256": "8ceced668b5585f94931936f4f69f9ceafffd3aa1de3ae2f51d89cfe9d2f220c"
+    },
+    {
+      "file": "save-retry.png",
+      "sha256": "d23d021ec7d171dd9c14e762a3cba1b5b8366fe9758dc235a8f0d909ff80e8be"
+    },
+    {
+      "file": "unknown-detail-end-1152.png",
+      "sha256": "9f8b974fd4e5061ac6666652ce0a0eb4bf3e6092a6a5f797ab647a569af43656"
+    },
+    {
+      "file": "unknown-detail-end-1600.png",
+      "sha256": "643ec7acfeebf3faed5ccb51c0a9bf5658a4e22fecadc27ece1389229a968d47"
+    },
+    {
+      "file": "unknown-summary-1152.png",
+      "sha256": "5c538ee544ba3a2248aed5fb49ceeeabf0f343159c4d5f0ab4054ea4847274f5"
+    },
+    {
+      "file": "unknown-summary-1600.png",
+      "sha256": "3c954802fa2b469ab7dd92fe0100301746d4c1c0d497d2577e8306825752998a"
+    }
+  ],
+  "notes": "Prepared domain cases and automated keyboard/mouse input; not human earnings/play. Rendering captures are temporary local evidence; this index does not guarantee their future availability."
+}

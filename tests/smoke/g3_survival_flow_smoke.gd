@@ -164,6 +164,9 @@ func _check_emergency_result(timeout: bool) -> void:
 	_expect(outcome != null and GameState.get_current_state() == GameState.State.RESULTS and _entry.get_node_or_null("EmergencyEscapeTestSpace") == null and _end_count == 1, "Emergency app result or scene disposal failed.")
 	_expect(FileAccess.get_file_as_bytes(_path) == before, "Result preview committed progress.")
 	var result_panel: ExplorationOutcomePanel = _entry.get_node("Interface/Results/OutcomePanel")
+	_click(_entry.get_node("Interface/Results/NextStep/RecoveryButton"))
+	await _frames(5)
+	_expect(result_panel.is_visible_in_tree(), "Recovery details did not open.")
 	if timeout:
 		_expect(outcome.is_failure() and outcome.get_failure_cause() == &"escape_timeout" and outcome.get_lost_item_count() == 1 and _charge_on_end == 3, "App timeout lost exact cargo/cost contract.")
 		_expect(result_panel.get_summary_text().contains("제한 시간") and not result_panel.is_recovery_result_visible(), "App timeout UI omitted cause/loss.")
@@ -174,10 +177,12 @@ func _check_emergency_result(timeout: bool) -> void:
 		await _capture("g3-review-escape-result.png")
 		get_tree().root.size = Vector2i(1600, 900)
 		await _frames(5)
-		_expect(Rect2(Vector2.ZERO, get_viewport().get_visible_rect().size).encloses(result_panel.get_global_rect()), "Wide result panel clipped.")
+		_expect(Rect2(Vector2.ZERO, get_viewport().get_visible_rect().size).encloses(result_panel.get_global_rect()), "Wide result panel clipped: %s / %s" % [result_panel.get_global_rect(), get_viewport().get_visible_rect()])
 		await _capture("g3-review-escape-wide.png")
 		get_tree().root.size = Vector2i(1152, 648)
 		await _frames(5)
+		_click(_entry.get_node("Interface/Results/CloseRecovery"))
+		await _frames(3)
 		# A real temporary-path collision rejects the atomic write. The directory
 		# is created and removed only inside this run's fresh test directory.
 		_expect(DirAccess.make_dir_absolute(_path + ".tmp") == OK, "Cannot create save-failure fixture.")
@@ -186,6 +191,9 @@ func _check_emergency_result(timeout: bool) -> void:
 		_expect(GameState.get_current_state() == GameState.State.RESULTS and _entry.get_pending_outcome() == outcome and _entry.get_hub_money() == 76 and FileAccess.get_file_as_bytes(_path) == before, "Rejected emergency settlement changed holdings or discarded retry.")
 		await _capture("g3-review-save-retry.png")
 		_expect(DirAccess.remove_absolute(_path + ".tmp") == OK, "Cannot remove isolated save-failure fixture.")
+	if timeout:
+		_click(_entry.get_node("Interface/Results/CloseRecovery"))
+		await _frames(3)
 	await _settle(85)
 	_cases.append({"case": "escape_timeout" if timeout else "emergency_return_save_retry", "charge": _charge_on_end, "outcomes": _end_count, "hub_money": 85, "stored_unknown": 1})
 

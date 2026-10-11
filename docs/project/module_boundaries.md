@@ -458,3 +458,9 @@ ExpeditionLoadout은 복사된 시작 수량/무게, ExplorationOutcome은 실�
 ## DEV-0425 사람 검토 환경 책임
 
 [검토 래퍼](../../tests/fixtures/g4_review_entry.gd)는 테스트 영역에서만 초기 상태와 세션 경로를 준비하고 기존 GameEntry의 저장소 주입 API를 호출한다. 제품 코드를 상속해 거래/탐험 동작을 바꾸지 않는다. ProgressStore·HubState·SettingsStore의 기존 검증을 사용하며 개인 저장과 설정을 덮어쓰지 않는다. [전용 검사](../../tests/smoke/g4_review_session_smoke.gd)는 여섯 사례·재실행 보존·잘못된/손상 세션 거절과 실제 이어하기/출정의 저장 분리를 확인한다. 사람의 판단은 [관찰 문서](g4_playtest_review.md)가 소유한다.
+
+## DEV-0426 정산 화면 책임
+
+[ExpeditionResultsScreen](../../src/ui/expedition_results_screen.gd)은 요약/상세/회수품 화면·포커스·확정 요청을, [CostReportText](../../src/ui/cost_report_text.gd)는 공개 비용 요약의 표현만 맡는다. Meta·App·Infrastructure와 스키마10의 책임/계산을 변경하지 않는다.
+
+[별도 검토 장면](../../tests/fixtures/results_readability_review.gd)은 HubState의 기존 API로 예시 결과를 메모리에 준비하며 개인 진행/설정을 읽거나 저장하지 않는다. 이 장면의 정산/종료 버튼은 검토 화면만 닫는다. [화면 검사](../../tests/smoke/results_readability_smoke.gd)는 도메인 값·조작·배치·미변경을 확인하며 실제 저장 실패/재시도는 기존 통합 검사에서 확인한다.

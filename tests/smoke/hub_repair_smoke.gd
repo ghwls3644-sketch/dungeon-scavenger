@@ -249,7 +249,7 @@ func _repair_expedition(failure: bool, money: int, before: int, after: int) -> v
 		await _frames(5)
 	_expect(GameState.get_current_state() == GameState.State.RESULTS and _entry.get_pending_outcome().is_failure() == failure, "Actual repair-loop outcome missing.")
 	var text: String = _results.get_node("NextStep/EquipmentDamage").text
-	_expect("%d/3 → %d/3" % [before, after] in text and "완전 수리 예상 %d" % ((3 - after) * 5) in text and "이번 준비·탐험 손익" in _results.get_node("NextStep/NetIncome").text, "Result combined estimate with actual cost or lost damage.")
+	_expect("%d/3 → %d/3" % [before, after] in text and "완전 수리 예상 %d" % ((3 - after) * 5) in text and "이번 준비·탐험 손익" in _results.get_node("NextStep/ProfitTitle").text, "Result combined estimate with actual cost or lost damage.")
 	await _capture_wear("failure-result" if failure else "return-result", _results.get_node("NextStep"))
 	_click(_results.get_node("NextStep/SettleButton"))
 	await _frames(5)

@@ -101,7 +101,7 @@ func _cost_run(profit: int, cash: int) -> void:
 	_tap(KEY_E)
 	await _frames(5)
 	_expect(_entry.get_pending_outcome() != null, "Cost run did not reach result.")
-	_expect(_results.get_node("NextStep/NetIncome").text == "이번 준비·탐험 손익\n%+d" % profit, "Actual result profit incorrect.")
+	_expect(_results.get_node("NextStep/NetIncome").text == "%+d" % profit and _results.get_node("NextStep/ProfitTitle").text == "이번 준비·탐험 손익", "Actual result profit incorrect.")
 	_expect("현금 변화 %+d" % cash in _results.get_node("NextStep/Totals").text, "Actual result cash incorrect.")
 	await _cost_result_capture("actual-%d" % cash)
 
@@ -134,6 +134,9 @@ func _cost_display_boundary(label: String, money: int, stock: Array, failure: bo
 
 func _cost_result_capture(label: String) -> void:
 	await _capture_wear(label, _results.get_node("NextStep"))
+	if not _results.get_node("NextStep/Items").visible:
+		_click(_results.get_node("NextStep/DetailButton"))
+		await _frames(3)
 	var items: RichTextLabel = _results.get_node("NextStep/Items")
 	items.grab_focus()
 	_tap(KEY_END)

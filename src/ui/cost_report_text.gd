@@ -12,6 +12,26 @@ static func _cost(amount: int, unknown: int) -> String:
 	return "%d · 원가 미기록 %d개 별도" % [amount, unknown] if unknown > 0 else str(amount)
 
 
+static func result_equation(summary: Dictionary) -> String:
+	if summary.unknown_count > 0:
+		return "도구 원가 미기록 %d개\n정확한 손익을 계산할 수 없습니다." % summary.unknown_count
+	return "수입 %d − 비용 %d\n사용·소실한 도구와 세금·서비스 비용 반영" % [summary.income, summary.operating_cost]
+
+
+static func result_overview(summary: Dictionary) -> String:
+	var lines := PackedStringArray([
+		"수입 %d  ·  회수품 %d / 거점 판매 %d / 의뢰 %d" % [summary.income, summary.loot_income, summary.storage_income, summary.objective_income],
+		"확인된 비용 %d · 미기록 원가 별도" % summary.operating_cost if summary.unknown_count > 0 else "비용 %d  ·  세금·서비스·도구 사용/소실 포함" % summary.operating_cost,
+		ObjectiveText.result(summary.objective),
+		"도구 구매액은 현금 변화에, 사용·소실한 원가는 손익에 반영합니다.",
+	])
+	if summary.partial:
+		lines.append("기록 시작 이후의 거래만 표시합니다.")
+	if summary.tax_legacy:
+		lines.append("회수세 도입 전 판매가 포함되어 있습니다. 과거 세금은 소급하지 않습니다.")
+	return "\n".join(lines)
+
+
 static func details(summary: Dictionary) -> String:
 	var lines := PackedStringArray([
 		"기록 시작 이후의 거래입니다." if summary.partial else "직전 정산 뒤 준비부터 이번 정산까지",

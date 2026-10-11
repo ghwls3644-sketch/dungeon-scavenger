@@ -1,0 +1,179 @@
+{
+  "ticket": "DEV-0426",
+  "ticket_name": "정산 화면 가독성 개선",
+  "ticket_status": "implementation_validated_feedback_recorded",
+  "checked_date_kst": "2026-10-11",
+  "passed": true,
+  "failures": [],
+  "markdown_files": 54,
+  "relative_links_checked": 1979,
+  "front_matter_related_checked": 580,
+  "frozen_sources": [
+    {
+      "id": "SRC-001",
+      "path": "게임 기획 파일/통합 게임 기획서 v2.1.md",
+      "sha256": "45e92dfede482968b31c14eef712012735aa9657de18bd7c0922f94d40dd460a",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-002",
+      "path": "게임 기획 파일/스토리 정리 v1.5.md",
+      "sha256": "4191c100d5b3bfbef291d3fd4d7588a3c5c31113a1827d33886cc8c90931292d",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-003",
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.1.md",
+      "sha256": "a52337ed1cc3decebf8bd6840662e12fafddcfa95c3e5e8d5e1129ffbbef796f",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-004",
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.2.md",
+      "sha256": "0bac7f52cf21eddcd4b720c7b5b8ff76f98fb452904cebcc3e03c1eb2b220c67",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-005",
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.2.1.md",
+      "sha256": "b4451e06d8ffaf5d1a233fa1a639e783ba17973977398c12527333a7707319f0",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-006",
+      "path": "게임 기획 파일/게임 개발 단계별 제안서 v0.1.md",
+      "sha256": "2ee29aca36e74f5e0206aff150ed610eba8381e594b9091141e6f74caa2b60c1",
+      "matches_record": true
+    }
+  ],
+  "archive_copies": [
+    {
+      "path": "docs/archive/story_v1.5_full.md",
+      "source_id": "SRC-002",
+      "bytes_match": true
+    },
+    {
+      "path": "docs/archive/story_document_management_proposal_v0.1.md",
+      "source_id": "SRC-003",
+      "bytes_match": true
+    },
+    {
+      "path": "docs/archive/story_document_management_proposal_v0.2.md",
+      "source_id": "SRC-004",
+      "bytes_match": true
+    }
+  ],
+  "checkpoint_tables_preserved": {
+    "docs/README.md": true,
+    "docs/project/migration_manifest.md": true
+  },
+  "next_checkpoint": "G5 완료 후",
+  "base_commit": "7aa117c91440ce8ce17dcdd1bd130b61cebd5212",
+  "start_local_ahead": 2,
+  "start_local_behind": 0,
+  "source_tree_sha256": "eb31c78d6f25f7c89cede37b43f50ae3cff9e985b39ced7846e04ec798ea77b6",
+  "source_files": 552,
+  "fresh_runtime_source_matches_current": true,
+  "source_sort_order": "PowerShell Sort-Object FullName, same as Get-G2SourceHash in the runner",
+  "runtime_evidence_preserved_from_raw_report": true,
+  "previous_source_content_differences_from_head_after_line_ending_normalization": [
+    "src/ui/cost_report_text.gd",
+    "src/ui/expedition_results_screen.gd",
+    "src/ui/expedition_results_screen.tscn",
+    "tests/smoke/cost_flow_smoke.gd",
+    "tests/smoke/g3_survival_flow_smoke.gd",
+    "tests/smoke/hub_departure_smoke.gd",
+    "tests/smoke/hub_repair_smoke.gd"
+  ],
+  "added_test_files": [
+    "tests/fixtures/results_readability_review.gd",
+    "tests/fixtures/results_readability_review.gd.uid",
+    "tests/fixtures/results_readability_review.tscn",
+    "tests/smoke/results_readability_smoke.gd",
+    "tests/smoke/results_readability_smoke.gd.uid",
+    "tests/smoke/results_readability_smoke.tscn"
+  ],
+  "raw_line_ending_differences_from_git_blobs": 226,
+  "prior_reports_checked": 85,
+  "protected_content_differences_from_head": [],
+  "question_statuses_preserved": true,
+  "question_statuses": {
+    "Q-001": "provisional",
+    "Q-002": "provisional",
+    "Q-003": "provisional",
+    "Q-004": "provisional",
+    "Q-005": "provisional",
+    "Q-006": "provisional",
+    "Q-007": "provisional",
+    "Q-008": "provisional",
+    "Q-009": "deferred",
+    "Q-010": "deferred",
+    "Q-011": "deferred",
+    "Q-012": "deferred",
+    "Q-013": "deferred",
+    "Q-014": "provisional",
+    "Q-015": "deferred",
+    "Q-016": "deferred",
+    "Q-017": "deferred",
+    "Q-018": "deferred",
+    "Q-019": "provisional",
+    "Q-020": "provisional",
+    "Q-021": "provisional",
+    "Q-022": "provisional",
+    "Q-023": "provisional",
+    "Q-024": "provisional",
+    "Q-025": "provisional",
+    "Q-026": "provisional",
+    "Q-027": "provisional",
+    "Q-028": "provisional",
+    "Q-029": "provisional",
+    "Q-030": "provisional"
+  },
+  "fresh_runtime_checks_passed": 106,
+  "fresh_runtime_repetitions": 1,
+  "smoke_scene_count": 62,
+  "fresh_graphical_launches": 1,
+  "fresh_graphical_checks_completed": 20,
+  "fresh_external_termination_runs": 0,
+  "human_session_completed": false,
+  "human_understanding_self_reported": true,
+  "human_amount_relationship_explanation_verified": false,
+  "all_human_criteria_evaluated": false,
+  "g4_completion_conditions": 6,
+  "g4_completion": "held: meanings understood by self-report; everyday wording and pursuit countermeasures need review; untested criteria remain unevaluated",
+  "next_work": "DEV-0427 — 골렘 대응 수단 안내·활용성 검토",
+  "commit_status": "user_approved_local_commit",
+  "approval_text": "커밋",
+  "approval_date_kst": "2026-10-11",
+  "pushed": false,
+  "git_diff_check": true,
+  "changed_paths": [
+    "docs/README.md",
+    "docs/design/expedition_cost_reporting.md",
+    "docs/project/README.md",
+    "docs/project/dev0426_automated_results.json",
+    "docs/project/dev0426_document_results.json",
+    "docs/project/dev0426_readability_results.json",
+    "docs/project/development_handoff.md",
+    "docs/project/g4_meta_review.md",
+    "docs/project/g4_playtest_review.md",
+    "docs/project/migration_changes.md",
+    "docs/project/migration_manifest.md",
+    "docs/project/module_boundaries.md",
+    "docs/project/open_questions.md",
+    "docs/project/project_context.md",
+    "src/ui/cost_report_text.gd",
+    "src/ui/expedition_results_screen.gd",
+    "src/ui/expedition_results_screen.tscn",
+    "tests/fixtures/results_readability_review.gd",
+    "tests/fixtures/results_readability_review.gd.uid",
+    "tests/fixtures/results_readability_review.tscn",
+    "tests/smoke/cost_flow_smoke.gd",
+    "tests/smoke/g3_survival_flow_smoke.gd",
+    "tests/smoke/hub_departure_smoke.gd",
+    "tests/smoke/hub_repair_smoke.gd",
+    "tests/smoke/results_readability_smoke.gd",
+    "tests/smoke/results_readability_smoke.gd.uid",
+    "tests/smoke/results_readability_smoke.tscn"
+  ]
+}
