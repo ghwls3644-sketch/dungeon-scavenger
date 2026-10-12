@@ -8,7 +8,7 @@ canonical_for:
   - development_environment
   - engine_and_language
   - development_commands
-last_reviewed: 2026-10-11
+last_reviewed: 2026-10-12
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -1781,3 +1781,25 @@ git diff --check
 
 최종 실행 소스 SHA-256: `eb31c78d6f25f7c89cede37b43f50ae3cff9e985b39ced7846e04ec798ea77b6`.
 원시 전체 보고서: `C:/tmp/dev0426-review/dungeon-g2-20261011-071548-3e41a68131d9436384e9b6ce5af9f710/results.json`. 화면 파일/로그는 `.godot/dev0426-review/render-2`의 임시 근거이며 저장소 JSON에 결과·파일별 해시를 보존한다. 임시 파일의 영구 보존을 가정하지 않는다.
+
+## DEV-0427 골렘 대응 검토 검사
+
+**DEV-0427 — 골렘 대응 수단 안내·활용성 검토·재현 완료, 사용자 로컬 커밋 승인.** 무료 안내의 방전 효과/충전 부족 전달과 유인 이동 중 수색 시간 소모를 보완 대상으로 확인했다. 통제된15사례, 전체 **107/107 실행·63개 스모크 장면**, 기존 안내 관찰용 그래픽1회/14장과 문서·원본 보존 검사를 통과했다. 제품 동작·수치·스키마10은 유지한다. 새 사람 플레이는0회이며 기존 의견을 대조했을 뿐 최종 밸런스나 G4 전체 완료를 승인하지 않는다. 기준 `5a3fa05`, 승인된 로컬3커밋 앞섬·뒤처짐0에서 착수했다. 2026-10-12 사용자가 검토된 DEV-0427 결과의 로컬 커밋을 승인했으며 push하지 않았다. 다음은 **DEV-0428 — 골렘 대응 안내·유인 조사 흐름 보완**이다. **정합성 검사: 아직 아님 — G5 완료 후.**
+
+[전용15사례](dev0427_response_results.json)는 실제 출정 설정의 Q 조건/정지·재가동, 적재별 추적/방전 이탈, 시야 차단/유인·G 선택/버리기를 재현한다. 유인 거리별 이동은 분리 통로에 AI 착지 위치를 직접 전달한다. 실제 사람이 던지거나 자연스럽게 도주한 사례로 세지 않는다. 실제 F 입력/비행/벽·거리/잔량·소음 우선순위·문 시야·접촉/일시정지/저장 경계는 기존 회귀와 함께 확인했다.
+
+- Godot4.7.1, [전체 회귀](dev0427_automated_results.json) 107/107프로세스·63개 스모크 장면, 오류/경고·무시 진단0. 최초 전체 실행은 동작 검사107건을 통과했으나 import 중 새 검사 .gd.uid가 생성되어 실행 전후 해시 불일치로 전체 실패 처리됐다. 생성 파일을 포함해 재실행한 최종 전체 순환만 성공 근거로 센다.
+- 그래픽 OpenGL Compatibility/NVIDIA RTX4060,1152×648에서14장 캡처. 기본 Q/충전0/벽 뒤 재가동 전후의 기존 HUD를 직접 관찰했다. 새 UI나 두 해상도 개선 수용 검사로 세지 않는다. 캡처와 로그는 `.godot/dev0427-review/render`의 임시 근거이며 저장소 JSON에 파일별 해시를 남겼다. 최초 그래픽 JSON의 방법 설명은 모든 주입을 hearing API로 표현했으나 실제 통로는 골렘 API이고 벽/시야 사례만 청취 API다. 최종 검사 문구와 저장소 결과의 방법 설명에서 구분했다. 동작 코드 변화는 없다.
+- [문서/보존 검사](dev0427_document_results.json)는 활성 링크/앵커·related, 동결 원본6/사본3, 기존 소스와 GDD/Design/Story/Reference/결정·이전 보고서, 질문30개 상태·정기 검사 두 표·작업 범위·공백과 최종 실행 소스 일치를 확인한다. 새 테스트3파일은 제품 동작 변경과 구분한다.
+- 이번 새 사람 플레이·별도 외부 강제 종료는 각각0회다. 기존 사람 발언과 과거 강제 종료/화면 근거를 이번 실행 횟수에 더하지 않는다. 미평가와 최종 수치 판단은 유지한다.
+
+재현(저장소 루트, PowerShell7, GODOT_BIN에 Godot4.7.1 콘솔 경로):
+
+```powershell
+./tests/run_g2_checks.ps1 -GodotBin $env:GODOT_BIN -Repetitions 1 -TimeoutSeconds 90 -OutputRoot 'C:/tmp/dev0427-review'
+& $env:GODOT_BIN --path . --rendering-method gl_compatibility --fixed-fps 60 res://tests/smoke/golem_response_review_smoke.tscn -- --response-render
+git diff --check
+```
+
+최종 소스 SHA-256: `d3a0d579596be1c9b478c8e9e6ab8ae3ccdfd2d9fdd633e2c93fa1fbc825d1a7`.
+원시 전체 보고서: `C:/tmp/dev0427-review/dungeon-g2-20261012-094313-914e1ff35c8845ff9f3d3fd3f5d3f3c5/results.json`. 저장소 결과는 checks/flows·시각·기준 커밋·해시와 최종15사례를 보존한다. 임시 로그/캡처의 영구 보존을 가정하지 않는다.

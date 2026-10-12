@@ -7,7 +7,7 @@ source_version: gdd-v2.1+management-proposal-v0.2.1
 canonical_for:
   - document_navigation
   - canonical_source_routing
-last_reviewed: 2026-10-11
+last_reviewed: 2026-10-12
 owner: documentation-maintainer
 related:
   - GDD.md
@@ -54,6 +54,7 @@ related:
 - G1 통합 플레이 방법과 검토 기록: [`project/g1_playtest_review.md`](project/g1_playtest_review.md)
 - G2 전체 흐름 검사·완료 결과: [`project/g2_flow_review.md`](project/g2_flow_review.md)
 - G3 탐험 통합 검사·남은 범위: [`project/g3_exploration_review.md`](project/g3_exploration_review.md)
+- 골렘 대응 수단 안내·활용성 검토: [검토 결과](project/golem_response_review.md)
 - G4 사람 플레이 방법과 관찰 기록: [`project/g4_playtest_review.md`](project/g4_playtest_review.md)
 - G4 거점·경제·성장 검토와 보완 범위: [`project/g4_meta_review.md`](project/g4_meta_review.md)
 - 휴대용 감정 최소 규칙 검토안 (`draft`): [`design/portable_appraisal.md`](design/portable_appraisal.md)
@@ -114,7 +115,7 @@ GitHub 로그인 상태, Codex 대화 기록, 앱별 로컬 설정은 저장소�
 
 ## 현재 단계
 
-**DEV-0426 — 정산 화면 가독성 개선 구현·검증 및 재검토 의견 기록 완료, 사용자 로컬 커밋 승인.** 손익·이번 입금·현금 변화/정산 후 보유금을 분리하고 비용·도구 상세와 회수품 보기를 열어 읽도록 바꿨다. 계산·가격·세율·스키마10은 유지한다. 전체 **106/106 실행·62개 스모크 장면**, 10사례×두 해상도 화면/조작 검사와 최종31장 캡처를 통과했다. 사용자는 뜻을 이해했다고 답했고 어려운 용어와 몰입감을 후속 검토 의견으로 남겼다. **G4 전체 완료와 G5 착수는 보류**한다. 기준 `7aa117c`, 승인된 로컬2커밋 앞섬·뒤처짐0에서 착수했다. 2026-10-11 사용자가 검토된 DEV-0426 결과의 로컬 커밋을 승인했으며 push하지 않았다. 다음은 **DEV-0427 — 골렘 대응 수단 안내·활용성 검토**다. **정합성 검사: 아직 아님 — G5 완료 후.**
+**DEV-0427 — 골렘 대응 수단 안내·활용성 검토·재현 완료, 사용자 로컬 커밋 승인.** 무료 안내의 방전 효과/충전 부족 전달과 유인 이동 중 수색 시간 소모를 보완 대상으로 확인했다. 통제된15사례, 전체 **107/107 실행·63개 스모크 장면**, 기존 안내 관찰용 그래픽1회/14장과 문서·원본 보존 검사를 통과했다. 제품 동작·수치·스키마10은 유지한다. 새 사람 플레이는0회이며 기존 의견을 대조했을 뿐 최종 밸런스나 G4 전체 완료를 승인하지 않는다. 기준 `5a3fa05`, 승인된 로컬3커밋 앞섬·뒤처짐0에서 착수했다. 2026-10-12 사용자가 검토된 DEV-0427 결과의 로컬 커밋을 승인했으며 push하지 않았다. 다음은 **DEV-0428 — 골렘 대응 안내·유인 조사 흐름 보완**이다. **정합성 검사: 아직 아님 — G5 완료 후.**
 
 사람 평가 진행은 [DEV-0425 관찰 기록](project/g4_playtest_review.md), 이전 기술 판정은 [G4 검토 기록](project/g4_meta_review.md)을 따른다.
 

@@ -1,0 +1,259 @@
+{
+  "cases": [
+    {
+      "after_q_distance": 588.083679199219,
+      "after_q_visual_contact": false,
+      "case": "open_chase",
+      "gap_after_45_frames": 95.5,
+      "gap_before": 73.0,
+      "golem_speed": 210.0,
+      "speed": 240.0,
+      "total_weight": 0.5
+    },
+    {
+      "after_q_distance": 480.08447265625,
+      "after_q_visual_contact": false,
+      "case": "open_chase",
+      "gap_after_45_frames": 59.5005493164063,
+      "gap_before": 73.0,
+      "golem_speed": 210.0,
+      "speed": 192.0,
+      "total_weight": 2.5
+    },
+    {
+      "after_q_distance": 345.085021972656,
+      "after_q_visual_contact": false,
+      "case": "open_chase",
+      "gap_after_45_frames": 14.5005493164063,
+      "gap_before": 73.0,
+      "golem_speed": 210.0,
+      "speed": 132.0,
+      "total_weight": 4.0
+    },
+    {
+      "accepted": true,
+      "basic_after": "비상 방전: 잠시 정지 중\n벽·닫힌 문 뒤로 숨으면 마지막으로 본 위치를 수색합니다. 소음은 들릴 수 있습니다.",
+      "basic_before": "탐지음: 마지막 위치 확인 중\n벽·닫힌 문 뒤로 숨으면 마지막으로 본 위치를 수색합니다. 소음은 들릴 수 있습니다.",
+      "case": "discharge_default",
+      "charge_after": 2,
+      "charge_before": 3,
+      "disabled_seconds_approx": 2.01666666666667,
+      "prompt_before": "경비 골렘 비상 방전 · 충전 1",
+      "remaining_after_2_frames": 1.96666666666667,
+      "state_after_restart": 1,
+      "status_after": "비상 방전: 잠시 정지 중",
+      "visual_after_restart": true,
+      "visual_before": true
+    },
+    {
+      "accepted": false,
+      "basic_after": "탐지음: 마지막 위치 확인 중\n벽·닫힌 문 뒤로 숨으면 마지막으로 본 위치를 수색합니다. 소음은 들릴 수 있습니다.",
+      "basic_before": "탐지음: 마지막 위치 확인 중\n벽·닫힌 문 뒤로 숨으면 마지막으로 본 위치를 수색합니다. 소음은 들릴 수 있습니다.",
+      "case": "discharge_no_module",
+      "charge_after": 3,
+      "charge_before": 3,
+      "prompt_before": "비상 방전 미장착 · 거점에서 변경",
+      "remaining_after_2_frames": 0.666666666666667,
+      "status_after": "탐지음: 마지막 위치 확인 중",
+      "visual_before": true
+    },
+    {
+      "accepted": false,
+      "basic_after": "탐지음: 마지막 위치 확인 중\n벽·닫힌 문 뒤로 숨으면 마지막으로 본 위치를 수색합니다. 소음은 들릴 수 있습니다.",
+      "basic_before": "탐지음: 마지막 위치 확인 중\n벽·닫힌 문 뒤로 숨으면 마지막으로 본 위치를 수색합니다. 소음은 들릴 수 있습니다.",
+      "case": "discharge_empty",
+      "charge_after": 0,
+      "charge_before": 0,
+      "prompt_before": "경비 골렘 비상 방전 · 충전 1",
+      "remaining_after_2_frames": 0.666666666666667,
+      "status_after": "탐지음: 마지막 위치 확인 중",
+      "visual_before": true
+    },
+    {
+      "accepted": false,
+      "basic_after": "",
+      "basic_before": "",
+      "case": "discharge_out_of_range",
+      "charge_after": 3,
+      "charge_before": 3,
+      "prompt_before": "",
+      "remaining_after_2_frames": 0.666666666666667,
+      "status_after": "탐지음: 마지막 위치 확인 중",
+      "visual_before": true
+    },
+    {
+      "accepted": true,
+      "basic_after": "비상 방전: 잠시 정지 중\n벽·닫힌 문 뒤로 숨으면 마지막으로 본 위치를 수색합니다. 소음은 들릴 수 있습니다.",
+      "basic_before": "마지막 위치 수색 중\n벽·닫힌 문 뒤로 숨으면 마지막으로 본 위치를 수색합니다. 소음은 들릴 수 있습니다.",
+      "case": "discharge_wall",
+      "charge_after": 2,
+      "charge_before": 3,
+      "disabled_seconds_approx": 2.01666666666667,
+      "prompt_before": "경비 골렘 비상 방전 · 충전 1",
+      "remaining_after_2_frames": 1.96666666666667,
+      "state_after_restart": 3,
+      "status_after": "비상 방전: 잠시 정지 중",
+      "visual_after_restart": false,
+      "visual_before": false
+    },
+    {
+      "accepted": true,
+      "basic_after": "비상 방전: 잠시 정지 중\n벽·닫힌 문 뒤로 숨으면 마지막으로 본 위치를 수색합니다. 소음은 들릴 수 있습니다.",
+      "basic_before": "탐지음: 마지막 위치 확인 중\n벽·닫힌 문 뒤로 숨으면 마지막으로 본 위치를 수색합니다. 소음은 들릴 수 있습니다.",
+      "case": "discharge_stay",
+      "charge_after": 2,
+      "charge_before": 3,
+      "disabled_seconds_approx": 2.01666666666667,
+      "prompt_before": "경비 골렘 비상 방전 · 충전 1",
+      "remaining_after_2_frames": 1.96666666666667,
+      "state_after_restart": 1,
+      "status_after": "비상 방전: 잠시 정지 중",
+      "visual_after_restart": true,
+      "visual_before": true
+    },
+    {
+      "accepted": true,
+      "basic_after": "비상 방전: 잠시 정지 중\n벽·닫힌 문 뒤로 숨으면 마지막으로 본 위치를 수색합니다. 소음은 들릴 수 있습니다.",
+      "basic_before": "탐지음: 마지막 위치 확인 중\n벽·닫힌 문 뒤로 숨으면 마지막으로 본 위치를 수색합니다. 소음은 들릴 수 있습니다.",
+      "case": "discharge_improved",
+      "charge_after": 2,
+      "charge_before": 3,
+      "disabled_seconds_approx": 3.01666666666667,
+      "prompt_before": "경비 골렘 비상 방전 · 충전 1",
+      "remaining_after_2_frames": 2.96666666666667,
+      "state_after_restart": 1,
+      "status_after": "비상 방전: 잠시 정지 중",
+      "visual_after_restart": true,
+      "visual_before": true
+    },
+    {
+      "arrival_before_patrol": true,
+      "arrival_seconds": 0.5,
+      "blocked": false,
+      "case": "lure_lane",
+      "distance_short_at_patrol": 2.49999618530273,
+      "first_search_seconds": 0.7,
+      "hold_after_arrival_seconds": 2.71666666666667,
+      "landing_distance": 40.0,
+      "patrol_seconds": 3.21666666666667
+    },
+    {
+      "arrival_before_patrol": true,
+      "arrival_seconds": 2.31666666666667,
+      "blocked": false,
+      "case": "lure_lane",
+      "distance_short_at_patrol": 2.41667175292969,
+      "first_search_seconds": 0.7,
+      "hold_after_arrival_seconds": 0.9,
+      "landing_distance": 160.0,
+      "patrol_seconds": 3.21666666666667
+    },
+    {
+      "arrival_before_patrol": false,
+      "arrival_seconds": -1.0,
+      "blocked": false,
+      "case": "lure_lane",
+      "distance_short_at_patrol": 83.9169464111328,
+      "first_search_seconds": 0.7,
+      "hold_after_arrival_seconds": 0.0,
+      "landing_distance": 300.0,
+      "patrol_seconds": 3.21666666666667
+    },
+    {
+      "arrival_before_patrol": false,
+      "arrival_seconds": -1.0,
+      "blocked": true,
+      "case": "lure_lane",
+      "distance_short_at_patrol": 130.001861572266,
+      "first_search_seconds": 0.7,
+      "hold_after_arrival_seconds": 0.0,
+      "landing_distance": 160.0,
+      "patrol_seconds": 3.21666666666667
+    },
+    {
+      "case": "cover_lure_and_quick_drop",
+      "hidden_lure_accepted": true,
+      "speed_after_drop": 240.0,
+      "speed_before_drop": 132.0,
+      "visible_lure_accepted": false
+    }
+  ],
+  "failures": [],
+  "method": "Prepared positions/load/initial chase; live current expedition settings, physics and Q/G input. Lanes inject the golem lure API; cover cases use the hearing API. No human play or balance approval.",
+  "passed": true,
+  "ticket": "DEV-0427",
+  "raw_report_path": "C:/Users/user/AppData/Local/Temp/dungeon-golem-review-17924/golem-response.json",
+  "graphical_passed": true,
+  "graphical_resolution": [
+    1152,
+    648
+  ],
+  "graphical_captures": 14,
+  "manual_inspection": [
+    "q-default-before.png",
+    "q-empty-before.png",
+    "q-wall-after.png"
+  ],
+  "graphical_method": "Existing HUD observation only, not a new layout acceptance test. AI lane injections use BrokenGuardGolem.investigate_lure; actual cover cases use GolemHearing.hear_lure. The original graphical JSON described all injections too broadly as hearing API; the final test report corrects that description without changing behavior.",
+  "captures_index": [
+    {
+      "file": "q-default-after.png",
+      "sha256": "99fd574af158f69b909ad616800ba8a073b2110e3c83aa69feb4294d5b1d096c"
+    },
+    {
+      "file": "q-default-before.png",
+      "sha256": "90375fa72dbe525d676faa3d679dba29dd21c05278712a602e814807eaf6cdda"
+    },
+    {
+      "file": "q-empty-after.png",
+      "sha256": "0f654363c8b1bee8ba8de66613b01496bc2a32fe9bb034fd7eae7d13a1250813"
+    },
+    {
+      "file": "q-empty-before.png",
+      "sha256": "b421d81697f45b721990515cbde0780635278198930a923609b764e486112503"
+    },
+    {
+      "file": "q-improved-after.png",
+      "sha256": "4da8409c96096943f94db4acc48df4eecd5927bd75778f6c545925d9894e2fb0"
+    },
+    {
+      "file": "q-improved-before.png",
+      "sha256": "d963e8fa1f539ed3aada1fda59f85402a1ec850add1c6c5a91f93bd298c62e91"
+    },
+    {
+      "file": "q-no_module-after.png",
+      "sha256": "ac2040f37cb88c1bb7d9f58d2891a037dab97d367658b6d3f278d6a304f33a00"
+    },
+    {
+      "file": "q-no_module-before.png",
+      "sha256": "2b218952191f6846e6470f2ea934975fd457b834f5b4b88861428c1aa4418941"
+    },
+    {
+      "file": "q-out_of_range-after.png",
+      "sha256": "4f40d3a2436a5382746296370ff414e617d34405c211a67a3ff3669a63f9d24e"
+    },
+    {
+      "file": "q-out_of_range-before.png",
+      "sha256": "b277c0c13ea726e26d0624d8f136614d61326f46d4c62f92c148b658ab1d0c58"
+    },
+    {
+      "file": "q-stay-after.png",
+      "sha256": "99fd574af158f69b909ad616800ba8a073b2110e3c83aa69feb4294d5b1d096c"
+    },
+    {
+      "file": "q-stay-before.png",
+      "sha256": "90375fa72dbe525d676faa3d679dba29dd21c05278712a602e814807eaf6cdda"
+    },
+    {
+      "file": "q-wall-after.png",
+      "sha256": "278369771ac92087c59be8bffca31dc7c4da6d45098c532d8d23a9f85595bd41"
+    },
+    {
+      "file": "q-wall-before.png",
+      "sha256": "a3ef4f1cf4f41b2ee557992db97f340d7e8ccf6dd37ac60fcc8b49a633c120fd"
+    }
+  ],
+  "graphical_directory": "C:/Users/user/OneDrive/문서/KHJ_web/chatGPT/Dungeon scavenger/.godot/dev0427-review/render",
+  "human_play_runs": 0,
+  "scope": "Prepared physics cases. No new player skill/balance verdict. Hearing disabled in open chase/Q isolation; lane patrol offset is zero to fix the start. Scene timers/speeds are copied unchanged from the current expedition."
+}

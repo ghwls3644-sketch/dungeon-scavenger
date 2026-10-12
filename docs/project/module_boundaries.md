@@ -8,7 +8,7 @@ canonical_for:
   - source_tree_layout
   - module_responsibilities
   - module_dependency_rules
-last_reviewed: 2026-10-10
+last_reviewed: 2026-10-12
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -464,3 +464,7 @@ ExpeditionLoadout은 복사된 시작 수량/무게, ExplorationOutcome은 실�
 [ExpeditionResultsScreen](../../src/ui/expedition_results_screen.gd)은 요약/상세/회수품 화면·포커스·확정 요청을, [CostReportText](../../src/ui/cost_report_text.gd)는 공개 비용 요약의 표현만 맡는다. Meta·App·Infrastructure와 스키마10의 책임/계산을 변경하지 않는다.
 
 [별도 검토 장면](../../tests/fixtures/results_readability_review.gd)은 HubState의 기존 API로 예시 결과를 메모리에 준비하며 개인 진행/설정을 읽거나 저장하지 않는다. 이 장면의 정산/종료 버튼은 검토 화면만 닫는다. [화면 검사](../../tests/smoke/results_readability_smoke.gd)는 도메인 값·조작·배치·미변경을 확인하며 실제 저장 실패/재시도는 기존 통합 검사에서 확인한다.
+
+## DEV-0427 골렘 대응 검토 책임
+
+[전용 검사](../../tests/smoke/golem_response_review_smoke.gd)는 테스트 영역에서만 준비 위치/짐·초기 추적을 만들고 현재 출정 설정·Q/G 입력·물리 이동, 골렘 유인 API/청취 경로를 관찰한다. 별도 통로에서 골렘 설정을 복사하며 제품 클래스·자원·저장 책임을 바꾸지 않는다. [검토 문서](golem_response_review.md)는 실제 사용자 발언·현재 동작·후속 제안을 구별하고, 정확한 시각/값은 보존 JSON이 소유한다. 이 검사를 제품의 영구 유인 시간 계약으로 읽지 않는다.
