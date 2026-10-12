@@ -69,7 +69,7 @@ func _check_wall_and_movement() -> void:
 	await _frames(5)
 	_expect(golem.get_node("DetectionArea").overlaps_body(player), "Wall check was outside the detection range.")
 	_expect(golem.use_sight_occlusion and not golem.has_visual_contact() and _warnings == 0, "Central wall failed to block initial sight.")
-	_expect(golem.get_basic_analysis().contains("닫힌 문") and golem.get_basic_analysis().contains("소음"), "Basic analysis omitted cover/hearing guidance.")
+	_expect(golem.get_basic_analysis().contains("닫힌 문") and golem.get_basic_analysis().contains("발소리"), "Basic analysis omitted cover/hearing guidance.")
 	await _capture("sight-hidden.png")
 	await _walk(InputActions.MOVE_RIGHT, 27)
 	_expect(golem.has_visual_contact() and golem.get_state() == BrokenGuardGolem.State.SUSPICIOUS, "Walking beyond wall failed to start warning.")

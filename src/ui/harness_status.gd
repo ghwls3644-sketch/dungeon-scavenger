@@ -65,6 +65,8 @@ func _render(prompt: String, should_show_prompt: bool, current_charge: int, char
 	_status.text = "하네스 충전 %d/%d" % [current_charge, charge_capacity]
 	if should_show_prompt:
 		_status.text += "\n%s" % ("[Q] " + prompt if _source.has_module(_source.get_action_module()) else prompt)
+	elif basic.is_empty() and is_instance_valid(_source):
+		_status.text += "\nQ: 가까운 하네스 대상 없음"
 
 	_analysis.visible = not basic.is_empty()
 	_analyze_button.visible = _analysis.visible and _source.get_analysis_charge_cost() > 0

@@ -169,7 +169,7 @@ func _lure(distance: float, blocked: bool) -> void:
 	var elapsed := 0
 	var first_arrival := -1
 	var first_search := -1
-	while golem.get_state() != BrokenGuardGolem.State.PATROL and elapsed < 300:
+	while golem.get_state() != BrokenGuardGolem.State.PATROL and elapsed < 540:
 		await _frames(1)
 		elapsed += 1
 		if first_arrival < 0 and golem.position.distance_to(Vector2(distance, 0)) <= 3.0:
@@ -182,8 +182,10 @@ func _lure(distance: float, blocked: bool) -> void:
 		"arrival_before_patrol": first_arrival >= 0,
 		"distance_short_at_patrol": golem.position.distance_to(Vector2(distance, 0)),
 		"hold_after_arrival_seconds": float(elapsed - first_arrival) / 60.0 if first_arrival >= 0 else 0.0}
-	_expect(golem.get_state() == BrokenGuardGolem.State.PATROL and absf(float(elapsed) / 60.0 - 3.2) < 0.12, "Unchanged lure timing not reproduced")
-	_expect((first_arrival < 0) == (blocked or distance == 300.0), "Lure arrival hypothesis not reproduced")
+	_expect(golem.get_state() == BrokenGuardGolem.State.PATROL and float(elapsed) / 60.0 <= 8.1, "Lure did not end within the bounded investigation")
+	_expect((first_arrival < 0) == blocked, "Reachable lure destination was abandoned")
+	if not blocked:
+		_expect(float(elapsed - first_arrival) / 60.0 >= 2.45, "Travel consumed the arrival search window")
 	cases.append(row)
 	await _dispose(lane)
 

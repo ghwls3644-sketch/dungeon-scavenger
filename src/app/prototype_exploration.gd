@@ -51,6 +51,9 @@ func _ready() -> void:
 	%MalfunctioningTrap.body_caught.connect(_on_trap_hit)
 	%MalfunctioningTrap.stabilized.connect(func(): %ChoiceStatus.text = "함정을 잠시 멈췄습니다. 불빛이 다시 점멸하면 물러나세요.")
 	_golem.sight_lost.connect(func(_position: Vector2): %ChoiceStatus.text = "골렘의 시야를 벗어났습니다. 마지막으로 본 위치를 수색하며 소음에는 반응할 수 있습니다.")
+	_harness.discharge_succeeded.connect(func(_target: BrokenGuardGolem): %ChoiceStatus.text = "골렘이 잠깐 멈췄습니다. 지금 멀어지세요.")
+	_golem.state_changed.connect(_on_golem_state_changed)
+	_golem.lure_finished.connect(_on_lure_finished)
 	%NoiseLureController.status_changed.connect(_update_tool_status)
 	%NoiseLureController.lure_landed.connect(_on_lure_landed)
 	%NoiseLureController.throw_rejected.connect(func(reason: String): %ChoiceStatus.text = reason)
@@ -236,7 +239,14 @@ func _update_contact_status() -> void:
 	%ContactStatus.visible = threat.is_warning() and not _inventory_panel.visible and not %ExplorationMapPanel.visible
 	%ChoiceStatus.visible = not %ContactStatus.visible
 	if threat.is_warning():
-		%ContactStatus.text = "골렘 접촉! %.1f초 뒤 행동 불능\n이동으로 이탈 · G 길게: 선택한 짐 버리기 · Q: 방전 (충전 필요)" % threat.get_remaining_time()
+		var action := "Q: 잠깐 멈추기"
+		if not _harness.has_module(HarnessModules.EMERGENCY):
+			action = "방전 미장착"
+		elif _harness.get_current_charge() < _golem.get_discharge_charge_cost():
+			action = "방전 충전 부족"
+		elif $Player/HazardDetector.get_current_harness_target() != _golem:
+			action = "Q 대상은 오른쪽 안내 확인"
+		%ContactStatus.text = "골렘 접촉! %.1f초 뒤 행동 불능\n이동으로 이탈 · G 길게: 선택한 짐 버리기 · %s" % [threat.get_remaining_time(), action]
 
 
 func _on_pickup_rejected(_item: ItemDefinition, reason: StringName) -> void:
@@ -317,14 +327,36 @@ func _update_tool_status() -> void:
 		_inventory.set_external_weight(tool.get_remaining_uses() * _loadout.lure_weight + _portable.get_remaining_uses() * _loadout.appraisal_weight)
 	%ToolStatus.text = "소음 유인물 %d/%d · F 투척\n마우스로 목표 위치 지정\n%s\n감정 도구 %d/%d · Tab 가방에서 사용" % [
 		tool.get_remaining_uses(), tool.get_capacity(),
-		"투척 중" if tool.is_in_flight() else "플레이어를 못 본 골렘을 유인합니다.",
+		"투척 중" if tool.is_in_flight() else "들키면 소리보다 나를 쫓습니다.\n먼저 벽·문 뒤로 숨으세요.",
 		_portable.get_remaining_uses(), _portable.get_capacity(),
 	]
 
 
 func _on_lure_landed(position: Vector2, radius: float) -> void:
 	var heard: bool = %GolemHearing.hear_lure(position, radius)
-	%ChoiceStatus.text = "골렘이 소음 유인물이 떨어진 위치를 확인합니다." if heard else "소음 유인물이 떨어졌습니다."
+	%ChoiceStatus.text = "골렘이 소리 쪽으로 움직입니다. 도착하면 잠깐 살핍니다." if heard else "유인물이 떨어졌지만 골렘은 반응하지 않았습니다."
+
+
+func _can_observe_golem() -> bool:
+	if not _started or _finished:
+		return false
+	var screen_position := get_global_transform_with_canvas() * _golem.global_position
+	if not get_viewport_rect().has_point(screen_position):
+		return false
+	var query := PhysicsRayQueryParameters2D.create(_player.global_position, _golem.global_position, _golem.sight_blocker_mask)
+	query.exclude = [_player.get_rid(), _golem.get_rid()]
+	query.hit_from_inside = true
+	return get_world_2d().direct_space_state.intersect_ray(query).is_empty()
+
+
+func _on_golem_state_changed(previous: int, current: int) -> void:
+	if previous == BrokenGuardGolem.State.DISABLED and current != BrokenGuardGolem.State.DISABLED and _can_observe_golem():
+		%ChoiceStatus.text = "골렘이 다시 움직입니다. 벽·닫힌 문 뒤로 숨으세요."
+
+
+func _on_lure_finished() -> void:
+	if _can_observe_golem():
+		%ChoiceStatus.text = "골렘이 다시 순찰을 돕니다."
 
 
 func _on_map_clue_read(clue: MapClueDefinition) -> void:

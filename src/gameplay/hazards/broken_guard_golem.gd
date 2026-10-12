@@ -7,6 +7,7 @@ signal chase_started(last_known_position: Vector2)
 signal search_started(last_known_position: Vector2)
 signal sight_lost(last_known_position: Vector2)
 signal obstacle_contacted(obstacle: Node2D)
+signal lure_finished
 
 enum State {
 	PATROL,
@@ -26,6 +27,9 @@ enum State {
 @export var analysis_charge_cost := 1
 @export var discharge_charge_cost := 1
 @export var discharge_duration := 1.5
+# DEV-0428 trial bounds apply only to lure investigations, including redirects.
+@export var lure_max_duration := 8.0
+@export var lure_stall_duration := 1.25
 # Opt in on the current expedition; historical G1 fixtures retain their baseline.
 @export var use_sight_occlusion := false
 @export_flags_2d_physics var sight_blocker_mask := 9
@@ -38,6 +42,11 @@ var _last_known_position := Vector2.ZERO
 var _tracked_target: Node2D
 var _alarm_escalation := false
 var _heading_to_patrol_end := true
+var _lure_active := false
+var _lure_arrived := false
+var _lure_elapsed := 0.0
+var _lure_stalled := 0.0
+var _lure_progress_distance := 0.0
 
 @onready var _body: Polygon2D = %Body
 @onready var _warning_glow: Polygon2D = %WarningGlow
@@ -63,9 +72,14 @@ func _ready() -> void:
 	_render_state()
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if use_sight_occlusion and _state != State.DISABLED:
 		_refresh_visual_target()
+	if _lure_active:
+		_lure_elapsed += delta
+		if _lure_elapsed >= lure_max_duration:
+			_on_search_timeout()
+			return
 	match _state:
 		State.PATROL:
 			if _move_toward_position(_patrol_destination, patrol_speed):
@@ -82,6 +96,19 @@ func _physics_process(_delta: float) -> void:
 				_begin_search()
 		State.SEARCH:
 			_move_toward_position(_last_known_position, search_speed)
+	if _lure_active and not _lure_arrived:
+		var distance := global_position.distance_to(_last_known_position)
+		if distance <= 3.0:
+			_lure_arrived = true
+			if _state == State.SEARCH:
+				_start_lure_search()
+		elif _lure_progress_distance - distance >= 1.0:
+			_lure_progress_distance = distance
+			_lure_stalled = 0.0
+		else:
+			_lure_stalled += delta
+			if _lure_stalled >= lure_stall_duration:
+				_on_search_timeout()
 
 
 func get_state() -> State:
@@ -99,7 +126,10 @@ func get_analysis_revision() -> int:
 func get_analysis_remaining() -> float:
 	match _state:
 		State.SUSPICIOUS: return _suspicion_timer.time_left
-		State.SEARCH: return _search_timer.time_left
+		State.SEARCH:
+			if _lure_active:
+				return minf(_search_timer.time_left, maxf(lure_max_duration - _lure_elapsed, 0.0)) if _lure_arrived else -1.0
+			return _search_timer.time_left
 		State.DISABLED: return _discharge_timer.time_left
 	return -1.0
 
@@ -117,9 +147,12 @@ func get_analysis_charge_cost() -> int:
 
 
 func get_basic_analysis() -> String:
+	var effect := "비상 방전으로 잠깐 멈춥니다.\n그동안 멀어지세요."
+	if _state == State.DISABLED:
+		effect = "멈춘 동안 멀어지세요. 곧 다시 움직입니다."
 	if use_sight_occlusion:
-		return "%s\n벽·닫힌 문 뒤로 숨으면 마지막으로 본 위치를 수색합니다. 소음은 들릴 수 있습니다." % get_status_text()
-	return get_status_text()
+		return "%s\n%s\n벽·닫힌 문 뒤로 숨으세요.\n발소리는 들릴 수 있습니다." % [get_status_text(), effect]
+	return "%s\n%s" % [get_status_text(), effect]
 
 
 func get_precise_analysis() -> String:
@@ -131,6 +164,8 @@ func get_precise_analysis() -> String:
 				return "추적 중입니다. 벽·닫힌 문으로 시야를 끊거나 비상 방전으로 잠시 멈출 수 있습니다. 소음에는 주의하세요."
 			return "추적 중입니다. 비상 방전으로 잠시 멈춘 사이 탐지 범위에서 벗어나세요."
 		State.SEARCH:
+			if _lure_active:
+				return "소리가 난 곳에 도착해 살피고 있습니다. 다시 보이거나 다른 소리가 나면 반응합니다." if _lure_arrived else "소리가 난 곳으로 이동 중입니다. 도착 뒤 살피며, 길이 막히면 포기합니다."
 			return "마지막으로 확인한 위치를 수색합니다. 다시 탐지되지 않으면 순찰로 돌아갑니다."
 		State.DISABLED:
 			return "비상 방전으로 잠시 정지했습니다. 곧 다시 움직이며 영구 처치는 되지 않습니다."
@@ -153,6 +188,7 @@ func emergency_discharge(bonus: float = 0.0) -> bool:
 	if is_instance_valid(_tracked_target):
 		_last_known_position = _tracked_target.global_position
 	_tracked_target = null
+	_clear_lure()
 	_alarm_escalation = false
 	_suspicion_timer.stop()
 	_search_timer.stop()
@@ -176,9 +212,16 @@ func investigate_noise(source_position: Vector2) -> bool:
 
 func investigate_lure(source_position: Vector2) -> bool:
 	# A lure can redirect a sound-only chase, but cannot erase stronger evidence.
-	if not source_position.is_finite() or _state == State.DISABLED or is_instance_valid(_tracked_target) or _alarm_escalation:
+	if not source_position.is_finite() or _state == State.DISABLED or is_instance_valid(_tracked_target) or _alarm_escalation \
+			or not is_finite(lure_max_duration) or lure_max_duration <= 0.0 \
+			or not is_finite(lure_stall_duration) or lure_stall_duration <= 0.0:
 		return false
+	var elapsed := _lure_elapsed if _lure_active else 0.0
 	_begin_suspicion(source_position, null, false)
+	_lure_active = true
+	_lure_elapsed = elapsed
+	_lure_progress_distance = global_position.distance_to(source_position)
+	_render_state()
 	return true
 
 
@@ -238,12 +281,18 @@ func _on_suspicion_timeout() -> void:
 
 
 func _on_search_timeout() -> void:
-	if _state != State.SEARCH:
+	if _state != State.SEARCH and not _lure_active:
 		return
 
+	var was_lured := _lure_active
+	_clear_lure()
+	_suspicion_timer.stop()
+	_search_timer.stop()
 	_heading_to_patrol_end = false
 	_patrol_destination = _patrol_origin
 	_set_state(State.PATROL)
+	if was_lured:
+		lure_finished.emit()
 
 
 func _on_discharge_timeout() -> void:
@@ -311,6 +360,7 @@ func _begin_suspicion(
 	target: Node2D,
 	escalate_to_chase: bool
 ) -> void:
+	_clear_lure()
 	_search_timer.stop()
 	_suspicion_timer.stop()
 	_last_known_position = last_known_position
@@ -332,8 +382,24 @@ func _begin_search() -> void:
 	_alarm_escalation = false
 	_tracked_target = null
 	_set_state(State.SEARCH)
-	_search_timer.start(maxf(search_duration, 0.01))
+	if _lure_active:
+		if _lure_arrived:
+			_start_lure_search()
+	else:
+		_search_timer.start(maxf(search_duration, 0.01))
 	search_started.emit(_last_known_position)
+
+
+func _start_lure_search() -> void:
+	_search_timer.start(maxf(search_duration, 0.01))
+	_render_state()
+
+
+func _clear_lure() -> void:
+	_lure_active = false
+	_lure_arrived = false
+	_lure_elapsed = 0.0
+	_lure_stalled = 0.0
 
 
 func _move_toward_position(destination: Vector2, speed: float) -> bool:
@@ -372,7 +438,7 @@ func _render_state() -> void:
 		State.SUSPICIOUS:
 			_body.color = Color(0.78, 0.58, 0.2, 1.0)
 			_warning_glow.show()
-			_status.text = "탐지음: 마지막 위치 확인 중"
+			_status.text = "소리가 난 쪽으로 움직이는 중" if _lure_active else "탐지음: 마지막 위치 확인 중"
 		State.CHASE:
 			_body.color = Color(0.78, 0.22, 0.18, 1.0)
 			_warning_glow.show()
@@ -380,7 +446,7 @@ func _render_state() -> void:
 		State.SEARCH:
 			_body.color = Color(0.48, 0.38, 0.64, 1.0)
 			_warning_glow.hide()
-			_status.text = "마지막 위치 수색 중"
+			_status.text = ("소리가 난 곳을 살피는 중" if _lure_arrived else "소리가 난 곳으로 이동 중") if _lure_active else "마지막 위치 수색 중"
 		_:
 			_body.color = Color(0.34, 0.4, 0.44, 1.0)
 			_warning_glow.hide()

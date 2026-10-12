@@ -1803,3 +1803,25 @@ git diff --check
 
 최종 소스 SHA-256: `d3a0d579596be1c9b478c8e9e6ab8ae3ccdfd2d9fdd633e2c93fa1fbc825d1a7`.
 원시 전체 보고서: `C:/tmp/dev0427-review/dungeon-g2-20261012-094313-914e1ff35c8845ff9f3d3fd3f5d3f3c5/results.json`. 저장소 결과는 checks/flows·시각·기준 커밋·해시와 최종15사례를 보존한다. 임시 로그/캡처의 영구 보존을 가정하지 않는다.
+
+## DEV-0428 골렘 대응 보완 검사
+
+**DEV-0428 — 골렘 대응 안내·유인 조사 흐름 보완 구현·검증 및 재평가 의견 반영 완료, 사용자 로컬 커밋 승인.** 무료 방전 효과·조건·성공/재가동 안내를 보완하고, 사용 후 감각은 알겠지만 첫 표현이 어렵다는 의견을 받아 Q 첫 줄을 `골렘 잠깐 멈추기`로 바꿨다. 재가동 인지·유인 후 여유와 바뀐 표현의 사람 재확인은 남긴다. 유인 이동과 도착 후 확인을 분리하고 정체1.25초·첫 반응부터8초 상한을 시험 적용했다. 기본/개선 방전2초/3초·공유 충전·가격·적재·스키마10은 유지한다. 전체 **108/108 실행·64개 스모크 장면**, 준비된29사례와 두 해상도 최종28장 화면 검사, 문서/보존 검사를 통과했다. 기준 `8ecc208`, 승인된 로컬4커밋 앞섬·뒤처짐0에서 착수했다. 2026-10-12 사용자가 검토된 DEV-0428 결과의 로컬 커밋을 승인했으며 push하지 않았다. 다음은 **DEV-0429 — G4 보완 후 사람 플레이 검토**이며 G4 전체 완료·G5 착수와 최종 수치는 보류한다. **정합성 검사: 아직 아님 — G5 완료 후.**
+
+- Godot4.7.1, [전체 회귀](dev0428_automated_results.json)108/108프로세스·64개 스모크 장면·1회. 오류/경고·무시 진단0과 실행 전후 소스 일치를 확인했다. 첫 시도는 이전 `소음` 문구, 다음 시도는 이전 유인 성공 문구를 찾는 검사에서 실패했다. 새 표현의 같은 의미를 확인하도록 검사만 갱신한 전체 실행은108/108을 통과했다. 이어 사람의 첫 표현 의견을 반영해 Q 효과를 먼저 표시하고 최종 전체108/108을 다시 통과했다. 수정 전 통과 기록과 새 결과는 JSON에서 구분한다.
+- [대응/안내](dev0428_response_results.json)는15개 기존 준비 사례와14개 추가 사례를 분리한다. 재유인/정체·일반 소음 우선·방전/정보 조건·지도/가방 일시정지/종료를 확인했고, 기존 전체 검사가 실제F 투척·경보/시야·문/접촉·소비/무게/저장을 검증한다.
+- 최종 그래픽은1152×648/1600×900·28장, OpenGL Compatibility/NVIDIA RTX4060이다. 첫18장과 사람 답변 전28장은 수정 전 근거로 구분한다. 사람 의견 반영 뒤 최종28장을 다시 촬영했다. 화면 조작/겹침/잘림은 자동 확인하고 새 Q 기본/미장착/정밀 분석 화면을 직접 관찰했다. 그래픽3회·별도 외부 강제 종료0회다.
+- [문서/보존 검사](dev0428_document_results.json)는 활성 링크/앵커·related, 원본6/사본3, 과거 결과91개, Story/Reference/GDD/결정·질문 상태·두 정기 검사 표, 변경 범위와 소스 해시·공백을 확인한다. Design의 두 제한 적용만 변경했다.
+- 사람의 Q 사용/감각 이해 자기보고와 첫 표현 보완 의견은 [별도 세션 기록](g4_playtest_review.md#dev-0428-골렘-대응-재평가)에 반영했다. 재가동 인지·유인 후 여유와 바뀐 표현의 사람 재확인은 미평가다. 원시 로그/캡처는 임시 근거이며 파일 해시를 JSON에 보존한다.
+
+재현(저장소 루트, PowerShell7, GODOT_BIN에 Godot4.7.1 콘솔 경로):
+
+```powershell
+./tests/run_g2_checks.ps1 -GodotBin $env:GODOT_BIN -Repetitions 1 -TimeoutSeconds 90 -OutputRoot 'C:/tmp/dev0428-review'
+& $env:GODOT_BIN --path . --rendering-method gl_compatibility --fixed-fps 60 res://tests/smoke/golem_response_guidance_smoke.tscn -- --guidance-render
+& $env:GODOT_BIN --path . res://tests/fixtures/g4_review_entry.tscn -- --g4-case=economy --g4-session=dev0428-response-20261012
+git diff --check
+```
+
+최종 소스 SHA-256: `e48e23498722f8f1aec4a3e08316239f1e6ce90a4220e9920dd71ded15f7151a`.
+원시 전체 보고서: `C:/tmp/dev0428-review/dungeon-g2-20261012-102948-f17e957477424a2eb34fb1c805be2e5e/results.json`. 최종 화면은 `.godot/dev0428-review/render-wording`, 사람 로그는 `.godot/dev0428-review/human.log`다.

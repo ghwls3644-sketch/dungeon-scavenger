@@ -116,7 +116,7 @@ func _check_throwing() -> void:
 	await _frames(2)
 	_expect(_landings.size() == 2 and _landings.back().distance_to(Vector2(350, -200)) < 0.1, "Moving thrower altered destination or duplicated landing.")
 	_expect(golem.get_state() == BrokenGuardGolem.State.SUSPICIOUS and golem.get_last_known_position() == _landings.back(), "Landing did not lure toward snapshot position.")
-	_expect(world.get_node("%ChoiceStatus").text.contains("소음 유인물이 떨어진 위치"), "Lure feedback missing.")
+	_expect(world.get_node("%ChoiceStatus").text.contains("소리 쪽으로 움직입니다"), "Lure feedback missing.")
 	_expect(world.get_node("%ToolStatus").text.contains("0/2"), "Remaining stock missing from HUD.")
 	await _capture("lure-heard.png")
 	var before := golem.position
@@ -175,8 +175,10 @@ func _check_hearing() -> void:
 	_expect(hearing.hear_lure(Vector2(720, -200), 320.0), "Boundary lure not heard.")
 	await _frames(12)
 	_expect(golem.get_state() == BrokenGuardGolem.State.SEARCH, "Single lure escalated to chase.")
-	await _frames(18)
-	_expect(golem.get_state() == BrokenGuardGolem.State.PATROL, "Lure did not return to patrol.")
+	# This deliberately immobile golem now gives up at the lure stall bound,
+	# rather than spending the ordinary search timer while travelling.
+	await _frames(72)
+	_expect(golem.get_state() == BrokenGuardGolem.State.PATROL, "Blocked lure did not return to patrol.")
 	emitter.noise_emitted.emit(Vector2(600, -200), 260.0, true)
 	emitter.noise_emitted.emit(Vector2(600, -200), 260.0, true)
 	_expect(hearing.get_loud_noise_count() == 2 and hearing.hear_lure(Vector2(650, -200), 320.0), "Could not lure suspicious golem.")

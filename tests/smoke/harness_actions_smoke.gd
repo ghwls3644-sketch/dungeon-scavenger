@@ -86,7 +86,7 @@ func _check_shared_charge_and_escape() -> void:
 	await get_tree().create_timer(0.12).timeout
 	_expect(golem.get_state() == BrokenGuardGolem.State.CHASE, "Golem did not reach chase before the discharge check.")
 	_expect(detector.get_current_harness_target() == golem, "An inactive hazard hid the actionable golem.")
-	_expect(harness.get_current_prompt().contains("비상 방전"), "Q prompt did not name the chosen physical action.")
+	_expect(harness.get_current_prompt().begins_with("골렘 잠깐 멈추기"), "Q prompt did not explain the chosen physical action.")
 
 	var nested_accepts: Array[bool] = []
 	golem.state_changed.connect(func(_previous: int, current: int) -> void:

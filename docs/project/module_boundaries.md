@@ -468,3 +468,9 @@ ExpeditionLoadout은 복사된 시작 수량/무게, ExplorationOutcome은 실�
 ## DEV-0427 골렘 대응 검토 책임
 
 [전용 검사](../../tests/smoke/golem_response_review_smoke.gd)는 테스트 영역에서만 준비 위치/짐·초기 추적을 만들고 현재 출정 설정·Q/G 입력·물리 이동, 골렘 유인 API/청취 경로를 관찰한다. 별도 통로에서 골렘 설정을 복사하며 제품 클래스·자원·저장 책임을 바꾸지 않는다. [검토 문서](golem_response_review.md)는 실제 사용자 발언·현재 동작·후속 제안을 구별하고, 정확한 시각/값은 보존 JSON이 소유한다. 이 검사를 제품의 영구 유인 시간 계약으로 읽지 않는다.
+
+## DEV-0428 골렘 대응 보완 책임
+
+[BrokenGuardGolem](../../src/gameplay/hazards/broken_guard_golem.gd)이 유인 조사만의 도착·정체·전체 상한과 상태 설명을 소유한다. HarnessController는 기존 대상/충전에서 가능 조건을 표현하고 HarnessStatus는 무료 안내를 배치한다. [PrototypeExploration](../../src/app/prototype_exploration.gd)은 성공/가시 재가동·가시 복귀 알림과 접촉 경고 우선순위를 연결한다. 청취 반경/발소리 이력·투척/소비·Meta/Infrastructure·저장 책임은 바꾸지 않는다.
+
+[기준 재현 검사](../../tests/smoke/golem_response_review_smoke.gd)는 과거 조기 복귀를 영구 계약으로 삼지 않고 도착 후 확인/유한 복귀를 검증하도록 갱신했다. [추가 검사](../../tests/smoke/golem_response_guidance_smoke.gd)는 재유인 상한·일시정지·무료/유료 정보·조건별 안내·유인 단계·두 해상도 배치를 맡는다. 기존 시야/유인 검사는 새 쉬운 문구의 의미와 새 정체 종료 조건에 맞춰 갱신하며 이전 결과 JSON은 보존한다.

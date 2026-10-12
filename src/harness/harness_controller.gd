@@ -106,12 +106,15 @@ func get_current_charge() -> int:
 func get_current_prompt() -> String:
 	var target := _detector.get_current_harness_target()
 	var required := get_action_module()
+	if target is BrokenGuardGolem and target.can_emergency_discharge():
+		if not has_module(required):
+			return "골렘 잠깐 멈추기\n비상 방전 미장착 · 거점에서 변경"
+		var cost: int = target.get_discharge_charge_cost()
+		return "골렘 잠깐 멈추기\n충전 부족 (필요 %d)" % cost if _current_charge < cost else "골렘 잠깐 멈추기 · 충전 %d" % cost
 	if not required.is_empty() and not has_module(required):
 		return "%s 미장착 · 거점에서 변경" % HarnessModules.label(required)
 	if target is StabilizableHazard and target.can_stabilize():
 		return "%s · 충전 %d" % [target.get_harness_prompt(), target.get_stabilization_charge_cost()]
-	if target is BrokenGuardGolem and target.can_emergency_discharge():
-		return "경비 골렘 비상 방전 · 충전 %d" % target.get_discharge_charge_cost()
 	return ""
 
 
