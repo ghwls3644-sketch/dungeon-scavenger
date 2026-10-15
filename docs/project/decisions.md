@@ -7,7 +7,7 @@ source_version: story-v1.5+gdd-v2.1
 canonical_for:
   - approved_decisions
   - decision_rationale
-last_reviewed: 2026-10-10
+last_reviewed: 2026-10-15
 owner: project-maintainer
 related:
   - ../design/recovery_tax.md
@@ -96,6 +96,13 @@ related:
 | `DEC-115` | 자유 수색을 유지하고 원할 때 회수 의뢰 하나를 선택해 추가 보상을 받는다. 미달성해도 기존 회수품 정산을 유지한다. | `active` | [목표·의뢰 검토안](../design/expedition_objectives.md), [경제 규칙](../design/economy_rules.md#선택-의뢰의-추가-보상), [GDD](../GDD.md#4-2-한-런의-흐름) | G4 |
 | `DEC-116` | 회수세는 판매 대금에만 부과하고 의뢰 보상은 전액 지급한다. 귀환 자동 판매와 거점 보관품 판매에 같은 과세 기준을 적용한다. | `active` | [경제 규칙](../design/economy_rules.md#회수세의-과세-대상), [회수세 검토안](../design/recovery_tax.md), [GDD](../GDD.md#10-4-가격과-거래) | G4 |
 | `DEC-117` | 휴대용 감정은 횟수 제한 확정 감정이며 같은 물품은 다시 감정하지 않는다. 필요한 만큼 유료 구매해 휴대 수량을 선택하고 안전 귀환 시 미사용분을 보관한다. | `active` | [아이템 규칙](../design/item_rules.md#감정-상태), [경제 규칙](../design/economy_rules.md#휴대용-감정-도구의-구매와-보관), [검토안](../design/portable_appraisal.md), [GDD](../GDD.md#8-2-감정) | G4 |
+| `DEC-118` | 안전 귀환의 고정 마모를 없애고 실패 때만 손상되는 방식을 제한적으로 시험한다. 비용 확인 후 수리 확정과 돈 부족 시 최소 복구는 유지한다. 최종 제품 규칙·수치 확정은 아니다. | `active` | [수리 검토안](../design/repair_rules.md#dev-0430-반복-수리-검토와-미적용-제안), [비교 근거](repair_choice_review.md), [Q-022·Q-023](open_questions.md#수리-규칙-검토-경계) | G4 시험 |
+
+### DEV-0430 수리 반복 보완 시험 방향 선택
+
+결정일 **2026-10-15**, 승인자 **사용자**. 안전 귀환의 고정 마모 제외와 현행 유지 중 “실패 때만 손상되는 안 시험 (권장)”을 선택했다. `MIG-CHG-062`에 먼저 기록했다. 승인 범위는 안전 귀환의 고정 마모를 없애고 실패 손상은 유지하는 제한된 시험이며, 비용 확인/수리 확정과 돈 부족 시 최소 복구는 유지한다. DEV-0430에서 비교한 안전 귀환0·실패2의 후보를 다음 DEV-0431에서 시험한다.
+
+DEC-111의 거래 방식은 유지한다. 최종 손상량·가격·지원 자격, 장기 경제·완전 수리의 가치와 구매 순서에 따른 지원 자격 차이는 [수리 검토안](../design/repair_rules.md)·[Q-022·Q-023](open_questions.md#수리-규칙-검토-경계)에 남긴다. 현재 게임 데이터는 미적용이며, 이 답변은 DEV-0430 문서의 커밋 승인·G4 전체 완료·G5 착수 승인이 아니다. GDD/confirmed 경제 규칙을 최종 수치로 바꾸지 않는다.
 
 ### DEV-0422 휴대용 감정 방식 선택
 

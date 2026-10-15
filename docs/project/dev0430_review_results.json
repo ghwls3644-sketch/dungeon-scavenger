@@ -1,0 +1,971 @@
+{
+  "boundaries": [
+    {
+      "can_depart": false,
+      "durability": 0,
+      "money": 0,
+      "offers": [
+        {
+          "affordable": true,
+          "amount": 1,
+          "applied": true,
+          "cost": 0,
+          "supported": true
+        },
+        {
+          "affordable": false,
+          "amount": 1,
+          "applied": false,
+          "cost": 5,
+          "supported": false
+        },
+        {
+          "affordable": false,
+          "amount": 2,
+          "applied": false,
+          "cost": 10,
+          "supported": false
+        },
+        {
+          "affordable": false,
+          "amount": 3,
+          "applied": false,
+          "cost": 15,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "can_depart": true,
+      "durability": 1,
+      "money": 0,
+      "offers": [
+        {
+          "affordable": false,
+          "amount": 1,
+          "applied": false,
+          "cost": 5,
+          "supported": false
+        },
+        {
+          "affordable": false,
+          "amount": 2,
+          "applied": false,
+          "cost": 10,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "can_depart": false,
+      "durability": 0,
+      "money": 4,
+      "offers": [
+        {
+          "affordable": true,
+          "amount": 1,
+          "applied": true,
+          "cost": 0,
+          "supported": true
+        },
+        {
+          "affordable": false,
+          "amount": 1,
+          "applied": false,
+          "cost": 5,
+          "supported": false
+        },
+        {
+          "affordable": false,
+          "amount": 2,
+          "applied": false,
+          "cost": 10,
+          "supported": false
+        },
+        {
+          "affordable": false,
+          "amount": 3,
+          "applied": false,
+          "cost": 15,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "can_depart": true,
+      "durability": 1,
+      "money": 4,
+      "offers": [
+        {
+          "affordable": false,
+          "amount": 1,
+          "applied": false,
+          "cost": 5,
+          "supported": false
+        },
+        {
+          "affordable": false,
+          "amount": 2,
+          "applied": false,
+          "cost": 10,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "can_depart": false,
+      "durability": 0,
+      "money": 5,
+      "offers": [
+        {
+          "affordable": true,
+          "amount": 1,
+          "applied": true,
+          "cost": 5,
+          "supported": false
+        },
+        {
+          "affordable": false,
+          "amount": 2,
+          "applied": false,
+          "cost": 10,
+          "supported": false
+        },
+        {
+          "affordable": false,
+          "amount": 3,
+          "applied": false,
+          "cost": 15,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "can_depart": true,
+      "durability": 1,
+      "money": 5,
+      "offers": [
+        {
+          "affordable": true,
+          "amount": 1,
+          "applied": true,
+          "cost": 5,
+          "supported": false
+        },
+        {
+          "affordable": false,
+          "amount": 2,
+          "applied": false,
+          "cost": 10,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "can_depart": false,
+      "durability": 0,
+      "money": 9,
+      "offers": [
+        {
+          "affordable": true,
+          "amount": 1,
+          "applied": true,
+          "cost": 5,
+          "supported": false
+        },
+        {
+          "affordable": false,
+          "amount": 2,
+          "applied": false,
+          "cost": 10,
+          "supported": false
+        },
+        {
+          "affordable": false,
+          "amount": 3,
+          "applied": false,
+          "cost": 15,
+          "supported": false
+        }
+      ]
+    },
+    {
+      "can_depart": true,
+      "durability": 1,
+      "money": 9,
+      "offers": [
+        {
+          "affordable": true,
+          "amount": 1,
+          "applied": true,
+          "cost": 5,
+          "supported": false
+        },
+        {
+          "affordable": false,
+          "amount": 2,
+          "applied": false,
+          "cost": 10,
+          "supported": false
+        }
+      ]
+    }
+  ],
+  "checked_date_kst": "2026-10-15",
+  "engine": "4.7.1-stable (official)",
+  "failures": [],
+  "full_repair_controls": [
+    {
+      "after_durability": 3,
+      "after_money": 0,
+      "before_durability": 0,
+      "cost": 15
+    },
+    {
+      "after_durability": 3,
+      "after_money": 5,
+      "before_durability": 1,
+      "cost": 10
+    }
+  ],
+  "outcomes": [
+    {
+      "after": 0,
+      "before": 0,
+      "damage": 0,
+      "kind": "normal",
+      "policy": "current",
+      "repair_estimate_unpaid": 15
+    },
+    {
+      "after": 0,
+      "before": 0,
+      "damage": 0,
+      "kind": "empty",
+      "policy": "current",
+      "repair_estimate_unpaid": 15
+    },
+    {
+      "after": 0,
+      "before": 0,
+      "damage": 0,
+      "kind": "emergency",
+      "policy": "current",
+      "repair_estimate_unpaid": 15
+    },
+    {
+      "after": 0,
+      "before": 0,
+      "damage": 0,
+      "kind": "failure",
+      "policy": "current",
+      "repair_estimate_unpaid": 15
+    },
+    {
+      "after": 0,
+      "before": 1,
+      "damage": 1,
+      "kind": "normal",
+      "policy": "current",
+      "repair_estimate_unpaid": 15
+    },
+    {
+      "after": 0,
+      "before": 1,
+      "damage": 1,
+      "kind": "empty",
+      "policy": "current",
+      "repair_estimate_unpaid": 15
+    },
+    {
+      "after": 0,
+      "before": 1,
+      "damage": 1,
+      "kind": "emergency",
+      "policy": "current",
+      "repair_estimate_unpaid": 15
+    },
+    {
+      "after": 0,
+      "before": 1,
+      "damage": 1,
+      "kind": "failure",
+      "policy": "current",
+      "repair_estimate_unpaid": 15
+    },
+    {
+      "after": 1,
+      "before": 2,
+      "damage": 1,
+      "kind": "normal",
+      "policy": "current",
+      "repair_estimate_unpaid": 10
+    },
+    {
+      "after": 1,
+      "before": 2,
+      "damage": 1,
+      "kind": "empty",
+      "policy": "current",
+      "repair_estimate_unpaid": 10
+    },
+    {
+      "after": 1,
+      "before": 2,
+      "damage": 1,
+      "kind": "emergency",
+      "policy": "current",
+      "repair_estimate_unpaid": 10
+    },
+    {
+      "after": 0,
+      "before": 2,
+      "damage": 2,
+      "kind": "failure",
+      "policy": "current",
+      "repair_estimate_unpaid": 15
+    },
+    {
+      "after": 2,
+      "before": 3,
+      "damage": 1,
+      "kind": "normal",
+      "policy": "current",
+      "repair_estimate_unpaid": 5
+    },
+    {
+      "after": 2,
+      "before": 3,
+      "damage": 1,
+      "kind": "empty",
+      "policy": "current",
+      "repair_estimate_unpaid": 5
+    },
+    {
+      "after": 2,
+      "before": 3,
+      "damage": 1,
+      "kind": "emergency",
+      "policy": "current",
+      "repair_estimate_unpaid": 5
+    },
+    {
+      "after": 1,
+      "before": 3,
+      "damage": 2,
+      "kind": "failure",
+      "policy": "current",
+      "repair_estimate_unpaid": 10
+    },
+    {
+      "after": 0,
+      "before": 0,
+      "damage": 0,
+      "kind": "normal",
+      "policy": "safe_wear_zero_proposal",
+      "repair_estimate_unpaid": 15
+    },
+    {
+      "after": 0,
+      "before": 0,
+      "damage": 0,
+      "kind": "empty",
+      "policy": "safe_wear_zero_proposal",
+      "repair_estimate_unpaid": 15
+    },
+    {
+      "after": 0,
+      "before": 0,
+      "damage": 0,
+      "kind": "emergency",
+      "policy": "safe_wear_zero_proposal",
+      "repair_estimate_unpaid": 15
+    },
+    {
+      "after": 0,
+      "before": 0,
+      "damage": 0,
+      "kind": "failure",
+      "policy": "safe_wear_zero_proposal",
+      "repair_estimate_unpaid": 15
+    },
+    {
+      "after": 1,
+      "before": 1,
+      "damage": 0,
+      "kind": "normal",
+      "policy": "safe_wear_zero_proposal",
+      "repair_estimate_unpaid": 10
+    },
+    {
+      "after": 1,
+      "before": 1,
+      "damage": 0,
+      "kind": "empty",
+      "policy": "safe_wear_zero_proposal",
+      "repair_estimate_unpaid": 10
+    },
+    {
+      "after": 1,
+      "before": 1,
+      "damage": 0,
+      "kind": "emergency",
+      "policy": "safe_wear_zero_proposal",
+      "repair_estimate_unpaid": 10
+    },
+    {
+      "after": 0,
+      "before": 1,
+      "damage": 1,
+      "kind": "failure",
+      "policy": "safe_wear_zero_proposal",
+      "repair_estimate_unpaid": 15
+    },
+    {
+      "after": 2,
+      "before": 2,
+      "damage": 0,
+      "kind": "normal",
+      "policy": "safe_wear_zero_proposal",
+      "repair_estimate_unpaid": 5
+    },
+    {
+      "after": 2,
+      "before": 2,
+      "damage": 0,
+      "kind": "empty",
+      "policy": "safe_wear_zero_proposal",
+      "repair_estimate_unpaid": 5
+    },
+    {
+      "after": 2,
+      "before": 2,
+      "damage": 0,
+      "kind": "emergency",
+      "policy": "safe_wear_zero_proposal",
+      "repair_estimate_unpaid": 5
+    },
+    {
+      "after": 0,
+      "before": 2,
+      "damage": 2,
+      "kind": "failure",
+      "policy": "safe_wear_zero_proposal",
+      "repair_estimate_unpaid": 15
+    },
+    {
+      "after": 3,
+      "before": 3,
+      "damage": 0,
+      "kind": "normal",
+      "policy": "safe_wear_zero_proposal",
+      "repair_estimate_unpaid": 0
+    },
+    {
+      "after": 3,
+      "before": 3,
+      "damage": 0,
+      "kind": "empty",
+      "policy": "safe_wear_zero_proposal",
+      "repair_estimate_unpaid": 0
+    },
+    {
+      "after": 3,
+      "before": 3,
+      "damage": 0,
+      "kind": "emergency",
+      "policy": "safe_wear_zero_proposal",
+      "repair_estimate_unpaid": 0
+    },
+    {
+      "after": 1,
+      "before": 3,
+      "damage": 2,
+      "kind": "failure",
+      "policy": "safe_wear_zero_proposal",
+      "repair_estimate_unpaid": 10
+    }
+  ],
+  "passed": true,
+  "purchase_orders": [
+    {
+      "after_durability": 1,
+      "after_money": 4,
+      "costs": {
+        "appraisal_bought_costs": [],
+        "appraisal_opening_stock": [],
+        "appraisal_paid": "0",
+        "bought_costs": [],
+        "opening_money": "9",
+        "opening_stock": [],
+        "partial": false,
+        "repair_paid": "5",
+        "storage_income": "0",
+        "tax_legacy_income": "0",
+        "tax_sales": [],
+        "upgrade_paid": "0"
+      },
+      "initial_money": 9,
+      "order": "repair_first",
+      "paid_lures": 0
+    },
+    {
+      "after_durability": 1,
+      "after_money": 4,
+      "costs": {
+        "appraisal_bought_costs": [],
+        "appraisal_opening_stock": [],
+        "appraisal_paid": "0",
+        "bought_costs": [
+          "5"
+        ],
+        "opening_money": "9",
+        "opening_stock": [],
+        "partial": false,
+        "repair_paid": "0",
+        "storage_income": "0",
+        "tax_legacy_income": "0",
+        "tax_sales": [],
+        "upgrade_paid": "0"
+      },
+      "initial_money": 9,
+      "order": "lure_first",
+      "paid_lures": 1
+    }
+  ],
+  "scenario_count": 56,
+  "scope": "isolated domain comparison, no GUI/player/save mutation; proposal uses a duplicated wear resource",
+  "sequences": [
+    {
+      "after_durability": 0,
+      "after_money": 15,
+      "case": "safe3_minimum",
+      "events": [
+        {
+          "after_durability": 0,
+          "after_money": 25,
+          "kind": "empty"
+        },
+        {
+          "after_durability": 0,
+          "after_money": 20,
+          "kind": "empty"
+        },
+        {
+          "after_durability": 0,
+          "after_money": 15,
+          "kind": "empty"
+        }
+      ],
+      "income_per_run": 0,
+      "initial_durability": 0,
+      "initial_money": 30,
+      "integration_run": false,
+      "paid": 15,
+      "policy": "current",
+      "repair_transactions": 3,
+      "support_transactions": 0
+    },
+    {
+      "after_durability": 0,
+      "after_money": 15,
+      "case": "safe3_full",
+      "events": [
+        {
+          "after_durability": 2,
+          "after_money": 15,
+          "kind": "empty"
+        },
+        {
+          "after_durability": 1,
+          "after_money": 15,
+          "kind": "empty"
+        },
+        {
+          "after_durability": 0,
+          "after_money": 15,
+          "kind": "empty"
+        }
+      ],
+      "income_per_run": 0,
+      "initial_durability": 0,
+      "initial_money": 30,
+      "integration_run": false,
+      "paid": 15,
+      "policy": "current",
+      "repair_transactions": 1,
+      "support_transactions": 0
+    },
+    {
+      "after_durability": 0,
+      "after_money": 15,
+      "case": "failure3_minimum",
+      "events": [
+        {
+          "after_durability": 0,
+          "after_money": 25,
+          "kind": "failure"
+        },
+        {
+          "after_durability": 0,
+          "after_money": 20,
+          "kind": "failure"
+        },
+        {
+          "after_durability": 0,
+          "after_money": 15,
+          "kind": "failure"
+        }
+      ],
+      "income_per_run": 0,
+      "initial_durability": 0,
+      "initial_money": 30,
+      "integration_run": false,
+      "paid": 15,
+      "policy": "current",
+      "repair_transactions": 3,
+      "support_transactions": 0
+    },
+    {
+      "after_durability": 0,
+      "after_money": 15,
+      "case": "safe_failure_safe",
+      "events": [
+        {
+          "after_durability": 0,
+          "after_money": 25,
+          "kind": "empty"
+        },
+        {
+          "after_durability": 0,
+          "after_money": 20,
+          "kind": "failure"
+        },
+        {
+          "after_durability": 0,
+          "after_money": 15,
+          "kind": "empty"
+        }
+      ],
+      "income_per_run": 0,
+      "initial_durability": 0,
+      "initial_money": 30,
+      "integration_run": false,
+      "paid": 15,
+      "policy": "current",
+      "repair_transactions": 3,
+      "support_transactions": 0
+    },
+    {
+      "after_durability": 0,
+      "after_money": 0,
+      "case": "zero_money_safe3",
+      "events": [
+        {
+          "after_durability": 0,
+          "after_money": 0,
+          "kind": "empty"
+        },
+        {
+          "after_durability": 0,
+          "after_money": 0,
+          "kind": "empty"
+        },
+        {
+          "after_durability": 0,
+          "after_money": 0,
+          "kind": "empty"
+        }
+      ],
+      "income_per_run": 0,
+      "initial_durability": 0,
+      "initial_money": 0,
+      "integration_run": false,
+      "paid": 0,
+      "policy": "current",
+      "repair_transactions": 3,
+      "support_transactions": 3
+    },
+    {
+      "after_durability": 0,
+      "after_money": 0,
+      "case": "zero_money_failure3",
+      "events": [
+        {
+          "after_durability": 0,
+          "after_money": 0,
+          "kind": "failure"
+        },
+        {
+          "after_durability": 0,
+          "after_money": 0,
+          "kind": "failure"
+        },
+        {
+          "after_durability": 0,
+          "after_money": 0,
+          "kind": "failure"
+        }
+      ],
+      "income_per_run": 0,
+      "initial_durability": 0,
+      "initial_money": 0,
+      "integration_run": false,
+      "paid": 0,
+      "policy": "current",
+      "repair_transactions": 3,
+      "support_transactions": 3
+    },
+    {
+      "after_durability": 1,
+      "after_money": 25,
+      "case": "safe3_minimum",
+      "events": [
+        {
+          "after_durability": 1,
+          "after_money": 25,
+          "kind": "empty"
+        },
+        {
+          "after_durability": 1,
+          "after_money": 25,
+          "kind": "empty"
+        },
+        {
+          "after_durability": 1,
+          "after_money": 25,
+          "kind": "empty"
+        }
+      ],
+      "income_per_run": 0,
+      "initial_durability": 0,
+      "initial_money": 30,
+      "integration_run": false,
+      "paid": 5,
+      "policy": "safe_wear_zero_proposal",
+      "repair_transactions": 1,
+      "support_transactions": 0
+    },
+    {
+      "after_durability": 3,
+      "after_money": 15,
+      "case": "safe3_full",
+      "events": [
+        {
+          "after_durability": 3,
+          "after_money": 15,
+          "kind": "empty"
+        },
+        {
+          "after_durability": 3,
+          "after_money": 15,
+          "kind": "empty"
+        },
+        {
+          "after_durability": 3,
+          "after_money": 15,
+          "kind": "empty"
+        }
+      ],
+      "income_per_run": 0,
+      "initial_durability": 0,
+      "initial_money": 30,
+      "integration_run": false,
+      "paid": 15,
+      "policy": "safe_wear_zero_proposal",
+      "repair_transactions": 1,
+      "support_transactions": 0
+    },
+    {
+      "after_durability": 0,
+      "after_money": 15,
+      "case": "failure3_minimum",
+      "events": [
+        {
+          "after_durability": 0,
+          "after_money": 25,
+          "kind": "failure"
+        },
+        {
+          "after_durability": 0,
+          "after_money": 20,
+          "kind": "failure"
+        },
+        {
+          "after_durability": 0,
+          "after_money": 15,
+          "kind": "failure"
+        }
+      ],
+      "income_per_run": 0,
+      "initial_durability": 0,
+      "initial_money": 30,
+      "integration_run": false,
+      "paid": 15,
+      "policy": "safe_wear_zero_proposal",
+      "repair_transactions": 3,
+      "support_transactions": 0
+    },
+    {
+      "after_durability": 1,
+      "after_money": 20,
+      "case": "safe_failure_safe",
+      "events": [
+        {
+          "after_durability": 1,
+          "after_money": 25,
+          "kind": "empty"
+        },
+        {
+          "after_durability": 0,
+          "after_money": 25,
+          "kind": "failure"
+        },
+        {
+          "after_durability": 1,
+          "after_money": 20,
+          "kind": "empty"
+        }
+      ],
+      "income_per_run": 0,
+      "initial_durability": 0,
+      "initial_money": 30,
+      "integration_run": false,
+      "paid": 10,
+      "policy": "safe_wear_zero_proposal",
+      "repair_transactions": 2,
+      "support_transactions": 0
+    },
+    {
+      "after_durability": 1,
+      "after_money": 0,
+      "case": "zero_money_safe3",
+      "events": [
+        {
+          "after_durability": 1,
+          "after_money": 0,
+          "kind": "empty"
+        },
+        {
+          "after_durability": 1,
+          "after_money": 0,
+          "kind": "empty"
+        },
+        {
+          "after_durability": 1,
+          "after_money": 0,
+          "kind": "empty"
+        }
+      ],
+      "income_per_run": 0,
+      "initial_durability": 0,
+      "initial_money": 0,
+      "integration_run": false,
+      "paid": 0,
+      "policy": "safe_wear_zero_proposal",
+      "repair_transactions": 1,
+      "support_transactions": 1
+    },
+    {
+      "after_durability": 0,
+      "after_money": 0,
+      "case": "zero_money_failure3",
+      "events": [
+        {
+          "after_durability": 0,
+          "after_money": 0,
+          "kind": "failure"
+        },
+        {
+          "after_durability": 0,
+          "after_money": 0,
+          "kind": "failure"
+        },
+        {
+          "after_durability": 0,
+          "after_money": 0,
+          "kind": "failure"
+        }
+      ],
+      "income_per_run": 0,
+      "initial_durability": 0,
+      "initial_money": 0,
+      "integration_run": false,
+      "paid": 0,
+      "policy": "safe_wear_zero_proposal",
+      "repair_transactions": 3,
+      "support_transactions": 3
+    }
+  ],
+  "ticket": "DEV-0430",
+  "ticket_name": "내구·수리와 재출정 선택 검토",
+  "repository_commit": "ebf3bd201dfa5c457d533ab92de73e9045ab83d1",
+  "source_tree_sha256": "e48e23498722f8f1aec4a3e08316239f1e6ce90a4220e9920dd71ded15f7151a",
+  "source_files": 558,
+  "fresh_successful_processes": 1,
+  "new_human_playtests": 0,
+  "new_gui_launches": 0,
+  "counts": {
+    "boundaries": 8,
+    "full_repair_controls": 2,
+    "outcomes": 32,
+    "sequences": 12,
+    "purchase_orders": 2
+  },
+  "initial_attempt": {
+    "passed": false,
+    "reason": "Review script type inference parse error; no scenarios executed. Corrected in review helper only.",
+    "counted_as_success": false
+  },
+  "reproduction": {
+    "script_path": ".godot/dev0430-review/compare.gd",
+    "script_source": "extends SceneTree\n\nconst ECONOMY = preload(\"res://src/data/prototype_economy.tres\")\nconst WEAR = preload(\"res://src/data/prototype_equipment_wear.tres\")\nconst CATALOG = preload(\"res://src/data/prototype_item_catalog.tres\")\nvar failures: Array[String] = []\nvar report: Dictionary = {}\n\nfunc _initialize() -> void:\n\tcall_deferred(\"_run\")\n\nfunc check(ok: bool, message: String) -> void:\n\tif not ok:\n\t\tfailures.append(message)\n\nfunc hub_at(money: int, durability: int) -> HubState:\n\tvar data := HubState.new().to_save_data()\n\tdata.money = str(money)\n\tdata.costs = ExpeditionCosts.new_book(money)\n\tdata.harness_durability = durability\n\treturn HubState.from_save_data(data, CATALOG)\n\nfunc outcome(kind: String) -> ExplorationOutcome:\n\tif kind == \"failure\":\n\t\treturn ExplorationOutcome.failure(1)\n\tif kind == \"normal\":\n\t\tvar items: Array[ItemDefinition] = [CATALOG.find_item(\"test_g1_light\")]\n\t\treturn ExplorationOutcome.safe_return(items)\n\treturn ExplorationOutcome.safe_return_inventory_items([], &\"emergency_escape\" if kind == \"emergency\" else &\"entrance\")\n\nfunc _run() -> void:\n\treport = {\"ticket\": \"DEV-0430\", \"checked_date_kst\": \"2026-10-15\", \"engine\": Engine.get_version_info().string,\n\t\t\"scope\": \"isolated domain comparison, no GUI/player/save mutation; proposal uses a duplicated wear resource\",\n\t\t\"boundaries\": [], \"full_repair_controls\": [], \"outcomes\": [], \"sequences\": [], \"purchase_orders\": []}\n\tfor money in [0, 4, 5, 9]:\n\t\tfor durability in [0, 1]:\n\t\t\tvar hub := hub_at(money, durability)\n\t\t\tvar before := hub.to_save_data()\n\t\t\tvar row := {\"money\": money, \"durability\": durability, \"can_depart\": hub.can_depart(ECONOMY), \"offers\": []}\n\t\t\tcheck(hub.can_depart(ECONOMY) == (durability >= 1), \"departure boundary\")\n\t\t\tvar supported := hub.quote_repair(1, ECONOMY, true)\n\t\t\tcheck((supported != null) == (durability == 0 and money < 5), \"support boundary\")\n\t\t\tfor quote in hub.get_repair_offers(ECONOMY):\n\t\t\t\tvar copy := hub.copy()\n\t\t\t\tvar applied := copy.apply_repair(quote, ECONOMY)\n\t\t\t\tcheck(applied == quote.can_afford(), \"affordability\")\n\t\t\t\tif applied:\n\t\t\t\t\tvar expected := before.duplicate(true)\n\t\t\t\t\texpected.money = str(money - quote.get_cost())\n\t\t\t\t\texpected.harness_durability = durability + quote.get_amount()\n\t\t\t\t\texpected.costs.period.repair_paid = str(quote.get_cost())\n\t\t\t\t\tcheck(copy.to_save_data() == expected, \"repair changed unrelated fields\")\n\t\t\t\t\tcheck(not copy.apply_repair(quote, ECONOMY), \"duplicate repair\")\n\t\t\t\t\tif quote.is_supported():\n\t\t\t\t\t\tcheck(copy.quote_repair(1, ECONOMY, true) == null, \"repeat support\")\n\t\t\t\telse:\n\t\t\t\t\tcheck(copy.to_save_data() == before, \"rejected repair mutated state\")\n\t\t\t\trow.offers.append({\"amount\": quote.get_amount(), \"cost\": quote.get_cost(), \"supported\": quote.is_supported(), \"affordable\": quote.can_afford(), \"applied\": applied})\n\t\t\tcheck(hub.to_save_data() == before, \"quote/candidate mutated original\")\n\t\t\treport.boundaries.append(row)\n\tfor durability in [0, 1]:\n\t\tvar hub := hub_at(15, durability)\n\t\tvar quote := hub.quote_repair(3 - durability, ECONOMY)\n\t\tcheck(hub.apply_repair(quote, ECONOMY) and hub.get_harness_durability() == 3 and hub.get_money() == 15 - (3 - durability) * 5, \"full repair control\")\n\t\treport.full_repair_controls.append({\"before_durability\": durability, \"cost\": quote.get_cost(), \"after_money\": hub.get_money(), \"after_durability\": hub.get_harness_durability()})\n\tvar proposed := WEAR.duplicate(true) as EquipmentWearRule\n\tproposed.return_damage = 0\n\tfor policy in [\"current\", \"safe_wear_zero_proposal\"]:\n\t\tvar wear: EquipmentWearRule = WEAR if policy == \"current\" else proposed\n\t\tfor durability in [0, 1, 2, 3]:\n\t\t\tfor kind in [\"normal\", \"empty\", \"emergency\", \"failure\"]:\n\t\t\t\tvar settled := SettlementResult.from_outcome(outcome(kind), ECONOMY, wear, durability)\n\t\t\t\tcheck(settled != null, \"invalid settlement\")\n\t\t\t\tvar damage: int = mini(durability, 2 if kind == \"failure\" else (1 if policy == \"current\" else 0))\n\t\t\t\tcheck(settled.get_equipment_damage().after == durability - damage, \"wear amount\")\n\t\t\t\tcheck(settled.get_full_repair_estimate() == (3 - durability + damage) * 5, \"unpaid repair estimate\")\n\t\t\t\treport.outcomes.append({\"policy\": policy, \"kind\": kind, \"before\": durability, \"damage\": damage, \"after\": settled.get_equipment_damage().after, \"repair_estimate_unpaid\": settled.get_full_repair_estimate()})\n\t\tfor spec in [\n\t\t\t{\"id\": \"safe3_minimum\", \"money\": 30, \"full\": false, \"kinds\": [\"empty\", \"empty\", \"empty\"]},\n\t\t\t{\"id\": \"safe3_full\", \"money\": 30, \"full\": true, \"kinds\": [\"empty\", \"empty\", \"empty\"]},\n\t\t\t{\"id\": \"failure3_minimum\", \"money\": 30, \"full\": false, \"kinds\": [\"failure\", \"failure\", \"failure\"]},\n\t\t\t{\"id\": \"safe_failure_safe\", \"money\": 30, \"full\": false, \"kinds\": [\"empty\", \"failure\", \"empty\"]},\n\t\t\t{\"id\": \"zero_money_safe3\", \"money\": 0, \"full\": false, \"kinds\": [\"empty\", \"empty\", \"empty\"]},\n\t\t\t{\"id\": \"zero_money_failure3\", \"money\": 0, \"full\": false, \"kinds\": [\"failure\", \"failure\", \"failure\"]}]:\n\t\t\tvar money: int = spec.money\n\t\t\tvar durability := 0\n\t\t\tvar transactions := 0\n\t\t\tvar paid := 0\n\t\t\tvar supports := 0\n\t\t\tvar events: Array = []\n\t\t\tfor kind in spec.kinds:\n\t\t\t\tvar hub := hub_at(money, durability)\n\t\t\t\tif not hub.can_depart(ECONOMY):\n\t\t\t\t\tvar quote := hub.quote_repair(1, ECONOMY, true)\n\t\t\t\t\tif quote == null:\n\t\t\t\t\t\tquote = hub.quote_repair(3 if spec.full else 1, ECONOMY)\n\t\t\t\t\tcheck(hub.apply_repair(quote, ECONOMY) and hub.can_depart(ECONOMY), \"sequence departure\")\n\t\t\t\t\ttransactions += 1\n\t\t\t\t\tpaid += quote.get_cost()\n\t\t\t\t\tsupports += int(quote.is_supported())\n\t\t\t\tvar settled := SettlementResult.from_outcome(outcome(kind), ECONOMY, wear, hub.get_harness_durability())\n\t\t\t\tmoney = hub.get_money() + settled.get_net_income()\n\t\t\t\tdurability = settled.get_equipment_damage().after\n\t\t\t\tevents.append({\"kind\": kind, \"after_money\": money, \"after_durability\": durability})\n\t\t\tvar reduced: bool = policy != \"current\" and spec.id in [\"safe3_minimum\", \"zero_money_safe3\"]\n\t\t\tvar expected_transactions := 1 if (reduced or spec.full) else (2 if policy != \"current\" and spec.id == \"safe_failure_safe\" else 3)\n\t\t\tcheck(transactions == expected_transactions, \"transaction cadence: \" + policy + \"/\" + spec.id)\n\t\t\tcheck(paid == (15 if spec.full else expected_transactions * (5 if spec.money > 0 else 0)) and money == spec.money - paid, \"sequence money\")\n\t\t\treport.sequences.append({\"policy\": policy, \"case\": spec.id, \"initial_money\": spec.money, \"initial_durability\": 0, \"income_per_run\": 0, \"repair_transactions\": transactions, \"support_transactions\": supports, \"paid\": paid, \"after_money\": money, \"after_durability\": durability, \"events\": events, \"integration_run\": false})\n\tfor order in [\"repair_first\", \"lure_first\"]:\n\t\tvar hub := hub_at(9, 0)\n\t\tif order == \"repair_first\":\n\t\t\tcheck(hub.apply_repair(hub.quote_repair(1, ECONOMY), ECONOMY), \"paid-first repair\")\n\t\t\tcheck(not hub.quote_lures(3).can_afford(), \"paid-first lure affordability\")\n\t\telse:\n\t\t\tcheck(hub.apply_lures(hub.quote_lures(3)), \"lure-first purchase\")\n\t\t\tcheck(hub.apply_repair(hub.quote_repair(1, ECONOMY, true), ECONOMY), \"lure-first support\")\n\t\tcheck(hub.get_money() == 4 and hub.can_depart(ECONOMY), \"purchase order result\")\n\t\treport.purchase_orders.append({\"order\": order, \"initial_money\": 9, \"after_money\": hub.get_money(), \"after_durability\": hub.get_harness_durability(), \"paid_lures\": hub.get_paid_lures(), \"costs\": hub.to_save_data().costs.period})\n\tcheck(WEAR.return_damage == 1 and WEAR.failure_damage == 2, \"shared resource changed\")\n\treport.passed = failures.is_empty()\n\treport.failures = failures\n\treport.scenario_count = 56\n\tvar file := FileAccess.open(\"res://.godot/dev0430-review/domain_results.json\", FileAccess.WRITE)\n\tfile.store_string(JSON.stringify(report, \"  \") + \"\\n\")\n\tfile.close()\n\tprint(\"DEV0430_COMPARE \", JSON.stringify({\"passed\": report.passed, \"failures\": failures, \"scenarios\": report.scenario_count}))\n\tquit(0 if failures.is_empty() else 1)\n",
+    "script_sha256": "5044eb596fd9aa86faa6c5a600ea9fe86a7f372f2bed9069f97d60eaf583b919",
+    "log_path": "C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0430-review\\compare.log",
+    "log_sha256": "1d30bf745f62388899ed6ec683e97b008d39f107ce44ab00e5f5c4f200e5c6a1",
+    "command": "Godot_v4.7.1-stable_win64_console.exe --headless --path . --log-file <absolute_review_directory>/compare.log --script .godot/dev0430-review/compare.gd"
+  },
+  "source_order_evidence": "dev0428_automated_results.json",
+  "prior_full_suite": {
+    "ticket": "DEV-0428",
+    "checks": 108,
+    "source_matches": true,
+    "rerun_this_ticket": false
+  },
+  "human_evidence": {
+    "report": "dev0429_playtest_results.json",
+    "unchanged_sha256": "66a5457c03e7fba540d0a516d1446060efbd28d4b7c2e041a372431f0ec03a4c",
+    "observed_last_ledger": {
+      "opening_money": 9,
+      "repair_paid": 5,
+      "sales_income": 40,
+      "tax_paid": 4,
+      "closing_money": 40
+    },
+    "earlier_income_history_reconstructed": false
+  },
+  "recommendation": "Safe return wear 0; failure wear 2 and current explicit repair/support trial retained; not applied.",
+  "direction_status": "user_selected_limited_trial",
+  "ticket_status": "review_complete",
+  "g4_completion": "held",
+  "next_checkpoint": "G5 완료 후",
+  "commit_status": "user_approved_local_commit",
+  "pushed": false,
+  "known_limitations": [
+    "Domain comparison is not app integration or new human testing.",
+    "Support eligibility still changes when another purchase reduces cash below 5.",
+    "Safe-only runs would have no fixed wear; economic pacing and full-repair value need later evaluation."
+  ],
+  "user_selection": {
+    "date_kst": "2026-10-15",
+    "answer": "실패 때만 손상되는 안 시험 (권장)",
+    "decision_id": "DEC-118",
+    "scope": "Limited trial: safe return fixed wear 0, failure wear 2 retained; explicit repair confirmation and minimum support retained.",
+    "final_balance_approved": false,
+    "implementation_applied": false,
+    "commit_approved": false
+  },
+  "next_work": "DEV-0431 — 안전 귀환 마모 제외 시험 적용",
+  "approval_text": "커밋",
+  "approval_date_kst": "2026-10-15"
+}
