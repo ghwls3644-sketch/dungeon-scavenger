@@ -8,7 +8,7 @@ canonical_for:
   - development_environment
   - engine_and_language
   - development_commands
-last_reviewed: 2026-10-12
+last_reviewed: 2026-10-15
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -1825,3 +1825,19 @@ git diff --check
 
 최종 소스 SHA-256: `e48e23498722f8f1aec4a3e08316239f1e6ce90a4220e9920dd71ded15f7151a`.
 원시 전체 보고서: `C:/tmp/dev0428-review/dungeon-g2-20261012-102948-f17e957477424a2eb34fb1c805be2e5e/results.json`. 최종 화면은 `.godot/dev0428-review/render-wording`, 사람 로그는 `.godot/dev0428-review/human.log`다.
+
+## DEV-0429 사람 재검토 준비 검사
+
+**DEV-0429 — G4 보완 후 사람 플레이 검토·보완 인계 완료, 사용자 로컬 커밋 승인.** 기준 DEV-0428 `efc144e`, 착수 fetch 뒤 로컬5커밋 앞섬·뒤처짐0. 별도 저장3개·실행4회에서 탐험5회(안전 귀환4/실패1)를 기록했다. F 유인물·거점 메뉴는 큰 불편이 없었고 돈0의 최소 복구도 찾기 쉬웠다는 의견을 받았다. 수입 뒤 수리를 해야 출정할 수 있다는 경험은 현재 시험 조건과 일치하며 다음 준비의 선택 여지를 후속 검토한다. Q 안내·안정화 이득은 사용자 보류, 정산/거점 다듬기는 그래픽 뒤 재검토다. 정밀 분석·성장 차이 등 미평가를 유지한다. 준비 검사 **3/3** 통과, 제품 소스는 이전 전체108/108 검증 때와 같으며 규칙·수치를 바꾸지 않았다. 다음은 **DEV-0430 — 내구·수리와 재출정 선택 검토**다. G4 전체 완료·G5 착수는 보류한다. 2026-10-15 사용자가 검토된 DEV-0429 결과의 로컬 커밋을 승인했으며 push하지 않았다. **정합성 검사: 아직 아님 — G5 완료 후.**
+
+[이번 검사](dev0429_automated_results.json)는 기존 g4_review_session·golem_response_guidance·results_readability 스모크 각1회, 총3개 새 프로세스다. headless·fixed-fps60 실행으로 정상 종료/성공 표식/오류 진단 없음을 확인했다. 전체108/108과 두 해상도 그래픽 캡처는 DEV-0428의 이전 근거이며 이번 실행으로 합산하지 않는다. [문서 검사](dev0429_document_results.json)는 활성 링크·원본/이전 결과·제품 소스·질문/검사표 보존을 확인한다.
+
+실행은 [기존 검토 장면](../../tests/fixtures/g4_review_entry.tscn)과 새 세션 ID를 쓴다.
+
+```powershell
+& $env:GODOT_BIN --path . --rendering-method gl_compatibility --log-file .godot/dev0429-review/human-economy-01.log res://tests/fixtures/g4_review_entry.tscn -- --g4-case=economy --g4-session=dev0429-economy-20261015-01
+```
+
+위 명령은 최초 실행 기록이다. 같은 세션 재실행 시 로그 파일은 새 이름을 사용해 이전 기록을 보존한다.
+
+DEV-0429 최종 [사람 기록](dev0429_playtest_results.json)은 준비 저장3개·GUI 실행4회·탐험5회(안전 귀환4/실패1)와 사용자 원문을 담는다. growth_after는 기존 저장을 유지한 채 새 로그로 한 번 이어서 실행했다. 마지막 비용9−5+40−4=40을 저장 자료로 대조했고 내구0/무료 지원 조건은 현재 코드·DEV-0407 시험과 일치한다. 중간/최종 사본의 해시를 별도로 검사하며, 문서 마무리 뒤 코드를 바꾸지 않아 준비 검사3개를 중복 실행하지 않았다. 다음은 DEV-0430이며 G4 사람 미평가·보류를 유지한다.

@@ -1,0 +1,586 @@
+{
+  "ticket": "DEV-0429",
+  "date_kst": "2026-10-15",
+  "base_commit": "efc144e",
+  "human_evaluation_status": "recorded_with_user_deferrals_unassessed_items_and_repair_followup",
+  "participation_reply": "지금 플레이할 수 있어요",
+  "sessions": [
+    {
+      "id": "dev0429-economy-20261015-01",
+      "case": "economy",
+      "wrapper_ticket": "DEV-0425",
+      "created_at_utc": "2026-10-15T05:30:07",
+      "directory": "C:/Users/user/OneDrive/문서/KHJ_web/chatGPT/Dungeon scavenger/.godot/g4-playtests/dev0429-economy-20261015-01",
+      "log_path": "C:/Users/user/OneDrive/문서/KHJ_web/chatGPT/Dungeon scavenger/.godot/dev0429-review/human-economy-01.log",
+      "initial_progress_sha256": "c3f74c1d6e84e5721abaea555a47b9ce49b9c7cabb28006cd42faf1ae831764f",
+      "prepared_money": 100,
+      "prepared_bag_slots": 3,
+      "status": "safe_return_settled_manual_exit_feedback_recorded",
+      "human_feedback": "q안내는 딱히 달라진 건 없어 보이던데 일단 보류하고 넘어가도 될 것 같아, f 유인물은 크게 불편하진 않았어, 정산 손익 부분도 가독성이 좋진 않았었는데 아직 원하는 그림을 입히기 전이니 일단 보류하고 넘어가도 될 것 같아",
+      "limitations": [
+        "Prepared money100 and bag3 are not naturally earned.",
+        "One safe return and two free lure uses are evidenced; Q use and restart recognition are not inferred.",
+        "User deferral is not comprehension or final-balance approval.",
+        "Earlier incomplete snapshot remains preserved separately from final evidence."
+      ],
+      "snapshot_directory": "C:/Users/user/OneDrive/문서/KHJ_web/chatGPT/Dungeon scavenger/.godot/dev0429-review/economy-01-pending-snapshot",
+      "snapshot_files": [
+        {
+          "file": "human-economy-01.log",
+          "sha256": "3277fa655292c9fd1697c3a68a16d4f90d6952bd36e44395117fcc08afc7b40e"
+        },
+        {
+          "file": "initial_progress.json",
+          "sha256": "c3f74c1d6e84e5721abaea555a47b9ce49b9c7cabb28006cd42faf1ae831764f"
+        },
+        {
+          "file": "progress.json",
+          "sha256": "3a5d30017ba71cf1d01269b8e60ca49b1d00f63fac9140d26c0d5ee4b3745f8c"
+        },
+        {
+          "file": "session.json",
+          "sha256": "b9f38c2da41866d9a4ab7d86c079092782ccb7bdf861a92ae08e54d8cefd68fd"
+        }
+      ],
+      "exit_reason": "manual_exit_confirmed_by_user",
+      "intermediate_observation": {
+        "status": "exploration_entered_process_not_observed_exit_reason_pending",
+        "observed_log_events": {
+          "entered_hub": true,
+          "entered_exploration": true,
+          "safe_return": false,
+          "failure": false,
+          "settlement": false
+        },
+        "snapshot_state": {
+          "schema_version": 10,
+          "money": "100",
+          "last_settlement": {},
+          "pending_departure_phase": "started",
+          "selected_lures": 2,
+          "selected_appraisals": 0,
+          "objective": {}
+        },
+        "exit_reason_at_that_time": "unconfirmed; asked user whether manually closed, closed unexpectedly, or window still open",
+        "snapshot_directory": "C:/Users/user/OneDrive/문서/KHJ_web/chatGPT/Dungeon scavenger/.godot/dev0429-review/economy-01-pending-snapshot"
+      },
+      "exit_reply": "직접 종료했어요",
+      "final_snapshot_directory": "C:/Users/user/OneDrive/문서/KHJ_web/chatGPT/Dungeon scavenger/.godot/dev0429-review/economy-01-final-snapshot",
+      "final_snapshot_files": [
+        {
+          "file": "human-economy-01.log",
+          "sha256": "3277fa655292c9fd1697c3a68a16d4f90d6952bd36e44395117fcc08afc7b40e"
+        },
+        {
+          "file": "initial_progress.json",
+          "sha256": "c3f74c1d6e84e5721abaea555a47b9ce49b9c7cabb28006cd42faf1ae831764f"
+        },
+        {
+          "file": "progress.json",
+          "sha256": "3a5d30017ba71cf1d01269b8e60ca49b1d00f63fac9140d26c0d5ee4b3745f8c"
+        },
+        {
+          "file": "session.json",
+          "sha256": "b9f38c2da41866d9a4ab7d86c079092782ccb7bdf861a92ae08e54d8cefd68fd"
+        }
+      ],
+      "final_observed_log_events": {
+        "safe_return_count": 1,
+        "failure_count": 0,
+        "returned_to_hub": true
+      },
+      "final_saved_state": {
+        "money": "136",
+        "harness_durability": 2,
+        "pending_departure": {},
+        "last_settlement": {
+          "appraisal_count": 0,
+          "appraisal_used": 0,
+          "free_used": 2,
+          "id": "1",
+          "loot_income": "40",
+          "loot_tax": {
+            "gross": "40",
+            "paid": "4",
+            "rate": 10
+          },
+          "objective": {
+            "count": 0,
+            "offer": {}
+          },
+          "outcome": "safe",
+          "paid_count": 0,
+          "paid_used": 0,
+          "period": {
+            "appraisal_bought_costs": [],
+            "appraisal_opening_stock": [],
+            "appraisal_paid": "0",
+            "bought_costs": [],
+            "opening_money": "100",
+            "opening_stock": [],
+            "partial": false,
+            "repair_paid": "0",
+            "storage_income": "0",
+            "tax_legacy_income": "0",
+            "tax_sales": [],
+            "upgrade_paid": "0"
+          }
+        },
+        "stored_items": [
+          {
+            "id": "test_g1_unknown",
+            "identified": false,
+            "risk_hint": "희미한 진동이 느껴집니다."
+          }
+        ],
+        "harness_upgrades": []
+      },
+      "assessment": {
+        "q_guidance": "user_deferred; did not notice a difference",
+        "q_restart_recognition": "unassessed",
+        "lure": "user_reported_no_major_inconvenience; not proof of final timing/balance",
+        "settlement_readability": "user_deferred_until_visual_presentation; not a pass",
+        "settlement_amount_explanation": "unassessed"
+      }
+    },
+    {
+      "id": "dev0429-services-20261015-01",
+      "case": "services",
+      "wrapper_ticket": "DEV-0425",
+      "created_at_utc": "2026-10-15T05:39:55",
+      "directory": "C:/Users/user/OneDrive/문서/KHJ_web/chatGPT/Dungeon scavenger/.godot/g4-playtests/dev0429-services-20261015-01",
+      "log_path": "C:/Users/user/OneDrive/문서/KHJ_web/chatGPT/Dungeon scavenger/.godot/dev0429-review/human-services-01.log",
+      "initial_progress_sha256": "0adaad5e5043ed3d69e565b77562fc9158f5bb479d4c7be6fd379a54c7edc411",
+      "prepared_money": 30,
+      "prepared_bag_slots": 3,
+      "prepared_item_ids": [
+        "test_g1_unknown",
+        "test_g4_artifact",
+        "test_g4_record"
+      ],
+      "status": "feedback_recorded_window_closed_by_user",
+      "human_feedback": "크게 불현한 건 없어 더 수정할 부분은 나중에 그래픽 입히고 그 뒤에 수정해도 될 것 같아",
+      "limitations": [
+        "Prepared money and items are not naturally acquired.",
+        "No major inconvenience is not an explanation of each service role.",
+        "Unchanged saved state does not prove menus were not viewed."
+      ],
+      "exit_reply": "창을 닫았어요",
+      "snapshot_directory": "C:/Users/user/OneDrive/문서/KHJ_web/chatGPT/Dungeon scavenger/.godot/dev0429-review/services-01-feedback-snapshot",
+      "snapshot_files": [
+        {
+          "file": "human-services-01.log",
+          "sha256": "29068f7c2dac8d52bdfc42b47e2cbf64f1cc127b11afff395a22a7b5f9f166fc"
+        },
+        {
+          "file": "initial_progress.json",
+          "sha256": "0adaad5e5043ed3d69e565b77562fc9158f5bb479d4c7be6fd379a54c7edc411"
+        },
+        {
+          "file": "progress.json",
+          "sha256": "0adaad5e5043ed3d69e565b77562fc9158f5bb479d4c7be6fd379a54c7edc411"
+        },
+        {
+          "file": "session.json",
+          "sha256": "ac0b5dd124a95789bfdd8d51aca88b0d1b07d7525b15a6a566cefd5104b223cc"
+        }
+      ],
+      "observed_log_events": {
+        "entered_hub": true,
+        "entered_exploration": false,
+        "quit_requested": true
+      },
+      "observed_saved_hub": {
+        "bag_slots": 3,
+        "costs": {
+          "appraisal_carried": [],
+          "appraisal_stock": [],
+          "carried": [],
+          "last": {},
+          "period": {
+            "appraisal_bought_costs": [],
+            "appraisal_opening_stock": [],
+            "appraisal_paid": "0",
+            "bought_costs": [],
+            "opening_money": "30",
+            "opening_stock": [],
+            "partial": false,
+            "repair_paid": "0",
+            "storage_income": "0",
+            "tax_legacy_income": "0",
+            "tax_sales": [],
+            "upgrade_paid": "0"
+          },
+          "stock": []
+        },
+        "harness_durability": 3,
+        "harness_modules": [
+          "stabilization",
+          "emergency_discharge"
+        ],
+        "harness_upgrades": [],
+        "money": "30",
+        "next_expedition_id": "1",
+        "objective": {},
+        "paid_appraisals": 0,
+        "paid_lures": 0,
+        "pending_departure": {},
+        "registered_items": [],
+        "selected_appraisals": 0,
+        "selected_lures": 2,
+        "stored_items": [
+          {
+            "id": "test_g1_unknown",
+            "identified": false,
+            "risk_hint": ""
+          },
+          {
+            "id": "test_g4_artifact",
+            "identified": false,
+            "risk_hint": ""
+          },
+          {
+            "id": "test_g4_record",
+            "identified": false,
+            "risk_hint": ""
+          }
+        ]
+      },
+      "changed_hub_fields": [],
+      "assessment": {
+        "usability": "user_reported_no_major_inconvenience",
+        "further_polish": "deferred_by_user_until_graphics",
+        "role_explanation": "not_provided",
+        "transaction_usage": "only_changes_in_saved_state_are_evidence; menu_viewing_is_not_logged"
+      }
+    },
+    {
+      "id": "dev0429-growth-after-20261015-01",
+      "case": "growth_after",
+      "wrapper_ticket": "DEV-0425",
+      "created_at_utc": "2026-10-15T05:53:27",
+      "directory": "C:/Users/user/OneDrive/문서/KHJ_web/chatGPT/Dungeon scavenger/.godot/g4-playtests/dev0429-growth-after-20261015-01",
+      "log_path": "C:/Users/user/OneDrive/문서/KHJ_web/chatGPT/Dungeon scavenger/.godot/dev0429-review/human-growth-after-01.log",
+      "initial_progress_sha256": "601bcf5fee347c162b3b09183219bd7cb88847ae52bd7b5c7db03f03a54d256f",
+      "prepared_money": 0,
+      "prepared_bag_slots": 3,
+      "prepared_harness_upgrades": [
+        "observation_timing",
+        "emergency_duration"
+      ],
+      "status": "review_recorded_with_deferred_and_unassessed_items",
+      "human_feedback": "안정화는 당장 함정을 정지해서 무슨 이득이 있는지를 알 수 없으니 보류고, 비상 방전은 어떤 느낌으로 쓰는 지는 알겠어. 다른 나머지 하나는 한번도 안 골라봐서 잘 모르겠네.",
+      "comparison_baseline": "dev0429-economy-20261015-01",
+      "limitations": [
+        "Upgrades are prepared, not earned or bought by this user.",
+        "Baseline had money100 and no upgrades; same prototype area and starting bag3/durability3, not a controlled identical-input experiment."
+      ],
+      "snapshot_directory": "C:/Users/user/OneDrive/문서/KHJ_web/chatGPT/Dungeon scavenger/.godot/dev0429-review/growth-after-01-feedback-snapshot",
+      "snapshot_files": [
+        {
+          "file": "human-growth-after-01.log",
+          "sha256": "03853bcbcc01eb256091d7a23aea2a8af0409e9537c718fe238dbe8be8ae08bf"
+        },
+        {
+          "file": "initial_progress.json",
+          "sha256": "601bcf5fee347c162b3b09183219bd7cb88847ae52bd7b5c7db03f03a54d256f"
+        },
+        {
+          "file": "progress.json",
+          "sha256": "880a060731116549b6233323d7e90784eeaa95070f4341aab171fcd7f5c00f7a"
+        },
+        {
+          "file": "session.json",
+          "sha256": "301265eff87a72c85da308a1903e3435bc433b25de354f92bd4aec603cf59719"
+        }
+      ],
+      "observed_log_events": {
+        "failure_count": 1,
+        "safe_return_count": 1,
+        "departure_count": 2,
+        "quit_requested": true
+      },
+      "observed_saved_hub": {
+        "bag_slots": 3,
+        "costs": {
+          "appraisal_carried": [],
+          "appraisal_stock": [],
+          "carried": [],
+          "last": {
+            "appraisal_count": 0,
+            "appraisal_used": 0,
+            "free_used": 2,
+            "id": "2",
+            "loot_income": "0",
+            "loot_tax": {
+              "gross": "0",
+              "paid": "0",
+              "rate": 10
+            },
+            "objective": {
+              "count": 0,
+              "offer": {}
+            },
+            "outcome": "safe",
+            "paid_count": 0,
+            "paid_used": 0,
+            "period": {
+              "appraisal_bought_costs": [],
+              "appraisal_opening_stock": [],
+              "appraisal_paid": "0",
+              "bought_costs": [],
+              "opening_money": "0",
+              "opening_stock": [],
+              "partial": false,
+              "repair_paid": "0",
+              "storage_income": "0",
+              "tax_legacy_income": "0",
+              "tax_sales": [],
+              "upgrade_paid": "0"
+            }
+          },
+          "period": {
+            "appraisal_bought_costs": [],
+            "appraisal_opening_stock": [],
+            "appraisal_paid": "0",
+            "bought_costs": [],
+            "opening_money": "0",
+            "opening_stock": [],
+            "partial": false,
+            "repair_paid": "0",
+            "storage_income": "0",
+            "tax_legacy_income": "0",
+            "tax_sales": [],
+            "upgrade_paid": "0"
+          },
+          "stock": []
+        },
+        "harness_durability": 0,
+        "harness_modules": [
+          "stabilization",
+          "emergency_discharge"
+        ],
+        "harness_upgrades": [
+          "observation_timing",
+          "emergency_duration"
+        ],
+        "money": "0",
+        "next_expedition_id": "3",
+        "objective": {},
+        "paid_appraisals": 0,
+        "paid_lures": 0,
+        "pending_departure": {},
+        "registered_items": [],
+        "selected_appraisals": 0,
+        "selected_lures": 2,
+        "stored_items": []
+      },
+      "assessment": {
+        "stabilization": "benefit_of_stopping_trap_unclear; deferred_by_user",
+        "emergency_discharge": "use_feeling_understood_by_self_report",
+        "analysis_module": "never_selected_by_self_report; unassessed",
+        "upgrade_comparison": "no_reported_before_after_difference; unassessed",
+        "failure_redeparture": "log_evidenced; subjective_recovery_experience_not_yet_reported"
+      },
+      "continuations": [
+        {
+          "purpose": "zero_money_recovery_and_earned_income_preparation",
+          "status": "two_safe_returns_quit_feedback_recorded",
+          "log_path": "C:/Users/user/OneDrive/문서/KHJ_web/chatGPT/Dungeon scavenger/.godot/dev0429-review/human-growth-recovery-02.log",
+          "starting_snapshot_directory": "C:/Users/user/OneDrive/문서/KHJ_web/chatGPT/Dungeon scavenger/.godot/dev0429-review/growth-after-01-feedback-snapshot",
+          "starting_money": 0,
+          "starting_durability": 0,
+          "limitations": [
+            "Same human-played state, not a new recovery preset.",
+            "Bag3 and two upgrades remain prepared; not baseline new-game economy or earned upgrade acquisition."
+          ],
+          "question": "돈이 없는 상태에서 다시 출정할 방법을 찾기 쉬웠나요? 탐험 뒤 수입이 생겼다면 다음 준비에 무엇을 선택했고 왜 선택했는지 알려주세요. 아직 못 한 부분이나 막힌 부분은 그대로 말씀해 주세요.",
+          "human_feedback": "돈이 없는 상태에선 비용없이 최소 수리 보존이 가능해서 방법이 어렵진 않았는데 탐험 뒤에 수입이 생기니 수리를 하지 않으면 출정이 불가능 해 버리네. 그래서 반드시 수리를 하고 출정할 수 밖에 없었어",
+          "snapshot_directory": "C:/Users/user/OneDrive/문서/KHJ_web/chatGPT/Dungeon scavenger/.godot/dev0429-review/growth-recovery-02-feedback-snapshot",
+          "snapshot_files": [
+            {
+              "file": "human-growth-recovery-02.log",
+              "sha256": "830cb124caa0b5467053914b41692342fc0514bb06401bb4138cf29bdbe0e4e5"
+            },
+            {
+              "file": "initial_progress.json",
+              "sha256": "601bcf5fee347c162b3b09183219bd7cb88847ae52bd7b5c7db03f03a54d256f"
+            },
+            {
+              "file": "progress.json",
+              "sha256": "6c974bc3b9cdb57896e1083bf8e0502da2b1fe35ff517bc4a4e9a1f67353a22f"
+            },
+            {
+              "file": "session.json",
+              "sha256": "301265eff87a72c85da308a1903e3435bc433b25de354f92bd4aec603cf59719"
+            }
+          ],
+          "observed_log_events": {
+            "safe_return_count": 2,
+            "failure_count": 0,
+            "departure_count": 2,
+            "quit_requested": true
+          },
+          "observed_saved_hub": {
+            "bag_slots": 3,
+            "costs": {
+              "appraisal_carried": [],
+              "appraisal_stock": [],
+              "carried": [],
+              "last": {
+                "appraisal_count": 0,
+                "appraisal_used": 0,
+                "free_used": 0,
+                "id": "4",
+                "loot_income": "40",
+                "loot_tax": {
+                  "gross": "40",
+                  "paid": "4",
+                  "rate": 10
+                },
+                "objective": {
+                  "count": 0,
+                  "offer": {}
+                },
+                "outcome": "safe",
+                "paid_count": 0,
+                "paid_used": 0,
+                "period": {
+                  "appraisal_bought_costs": [],
+                  "appraisal_opening_stock": [],
+                  "appraisal_paid": "0",
+                  "bought_costs": [],
+                  "opening_money": "9",
+                  "opening_stock": [],
+                  "partial": false,
+                  "repair_paid": "5",
+                  "storage_income": "0",
+                  "tax_legacy_income": "0",
+                  "tax_sales": [],
+                  "upgrade_paid": "0"
+                }
+              },
+              "period": {
+                "appraisal_bought_costs": [],
+                "appraisal_opening_stock": [],
+                "appraisal_paid": "0",
+                "bought_costs": [],
+                "opening_money": "40",
+                "opening_stock": [],
+                "partial": false,
+                "repair_paid": "0",
+                "storage_income": "0",
+                "tax_legacy_income": "0",
+                "tax_sales": [],
+                "upgrade_paid": "0"
+              },
+              "stock": []
+            },
+            "harness_durability": 0,
+            "harness_modules": [
+              "stabilization",
+              "emergency_discharge"
+            ],
+            "harness_upgrades": [
+              "observation_timing",
+              "emergency_duration"
+            ],
+            "money": "40",
+            "next_expedition_id": "5",
+            "objective": {},
+            "paid_appraisals": 0,
+            "paid_lures": 0,
+            "pending_departure": {},
+            "registered_items": [],
+            "selected_appraisals": 0,
+            "selected_lures": 2,
+            "stored_items": [
+              {
+                "id": "test_g4_artifact",
+                "identified": true,
+                "risk_hint": ""
+              },
+              {
+                "id": "test_g4_record",
+                "identified": true,
+                "risk_hint": ""
+              },
+              {
+                "id": "test_g1_unknown",
+                "identified": false,
+                "risk_hint": "희미한 진동이 느껴집니다."
+              }
+            ]
+          },
+          "last_period_reconciliation": {
+            "opening_money": 9,
+            "repair_paid": 5,
+            "gross_loot": 40,
+            "recovery_tax": 4,
+            "closing_money": 40,
+            "matches": true
+          },
+          "assessment": {
+            "zero_money_recovery": "user_found_free_minimum_repair_without_difficulty; actual_redeparture_recorded",
+            "earned_income_preparation": "paid_repair5_recorded; user_experienced_repair_as_required_for_departure",
+            "free_preparation_choice": "not_demonstrated_by_required_repair",
+            "repair_policy": "current_trial_conditions_match; followup_review_needed; no_policy_change_approved"
+          }
+        }
+      ]
+    }
+  ],
+  "unassessed": [
+    "Q restart recognition",
+    "settlement amount explanation",
+    "service role explanation",
+    "analysis module and observation upgrade",
+    "upgrade before/after difference and experienced mastery",
+    "meaningful discretionary preparation choice beyond required repair"
+  ],
+  "g4_completion": "held: deferred/unassessed human criteria and repair-choice followup",
+  "next_work": "DEV-0430 — 내구·수리와 재출정 선택 검토",
+  "commit_status": "user_approved_local_commit",
+  "pushed": false,
+  "deferred_by_user": [
+    {
+      "topic": "Q 안내",
+      "follow_up": "후속 표현 검토 시 재확인; 현재 반복 수정/질문 보류"
+    },
+    {
+      "topic": "정산 손익 가독성",
+      "follow_up": "원하는 시각 표현을 적용한 뒤 재검토; 현재 반복 수정/질문 보류"
+    },
+    {
+      "topic": "거점 서비스 추가 다듬기",
+      "follow_up": "그래픽 적용 뒤 재검토; 현재 반복 수정/역할 설명 재질문 보류"
+    },
+    {
+      "topic": "안정화의 이득 전달",
+      "follow_up": "사용자 보류. 실제 멈춤 이득을 알아볼 수 있는지 후속 검토; 현재 반복 질문/수정 없음"
+    }
+  ],
+  "ticket_status": "review_and_handoff_complete",
+  "counts": {
+    "isolated_save_sessions": 3,
+    "graphical_launches": 4,
+    "human_expeditions": 5,
+    "safe_returns": 4,
+    "failures": 1
+  },
+  "repair_rule_cross_check": {
+    "minimum_departure_durability": 1,
+    "repair_cost_per_durability": 5,
+    "supported_when_durability_zero_and_money_below": 5,
+    "safe_return_wear": 1,
+    "source": [
+      "src/meta/hub_state.gd",
+      "src/data/prototype_economy.tres",
+      "src/data/prototype_equipment_wear.tres"
+    ],
+    "authority": "DEV-0407 trial; DEC-111 approves transaction choice/confirmation only; Q-022/Q-023 remain provisional",
+    "code_changed": false
+  },
+  "approval_text": "커밋",
+  "approval_date_kst": "2026-10-15"
+}

@@ -1,0 +1,59 @@
+{
+  "ticket": "DEV-0429",
+  "ticket_name": "G4 보완 후 사람 플레이 검토",
+  "checked_date_kst": "2026-10-15",
+  "repository_commit": "efc144e57a32aaba45f7283ad27365fbcd0f039a",
+  "source_tree_sha256": "e48e23498722f8f1aec4a3e08316239f1e6ce90a4220e9920dd71ded15f7151a",
+  "source_files": 558,
+  "source_unchanged": true,
+  "prior_full_suite": {
+    "ticket": "DEV-0428",
+    "passed": true,
+    "checks": 108,
+    "source_matches": true,
+    "rerun_this_ticket": false
+  },
+  "checks": [
+    {
+      "name": "g4_review_session",
+      "exit_code": 0,
+      "passed": true,
+      "diagnostics": [],
+      "marker": "g4_review_session_passed",
+      "log_path": "C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0429-review\\g4_review_session.engine.log",
+      "log_sha256": "a17aa0846d8c989029fe6ccc3e138f46baf0c9df4ba1d2c972eae95eb791ad03",
+      "console_sha256": "8bdb6753fe849d910264cd9a79cc120731ed49942c166cf5b58d60c54708a87c"
+    },
+    {
+      "name": "golem_response_guidance",
+      "exit_code": 0,
+      "passed": true,
+      "diagnostics": [],
+      "marker": "golem_response_guidance_passed",
+      "log_path": "C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0429-review\\golem_response_guidance.engine.log",
+      "log_sha256": "fa5a10838711b551c5eff49403966f1c0d37c7558d00c3d841c9c3e31f837db9",
+      "console_sha256": "f9a2067014609c690111195f717cf6133156eaf068d87f6f09075b3e22530b7c"
+    },
+    {
+      "name": "results_readability",
+      "exit_code": 0,
+      "passed": true,
+      "diagnostics": [],
+      "marker": "results_readability_passed",
+      "log_path": "C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0429-review\\results_readability.engine.log",
+      "log_sha256": "4dcce0065ddd97026e9c940c440a0c6db9b04430194d7eaf6aae42628061ed9f",
+      "console_sha256": "68f78719bd355948affdfcd5fec4a3478b8b94f8af39753aa2286a555d5fe111"
+    }
+  ],
+  "fresh_check_count": 3,
+  "passed": true,
+  "human_session_count_at_readiness_checks": 0,
+  "human_evaluation_at_readiness_checks": "pending",
+  "human_evaluation_report": "dev0429_playtest_results.json",
+  "ticket_status": "review_and_handoff_complete",
+  "commit_status": "user_approved_local_commit",
+  "next_work": "DEV-0430 — 내구·수리와 재출정 선택 검토",
+  "pushed": false,
+  "approval_text": "커밋",
+  "approval_date_kst": "2026-10-15"
+}
