@@ -1,0 +1,39 @@
+{
+  "ticket": "DEV-0432",
+  "ticket_name": "수리 보완 후 사람 플레이 검토",
+  "checked_date_kst": "2026-10-20",
+  "repository_commit": "ea7a6677de0720d6e8274d4c1c4821695a6a09cb",
+  "source_tree_sha256": "d400350f8b42f236a9e5dfe6535f8cc23d78aa6e7307d48cf6fe5d51d64bbda0",
+  "source_unchanged": true,
+  "prior_full_suite": {
+    "ticket": "DEV-0431",
+    "checks": 108,
+    "source_matches": true,
+    "passed": true,
+    "rerun_this_ticket": false
+  },
+  "checks": [
+    {
+      "name": "g4_review_session",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/g4_review_session_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] g4_review_session_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1119,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "g4_review_session.console.log"
+    }
+  ],
+  "fresh_check_count": 1,
+  "passed": true,
+  "human_evaluation": "pending"
+}

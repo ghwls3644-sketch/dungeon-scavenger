@@ -1,0 +1,213 @@
+{
+  "ticket": "DEV-0432",
+  "ticket_name": "수리 보완 후 사람 플레이 검토",
+  "date_kst": "2026-10-20",
+  "base_commit": "ea7a6677de0720d6e8274d4c1c4821695a6a09cb",
+  "source_tree_sha256": "d400350f8b42f236a9e5dfe6535f8cc23d78aa6e7307d48cf6fe5d51d64bbda0",
+  "status": "review_complete_with_clarified_direction",
+  "participation_reply": "지금 플레이할 수 있어요",
+  "new_gui_launches": 1,
+  "sessions": [
+    {
+      "id": "dev0432-recovery-20261020-01",
+      "case": "recovery",
+      "wrapper_ticket": "DEV-0425",
+      "directory": "C:/Users/user/OneDrive/문서/KHJ_web/chatGPT/Dungeon scavenger/.godot/g4-playtests/dev0432-recovery-20261020-01",
+      "log_path": ".godot/dev0432-review/human-recovery-01.log",
+      "launched_at_utc": "2026-10-20T09:29:44.7451058Z",
+      "launcher_process_id": 15496,
+      "initial_progress": {
+        "content_version": "g2_prototype_1",
+        "hub": {
+          "bag_slots": 3,
+          "costs": {
+            "appraisal_carried": [],
+            "appraisal_stock": [],
+            "carried": [],
+            "last": {},
+            "period": {
+              "appraisal_bought_costs": [],
+              "appraisal_opening_stock": [],
+              "appraisal_paid": "0",
+              "bought_costs": [],
+              "opening_money": "0",
+              "opening_stock": [],
+              "partial": false,
+              "repair_paid": "0",
+              "storage_income": "0",
+              "tax_legacy_income": "0",
+              "tax_sales": [],
+              "upgrade_paid": "0"
+            },
+            "stock": []
+          },
+          "harness_durability": 0,
+          "harness_modules": [
+            "stabilization",
+            "emergency_discharge"
+          ],
+          "harness_upgrades": [],
+          "money": "0",
+          "next_expedition_id": "1",
+          "objective": {},
+          "paid_appraisals": 0,
+          "paid_lures": 0,
+          "pending_departure": {},
+          "registered_items": [],
+          "selected_appraisals": 0,
+          "selected_lures": 2,
+          "stored_items": []
+        },
+        "resume_state": "hub",
+        "schema_version": 10
+      },
+      "prepared_file_sha256": {
+        "initial_progress.json": "88a5e121907e55710f4cd989ae64068d7e1c4602114a60d83948176ee9c4af90",
+        "session.json": "aac1e2b258cc37b60a9c7f6f356c536b370a60b7b538aa0d74016549960983b7"
+      },
+      "status": "one_safe_return_and_hub_exit_feedback_recorded",
+      "help_given": "타이틀 이어하기, 최소 복구 후 물품 회수/안전 귀환과 자유로운 다음 준비/재출정. 자연스럽게 실패하면 복구를 이어 확인. 구체적 구매 선택/경로/의도적 실패는 지시하지 않음.",
+      "feedback_question": "안전 귀환 후 반복 수리 부담, 번 돈으로 고른 다음 준비와 이유, 직접 실패한 경우 복구/재출정 부담. 미실시·막힘은 그대로 기록.",
+      "feedback": "수리 부담은 원래도 크진 않았던거 같아 문제는 수리하지 않으면 다음 출정이 막히는 게 문제였지",
+      "limits": [
+        "Prepared money0/durability0/bag3/no upgrades; not a natural new game or personally incurred failure.",
+        "Unobserved outcomes and missing feedback remain unassessed.",
+        "Existing user deferrals are preserved; no G4 completion or final-balance approval inferred."
+      ],
+      "snapshot_directory": "C:/Users/user/OneDrive/문서/KHJ_web/chatGPT/Dungeon scavenger/.godot/dev0432-review/recovery-01-feedback-snapshot",
+      "snapshot_file_sha256": {
+        "human-recovery-01.log": "f03ea004c240672dd5c402c22934037c392fad1c43352c55a94ec6406c3d0c66",
+        "initial_progress.json": "88a5e121907e55710f4cd989ae64068d7e1c4602114a60d83948176ee9c4af90",
+        "progress.json": "30a11ff6a8b7b4f8d323f5e56f09e6558935d68bd699ba0257bdc496482052ec",
+        "session.json": "aac1e2b258cc37b60a9c7f6f356c536b370a60b7b538aa0d74016549960983b7",
+        "settings.cfg": "4fef2a4db4a994748d3c8fd7729ebe43ea28a50af73f49cfee85d6b01b6a17eb"
+      },
+      "observed_log_events": {
+        "expeditions_started": 1,
+        "safe_returns": 1,
+        "failures": 0,
+        "returned_to_hub": 1,
+        "quit_requested": true
+      },
+      "final_progress": {
+        "content_version": "g2_prototype_1",
+        "hub": {
+          "bag_slots": 3,
+          "costs": {
+            "appraisal_carried": [],
+            "appraisal_stock": [],
+            "carried": [],
+            "last": {
+              "appraisal_count": 0,
+              "appraisal_used": 0,
+              "free_used": 0,
+              "id": "1",
+              "loot_income": "40",
+              "loot_tax": {
+                "gross": "40",
+                "paid": "4",
+                "rate": 10
+              },
+              "objective": {
+                "count": 0,
+                "offer": {}
+              },
+              "outcome": "safe",
+              "paid_count": 0,
+              "paid_used": 0,
+              "period": {
+                "appraisal_bought_costs": [],
+                "appraisal_opening_stock": [],
+                "appraisal_paid": "0",
+                "bought_costs": [],
+                "opening_money": "0",
+                "opening_stock": [],
+                "partial": false,
+                "repair_paid": "0",
+                "storage_income": "0",
+                "tax_legacy_income": "0",
+                "tax_sales": [],
+                "upgrade_paid": "0"
+              }
+            },
+            "period": {
+              "appraisal_bought_costs": [],
+              "appraisal_opening_stock": [],
+              "appraisal_paid": "0",
+              "bought_costs": [],
+              "opening_money": "36",
+              "opening_stock": [],
+              "partial": false,
+              "repair_paid": "10",
+              "storage_income": "0",
+              "tax_legacy_income": "0",
+              "tax_sales": [],
+              "upgrade_paid": "0"
+            },
+            "stock": []
+          },
+          "harness_durability": 3,
+          "harness_modules": [
+            "stabilization",
+            "emergency_discharge"
+          ],
+          "harness_upgrades": [],
+          "money": "26",
+          "next_expedition_id": "2",
+          "objective": {},
+          "paid_appraisals": 0,
+          "paid_lures": 0,
+          "pending_departure": {},
+          "registered_items": [],
+          "selected_appraisals": 0,
+          "selected_lures": 2,
+          "stored_items": [
+            {
+              "id": "test_g4_record",
+              "identified": true,
+              "risk_hint": ""
+            }
+          ]
+        },
+        "resume_state": "hub",
+        "schema_version": 10
+      },
+      "interpretation": {
+        "reported_issue": "Mandatory repair as a condition for departure, rather than a large repair expense or repeated-input burden.",
+        "observed_spending": "Safe-return income40 minus tax4 gives36, then repair spending10 leaves26 and durability3.",
+        "rule_based_inference": "Free minimum recovery from prepared durability0 permits departure at1; safe wear0 retains1. Repair after this return was not required by the departure gate.",
+        "not_observed": [
+          "Second departure after safe return",
+          "Failure and subsequent recovery",
+          "Reason for the post-return repair spending10"
+        ],
+        "scope_clarification": "User explicitly requested durability0 departure with advance warning feedback."
+      },
+      "clarification_reply": "내구도가 0이여도 출정할 수 있지만 실수로 출정하는 경우를 생각해서 주의 할 수 있게 피드백이 있으면 좋겠어"
+    }
+  ],
+  "commit_status": "user_approved_local_commit",
+  "pushed": false,
+  "next_checkpoint": "G5 완료 후",
+  "next_work": "DEV-0433 — 내구0 출정 허용·주의 안내 구현",
+  "g4_completion": "held",
+  "direction": {
+    "reply": "내구도가 0이여도 출정할 수 있지만 실수로 출정하는 경우를 생각해서 주의 할 수 있게 피드백이 있으면 좋겠어",
+    "decision_id": "DEC-119",
+    "date_kst": "2026-10-20",
+    "approved_requirement": "Allow departure at durability0 and give advance feedback to prevent accidental departure.",
+    "implementation_plan": "Show durability0 before departure and offer return/proceed choices; default focus and Esc return. Exact copy/layout is implementation work.",
+    "product_applied": false,
+    "excluded": [
+      "New ability penalties",
+      "Automatic repair or charging",
+      "Final support eligibility or balance",
+      "Commit approval"
+    ]
+  },
+  "commit_approval": {
+    "date_kst": "2026-10-20",
+    "reply": "커밋",
+    "scope": "Reviewed DEV-0432 result only; no push."
+  }
+}
