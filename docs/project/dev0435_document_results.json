@@ -1,0 +1,303 @@
+{
+  "ticket": "DEV-0435",
+  "ticket_name": "G4 보완 결과·잔여 범위 정리",
+  "checked_date_kst": "2026-10-20",
+  "passed": true,
+  "failures": [],
+  "status": "review_complete_user_approved_local_commit",
+  "base_commit": "d264bf847298c03dbdd50857d0360ee80051a9a6",
+  "local_ahead": 11,
+  "local_behind": 0,
+  "markdown_files": 56,
+  "relative_links_checked": 2177,
+  "front_matter_related_checked": 605,
+  "frozen_sources": [
+    {
+      "id": "SRC-001",
+      "path": "게임 기획 파일/통합 게임 기획서 v2.1.md",
+      "sha256": "45e92dfede482968b31c14eef712012735aa9657de18bd7c0922f94d40dd460a",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-002",
+      "path": "게임 기획 파일/스토리 정리 v1.5.md",
+      "sha256": "4191c100d5b3bfbef291d3fd4d7588a3c5c31113a1827d33886cc8c90931292d",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-003",
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.1.md",
+      "sha256": "a52337ed1cc3decebf8bd6840662e12fafddcfa95c3e5e8d5e1129ffbbef796f",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-004",
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.2.md",
+      "sha256": "0bac7f52cf21eddcd4b720c7b5b8ff76f98fb452904cebcc3e03c1eb2b220c67",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-005",
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.2.1.md",
+      "sha256": "b4451e06d8ffaf5d1a233fa1a639e783ba17973977398c12527333a7707319f0",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-006",
+      "path": "게임 기획 파일/게임 개발 단계별 제안서 v0.1.md",
+      "sha256": "2ee29aca36e74f5e0206aff150ed610eba8381e594b9091141e6f74caa2b60c1",
+      "matches_record": true
+    }
+  ],
+  "archive_copies": [
+    {
+      "path": "docs/archive/story_v1.5_full.md",
+      "source_id": "SRC-002",
+      "bytes_match": true
+    },
+    {
+      "path": "docs/archive/story_document_management_proposal_v0.1.md",
+      "source_id": "SRC-003",
+      "bytes_match": true
+    },
+    {
+      "path": "docs/archive/story_document_management_proposal_v0.2.md",
+      "source_id": "SRC-004",
+      "bytes_match": true
+    }
+  ],
+  "checkpoint_tables_preserved": {
+    "docs/README.md": true,
+    "docs/project/migration_manifest.md": true
+  },
+  "source_tree_sha256": "b3697858755987d24ac06ddfed0508645c1080fcc7702d626fc41a62cdaf7479",
+  "source_files": 564,
+  "prior_reports_checked": 111,
+  "protected_content_differences": [],
+  "question_statuses": {
+    "Q-001": "provisional",
+    "Q-002": "provisional",
+    "Q-003": "provisional",
+    "Q-004": "provisional",
+    "Q-005": "provisional",
+    "Q-006": "provisional",
+    "Q-007": "provisional",
+    "Q-008": "provisional",
+    "Q-009": "deferred",
+    "Q-010": "deferred",
+    "Q-011": "deferred",
+    "Q-012": "deferred",
+    "Q-013": "deferred",
+    "Q-014": "provisional",
+    "Q-015": "deferred",
+    "Q-016": "deferred",
+    "Q-017": "deferred",
+    "Q-018": "deferred",
+    "Q-019": "provisional",
+    "Q-020": "provisional",
+    "Q-021": "provisional",
+    "Q-022": "provisional",
+    "Q-023": "provisional",
+    "Q-024": "provisional",
+    "Q-025": "provisional",
+    "Q-026": "provisional",
+    "Q-027": "provisional",
+    "Q-028": "provisional",
+    "Q-029": "provisional",
+    "Q-030": "provisional"
+  },
+  "prior_full_suite_checks": 117,
+  "prior_full_suite_rerun": false,
+  "fresh_godot_processes": 0,
+  "new_gui_launches": 0,
+  "new_human_playtests": 0,
+  "completion_criteria": [
+    {
+      "criterion": "회수품을 판매·감정·등록할 수 있음",
+      "evidence": "거점/현장 감정·판매·원본 등록/해설·저장 연결 유지. [DEV-0429 services](g4_playtest_review.md#services-세션)에서 큰 불편 없음",
+      "judgment": "기술 연결 확인, 거점 사용성에 긍정 의견. 서비스별 역할의 본인 설명·실제 거래별 이용 여부와 현장 감정 선택 가치는 미평가. 다듬기는 사용자 요청대로 그래픽 이후"
+    },
+    {
+      "criterion": "비용 뒤 순이익이 명확히 보임",
+      "evidence": "계산 연결 유지. DEV-0426에서 손익·입금·현금 변화를 분리했고 [사용자는 뜻을 이해했다고 답함](g4_playtest_review.md#dev-0426-정산-화면-재평가). DEV-0429에서는 가독성 아쉬움과 그래픽 이후 보류",
+      "judgment": "계산·표시 기능 확인, 이해 자기보고와 가독성 보류를 구분. 금액 관계를 본인 말로 설명한 검증은 미실시. 전체 명료성 통과로 올리지 않음"
+    },
+    {
+      "criterion": "번 수익으로 다음 준비를 개선",
+      "evidence": "수입→개선/도구 구매의 자동 경로 유지. DEV-0429 실제 수입에서 수리5 지출. DEV-0432에서 문제는 수리 부담보다 출정 차단이라고 정정. [DEV-0433 구현](../design/repair_rules.md#dev-0433-내구0-출정과-주의-안내-적용)·[DEV-0434 확인](g4_playtest_review.md#dev-0434-내구0-출정-안내-사람-검토)으로 내구0 수리 없는 출정/귀환 확인",
+      "judgment": "출정 차단 문제 보완. 다음 준비의 자율 선택 이유·자연 수입으로 성장 구매·수리의 가치는 미평가. 최신 DEV-0434의 수입0을 경제 개선 증거로 사용하지 않음"
+    },
+    {
+      "criterion": "최소 두 성장 선택이 다른 플레이 방식을 만듦",
+      "evidence": "관찰 정보 개선과 비상 대응 시간 개선의 서로 다른 효과/저장 기술 근거 유지. [DEV-0429 growth_after](g4_playtest_review.md#growth_after-세션): 방전 쓰임새 이해, 안정화 이득 보류, 정밀 분석 미선택",
+      "judgment": "효과 구현 확인. 두 성장의 비교·선택 이유·노련함·장착으로 달라진 플레이는 미평가. 준비된 개선을 직접 획득한 경험으로 세지 않으며 이 조건 전체를 통과로 세지 않음"
+    },
+    {
+      "criterion": "고유 유물·핵심 기록물이 실수로 판매되지 않음",
+      "evidence": "기존 감정 전후 판매/버리기 보호·안전 귀환/등록 경계와 최신 회귀 유지",
+      "judgment": "현재 시험 원본의 기술 조건 충족. 정식 콘텐츠 추가 시 같은 보호 계약 적용 필요. 사람 검토에서 새 보호 실패를 관찰했다는 근거 없음"
+    },
+    {
+      "criterion": "거점 행동이 저장되고 다음 탐험에 반영됨",
+      "evidence": "기존 거래·장착·원본·도구·의뢰·스키마10/구형 전환과 출정 저장 복구 검사 유지. DEV-0433 내구0 확인 경로·DEV-0434 실제 출정/귀환 저장",
+      "judgment": "현재 거점 순환의 기술 조건 충족. G5 시드/구역 풀·영구 방 변화와 G6 일반 사용자의 저장 복구 UX는 별도 책임"
+    }
+  ],
+  "gdd20_3": [
+    {
+      "criterion": "귀환 정산에서 총액, 비용, 순이익을 이해할 수 있다.",
+      "perspective": "총액·비용·순이익 이해",
+      "evidence": "DEV-0426 뜻 이해 자기보고, DEV-0429 가독성 아쉬움·그래픽 이후 보류",
+      "remaining": "용어/시각 표현을 갖춘 뒤 금액 관계와 읽기 쉬움 확인. 현재 답변을 상세 관계 설명으로 확대하지 않음"
+    },
+    {
+      "criterion": "성장 뒤 강해졌다기보다 노련해졌다고 느낀다.",
+      "perspective": "성장 뒤 노련함",
+      "evidence": "DEV-0429 방전 쓰임새 이해, 준비된 두 개선으로 플레이",
+      "remaining": "성장 전후 판단 차이 미평가. 준비된 개선·서로 다른 경로를 통제된 비교나 직접 구매 경험으로 세지 않음"
+    },
+    {
+      "criterion": "실패해도 다음 출정이 가능하다.",
+      "perspective": "실패해도 다음 출정 가능",
+      "evidence": "DEV-0429 실제 실패 뒤 재출정·돈0 무료 복구 접근성 긍정. DEV-0433 자동 실패/내구0 경로, DEV-0434 내구0 무수리 출정/안전 귀환·불편 없음",
+      "remaining": "출정 차단 보완 확인. DEV-0434 시작 손상은 준비 값이며 직접 실패 경험이 아님. 변경 후 장기 실패 부담·재도전 의향 전체는 미평가"
+    },
+    {
+      "criterion": "감정·연구·판매의 역할이 서로 다르다.",
+      "perspective": "감정·연구·판매의 역할 구별",
+      "evidence": "DEV-0429 거점 메뉴 큰 불편 없음",
+      "remaining": "서비스별 목적 설명과 현장/거점 감정 선택 이유는 미실시. 그래픽 뒤 다듬기와 함께 확인"
+    },
+    {
+      "criterion": "하네스 모듈 선택이 실제 플레이 방식을 바꾼다.",
+      "perspective": "모듈 선택이 실제 플레이를 바꿈",
+      "evidence": "서로 다른 기능의 기술 구현, 방전 쓰임새 이해. F 유인물 불편 없음은 별도 도구 의견",
+      "remaining": "정밀 분석 미선택·안정화 보류, 다른 조합/성장 비교 미평가. F 의견을 하네스 성장 조건의 통과로 세지 않음"
+    }
+  ],
+  "remaining_scope": [
+    {
+      "scope": "Q 첫 표현·안정화 이득은 사용자 보류, 재가동 인지는 미평가",
+      "responsibility": "G4 사람 평가 잔여, G7 위험 배치/도움말·연출",
+      "revisit_condition": "사용자가 재개를 원하거나 실제 위험 안내/활용 상황을 보완해 새 확인 근거가 생겼을 때. 같은 시험 장면의 질문 반복은 피하고 스태미나/전력질주를 자동 추가하지 않음"
+    },
+    {
+      "scope": "정산 가독성·어려운 표현, 거점 다듬기는 그래픽 이후 보류",
+      "responsibility": "G7 시각 표현/텍스트, G6 해상도·포커스·접근성, Q-027/Q-029/Q-030",
+      "revisit_condition": "원하는 그림과 정보 배치가 갖춰진 화면에서 읽기·서비스 구별 확인. 계산/입금/현금 분리는 유지하고 공식 용어 변경은 Reference와 별도 대조"
+    },
+    {
+      "scope": "정밀 분석·두 성장/장착 비교·노련함은 미평가",
+      "responsibility": "G4 미평가 유지, G7 대표 위험/성장 콘텐츠, Q-024/Q-025",
+      "revisit_condition": "서로 다른 판단을 할 대표 상황과 실제 획득 경로가 준비됐을 때 비교. 사용자 보류로 간주하지 않으며 준비된 해금을 자연 성장으로 기록하지 않음"
+    },
+    {
+      "scope": "자연 수입의 자율 준비 선택·수리의 가치·지원 순서 유인은 미평가/미해결",
+      "responsibility": "G4 경제 평가 잔여, G7 반복 경제, Q-022/Q-023/Q-025",
+      "revisit_condition": "대표 반복 탐험에서 수입·지출·실패와 선택 이유를 함께 확인. 내구0에도 새 능력 불이익이 없는 현재 시험에서는 수리의 이득이 검증되지 않았음. 추가 페널티/지원 재설계는 별도 선택·검증 사항"
+    },
+    {
+      "scope": "도구/의뢰 선택 이유·휴대용 감정의 가치와 최종 수치는 미평가",
+      "responsibility": "G4 선택 가치 잔여, G7 경제/콘텐츠, Q-026/Q-028/Q-030",
+      "revisit_condition": "기본값 외 선택의 필요가 생기는 실제 탐험에서 확인. 선택 의뢰와 감정 도구 구매를 출정 의무로 만들지 않음"
+    },
+    {
+      "scope": "가방 칸은 사용자 보류, 추적/적재·런 분량의 최종 체감은 미평가",
+      "responsibility": "G1/G3 잔여·G7 분량/밸런스, Q-004/Q-005/Q-019~Q-021",
+      "revisit_condition": "대표 지도/위험/반복 분량이 생겼을 때 확인. 작은 준비 장면으로 목표 런 시간·슬롯·전력질주 도입을 확정하지 않음"
+    },
+    {
+      "scope": "시드·구역별 후보·1회성 상태·원본 회수 후 방 변화는 별도 개발 범위",
+      "responsibility": "G5, confirmed 반복 탐험/아이템/정보 전달 규칙",
+      "revisit_condition": "아래 DEV-0501을 사용자 진행 지시 후 시작. 현재 원본 중복 제외/지도 기록이 G5 전체 구현을 대신하지 않음"
+    },
+    {
+      "scope": "일반 사용자 옵션·접근성·저장 복구 사용성은 별도 개발 범위",
+      "responsibility": "G6, Q-006/Q-007",
+      "revisit_condition": "G5 후 제품 기능 범위를 검토할 때. 현재 기술 저장/복구 검사를 전체 사용자 UX 검증으로 세지 않음"
+    },
+    {
+      "scope": "정식 던전·NPC/의뢰/연구문·튜토리얼·연출·장기 밸런스는 별도 개발 범위",
+      "responsibility": "G7, GDD15-4/16-1 및 해당 Story/Design/Reference",
+      "revisit_condition": "시스템 위에 대표 콘텐츠를 만들 때 보류/미평가를 재검토 목록에 함께 인계. 시험 문구/가격을 정식 콘텐츠로 승인하지 않음"
+    }
+  ],
+  "prior_evidence": [
+    {
+      "path": "docs/project/dev0424_automated_results.json",
+      "sha256": "9fbe3b006810de72b220b84061c34db8083679f535613f3dc0d2169d302fb099",
+      "scope": "prior_ticket_evidence_not_new_execution"
+    },
+    {
+      "path": "docs/project/dev0425_automated_results.json",
+      "sha256": "9cf3283ee593cf74bc4cb789f5091f3087e05f90a6c6ca95653074c6e3836804",
+      "scope": "prior_ticket_evidence_not_new_execution"
+    },
+    {
+      "path": "docs/project/dev0426_readability_results.json",
+      "sha256": "bc8152ecdd02afc9ad39b07113e6b4f1a6b950d88308eb1c4027aeb977a1ceb8",
+      "scope": "prior_ticket_evidence_not_new_execution"
+    },
+    {
+      "path": "docs/project/dev0427_response_results.json",
+      "sha256": "1407cd74ab7d5bc8d886a66151121606c17b2b9ab04da2ed727399b20ab100f6",
+      "scope": "prior_ticket_evidence_not_new_execution"
+    },
+    {
+      "path": "docs/project/dev0428_response_results.json",
+      "sha256": "a0107f559afd836bb34956a5c53a8e13e47d7b014e8a8821f02b9de1d66731a0",
+      "scope": "prior_ticket_evidence_not_new_execution"
+    },
+    {
+      "path": "docs/project/dev0429_playtest_results.json",
+      "sha256": "66a5457c03e7fba540d0a516d1446060efbd28d4b7c2e041a372431f0ec03a4c",
+      "scope": "prior_ticket_evidence_not_new_execution"
+    },
+    {
+      "path": "docs/project/dev0430_review_results.json",
+      "sha256": "4a75c7c7bc408ee4b5d6c4faee39b1783e7b82b43290138521567895b0132e89",
+      "scope": "prior_ticket_evidence_not_new_execution"
+    },
+    {
+      "path": "docs/project/dev0431_automated_results.json",
+      "sha256": "4222c8dc0c0ce3473c144a8fd89e80914e0c97439e06c6cf30f11fdaec9b161e",
+      "scope": "prior_ticket_evidence_not_new_execution"
+    },
+    {
+      "path": "docs/project/dev0432_playtest_results.json",
+      "sha256": "c8ae9807fa50759b5a44c081d9af1792db959c921e1643d9df4466601617d860",
+      "scope": "prior_ticket_evidence_not_new_execution"
+    },
+    {
+      "path": "docs/project/dev0433_automated_results.json",
+      "sha256": "4a047635f5cd58454f563c3a55ee66c55c698053d68ecc3ff57b12e8b6bb0223",
+      "scope": "prior_ticket_evidence_not_new_execution"
+    },
+    {
+      "path": "docs/project/dev0434_playtest_results.json",
+      "sha256": "4b18876a7f0f4179ed2d572cab3cf62ce576f80f8672e6d01590ea125f645400",
+      "scope": "prior_ticket_evidence_not_new_execution"
+    }
+  ],
+  "historical_review_and_human_feedback_preserved": true,
+  "changed_paths": [
+    "docs/README.md",
+    "docs/project/README.md",
+    "docs/project/dev0435_document_results.json",
+    "docs/project/development_handoff.md",
+    "docs/project/g4_meta_review.md",
+    "docs/project/g4_playtest_review.md",
+    "docs/project/migration_changes.md",
+    "docs/project/migration_manifest.md",
+    "docs/project/project_context.md"
+  ],
+  "diff_check_passed": true,
+  "commit_status": "user_approved_local_commit",
+  "approval_text": "커밋",
+  "approval_date_kst": "2026-10-20",
+  "pushed": false,
+  "g4_completion": "human_evaluation_not_fully_passed",
+  "g5_start": "not_started_recommended_after_review_commit_and_user_direction",
+  "next_work_recommendation": "DEV-0501 — 반복 탐험 상태·시드 계약 정리",
+  "next_checkpoint": "G5 완료 후"
+}
