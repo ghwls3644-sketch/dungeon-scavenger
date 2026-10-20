@@ -1,0 +1,187 @@
+{
+  "ticket": "DEV-0434",
+  "ticket_name": "내구0 출정 안내 사람 검토",
+  "date_kst": "2026-10-20",
+  "base_commit": "b07cf2321c1543e666179cc7ed8f91af852cf1a2",
+  "source_tree_sha256": "b3697858755987d24ac06ddfed0508645c1080fcc7702d626fc41a62cdaf7479",
+  "status": "review_complete_no_reported_issue",
+  "participation_reply": "지금 플레이할 수 있어요",
+  "new_gui_launches": 1,
+  "sessions": [
+    {
+      "id": "dev0434-zero-20261020-01",
+      "case": "recovery",
+      "wrapper_ticket": "DEV-0425",
+      "directory": "C:/Users/user/OneDrive/문서/KHJ_web/chatGPT/Dungeon scavenger/.godot/g4-playtests/dev0434-zero-20261020-01",
+      "log_path": ".godot/dev0434-review/human-zero-01.log",
+      "launched_at_utc": "2026-10-20T11:52:26.9335696Z",
+      "launcher_process_id": 2636,
+      "snapshot_at_utc": "2026-10-20T11:56:17.584443+00:00",
+      "snapshot_directory": ".godot/dev0434-review/zero-01-feedback-snapshot",
+      "snapshot_file_sha256": {
+        "initial_progress.json": "88a5e121907e55710f4cd989ae64068d7e1c4602114a60d83948176ee9c4af90",
+        "progress.json": "e731128efc08a248d095788fcbf6d9af1e7b1972bb083f64f54d5f970b31bd68",
+        "session.json": "02a191c647207243517556e6af9d60942ba8328bb17bd9f6b50164d79188f202",
+        "settings.cfg": "4fef2a4db4a994748d3c8fd7729ebe43ea28a50af73f49cfee85d6b01b6a17eb",
+        "human-zero-01.log": "526f30f17a501391fa35cba6a11b01a0eb9ca8a83e2c81c4b7a4c9507d98bb82"
+      },
+      "initial_progress": {
+        "content_version": "g2_prototype_1",
+        "hub": {
+          "bag_slots": 3,
+          "costs": {
+            "appraisal_carried": [],
+            "appraisal_stock": [],
+            "carried": [],
+            "last": {},
+            "period": {
+              "appraisal_bought_costs": [],
+              "appraisal_opening_stock": [],
+              "appraisal_paid": "0",
+              "bought_costs": [],
+              "opening_money": "0",
+              "opening_stock": [],
+              "partial": false,
+              "repair_paid": "0",
+              "storage_income": "0",
+              "tax_legacy_income": "0",
+              "tax_sales": [],
+              "upgrade_paid": "0"
+            },
+            "stock": []
+          },
+          "harness_durability": 0,
+          "harness_modules": [
+            "stabilization",
+            "emergency_discharge"
+          ],
+          "harness_upgrades": [],
+          "money": "0",
+          "next_expedition_id": "1",
+          "objective": {},
+          "paid_appraisals": 0,
+          "paid_lures": 0,
+          "pending_departure": {},
+          "registered_items": [],
+          "selected_appraisals": 0,
+          "selected_lures": 2,
+          "stored_items": []
+        },
+        "resume_state": "hub",
+        "schema_version": 10
+      },
+      "observed_progress": {
+        "content_version": "g2_prototype_1",
+        "hub": {
+          "bag_slots": 3,
+          "costs": {
+            "appraisal_carried": [],
+            "appraisal_stock": [],
+            "carried": [],
+            "last": {
+              "appraisal_count": 0,
+              "appraisal_used": 0,
+              "free_used": 0,
+              "id": "1",
+              "loot_income": "0",
+              "loot_tax": {
+                "gross": "0",
+                "paid": "0",
+                "rate": 10
+              },
+              "objective": {
+                "count": 0,
+                "offer": {}
+              },
+              "outcome": "safe",
+              "paid_count": 0,
+              "paid_used": 0,
+              "period": {
+                "appraisal_bought_costs": [],
+                "appraisal_opening_stock": [],
+                "appraisal_paid": "0",
+                "bought_costs": [],
+                "opening_money": "0",
+                "opening_stock": [],
+                "partial": false,
+                "repair_paid": "0",
+                "storage_income": "0",
+                "tax_legacy_income": "0",
+                "tax_sales": [],
+                "upgrade_paid": "0"
+              }
+            },
+            "period": {
+              "appraisal_bought_costs": [],
+              "appraisal_opening_stock": [],
+              "appraisal_paid": "0",
+              "bought_costs": [],
+              "opening_money": "0",
+              "opening_stock": [],
+              "partial": false,
+              "repair_paid": "0",
+              "storage_income": "0",
+              "tax_legacy_income": "0",
+              "tax_sales": [],
+              "upgrade_paid": "0"
+            },
+            "stock": []
+          },
+          "harness_durability": 0,
+          "harness_modules": [
+            "stabilization",
+            "emergency_discharge"
+          ],
+          "harness_upgrades": [],
+          "money": "0",
+          "next_expedition_id": "2",
+          "objective": {},
+          "paid_appraisals": 0,
+          "paid_lures": 0,
+          "pending_departure": {},
+          "registered_items": [],
+          "selected_appraisals": 0,
+          "selected_lures": 2,
+          "stored_items": []
+        },
+        "resume_state": "hub",
+        "schema_version": 10
+      },
+      "observed_log_events": {
+        "expeditions_started": 1,
+        "safe_returns": 1,
+        "failures": 0,
+        "returned_to_hub": 1,
+        "quit_requested": false
+      },
+      "status": "one_zero_durability_safe_return_feedback_recorded",
+      "help_given": "타이틀 이어하기→거점 출정 안내를 읽고 원하는 쪽 선택. 탐험 완주는 불필요하다고 안내. 선택지별 정답이나 수리/구매는 지시하지 않음.",
+      "feedback_question": "내구0과 수리 없는 출정 가능 여부가 이해됐는지, 돌아가기/그대로 출정 선택이 쉬웠는지와 실수 우려/실제 선택/불편 확인.",
+      "feedback": "문제있던 부분 없었어",
+      "interpretation": {
+        "user_report": "No problem reported with the departure warning in this brief review.",
+        "observed": "One exploration, safe return and settlement back to Hub; durability0, cash0, repair expense0, next expedition ID2, no pending departure.",
+        "rule_based_inference": "Initial0 and observed0 with one safe return (wear0, no failure) establish departure without repair. The current app requires the proceed confirmation for this path.",
+        "not_observed": [
+          "Use of Return as a separate branch",
+          "Individual Enter/Esc or focus checks by the human",
+          "Independent explanation of every label",
+          "Long-term repair value or economy"
+        ],
+        "termination": "Quit event is recorded only if present; absence does not establish crash, normal exit or whether the window remains open."
+      },
+      "limits": [
+        "Prepared money0/durability0/bag3/no upgrades; not a natural new game or personally incurred failure.",
+        "Feedback snapshot, not a promise that the live session cannot change later.",
+        "No new product change or G4 completion is inferred."
+      ]
+    }
+  ],
+  "commit_status": "user_approved_local_commit",
+  "pushed": false,
+  "g4_completion": "held",
+  "next_work": "DEV-0435 — G4 보완 결과·잔여 범위 정리",
+  "next_checkpoint": "G5 완료 후",
+  "approval_text": "커밋",
+  "approval_date_kst": "2026-10-20"
+}

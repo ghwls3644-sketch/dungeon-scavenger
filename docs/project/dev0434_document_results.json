@@ -1,0 +1,150 @@
+{
+  "ticket": "DEV-0434",
+  "ticket_name": "내구0 출정 안내 사람 검토",
+  "checked_date_kst": "2026-10-20",
+  "passed": true,
+  "failures": [],
+  "status": "review_complete_user_approved_local_commit",
+  "markdown_files": 56,
+  "relative_links_checked": 2152,
+  "front_matter_related_checked": 605,
+  "frozen_sources": [
+    {
+      "id": "SRC-001",
+      "path": "게임 기획 파일/통합 게임 기획서 v2.1.md",
+      "sha256": "45e92dfede482968b31c14eef712012735aa9657de18bd7c0922f94d40dd460a",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-002",
+      "path": "게임 기획 파일/스토리 정리 v1.5.md",
+      "sha256": "4191c100d5b3bfbef291d3fd4d7588a3c5c31113a1827d33886cc8c90931292d",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-003",
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.1.md",
+      "sha256": "a52337ed1cc3decebf8bd6840662e12fafddcfa95c3e5e8d5e1129ffbbef796f",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-004",
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.2.md",
+      "sha256": "0bac7f52cf21eddcd4b720c7b5b8ff76f98fb452904cebcc3e03c1eb2b220c67",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-005",
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.2.1.md",
+      "sha256": "b4451e06d8ffaf5d1a233fa1a639e783ba17973977398c12527333a7707319f0",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-006",
+      "path": "게임 기획 파일/게임 개발 단계별 제안서 v0.1.md",
+      "sha256": "2ee29aca36e74f5e0206aff150ed610eba8381e594b9091141e6f74caa2b60c1",
+      "matches_record": true
+    }
+  ],
+  "archive_copies": [
+    {
+      "path": "docs/archive/story_v1.5_full.md",
+      "source_id": "SRC-002",
+      "bytes_match": true
+    },
+    {
+      "path": "docs/archive/story_document_management_proposal_v0.1.md",
+      "source_id": "SRC-003",
+      "bytes_match": true
+    },
+    {
+      "path": "docs/archive/story_document_management_proposal_v0.2.md",
+      "source_id": "SRC-004",
+      "bytes_match": true
+    }
+  ],
+  "checkpoint_tables_preserved": {
+    "docs/README.md": true,
+    "docs/project/migration_manifest.md": true
+  },
+  "base_commit": "b07cf2321c1543e666179cc7ed8f91af852cf1a2",
+  "local_ahead": 10,
+  "local_behind": 0,
+  "source_tree_sha256": "b3697858755987d24ac06ddfed0508645c1080fcc7702d626fc41a62cdaf7479",
+  "source_files": 564,
+  "prior_reports_checked": 108,
+  "protected_content_differences": [],
+  "question_statuses": {
+    "Q-001": "provisional",
+    "Q-002": "provisional",
+    "Q-003": "provisional",
+    "Q-004": "provisional",
+    "Q-005": "provisional",
+    "Q-006": "provisional",
+    "Q-007": "provisional",
+    "Q-008": "provisional",
+    "Q-009": "deferred",
+    "Q-010": "deferred",
+    "Q-011": "deferred",
+    "Q-012": "deferred",
+    "Q-013": "deferred",
+    "Q-014": "provisional",
+    "Q-015": "deferred",
+    "Q-016": "deferred",
+    "Q-017": "deferred",
+    "Q-018": "deferred",
+    "Q-019": "provisional",
+    "Q-020": "provisional",
+    "Q-021": "provisional",
+    "Q-022": "provisional",
+    "Q-023": "provisional",
+    "Q-024": "provisional",
+    "Q-025": "provisional",
+    "Q-026": "provisional",
+    "Q-027": "provisional",
+    "Q-028": "provisional",
+    "Q-029": "provisional",
+    "Q-030": "provisional"
+  },
+  "fresh_successful_processes": 1,
+  "prior_full_suite_checks": 117,
+  "prior_full_suite_rerun": false,
+  "new_gui_launches": 1,
+  "human_sessions": 1,
+  "observed_log_events": {
+    "expeditions_started": 1,
+    "safe_returns": 1,
+    "failures": 0,
+    "returned_to_hub": 1,
+    "quit_requested": false
+  },
+  "snapshot_verified": {
+    "initial_progress.json": true,
+    "progress.json": true,
+    "session.json": true,
+    "settings.cfg": true,
+    "human-zero-01.log": true
+  },
+  "human_feedback": "문제있던 부분 없었어",
+  "changed_paths": [
+    "docs/README.md",
+    "docs/project/README.md",
+    "docs/project/dev0434_automated_results.json",
+    "docs/project/dev0434_document_results.json",
+    "docs/project/dev0434_playtest_results.json",
+    "docs/project/development_handoff.md",
+    "docs/project/g4_meta_review.md",
+    "docs/project/g4_playtest_review.md",
+    "docs/project/migration_changes.md",
+    "docs/project/migration_manifest.md",
+    "docs/project/project_context.md"
+  ],
+  "diff_check_passed": true,
+  "commit_status": "user_approved_local_commit",
+  "approval_text": "커밋",
+  "approval_date_kst": "2026-10-20",
+  "pushed": false,
+  "g4_completion": "held",
+  "next_work": "DEV-0435 — G4 보완 결과·잔여 범위 정리",
+  "next_checkpoint": "G5 완료 후"
+}

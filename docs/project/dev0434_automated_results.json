@@ -1,0 +1,39 @@
+{
+  "ticket": "DEV-0434",
+  "ticket_name": "내구0 출정 안내 사람 검토",
+  "checked_date_kst": "2026-10-20",
+  "repository_commit": "b07cf2321c1543e666179cc7ed8f91af852cf1a2",
+  "source_tree_sha256": "b3697858755987d24ac06ddfed0508645c1080fcc7702d626fc41a62cdaf7479",
+  "source_unchanged": true,
+  "prior_full_suite": {
+    "source_matches": true,
+    "rerun_this_ticket": false,
+    "passed": true,
+    "ticket": "DEV-0433",
+    "checks": 117
+  },
+  "checks": [
+    {
+      "name": "g4_review_session",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/g4_review_session_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] g4_review_session_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1124,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "g4_review_session.console.log"
+    }
+  ],
+  "fresh_check_count": 1,
+  "passed": true,
+  "human_evaluation": "pending"
+}
