@@ -1,0 +1,792 @@
+{
+  "ticket": "DEV-0431",
+  "passed": true,
+  "failures": [],
+  "source_tree_sha256": "d400350f8b42f236a9e5dfe6535f8cc23d78aa6e7307d48cf6fe5d51d64bbda0",
+  "method": "Headless actual GameEntry scenes with scripted UI input, isolated saves and fresh continuation processes; included in the final 108 checks, not additional processes.",
+  "new_human_playtests": 0,
+  "new_gui_launches": 0,
+  "limits": [
+    "Prepared balances and empty-return routes do not establish natural income balance or human preparation choices.",
+    "Purchase-first cash support incentive remains unchanged; historical damage fixture is constructed, not a personal save."
+  ],
+  "domain_coverage": {
+    "wear_outcomes": [
+      "normal_with_cargo",
+      "empty",
+      "emergency_success",
+      "failure"
+    ],
+    "durability_values": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "wear_cases": 16,
+    "repair_cash_values": [
+      0,
+      4,
+      5,
+      6,
+      9,
+      15,
+      "9223372036854775807"
+    ],
+    "repair_cash_durability_combinations": 28,
+    "purchase_order_comparisons": 2
+  },
+  "reports": [
+    {
+      "path": ".godot/dev0431-review/dungeon-g2-20261020-091935-6a51fcdfc9f14904a047967c5c743848/round-1-repair-session/repair-continue.json",
+      "sha256": "a51693a4665f393533492f6f54ee2b510a82b951070c8438fae93bb05b7ce1e2",
+      "report": {
+        "case": "continue",
+        "events": [
+          {
+            "after": 1,
+            "balance": 0,
+            "before": 1,
+            "kind": "return",
+            "repair_paid_in_period": "0"
+          },
+          {
+            "after": 0,
+            "balance": 0,
+            "before": 1,
+            "kind": "failure",
+            "repair_paid_in_period": "0"
+          },
+          {
+            "after": 1,
+            "balance": 0,
+            "before": 0,
+            "kind": "repair",
+            "paid": 0,
+            "save_retry": false
+          }
+        ],
+        "failures": [],
+        "final_hub": {
+          "bag_slots": 3.0,
+          "costs": {
+            "appraisal_carried": [],
+            "appraisal_stock": [],
+            "carried": [],
+            "last": {
+              "appraisal_count": 0,
+              "appraisal_used": 0,
+              "free_used": 0,
+              "id": "12",
+              "loot_income": "0",
+              "loot_tax": {
+                "gross": "0",
+                "paid": "0",
+                "rate": 10
+              },
+              "objective": {
+                "count": 0,
+                "offer": {}
+              },
+              "outcome": "failure",
+              "paid_count": 0,
+              "paid_used": 0,
+              "period": {
+                "appraisal_bought_costs": [],
+                "appraisal_opening_stock": [],
+                "appraisal_paid": "0",
+                "bought_costs": [],
+                "opening_money": "0",
+                "opening_stock": [],
+                "partial": false,
+                "repair_paid": "0",
+                "storage_income": "0",
+                "tax_legacy_income": "0",
+                "tax_sales": [],
+                "upgrade_paid": "0"
+              }
+            },
+            "period": {
+              "appraisal_bought_costs": [],
+              "appraisal_opening_stock": [],
+              "appraisal_paid": "0",
+              "bought_costs": [],
+              "opening_money": "0",
+              "opening_stock": [],
+              "partial": false,
+              "repair_paid": "0",
+              "storage_income": "0",
+              "tax_legacy_income": "0",
+              "tax_sales": [],
+              "upgrade_paid": "0"
+            },
+            "stock": []
+          },
+          "harness_durability": 1,
+          "harness_modules": [
+            "stabilization",
+            "emergency_discharge"
+          ],
+          "harness_upgrades": [],
+          "money": "0",
+          "next_expedition_id": "13",
+          "objective": {},
+          "paid_appraisals": 0,
+          "paid_lures": 0,
+          "pending_departure": {},
+          "registered_items": [
+            {
+              "id": "test_g4_record",
+              "identified": true,
+              "risk_hint": ""
+            },
+            {
+              "id": "test_g4_artifact",
+              "identified": true,
+              "risk_hint": ""
+            }
+          ],
+          "selected_appraisals": 0,
+          "selected_lures": 2,
+          "stored_items": [
+            {
+              "id": "test_g1_unknown",
+              "identified": false,
+              "risk_hint": "진동"
+            }
+          ]
+        },
+        "passed": true
+      }
+    },
+    {
+      "path": ".godot/dev0431-review/dungeon-g2-20261020-091935-6a51fcdfc9f14904a047967c5c743848/round-1-repair-session/repair-write.json",
+      "sha256": "de5b1075bad7aebaa7ba62d0765971777379ed5c88133fd4c974a70c97fb5baa",
+      "report": {
+        "case": "write",
+        "events": [
+          {
+            "after": 1,
+            "balance": 15,
+            "before": 0,
+            "kind": "repair",
+            "paid": 5,
+            "save_retry": true
+          },
+          {
+            "after": 1,
+            "balance": 15,
+            "before": 1,
+            "kind": "return",
+            "repair_paid_in_period": "5"
+          },
+          {
+            "after": 1,
+            "balance": 15,
+            "before": 1,
+            "kind": "return",
+            "repair_paid_in_period": "0"
+          },
+          {
+            "after": 1,
+            "balance": 15,
+            "before": 1,
+            "kind": "return",
+            "repair_paid_in_period": "0"
+          },
+          {
+            "after": 0,
+            "balance": 15,
+            "before": 1,
+            "kind": "failure",
+            "repair_paid_in_period": "0"
+          },
+          {
+            "after": 3,
+            "balance": 0,
+            "before": 0,
+            "kind": "repair",
+            "paid": 15,
+            "save_retry": false
+          },
+          {
+            "after": 3,
+            "balance": 0,
+            "before": 3,
+            "kind": "return",
+            "repair_paid_in_period": "15"
+          },
+          {
+            "after": 1,
+            "balance": 0,
+            "before": 3,
+            "kind": "failure",
+            "repair_paid_in_period": "0"
+          },
+          {
+            "after": 0,
+            "balance": 0,
+            "before": 1,
+            "kind": "failure",
+            "repair_paid_in_period": "0"
+          },
+          {
+            "after": 1,
+            "balance": 0,
+            "before": 0,
+            "kind": "repair",
+            "paid": 0,
+            "save_retry": false
+          },
+          {
+            "after": 1,
+            "balance": 0,
+            "before": 1,
+            "kind": "return",
+            "repair_paid_in_period": "0"
+          },
+          {
+            "after": 1,
+            "balance": 0,
+            "before": 1,
+            "kind": "return",
+            "repair_paid_in_period": "0"
+          },
+          {
+            "after": 1,
+            "balance": 0,
+            "before": 1,
+            "kind": "return",
+            "repair_paid_in_period": "0"
+          }
+        ],
+        "failures": [],
+        "final_hub": {
+          "bag_slots": 3.0,
+          "costs": {
+            "appraisal_carried": [],
+            "appraisal_stock": [],
+            "carried": [],
+            "last": {
+              "appraisal_count": 0,
+              "appraisal_used": 0,
+              "free_used": 0,
+              "id": "10",
+              "loot_income": "0",
+              "loot_tax": {
+                "gross": "0",
+                "paid": "0",
+                "rate": 10
+              },
+              "objective": {
+                "count": 0,
+                "offer": {}
+              },
+              "outcome": "safe",
+              "paid_count": 0,
+              "paid_used": 0,
+              "period": {
+                "appraisal_bought_costs": [],
+                "appraisal_opening_stock": [],
+                "appraisal_paid": "0",
+                "bought_costs": [],
+                "opening_money": "0",
+                "opening_stock": [],
+                "partial": false,
+                "repair_paid": "0",
+                "storage_income": "0",
+                "tax_legacy_income": "0",
+                "tax_sales": [],
+                "upgrade_paid": "0"
+              }
+            },
+            "period": {
+              "appraisal_bought_costs": [],
+              "appraisal_opening_stock": [],
+              "appraisal_paid": "0",
+              "bought_costs": [],
+              "opening_money": "0",
+              "opening_stock": [],
+              "partial": false,
+              "repair_paid": "0",
+              "storage_income": "0",
+              "tax_legacy_income": "0",
+              "tax_sales": [],
+              "upgrade_paid": "0"
+            },
+            "stock": []
+          },
+          "harness_durability": 1,
+          "harness_modules": [
+            "stabilization",
+            "emergency_discharge"
+          ],
+          "harness_upgrades": [],
+          "money": "0",
+          "next_expedition_id": "11",
+          "objective": {},
+          "paid_appraisals": 0,
+          "paid_lures": 0,
+          "pending_departure": {},
+          "registered_items": [
+            {
+              "id": "test_g4_record",
+              "identified": true,
+              "risk_hint": ""
+            },
+            {
+              "id": "test_g4_artifact",
+              "identified": true,
+              "risk_hint": ""
+            }
+          ],
+          "selected_appraisals": 0,
+          "selected_lures": 2,
+          "stored_items": [
+            {
+              "id": "test_g1_unknown",
+              "identified": false,
+              "risk_hint": "진동"
+            }
+          ]
+        },
+        "passed": true
+      }
+    },
+    {
+      "path": ".godot/dev0431-review/dungeon-g2-20261020-091935-6a51fcdfc9f14904a047967c5c743848/round-1-support-session/repair-continue-support.json",
+      "sha256": "81aa6d4e27b832219d4bed4b1e5ab74f715652b7cb1600c85fcbb10a28a00d12",
+      "report": {
+        "case": "continue-support",
+        "events": [
+          {
+            "after": 1,
+            "balance": 4,
+            "before": 1,
+            "kind": "return",
+            "repair_paid_in_period": "0"
+          },
+          {
+            "after": 0,
+            "balance": 4,
+            "before": 1,
+            "kind": "failure",
+            "repair_paid_in_period": "0"
+          },
+          {
+            "after": 1,
+            "balance": 4,
+            "before": 0,
+            "kind": "repair",
+            "paid": 0,
+            "save_retry": false
+          }
+        ],
+        "failures": [],
+        "final_hub": {
+          "bag_slots": 3.0,
+          "costs": {
+            "appraisal_carried": [],
+            "appraisal_stock": [],
+            "carried": [],
+            "last": {
+              "appraisal_count": 0,
+              "appraisal_used": 0,
+              "free_used": 0,
+              "id": "3",
+              "loot_income": "0",
+              "loot_tax": {
+                "gross": "0",
+                "paid": "0",
+                "rate": 10
+              },
+              "objective": {
+                "count": 0,
+                "offer": {}
+              },
+              "outcome": "failure",
+              "paid_count": 0,
+              "paid_used": 0,
+              "period": {
+                "appraisal_bought_costs": [],
+                "appraisal_opening_stock": [],
+                "appraisal_paid": "0",
+                "bought_costs": [],
+                "opening_money": "4",
+                "opening_stock": [],
+                "partial": false,
+                "repair_paid": "0",
+                "storage_income": "0",
+                "tax_legacy_income": "0",
+                "tax_sales": [],
+                "upgrade_paid": "0"
+              }
+            },
+            "period": {
+              "appraisal_bought_costs": [],
+              "appraisal_opening_stock": [],
+              "appraisal_paid": "0",
+              "bought_costs": [],
+              "opening_money": "4",
+              "opening_stock": [],
+              "partial": false,
+              "repair_paid": "0",
+              "storage_income": "0",
+              "tax_legacy_income": "0",
+              "tax_sales": [],
+              "upgrade_paid": "0"
+            },
+            "stock": []
+          },
+          "harness_durability": 1,
+          "harness_modules": [
+            "stabilization",
+            "emergency_discharge"
+          ],
+          "harness_upgrades": [],
+          "money": "4",
+          "next_expedition_id": "4",
+          "objective": {},
+          "paid_appraisals": 0,
+          "paid_lures": 0,
+          "pending_departure": {},
+          "registered_items": [
+            {
+              "id": "test_g4_record",
+              "identified": true,
+              "risk_hint": ""
+            },
+            {
+              "id": "test_g4_artifact",
+              "identified": true,
+              "risk_hint": ""
+            }
+          ],
+          "selected_appraisals": 0,
+          "selected_lures": 2,
+          "stored_items": [
+            {
+              "id": "test_g1_unknown",
+              "identified": false,
+              "risk_hint": "진동"
+            }
+          ]
+        },
+        "passed": true
+      }
+    },
+    {
+      "path": ".godot/dev0431-review/dungeon-g2-20261020-091935-6a51fcdfc9f14904a047967c5c743848/round-1-support-session/repair-support.json",
+      "sha256": "ead694e9bf2a679bbc250fe5f4829b04d5d5e8e73b145a24f05e8e827bd489bf",
+      "report": {
+        "case": "support",
+        "events": [
+          {
+            "after": 1,
+            "balance": 4,
+            "before": 0,
+            "kind": "repair",
+            "paid": 0,
+            "save_retry": true
+          },
+          {
+            "after": 0,
+            "balance": 4,
+            "before": 1,
+            "kind": "failure",
+            "repair_paid_in_period": "0"
+          },
+          {
+            "after": 1,
+            "balance": 4,
+            "before": 0,
+            "kind": "repair",
+            "paid": 0,
+            "save_retry": false
+          }
+        ],
+        "failures": [],
+        "final_hub": {
+          "bag_slots": 3.0,
+          "costs": {
+            "appraisal_carried": [],
+            "appraisal_stock": [],
+            "carried": [],
+            "last": {
+              "appraisal_count": 0,
+              "appraisal_used": 0,
+              "free_used": 0,
+              "id": "1",
+              "loot_income": "0",
+              "loot_tax": {
+                "gross": "0",
+                "paid": "0",
+                "rate": 10
+              },
+              "objective": {
+                "count": 0,
+                "offer": {}
+              },
+              "outcome": "failure",
+              "paid_count": 0,
+              "paid_used": 0,
+              "period": {
+                "appraisal_bought_costs": [],
+                "appraisal_opening_stock": [],
+                "appraisal_paid": "0",
+                "bought_costs": [],
+                "opening_money": "4",
+                "opening_stock": [],
+                "partial": false,
+                "repair_paid": "0",
+                "storage_income": "0",
+                "tax_legacy_income": "0",
+                "tax_sales": [],
+                "upgrade_paid": "0"
+              }
+            },
+            "period": {
+              "appraisal_bought_costs": [],
+              "appraisal_opening_stock": [],
+              "appraisal_paid": "0",
+              "bought_costs": [],
+              "opening_money": "4",
+              "opening_stock": [],
+              "partial": false,
+              "repair_paid": "0",
+              "storage_income": "0",
+              "tax_legacy_income": "0",
+              "tax_sales": [],
+              "upgrade_paid": "0"
+            },
+            "stock": []
+          },
+          "harness_durability": 1,
+          "harness_modules": [
+            "stabilization",
+            "emergency_discharge"
+          ],
+          "harness_upgrades": [],
+          "money": "4",
+          "next_expedition_id": "2",
+          "objective": {},
+          "paid_appraisals": 0,
+          "paid_lures": 0,
+          "pending_departure": {},
+          "registered_items": [
+            {
+              "id": "test_g4_record",
+              "identified": true,
+              "risk_hint": ""
+            },
+            {
+              "id": "test_g4_artifact",
+              "identified": true,
+              "risk_hint": ""
+            }
+          ],
+          "selected_appraisals": 0,
+          "selected_lures": 2,
+          "stored_items": [
+            {
+              "id": "test_g1_unknown",
+              "identified": false,
+              "risk_hint": "진동"
+            }
+          ]
+        },
+        "passed": true
+      }
+    },
+    {
+      "path": ".godot/dev0431-review/dungeon-g2-20261020-091935-6a51fcdfc9f14904a047967c5c743848/round-1-wear-session/wear-continue.json",
+      "sha256": "bfab14a456e603f35b4fada709f3d5405cf5da4594feef842db56fcd319cd30f",
+      "report": {
+        "case": "continue",
+        "failures": [],
+        "final_hub": {
+          "bag_slots": 3.0,
+          "costs": {
+            "appraisal_carried": [],
+            "appraisal_stock": [],
+            "carried": [],
+            "last": {
+              "appraisal_count": 0,
+              "appraisal_used": 0,
+              "free_used": 0,
+              "id": "6",
+              "loot_income": "0",
+              "loot_tax": {
+                "gross": "0",
+                "paid": "0",
+                "rate": 10
+              },
+              "objective": {
+                "count": 0,
+                "offer": {}
+              },
+              "outcome": "safe",
+              "paid_count": 0,
+              "paid_used": 0,
+              "period": {
+                "appraisal_bought_costs": [],
+                "appraisal_opening_stock": [],
+                "appraisal_paid": "0",
+                "bought_costs": [],
+                "opening_money": "0",
+                "opening_stock": [],
+                "partial": false,
+                "repair_paid": "0",
+                "storage_income": "0",
+                "tax_legacy_income": "0",
+                "tax_sales": [],
+                "upgrade_paid": "0"
+              }
+            },
+            "period": {
+              "appraisal_bought_costs": [],
+              "appraisal_opening_stock": [],
+              "appraisal_paid": "0",
+              "bought_costs": [],
+              "opening_money": "0",
+              "opening_stock": [],
+              "partial": false,
+              "repair_paid": "0",
+              "storage_income": "0",
+              "tax_legacy_income": "0",
+              "tax_sales": [],
+              "upgrade_paid": "0"
+            },
+            "stock": []
+          },
+          "harness_durability": 1,
+          "harness_modules": [
+            "stabilization",
+            "emergency_discharge"
+          ],
+          "harness_upgrades": [],
+          "money": "0",
+          "next_expedition_id": "7",
+          "objective": {},
+          "paid_appraisals": 0,
+          "paid_lures": 0,
+          "pending_departure": {},
+          "registered_items": [
+            {
+              "id": "test_g4_record",
+              "identified": true,
+              "risk_hint": ""
+            },
+            {
+              "id": "test_g4_artifact",
+              "identified": true,
+              "risk_hint": ""
+            }
+          ],
+          "selected_appraisals": 0,
+          "selected_lures": 2,
+          "stored_items": []
+        },
+        "passed": true
+      }
+    },
+    {
+      "path": ".godot/dev0431-review/dungeon-g2-20261020-091935-6a51fcdfc9f14904a047967c5c743848/round-1-wear-session/wear-write.json",
+      "sha256": "fdce598ff00400b6ad6162cc1850a622fcfb9de73b5e5facaaeac3abf8200a3a",
+      "report": {
+        "case": "write",
+        "failures": [],
+        "final_hub": {
+          "bag_slots": 3.0,
+          "costs": {
+            "appraisal_carried": [],
+            "appraisal_stock": [],
+            "carried": [],
+            "last": {
+              "appraisal_count": 0,
+              "appraisal_used": 0,
+              "free_used": 0,
+              "id": "4",
+              "loot_income": "0",
+              "loot_tax": {
+                "gross": "0",
+                "paid": "0",
+                "rate": 10
+              },
+              "objective": {
+                "count": 0,
+                "offer": {}
+              },
+              "outcome": "failure",
+              "paid_count": 0,
+              "paid_used": 0,
+              "period": {
+                "appraisal_bought_costs": [],
+                "appraisal_opening_stock": [],
+                "appraisal_paid": "0",
+                "bought_costs": [],
+                "opening_money": "0",
+                "opening_stock": [],
+                "partial": false,
+                "repair_paid": "0",
+                "storage_income": "0",
+                "tax_legacy_income": "0",
+                "tax_sales": [],
+                "upgrade_paid": "0"
+              }
+            },
+            "period": {
+              "appraisal_bought_costs": [],
+              "appraisal_opening_stock": [],
+              "appraisal_paid": "0",
+              "bought_costs": [],
+              "opening_money": "0",
+              "opening_stock": [],
+              "partial": false,
+              "repair_paid": "0",
+              "storage_income": "0",
+              "tax_legacy_income": "0",
+              "tax_sales": [],
+              "upgrade_paid": "0"
+            },
+            "stock": []
+          },
+          "harness_durability": 0,
+          "harness_modules": [
+            "stabilization",
+            "emergency_discharge"
+          ],
+          "harness_upgrades": [],
+          "money": "0",
+          "next_expedition_id": "5",
+          "objective": {},
+          "paid_appraisals": 0,
+          "paid_lures": 0,
+          "pending_departure": {},
+          "registered_items": [
+            {
+              "id": "test_g4_record",
+              "identified": true,
+              "risk_hint": ""
+            },
+            {
+              "id": "test_g4_artifact",
+              "identified": true,
+              "risk_hint": ""
+            }
+          ],
+          "selected_appraisals": 0,
+          "selected_lures": 2,
+          "stored_items": []
+        },
+        "passed": true
+      }
+    }
+  ],
+  "next_work": "DEV-0432 — 수리 보완 후 사람 플레이 검토",
+  "g4_completion": "held",
+  "commit_status": "user_approved_local_commit",
+  "pushed": false,
+  "approval_text": "커밋",
+  "approval_date_kst": "2026-10-20"
+}

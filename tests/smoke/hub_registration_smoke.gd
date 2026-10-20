@@ -13,7 +13,7 @@ func _ready() -> void:
 		if argument.begins_with("--registration-directory="):
 			_directory = argument.trim_prefix("--registration-directory=")
 	_read_case = "--registration-continue" in OS.get_cmdline_user_args()
-	_expected_registry_money = 0 if _read_case else 10
+	_expected_registry_money = 10
 	_render = "--registration-render" in OS.get_cmdline_user_args()
 	if _directory.is_empty():
 		_directory = OS.get_environment("TEMP").path_join("dungeon-registration-%d-%d" % [OS.get_process_id(), Time.get_ticks_usec()])

@@ -291,7 +291,7 @@ func _check_app_failure() -> void:
 	saved_keys.sort()
 	original_keys.sort()
 	_expect(saved_keys == original_keys, "Survival added hub save fields.")
-	_expect(HubRepairTestInput.prepare_departure(entry) == 5, "Survival redeparture repair cost changed.")
+	_expect(entry.get_hub_harness_durability() == 1 and HubRepairTestInput.prepare_departure(entry) == 0, "Survival failure incorrectly consumed all previously intact durability.")
 	_click(entry.get_node("Interface/HubPanel/%DepartureButton").get_global_rect().get_center())
 	await _frames(5)
 	var fresh: PrototypeExploration = entry.get_node("PrototypeExploration")

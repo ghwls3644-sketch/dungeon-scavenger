@@ -49,14 +49,14 @@ func _ready() -> void:
 	else:
 		_expect_sale_holdings(738, 0)
 		await _empty_return_after_sale()
-	_expect_sale_holdings(733 if _read_case else 738, 0)
+	_expect_sale_holdings(738, 0)
 	_click(_hub.get_node("%SaleButton"))
 	await _frames(3)
 	_expect(_sale_list.item_count == 0 and _sale_panel.get_node("%ReviewSale").disabled and "판매 가능한" in _sale_panel.get_node("%SaleStatus").text, "Empty storage offered a sale.")
 	await _capture_sale("empty")
 	_sale_panel.review_requested.emit(PackedInt32Array())
 	_sale_panel.confirmation_requested.emit()
-	_expect_sale_holdings(733 if _read_case else 738, 0)
+	_expect_sale_holdings(738, 0)
 	_expect(settings_before == FileAccess.get_file_as_bytes(_directory.path_join("settings.cfg")), "Selling changed settings.")
 	var report := {"passed": _failures.is_empty(), "case": "continue" if _read_case else "write", "final_hub": _store.load_data()}
 	var file := FileAccess.open(_directory.path_join("sale-continue.json" if _read_case else "sale-write.json"), FileAccess.WRITE)
@@ -280,11 +280,11 @@ func _check_failure_preserves_sale() -> void:
 	_expect(_entry.get_pending_outcome() != null and _entry.get_pending_outcome().is_failure(), "Expected collapse failure missing.")
 	_click(_entry.get_node("Interface/Results/NextStep/SettleButton"))
 	await _frames(5)
-	_expect_sale_holdings(733 if _read_case else 738, 0)
+	_expect_sale_holdings(738, 0)
 
 
 func _empty_return_after_sale() -> void:
-	_expect(HubRepairTestInput.prepare_departure(_entry) == 5, "Sale continuation repair cost changed.")
+	_expect(_entry.get_hub_harness_durability() == 1 and HubRepairTestInput.prepare_departure(_entry) == 0, "Sale continuation required repair despite remaining durability.")
 	_click(_hub.get_node("%DepartureButton"))
 	await _frames(5)
 	var world: PrototypeExploration = _entry.get_node("PrototypeExploration")

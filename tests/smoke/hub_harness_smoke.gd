@@ -81,8 +81,8 @@ func _ready() -> void:
 			await _choose_pair(index, index == 1)
 			await _recover_pair(HarnessModules.PAIRS[index])
 		await _choose_pair(1)
-		# Existing actual hazard failure and paid minimum repair, with non-default equipment.
-		_expect(HubRepairTestInput.prepare_departure(_entry) == 5, "Paid minimum repair cost changed.")
+		# Safe module comparisons retain full durability; the next failure leaves one point.
+		_expect(_entry.get_hub_harness_durability() == 3 and HubRepairTestInput.prepare_departure(_entry) == 0, "Safe module comparisons unexpectedly required repair.")
 		var before_money := _entry.get_hub_money()
 		var before_stored := _entry.get_hub_stored_items().size()
 		_click(_hub.get_node("%DepartureButton"))
@@ -95,7 +95,7 @@ func _ready() -> void:
 		_click(_results.get_node("NextStep/SettleButton"))
 		await _frames(5)
 		_expect(_entry.get_hub_money() == before_money and _entry.get_hub_stored_items().size() == before_stored and _entry.get_departure_preview().harness_modules == HarnessModules.PAIRS[1], "Failure erased secured progress/equipment.")
-		_expect(HubRepairTestInput.prepare_departure(_entry) == 5 and _entry.get_hub_harness_durability() == 1, "Support did not restore departure minimum.")
+		_expect(HubRepairTestInput.prepare_departure(_entry) == 0 and _entry.get_hub_harness_durability() == 1, "Failure did not preserve the remaining departure durability.")
 		_expect(_entry.get_departure_preview().harness_modules == HarnessModules.PAIRS[1], "Repair changed equipment.")
 		# E emergency escape is deliberately outside the emergency module gate.
 		_entry.review_scene = ESCAPE

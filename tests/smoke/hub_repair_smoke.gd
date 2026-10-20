@@ -42,7 +42,8 @@ func _ready() -> void:
 	if _case.begins_with("continue"):
 		var money := 4 if _case == "continue-support" else 0
 		_check_repair_state(money, 1)
-		await _repair_expedition(false, money, 1, 0)
+		await _repair_expedition(false, money, 1, 1)
+		await _repair_expedition(true, money, 1, 0)
 		await _support_cycle(money)
 	elif _case == "support":
 		await _support_cycle(4, true)
@@ -71,7 +72,7 @@ func _repair_data(money: int, durability: int) -> Dictionary:
 
 
 func _check_repair_domain() -> void:
-	for money in [0, 4, 5, 6, 15, 9223372036854775807]:
+	for money in [0, 4, 5, 6, 9, 15, 9223372036854775807]:
 		for durability in [0, 1, 2, 3]:
 			var data := _repair_data(money, durability)
 			var hub := HubState.from_save_data(data, CATALOG)
@@ -122,9 +123,46 @@ func _check_repair_domain() -> void:
 	_expect(hub.quote_repair(1, changed, true) == null and hub.apply_repair(hub.quote_repair(3, changed), changed), "Zero-price rule required support or failed repair.")
 	changed = ECONOMY.duplicate(true)
 	var settlement := SettlementResult.from_outcome(ExplorationOutcome.safe_return([]), changed, WEAR, 1)
-	_expect(settlement.get_full_repair_estimate() == 15 and settlement.get_total_cost() == 0, "Repair estimate charged settlement.")
+	_expect(settlement.get_full_repair_estimate() == 10 and settlement.get_total_cost() == 0, "Repair estimate charged settlement.")
 	changed.repair_cost_per_durability = 99
-	_expect(settlement.get_full_repair_estimate() == 15, "Repair estimate is not a snapshot.")
+	_expect(settlement.get_full_repair_estimate() == 10, "Repair estimate is not a snapshot.")
+	_check_purchase_order_support()
+	_check_existing_damage_and_costs()
+
+
+func _check_purchase_order_support() -> void:
+	# Support still considers cash only. This order incentive is recorded, not fixed here.
+	for repair_first in [true, false]:
+		var hub := HubState.from_save_data(_repair_data(9, 0), CATALOG)
+		if repair_first:
+			_expect(hub.apply_repair(hub.quote_repair(1, ECONOMY), ECONOMY), "Cash9 minimum repair rejected.")
+			_expect(not hub.apply_lures(hub.quote_lures(3)), "Cash4 bought an unaffordable extra lure.")
+		else:
+			_expect(hub.apply_lures(hub.quote_lures(3)), "Cash9 extra lure purchase rejected.")
+			var quote := hub.quote_repair(1, ECONOMY, true)
+			_expect(quote != null and hub.apply_repair(quote, ECONOMY), "Cash4 purchase-first support changed.")
+			_expect(not hub.apply_repair(quote, ECONOMY) and hub.quote_repair(1, ECONOMY, true) == null, "Support repeated after minimum recovery.")
+		_expect(hub.get_money() == 4 and hub.get_harness_durability() == 1 and hub.get_paid_lures() == (0 if repair_first else 1), "Purchase-order boundary changed holdings.")
+
+
+func _check_existing_damage_and_costs() -> void:
+	# A schema10 record from the prior wear trial retains its exact damage and receipts.
+	var hub := HubState.from_save_data(_repair_data(9, 0), CATALOG)
+	_expect(hub.apply_repair(hub.quote_repair(1, ECONOMY), ECONOMY), "Cannot seed historic paid repair.")
+	var id := hub.begin_expedition()
+	_expect(hub.prepare_settlement(id, ExplorationOutcome.safe_return([]), ECONOMY) and hub.apply_settlement(id), "Cannot seed historic receipt.")
+	var data := hub.to_save_data()
+	data.harness_durability = 0 # Previously persisted safe-return damage, not new gameplay.
+	var path := _directory.path_join("existing-damage.json")
+	_write_json(path, _envelope(10, data))
+	var bytes := FileAccess.get_file_as_bytes(path)
+	var loaded := ProgressStore.new(path).load_data()
+	var restored := HubState.from_save_data(loaded, CATALOG)
+	# Compare normalized domain state after JSON decoding.
+	_expect(restored.to_save_data() == data, "Loaded historic domain state changed.")
+	_expect(FileAccess.get_file_as_bytes(path) == bytes, "Reading historic damage rewrote the file.")
+	_expect(restored.get_money() == 4 and restored.get_harness_durability() == 0, "Wear trial retroactively repaired/refunded an existing save.")
+	_expect(loaded.costs.last.period.repair_paid == "5" and not restored.can_depart(ECONOMY), "Historical payment/departure gate changed.")
 
 
 func _paid_cycle() -> void:
@@ -153,16 +191,23 @@ func _paid_cycle() -> void:
 	await _confirm_repair(15, 1, true)
 	await _capture_wear("partial-complete", _repair.get_node("Center/Card"))
 	await _close_repair()
-	await _repair_expedition(false, 15, 1, 0)
+	# Three real departures after one paid minimum repair: no hidden repair or repeated cost.
+	for run in range(3):
+		await _repair_expedition(false, 15, 1, 1)
+		_expect(_store.load_data().costs.last.period.repair_paid == ("5" if run == 0 else "0"), "Safe returns repeated the initial repair expense.")
+	await _repair_expedition(true, 15, 1, 0)
 	await _open_repair()
 	await _review_choice(2)
 	await _confirm_repair(0, 3)
 	_expect(_repair.get_node("%ReviewRepair").disabled and "수리할 손상이 없습니다" in _repair.get_node("%RepairDetails").text, "Full equipment offered repair.")
 	await _capture_wear("full-complete", _repair.get_node("Center/Card"))
 	await _close_repair()
-	await _repair_expedition(false, 0, 3, 2)
-	await _repair_expedition(true, 0, 2, 0)
+	await _repair_expedition(false, 0, 3, 3)
+	await _repair_expedition(true, 0, 3, 1)
+	await _repair_expedition(true, 0, 1, 0)
 	await _support_cycle(0)
+	for run in range(3):
+		await _repair_expedition(false, 0, 1, 1)
 
 
 func _support_cycle(money: int, retry := false) -> void:
@@ -236,6 +281,7 @@ func _confirm_repair(money: int, durability: int, retry := false) -> void:
 func _repair_expedition(failure: bool, money: int, before: int, after: int) -> void:
 	_click(_hub.get_node("%DepartureButton"))
 	await _frames(5)
+	_expect(not _repair.visible, "Expected direct departure unexpectedly required another repair.")
 	var world: PrototypeExploration = _entry.get_node("PrototypeExploration")
 	_expect(world != null and world.get_node("Player/HarnessController").get_current_charge() == 3 and world.get_node("PlayerSurvival").get_health() == 2, "Repair changed next-run charge/health or failed to depart.")
 	_hub.repair_requested.emit()
@@ -254,7 +300,7 @@ func _repair_expedition(failure: bool, money: int, before: int, after: int) -> v
 	_click(_results.get_node("NextStep/SettleButton"))
 	await _frames(5)
 	_check_repair_state(money, after)
-	_events.append({"kind": "failure" if failure else "return", "before": before, "after": after, "balance": money})
+	_events.append({"kind": "failure" if failure else "return", "before": before, "after": after, "balance": money, "repair_paid_in_period": _store.load_data().costs.last.period.repair_paid})
 
 
 func _check_repair_state(money: int, durability: int) -> void:

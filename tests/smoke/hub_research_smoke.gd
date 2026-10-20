@@ -9,7 +9,7 @@ func _ready() -> void:
 		if argument.begins_with("--research-directory="):
 			_directory = argument.trim_prefix("--research-directory=")
 	_read_case = "--research-continue" in OS.get_cmdline_user_args()
-	_expected_registry_money = 0 if _read_case else 10
+	_expected_registry_money = 10
 	_render = "--research-render" in OS.get_cmdline_user_args()
 	if _directory.is_empty():
 		_directory = OS.get_environment("TEMP").path_join("dungeon-research-%d-%d" % [OS.get_process_id(), Time.get_ticks_usec()])

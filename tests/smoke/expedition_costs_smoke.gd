@@ -102,7 +102,7 @@ func _check_examples() -> void:
 	_expect(hub.apply_appraisal(hub.quote_appraisal(PackedInt32Array([0]), ECONOMY), ECONOMY), "Cannot pay appraisal.")
 	_expect(hub.apply_sale(hub.quote_sale(PackedInt32Array([0]), ECONOMY), ECONOMY), "Cannot sell older stock.")
 	_check(hub, _end(hub, 0), 94, 94, [])
-	hub = _hub()
+	hub = _hub(100, [], 2) # Existing damage produces an unpaid repair estimate even after a safe return.
 	_check(hub, _end(hub, 0), 27, 27, [])
 	_expect(hub.quote_repair(1, ECONOMY).get_cost() == 5 and hub.get_last_costs().repair_paid == 0, "Unpaid estimate became an expense.")
 	hub = _hub(0, [], 0)

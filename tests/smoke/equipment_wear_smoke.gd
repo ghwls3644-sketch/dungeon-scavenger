@@ -79,6 +79,7 @@ func _ready() -> void:
 			_check_hub(0)
 			await _capture_wear("continue-zero", _hub.get_node("Center/Card"))
 			await _normal_return(0, false)
+			await _normal_return(1, false)
 		elif _case in ["legacy1", "legacy2"]:
 			_check_hub(3)
 			_expect(DirAccess.make_dir_absolute(_path + ".tmp") == OK, "Cannot block migration write.")
@@ -93,10 +94,10 @@ func _ready() -> void:
 			_check_hub(3)
 			await _normal_return(3, true)
 			await _emergency_return()
-			await _actual_failure()
+			await _actual_failure(3, 1, true)
+			await _actual_failure(1, 0)
 			_check_hub(0)
 			await _capture_wear("hub-zero", _hub.get_node("Center/Card"))
-			await _normal_return(0, false)
 	_expect(FileAccess.get_file_as_bytes(_directory.path_join("settings.cfg")) == settings_bytes, "Wear modified settings.")
 	_release()
 	_write_json(_directory.path_join("wear-%s.json" % _case), {
@@ -118,9 +119,9 @@ func _initial_data() -> Dictionary:
 
 
 func _check_domain() -> void:
-	_expect(WEAR.is_valid(), "Prototype wear data invalid.")
+	_expect(WEAR.is_valid() and WEAR.return_damage == 0 and WEAR.failure_damage == 2, "Failure-only wear trial changed.")
 	for start in [0, 1, 2, 3]:
-		for outcome in [ExplorationOutcome.safe_return([]), ExplorationOutcome.safe_return_inventory_items([], &"emergency_escape"), ExplorationOutcome.failure(2)]:
+		for outcome in [ExplorationOutcome.safe_return([]), ExplorationOutcome.safe_return([CATALOG.find_item(&"test_g1_light")]), ExplorationOutcome.safe_return_inventory_items([], &"emergency_escape"), ExplorationOutcome.failure(2)]:
 			var data := _initial_data()
 			data.harness_durability = start
 			var hub := HubState.from_save_data(data, CATALOG)
@@ -130,17 +131,18 @@ func _check_domain() -> void:
 			_expect(not hub.prepare_settlement(run_id, outcome, ECONOMY), "Canceled/stale result accepted.")
 			_expect(not hub.prepare_settlement(next_id, null, ECONOMY) and hub.get_harness_durability() == start, "Invalid result damaged equipment.")
 			_expect(hub.prepare_settlement(next_id, outcome, ECONOMY), "Valid wear result rejected.")
-			var damage := mini(start, 2 if outcome.is_failure() else 1)
+			var damage := mini(start, 2) if outcome.is_failure() else 0
 			var expected := {"before": start, "after": start - damage, "damage": damage, "maximum": 3}
 			var result := hub.get_pending_settlement()
-			_expect(result.get_equipment_damage() == expected and result.get_total_cost() == 0, "Wear amount/cost incorrect.")
+			var income := 9 if outcome.is_safe_return() and outcome.get_recovery_result().get_item_count() == 1 else 0
+			_expect(result.get_equipment_damage() == expected and result.get_net_income() == income, "Wear amount/income incorrect.")
 			result.get_equipment_damage().after = 999
 			_expect(result.get_equipment_damage() == expected and hub.get_harness_durability() == start, "Preview exposed mutable or live durability.")
 			_expect(not hub.prepare_settlement(next_id, outcome, ECONOMY), "Duplicate result replaced preview.")
 			var candidate := hub.copy()
 			_expect(candidate.apply_settlement(next_id) and not candidate.apply_settlement(next_id), "Candidate applied wear twice.")
 			_expect(hub.get_harness_durability() == start and candidate.get_harness_durability() == start - damage, "Candidate changed original or misapplied wear.")
-			_expect(candidate.get_money() == 0 and candidate.get_registered_items().size() == 2 and candidate.create_departure_loadout().starting_charge == 3, "Wear changed other permanent resources.")
+			_expect(candidate.get_money() == income and candidate.get_registered_items().size() == 2 and candidate.create_departure_loadout().starting_charge == 3, "Wear changed other permanent resources.")
 			_expect(hub.apply_settlement(next_id) and hub.get_harness_durability() == start - damage, "Original retry changed wear amount.")
 	var rule := WEAR.duplicate(true) as EquipmentWearRule
 	var snapshot := SettlementResult.from_outcome(ExplorationOutcome.failure(0), ECONOMY, rule, 3)
@@ -240,7 +242,7 @@ func _normal_return(before: int, retry: bool) -> void:
 	await _frames(5)
 	_expect(_entry.get_pending_outcome().get_return_method() == &"entrance", "Actual empty entrance return failed.")
 	before = maxi(1, before) # DEV-0407 support restores the departure minimum.
-	await _settle_wear(before, maxi(0, before - 1), retry, "return" if retry else "")
+	await _settle_wear(before, before, retry, "return" if retry else "")
 
 
 func _emergency_return() -> void:
@@ -254,17 +256,17 @@ func _emergency_return() -> void:
 	_tap(KEY_E)
 	await _frames(250)
 	_expect(_entry.get_pending_outcome() != null and _entry.get_pending_outcome().get_return_method() == &"emergency_escape", "Actual emergency return failed.")
-	await _settle_wear(2, 1, false, "emergency")
+	await _settle_wear(3, 3, false, "emergency")
 
 
-func _actual_failure() -> void:
+func _actual_failure(before: int, after: int, retry := false) -> void:
 	var world := await _depart_wear()
 	var player: PlayerController = world.get_node("Player")
 	for point in [Vector2(-500, 0), Vector2(-500, 200), Vector2(-170, 200)]:
 		await _walk(player, point)
 	await _frames(100)
 	_expect(_entry.get_pending_outcome() != null and _entry.get_pending_outcome().is_failure(), "Actual danger did not end expedition.")
-	await _settle_wear(1, 0, false, "failure")
+	await _settle_wear(before, after, retry, "failure")
 
 
 func _settle_wear(before: int, after: int, retry: bool, capture: String) -> void:
