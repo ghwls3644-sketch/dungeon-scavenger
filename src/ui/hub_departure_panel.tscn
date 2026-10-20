@@ -1,0 +1,88 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://src/ui/hub_departure_panel.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="Card"]
+bg_color = Color(0.12, 0.105, 0.085, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7, 0.49, 0.22, 1)
+content_margin_left = 32.0
+content_margin_right = 32.0
+content_margin_top = 28.0
+content_margin_bottom = 28.0
+
+[node name="DeparturePanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_font_sizes/font_size = 22
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.06, 0.05, 0.04, 1)
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Card" type="PanelContainer" parent="Center"]
+custom_minimum_size = Vector2(860, 340)
+layout_mode = 2
+theme_override_styles/panel = SubResource("Card")
+
+[node name="Content" type="VBoxContainer" parent="Center/Card"]
+layout_mode = 2
+theme_override_constants/separation = 22
+
+[node name="Title" type="Label" parent="Center/Card/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "수리하지 않고 출정할까요?"
+
+[node name="DepartureWarning" type="Label" parent="Center/Card/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.8, 0.45, 1)
+text = "하네스 내구가 0입니다."
+
+[node name="Details" type="Label" parent="Center/Card/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "이 상태로도 출정할 수 있습니다.\n수리하려면 거점으로 돌아가 주세요."
+autowrap_mode = 2
+
+[node name="Actions" type="HBoxContainer" parent="Center/Card/Content"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="ReturnToHub" type="Button" parent="Center/Card/Content/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 54)
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../ProceedDeparture")
+focus_neighbor_right = NodePath("../ProceedDeparture")
+focus_next = NodePath("../ProceedDeparture")
+focus_previous = NodePath("../ProceedDeparture")
+text = "돌아가기"
+
+[node name="ProceedDeparture" type="Button" parent="Center/Card/Content/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 54)
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../ReturnToHub")
+focus_neighbor_right = NodePath("../ReturnToHub")
+focus_next = NodePath("../ReturnToHub")
+focus_previous = NodePath("../ReturnToHub")
+text = "그대로 출정"

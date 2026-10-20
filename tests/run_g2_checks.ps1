@@ -145,6 +145,7 @@ function Start-G2Checks {
             $repairSession = Join-Path $runDirectory "$prefix-repair-session"
             $portableSession = Join-Path $runDirectory "$prefix-portable-session"
             $supportSession = Join-Path $runDirectory "$prefix-support-session"
+            $zeroSession = Join-Path $runDirectory "$prefix-zero-session"
             foreach ($scene in (Get-ChildItem -LiteralPath (Join-Path $repository 'tests/smoke') -Filter '*.tscn' | Sort-Object Name)) {
                 $marker = $scene.BaseName -replace '_smoke$', '_passed'
                 if ($marker -eq 'game_state_flow_passed') { $marker = 'state_flow_passed' }
@@ -159,6 +160,7 @@ function Start-G2Checks {
                 if ($scene.BaseName -eq 'hub_upgrade_smoke') { $sceneArguments = @("--upgrade-directory=$upgradeSession") }
                 if ($scene.BaseName -eq 'portable_appraisal_flow_smoke') { $sceneArguments = @("--portable-directory=$portableSession") }
                 if ($scene.BaseName -eq 'hub_repair_smoke') { $sceneArguments = @("--repair-directory=$repairSession") }
+                if ($scene.BaseName -eq 'zero_durability_departure_smoke') { $sceneArguments = @("--zero-directory=$zeroSession") }
                 Run-Scene "$prefix-$($scene.BaseName)" $scene.BaseName "\[SmokeTest\] $marker(?:\s|$)" $sceneArguments
             }
             Run-Scene "$prefix-portable-continue" 'portable_appraisal_flow_smoke' '\[SmokeTest\] portable_appraisal_flow_passed continue' @('--portable-continue', "--portable-directory=$portableSession")
@@ -179,6 +181,14 @@ function Start-G2Checks {
             Run-Scene "$prefix-repair-continue" 'hub_repair_smoke' '\[SmokeTest\] hub_repair_passed continue' @('--repair-case=continue', "--repair-directory=$repairSession")
             Run-Scene "$prefix-repair-support" 'hub_repair_smoke' '\[SmokeTest\] hub_repair_passed support' @('--repair-case=support', "--repair-directory=$supportSession")
             Run-Scene "$prefix-repair-support-continue" 'hub_repair_smoke' '\[SmokeTest\] hub_repair_passed continue-support' @('--repair-case=continue-support', "--repair-directory=$supportSession")
+            Run-Scene "$prefix-zero-resume" 'zero_durability_departure_smoke' '\[SmokeTest\] zero_durability_departure_passed' @('--zero-resume', "--zero-directory=$zeroSession")
+            foreach ($cash in @(4, 5, 9)) {
+                Run-Scene "$prefix-zero-cash-$cash" 'zero_durability_departure_smoke' '\[SmokeTest\] zero_durability_departure_passed' @("--zero-cash=$cash")
+            }
+            foreach ($durability in @(1, 2, 3)) {
+                Run-Scene "$prefix-positive-durability-$durability" 'zero_durability_departure_smoke' '\[SmokeTest\] zero_durability_departure_passed' @("--zero-durability=$durability")
+            }
+            Run-Scene "$prefix-zero-legacy" 'zero_durability_departure_smoke' '\[SmokeTest\] zero_durability_departure_passed' @('--zero-legacy')
             foreach ($case in @('legacy1', 'legacy2', 'invalid')) {
                 Run-Scene "$prefix-wear-$case" 'equipment_wear_smoke' "\[SmokeTest\] equipment_wear_passed $case" @("--wear-case=$case")
             }

@@ -6,13 +6,14 @@ extends Resource
 # Prototype per-item fee. Final pricing/batch discounts remain undecided.
 @export var appraisal_fee_per_item: int = 0
 @export var repair_cost_per_durability: int = 0
-@export var minimum_departure_durability: int = 1
+# Support restores this target; durability no longer gates departure.
+@export var minimum_recovery_durability: int = 1
 # Must be explicit, including intentionally untaxed test fixtures.
 @export var recovery_tax_percent: int = -1
 
 
 func is_valid() -> bool:
-	if appraisal_fee_per_item < 0 or repair_cost_per_durability < 0 or minimum_departure_durability <= 0 or recovery_tax_percent < 0 or recovery_tax_percent > 100:
+	if appraisal_fee_per_item < 0 or repair_cost_per_durability < 0 or minimum_recovery_durability <= 0 or recovery_tax_percent < 0 or recovery_tax_percent > 100:
 		return false
 	for item_id in base_prices:
 		if not StableId.is_valid(item_id) or base_prices[item_id] < 0:

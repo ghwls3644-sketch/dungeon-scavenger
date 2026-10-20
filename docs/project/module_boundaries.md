@@ -474,3 +474,9 @@ ExpeditionLoadout은 복사된 시작 수량/무게, ExplorationOutcome은 실�
 [BrokenGuardGolem](../../src/gameplay/hazards/broken_guard_golem.gd)이 유인 조사만의 도착·정체·전체 상한과 상태 설명을 소유한다. HarnessController는 기존 대상/충전에서 가능 조건을 표현하고 HarnessStatus는 무료 안내를 배치한다. [PrototypeExploration](../../src/app/prototype_exploration.gd)은 성공/가시 재가동·가시 복귀 알림과 접촉 경고 우선순위를 연결한다. 청취 반경/발소리 이력·투척/소비·Meta/Infrastructure·저장 책임은 바꾸지 않는다.
 
 [기준 재현 검사](../../tests/smoke/golem_response_review_smoke.gd)는 과거 조기 복귀를 영구 계약으로 삼지 않고 도착 후 확인/유한 복귀를 검증하도록 갱신했다. [추가 검사](../../tests/smoke/golem_response_guidance_smoke.gd)는 재유인 상한·일시정지·무료/유료 정보·조건별 안내·유인 단계·두 해상도 배치를 맡는다. 기존 시야/유인 검사는 새 쉬운 문구의 의미와 새 정체 종료 조건에 맞춰 갱신하며 이전 결과 JSON은 보존한다.
+
+## DEV-0433 내구0 출정 안내 경계
+
+- `src/ui/hub_departure_panel.gd/.tscn`은 내구0 안내·안전한 기본 포커스·돌아가기/출정 요청만 맡는다. 저장·복구나 직접 장면 전환을 하지 않는다.
+- `GameEntry`는 확인 요청 번호/준비 스냅샷·서비스 경합·상태를 검사하고 기존 출정 예약/시작/복구를 연결한다. `HubState`의 출정 가능 상태와 `EconomyRule`의 무료 복구 목표를 분리한다.
+- `tests/smoke/zero_durability_departure_smoke.gd/.tscn`은 실제 앱의 입력/저장/재출정·내구/현금 경계와 두 해상도를 검사한다. 게임 소스에서 테스트 자료를 참조하지 않는다.

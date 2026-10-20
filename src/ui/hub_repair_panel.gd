@@ -23,7 +23,7 @@ func _ready() -> void:
 func present(durability: int, maximum: int, money: int, minimum: int, offers: Array[RepairQuote]) -> void:
 	_offers = offers.duplicate()
 	_choices.clear()
-	%RepairSummary.text = "기본 하네스 내구 %d/%d · 보유금 %d\n출정에 필요한 내구 %d" % [durability, maximum, money, minimum]
+	%RepairSummary.text = "기본 하네스 내구 %d/%d · 보유금 %d\n수리 없이도 출정 가능 · 최소 복구 지원 목표: 내구 %d" % [durability, maximum, money, minimum]
 	for quote in offers:
 		var label := "최소 복구 지원 · 내구 +%d · 비용 0" % quote.get_amount() if quote.is_supported() \
 			else "%s · 내구 +%d · 비용 %d" % ["완전 수리" if quote.get_durability_after() == maximum else "부분 수리", quote.get_amount(), quote.get_cost()]
@@ -86,7 +86,7 @@ func _describe(quote: RepairQuote) -> String:
 	return "내구 %d/%d → %d/%d\n%s · 예상 비용 %d · %s\n%s" % [
 		quote.get_durability_before(), quote.get_maximum(), quote.get_durability_after(), quote.get_maximum(),
 		"최소 복구 지원 견적" if quote.is_supported() else "선택 수리 견적", quote.get_cost(), balance,
-		"최소 수리비가 부족해 출정에 필요한 내구까지만 복구합니다." if quote.is_supported() else "이번에 선택한 복구량만 수리합니다.",
+		"최소 수리비가 부족할 때 내구 %d까지 무료로 복구합니다." % quote.get_durability_after() if quote.is_supported() else "이번에 선택한 복구량만 수리합니다.",
 	]
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="Script" path="res://src/ui/hub_panel.gd" id="1_script"]
 [ext_resource type="PackedScene" path="res://src/ui/hub_appraisal_panel.tscn" id="2_appraisal"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" path="res://src/ui/hub_lure_panel.tscn" id="8_lure"]
 
 [ext_resource type="PackedScene" path="res://src/ui/hub_portable_appraisal_panel.tscn" id="9_portable"]
+[ext_resource type="PackedScene" path="res://src/ui/hub_departure_panel.tscn" id="10_departure"]
 
 [sub_resource type="StyleBoxFlat" id="CardStyle"]
 bg_color = Color(0.12, 0.105, 0.085, 1)
@@ -281,4 +282,7 @@ visible = false
 visible = false
 
 [node name="PortablePanel" parent="." instance=ExtResource("9_portable")]
+visible = false
+
+[node name="DeparturePanel" parent="." instance=ExtResource("10_departure")]
 visible = false

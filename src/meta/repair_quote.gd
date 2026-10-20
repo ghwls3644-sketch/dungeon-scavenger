@@ -15,7 +15,7 @@ func _init(source: Dictionary, amount: int, cost: int, rule: EconomyRule, maximu
 	_amount = amount
 	_cost = cost
 	_unit_cost = rule.repair_cost_per_durability
-	_minimum = rule.minimum_departure_durability
+	_minimum = rule.minimum_recovery_durability
 	_maximum = maximum
 	_supported = supported
 

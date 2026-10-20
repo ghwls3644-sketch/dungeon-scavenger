@@ -76,7 +76,7 @@ func _check_repair_domain() -> void:
 		for durability in [0, 1, 2, 3]:
 			var data := _repair_data(money, durability)
 			var hub := HubState.from_save_data(data, CATALOG)
-			_expect(hub.can_depart(ECONOMY) == (durability >= 1), "Departure threshold incorrect.")
+			_expect(hub.can_depart(ECONOMY), "Valid durability blocked departure.")
 			for amount in [-1, 0, 4, 9223372036854775807]:
 				_expect(hub.quote_repair(amount, ECONOMY) == null, "Invalid amount accepted.")
 			var support := hub.quote_repair(1, ECONOMY, true)
@@ -102,7 +102,7 @@ func _check_repair_domain() -> void:
 	changed.repair_cost_per_durability = 4
 	_expect(not hub.apply_repair(quote, changed), "Changed price accepted old quote.")
 	changed = ECONOMY.duplicate(true)
-	changed.minimum_departure_durability = 2
+	changed.minimum_recovery_durability = 2
 	_expect(not hub.apply_repair(quote, changed), "Changed minimum accepted old quote.")
 	hub.select_bag_slots(2)
 	_expect(not hub.apply_repair(quote, ECONOMY), "Changed hub accepted old quote.")
@@ -114,7 +114,7 @@ func _check_repair_domain() -> void:
 		_expect(HubState.from_save_data(_repair_data(20, 0), CATALOG).quote_repair(2, changed) == null, "Invalid/overflow price accepted.")
 	for minimum in [0, 4]:
 		changed = ECONOMY.duplicate(true)
-		changed.minimum_departure_durability = minimum
+		changed.minimum_recovery_durability = minimum
 		var invalid := HubState.from_save_data(_repair_data(20, 0), CATALOG)
 		_expect(not invalid.can_depart(changed) and invalid.get_repair_offers(changed).is_empty(), "Invalid minimum accepted.")
 	changed = ECONOMY.duplicate(true)
@@ -162,16 +162,16 @@ func _check_existing_damage_and_costs() -> void:
 	_expect(restored.to_save_data() == data, "Loaded historic domain state changed.")
 	_expect(FileAccess.get_file_as_bytes(path) == bytes, "Reading historic damage rewrote the file.")
 	_expect(restored.get_money() == 4 and restored.get_harness_durability() == 0, "Wear trial retroactively repaired/refunded an existing save.")
-	_expect(loaded.costs.last.period.repair_paid == "5" and not restored.can_depart(ECONOMY), "Historical payment/departure gate changed.")
+	_expect(loaded.costs.last.period.repair_paid == "5" and restored.can_depart(ECONOMY), "Historical payment changed or zero departure blocked.")
 
 
 func _paid_cycle() -> void:
 	_check_repair_state(20, 0)
-	await _capture_wear("hub-blocked", _hub.get_node("Center/Card"))
+	await _capture_wear("hub-damaged", _hub.get_node("Center/Card"))
 	var before := FileAccess.get_file_as_bytes(_path)
-	_click(_hub.get_node("%DepartureButton"))
+	_click(_hub.get_node("%RepairButton"))
 	await _frames(4)
-	_expect(_repair.visible and GameState.get_current_state() == GameState.State.HUB and FileAccess.get_file_as_bytes(_path) == before, "Zero departure did not route to unpaid repair.")
+	_expect(_repair.visible and GameState.get_current_state() == GameState.State.HUB and FileAccess.get_file_as_bytes(_path) == before, "Optional repair did not open without payment.")
 	_hub.appraisal_requested.emit()
 	_hub.sale_requested.emit()
 	_hub.registration_requested.emit()

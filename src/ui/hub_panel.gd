@@ -85,11 +85,10 @@ func set_status(message: String) -> void:
 	_status.text = message
 
 
-func render_equipment(durability: int, maximum: int, minimum: int) -> void:
-	var ready := durability >= minimum
+func render_equipment(durability: int, maximum: int) -> void:
 	%EquipmentStatus.text = "기본 하네스 내구 %d/%d\n%s" % [durability, maximum,
-		"출정 가능 · 필요 내구 %d" % minimum if ready else "수리가 필요합니다. 비용 부족 시 최소 복구 지원을 확인하세요."]
-	_departure.text = "출정" if ready else "수리하고 출정 준비"
+		"수리 없이도 출정 가능 · 출정 전에 내구 0 상태를 확인합니다." if durability == 0 else "출정 가능 · 수리는 거점에서 선택할 수 있습니다."]
+	_departure.text = "출정"
 
 
 func render_holdings(money: int, items: Array[InventoryItem], preparation_costs: Dictionary = {}, last_costs: Dictionary = {}) -> void:
