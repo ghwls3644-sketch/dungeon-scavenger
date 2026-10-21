@@ -2,9 +2,16 @@ class_name LegacyProgressFixture
 extends RefCounted
 
 
+static func before_seed(hub: Dictionary) -> Dictionary:
+	var result := hub.duplicate(true)
+	result.erase("visit_seed")
+	return result
+
+
 # Build authentic pre-10 fixtures without changing the requested older-version fields.
 static func before_appraisal(hub: Dictionary) -> Dictionary:
 	var result := hub.duplicate(true)
+	result.erase("visit_seed")
 	result.erase("paid_appraisals")
 	result.erase("selected_appraisals")
 	if typeof(result.get("pending_departure")) == TYPE_DICTIONARY:

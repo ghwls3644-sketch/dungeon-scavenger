@@ -1,0 +1,1009 @@
+{
+  "passed": true,
+  "source_tree_sha256": "e28b050fe3a9dbb6f979b5623c8b6cb0582d5c5347f5ad986bca2d312afef9e8",
+  "checks": [
+    {
+      "name": "save-1-before-resume",
+      "arguments": [
+        "res://tests/smoke/lure_departure_smoke.tscn",
+        "--",
+        "--boundary-mode=resume",
+        "--lure-directory=.godot\\dev0503-review\\dungeon-lure-boundaries-15d47c99d1a34cc18a332ec0f7e0fb54\\save-1-before",
+        "--expected-stock=2",
+        "--expected-next=1"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] lure_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1305,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "save-1-before-resume.console.log"
+    },
+    {
+      "name": "save-1-after-resume-retry",
+      "arguments": [
+        "res://tests/smoke/lure_departure_smoke.tscn",
+        "--",
+        "--boundary-mode=resume-retry",
+        "--lure-directory=.godot\\dev0503-review\\dungeon-lure-boundaries-15d47c99d1a34cc18a332ec0f7e0fb54\\save-1-after",
+        "--expected-stock=2",
+        "--expected-next=2"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] lure_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1399,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "save-1-after-resume-retry.console.log"
+    },
+    {
+      "name": "save-1-after-resume",
+      "arguments": [
+        "res://tests/smoke/lure_departure_smoke.tscn",
+        "--",
+        "--boundary-mode=resume",
+        "--lure-directory=.godot\\dev0503-review\\dungeon-lure-boundaries-15d47c99d1a34cc18a332ec0f7e0fb54\\save-1-after",
+        "--expected-stock=2",
+        "--expected-next=2"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] lure_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1215,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "save-1-after-resume.console.log"
+    },
+    {
+      "name": "save-2-before-resume-retry",
+      "arguments": [
+        "res://tests/smoke/lure_departure_smoke.tscn",
+        "--",
+        "--boundary-mode=resume-retry",
+        "--lure-directory=.godot\\dev0503-review\\dungeon-lure-boundaries-15d47c99d1a34cc18a332ec0f7e0fb54\\save-2-before",
+        "--expected-stock=2",
+        "--expected-next=2"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] lure_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1393,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "save-2-before-resume-retry.console.log"
+    },
+    {
+      "name": "save-2-before-resume",
+      "arguments": [
+        "res://tests/smoke/lure_departure_smoke.tscn",
+        "--",
+        "--boundary-mode=resume",
+        "--lure-directory=.godot\\dev0503-review\\dungeon-lure-boundaries-15d47c99d1a34cc18a332ec0f7e0fb54\\save-2-before",
+        "--expected-stock=2",
+        "--expected-next=2"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] lure_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1209,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "save-2-before-resume.console.log"
+    },
+    {
+      "name": "save-2-after-resume-retry",
+      "arguments": [
+        "res://tests/smoke/lure_departure_smoke.tscn",
+        "--",
+        "--boundary-mode=resume-retry",
+        "--lure-directory=.godot\\dev0503-review\\dungeon-lure-boundaries-15d47c99d1a34cc18a332ec0f7e0fb54\\save-2-after",
+        "--expected-stock=0",
+        "--expected-next=2"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] lure_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1413,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "save-2-after-resume-retry.console.log"
+    },
+    {
+      "name": "save-2-after-resume",
+      "arguments": [
+        "res://tests/smoke/lure_departure_smoke.tscn",
+        "--",
+        "--boundary-mode=resume",
+        "--lure-directory=.godot\\dev0503-review\\dungeon-lure-boundaries-15d47c99d1a34cc18a332ec0f7e0fb54\\save-2-after",
+        "--expected-stock=0",
+        "--expected-next=2"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] lure_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1303,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "save-2-after-resume.console.log"
+    },
+    {
+      "name": "save-3-before-resume-retry",
+      "arguments": [
+        "res://tests/smoke/lure_departure_smoke.tscn",
+        "--",
+        "--boundary-mode=resume-retry",
+        "--lure-directory=.godot\\dev0503-review\\dungeon-lure-boundaries-15d47c99d1a34cc18a332ec0f7e0fb54\\save-3-before",
+        "--expected-stock=0",
+        "--expected-next=2"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] lure_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1399,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "save-3-before-resume-retry.console.log"
+    },
+    {
+      "name": "save-3-before-resume",
+      "arguments": [
+        "res://tests/smoke/lure_departure_smoke.tscn",
+        "--",
+        "--boundary-mode=resume",
+        "--lure-directory=.godot\\dev0503-review\\dungeon-lure-boundaries-15d47c99d1a34cc18a332ec0f7e0fb54\\save-3-before",
+        "--expected-stock=0",
+        "--expected-next=2"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] lure_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1210,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "save-3-before-resume.console.log"
+    },
+    {
+      "name": "save-3-after-resume",
+      "arguments": [
+        "res://tests/smoke/lure_departure_smoke.tscn",
+        "--",
+        "--boundary-mode=resume",
+        "--lure-directory=.godot\\dev0503-review\\dungeon-lure-boundaries-15d47c99d1a34cc18a332ec0f7e0fb54\\save-3-after",
+        "--expected-stock=2",
+        "--expected-next=2"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] lure_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1300,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "save-3-after-resume.console.log"
+    }
+  ],
+  "interrupted_boundaries": 6,
+  "ticket": "DEV-0503",
+  "ticket_name": "출정 시드 예약·저장 연결",
+  "restarted_process_count": 10,
+  "boundaries": [
+    {
+      "name": "save-1-after",
+      "recovery_reports": [
+        {
+          "failures": [],
+          "final_hub": {
+            "bag_slots": 2.0,
+            "costs": {
+              "appraisal_carried": [],
+              "appraisal_stock": [
+                "8",
+                "10"
+              ],
+              "carried": [],
+              "last": {},
+              "period": {
+                "appraisal_bought_costs": [],
+                "appraisal_opening_stock": [
+                  "8",
+                  "10"
+                ],
+                "appraisal_paid": "0",
+                "bought_costs": [],
+                "opening_money": "0",
+                "opening_stock": [
+                  "5",
+                  "5"
+                ],
+                "partial": false,
+                "repair_paid": "0",
+                "storage_income": "0",
+                "tax_legacy_income": "0",
+                "tax_sales": [],
+                "upgrade_paid": "0"
+              },
+              "stock": [
+                "5",
+                "5"
+              ]
+            },
+            "harness_durability": 3,
+            "harness_modules": [
+              "stabilization",
+              "emergency_discharge"
+            ],
+            "harness_upgrades": [],
+            "money": "0",
+            "next_expedition_id": "2",
+            "objective": {},
+            "paid_appraisals": 2,
+            "paid_lures": 2,
+            "pending_departure": {},
+            "registered_items": [],
+            "selected_appraisals": 2,
+            "selected_lures": 4,
+            "stored_items": [],
+            "visit_seed": {
+              "content_version": "g2_prototype_1",
+              "generation_version": "repeat_plan_sha256_v1",
+              "id": "1",
+              "seed": "-7885666345175705376"
+            }
+          },
+          "mode": "resume-retry",
+          "passed": true
+        },
+        {
+          "failures": [],
+          "final_hub": {
+            "bag_slots": 2.0,
+            "costs": {
+              "appraisal_carried": [],
+              "appraisal_stock": [
+                "8",
+                "10"
+              ],
+              "carried": [],
+              "last": {},
+              "period": {
+                "appraisal_bought_costs": [],
+                "appraisal_opening_stock": [
+                  "8",
+                  "10"
+                ],
+                "appraisal_paid": "0",
+                "bought_costs": [],
+                "opening_money": "0",
+                "opening_stock": [
+                  "5",
+                  "5"
+                ],
+                "partial": false,
+                "repair_paid": "0",
+                "storage_income": "0",
+                "tax_legacy_income": "0",
+                "tax_sales": [],
+                "upgrade_paid": "0"
+              },
+              "stock": [
+                "5",
+                "5"
+              ]
+            },
+            "harness_durability": 3,
+            "harness_modules": [
+              "stabilization",
+              "emergency_discharge"
+            ],
+            "harness_upgrades": [],
+            "money": "0",
+            "next_expedition_id": "2",
+            "objective": {},
+            "paid_appraisals": 2,
+            "paid_lures": 2,
+            "pending_departure": {},
+            "registered_items": [],
+            "selected_appraisals": 2,
+            "selected_lures": 4,
+            "stored_items": [],
+            "visit_seed": {
+              "content_version": "g2_prototype_1",
+              "generation_version": "repeat_plan_sha256_v1",
+              "id": "1",
+              "seed": "-7885666345175705376"
+            }
+          },
+          "mode": "resume",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "save-1-before",
+      "recovery_reports": [
+        {
+          "failures": [],
+          "final_hub": {
+            "bag_slots": 2.0,
+            "costs": {
+              "appraisal_carried": [],
+              "appraisal_stock": [
+                "8",
+                "10"
+              ],
+              "carried": [],
+              "last": {},
+              "period": {
+                "appraisal_bought_costs": [],
+                "appraisal_opening_stock": [
+                  "8",
+                  "10"
+                ],
+                "appraisal_paid": "0",
+                "bought_costs": [],
+                "opening_money": "0",
+                "opening_stock": [
+                  "5",
+                  "5"
+                ],
+                "partial": false,
+                "repair_paid": "0",
+                "storage_income": "0",
+                "tax_legacy_income": "0",
+                "tax_sales": [],
+                "upgrade_paid": "0"
+              },
+              "stock": [
+                "5",
+                "5"
+              ]
+            },
+            "harness_durability": 3,
+            "harness_modules": [
+              "stabilization",
+              "emergency_discharge"
+            ],
+            "harness_upgrades": [],
+            "money": "0",
+            "next_expedition_id": "1",
+            "objective": {},
+            "paid_appraisals": 2,
+            "paid_lures": 2,
+            "pending_departure": {},
+            "registered_items": [],
+            "selected_appraisals": 2,
+            "selected_lures": 4,
+            "stored_items": [],
+            "visit_seed": {}
+          },
+          "mode": "resume",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "save-2-after",
+      "recovery_reports": [
+        {
+          "failures": [],
+          "final_hub": {
+            "bag_slots": 2.0,
+            "costs": {
+              "appraisal_carried": [],
+              "appraisal_stock": [],
+              "carried": [],
+              "last": {
+                "appraisal_count": 2,
+                "appraisal_used": -1,
+                "free_used": -1,
+                "id": "1",
+                "loot_income": "0",
+                "loot_tax": {
+                  "gross": "0",
+                  "paid": "0",
+                  "rate": 0
+                },
+                "objective": {
+                  "count": 0,
+                  "offer": {}
+                },
+                "outcome": "interrupted",
+                "paid_count": 2,
+                "paid_used": -1,
+                "period": {
+                  "appraisal_bought_costs": [],
+                  "appraisal_opening_stock": [
+                    "8",
+                    "10"
+                  ],
+                  "appraisal_paid": "0",
+                  "bought_costs": [],
+                  "opening_money": "0",
+                  "opening_stock": [
+                    "5",
+                    "5"
+                  ],
+                  "partial": false,
+                  "repair_paid": "0",
+                  "storage_income": "0",
+                  "tax_legacy_income": "0",
+                  "tax_sales": [],
+                  "upgrade_paid": "0"
+                }
+              },
+              "period": {
+                "appraisal_bought_costs": [],
+                "appraisal_opening_stock": [],
+                "appraisal_paid": "0",
+                "bought_costs": [],
+                "opening_money": "0",
+                "opening_stock": [],
+                "partial": false,
+                "repair_paid": "0",
+                "storage_income": "0",
+                "tax_legacy_income": "0",
+                "tax_sales": [],
+                "upgrade_paid": "0"
+              },
+              "stock": []
+            },
+            "harness_durability": 3,
+            "harness_modules": [
+              "stabilization",
+              "emergency_discharge"
+            ],
+            "harness_upgrades": [],
+            "money": "0",
+            "next_expedition_id": "2",
+            "objective": {},
+            "paid_appraisals": 0,
+            "paid_lures": 0,
+            "pending_departure": {},
+            "registered_items": [],
+            "selected_appraisals": 2,
+            "selected_lures": 4,
+            "stored_items": [],
+            "visit_seed": {
+              "content_version": "g2_prototype_1",
+              "generation_version": "repeat_plan_sha256_v1",
+              "id": "1",
+              "seed": "6541422823030047285"
+            }
+          },
+          "mode": "resume-retry",
+          "passed": true
+        },
+        {
+          "failures": [],
+          "final_hub": {
+            "bag_slots": 2.0,
+            "costs": {
+              "appraisal_carried": [],
+              "appraisal_stock": [],
+              "carried": [],
+              "last": {
+                "appraisal_count": 2,
+                "appraisal_used": -1,
+                "free_used": -1,
+                "id": "1",
+                "loot_income": "0",
+                "loot_tax": {
+                  "gross": "0",
+                  "paid": "0",
+                  "rate": 0
+                },
+                "objective": {
+                  "count": 0,
+                  "offer": {}
+                },
+                "outcome": "interrupted",
+                "paid_count": 2,
+                "paid_used": -1,
+                "period": {
+                  "appraisal_bought_costs": [],
+                  "appraisal_opening_stock": [
+                    "8",
+                    "10"
+                  ],
+                  "appraisal_paid": "0",
+                  "bought_costs": [],
+                  "opening_money": "0",
+                  "opening_stock": [
+                    "5",
+                    "5"
+                  ],
+                  "partial": false,
+                  "repair_paid": "0",
+                  "storage_income": "0",
+                  "tax_legacy_income": "0",
+                  "tax_sales": [],
+                  "upgrade_paid": "0"
+                }
+              },
+              "period": {
+                "appraisal_bought_costs": [],
+                "appraisal_opening_stock": [],
+                "appraisal_paid": "0",
+                "bought_costs": [],
+                "opening_money": "0",
+                "opening_stock": [],
+                "partial": false,
+                "repair_paid": "0",
+                "storage_income": "0",
+                "tax_legacy_income": "0",
+                "tax_sales": [],
+                "upgrade_paid": "0"
+              },
+              "stock": []
+            },
+            "harness_durability": 3,
+            "harness_modules": [
+              "stabilization",
+              "emergency_discharge"
+            ],
+            "harness_upgrades": [],
+            "money": "0",
+            "next_expedition_id": "2",
+            "objective": {},
+            "paid_appraisals": 0,
+            "paid_lures": 0,
+            "pending_departure": {},
+            "registered_items": [],
+            "selected_appraisals": 2,
+            "selected_lures": 4,
+            "stored_items": [],
+            "visit_seed": {
+              "content_version": "g2_prototype_1",
+              "generation_version": "repeat_plan_sha256_v1",
+              "id": "1",
+              "seed": "6541422823030047285"
+            }
+          },
+          "mode": "resume",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "save-2-before",
+      "recovery_reports": [
+        {
+          "failures": [],
+          "final_hub": {
+            "bag_slots": 2.0,
+            "costs": {
+              "appraisal_carried": [],
+              "appraisal_stock": [
+                "8",
+                "10"
+              ],
+              "carried": [],
+              "last": {},
+              "period": {
+                "appraisal_bought_costs": [],
+                "appraisal_opening_stock": [
+                  "8",
+                  "10"
+                ],
+                "appraisal_paid": "0",
+                "bought_costs": [],
+                "opening_money": "0",
+                "opening_stock": [
+                  "5",
+                  "5"
+                ],
+                "partial": false,
+                "repair_paid": "0",
+                "storage_income": "0",
+                "tax_legacy_income": "0",
+                "tax_sales": [],
+                "upgrade_paid": "0"
+              },
+              "stock": [
+                "5",
+                "5"
+              ]
+            },
+            "harness_durability": 3,
+            "harness_modules": [
+              "stabilization",
+              "emergency_discharge"
+            ],
+            "harness_upgrades": [],
+            "money": "0",
+            "next_expedition_id": "2",
+            "objective": {},
+            "paid_appraisals": 2,
+            "paid_lures": 2,
+            "pending_departure": {},
+            "registered_items": [],
+            "selected_appraisals": 2,
+            "selected_lures": 4,
+            "stored_items": [],
+            "visit_seed": {
+              "content_version": "g2_prototype_1",
+              "generation_version": "repeat_plan_sha256_v1",
+              "id": "1",
+              "seed": "7650486010613101044"
+            }
+          },
+          "mode": "resume-retry",
+          "passed": true
+        },
+        {
+          "failures": [],
+          "final_hub": {
+            "bag_slots": 2.0,
+            "costs": {
+              "appraisal_carried": [],
+              "appraisal_stock": [
+                "8",
+                "10"
+              ],
+              "carried": [],
+              "last": {},
+              "period": {
+                "appraisal_bought_costs": [],
+                "appraisal_opening_stock": [
+                  "8",
+                  "10"
+                ],
+                "appraisal_paid": "0",
+                "bought_costs": [],
+                "opening_money": "0",
+                "opening_stock": [
+                  "5",
+                  "5"
+                ],
+                "partial": false,
+                "repair_paid": "0",
+                "storage_income": "0",
+                "tax_legacy_income": "0",
+                "tax_sales": [],
+                "upgrade_paid": "0"
+              },
+              "stock": [
+                "5",
+                "5"
+              ]
+            },
+            "harness_durability": 3,
+            "harness_modules": [
+              "stabilization",
+              "emergency_discharge"
+            ],
+            "harness_upgrades": [],
+            "money": "0",
+            "next_expedition_id": "2",
+            "objective": {},
+            "paid_appraisals": 2,
+            "paid_lures": 2,
+            "pending_departure": {},
+            "registered_items": [],
+            "selected_appraisals": 2,
+            "selected_lures": 4,
+            "stored_items": [],
+            "visit_seed": {
+              "content_version": "g2_prototype_1",
+              "generation_version": "repeat_plan_sha256_v1",
+              "id": "1",
+              "seed": "7650486010613101044"
+            }
+          },
+          "mode": "resume",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "save-3-after",
+      "recovery_reports": [
+        {
+          "failures": [],
+          "final_hub": {
+            "bag_slots": 2.0,
+            "costs": {
+              "appraisal_carried": [],
+              "appraisal_stock": [
+                "8",
+                "10"
+              ],
+              "carried": [],
+              "last": {
+                "appraisal_count": 2,
+                "appraisal_used": 0,
+                "free_used": 0,
+                "id": "1",
+                "loot_income": "0",
+                "loot_tax": {
+                  "gross": "0",
+                  "paid": "0",
+                  "rate": 10
+                },
+                "objective": {
+                  "count": 0,
+                  "offer": {}
+                },
+                "outcome": "safe",
+                "paid_count": 2,
+                "paid_used": 0,
+                "period": {
+                  "appraisal_bought_costs": [],
+                  "appraisal_opening_stock": [
+                    "8",
+                    "10"
+                  ],
+                  "appraisal_paid": "0",
+                  "bought_costs": [],
+                  "opening_money": "0",
+                  "opening_stock": [
+                    "5",
+                    "5"
+                  ],
+                  "partial": false,
+                  "repair_paid": "0",
+                  "storage_income": "0",
+                  "tax_legacy_income": "0",
+                  "tax_sales": [],
+                  "upgrade_paid": "0"
+                }
+              },
+              "period": {
+                "appraisal_bought_costs": [],
+                "appraisal_opening_stock": [
+                  "8",
+                  "10"
+                ],
+                "appraisal_paid": "0",
+                "bought_costs": [],
+                "opening_money": "0",
+                "opening_stock": [
+                  "5",
+                  "5"
+                ],
+                "partial": false,
+                "repair_paid": "0",
+                "storage_income": "0",
+                "tax_legacy_income": "0",
+                "tax_sales": [],
+                "upgrade_paid": "0"
+              },
+              "stock": [
+                "5",
+                "5"
+              ]
+            },
+            "harness_durability": 3,
+            "harness_modules": [
+              "stabilization",
+              "emergency_discharge"
+            ],
+            "harness_upgrades": [],
+            "money": "0",
+            "next_expedition_id": "2",
+            "objective": {},
+            "paid_appraisals": 2,
+            "paid_lures": 2,
+            "pending_departure": {},
+            "registered_items": [],
+            "selected_appraisals": 2,
+            "selected_lures": 4,
+            "stored_items": [],
+            "visit_seed": {
+              "content_version": "g2_prototype_1",
+              "generation_version": "repeat_plan_sha256_v1",
+              "id": "1",
+              "seed": "4466635406314105428"
+            }
+          },
+          "mode": "resume",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "save-3-before",
+      "recovery_reports": [
+        {
+          "failures": [],
+          "final_hub": {
+            "bag_slots": 2.0,
+            "costs": {
+              "appraisal_carried": [],
+              "appraisal_stock": [],
+              "carried": [],
+              "last": {
+                "appraisal_count": 2,
+                "appraisal_used": -1,
+                "free_used": -1,
+                "id": "1",
+                "loot_income": "0",
+                "loot_tax": {
+                  "gross": "0",
+                  "paid": "0",
+                  "rate": 0
+                },
+                "objective": {
+                  "count": 0,
+                  "offer": {}
+                },
+                "outcome": "interrupted",
+                "paid_count": 2,
+                "paid_used": -1,
+                "period": {
+                  "appraisal_bought_costs": [],
+                  "appraisal_opening_stock": [
+                    "8",
+                    "10"
+                  ],
+                  "appraisal_paid": "0",
+                  "bought_costs": [],
+                  "opening_money": "0",
+                  "opening_stock": [
+                    "5",
+                    "5"
+                  ],
+                  "partial": false,
+                  "repair_paid": "0",
+                  "storage_income": "0",
+                  "tax_legacy_income": "0",
+                  "tax_sales": [],
+                  "upgrade_paid": "0"
+                }
+              },
+              "period": {
+                "appraisal_bought_costs": [],
+                "appraisal_opening_stock": [],
+                "appraisal_paid": "0",
+                "bought_costs": [],
+                "opening_money": "0",
+                "opening_stock": [],
+                "partial": false,
+                "repair_paid": "0",
+                "storage_income": "0",
+                "tax_legacy_income": "0",
+                "tax_sales": [],
+                "upgrade_paid": "0"
+              },
+              "stock": []
+            },
+            "harness_durability": 3,
+            "harness_modules": [
+              "stabilization",
+              "emergency_discharge"
+            ],
+            "harness_upgrades": [],
+            "money": "0",
+            "next_expedition_id": "2",
+            "objective": {},
+            "paid_appraisals": 0,
+            "paid_lures": 0,
+            "pending_departure": {},
+            "registered_items": [],
+            "selected_appraisals": 2,
+            "selected_lures": 4,
+            "stored_items": [],
+            "visit_seed": {
+              "content_version": "g2_prototype_1",
+              "generation_version": "repeat_plan_sha256_v1",
+              "id": "1",
+              "seed": "8857258308204192941"
+            }
+          },
+          "mode": "resume-retry",
+          "passed": true
+        },
+        {
+          "failures": [],
+          "final_hub": {
+            "bag_slots": 2.0,
+            "costs": {
+              "appraisal_carried": [],
+              "appraisal_stock": [],
+              "carried": [],
+              "last": {
+                "appraisal_count": 2,
+                "appraisal_used": -1,
+                "free_used": -1,
+                "id": "1",
+                "loot_income": "0",
+                "loot_tax": {
+                  "gross": "0",
+                  "paid": "0",
+                  "rate": 0
+                },
+                "objective": {
+                  "count": 0,
+                  "offer": {}
+                },
+                "outcome": "interrupted",
+                "paid_count": 2,
+                "paid_used": -1,
+                "period": {
+                  "appraisal_bought_costs": [],
+                  "appraisal_opening_stock": [
+                    "8",
+                    "10"
+                  ],
+                  "appraisal_paid": "0",
+                  "bought_costs": [],
+                  "opening_money": "0",
+                  "opening_stock": [
+                    "5",
+                    "5"
+                  ],
+                  "partial": false,
+                  "repair_paid": "0",
+                  "storage_income": "0",
+                  "tax_legacy_income": "0",
+                  "tax_sales": [],
+                  "upgrade_paid": "0"
+                }
+              },
+              "period": {
+                "appraisal_bought_costs": [],
+                "appraisal_opening_stock": [],
+                "appraisal_paid": "0",
+                "bought_costs": [],
+                "opening_money": "0",
+                "opening_stock": [],
+                "partial": false,
+                "repair_paid": "0",
+                "storage_income": "0",
+                "tax_legacy_income": "0",
+                "tax_sales": [],
+                "upgrade_paid": "0"
+              },
+              "stock": []
+            },
+            "harness_durability": 3,
+            "harness_modules": [
+              "stabilization",
+              "emergency_discharge"
+            ],
+            "harness_upgrades": [],
+            "money": "0",
+            "next_expedition_id": "2",
+            "objective": {},
+            "paid_appraisals": 0,
+            "paid_lures": 0,
+            "pending_departure": {},
+            "registered_items": [],
+            "selected_appraisals": 2,
+            "selected_lures": 4,
+            "stored_items": [],
+            "visit_seed": {
+              "content_version": "g2_prototype_1",
+              "generation_version": "repeat_plan_sha256_v1",
+              "id": "1",
+              "seed": "8857258308204192941"
+            }
+          },
+          "mode": "resume",
+          "passed": true
+        }
+      ]
+    }
+  ]
+}

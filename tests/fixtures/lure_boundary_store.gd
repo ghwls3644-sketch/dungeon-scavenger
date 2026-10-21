@@ -5,10 +5,12 @@ var failures: Array[int] = []
 var stop_call := 0
 var stop_after := false
 var directory := ""
+var seed_attempts: Array[Dictionary] = []
 
 
 func save_data(hub: Dictionary, replace_existing: bool = false) -> Error:
 	calls += 1
+	seed_attempts.append(hub.get("visit_seed", {}).duplicate(true))
 	if calls == stop_call and not stop_after:
 		_wait_for_termination()
 	if calls in failures:

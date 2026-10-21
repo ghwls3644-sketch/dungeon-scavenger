@@ -32,7 +32,7 @@ related:
 |---|---|
 | [`narrative_delivery.md`](narrative_delivery.md) | 세계관 정보가 어떤 시스템과 조건으로 전달되는가? |
 | [`repeat_exploration.md`](repeat_exploration.md) | 방문 사이에 무엇이 유지되고 무엇이 변하는가? |
-| [반복 상태·시드 계약 검토안](repeat_state_contract.md) (`draft`) | DEV-0501 제안과 DEV-0502 메모리 내 시드/상태 구현은 무엇이며, 실제 출정·저장에 무엇이 남았는가? |
+| [반복 상태·시드 계약 검토안](repeat_state_contract.md) (`draft`) | DEV-0501 제안·DEV-0502 메모리 기반·DEV-0503 출정 시드 저장의 적용과 남은 실제 배치 범위는 무엇인가? |
 | [`item_rules.md`](item_rules.md) | 아이템이 데이터와 시스템에서 어떻게 작동하는가? |
 | [`economy_rules.md`](economy_rules.md) | 가격·비용·손실·수익은 어떻게 계산되는가? |
 | [`harness_engineering.md`](harness_engineering.md) (`draft`) | 하네스 준비·공유 자원의 기존 요구, 장착 및 구매/발견 성장의 시험 적용과 후속 조건은 무엇인가? |

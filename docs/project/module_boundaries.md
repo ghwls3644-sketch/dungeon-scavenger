@@ -487,3 +487,10 @@ ExpeditionLoadout은 복사된 시작 수량/무게, ExplorationOutcome은 실�
 - `src/gameplay/exploration/repeat_exploration_progress.gd`는 외부에서 전달한 영구 진행의 복사 입력, `repeat_visit_generator.gd`는 시드 순위·후보 제외·중복/점 위치 충돌 처리와 오류, `repeat_visit_plan.gd`는 생성 완료한 입력/결과의 복사 조회를 소유한다. meta/infrastructure/app을 호출하지 않는다.
 - `tests/fixtures/repeat_visit_fixture.gd`는 시험 후보 ID/위치·선택 상한만 소유한다. `tests/smoke/repeat_visit_smoke.*`는 재현·제외·복사·오류 계약을 검증한다. 제품에서 tests를 참조하지 않는다.
 - 현재 app/HubState/ProgressStore/지도 UI와 기존 콘텐츠는 변경하지 않았다. 실제 출정과 파일 저장은 후속 app 조립/저장 작업 책임이며, 위험/골렘/문·개선 발견의 새 생성 규칙은 이번 기반에 포함하지 않는다. 상세 범위는 [구현 기록](../design/repeat_state_contract.md#dev-0502-메모리-내-시드-기반-구현)을 따른다.
+
+## DEV-0503 출정 시드 저장 경계
+
+- `src/meta/expedition_seed.gd`는 요청별 지역 난수 발급, 시드 기록의 검증과 구형 기본값을 맡는다. 생성기의 공개 버전 상수만 참조하며 실제 후보 선택·장면·파일 I/O는 하지 않는다.
+- `HubState`는 예약 시 한 번 발급하고 복사/시작/정산/복구 때 기록을 유지한다. `ProgressStore`는 기존 변환 뒤 스키마11/거점16필드를 읽고 쓰며, 시드를 재발급하지 않는다.
+- `GameEntry`는 기존 후보 저장 성공 후 확정 순서를 유지하고 예약/시작·저장 오류에 시드/버전을 로그로 남긴다. 실제 배치 조립은 DEV-0504 범위다.
+- 전용 시드 검사는 도메인·저장·변환을, 기존 출정/강제 종료 검사는 실제 앱 요청·복구·새 프로세스의 시드 보존을 검증한다. 기존 저장 검사 변경은 새 필드/버전에 한정하며 출시 코드에서 tests를 참조하지 않는다.

@@ -153,7 +153,7 @@ func _check_growth_migration() -> void:
 		_write_json(path, _envelope(version, data))
 		var original := FileAccess.get_file_as_bytes(path)
 		var loaded := store.load_data()
-		_expect(loaded.size() == 15 and loaded.harness_upgrades.is_empty() and FileAccess.get_file_as_bytes(path) == original, "Legacy growth read changed file or granted upgrades.")
+		_expect(loaded.size() == 16 and loaded.harness_upgrades.is_empty() and FileAccess.get_file_as_bytes(path) == original, "Legacy growth read changed file or granted upgrades.")
 		_expect(loaded.harness_modules == (HarnessModules.PAIRS[1] if version == 4 else HarnessModules.DEFAULT), "Legacy growth migration replaced equipment.")
 		_expect(store.save_data(loaded) == OK and store.load_data() == loaded and JSON.parse_string(FileAccess.get_file_as_string(path)).schema_version == ProgressStore.SCHEMA_VERSION, "Growth migration write failed.")
 	for invalid in [null, {}, ["unknown"], [HarnessUpgradeRule.EMERGENCY, HarnessUpgradeRule.EMERGENCY]]:

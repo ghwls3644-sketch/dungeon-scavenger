@@ -228,7 +228,7 @@ func _check_portable_storage() -> void:
 		_storage_cases += 1
 	_write(path, _raw(base, 9))
 	_expect(store.load_data().is_empty(), "Hybrid schema 9 accepted.")
-	_write(path, _raw(base, 11))
+	_write(path, _raw(base, ProgressStore.SCHEMA_VERSION + 1))
 	_expect(store.load_data().is_empty() and store.get_last_error() == ERR_UNAVAILABLE, "Future schema accepted.")
 	_expect(store.save_data(base, true) == OK, "Cannot seed save-failure check.")
 	var bytes := FileAccess.get_file_as_bytes(path)

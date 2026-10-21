@@ -22,6 +22,7 @@ var _pending_departure: Dictionary = {}
 var _return_paid_lures := 0
 var _costs := ExpeditionCosts.new_book(0)
 var _objective: Dictionary = {}
+var _visit_seed: Dictionary = {}
 
 
 func _init() -> void:
@@ -284,6 +285,7 @@ func copy() -> HubState:
 	result._return_paid_lures = _return_paid_lures
 	result._costs = _costs.duplicate(true)
 	result._objective = _objective.duplicate(true)
+	result._visit_seed = _visit_seed.duplicate(true)
 	return result
 
 
@@ -321,11 +323,12 @@ func to_progress_data() -> Dictionary:
 		"pending_departure": _pending_departure.duplicate(true),
 		"costs": _costs.duplicate(true),
 		"objective": _objective.duplicate(true),
+		"visit_seed": _visit_seed.duplicate(true),
 	}
 
 
 static func from_save_data(data: Dictionary, catalog: ItemCatalog) -> HubState:
-	if catalog == null or not catalog.is_valid() or data.size() != 15 or not AppraisalPreparation.valid_save(data) or not ExpeditionObjective.valid_offer(data.get("objective")) or not LurePreparation.valid_save(data) \
+	if catalog == null or not catalog.is_valid() or data.size() != 16 or not ExpeditionSeed.valid_save(data) or not AppraisalPreparation.valid_save(data) or not ExpeditionObjective.valid_offer(data.get("objective")) or not LurePreparation.valid_save(data) \
 			or not ExpeditionCosts.valid_save(data.get("costs"), data) \
 			or not HarnessUpgradeRule.is_valid_owned(data.get("harness_upgrades")) \
 			or not is_valid_harness_durability(data.get("harness_durability")) \
@@ -357,6 +360,7 @@ static func from_save_data(data: Dictionary, catalog: ItemCatalog) -> HubState:
 	restored._pending_departure = data.pending_departure.duplicate(true)
 	restored._costs = data.costs.duplicate(true)
 	restored._objective = data.objective.duplicate(true)
+	restored._visit_seed = data.visit_seed.duplicate(true)
 	if restored.has_pending_departure():
 		restored._active_expedition_id = restored._pending_departure.id.to_int()
 	for raw_item in items:
@@ -531,6 +535,10 @@ func has_pending_departure() -> bool:
 	return not _pending_departure.is_empty()
 
 
+func get_visit_seed() -> Dictionary:
+	return _visit_seed.duplicate(true)
+
+
 func reserve_departure() -> int:
 	if not has_prepared_lures() or not has_prepared_appraisals():
 		return 0
@@ -545,6 +553,7 @@ func reserve_departure() -> int:
 	_paid_lures -= paid
 	_paid_appraisals -= _selected_appraisals
 	_pending_departure = {"id": str(id), "phase": "reserved", "free": mini(_selected_lures, LurePreparation.RULE.free_count), "paid": paid, "appraisals": _selected_appraisals}
+	_visit_seed = ExpeditionSeed.issue(id, _visit_seed)
 	return id
 
 

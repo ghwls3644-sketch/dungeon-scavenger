@@ -170,7 +170,10 @@ func _save_hub(candidate: HubState, replace_existing: bool = false) -> bool:
 	var data := candidate.to_progress_data()
 	if HubState.from_save_data(data, ITEM_CATALOG) == null:
 		return false
-	return _progress_store.save_data(data, replace_existing) == OK
+	var error := _progress_store.save_data(data, replace_existing)
+	if error != OK and not data.visit_seed.is_empty():
+		GameLog.info(&"GameEntry", &"visit_save_failed", JSON.stringify({"error": error, "visit": data.visit_seed}))
+	return error == OK
 
 
 func _initialize_settings() -> void:
@@ -344,6 +347,7 @@ func _on_state_changed(_previous_state: int, current_state: int) -> void:
 			GameState.return_from_failed_departure()
 			return
 		_hub_state = candidate
+		GameLog.info(&"GameEntry", &"visit_started", JSON.stringify(_hub_state.get_visit_seed()))
 		_exploration.start_exploration()
 		_departing = false
 	if _results.visible:
@@ -485,6 +489,7 @@ func _try_departure(confirmed_zero_durability: bool = false) -> void:
 		return
 	_hub_state = candidate
 	_expedition_id = reserved_id
+	GameLog.info(&"GameEntry", &"visit_reserved", JSON.stringify(_hub_state.get_visit_seed()))
 	_exploration.exploration_ended.connect(_on_exploration_ended.bind(_expedition_id))
 	if not GameState.request_transition(GameState.State.EXPLORATION):
 		_cancel_departure()

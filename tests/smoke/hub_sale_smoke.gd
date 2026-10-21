@@ -299,7 +299,7 @@ func _empty_return_after_sale() -> void:
 func _expect_sale_holdings(money: int, count: int) -> void:
 	_expect(_entry.get_hub_money() == money and _entry.get_hub_stored_items().size() == count, "Live sale holdings mismatch: expected %d/%d, got %d/%d." % [money, count, _entry.get_hub_money(), _entry.get_hub_stored_items().size()])
 	var saved := _store.load_data()
-	_expect(saved.money == str(money) and saved.stored_items.size() == count and saved.size() == 15, "Saved sale holdings/schema mismatch.")
+	_expect(saved.money == str(money) and saved.stored_items.size() == count and saved.size() == 16, "Saved sale holdings/schema mismatch.")
 
 
 func _choose_sale_row(index: int, control := false) -> void:

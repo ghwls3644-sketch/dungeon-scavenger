@@ -228,7 +228,8 @@ func _depart_wear(emergency := false) -> PrototypeExploration:
 	var world: PrototypeExploration = _entry.get_node("EmergencyEscapeTestSpace" if emergency else "PrototypeExploration")
 	var saved := _store.load_data()
 	_expect(saved.pending_departure.phase == "started" and saved.next_expedition_id.to_int() == before.next_expedition_id.to_int() + 1, "Departure journal missing.")
-	for key in ["next_expedition_id", "pending_departure"]:
+	_expect(ExpeditionSeed.valid_save(saved) and saved.visit_seed.seed != before.visit_seed.get("seed"), "Departure did not record a fresh seed.")
+	for key in ["next_expedition_id", "pending_departure", "visit_seed"]:
 		saved.erase(key)
 		before.erase(key)
 	_expect(GameState.get_current_state() == GameState.State.EXPLORATION and _entry.get_hub_harness_durability() == durability and saved == before, "Departure changed durability/holdings.")
@@ -314,6 +315,8 @@ func _click(button: Button) -> void:
 
 
 func _envelope(version: int, hub: Dictionary) -> Dictionary:
+	if version <= 10:
+		hub = LegacyProgressFixture.before_seed(hub)
 	if version <= 9:
 		hub = LegacyProgressFixture.before_appraisal(hub)
 	return {"schema_version": version, "content_version": ProgressStore.CONTENT_VERSION, "resume_state": "hub", "hub": hub}

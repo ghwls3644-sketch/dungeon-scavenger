@@ -1,7 +1,7 @@
 class_name ProgressStore
 extends RefCounted
 
-const SCHEMA_VERSION := 10
+const SCHEMA_VERSION := 11
 const CONTENT_VERSION := "g2_prototype_1"
 const MAX_FILE_BYTES := 16 * 1024 * 1024
 
@@ -49,7 +49,7 @@ func load_data() -> Dictionary:
 		_last_error = ERR_INVALID_DATA
 		return {}
 	# JSON numbers are floats; Array.has() does not coerce int/float variants.
-	if (version != 1 and version != 2 and version != 3 and version != 4 and version != 5 and version != 6 and version != 7 and version != 8 and version != 9 and version != SCHEMA_VERSION) or data.get("content_version") != CONTENT_VERSION:
+	if (version != 1 and version != 2 and version != 3 and version != 4 and version != 5 and version != 6 and version != 7 and version != 8 and version != 9 and version != 10 and version != SCHEMA_VERSION) or data.get("content_version") != CONTENT_VERSION:
 		_last_error = ERR_UNAVAILABLE
 		return {}
 	if data.size() != 4 or data.get("resume_state") != "hub" or typeof(data.get("hub")) != TYPE_DICTIONARY:
@@ -100,7 +100,10 @@ func load_data() -> Dictionary:
 	if version <= 9 and not AppraisalPreparation.migrate_legacy(hub):
 		_last_error = ERR_INVALID_DATA
 		return {}
-	if hub.size() != 15 or not AppraisalPreparation.valid_save(hub) or not ExpeditionObjective.valid_offer(hub.get("objective")) or not LurePreparation.valid_save(hub) or not ExpeditionCosts.valid_save(hub.get("costs"), hub) \
+	if version <= 10 and not ExpeditionSeed.migrate_legacy(hub):
+		_last_error = ERR_INVALID_DATA
+		return {}
+	if hub.size() != 16 or not ExpeditionSeed.valid_save(hub) or not AppraisalPreparation.valid_save(hub) or not ExpeditionObjective.valid_offer(hub.get("objective")) or not LurePreparation.valid_save(hub) or not ExpeditionCosts.valid_save(hub.get("costs"), hub) \
 			or not HarnessUpgradeRule.is_valid_owned(hub.get("harness_upgrades")) \
 			or not hub.has("registered_items") or not HarnessModules.is_valid(hub.get("harness_modules")) \
 			or not HubState.is_valid_harness_durability(hub.get("harness_durability")):
@@ -136,7 +139,7 @@ func load_data() -> Dictionary:
 
 
 func save_data(hub: Dictionary, replace_existing: bool = false) -> Error:
-	if hub.size() != 15 or not AppraisalPreparation.valid_save(hub) or not ExpeditionObjective.valid_offer(hub.get("objective")) or not LurePreparation.valid_save(hub) or not ExpeditionCosts.valid_save(hub.get("costs"), hub) \
+	if hub.size() != 16 or not ExpeditionSeed.valid_save(hub) or not AppraisalPreparation.valid_save(hub) or not ExpeditionObjective.valid_offer(hub.get("objective")) or not LurePreparation.valid_save(hub) or not ExpeditionCosts.valid_save(hub.get("costs"), hub) \
 			or not HarnessUpgradeRule.is_valid_owned(hub.get("harness_upgrades")) \
 			or not HubState.is_valid_harness_durability(hub.get("harness_durability")) \
 			or not HarnessModules.is_valid(hub.get("harness_modules")):
