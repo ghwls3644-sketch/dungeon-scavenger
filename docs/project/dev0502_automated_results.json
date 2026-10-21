@@ -1,0 +1,2403 @@
+{
+  "report_version": 1,
+  "scope": "DEV-0206 / G2 approved prototype loop",
+  "started_at_utc": "2026-10-21T10:07:20.3472471Z",
+  "repository_commit": "6f9d914e9ca9205b5fca3266f7e416927a7d1d2c",
+  "source_tree_sha256": "8bc2a947c43ccc3b9c03c093bc8cef0586bd1912a6e395e466e3e04cf8f4453e",
+  "requested_repetitions": 1,
+  "completed_repetitions": 1,
+  "certificate_exception_enabled": false,
+  "passed": true,
+  "failure": null,
+  "checks": [
+    {
+      "name": "engine-version",
+      "arguments": [
+        "--version"
+      ],
+      "expected_pattern": "^4\\.7\\.1\\.stable\\.",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 66,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "engine-version.console.log"
+    },
+    {
+      "name": "project-import",
+      "arguments": [
+        "--editor",
+        "--quit"
+      ],
+      "expected_pattern": "Godot Engine v4\\.7\\.1\\.stable\\.",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 3392,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "project-import.console.log"
+    },
+    {
+      "name": "round-1-broken_guard_golem_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/broken_guard_golem_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] broken_guard_golem_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 305,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-broken_guard_golem_smoke.console.log"
+    },
+    {
+      "name": "round-1-core_loop_playtest_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/core_loop_playtest_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] core_loop_playtest_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 475,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-core_loop_playtest_smoke.console.log"
+    },
+    {
+      "name": "round-1-cost_boundary_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/cost_boundary_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] cost_boundary_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 472,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-cost_boundary_smoke.console.log"
+    },
+    {
+      "name": "round-1-cost_flow_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/cost_flow_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] cost_flow_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2139,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-cost_flow_smoke.console.log"
+    },
+    {
+      "name": "round-1-door_hold_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/door_hold_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] door_hold_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1303,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-door_hold_smoke.console.log"
+    },
+    {
+      "name": "round-1-emergency_escape_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/emergency_escape_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] emergency_escape_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2597,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-emergency_escape_smoke.console.log"
+    },
+    {
+      "name": "round-1-equipment_wear_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/equipment_wear_smoke.tscn",
+        "--",
+        "--wear-directory=C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0502-review\\dungeon-g2-20261021-100720-63ac570c835b4b8d808bc424bef1b828\\round-1-wear-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] equipment_wear_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1859,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-equipment_wear_smoke.console.log"
+    },
+    {
+      "name": "round-1-expedition_costs_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/expedition_costs_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] expedition_costs_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 750,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-expedition_costs_smoke.console.log"
+    },
+    {
+      "name": "round-1-expedition_objective_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/expedition_objective_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] expedition_objective_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 656,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-expedition_objective_smoke.console.log"
+    },
+    {
+      "name": "round-1-exploration_end_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/exploration_end_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] exploration_end_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 374,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-exploration_end_smoke.console.log"
+    },
+    {
+      "name": "round-1-exploration_map_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/exploration_map_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] exploration_map_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 758,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-exploration_map_smoke.console.log"
+    },
+    {
+      "name": "round-1-g1_integration_playtest_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/g1_integration_playtest_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] g1_integration_playtest_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1120,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-g1_integration_playtest_smoke.console.log"
+    },
+    {
+      "name": "round-1-g3_exploration_flow_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/g3_exploration_flow_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] g3_exploration_flow_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1669,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-g3_exploration_flow_smoke.console.log"
+    },
+    {
+      "name": "round-1-g3_survival_flow_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/g3_survival_flow_smoke.tscn",
+        "--",
+        "--review-progress-directory=C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0502-review\\dungeon-g2-20261021-100720-63ac570c835b4b8d808bc424bef1b828\\round-1-survival-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] g3_survival_flow_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2698,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-g3_survival_flow_smoke.console.log"
+    },
+    {
+      "name": "round-1-g4_review_session_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/g4_review_session_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] g4_review_session_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1125,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-g4_review_session_smoke.console.log"
+    },
+    {
+      "name": "round-1-game_state_flow_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/game_state_flow_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] state_flow_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 196,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-game_state_flow_smoke.console.log"
+    },
+    {
+      "name": "round-1-golem_contact_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/golem_contact_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] golem_contact_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2051,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-golem_contact_smoke.console.log"
+    },
+    {
+      "name": "round-1-golem_response_guidance_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/golem_response_guidance_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] golem_response_guidance_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1675,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-golem_response_guidance_smoke.console.log"
+    },
+    {
+      "name": "round-1-golem_response_review_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/golem_response_review_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] golem_response_review_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1490,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-golem_response_review_smoke.console.log"
+    },
+    {
+      "name": "round-1-golem_sight_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/golem_sight_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] golem_sight_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 933,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-golem_sight_smoke.console.log"
+    },
+    {
+      "name": "round-1-harness_actions_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/harness_actions_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] harness_actions_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 376,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-harness_actions_smoke.console.log"
+    },
+    {
+      "name": "round-1-hazard_harness_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hazard_harness_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hazard_harness_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 286,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-hazard_harness_smoke.console.log"
+    },
+    {
+      "name": "round-1-hub_appraisal_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_appraisal_smoke.tscn",
+        "--",
+        "--appraisal-directory=C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0502-review\\dungeon-g2-20261021-100720-63ac570c835b4b8d808bc424bef1b828\\round-1-appraisal-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_appraisal_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1583,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-hub_appraisal_smoke.console.log"
+    },
+    {
+      "name": "round-1-hub_departure_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_departure_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_departure_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1676,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-hub_departure_smoke.console.log"
+    },
+    {
+      "name": "round-1-hub_harness_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_harness_smoke.tscn",
+        "--",
+        "--harness-directory=C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0502-review\\dungeon-g2-20261021-100720-63ac570c835b4b8d808bc424bef1b828\\round-1-harness-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_harness_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 3339,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-hub_harness_smoke.console.log"
+    },
+    {
+      "name": "round-1-hub_registration_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_registration_smoke.tscn",
+        "--",
+        "--registration-directory=C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0502-review\\dungeon-g2-20261021-100720-63ac570c835b4b8d808bc424bef1b828\\round-1-registration-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_registration_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1766,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-hub_registration_smoke.console.log"
+    },
+    {
+      "name": "round-1-hub_repair_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_repair_smoke.tscn",
+        "--",
+        "--repair-directory=C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0502-review\\dungeon-g2-20261021-100720-63ac570c835b4b8d808bc424bef1b828\\round-1-repair-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_repair_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2133,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-hub_repair_smoke.console.log"
+    },
+    {
+      "name": "round-1-hub_research_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_research_smoke.tscn",
+        "--",
+        "--research-directory=C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0502-review\\dungeon-g2-20261021-100720-63ac570c835b4b8d808bc424bef1b828\\round-1-research-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_research_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1765,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-hub_research_smoke.console.log"
+    },
+    {
+      "name": "round-1-hub_sale_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_sale_smoke.tscn",
+        "--",
+        "--sale-directory=C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0502-review\\dungeon-g2-20261021-100720-63ac570c835b4b8d808bc424bef1b828\\round-1-sale-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_sale_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1770,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-hub_sale_smoke.console.log"
+    },
+    {
+      "name": "round-1-hub_upgrade_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_upgrade_smoke.tscn",
+        "--",
+        "--upgrade-directory=C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0502-review\\dungeon-g2-20261021-100720-63ac570c835b4b8d808bc424bef1b828\\round-1-upgrade-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_upgrade_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 3548,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-hub_upgrade_smoke.console.log"
+    },
+    {
+      "name": "round-1-inspection_unidentified_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/inspection_unidentified_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] inspection_unidentified_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 378,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-inspection_unidentified_smoke.console.log"
+    },
+    {
+      "name": "round-1-interaction_system_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/interaction_system_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] interaction_system_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 281,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-interaction_system_smoke.console.log"
+    },
+    {
+      "name": "round-1-interaction_timing_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/interaction_timing_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] interaction_timing_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1673,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-interaction_timing_smoke.console.log"
+    },
+    {
+      "name": "round-1-inventory_system_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/inventory_system_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] inventory_system_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 375,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-inventory_system_smoke.console.log"
+    },
+    {
+      "name": "round-1-item_category_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/item_category_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] item_category_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 745,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-item_category_smoke.console.log"
+    },
+    {
+      "name": "round-1-load_movement_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/load_movement_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] load_movement_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 838,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-load_movement_smoke.console.log"
+    },
+    {
+      "name": "round-1-lure_departure_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/lure_departure_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] lure_departure_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1398,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-lure_departure_smoke.console.log"
+    },
+    {
+      "name": "round-1-lure_preparation_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/lure_preparation_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] lure_preparation_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2050,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-lure_preparation_smoke.console.log"
+    },
+    {
+      "name": "round-1-malfunctioning_trap_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/malfunctioning_trap_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] malfunctioning_trap_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1497,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-malfunctioning_trap_smoke.console.log"
+    },
+    {
+      "name": "round-1-map_clue_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/map_clue_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] map_clue_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 839,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-map_clue_smoke.console.log"
+    },
+    {
+      "name": "round-1-map_marker_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/map_marker_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] map_marker_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 657,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-map_marker_smoke.console.log"
+    },
+    {
+      "name": "round-1-map_passage_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/map_passage_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] map_passage_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 755,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-map_passage_smoke.console.log"
+    },
+    {
+      "name": "round-1-movement_noise_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/movement_noise_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] movement_noise_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 750,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-movement_noise_smoke.console.log"
+    },
+    {
+      "name": "round-1-noise_lure_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/noise_lure_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] noise_lure_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 840,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-noise_lure_smoke.console.log"
+    },
+    {
+      "name": "round-1-objective_boundary_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/objective_boundary_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] objective_boundary_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 470,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-objective_boundary_smoke.console.log"
+    },
+    {
+      "name": "round-1-objective_flow_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/objective_flow_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] objective_flow_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 2322,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-objective_flow_smoke.console.log"
+    },
+    {
+      "name": "round-1-player_movement_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/player_movement_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] player_movement_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 292,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-player_movement_smoke.console.log"
+    },
+    {
+      "name": "round-1-player_survival_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/player_survival_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] player_survival_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1957,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-player_survival_smoke.console.log"
+    },
+    {
+      "name": "round-1-portable_appraisal_boundary_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/portable_appraisal_boundary_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] portable_appraisal_boundary_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 467,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-portable_appraisal_boundary_smoke.console.log"
+    },
+    {
+      "name": "round-1-portable_appraisal_field_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/portable_appraisal_field_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] portable_appraisal_field_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1395,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-portable_appraisal_field_smoke.console.log"
+    },
+    {
+      "name": "round-1-portable_appraisal_flow_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/portable_appraisal_flow_smoke.tscn",
+        "--",
+        "--portable-directory=C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0502-review\\dungeon-g2-20261021-100720-63ac570c835b4b8d808bc424bef1b828\\round-1-portable-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] portable_appraisal_flow_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1857,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-portable_appraisal_flow_smoke.console.log"
+    },
+    {
+      "name": "round-1-portable_appraisal_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/portable_appraisal_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] portable_appraisal_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 840,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-portable_appraisal_smoke.console.log"
+    },
+    {
+      "name": "round-1-progress_save_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/progress_save_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] progress_save_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1213,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-progress_save_smoke.console.log"
+    },
+    {
+      "name": "round-1-quick_drop_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/quick_drop_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] quick_drop_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 932,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-quick_drop_smoke.console.log"
+    },
+    {
+      "name": "round-1-recovery_result_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/recovery_result_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] recovery_result_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 290,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-recovery_result_smoke.console.log"
+    },
+    {
+      "name": "round-1-recovery_tax_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/recovery_tax_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] recovery_tax_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 753,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-recovery_tax_smoke.console.log"
+    },
+    {
+      "name": "round-1-remaining_zone_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/remaining_zone_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] remaining_zone_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1033,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-remaining_zone_smoke.console.log"
+    },
+    {
+      "name": "round-1-repeat_visit_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/repeat_visit_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] repeat_visit_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 296,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-repeat_visit_smoke.console.log"
+    },
+    {
+      "name": "round-1-results_readability_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/results_readability_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] results_readability_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 845,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-results_readability_smoke.console.log"
+    },
+    {
+      "name": "round-1-retreat_route_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/retreat_route_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] retreat_route_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1119,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-retreat_route_smoke.console.log"
+    },
+    {
+      "name": "round-1-return_route_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/return_route_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] return_route_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 749,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-return_route_smoke.console.log"
+    },
+    {
+      "name": "round-1-settings_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/settings_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] settings_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1034,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-settings_smoke.console.log"
+    },
+    {
+      "name": "round-1-settlement_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/settlement_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] settlement_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 474,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-settlement_smoke.console.log"
+    },
+    {
+      "name": "round-1-title_screen_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/title_screen_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] title_screen_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1038,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-title_screen_smoke.console.log"
+    },
+    {
+      "name": "round-1-value_comparison_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/value_comparison_smoke.tscn"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] value_comparison_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 842,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-value_comparison_smoke.console.log"
+    },
+    {
+      "name": "round-1-zero_durability_departure_smoke",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/zero_durability_departure_smoke.tscn",
+        "--",
+        "--zero-directory=C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0502-review\\dungeon-g2-20261021-100720-63ac570c835b4b8d808bc424bef1b828\\round-1-zero-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] zero_durability_departure_passed(?:\\s|$)",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1866,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-zero_durability_departure_smoke.console.log"
+    },
+    {
+      "name": "round-1-portable-continue",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/portable_appraisal_flow_smoke.tscn",
+        "--",
+        "--portable-continue",
+        "--portable-directory=C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0502-review\\dungeon-g2-20261021-100720-63ac570c835b4b8d808bc424bef1b828\\round-1-portable-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] portable_appraisal_flow_passed continue",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1406,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-portable-continue.console.log"
+    },
+    {
+      "name": "round-1-survival-continue",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/g3_survival_flow_smoke.tscn",
+        "--",
+        "--review-continue",
+        "--review-progress-directory=C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0502-review\\dungeon-g2-20261021-100720-63ac570c835b4b8d808bc424bef1b828\\round-1-survival-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] g3_survival_flow_passed continue",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1209,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-survival-continue.console.log"
+    },
+    {
+      "name": "round-1-appraisal-continue",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_appraisal_smoke.tscn",
+        "--",
+        "--appraisal-continue",
+        "--appraisal-directory=C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0502-review\\dungeon-g2-20261021-100720-63ac570c835b4b8d808bc424bef1b828\\round-1-appraisal-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_appraisal_passed continue",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1123,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-appraisal-continue.console.log"
+    },
+    {
+      "name": "round-1-sale-continue",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_sale_smoke.tscn",
+        "--",
+        "--sale-continue",
+        "--sale-directory=C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0502-review\\dungeon-g2-20261021-100720-63ac570c835b4b8d808bc424bef1b828\\round-1-sale-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_sale_passed continue",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1215,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-sale-continue.console.log"
+    },
+    {
+      "name": "round-1-registration-continue",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_registration_smoke.tscn",
+        "--",
+        "--registration-continue",
+        "--registration-directory=C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0502-review\\dungeon-g2-20261021-100720-63ac570c835b4b8d808bc424bef1b828\\round-1-registration-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_registration_passed continue",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1214,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-registration-continue.console.log"
+    },
+    {
+      "name": "round-1-research-continue",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_research_smoke.tscn",
+        "--",
+        "--research-continue",
+        "--research-directory=C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0502-review\\dungeon-g2-20261021-100720-63ac570c835b4b8d808bc424bef1b828\\round-1-research-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_research_passed continue",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1211,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-research-continue.console.log"
+    },
+    {
+      "name": "round-1-upgrade-continue",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_upgrade_smoke.tscn",
+        "--",
+        "--upgrade-case=continue",
+        "--upgrade-directory=C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0502-review\\dungeon-g2-20261021-100720-63ac570c835b4b8d808bc424bef1b828\\round-1-upgrade-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_upgrade_passed continue",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1302,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-upgrade-continue.console.log"
+    },
+    {
+      "name": "round-1-upgrade-purchase",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_upgrade_smoke.tscn",
+        "--",
+        "--upgrade-case=purchase"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_upgrade_passed purchase",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1394,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-upgrade-purchase.console.log"
+    },
+    {
+      "name": "round-1-upgrade-support",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_upgrade_smoke.tscn",
+        "--",
+        "--upgrade-case=support"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_upgrade_passed support",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1394,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-upgrade-support.console.log"
+    },
+    {
+      "name": "round-1-harness-continue",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_harness_smoke.tscn",
+        "--",
+        "--harness-case=continue",
+        "--harness-directory=C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0502-review\\dungeon-g2-20261021-100720-63ac570c835b4b8d808bc424bef1b828\\round-1-harness-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_harness_passed continue",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1392,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-harness-continue.console.log"
+    },
+    {
+      "name": "round-1-harness-legacy1",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_harness_smoke.tscn",
+        "--",
+        "--harness-case=legacy1"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_harness_passed legacy1",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1211,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-harness-legacy1.console.log"
+    },
+    {
+      "name": "round-1-harness-legacy2",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_harness_smoke.tscn",
+        "--",
+        "--harness-case=legacy2"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_harness_passed legacy2",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1302,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-harness-legacy2.console.log"
+    },
+    {
+      "name": "round-1-harness-legacy3",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_harness_smoke.tscn",
+        "--",
+        "--harness-case=legacy3"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_harness_passed legacy3",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1300,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-harness-legacy3.console.log"
+    },
+    {
+      "name": "round-1-harness-support",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_harness_smoke.tscn",
+        "--",
+        "--harness-case=support"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_harness_passed support",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1398,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-harness-support.console.log"
+    },
+    {
+      "name": "round-1-wear-continue",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/equipment_wear_smoke.tscn",
+        "--",
+        "--wear-case=continue",
+        "--wear-directory=C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0502-review\\dungeon-g2-20261021-100720-63ac570c835b4b8d808bc424bef1b828\\round-1-wear-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] equipment_wear_passed continue",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1314,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-wear-continue.console.log"
+    },
+    {
+      "name": "round-1-repair-continue",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_repair_smoke.tscn",
+        "--",
+        "--repair-case=continue",
+        "--repair-directory=C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0502-review\\dungeon-g2-20261021-100720-63ac570c835b4b8d808bc424bef1b828\\round-1-repair-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_repair_passed continue",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1392,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-repair-continue.console.log"
+    },
+    {
+      "name": "round-1-repair-support",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_repair_smoke.tscn",
+        "--",
+        "--repair-case=support",
+        "--repair-directory=C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0502-review\\dungeon-g2-20261021-100720-63ac570c835b4b8d808bc424bef1b828\\round-1-support-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_repair_passed support",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1402,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-repair-support.console.log"
+    },
+    {
+      "name": "round-1-repair-support-continue",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_repair_smoke.tscn",
+        "--",
+        "--repair-case=continue-support",
+        "--repair-directory=C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0502-review\\dungeon-g2-20261021-100720-63ac570c835b4b8d808bc424bef1b828\\round-1-support-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_repair_passed continue-support",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1397,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-repair-support-continue.console.log"
+    },
+    {
+      "name": "round-1-zero-resume",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/zero_durability_departure_smoke.tscn",
+        "--",
+        "--zero-resume",
+        "--zero-directory=C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0502-review\\dungeon-g2-20261021-100720-63ac570c835b4b8d808bc424bef1b828\\round-1-zero-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] zero_durability_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1488,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-zero-resume.console.log"
+    },
+    {
+      "name": "round-1-zero-cash-4",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/zero_durability_departure_smoke.tscn",
+        "--",
+        "--zero-cash=4"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] zero_durability_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1766,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-zero-cash-4.console.log"
+    },
+    {
+      "name": "round-1-zero-cash-5",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/zero_durability_departure_smoke.tscn",
+        "--",
+        "--zero-cash=5"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] zero_durability_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1765,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-zero-cash-5.console.log"
+    },
+    {
+      "name": "round-1-zero-cash-9",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/zero_durability_departure_smoke.tscn",
+        "--",
+        "--zero-cash=9"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] zero_durability_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1764,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-zero-cash-9.console.log"
+    },
+    {
+      "name": "round-1-positive-durability-1",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/zero_durability_departure_smoke.tscn",
+        "--",
+        "--zero-durability=1"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] zero_durability_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1212,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-positive-durability-1.console.log"
+    },
+    {
+      "name": "round-1-positive-durability-2",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/zero_durability_departure_smoke.tscn",
+        "--",
+        "--zero-durability=2"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] zero_durability_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1305,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-positive-durability-2.console.log"
+    },
+    {
+      "name": "round-1-positive-durability-3",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/zero_durability_departure_smoke.tscn",
+        "--",
+        "--zero-durability=3"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] zero_durability_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1212,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-positive-durability-3.console.log"
+    },
+    {
+      "name": "round-1-zero-legacy",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/zero_durability_departure_smoke.tscn",
+        "--",
+        "--zero-legacy"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] zero_durability_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1768,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-zero-legacy.console.log"
+    },
+    {
+      "name": "round-1-wear-legacy1",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/equipment_wear_smoke.tscn",
+        "--",
+        "--wear-case=legacy1"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] equipment_wear_passed legacy1",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1210,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-wear-legacy1.console.log"
+    },
+    {
+      "name": "round-1-wear-legacy2",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/equipment_wear_smoke.tscn",
+        "--",
+        "--wear-case=legacy2"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] equipment_wear_passed legacy2",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1209,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-wear-legacy2.console.log"
+    },
+    {
+      "name": "round-1-wear-invalid",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/equipment_wear_smoke.tscn",
+        "--",
+        "--wear-case=invalid"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] equipment_wear_passed invalid",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1114,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-wear-invalid.console.log"
+    },
+    {
+      "name": "round-1-continue",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/title_screen_smoke.tscn",
+        "--",
+        "--title-case=continue"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] title_screen_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 929,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-continue.console.log"
+    },
+    {
+      "name": "round-1-quit",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/title_screen_smoke.tscn",
+        "--",
+        "--title-case=quit"
+      ],
+      "expected_pattern": "\\[GameEntry\\] quit_requested",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 931,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-quit.console.log"
+    },
+    {
+      "name": "round-1-departure-three",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_departure_smoke.tscn",
+        "--",
+        "--departure-case=three"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1671,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-departure-three.console.log"
+    },
+    {
+      "name": "round-1-departure-failure",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_departure_smoke.tscn",
+        "--",
+        "--departure-case=failure"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1395,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-departure-failure.console.log"
+    },
+    {
+      "name": "round-1-settings-invalid",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/settings_smoke.tscn",
+        "--",
+        "--settings-case=invalid"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] settings_passed invalid",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 934,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-settings-invalid.console.log"
+    },
+    {
+      "name": "round-1-settings-future",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/settings_smoke.tscn",
+        "--",
+        "--settings-case=future"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] settings_passed future",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 932,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-settings-future.console.log"
+    },
+    {
+      "name": "round-1-progress-replace",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/progress_save_smoke.tscn",
+        "--",
+        "--progress-case=replace"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] progress_save_passed replace",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1027,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-progress-replace.console.log"
+    },
+    {
+      "name": "round-1-progress-invalid",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/progress_save_smoke.tscn",
+        "--",
+        "--progress-case=invalid"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] progress_save_passed invalid",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1023,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-progress-invalid.console.log"
+    },
+    {
+      "name": "round-1-progress-future",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/progress_save_smoke.tscn",
+        "--",
+        "--progress-case=future"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] progress_save_passed future",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1025,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-progress-future.console.log"
+    },
+    {
+      "name": "round-1-progress-unknown_id",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/progress_save_smoke.tscn",
+        "--",
+        "--progress-case=unknown_id"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] progress_save_passed unknown_id",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1021,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-progress-unknown_id.console.log"
+    },
+    {
+      "name": "round-1-progress-disappeared",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/progress_save_smoke.tscn",
+        "--",
+        "--progress-case=disappeared"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] progress_save_passed disappeared",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1024,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-progress-disappeared.console.log"
+    },
+    {
+      "name": "round-1-startup",
+      "arguments": [
+        "--quit-after",
+        "20"
+      ],
+      "expected_pattern": "transition_completed from=Boot to=Title",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1022,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-startup.console.log"
+    },
+    {
+      "name": "round-1-dev-Boot",
+      "arguments": [
+        "--quit-after",
+        "20",
+        "--",
+        "--dev-state=Boot"
+      ],
+      "expected_pattern": "entry_ready state=Boot",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1023,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-dev-Boot.console.log"
+    },
+    {
+      "name": "round-1-dev-Title",
+      "arguments": [
+        "--quit-after",
+        "20",
+        "--",
+        "--dev-state=Title"
+      ],
+      "expected_pattern": "entry_ready state=Title",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1026,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-dev-Title.console.log"
+    },
+    {
+      "name": "round-1-dev-Hub",
+      "arguments": [
+        "--quit-after",
+        "20",
+        "--",
+        "--dev-state=Hub"
+      ],
+      "expected_pattern": "entry_ready state=Hub",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1120,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-dev-Hub.console.log"
+    },
+    {
+      "name": "round-1-dev-Exploration",
+      "arguments": [
+        "--quit-after",
+        "20",
+        "--",
+        "--dev-state=Exploration"
+      ],
+      "expected_pattern": "entry_ready state=Exploration",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1121,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-dev-Exploration.console.log"
+    },
+    {
+      "name": "round-1-dev-Results",
+      "arguments": [
+        "--quit-after",
+        "20",
+        "--",
+        "--dev-state=Results"
+      ],
+      "expected_pattern": "entry_ready state=Results",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1121,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-dev-Results.console.log"
+    },
+    {
+      "name": "round-1-flow-settings-write",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/settings_smoke.tscn",
+        "--",
+        "--settings-case=write",
+        "--settings-test-directory=C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0502-review\\dungeon-g2-20261021-100720-63ac570c835b4b8d808bc424bef1b828\\round-1-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] settings_passed write",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 934,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-flow-settings-write.console.log"
+    },
+    {
+      "name": "round-1-flow-expeditions",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/hub_departure_smoke.tscn",
+        "--",
+        "--departure-case=three",
+        "--progress-test-directory=C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0502-review\\dungeon-g2-20261021-100720-63ac570c835b4b8d808bc424bef1b828\\round-1-session",
+        "--settings-test-directory=C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0502-review\\dungeon-g2-20261021-100720-63ac570c835b4b8d808bc424bef1b828\\round-1-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] hub_departure_passed",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1769,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-flow-expeditions.console.log"
+    },
+    {
+      "name": "round-1-flow-continue",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/progress_save_smoke.tscn",
+        "--",
+        "--progress-case=read",
+        "--existing-settings",
+        "--progress-test-directory=C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0502-review\\dungeon-g2-20261021-100720-63ac570c835b4b8d808bc424bef1b828\\round-1-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] progress_save_passed read",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1118,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-flow-continue.console.log"
+    },
+    {
+      "name": "round-1-flow-settings-read",
+      "arguments": [
+        "--fixed-fps",
+        "60",
+        "--quit-after",
+        "20000",
+        "res://tests/smoke/settings_smoke.tscn",
+        "--",
+        "--settings-case=read",
+        "--shared-progress",
+        "--settings-test-directory=C:\\Users\\user\\OneDrive\\문서\\KHJ_web\\chatGPT\\Dungeon scavenger\\.godot\\dev0502-review\\dungeon-g2-20261021-100720-63ac570c835b4b8d808bc424bef1b828\\round-1-session"
+      ],
+      "expected_pattern": "\\[SmokeTest\\] settings_passed read",
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "marker_found": true,
+      "duration_ms": 1028,
+      "diagnostics": [],
+      "ignored_diagnostics": [],
+      "console_log": "round-1-flow-settings-read.console.log"
+    }
+  ],
+  "flows": [
+    {
+      "repetition": 1,
+      "money": "36",
+      "bag_slots": 3,
+      "next_expedition_id": "5",
+      "stored_items": [
+        {
+          "id": "test_g1_unknown",
+          "identified": false,
+          "risk_hint": "희미한 진동이 느껴집니다."
+        }
+      ],
+      "settings_unchanged": true,
+      "progress_unchanged_by_options": true,
+      "settings_sha256": "85586497be4c14820643232206e40615f9fa122dc347351ed0076e80b22bd141",
+      "progress_sha256": "df13d39a440c701954b8213ffc6beaac34f3458c0550d89e6e15c99ed7d15e40"
+    }
+  ],
+  "finished_at_utc": "2026-10-21T10:09:45.1205695Z",
+  "check_count": 118,
+  "ticket": "DEV-0502",
+  "ticket_name": "반복 탐험 상태·시드 기반 구현",
+  "checked_date_kst": "2026-10-21",
+  "ticket_scope": "In-memory seeded item-placement foundation; unchanged product app/save flow",
+  "smoke_scene_count": 66,
+  "repeat_visit_assertions": 500,
+  "new_gui_launches": 0,
+  "new_human_playtests": 0,
+  "original_runner_report": ".godot/dev0502-review/dungeon-g2-20261021-100720-63ac570c835b4b8d808bc424bef1b828/results.json",
+  "standalone_repeat_smoke": "passed, not included a second time in the 118 full-suite processes",
+  "initial_import_attempt": "restricted environment could not write Godot editor data; elevated retry passed; not counted as a passing suite check"
+}

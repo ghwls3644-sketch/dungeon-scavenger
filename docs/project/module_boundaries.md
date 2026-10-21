@@ -8,7 +8,7 @@ canonical_for:
   - source_tree_layout
   - module_responsibilities
   - module_dependency_rules
-last_reviewed: 2026-10-12
+last_reviewed: 2026-10-21
 owner: project-maintainer
 related:
   - ../../AGENTS.md
@@ -480,3 +480,10 @@ ExpeditionLoadout은 복사된 시작 수량/무게, ExplorationOutcome은 실�
 - `src/ui/hub_departure_panel.gd/.tscn`은 내구0 안내·안전한 기본 포커스·돌아가기/출정 요청만 맡는다. 저장·복구나 직접 장면 전환을 하지 않는다.
 - `GameEntry`는 확인 요청 번호/준비 스냅샷·서비스 경합·상태를 검사하고 기존 출정 예약/시작/복구를 연결한다. `HubState`의 출정 가능 상태와 `EconomyRule`의 무료 복구 목표를 분리한다.
 - `tests/smoke/zero_durability_departure_smoke.gd/.tscn`은 실제 앱의 입력/저장/재출정·내구/현금 경계와 두 해상도를 검사한다. 게임 소스에서 테스트 자료를 참조하지 않는다.
+
+## DEV-0502의 반복 탐험 메모리 기반
+
+- `src/data/repeat_exploration_definition.gd`, `visit_pool_definition.gd`, `visit_candidate_definition.gd`는 기존 공개 지도/카탈로그를 참조하는 시험 가능한 후보 정의와 ID/참조/위치 검증을 소유한다. 실행 중 상태·정산·저장 시점을 소유하지 않는다.
+- `src/gameplay/exploration/repeat_exploration_progress.gd`는 외부에서 전달한 영구 진행의 복사 입력, `repeat_visit_generator.gd`는 시드 순위·후보 제외·중복/점 위치 충돌 처리와 오류, `repeat_visit_plan.gd`는 생성 완료한 입력/결과의 복사 조회를 소유한다. meta/infrastructure/app을 호출하지 않는다.
+- `tests/fixtures/repeat_visit_fixture.gd`는 시험 후보 ID/위치·선택 상한만 소유한다. `tests/smoke/repeat_visit_smoke.*`는 재현·제외·복사·오류 계약을 검증한다. 제품에서 tests를 참조하지 않는다.
+- 현재 app/HubState/ProgressStore/지도 UI와 기존 콘텐츠는 변경하지 않았다. 실제 출정과 파일 저장은 후속 app 조립/저장 작업 책임이며, 위험/골렘/문·개선 발견의 새 생성 규칙은 이번 기반에 포함하지 않는다. 상세 범위는 [구현 기록](../design/repeat_state_contract.md#dev-0502-메모리-내-시드-기반-구현)을 따른다.

@@ -1,0 +1,183 @@
+{
+  "ticket": "DEV-0502",
+  "ticket_name": "반복 탐험 상태·시드 기반 구현",
+  "checked_date_kst": "2026-10-21",
+  "passed": true,
+  "failures": [],
+  "status": "implementation_complete_user_approved_local_commit",
+  "base_commit": "6f9d914e9ca9205b5fca3266f7e416927a7d1d2c",
+  "local_ahead": 1,
+  "local_behind": 0,
+  "markdown_files": 57,
+  "relative_links_checked": 2237,
+  "front_matter_related_checked": 616,
+  "frozen_sources": [
+    {
+      "id": "SRC-001",
+      "path": "게임 기획 파일/통합 게임 기획서 v2.1.md",
+      "sha256": "45e92dfede482968b31c14eef712012735aa9657de18bd7c0922f94d40dd460a",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-002",
+      "path": "게임 기획 파일/스토리 정리 v1.5.md",
+      "sha256": "4191c100d5b3bfbef291d3fd4d7588a3c5c31113a1827d33886cc8c90931292d",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-003",
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.1.md",
+      "sha256": "a52337ed1cc3decebf8bd6840662e12fafddcfa95c3e5e8d5e1129ffbbef796f",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-004",
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.2.md",
+      "sha256": "0bac7f52cf21eddcd4b720c7b5b8ff76f98fb452904cebcc3e03c1eb2b220c67",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-005",
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.2.1.md",
+      "sha256": "b4451e06d8ffaf5d1a233fa1a639e783ba17973977398c12527333a7707319f0",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-006",
+      "path": "게임 기획 파일/게임 개발 단계별 제안서 v0.1.md",
+      "sha256": "2ee29aca36e74f5e0206aff150ed610eba8381e594b9091141e6f74caa2b60c1",
+      "matches_record": true
+    }
+  ],
+  "archive_copies": [
+    {
+      "path": "docs/archive/story_v1.5_full.md",
+      "source_id": "SRC-002",
+      "bytes_match": true
+    },
+    {
+      "path": "docs/archive/story_document_management_proposal_v0.1.md",
+      "source_id": "SRC-003",
+      "bytes_match": true
+    },
+    {
+      "path": "docs/archive/story_document_management_proposal_v0.2.md",
+      "source_id": "SRC-004",
+      "bytes_match": true
+    }
+  ],
+  "checkpoint_tables_preserved": {
+    "docs/README.md": true,
+    "docs/project/migration_manifest.md": true
+  },
+  "source_tree_sha256": "8bc2a947c43ccc3b9c03c093bc8cef0586bd1912a6e395e466e3e04cf8f4453e",
+  "source_files": 581,
+  "new_source_files": [
+    "src/data/repeat_exploration_definition.gd",
+    "src/data/repeat_exploration_definition.gd.uid",
+    "src/data/visit_candidate_definition.gd",
+    "src/data/visit_candidate_definition.gd.uid",
+    "src/data/visit_pool_definition.gd",
+    "src/data/visit_pool_definition.gd.uid",
+    "src/gameplay/exploration/repeat_exploration_progress.gd",
+    "src/gameplay/exploration/repeat_exploration_progress.gd.uid",
+    "src/gameplay/exploration/repeat_visit_generator.gd",
+    "src/gameplay/exploration/repeat_visit_generator.gd.uid",
+    "src/gameplay/exploration/repeat_visit_plan.gd",
+    "src/gameplay/exploration/repeat_visit_plan.gd.uid",
+    "tests/fixtures/repeat_visit_fixture.gd",
+    "tests/fixtures/repeat_visit_fixture.gd.uid",
+    "tests/smoke/repeat_visit_smoke.gd",
+    "tests/smoke/repeat_visit_smoke.gd.uid",
+    "tests/smoke/repeat_visit_smoke.tscn"
+  ],
+  "unchanged_existing_source_files": 564,
+  "prior_reports_checked": 113,
+  "protected_content_differences": [],
+  "question_statuses": {
+    "Q-001": "provisional",
+    "Q-002": "provisional",
+    "Q-003": "provisional",
+    "Q-004": "provisional",
+    "Q-005": "provisional",
+    "Q-006": "provisional",
+    "Q-007": "provisional",
+    "Q-008": "provisional",
+    "Q-009": "deferred",
+    "Q-010": "deferred",
+    "Q-011": "deferred",
+    "Q-012": "deferred",
+    "Q-013": "deferred",
+    "Q-014": "provisional",
+    "Q-015": "deferred",
+    "Q-016": "deferred",
+    "Q-017": "deferred",
+    "Q-018": "deferred",
+    "Q-019": "provisional",
+    "Q-020": "provisional",
+    "Q-021": "provisional",
+    "Q-022": "provisional",
+    "Q-023": "provisional",
+    "Q-024": "provisional",
+    "Q-025": "provisional",
+    "Q-026": "provisional",
+    "Q-027": "provisional",
+    "Q-028": "provisional",
+    "Q-029": "provisional",
+    "Q-030": "provisional"
+  },
+  "full_suite_processes": 118,
+  "smoke_scenes": 66,
+  "new_smoke_assertions": 500,
+  "new_gui_launches": 0,
+  "new_human_playtests": 0,
+  "automated_report_sha256": "08ea22414d1dad23f38c8e9891bdca466361ca7c20f4051b29bc9802b5e1388a",
+  "manual_review": [
+    "New source is isolated: no existing app, save, catalog, map or test source modified.",
+    "Only item-placement candidates are implemented; no hazard, encounter, passage or upgrade generation.",
+    "SHA-256 rank uses framed string inputs, stable ID ordering and explicit version; no global RNG.",
+    "Snapshot retains registered/stored separation and preserves all generation inputs without mutable Resource references.",
+    "Shared originals and exact point conflicts use stable pool priority; count is an upper bound, not a fill guarantee.",
+    "Geometry validation covers region bounds and exact point duplicates, not walls, footprints or reachability.",
+    "Content tags are caller-owned; persistent version migration and seed lifecycle remain DEV-0503 scope.",
+    "G4 human findings, open questions and G5 checkpoint remain unchanged."
+  ],
+  "changed_paths": [
+    "docs/README.md",
+    "docs/design/README.md",
+    "docs/design/repeat_state_contract.md",
+    "docs/project/README.md",
+    "docs/project/dev0502_automated_results.json",
+    "docs/project/dev0502_document_results.json",
+    "docs/project/development_handoff.md",
+    "docs/project/migration_changes.md",
+    "docs/project/migration_manifest.md",
+    "docs/project/module_boundaries.md",
+    "docs/project/project_context.md",
+    "src/data/repeat_exploration_definition.gd",
+    "src/data/repeat_exploration_definition.gd.uid",
+    "src/data/visit_candidate_definition.gd",
+    "src/data/visit_candidate_definition.gd.uid",
+    "src/data/visit_pool_definition.gd",
+    "src/data/visit_pool_definition.gd.uid",
+    "src/gameplay/exploration/repeat_exploration_progress.gd",
+    "src/gameplay/exploration/repeat_exploration_progress.gd.uid",
+    "src/gameplay/exploration/repeat_visit_generator.gd",
+    "src/gameplay/exploration/repeat_visit_generator.gd.uid",
+    "src/gameplay/exploration/repeat_visit_plan.gd",
+    "src/gameplay/exploration/repeat_visit_plan.gd.uid",
+    "tests/fixtures/repeat_visit_fixture.gd",
+    "tests/fixtures/repeat_visit_fixture.gd.uid",
+    "tests/smoke/repeat_visit_smoke.gd",
+    "tests/smoke/repeat_visit_smoke.gd.uid",
+    "tests/smoke/repeat_visit_smoke.tscn"
+  ],
+  "diff_check_passed": true,
+  "commit_status": "user_approved_local_commit",
+  "approval_text": "커밋",
+  "approval_date_kst": "2026-10-21",
+  "pushed": false,
+  "g5_status": "in_memory_foundation_only_not_gate_passed",
+  "next_work_recommendation": "DEV-0503 — 출정 시드 예약·저장 연결",
+  "next_checkpoint": "G5 완료 후"
+}
