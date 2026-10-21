@@ -7,7 +7,7 @@ source_version: gdd-v2.1+management-proposal-v0.2.1
 canonical_for:
   - document_navigation
   - canonical_source_routing
-last_reviewed: 2026-10-20
+last_reviewed: 2026-10-21
 owner: documentation-maintainer
 related:
   - GDD.md
@@ -37,6 +37,7 @@ related:
 
 ## 작업 진입점
 
+- [반복 탐험 상태·시드 계약 검토안](design/repeat_state_contract.md) (`draft`): DEV-0501의 상태·재현·저장 경계와 후속 검사 사례.
 - 문서 이관 현황: [`project/migration_manifest.md`](project/migration_manifest.md)
 - 스토리 원본 상세 인벤토리: [`project/story_v1.5_inventory.md`](project/story_v1.5_inventory.md)
 - 분할 중 변경 대기열: [`project/migration_changes.md`](project/migration_changes.md)
@@ -116,7 +117,7 @@ GitHub 로그인 상태, Codex 대화 기록, 앱별 로컬 설정은 저장소�
 
 ## 현재 단계
 
-**DEV-0435 — G4 보완 결과·잔여 범위 정리 완료, 사용자 로컬 커밋 승인.** 여섯 완료 조건과 GDD20-3의 다섯 관점을 누적 근거에 대조했다. 내구0 출정 차단은 보완됐고 안내 검토에서 불편 없음 의견을 받았다. 정산/거점의 그래픽 이후 다듬기, Q/안정화 보류와 성장·선택 가치 등의 미평가를 후속 조건과 함께 남겼다. 제품 소스는 DEV-0433 전체117/117 때와 같고 이번 문서/보존 검사를 통과했다. 다음 권고는 **DEV-0501 — 반복 탐험 상태·시드 계약 정리**이며 이 결과 검토·커밋 뒤 사용자 진행 지시로 시작한다. G4 사람 평가 전체 통과·G5 착수는 이번 작업에서 선언하지 않는다. **정합성 검사: 아직 아님 — G5 완료 후.**
+**DEV-0501 — 반복 탐험 상태·시드 계약 정리 완료, 사용자 로컬 커밋 승인.** 고정 정의·영구 진행·현재 방문의 책임, 시드/버전/진행 입력의 재현 경계와 후보 제외, 출정·정산·등록·중단/재시도의 제안을 현재 코드와 대조했다. 거점 보관 원본의 중복 제외와 등록/방 변화를 구분하고 지도 보존·시드 소비 등 미정 정책을 남겼다. 제품 코드·스키마10·기존 규칙과 G4 미평가/사용자 보류는 유지했다. 다음 권고는 **DEV-0502 — 반복 탐험 상태·시드 기반 구현**이다. 정합성 검사: 아직 아님 — G5 완료 후.
 
 사람 평가 진행은 [G4 사람 플레이 관찰 기록](project/g4_playtest_review.md), 현재 조건별 판정과 남은 범위는 [G4 검토 기록](project/g4_meta_review.md#dev-0435-누적-결과와-현재-판단)을 따른다.
 

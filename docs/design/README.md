@@ -6,7 +6,7 @@ status: confirmed
 source_version: management-proposal-v0.2.1
 canonical_for:
   - design_document_navigation
-last_reviewed: 2026-10-10
+last_reviewed: 2026-10-21
 owner: game-design
 related:
   - portable_appraisal.md
@@ -32,6 +32,7 @@ related:
 |---|---|
 | [`narrative_delivery.md`](narrative_delivery.md) | 세계관 정보가 어떤 시스템과 조건으로 전달되는가? |
 | [`repeat_exploration.md`](repeat_exploration.md) | 방문 사이에 무엇이 유지되고 무엇이 변하는가? |
+| [반복 상태·시드 계약 검토안](repeat_state_contract.md) (`draft`) | 기존 반복 규칙과 현재 구현을 어떻게 연결하고, 재현·확정·중단·저장 경계를 무엇으로 검사할 것인가? |
 | [`item_rules.md`](item_rules.md) | 아이템이 데이터와 시스템에서 어떻게 작동하는가? |
 | [`economy_rules.md`](economy_rules.md) | 가격·비용·손실·수익은 어떻게 계산되는가? |
 | [`harness_engineering.md`](harness_engineering.md) (`draft`) | 하네스 준비·공유 자원의 기존 요구, 장착 및 구매/발견 성장의 시험 적용과 후속 조건은 무엇인가? |

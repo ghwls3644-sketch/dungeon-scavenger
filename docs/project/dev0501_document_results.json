@@ -1,0 +1,206 @@
+{
+  "ticket": "DEV-0501",
+  "ticket_name": "반복 탐험 상태·시드 계약 정리",
+  "checked_date_kst": "2026-10-21",
+  "passed": true,
+  "failures": [],
+  "status": "proposal_complete_user_approved_local_commit",
+  "base_commit": "af047f7c5070ed859c05697d3a6fe01d21b501a4",
+  "local_ahead": 0,
+  "local_behind": 0,
+  "markdown_files": 57,
+  "relative_links_checked": 2216,
+  "front_matter_related_checked": 616,
+  "frozen_sources": [
+    {
+      "id": "SRC-001",
+      "path": "게임 기획 파일/통합 게임 기획서 v2.1.md",
+      "sha256": "45e92dfede482968b31c14eef712012735aa9657de18bd7c0922f94d40dd460a",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-002",
+      "path": "게임 기획 파일/스토리 정리 v1.5.md",
+      "sha256": "4191c100d5b3bfbef291d3fd4d7588a3c5c31113a1827d33886cc8c90931292d",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-003",
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.1.md",
+      "sha256": "a52337ed1cc3decebf8bd6840662e12fafddcfa95c3e5e8d5e1129ffbbef796f",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-004",
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.2.md",
+      "sha256": "0bac7f52cf21eddcd4b720c7b5b8ff76f98fb452904cebcc3e03c1eb2b220c67",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-005",
+      "path": "게임 기획 파일/스토리 문서 분할 및 관리 제안서 v0.2.1.md",
+      "sha256": "b4451e06d8ffaf5d1a233fa1a639e783ba17973977398c12527333a7707319f0",
+      "matches_record": true
+    },
+    {
+      "id": "SRC-006",
+      "path": "게임 기획 파일/게임 개발 단계별 제안서 v0.1.md",
+      "sha256": "2ee29aca36e74f5e0206aff150ed610eba8381e594b9091141e6f74caa2b60c1",
+      "matches_record": true
+    }
+  ],
+  "archive_copies": [
+    {
+      "path": "docs/archive/story_v1.5_full.md",
+      "source_id": "SRC-002",
+      "bytes_match": true
+    },
+    {
+      "path": "docs/archive/story_document_management_proposal_v0.1.md",
+      "source_id": "SRC-003",
+      "bytes_match": true
+    },
+    {
+      "path": "docs/archive/story_document_management_proposal_v0.2.md",
+      "source_id": "SRC-004",
+      "bytes_match": true
+    }
+  ],
+  "checkpoint_tables_preserved": {
+    "docs/README.md": true,
+    "docs/project/migration_manifest.md": true
+  },
+  "source_tree_sha256": "b3697858755987d24ac06ddfed0508645c1080fcc7702d626fc41a62cdaf7479",
+  "source_files": 564,
+  "prior_reports_checked": 112,
+  "protected_content_differences": [],
+  "question_statuses": {
+    "Q-001": "provisional",
+    "Q-002": "provisional",
+    "Q-003": "provisional",
+    "Q-004": "provisional",
+    "Q-005": "provisional",
+    "Q-006": "provisional",
+    "Q-007": "provisional",
+    "Q-008": "provisional",
+    "Q-009": "deferred",
+    "Q-010": "deferred",
+    "Q-011": "deferred",
+    "Q-012": "deferred",
+    "Q-013": "deferred",
+    "Q-014": "provisional",
+    "Q-015": "deferred",
+    "Q-016": "deferred",
+    "Q-017": "deferred",
+    "Q-018": "deferred",
+    "Q-019": "provisional",
+    "Q-020": "provisional",
+    "Q-021": "provisional",
+    "Q-022": "provisional",
+    "Q-023": "provisional",
+    "Q-024": "provisional",
+    "Q-025": "provisional",
+    "Q-026": "provisional",
+    "Q-027": "provisional",
+    "Q-028": "provisional",
+    "Q-029": "provisional",
+    "Q-030": "provisional"
+  },
+  "prior_full_suite_checks": 117,
+  "prior_full_suite_rerun": false,
+  "fresh_godot_processes": 0,
+  "new_gui_launches": 0,
+  "new_human_playtests": 0,
+  "source_review": [
+    {
+      "path": "src/data/exploration_map_definition.gd",
+      "sha256": "f75b3826f34e4e680d29f2937bed615cd3bad811a863d03efd38e5e895722ed8",
+      "scope": "read_only_contract_review_not_runtime_test"
+    },
+    {
+      "path": "src/data/prototype_exploration_map.tres",
+      "sha256": "284138e5323a6fec3cec6fdc082567f7e334f09350aae38dbc55210893a6dcce",
+      "scope": "read_only_contract_review_not_runtime_test"
+    },
+    {
+      "path": "src/gameplay/exploration/exploration_map_state.gd",
+      "sha256": "a900cd3ee4279f1f17c1130861d31d6efab0feaede47f6e558d19fe7ee6fd979",
+      "scope": "read_only_contract_review_not_runtime_test"
+    },
+    {
+      "path": "src/app/prototype_exploration.gd",
+      "sha256": "779ea6aa14178a5be036ced5234987812a6e2e08b66fc8dcc5c1db33ef76ec2b",
+      "scope": "read_only_contract_review_not_runtime_test"
+    },
+    {
+      "path": "src/app/game_entry.gd",
+      "sha256": "eb64a834d5b68e216cb5576885aca483eaa34df6d3187dc3d5762bd17ee42a54",
+      "scope": "read_only_contract_review_not_runtime_test"
+    },
+    {
+      "path": "src/meta/hub_state.gd",
+      "sha256": "9693fa63be3139ff4c88dd79a770b5a8ac1bff533af5073bf73406dc641b2e39",
+      "scope": "read_only_contract_review_not_runtime_test"
+    },
+    {
+      "path": "src/meta/unique_pickup_state.gd",
+      "sha256": "6bede509d214edd9de31e772dc7d974534355c0dbd6817fb2195492663679f86",
+      "scope": "read_only_contract_review_not_runtime_test"
+    },
+    {
+      "path": "src/meta/research_progress.gd",
+      "sha256": "2c948d1360447a944ad513cd46e380515dfba13f98eaa3a5bb15c7bb6a226c8f",
+      "scope": "read_only_contract_review_not_runtime_test"
+    },
+    {
+      "path": "src/gameplay/recovery/exploration_run.gd",
+      "sha256": "3121de3a7ae268d68ae66202bd382879f9883297f58194d960be7ace8bb2e1ea",
+      "scope": "read_only_contract_review_not_runtime_test"
+    },
+    {
+      "path": "src/infrastructure/progress_store.gd",
+      "sha256": "067acb29da064b89725e30f78a906dd6bd375a5c72bf887481f5be88fce0ec67",
+      "scope": "read_only_contract_review_not_runtime_test"
+    }
+  ],
+  "manual_review_findings": [
+    "Fixed public map is separate from hidden candidates and per-visit observations.",
+    "Original exclusion is union of registered and hub-stored originals; exclusion is not registration.",
+    "Reserved and started departure recovery differ; interruption is not ordinary failure settlement.",
+    "Settlement and registration apply to copies and persist before replacing live hub state.",
+    "Schema 10 / content g2_prototype_1 remain unchanged; seed, persistent room and map storage are not implemented.",
+    "Replay proposal requires seed, content/generation versions and pre-generation progress; output is initial visit plan, not full gameplay replay.",
+    "Failed-visit map retention, cancelled reservation seed reuse and retroactive room changes remain undecided.",
+    "Future acceptance cases are specifications, not passed game tests."
+  ],
+  "prior_evidence": [
+    {
+      "path": "docs/project/dev0433_automated_results.json",
+      "sha256": "4a047635f5cd58454f563c3a55ee66c55c698053d68ecc3ff57b12e8b6bb0223"
+    },
+    {
+      "path": "docs/project/dev0435_document_results.json",
+      "sha256": "878b6b99089cec01e31497621c1110b0f10a76c61bdf84046491b2b2836927a7"
+    }
+  ],
+  "changed_paths": [
+    "docs/README.md",
+    "docs/design/README.md",
+    "docs/design/repeat_state_contract.md",
+    "docs/project/README.md",
+    "docs/project/dev0501_document_results.json",
+    "docs/project/development_handoff.md",
+    "docs/project/migration_changes.md",
+    "docs/project/migration_manifest.md",
+    "docs/project/project_context.md"
+  ],
+  "diff_check_passed": true,
+  "commit_status": "user_approved_local_commit",
+  "approval_text": "커밋",
+  "approval_date_kst": "2026-10-21",
+  "pushed": false,
+  "g4_completion": "human_evaluation_not_fully_passed",
+  "g5_status": "technical_preparation_proposal_only",
+  "next_work_recommendation": "DEV-0502 — 반복 탐험 상태·시드 기반 구현",
+  "next_checkpoint": "G5 완료 후"
+}
